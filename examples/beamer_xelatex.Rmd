@@ -1,0 +1,967 @@
+---
+title: "R Markdownで日本語\\texttt{beamer}プレゼンテーション (XeLaTeX)版"
+author: "ill-identified"
+date: "`r Sys.Date()`"
+output:
+  rmdja::beamer_presentation_ja:
+    latex_engine: xelatex
+    theme: metropolis
+    theme_options: 
+      - 'progressbar=frametitle'
+      - 'block=fill'
+    keep_md: false
+    keep_tex: true
+    toc: false
+    fonttheme: default
+    colortheme: default
+    highlight: tango
+    rownumber_chunk: false
+    fig_width: 6.29921
+    fig_height: 3.54331
+    out.width: "100%"
+    out.height: "100%"
+    fig_crop: true
+    fig_caption: true
+    figurename: "図"
+    tablename: "表"
+    citation_package: natbib
+    citation_options: numbers
+    number_sections: false
+    slide_level: 2
+    incremental: false
+    includes:
+      preamble:
+        - \makeatletter
+        - \setlength{\metropolis@progressinheadfoot@linewidth}{2pt}
+        - \patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip0.5em}{}{}
+        - \makeatother
+fontsize: 12pt
+bibliography: examples.bib
+biblo-title: 参考文献
+biblio-style: jecon
+mainfont: Noto Serif
+mainfontoptions:
+  - Scale=MatchLowercase
+  - Ligatures=TeX
+sansfont: Noto Sans
+sansfontoptions:
+  - Scale=1.1
+monofont: Ricty Diminished
+monofontoptions:
+  - Scale=0.9
+jfontpreset: noto
+jfontpresetoptions:
+linkcolor: blue
+citecolor: blue
+urlcolor: magenta
+biblio-title: "参考文献"
+---
+
+```{r setup-document, include=F}
+options(tinytex.latexmk.emulation = F)
+# 上記は日本語引用文献リストのために必要
+
+# サンプル画像等を参照するパス
+file_loc <- system.file("extdata", package = "rmdja")
+# サンプル引用文献リストを取得する
+file.copy(file.path(file_loc, "examples.bib"), to = "./")
+
+knitr::opts_chunk$set(cache = T)
+```
+
+## 
+
+> `\textrm{Нужны новые формы. Новые формы нужны, а если их нет, то лучше ничего не нужно.}`{=latex}
+>
+> `\textrm{新しいフォーマットが必要なんですよ. 新しいフォーマットが. それがないというなら, いっそ何もないほうがいい.}`{=latex} 
+> `r tufte::quote_footer('--- A. チェーホフ『かもめ』')`
+
+## 目次
+
+\tableofcontents[hideallsubsections]
+
+# イントロダクション
+
+## このスライドは何?
+* あまり情報が流れていない, R Markdownと`beamer`で日本語を含むスライドを作るためのテンプレート兼用例集
+* `reveal.js`などHTML媒体は他の資料を参照
+  + [ここ](https://kazutan.github.io/SappoRoR6/rmd_slide.html#/)や[ここ](https://kazutan.github.io/fukuokaR11/intro_rmarkdown_d.html)を見よ
+* もともとは自分用に作ったテンプレだったものを万人向けに修正
+
+## 想定される用途
+
+* Tokyo.R などRを使った話を発表する際の資料作成
+* 技術・アカデミック寄りの話題を想定
+* 具体的に要求されるもの
+  + **日本語表示**
+  + ラスタまたはベクタ画像の挿入
+  + 表の挿入
+  + Rコードを見やすく表示
+  + 参考文献の相互参照/リスト自動生成
+  + **LyX やoverleafより簡単であること**
+  + **なんかナウでオサレな感じは求めてない**
+    + 自由すぎるデザインは不可
+
+## 先行事例の紹介
+
+* 伊東『[R MarkdownとBeamerでプレゼンテーション資料作成](https://www.slideshare.net/hirokito/r-markdownbeamer-88777082)』
+  + \LuaLaTeX を使って日本語でBeamerスライド作成する方法
+* Atusy 『[R Markdown + XeLaTeX で日本語含め好きなフォントを使って PDF を出力する](https://blog.atusy.net/2019/05/14/rmd2pdf-any-font/)』
+* 先行事例との違い:
+  + 使用者が設定を書く負担削減のためテンプレート化
+    - フォントやテーマなどデザインに関する大まかな選択の余地
+  + \XeLaTeX / \LuaLaTeX 両方に対応
+  + 日本語文献bibファイル・bstファイルに対応
+  + 充実したスライド作例
+
+## `reveal.js` じゃダメなの?
+
+* 個人的にデザインとかあまり好きじゃない
+* 上下左右に動いて空間識失調になる
+  + (個人の体験です)
+  + 上下のみにもできる
+* htmlよりも不変な媒体にしたい
+  + pdfが明確に優れているかは怪しい
+* ~~Q: お前が使いこなせてないだけじゃないの?~~
+  + ~~A: うるさい~~
+
+
+## パワーポイントじゃダメなの?
+
+* 私は**持ってない**
+* シンタックスハイライトが面倒
+  + 注: パワポの場合は[VSCode](https://notchained.hatenablog.com/entry/2017/02/20/221446)か[`reprex`](https://reprex.tidyverse.org/articles/articles/rtf.html)でコピペ
+* ドラッグ&ドロップで位置調整は便利
+* しかしポンチ絵芸術になりがち
+* 極力シンプルにして視線誘導の負担をなくすべき
+  + 徹底するかは**好みの問題**
+
+# 使い方/用例
+
+## セットアップ
+
+1. パッケージのインストール
+
+```{r install, eval=F, echo=T}
+remotes::install_github(
+  "Gedevan-Aleksizde/my_latex_templates",
+  subdir = "rmdja")
+```
+
+2. TeXLive (>= 2020)のインストール
+  + 分からなければ[TeX wiki のページ](https://texwiki.texjp.org/?TeX%20Live)を参考に
+  + Debian/Ubuntuのユーザは`apt`より公式ダウンローダの方が良いかも
+
+## 基本
+
+1. yamlヘッダに以下を書く
+  + 詳しくは`example/`のテンプレートを参考に
+
+```yaml
+output: rmdja::beamer_presentation_ja
+```
+
+2. RStudioのツールバーの"Knit"を押す
+
+```{r knit-image, out.width="80%"}
+knitr::include_graphics(file.path(file_loc, "img/render.png"))
+```
+
+## 最低限必要な設定
+
+* 実際は**細かい設定不要**
+  + examplesの長いyamlヘッダは単なる見本
+  + 文献引用をしないなら `biblio*` も不要
+* 使えるフォントはマシン依存
+  + なくても動くが**見た目が悪い**
+
+```yaml
+output:
+  rmdja::beamer_presentation_ja:
+    latex_engine: xelatex
+mainfont: Noto Serif
+sansfont: Noto Sans
+monofont: Ricty Diminished
+jfontpreset: noto
+```
+
+## 基本構文 (1/2)
+- markdown的な書き方でできる
+- "`## `タイトル" でスライドの開始
+
+```markdown
+# 節見出し
+## タイトル1
+- **太字** **bold**
+- _強調_ _emph_
+- `タイプライタ体` `mono`
+- ~~取り消し線~~
+```
+
+- **太字** **bold**
+- _強調_ _emph_
+- `タイプライタ体` `mono`
+- ~~取り消し線~~
+
+## 基本構文 (2/2)
+
+* \LaTeX コマンドも挿入可能
+  + うまく行かない場合は`\`...\`{=latex}\``で囲む
+* \LaTeX 使用例: \LaTeX で\ruby[g]{文書}{ぶんしょ}にルビも\ruby[g]{打}{う}てる
+* ルビ表示は[`pxrubrica`](https://zrbabbler.hatenablog.com/entry/20170429/1493475774)の構文を参考に
+
+## ソースコードの表示
+
+* 以下で対応言語一覧がわかる
+
+```{r engines-example, echo=T}
+names(knitr::knit_engines$get())
+```
+
+## BeamerやRMarkdown使用に役立つ資料
+
+* 伊東『[R MarkdownとBeamerでプレゼンテーション資料作成](https://www.slideshare.net/hirokito/r-markdownbeamer-88777082)』(\LuaLaTeX 使用)
+* 松田『[Beamer読本-講演用スライド作成のために-](http://ayapin-film.sakura.ne.jp/LaTeX/slides.html#beamer)』
+* Kazutan『[R Markdownによるスライド生成](https://kazutan.github.io/SappoRoR6/rmd_slide.html#/)』『[R Markdown入門](https://kazutan.github.io/kazutanR/Rmd_intro.html)』
+* Atusy『[R Markdown + XeLaTeX で日本語含め好きなフォントを使って PDF を出力する](https://blog.atusy.net/2019/05/14/rmd2pdf-any-font/)』
+* R Markdown 2.0 チートシートの[日本語訳](https://rstudio.com/wp-content/uploads/2016/11/Rmarkdown-cheatsheet-2.0_ja.pdf), Takahashi, M.訳
+
+## もう少しくわしいやつ
+
+* Atusy 『[R MarkdownユーザーのためのPandoc’s Markdown](https://atusy.booth.pm/items/1453002)』
+* 謝益輝 (yihui) "[knitr - Elegant, flexible, and fast dynamic report generation with R](https://yihui.org/knitr/)" (開発者本人)
+* Xie, Yihui & C. Dervieux "[R Markdown Coobook](https://bookdown.org/yihui/rmarkdown-cookbook/)"
+
+## 今回使うパッケージ
+
+* この用例作成には以下パッケージを使用
+
+```{r load-packages, echo=T, class.source = "numberLines LineAnchors"}
+require(conflicted)    # パッケージの競合防止用
+require(tidyverse)     # 全般
+require(ggthemes)      # ggplot2のデザイン変更
+require(ggdag)         # ネットワーク図の用例に
+require(DiagrammeR)    # DOT言語でのネットワーク図例
+require(kableExtra)    # 表の出力オプション
+require(stargazer)     # 複雑なLaTeXの表を扱う例
+```
+
+* 以下はインストールのみ/読み込む必要なし
+  - `citr`: 引用文献の挿入をGUIで
+  - `bookdown`: 数式をGUIで
+
+## ソースコードの表示: 基本事項
+* `echo=T`でチャンク内コードを表示
+  + デフォでは非表示
+  + **自動でシンタックスハイライト**
+* はみ出す場合は`tidy=F`して手動改行
+  + 日本語等で折り返し地点がうまく行かない
+* `class.source = "numberLines, LineAnchors"` で行番号表示([参考](https://blog.atusy.net/2019/04/18/rmd-line-num/))
+
+## ソースコードの表示: 出力例
+
+```{r display-chunk}
+text <- '```{r, echo=T, class.source = "numberLines, LineAnchors"}
+require(conflicted) 
+require(tidyverse)
+require(ggthemes)
+```'
+cat(text)
+```
+
+```{R load-packages2, echo=T, class.source = "numberLines LineAnchors", eval=F}
+require(conflicted)
+require(tidyverse)
+require(ggthemes)
+```
+
+## カラー絵文字
+
+* [`BXcoloremoji`](https://github.com/zr-tex8r/BXcoloremoji)をインストール
+  + `\coloremoji{}` で絵文字表示: \ifdefined\coloremoji \coloremoji{🍣} \else (ここに絵文字) \fi
+  + 実際には**画像に置き換えている**
+* グラフ描画には特に設定必要なし
+  + ソースコード上のものは文字化けする
+
+```{r sushi-plot, echo=T, out.width="40%", align="center"}
+plot(1:10, pch = "🍣")
+```
+
+## 数式の挿入: 行内(インライン)
+
+* markdown風のLaTeXコード埋め込み
+* \LaTeX の数式を`$`で挟む
+* 例: `らんま$\frac{1}{2}$`
+  + 出力: らんま$\frac{1}{2}$
+  + 注: 行内で分数はスラッシュ使ったほうが見やすい
+* 数式にはセリフフォント使用
+  + スライドはサンセリフが良いとされる
+  + しかし数式の統一感がない
+  + (個人の好み?) 
+
+## 数式の挿入: 独立行
+
+* `$$`で挟んだ範囲に\LaTeX 構文
+
+```latex
+$$\begin{aligned}
+& \sin^2(x) + \cos^2(x) = 1\\
+& f(x) = \frac{1}{(2\pi)^2}\int_{\mathbb{R}^n}
+\hat{f}(\omega)\exp(i\omega x)d\omega
+\end{aligned}$$
+```
+
+$$\begin{aligned}
+& \sin^2(x) + \cos^2(x) = 1\\
+& f(x) = \frac{1}{(2\pi)^2}\int_{\mathbb{R}^n}\hat{f}(\omega)\exp(i\omega x)d\omega
+\end{aligned}$$
+
+
+## 数式の挿入: `bookdown` パッケージのアドインで補完
+
+1. RStudioのツールバー "Addins"
+2. "Input LaTeX Math"
+
+```{r math-input, out.height="30%", fig.cap="bookdownの数式入力機能"}
+knitr::include_graphics(file.path(file_loc, "img/math-input.png"))
+```
+
+* 一部対応してない記号もある?
+  + `\mathbb{}`とか`\hat{}`とか
+* 数式のみで`\aligned`等環境の入力は不可
+
+# 用例: 図表の挿入
+
+## 図の挿入: 画像ファイル貼り付け
+
+* `out.width=`/`out.height=`でサイズ調整
+* jpeg, png, eps, pdf に対応
+  + \LaTeX の制約
+* デフォルトでは縦に並べる
+  + 横並びにしたい場合は `fig.show="hold"`
+
+```{r, echo=T, fig.cap="いつもの虎(TeXLiveより)", out.width="20%", fig.show="hold"}
+knitr::include_graphics(file.path(file_loc,
+  c("img/tiger.eps", "img/tiger.pdf", "img/tiger.png")))
+```
+
+## 図の挿入: markdown構文で貼り付け
+
+* `out.width=`/`out.height=`が適用されない
+* pandoc構文でサイズ指定
+
+```markdown
+![The Tiger](img/tiger.pdf){ height=30% }
+```
+![The Tiger](`r file.path(file_loc, "img/tiger.pdf")`){ height=30% }
+
+
+## 図の挿入: `ggplot2`のグラフ
+
+* `fig.cap=`でキャプションを設定可能. `labs(title = )`と違い自動相互参照あり
+```{r ggplot2-theme}
+theme_set(
+  theme_classic(base_size = 11) +
+  theme(legend.position = "top",
+        axis.title.y = element_text(angle = 90, vjust = .5), legend.title = element_blank()))
+```
+```{r plot-example,  out.height="60%", fig.cap="ggplot2の出力例: irisデータ"}
+data(iris)
+g <- ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
+  geom_point() + labs(x = "萼長", y = "萼幅")
+g
+```
+
+## 図の挿入: 文字の大きさをそろえるには
+
+* 出力された画像ファイルの文字が小さい!
+* その原因は
+1. **自動縮小される**ため
+  + 込み入った話なので**次のスライドへ**
+2. **単位が違う**ため
+  + beamerは主に **pt**単位
+  + `ggplot2` は `aanotate()`のみ**mm**単位
+* 補足
+  * `cairo_pdf()`の`pointsize`はビルトインデバイスにのみ影響
+  * 『[ggplot2のsizeが意味するもの](https://uribo.hatenablog.com/entry/2018/06/11/232041)』
+
+## 図の挿入: 画像サイズの基本ルール
+
+* Rが作図したファイルを一旦保存し, 拡大縮小して貼り付けられる
+  + `fig.width`/`fig.height` は**保存時**のサイズ
+  + `out.width`/`out.height` は**表示する**サイズ
+* Rの保存サイズとbeamerスライドのサイズのデフォルトは違う
+  + スライドは**5.04 x 3.78 in (128 x 96 mm)**(4:3)
+  + `ggsave()`は **9.11 x 5.77 in** で保存
+* RStudioのビューアは文字の大きさ**固定**で**サイズを画面に合わせる**
+  + **違和感の正体**(?)
+
+## 図の挿入: 幅100%で出力
+
+* 注: `out.width="100%"`はスライドサイズではなく**本文領域の相対サイズ**
+````{r plot-size-test1, out.width="100%", fig.width=9.11, fig.height=5.77}
+g + labs(title = "Iris") + theme_classic(base_size =11) + theme(axis.text = element_text(size = 11))
+```
+
+## 図の挿入: beamerサイズで保存, 幅100%で出力
+
+* 相対的に文字が大きくなった
+````{r plot-size-test2, out.width="100%"}
+g + labs(title = "Iris") + theme_classic(base_size =11) + theme(axis.text = element_text(size = 11))
+```
+
+
+## 図の挿入: 字の大きさをなるべく揃える
+
+* 基準をbeamerに合わせる方法
+  1. 保存時サイズをbeamerの画面サイズと同じにする
+  2. `theme_*()`で`base_size`をbeamerの文字サイズと同じにする
+* out.width="100%"のとき, グラフタイトルと本文のサイズが一致
+* 拡大縮小に合わせて文字の大きさを調整する
+* 横長のグラフなら`fig.width=` を調整する
+* ユーザは`theme_*()`の文字サイズ**のみ手動**で書く
+  + `theme_set(base_size = )` で統一すると楽
+
+
+## 図の挿入: 再現可能なポンチ絵
+
+* 概念図とかの図示はどうするか
+  + NOT データの視覚化(ビジュアライゼーション)
+  + `ggplot2`の本来の使い方ではない
+* `ggdag` はネットワーク図に使える
+  + 因果ダイアグラム, 遷移図, グラフィカルモデル等
+* `ggforce` は[ベン図の描画に応用可能](https://rpubs.com/sdutky/559050)
+  + 世間的にはグラフの部分拡大用パッケージ?
+* 詳しくは個別のマニュアル参照
+* 霞が関流ポンチ絵は**専門外**
+
+## 図の挿入: ポンチ絵の例1
+
+* [以前作ったやつ](https://speakerdeck.com/ktgrstsh/r-and-epidemical-mathematical-models)の修正
+
+```{r punch-chart-example, warning=F, out.width="90%", out.height="70%", fig.cap="ggdagで作ったYJ-SEIRモデルの遷移図"}
+diag_yjseir <- dagify(
+  Y ~ E,
+  J ~ E,
+  S ~ Y,
+  E ~ S,
+  I ~ E + Y,
+  R ~ J + I,
+  labels = c("Y" = "懐疑", "J" = "間接接触", "S" = "感受性", "E" = "潜伏", "I" = "感染", "R" = "回復"),
+  coords = list(x = c(Y = 1.5, J = 2, S = 0, E = 1, I = 2, R =3),
+                y = c(Y = .5, J = -.5, S = 0, E = 0, I = 0, R = 0)
+                )
+  ) %>% tidy_dagitty() %>% mutate(label_edge = c("beta", NA, NA, "gamma", NA, "lambda",  NA, NA, NA))
+diag_yjseir %>% ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_dag_node(size = 9 * .pt) +
+  geom_dag_edges(edge_width = 2, arrow_directed = grid::arrow(length = grid::unit(.05, "npc"), type = "closed")) +
+  geom_dag_text(aes(label = label)) +
+  geom_label(aes(x = (x + xend)/2, y = (y + yend)/2, label = label_edge), parse = T, size = 10) +
+  theme_dag_blank() + coord_cartesian(ylim=c(-1, 1))
+```
+
+## 図の挿入: ポンチ絵の例2
+
+* `ggforce::geom_circle()` を利用
+  + 参考: [How to Plot Venn Diagrams Using R, ggplot2 and ggforce](https://scriptsandstatistics.wordpress.com/2018/04/26/how-to-plot-venn-diagrams-using-r-ggplot2-and-ggforce/)
+
+```{r venn, fig.cap="ベン図の例", out.height="60%"}
+require(ggforce)
+df.venn <- data.frame(
+  x = c(-.5, 0, .5), y = c(0, .8, 0), r = c(1, 1, 1), labels = c('コーディング', 'デザイン', 'タイポグラフィ'))
+ggplot(df.venn, aes(x0 = x, y0 = y, r = r, fill = labels)) +
+  geom_circle(alpha = .3, size = 1, colour = 'grey') +
+  geom_label(aes(x = x, y = y, label = labels)) +
+  annotate("text", x = 0, y = .2, label = "LaTeX", size = 11 / .pt) +
+  coord_fixed() + scale_fill_pander() +
+  theme_void(base_size = 11) + theme(legend.position = "none")
+```
+
+## 図の挿入: `DiagrammeR` でDOT言語で書く
+
+* `DiagrammeR::grViz()`でDOT言語によるグラフィカルモデル描画
+  + 注: `fig.show="hold"`にすると正しく出力できない
+
+```{r diagrammer-example, out.height="40%", fig.cap="DiagrammeRによる作図"}
+grViz("
+digraph boxes_and_circles {
+
+  # a 'graph' statement
+  graph [overlap = true, fontsize = 15]
+
+  # several 'node' statements
+  node [shape = box]
+  A; B; C; D; E; F
+
+  node [shape = circle,
+        fixedsize = true,
+        width = 0.9] // sets as circles
+  1; 2; 3; 4; 5; 6; 7; 8
+
+  # several 'edge' statements
+  A->1 B->2 B->3 B->4 C->A
+  1->D E->A 2->4 1->5 1->F
+  E->6 4->6 5->7 6->7 3->8
+}
+")
+```
+
+
+## 図の挿入: R以外のデバイス
+
+* \LaTeX の`tikz`を使用可能
+  + `tikz`を知らない人は[ここ](https://www.opt.mist.i.u-tokyo.ac.jp/~tasuku/tikz.html)や[TeX Wiki](https://texwiki.texjp.org/?TikZ)を読む
+  + 現時点では**日本語表示が面倒** ([参考](https://stackoverflow.com/questions/51689570/how-to-force-tikz-in-rmarkdown-document-to-show-cyrillic-text))
+  + ~~そこまでやるなら全部\LaTeX で書いたほうがいいのではないか?~~
+
+## 表の挿入: データフレーム
+
+* デフォルトの表示
+
+```{r kable-iris, echo=T}
+data(iris)
+print(head(iris))
+```
+
+## 表の挿入: データフレームを`kable()`で表示
+
+* \LaTeX 風の表になる
+  + 詳しくは `knitr::kable()`や`kableExtra`のマニュアル
+
+```{r kable-iris-display, echo=T}
+data(iris)
+kable(head(iris[, 1:3]),
+      caption="kable()による表示")
+```
+
+## 表の挿入: \LaTeX コード
+
+* \LaTeX のコードを貼り付けて表を掲載
+  + `\input{tab.tex}` でコピペなしで貼り付け可
+  + `stargazer`との併用
+  + **リサイズは手動で**
+* 以下, 表を`.tex`で出力してから読み込む
+  
+```{r tex-tab, echo=T}
+xtable::xtable(
+  head(iris), caption = "xtableでexport") %>%
+  print(file = "tab.tex", scalebox = .75)
+```
+
+\input{tab.tex}
+
+
+## 表の挿入: `stargazer` の表示
+
+* `{r, results="asis"}` で出力texコードを直接表示
+* `stargazer`の使い方は[矢内氏の解説](http://yukiyanai.github.io/jp/classes/rm1/contents/R/tables-n-figures.html)や[私のブログ](https://ill-identified.hatenablog.com/entry/2014/01/28/214814)参照
+
+```{r stargazer-example, eval=F, echo=T}
+fit1  <- lm(Sepal.Length ~ Petal.Width, data = iris)
+fit2 <- lm(Sepal.Length ~ Petal.Width + Petal.Length,
+           data = iris)
+stargazer(fit1, fit2,
+          header = F, type = "latex",
+          digits = 2, digits.extra = 0, align = T,
+          ...
+```
+
+## 表の挿入: `stargazer` の出力結果
+
+\scriptsize
+
+```{r stargazer-example-real, results='asis'}
+fit1  <- lm(Sepal.Length ~ Petal.Width, data = iris)
+fit2 <- lm(Sepal.Length ~ Petal.Width + Petal.Length, data = iris)
+stargazer(fit1, fit2,
+          header = F, type = "latex", 
+          digits = 2, digits.extra = 0, align = T,
+          omit.table.layout = "n",
+          intercept.bottom = F,
+          keep.stat = c("n", "adj.rsq", "f"), df = F,
+          title            = "回帰分析の結果",
+          covariate.labels = c("定数項", "花弁幅", "花弁長"),
+          dep.var.caption  = "モデル1",
+          dep.var.labels   = "萼長")
+```
+
+\normalsize
+
+## 表の挿入: markdown構文
+
+
+\scriptsize
+```yaml
+Table: 得点一覧
+
+  クラス 科目   平均
+  ------ ----- -----
+  A      算数   $90$
+  B      算数   $95$
+  ------ ----- -----
+```
+\normalsize
+
+Table: 得点一覧
+
+  クラス 科目   平均
+  ------ ----- -----
+  A      算数   $90$
+  B      算数   $95$
+  ------ ----- -----
+
+# 外部資料の引用方法
+
+## ハイパーリンクの挿入
+
+* urlは自動でリンク
+  + https://rstudio.com/
+* markdown方式のリンク
+  + `[RStudio](https://rstudio.com/)`
+  + [RStudio](https://rstudio.com/)
+* 画像にハイパーリンク [![RStudio](`r file.path(file_loc, "img/RStudio-Logo-flat.pdf")`){ height=10% }](https://rstudio.com/) を貼ることも可
+
+## 文献引用の方法
+
+* `[@ref]` で番号引用: `\citep{ref}` (`[1]`) に対応
+* `@ref` で著者名引用: `\citet{ref}` (`hogehoge et al.`) に対応
+* `[@ref1; @ref1]` で連番引用 `[1, 2]`
+* 以下引用テスト
+
+```markdown
+[@R-tidyverse; @R-rmarkdown; @rmarkdown2018; @R-bookdown]
+[@R-citr; @wickham2016Data; @Okumura2017LaTeX]
+```
+
+[@R-tidyverse; @R-rmarkdown; @rmarkdown2018; @R-bookdown]
+[@R-citr; @wickham2016Data; @Okumura2017LaTeX]
+
+## 文献引用の補助: 引用子の補完
+
+* 重複・書き間違えの防止
+* `citr`パッケージを使うと楽
+  + ツールバーの `Addins` から選択
+  + zotero連携機能あり
+
+```{r citr-image, fig.cap="citrパッケージのGUI", out.width="50%"}
+knitr::include_graphics(file.path(file_loc, "img/citr.png"))
+```
+
+## 文献引用の補助: 文献管理
+
+* Mendeley, Zotero, ReabCubeの3つが多い?
+* 私はZoteroを使っている
+  + 多言語対応, 連携機能の充実, 料金などの理由
+  + 参考: 『[Mendeley Exodus Mendeley から Zotero への移行の手引き~](https://ill-identified.hatenablog.com/entry/2019/03/05/195257)』
+* `RefManageR` パッケージ
+  + Rでbibファイルをパースしたりする
+  + 文献管理用には既存ソフトで十分?
+
+# 基本的なカスタマイズ
+
+## フォント変更 (欧文)
+
+* 欧文/和文それぞれ3種類指定できる
+* 欧文フォントは `fontspec`で制御
+  + **yamlトップレベル**で指定
+  + `beamer`なので `main` という名に反して**サンセリフが主に使われる**
+* それぞれに `*options` というオプションパラメータ指定が可能
+  + 相対文字サイズの手動調整などに使う
+
+```yaml
+mainfont: <欧文フォント>
+  mainfontoptions:
+    - Scale=1.1
+    - Ligatures=TeX
+sansfont: <欧文サンセリフ体フォント>
+monofont: <等幅フォント>
+```
+
+## フォント変更: 和文
+
+* 和文フォントは**フォーマット関数の下**で指定
+* こちらもゴシック(サンセリフ)がメイン
+*  こちらも `*options` がある
+
+```yaml
+jmainfont: <和文フォント>
+jmainfontoptions: <オプション>
+jsansfont: <和文ゴシックフォント>
+jmonofont: <和文等幅フォント>
+```
+
+## フォント変更: 和文プリセット
+
+* 和文フォント指定は**プリセットを使うと楽**.
+* 対応フォント: `{\CJKfamily{Noto Serif CJK JP} Noto}`{=latex}, `{\CJKfamily{IPAMincho} IPA}`{=latex}, `{\CJKfamily{Harano Aji Mincho} 原ノ味}`{=latex}, ヒラギノ, 游, モリサワ, 小塚, MS など
+  + プリセットにないものは手動設定
+  + \LuaLaTeX は[ここ](https://ja.osdn.net/projects/luatex-ja/wiki/LuaTeX-ja%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9)や[公式ドキュメント](http://mirrors.ibiblio.org/CTAN/macros/luatex/generic/luatexja/doc/luatexja-ja.pdf)を参考に
+  + \XeLaTeX は[ここ](http://zrbabbler.sp.land.to/zxjafont.html)や[公式ドキュメント](https://github.com/zr-tex8r/ZXjafont/blob/master/zxjafont.pdf)を参考に
+* \LaTeX に詳しくないなら \LuaLaTeX を使うと無難
+* 個別設定とプリセットでは**プリセットが優先**される
+
+## フォント変更: 和文プリセットの設定例
+
+```yaml
+jfontpreset: noto-otf
+jfontpresetoptions:
+  - match
+  - deluxe
+  - no-math
+```
+
+## フォント変更: 和文フォントプリセット
+
+* 詳しくは\XeLaTeX の[マニュアル](http://ctan.math.washington.edu/tex-archive/language/japanese/zxjafont/zxjafont.pdf)と\LuaLaTeX の[マニュアル](https://ja.osdn.net/projects/luatex-ja/wiki/LuaTeX-ja%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9)
+
+Table: 主なプリセット名対照表
+
+|フォント |\XeLaTeX  |\LuaLaTeX|
+|:--------|---------:|-------------:|
+|小塚Pro6 |`kozuka6` |`kozuka-pro6` |
+|ヒラギノ |`hiragino`|`hiragino-pro`|
+|IPA      |`ipa`     |`ipa`|
+|MS       |`ms`      |`ms`|
+|NOTO     |`noto`    |`noto-otf`|
+
+
+## インラインでのフォント変更
+
+* 本文中の一部だけフォントを変更したい時は `\CJKfamily{}` を使う
+* 欧文なら `\fontspec{}` に置き換える
+* 詳しくは[ここ](http://zrbabbler.sp.land.to/xelatex.html#sssec-newfont)
+
+```md
+ここはいつものフォント.
+`\textrm{\CJKfamily{IPAMIncho} ここだけIPA明朝.}`{=latex}
+```
+
+ここはいつものフォント.`\textrm{\CJKfamily{IPAMincho} ここだけIPA明朝.}`{=latex}
+
+## スライドのテーマ変更
+
+* 指定できる名前一覧は[ここ](https://deic-web.uab.cat/~iblanes/beamer_gallery/index.html)を参照
+  + `metropolis` テーマはあまりカラーバリエーションがない
+  + 数式をサンセリフにしたくない場合は以下のように
+  + `rownumber_chunk`=デフォルトで行番号を付けるかどうか
+
+```yaml
+output:
+  rmdja::beamer_presentation_ja:
+    fonttheme: professionalfonts
+    rownumber_chunk: true
+```
+
+## シンタックスハイライトのテーマ変更
+
+* テーマは以下が用意されている
+  + `default`, `tango`, `pygments`, `kate`, `monochrome`, `espresso`, `zenburn`, `haddock`, `breezedark`, `textmate`
+  + 参考[Xie Yihui のドキュメント](https://bookdown.org/yihui/rmarkdown/html-document.html)
+
+```yaml
+output:
+  rmdja::beamer_presentation_ja:
+  highlight: tango
+```
+
+## ハイパーリンクの色の変更
+
+* YAMLヘッダの**トップレベルに**記述する
+* `linkcolor` スライド内リンク
+* `citecolor` 参考文献リストへのリンク
+* `urlcolor` urlリンク
+* デフォルトで使用できる色名は[ここ](http://www.latex-cmd.com/style/color.html)を参照
+
+```yaml
+linkcolor: blue
+citecolor: green
+urlcolor: red
+```
+
+## アスペクト比の変更
+
+* 1610(16:10), 149(14:9), 54(5:4), 43(4:3), 32(3:2) から選べる
+* 160 mm x 90 mmにする例
+  + 出力画像も合わせたほうが調整しやすい
+
+```yaml
+output:
+  rmdja::beamer_presentation_ja:
+    fig_width: 6.29921
+    fig_height: 3.54331
+aspectratio: 169
+```
+
+## 引用形式の変更
+
+* 3種類の出力方法
+* `natbib`以外で良いなら**TeXLive不要**
+* `natbib`: [`jecon.bst`](https://github.com/ShiroTakeda/jecon-bst) が使える
+  + **TeXLiveが必要な原因**
+* `biblatex`(+`biber`): 有力な日本語フォーマットがない?
+  + **TeXLive不要**
+* `citeproc`: `pandoc`の機能. `csl`ファイルで参考文献リストの体裁指定.
+  + **TeXLive不要**
+
+## 引用形式の変更例
+
+* 今回は `natbib` パッケージを使用
+* `natbib`で「著者(出版年)」表示にしたい場合は以下.
+  + その他のオプションは[natnotes.pdf](http://texdoc.net/texmf-dist/doc/latex/natbib/natnotes.pdf)を参照
+  
+```yaml
+output:
+  rmdja::beamer_presentation_ja:
+    citation_package: natbib
+    citation_options: authoryear
+```
+
+## 参考文献リストの変更
+
+* `.bib`, `.bst` は以下にファイルパスを指定する
+* `.bst` は TeX側が認識していればフルパス・相対パスである必要なし
+
+```yaml
+bibliography: examples.bib
+biblio-style: jecon
+```
+
+## 「図」「表」の表示
+
+* 図や表を掲載するとキャプションの先頭に「図X」「表Y」などと表示される
+  + "Fig.", "Tab." などと表示したい場合は以下のように変更
+* 参考文献リストを載せる場合, `biblio-title` で見出しを変更できる
+
+```yaml
+output:
+  rmdja::beamer_presentation_ja:
+    figurename: Fig.
+    tablename: Tab.
+biblio-title: Further Readings
+```
+
+# トラブルシューティング
+
+## Q 1: オプションが反映されない
+  
+* A1. PDFの生成に失敗しただけで, 前回のPDFから更新されていないかも
+* A2. 書く場所を間違っている
+  + yamlヘッダの入れ子には意味がある.
+  + トップレベル: `pandoc`に与える
+  + フォーマット関数の下: 関数に与える引数
+  + 関数ヘルプの引数一覧がこのフォーマットで指定できるもの
+```{r call-help, eval=F, echo=T}
+?rmdja::beamer_presentation_ja
+```
+  + **pandoc本来の引数と紛らわしい名前**があるので注意
+* A3. 実際**バグかも**
+
+
+
+## Q 2: エラーの原因がよくわからない
+* A1: **キャッシュ削除すると良くなることもある**
+  + 前回失敗した際のキャッシュが悪さしてることは結構ある
+    - `{ファイル名}_cache`, `{ファイル名}_files`を消す
+    - `cache = F`
+  + エラーメッセージが実態と矛盾してるときはまず試す
+* A2: `rmarkdown`/`knitr`と\LaTeX どちらのエラーか確認
+  + `output file: {ファイル名}.md` と出れば`pandoc`までは機能している
+  + `pandoc`の変換が意図したものでない可能性はある
+
+# まとめ
+
+## 結果どうなったか
+* **良く**なったこと
+  + `lstlisting.sty`**より見やすい**シンタックスハイライト
+  + Rの画像や数値出力を**コピペしなくて済む**
+  + 一画面に収めるための構成だけ考えれば済むように
+* **悪く**なったこと
+  + (パワポユーザ的に)WYSIWYGでないので作りづらい?
+  + 数式のリアルタイムレンダリング/補完はLyXが依然優秀
+  + python作業中(jupyter notebookへの)**不満高まり**
+  + ポンチ絵も`ggplot2`で作らねばという**強迫症状**
+  + 以前より**組版に神経質**になった
+
+## 改良・機能追加したいところ
+
+* 手動インストール作業の削減
+  + TeXLive を入れなくても動かせるようにしたい
+  + たぶん`tinytex`と`rmarkdown`両方がネック 
+* 細かいレイアウト修正
+  + 例: キャプションが上か下かで統一されてない
+  + `XeLaTeX`と`LuaLaTeX`で微妙に文字サイズが違う
+* 他の言語のシンタックスハイライト
+* `ggplot2` 以外で描かれたグラフの対応
+  + 埋め込みはできるがフォントの調整が困難
+  + `igraph` みたいなのとか...
+* [issues](https://github.com/Gedevan-Aleksizde/my_latex_templates/labels/enhancement) に詳細
+
+# 補足: 細かい技術的な話
+
+## このセクションの想定読者
+
+* 単に使いたいだけの人は見る必要なし
+  + 内部処理知りたい人向け
+
+## 既知の不具合
+
+1. \XeLaTeX で取り消し線を付ける場合の問題
+  + 和文に取り消し線を付けるとタイプセットエラーが発生**した**
+  + `zxjatype`と`ulem`の競合と思われる
+  + `xeCJKnftef`を読み込むとなんか解決した
+  + 詳細: [TeX フォーラム](https://oku.edu.mie-u.ac.jp/tex/mod/forum/discuss.php?d=2896)
+
+2. \LuaLaTeX と \XeLaTeX で文字サイズが変わってしまう
+
+
+## 技術的に厄介だったところ
+
+* htmlとpdf(\LaTeX)とで微妙に違う挙動
+  + ネット上の情報はhtml前提が多い
+  + pandocチョットワカル必要
+* 日本語を含む参考文献リスト
+  + \upBibTeX の適用
+  + 細かいオプション, 特に`metropolis`特有の仕様
+* RStudio Cloud で動くかは未確認
+  + 日本語表示がおかしい説あり
+
+## 実装の特徴
+
+* 初期バージョンではR側で設定を書いていた
+* pandocのテンプレートでかなり代替できると気づく
+* 結果だいぶシンプルな仕様に
+
+## \LaTeX プリアンブル: その他の設定
+
+* ハイパーリンクの色を見やすく変更
+* "Figure 1", "Table 1" を 「図1」「表1」に
+* 参考文献リストのフォントサイズ縮小
+* コードチャンクに行番号
+  + 表示は選択式
+* その他いろいろな微調整を書いたTeXファイルのpandocテンプレートを用意
+
+## 日本語文献にどう対応しているか
+
+* [`jecon.bst`](https://github.com/ShiroTakeda/jecon-bst/blob/master/jecon.bst)を使いたい
+  + マルチバイト文字未対応 の\BibTeX 
+  + 日本語は \upBibTeX 必要
+  + `biblatex` ではフォーマットに不満
+* `rmarkdown`/`tinytex`は日本語書誌情報処理未対応
+  + 内部では自前の設定でTex Live + `latexmk`を呼び出し
+  + 呼び出しているラッパにオプションなし
+  + 積極的に改修の気配なし([参考](https://github.com/yihui/tinytex/issues/70))
+* 自前の設定を使用する([参考](https://github.com/kenjimyzk/bookdown_ja_template))
+  + `tinytex.latexmk.emulation = F`
+  + [ここ](https://texwiki.texjp.org/?Latexmk)を参考に`.latexmkrc`設定
+  + **Rmdと同じディレクトリに**上記を置く
+
+## 謝辞
+
+* これを作るにあたって大いに参考になった資料
+  + Kazutan: 『[R Markdownの内部とテンプレート開発](https://kazutan.github.io/HijiyamaR6/intoTheRmarkdown.html)』
+  + Atusy:『[R Markdownのオリジナルフォーマットを作ろう](https://atusy.github.io/tokyor85-original-rmd-format/#/)』
+* 文句言ったら光の速さでPR出してくれたAtusy氏
+* TeX Forum で質問に答えてくれた方々
+* 今風のデザインのヒントを与えてくれたとこ
+  + [pecorarista/sakuratheme](https://github.com/pecorarista/sakuratheme)
+  + [ナウいBeamerスライド \@Dentoo.LT #23](https://www.slideshare.net/ItsukiAomi/beamer-dentoolt-23)

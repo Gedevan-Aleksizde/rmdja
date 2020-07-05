@@ -1,0 +1,12 @@
+Package: rmdja
+Title: R Markdown Formats for Japanese
+Version: 0.0.5
+Authors@R: person(role = c("aut", "cre"), email = "katagiri.stsh@gmail.com", given = "Satoshi", family = "Katagiri")
+Description: R Markdown beamer presentation formats by XeLaTeX, customized for Japanese
+Encoding: UTF-8
+Language: ja
+LazyData: true
+Roxygen: list(markdown = TRUE)
+Imports: rmarkdown
+RoxygenNote: 7.1.1
+Licence: BSD-3
