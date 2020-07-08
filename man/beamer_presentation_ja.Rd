@@ -74,7 +74,7 @@ beamer_presentation_ja(
 
 \item{tablename}{character. 表Y の「表」の部分のテキスト. デフォルト: "表"}
 
-\item{number_sections}{logical. セクション番号を付けるかどうか. デフォルト: FALSE}
+\item{number_sections}{logical. セクション見出しに番号を付けるかどうか. デフォルト: FALSE}
 
 \item{slide_level}{integer. フレームタイトルに対応する markdown の節レベル. デフォルト: 2. つまり \verb{#} はセクションタイトルで, \verb{##} がフレームタイトルになる}
 
@@ -84,7 +84,7 @@ beamer_presentation_ja(
 
 \item{includes}{named list. texファイルに追加するファイルパス. \code{in_header}, \code{before_body}, \code{after_body}, にはファイルパス, \code{preamble} は \code{document} 環境直前のプリアンブル記述をインラインで書くことができる. 詳細は \code{rmarkdown::includes} 参照. デフォルト: NULL}
 
-\item{latex_engine}{character. LaTeXエンジンの指定. デフォルト以外の値にすることは\strong{非推奨}. デフォルト: xelatex}
+\item{latex_engine}{character. LaTeXエンジンの指定. \code{xelatex} または \code{lualatex} を想定. \code{pdflatex} は現状\strong{非推奨}. デフォルト: xelatex}
 
 \item{dev}{character. グラフィックデバイス. 日本語を使う限りデフォルト値から変更する意義はほぼない. デフォルト: cairo_pdf}
 
@@ -98,13 +98,11 @@ additional details.}
 
 \item{opts_chunk}{named list. Rmdファイルのチャンク内で \code{knitr::opts_chunk$set(...)} で記入するものと同じ. 画像サイズなどチャンク出力の設定がbeamer向けになるようデフォルト値を変更している 主なデフォルト: list(message = FALSE, echo = FALSE, comment = NA, fig.align = "center")}
 
-\item{df_print}{character. チャンク出力のデータフレーム表示方法. 詳細は \code{rmarkdown::beamer_presentation} 参照. デフォルト: default}
-
 \item{out.heigt}{character. \code{out.height} 参照. デフォルト: "100\%"}
 
-\item{pandoc_args.}{named list. pandoc に渡す引数. yamlヘッダのトップレベルに概ね対応する. 詳細は \code{rmarkdown::pdf_document}, \code{rmarkdown::rmd_metadata} や pandoc の公式ドキュメント参照. デフォルト: NULL}
-
 \item{md_extensions.}{named_list. pandoc 変換の際にmdフォーマットに付けるオプション. 詳細は \code{rmarkdown::rmarkdown_format} 参照. デフォルト: NULL}
+
+\item{pandoc_args.}{named list. pandoc に渡す引数. yamlヘッダのトップレベルに概ね対応する. 詳細は \code{rmarkdown::pdf_document}, \code{rmarkdown::rmd_metadata} や pandoc の公式ドキュメント参照. デフォルト: NULL}
 }
 \value{
 rmarkdown_output_format
