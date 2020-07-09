@@ -26,7 +26,7 @@ Customized bearmer presentation format function for Japanese users
 2. このパッケージをインストールする
 
 ```
-remotes::install_github('Gedevan-Aleksizde/my_latex_templates', subdir = 'rmdCJK')
+remotes::install_github('Gedevan-Aleksizde/my_latex_templates', subdir = 'rmdja')
 ```
 
 3. `Rmd` ファイルを新規作成する
@@ -75,6 +75,7 @@ install.packages(
 
 * MacおよびWindowsはさらに以下が必要です (DOT言語での作図例のため)
   + Windows はさらにRStudioの再起動が必要かもしれません
+
 ```
 install.packages("webshot")
 webshot::install_install_phantomjs()
