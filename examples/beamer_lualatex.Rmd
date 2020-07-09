@@ -38,7 +38,7 @@ output:
 fontsize: 12pt
 bibliography: examples.bib
 biblo-title: 参考文献
-biblio-style: jecon
+biblio-style: jplain
 mainfont: Noto Serif
 mainfontoptions:
   - Scale=MatchLowercase

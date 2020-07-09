@@ -7,6 +7,7 @@ output:
     latex_engine: xelatex
     theme: metropolis
 fontsize: 12pt
+biblio-style: jplain
 jfontpreset: noto
 linkcolor: blue
 citecolor: blue

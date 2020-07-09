@@ -29,6 +29,7 @@ Customized bearmer presentation format function for Japanese users
 2. [`jecon.bst`](https://github.com/ShiroTakeda/jecon-bst) をインストールする
   + 日本語文献リスト用のスタイルファイルです
   + 他の`bst`ファイルを使っている, 参考文献を表示するつもりがない, なら**不要**です
+  + TeX Live にも `jplain.bst`, `jipsj.bst` などの日本語対応スタイルがバンドルされていますが, `jecon.bst` は日本語出力用のオプションが充実しています.
 3. このパッケージをインストールする
 
 ```
