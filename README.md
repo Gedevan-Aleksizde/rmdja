@@ -75,6 +75,7 @@ install.packages(
 Mac はさらに以下が必要です (DOT言語での作図例のため)
 ```
 install.packages("webshot")
+webshot::install_install_phantomjs()
 ```
 
 
