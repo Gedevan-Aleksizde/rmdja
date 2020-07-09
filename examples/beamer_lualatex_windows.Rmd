@@ -50,7 +50,6 @@ monofont: Ricty Diminished
 monofontoptions:
   - Scale=0.9
 jfontpreset: ms
-jfontpresetoptions:
 linkcolor: blue
 citecolor: blue
 urlcolor: magenta
@@ -691,7 +690,7 @@ jmonofont: <和文等幅フォント>
 ## フォント変更: 和文プリセット
 
 * 和文フォント指定は**プリセットを使うと楽**.
-* 対応フォント: `{\jfontspec{Noto Serif CJK JP} Noto}`{=latex}, `{\jfontspec{IPAMincho} IPA}`{=latex}, `{\jfontspec{Harano Aji Mincho} 原ノ味}`{=latex}, ヒラギノ, 游, モリサワ, 小塚, MS など
+* 対応フォント: Noto, `{\jfontspec{IPAMincho} IPA}`{=latex}, `{\jfontspec{Harano Aji Mincho} 原ノ味}`{=latex}, ヒラギノ, 游, モリサワ, 小塚, MS など
   + プリセットにないものは手動設定
   + \LuaLaTeX は[ここ](https://ja.osdn.net/projects/luatex-ja/wiki/LuaTeX-ja%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9)や[公式ドキュメント](http://mirrors.ibiblio.org/CTAN/macros/luatex/generic/luatexja/doc/luatexja-ja.pdf)を参考に
   + \XeLaTeX は[ここ](http://zrbabbler.sp.land.to/zxjafont.html)や[公式ドキュメント](https://github.com/zr-tex8r/ZXjafont/blob/master/zxjafont.pdf)を参考に
