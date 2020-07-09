@@ -76,7 +76,9 @@ beamer_presentation_ja <- function(
   # ----- reshape arguments -----
   
   fontsize_as_integer <- function(fontsize = "12pt"){
-    return(as.integer(regmatches(fontsize, regexpr("^[0-9]+", fontsize))))
+    if(is.null(fontsize)) fontsize = "12pt"
+    ps <- as.integer(regmatches(fontsize, regexpr("^[0-9]+", fontsize)))
+    return(ps)
   }
 
   pandoc_args_base <- c()
