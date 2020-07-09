@@ -64,7 +64,7 @@ options(tinytex.latexmk.emulation = F)
 # サンプル画像等を参照するパス
 file_loc <- system.file("extdata", package = "rmdja")
 # サンプル引用文献リストを取得する
-file.copy(file.path(file_loc, "examples.bib"), to = "./")
+file.copy(file.path(file_loc, "examples/examples.bib"), to = "./")
 
 knitr::opts_chunk$set(cache = T)
 ```
@@ -534,24 +534,21 @@ kable(head(iris[, 1:3]),
       caption="kable()による表示")
 ```
 
-## 表の挿入: \LaTeX コード
+## 表の挿入: 外部の.texファイル
 
-* \LaTeX のコードを貼り付けて表を掲載
+* \LaTeX でかかれた表を貼り付けて掲載
   + `\input{tab.tex}` でコピペなしで貼り付け可
-  + `stargazer`との併用
   + **リサイズは手動で**
-* 以下, 表を`.tex`で出力してから読み込む
-  
-```{r tex-tab, echo=T}
-sink(file("./tab.tex", encoding = "utf-8"))
-xtable::xtable(
-  head(iris), caption = "xtableでexport") %>%
-  print(scalebox = .75)
-sink()
+* 以下, 表を一旦`.tex`ファイルで出力してから読み込む
+  + R上で生成したTeXコードなら**直接出力可**(2枚後のスライド参照)
+
+```{r tex-tab, echo=F, results="hide"}
+file.copy(file.path(file_loc, "examples/tab.tex"), "./")
 ```
 
-\input{tab.tex}
+## 表の挿入: .texで書かれた表を掲載
 
+\input{tab.tex}
 
 ## 表の挿入: `stargazer` の表示
 
