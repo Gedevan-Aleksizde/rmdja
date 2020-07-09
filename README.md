@@ -68,7 +68,7 @@ remove.package("rmdCJK")
 
 ```
 install.packages(
-  c("conflicted", "rmarkdown", "tidyverse", "ggthemes", "ggdag", "DiagrammeR", "kableExtra", "stargazer"),
+  c("conflicted", "rmarkdown", "tidyverse", "ggthemes", "ggdag", "DiagrammeR", "xtables", "kableExtra", "stargazer", "tufte"),
   dependencies = T)
 ```
 
