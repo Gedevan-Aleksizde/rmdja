@@ -17,6 +17,7 @@ Customized bearmer presentation format function for Japanese users
 
 * `XeLaTeX`でタイプセットした場合, 和文に取り消し線を使うとエラーが発生します. おそらくはパッケージの競合ですが, 独力では難しいので一旦放置
 * **Windows では動作確認をしていません**
+* `rmarkdown` 2.3 (現時点でのCRAN最新版) では標準グラフィックデバイスのフォントサイズが自動調整されません. 気になる方は[githubリポジトリ](https://github.com/rstudio/rmarkdown) から2.3.2以降をインストールしてください.
 
 # 使い方
 
