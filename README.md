@@ -63,8 +63,9 @@ remove.package("rmdCJK")
 
 
 ### examples に必要なRパッケージ
-  + なくても動きますが, あったほうが使い方がわかりやすいです
-  + 以下でインストールしてください
+
+* なくても動きますが, あったほうが使い方がわかりやすいです
+* 以下でインストールしてください
 
 ```
 install.packages(
@@ -72,7 +73,8 @@ install.packages(
   dependencies = T)
 ```
 
-Mac はさらに以下が必要です (DOT言語での作図例のため)
+* MacおよびWindowsはさらに以下が必要です (DOT言語での作図例のため)
+  + Windows はさらにRStudioの再起動が必要かもしれません
 ```
 install.packages("webshot")
 webshot::install_install_phantomjs()
