@@ -15,31 +15,23 @@ Customized bearmer presentation format function for Japanese users
   
 ## 既知の問題点
 
-* `XeLaTeX`でタイプセットした場合, 和文に取り消し線を使うとエラーが発生します. おそらくはパッケージの競合ですが, 独力では難しいので一旦放置
 * **Windows では動作確認をしていません**
-* `rmarkdown` 2.3 (現時点でのCRAN最新版) では標準グラフィックデバイスのフォントサイズが自動調整されません. 気になる方は[githubリポジトリ](https://github.com/rstudio/rmarkdown) から2.3.2以降をインストールしてください.
+* `rmarkdown` 2.3 (現時点でのCRAN最新版) では標準グラフィックデバイスのフォントサイズが自動調整されません
+  + 気になる方は[githubリポジトリ](https://github.com/rstudio/rmarkdown) から2.3.2以降をインストールしてください
+* `XeLaTeX` ではヒラギノフォントのプリセット`hiragino-pro`を利用する場合, ヒラギノ明朝 W2が必要です
 
 # 使い方
 
-1. 最新のTeXLive(2020)をインストールする
-  + upBibTeX を使う必要があるためです
-  + BiBLaTeX または pandoc-citeproc の出力する参考文献で満足している, または参考文献リストを一切使わないのなら不要です
-  + Mac OS なら MacTeX, Ubuntu なら[公式](https://www.tug.org/texlive/acquire-netinstall.html)から落としてください
-    - Ubuntu は `apt` を使わずインストールしたほうが良いです
-  + [TeX wiki](https://texwiki.texjp.org/?TeX%20Live)などを参考にしてください
-2. [`jecon.bst`](https://github.com/ShiroTakeda/jecon-bst) をインストールする
-  + 日本語文献リスト用のスタイルファイルです
-  + 他の`bst`ファイルを使っている, 参考文献を表示するつもりがない, なら**不要**です
-  + TeX Live にも `jplain.bst`, `jipsj.bst` などの日本語対応スタイルがバンドルされていますが, `jecon.bst` は日本語出力用のオプションが充実しています.
-3. このパッケージをインストールする
+1. 後述の必要なパッケージや外部プログラムをインストールする
+2. このパッケージをインストールする
 
 ```
 remotes::install_github('Gedevan-Aleksizde/my_latex_templates', subdir = 'rmdCJK')
 ```
 
-4. `Rmd` ファイルを新規作成する
+3. `Rmd` ファイルを新規作成する
   + 最初は `examples/beamer_blank.Rmd` か `examples/beamer_xelatex.Rmd` をコピーして使ってみてください
-5. `Rmd`ファイルに`output::rmdja::beamer_presentation_ja` を指定
+4. `Rmd`ファイルに`output::rmdja::beamer_presentation_ja` を指定
   + フォントを手動で指定する必要があります
   + MS なら 
   ```
@@ -51,7 +43,7 @@ remotes::install_github('Gedevan-Aleksizde/my_latex_templates', subdir = 'rmdCJK
   ```
   + macなら
   ```
-  jfontpreset: hiragino
+  jfontpreset: yu-osx
   ```
   でとりあえずは動くはずです.
   + 詳しくは `examples/` 以下の pdf を確認してください.
@@ -64,6 +56,61 @@ remotes::install_github('Gedevan-Aleksizde/my_latex_templates', subdir = 'rmdCJK
 remove.package("rmdCJK")
 ```
 
+## 必要なパッケージなど
+
+
+## R パッケージ
+
+
+### examples に必要なRパッケージ
+  + なくても動きますが, あったほうが使い方がわかりやすいです
+  + 以下でインストールしてください
+
+```
+install.packages(
+  c("conflicted", "rmarkdown", "tidyverse", "ggthemes", "ggdag", "DiagrammeR", "kableExtra", "stargazer"),
+  dependencies = T)
+```
+
+Mac はさらに以下が必要です (DOT言語での作図例のため)
+```
+install.packages("webshot")
+```
+
+
+## 外部プログラム
+
+* TeX Live (>= 2020)
+もし (u)pBibTeX を一切使わない(BibLaTeX や pandoc-citeproc で良い), 参考文献を一切使わないというのであれば不要です
+  + upBibTeX を使う必要があるためです
+  + BiBLaTeX または pandoc-citeproc の出力する参考文献で満足している, または参考文献リストを一切使わないのなら不要です
+  + Mac OS なら MacTeX, Ubuntu なら[公式](https://www.tug.org/texlive/acquire-netinstall.html)から落としてください
+    - Ubuntu は `apt` を使わずインストールしたほうが良いです
+  + [TeX wiki](https://texwiki.texjp.org/?TeX%20Live)などを参考にしてください
+*. [`jecon.bst`](https://github.com/ShiroTakeda/jecon-bst) 
+  + 日本語文献リスト用のスタイルファイルです
+  + 他の`bst`ファイルを使っている, 参考文献を表示するつもりがない, なら**不要**です
+  + TeX Live にも `jplain.bst`, `jipsj.bst` などの日本語対応スタイルがバンドルされていますが, `jecon.bst` は日本語出力用のオプションが充実しています.
+
+### examples に必要な外部プログラム
+
+* Graphviz (DOT)
+DOT言語で生成した画像を挿入する用例があるため, インストールが必要です
+
+MAC:
+
+```
+brew install graphviz
+```
+
+Ubuntu:
+
+```
+sudo apt install graphiviz
+```
+
+* [BXcoloremoji.sty](https://github.com/zr-tex8r/BXcoloremoji)
+  + カラー絵文字を出力したい場合に必要です. CTANに登録されてないため手動インストールする必要があります
 
 # サンプル
 
