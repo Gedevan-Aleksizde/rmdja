@@ -18,7 +18,7 @@ Customized bearmer presentation format function for Japanese users
 * **Windows では動作確認をしていません**
 * `rmarkdown` 2.3 (現時点でのCRAN最新版) では標準グラフィックデバイスのフォントサイズが自動調整されません
   + 気になる方は[githubリポジトリ](https://github.com/rstudio/rmarkdown) から2.3.2以降をインストールしてください
-* `XeLaTeX` ではヒラギノフォントのプリセット`hiragino-pro`は, OS Xにバンドルされていないヒラギノ明朝 W2を要求します
+* `XeLaTeX` ではヒラギノフォントのプリセット`hiragino-pro`/`hiragino-pron`は, OS Xにバンドルされていないヒラギノ明朝 W2を要求します
 
 # 使い方
 
