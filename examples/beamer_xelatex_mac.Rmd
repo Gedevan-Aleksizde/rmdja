@@ -39,17 +39,13 @@ fontsize: 12pt
 bibliography: examples.bib
 biblo-title: 参考文献
 biblio-style: jplain
-mainfont: Noto Serif
+mainfont: Palatino
 mainfontoptions:
   - Scale=MatchLowercase
   - Ligatures=TeX
-sansfont: Noto Sans
-sansfontoptions:
-  - Scale=1.1
-monofont: Ricty Diminished
-monofontoptions:
-  - Scale=0.9
-jfontpreset: noto
+sansfont: Helvetica
+monofont: SF Mono
+jfontpreset: yu-osx
 linkcolor: blue
 citecolor: blue
 urlcolor: magenta
@@ -66,11 +62,6 @@ file_loc <- system.file("extdata", package = "rmdja")
 file.copy(file.path(file_loc, "examples.bib"), to = "./")
 
 knitr::opts_chunk$set(cache = T)
-
-# macでDOT言語の作図を直接貼り付けるために必要
-if(Sys.info()["sysname"] == "Darwin"){
-  webshot::install_phantomjs()
-}
 ```
 
 ## 
