@@ -148,6 +148,7 @@ file.copy(file.path(system.file("examples", package = "rmdCJK"), "beamer_*.Rmd")
 
 * 以下に触発されて作りました
   + https://atusy.github.io/tokyor85-original-rmd-format
+  + https://kazutan.github.io/HijiyamaR6/intoTheRmarkdown.html#/
   + https://github.com/atusy/tokyor85down
 
 * r-wakalang で `rmarkdown` の不具合を指摘するや即座にプルリクエストを上げていただいた Atusy 氏
