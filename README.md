@@ -8,17 +8,16 @@ Customized bearmer presentation format function for Japanese users
 * ~~名称は (Xe)LaTeX の `zxjatype` パッケージから取っていますが, 同パッケージ開発者の八登崇之氏は一切関知していません~~
 * ~~一旦 `zxjatype` ではなく `XeCJK` で和文フォントを埋め込むようにしました~~
   + ~~スライドでは`zxjatype`を使えないことによる大きな影響はないですが, そのうち`zxjatype`で表示するようにしたいです~~
-* `XeCJK` への依存をやめました. さらにCJKといいつつ中韓の言語に対応する予定はないため `rmdja` に改名しました.
+* 0.1 から `zxjatype` の使用を再開しました. さらにCJKといいつつ中韓の言語に対応する予定はないため `rmdja` に改名しました.
 * LuaLaTeXまたはXeLaTeXでのタイプセットを前提にしています
   + それぞれ `luatex-ja`, `zxjatype` を利用して和文表示をしています
-  + ただし現時点の XeLaTeX は打ち消し線を使用できない問題があります (おそらく `zxjatype` 0.7 の問題)
   
 ## 既知の問題点
 
-* **Windows では動作確認をしていません**
 * `rmarkdown` 2.3 (現時点でのCRAN最新版) では標準グラフィックデバイスのフォントサイズが自動調整されません
   + 気になる方は[githubリポジトリ](https://github.com/rstudio/rmarkdown) から2.3.2以降をインストールしてください
 * `XeLaTeX` ではヒラギノフォントのプリセット`hiragino-pro`/`hiragino-pron`は, OS Xにバンドルされていないヒラギノ明朝 W2を要求します
+* WindowsかつLuaLaTeXのとき, `\jfontspec` でフォント変更する歳, Noto Serif CJK JP が読み込めないことがあります (原因調査中)
 
 # 使い方
 
@@ -30,7 +29,8 @@ remotes::install_github('Gedevan-Aleksizde/my_latex_templates', subdir = 'rmdja'
 ```
 
 3. `Rmd` ファイルを新規作成する
-  + 最初は `examples/beamer_blank.Rmd` か `examples/beamer_xelatex.Rmd` をコピーして使ってみてください
+  + 最初は `examples/beamer_blank.Rmd` か `examples/beamer_xelatex_{使用しているOS名}.Rmd` をコピーして使ってみてください
+  + OSごとの違いはほぼデフォルトのフォントだけです
 4. `Rmd`ファイルに`output::rmdja::beamer_presentation_ja` を指定
   + フォントを手動で指定する必要があります
   + MS なら 
@@ -58,9 +58,21 @@ remove.package("rmdCJK")
 
 ## 必要なパッケージなど
 
+* 最低限必要なのは `rmarkdown` のみです.
 
-## R パッケージ
+### 外部プログラム
 
+* TeX Live (>= 2020)
+もし (u)pBibTeX を一切使わない(BibLaTeX や pandoc-citeproc で良い), 参考文献を一切使わないというのであれば不要です
+  + upBibTeX を使う必要があるためです
+  + BiBLaTeX または pandoc-citeproc の出力する参考文献で満足している, または参考文献リストを一切使わないのなら不要です
+  + Mac OS なら MacTeX, Ubuntu なら[公式](https://www.tug.org/texlive/acquire-netinstall.html)から落としてください
+    - Ubuntu は `apt` を使わずインストールしたほうが良いです
+  + [TeX wiki](https://texwiki.texjp.org/?TeX%20Live)などを参考にしてください
+*. [`jecon.bst`](https://github.com/ShiroTakeda/jecon-bst) 
+  + 日本語文献リスト用のスタイルファイルです
+  + 他の`bst`ファイルを使っている, 参考文献を表示するつもりがない, なら**不要**です
+  + TeX Live にも `jplain.bst`, `jipsj.bst` などの日本語対応スタイルがバンドルされていますが, `jecon.bst` は日本語出力用のオプションが充実しています.
 
 ### examples に必要なRパッケージ
 
@@ -81,24 +93,10 @@ install.packages("webshot")
 webshot::install_install_phantomjs()
 ```
 
-
-## 外部プログラム
-
-* TeX Live (>= 2020)
-もし (u)pBibTeX を一切使わない(BibLaTeX や pandoc-citeproc で良い), 参考文献を一切使わないというのであれば不要です
-  + upBibTeX を使う必要があるためです
-  + BiBLaTeX または pandoc-citeproc の出力する参考文献で満足している, または参考文献リストを一切使わないのなら不要です
-  + Mac OS なら MacTeX, Ubuntu なら[公式](https://www.tug.org/texlive/acquire-netinstall.html)から落としてください
-    - Ubuntu は `apt` を使わずインストールしたほうが良いです
-  + [TeX wiki](https://texwiki.texjp.org/?TeX%20Live)などを参考にしてください
-*. [`jecon.bst`](https://github.com/ShiroTakeda/jecon-bst) 
-  + 日本語文献リスト用のスタイルファイルです
-  + 他の`bst`ファイルを使っている, 参考文献を表示するつもりがない, なら**不要**です
-  + TeX Live にも `jplain.bst`, `jipsj.bst` などの日本語対応スタイルがバンドルされていますが, `jecon.bst` は日本語出力用のオプションが充実しています.
-
 ### examples に必要な外部プログラム
 
-* Graphviz (DOT)
+* Graphviz
+
 DOT言語で生成した画像を挿入する用例があるため, インストールが必要です
 
 MAC:
