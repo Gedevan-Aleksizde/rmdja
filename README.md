@@ -119,11 +119,11 @@ sudo apt install graphiviz
 `examples/` 以下にサンプルが存在します.
 
 
-* `beamer_linux.Rmd` (linuxというよりubuntu)
-* `beamer_macos.Rmd`
-* `beamer_windows.Rmd`
+* `beamer_xelatex_linux.Rmd` (linuxというよりubuntu)
+* `beamer_xelatex_macos.Rmd`
+* `beamer_xelatex_windows.Rmd`
 
-`*.pdf` はそれぞれに対応する出力例です.
+`*.pdf` はそれぞれに対応する出力例です. `xelatex` を `lualatex` に置き換えると LuaLaTeX 版のサンプルになります.
 
 各OSでよく使われるフォントを指定している以外は上記は全て同じです. 適当なディレクトリに上記いずれをコピーしてknitしてみてください.
 コピーする際には
