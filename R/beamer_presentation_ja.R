@@ -155,6 +155,7 @@ beamer_presentation_ja <- function(
     tidy.opts = list(width.cutoff = 40),
     tidy = F,
     fig.align = "center",
+    out.extra = "keepaspectratio",
     out.width = out.width,
     out.height = out.height,
     dev = dev
