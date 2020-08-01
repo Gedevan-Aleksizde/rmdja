@@ -328,7 +328,7 @@ $if(strikeout)$
 \usepackage{xpatch}
 \xpatchcmd{\sout}
   {\bgroup}
-  {\bgroup\def\ULthickness{2pt}}
+  {\bgroup\def\ULthickness{.5pt}}
   {}{}
 % Avoid problems with \sout in headers with hyperref
 \pdfstringdefDisableCommands{\renewcommand{\sout}{}}
