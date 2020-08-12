@@ -5,7 +5,7 @@ Customized bearmer presentation format function for Japanese users
 # なにこれ
 
 * R Markdown で 日本語Beamerスライドを作るためにフォーマットを梱包したパッケージです
-* ~~名称は (Xe)LaTeX の `zxjatype` パッケージから取っていますが, 同パッケージ開発者の八登崇之氏は一切関知していません~~
+* 名称は (Xe)LaTeX の `zxjatype` パッケージから取っていますが, 同パッケージ開発者の八登崇之氏は一切関知していません
 * ~~一旦 `zxjatype` ではなく `XeCJK` で和文フォントを埋め込むようにしました~~
   + ~~スライドでは`zxjatype`を使えないことによる大きな影響はないですが, そのうち`zxjatype`で表示するようにしたいです~~
 * 0.1 から `zxjatype` の使用を再開しました. さらにCJKといいつつ中韓の言語に対応する予定はないため `rmdja` に改名しました.
@@ -62,16 +62,14 @@ remove.package("rmdCJK")
 
 ### 外部プログラム
 
-* TeX Live (>= 2020)
-もし (u)pBibTeX を一切使わない(BibLaTeX や pandoc-citeproc で良い), 参考文献を一切使わないというのであれば不要です
+* TeX Live (>= 2020)  
   + upBibTeX を使う必要があるためです
-  + BiBLaTeX または pandoc-citeproc の出力する参考文献で満足している, または参考文献リストを一切使わないのなら不要です
+  + BiBLaTeX または pandoc-citeproc の出力する参考文献で満足している, または参考文献リストを一切使わないのならTeX Live は**不要**です
   + Mac OS なら MacTeX, Ubuntu なら[公式](https://www.tug.org/texlive/acquire-netinstall.html)から落としてください
-    - Ubuntu は `apt` を使わずインストールしたほうが良いです
+    - Ubuntu は `apt` を**使わず**インストールしたほうが良いです
   + [TeX wiki](https://texwiki.texjp.org/?TeX%20Live)などを参考にしてください
 *. [`jecon.bst`](https://github.com/ShiroTakeda/jecon-bst) 
   + 日本語文献リスト用のスタイルファイルです
-  + 他の`bst`ファイルを使っている, 参考文献を表示するつもりがない, なら**不要**です
   + TeX Live にも `jplain.bst`, `jipsj.bst` などの日本語対応スタイルがバンドルされていますが, `jecon.bst` は日本語出力用のオプションが充実しています.
 
 ### examples に必要なRパッケージ
@@ -134,11 +132,11 @@ file.copy(file.path(system.file("examples", package = "rmdCJK"), "beamer_*.Rmd")
 
 でコピーすると楽です.
 
-**NOTE**: 用例の一環として, knit時に同じフォルダに `tab.tex`, `examples.bib`, `.latexmkrc` というファイルが生成されます. 上書きに注意してください.
+**NOTE**: 用例の一環として, knit時に同じフォルダに `tab.tex`, `examples.bib`, `.latexmkrc` というファイルが生成されます. **上書きに注意**してください.
 
 **NOTE**: `monofont`/`jamonofont`はソースコードの掲載に使われます. [M+](http://mix-mplus-ipa.osdn.jp/)や[Ricty](https://rictyfonts.github.io/)などのインストールを推奨します
 
-**NOTE**: 現時点での XeLaTeX 版と LuaLaTeX 版の違いは以下のとおりです.
+**NOTE**: 現時点での XeLaTeX 版と LuaLaTeX 版の主な違いは以下のとおりです.
 
 1. 一部のLaTeXコマンドが違う
 2. 文字の相対的な大きさ, 字間などのレイアウトが微妙に違う
