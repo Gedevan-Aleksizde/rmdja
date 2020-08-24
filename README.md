@@ -158,3 +158,4 @@ file.copy(file.path(system.file("examples", package = "rmdCJK"), "beamer_*.Rmd")
 
 * (0.0.5) LuaLaTeX/XeLaTeX 両方に対応できるように, 再度の名前変更
 * (0.1.0) win/ubuntu/macで対応, XeLaTeX/LuaLaTeX で動作確認したのでmasterにマージ.
+* (0.1.1) レイアウト微修正
