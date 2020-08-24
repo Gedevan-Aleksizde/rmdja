@@ -5,7 +5,7 @@ Customized bearmer presentation format function for Japanese users
 # なにこれ
 
 * R Markdown で 日本語Beamerスライドを作るためにフォーマットを梱包したパッケージです
-* 名称は (Xe)LaTeX の `zxjatype` パッケージから取っていますが, 同パッケージ開発者の八登崇之氏は一切関知していません
+* ~~名称は (Xe)LaTeX の `zxjatype` パッケージから取っていますが, 同パッケージ開発者の八登崇之氏は一切関知していません~~
 * ~~一旦 `zxjatype` ではなく `XeCJK` で和文フォントを埋め込むようにしました~~
   + ~~スライドでは`zxjatype`を使えないことによる大きな影響はないですが, そのうち`zxjatype`で表示するようにしたいです~~
 * 0.1 から `zxjatype` の使用を再開しました. さらにCJKといいつつ中韓の言語に対応する予定はないため `rmdja` に改名しました.
