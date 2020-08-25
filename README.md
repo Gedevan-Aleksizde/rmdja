@@ -68,7 +68,7 @@ remove.package("rmdCJK")
   + Mac OS なら MacTeX, Ubuntu なら[公式](https://www.tug.org/texlive/acquire-netinstall.html)から落としてください
     - Ubuntu は `apt` を**使わず**インストールしたほうが良いです
   + [TeX wiki](https://texwiki.texjp.org/?TeX%20Live)などを参考にしてください
-*. [`jecon.bst`](https://github.com/ShiroTakeda/jecon-bst) 
+* [`jecon.bst`](https://github.com/ShiroTakeda/jecon-bst) 
   + 日本語文献リスト用のスタイルファイルです
   + TeX Live にも `jplain.bst`, `jipsj.bst` などの日本語対応スタイルがバンドルされていますが, `jecon.bst` は日本語出力用のオプションが充実しています.
 
