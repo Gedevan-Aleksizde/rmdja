@@ -13,8 +13,12 @@ output:
         - \patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip0.5em}{}{}
         - \makeatother
 fontsize: 12pt
-mainfont: 'DejaVu Serif'
-sansfont: 'DejaVu Sans'
+mainfont: "`r if(Sys.info()['sysname'] == 'Linux'){'DejaVu Serif'} else {'Times New Roman'}`"
+mainfontoptions:
+  - Scale=MatchLowercase
+  - Ligatures=TeX
+sansfont: "`r if(Sys.info()['sysname'] == 'Linux'){'DejaVu Sans'} else {'Arial'}`"
+monofont: 'Courier New'
 jfontpreset: "`r switch(Sys.info()['sysname'], 'Linux' = 'noto', 'Darwin' = 'yu-osx', 'Windows' = 'ms')`"
 ---
 

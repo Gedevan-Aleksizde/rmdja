@@ -39,16 +39,12 @@ fontsize: 12pt
 bibliography: examples.bib
 biblo-title: 参考文献
 biblio-style: jplain
-mainfont: DejaVu Serif
+mainfont: "`r if(Sys.info()['sysname'] == 'Linux'){'DejaVu Serif'} else {'Times New Roman'}`"
 mainfontoptions:
   - Scale=MatchLowercase
   - Ligatures=TeX
-sansfont: DejaVu Sans
-sansfontoptions:
-  - Scale=1.0
-monofont: DejaVu Sans Mono
-monofontoptions:
-  - Scale=1.0
+sansfont: "`r if(Sys.info()['sysname'] == 'Linux'){'DejaVu Sans'} else {'Arial'}`"
+monofont: 'Courier New'
 jfontpreset: "`r switch(Sys.info()['sysname'], 'Linux' = 'noto', 'Darwin' = 'yu-osx', 'Windows' = 'ms')`"
 linkcolor: blue
 citecolor: blue
@@ -185,9 +181,10 @@ knitr::include_graphics(file.path(file_loc, "img/readme-selection.png"))
 output:
   rmdja::beamer_presentation_ja:
     latex_engine: xelatex
-mainfont: DejaVu Serif
-sansfont: DejaVu Sans
-monofont: DejaVu Sans Mono
+mainfont: "`r if(Sys.info()['sysname'] == 'Linux'){'DejaVu Serif'} else {'Times New Roman'}`"
+mainfontoptions:
+sansfont: "`r if(Sys.info()['sysname'] == 'Linux'){'DejaVu Sans'} else {'Arial'}`"
+monofont: 'Courier New'
 jfontpreset: "`r switch(Sys.info()['sysname'], 'Linux' = 'noto', 'Darwin' = 'yu-osx', 'Windows' = 'ms')`"
 ```
 
