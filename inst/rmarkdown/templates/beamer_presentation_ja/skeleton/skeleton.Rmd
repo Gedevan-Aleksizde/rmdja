@@ -15,6 +15,7 @@ output:
 fontsize: 12pt
 mainfont: 'DejaVu Serif'
 sansfont: 'DejaVu Sans'
+jfontpreset: "`r switch(Sys.info()['sysname'], 'Linux' = 'noto', 'Darwin' = 'yu-osx', 'Windows' = 'ms')`"
 ---
 
 ```{r setup-document, include=F}
