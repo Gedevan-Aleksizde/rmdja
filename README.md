@@ -23,6 +23,10 @@ Customized bearmer presentation format function for Japanese users
 
 1. 後述の必要なパッケージや外部プログラムをインストールする
 2. このパッケージをインストールする
+3. RStudio で R Markdown を作成し, `output: rmdja::beamer_presentation_ja` を書く
+  + または新規作成時に [R Markdown] -> [From Template] -> [Beamer in Japanese] を選択します  
+
+![select templete](rmdja/inst/resorces/readme-selection.png)
 
 ```
 remotes::install_github('Gedevan-Aleksizde/my_latex_templates', subdir = 'rmdja')
