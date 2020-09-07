@@ -22,15 +22,14 @@ Customized bearmer presentation format function for Japanese users
 # 使い方
 
 1. 後述の必要なパッケージや外部プログラムをインストールする
-2. このパッケージをインストールする
+2. このパッケージをインストールする 
+```
+remotes::install_github('Gedevan-Aleksizde/my_latex_templates', subdir = 'rmdja')
+```
 3. RStudio で R Markdown を作成し, `output: rmdja::beamer_presentation_ja` を書く
   + または新規作成時に [R Markdown] -> [From Template] -> [Beamer in Japanese] を選択します  
 
 ![select templete](inst/resources/img/readme-selection.png)
-
-```
-remotes::install_github('Gedevan-Aleksizde/my_latex_templates', subdir = 'rmdja')
-```
 
 3. `Rmd` ファイルを新規作成する
   + 最初は `examples/beamer_blank.Rmd` か `examples/beamer_xelatex_{使用しているOS名}.Rmd` をコピーして使ってみてください
