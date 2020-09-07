@@ -171,7 +171,6 @@ beamer_presentation_ja <- function(
   # FIXME: I want to load rmarkdown::metadata directly.
   out <- rmarkdown::output_format(
     pre_knit = function(input, ...) {
-      print(rmarkdown::metadata$fontsize)
       knitr::opts_chunk$set(dev.args = list(pointsize = fontsize_as_integer(rmarkdown::metadata$fontsize)))
       return(input)
     },
