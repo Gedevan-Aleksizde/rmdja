@@ -13,18 +13,8 @@ output:
         - \patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip0.5em}{}{}
         - \makeatother
 fontsize: 12pt
-mainfont: Noto Serif
-mainfontoptions:
-  - Scale=MatchLowercase
-  - Ligatures=TeX
-sansfont: Noto Sans
-sansfontoptions:
-  - Scale=1.1
-monofont: Ricty Diminished
-monofontoptions:
-  - Scale=0.9
-jfontpreset: noto
-biblio-title: "参考文献"
+mainfont: 'DejaVu Serif'
+sansfont: 'DejaVu Sans'
 ---
 
 ```{r setup-document, include=F}
