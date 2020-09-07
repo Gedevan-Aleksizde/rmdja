@@ -32,7 +32,7 @@ options(tinytex.latexmk.emulation = F)
 # 上記は日本語引用文献リストのために必要
 
 # サンプル画像等を参照するパス
-file_loc <- system.file("extdata", package = "rmdja")
+file_loc <- system.file("resources", package = "rmdja")
 # サンプル引用文献リストを取得する
 file.copy(file.path(file_loc, "examples/examples.bib"), to = "./")
 
