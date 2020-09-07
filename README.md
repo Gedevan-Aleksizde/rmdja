@@ -122,17 +122,17 @@ sudo apt install graphiviz
 `examples/` 以下にサンプルが存在します.
 
 
-* `beamer_linux.Rmd` (linuxというよりubuntu)
-* `beamer_macos.Rmd`
-* `beamer_windows.Rmd`
+* `beamer_xelate.Rmd`
+* `beamer_lualatex.Rmd`
 
 `*.pdf` はそれぞれに対応する出力例です.
 
-各OSでよく使われるフォントを指定している以外は上記は全て同じです. 適当なディレクトリに上記いずれをコピーしてknitしてみてください.
+各OSでよく使われるフォントを指定している以外は上記は全て同じです. 適当なディレクトリに上記いずれかをコピーしてknitしてみてください.
 コピーする際には
 
 ```
-file.copy(file.path(system.file("examples", package = "rmdCJK"), "beamer_*.Rmd"), "HOGEHOGE")
+file.copy(file.path(system.file("resources/examples/rmd", package = "rmdja"), "beamer_xelatex.Rmd"), to = "./")
+file.copy(file.path(system.file("resources/examples/rmd", package = "rmdja"), "beamer_lualatex.Rmd"), to = "./")
 ```
 
 でコピーすると楽です.
