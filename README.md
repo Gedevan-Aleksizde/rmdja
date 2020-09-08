@@ -46,10 +46,10 @@ remotes::install_github('Gedevan-Aleksizde/my_latex_templates', subdir = 'rmdja'
   ```
   + macなら
   ```
-  jfontpreset: yu-osx
+  jfontpreset: hiragino-pro
   ```
   でとりあえずは動くはずです.
-  + 詳しくは `examples/` 以下の pdf を確認してください.
+  + 詳しくは [`examples/`](inst/resources/examples/rmd/) 以下の pdf を確認してください.
 
 ## 初期バージョン (rmdCJK) をお使いの場合
 
@@ -119,7 +119,7 @@ sudo apt install graphiviz
 
 # サンプル
 
-`examples/` 以下にサンプルが存在します.
+[`examples/`](inst/resources/examples/rmd/) 以下にサンプルが存在します.
 
 
 * `beamer_xelate.Rmd`
@@ -135,7 +135,7 @@ file.copy(file.path(system.file("resources/examples/rmd", package = "rmdja"), "b
 file.copy(file.path(system.file("resources/examples/rmd", package = "rmdja"), "beamer_lualatex.Rmd"), to = "./")
 ```
 
-でコピーすると楽です.
+と言うふうにコピーすると楽です.
 
 **NOTE**: 用例の一環として, knit時に同じフォルダに `tab.tex`, `examples.bib`, `.latexmkrc` というファイルが生成されます. 上書きに注意してください.
 
