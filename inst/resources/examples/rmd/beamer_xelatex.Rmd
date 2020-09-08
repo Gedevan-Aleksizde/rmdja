@@ -735,17 +735,17 @@ Table: 主なプリセット名対照表
 
 ## インラインでのフォント変更
 
-* 明朝/ローマンにしたいなら `\textmc`/`\textrm`
+* 明朝/ローマンにしたいなら `\textrm`
 * 本文中の一部だけフォントを変更したい時は `\jfontspec{}` を使う
   + 欧文なら `\fontspec{}`
 * 詳しくは[ここ](http://zrbabbler.sp.land.to/xelatex.html#sssec-newfont)
 
 ```md
 ここはいつものフォント.
-`\textmc{ここだけ明朝}`{=latex}
+`\textrm{ここだけ明朝 Mincho}`{=latex}
 ```
 
-ここはいつものフォント.`\textmc{ここだけ明朝.}`{=latex}
+ここはいつものフォント.`\textrm{ ここだけ明朝 Mincho.}`{=latex}
 
 ## スライドのテーマ変更
 

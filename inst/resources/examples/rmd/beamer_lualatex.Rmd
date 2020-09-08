@@ -1,5 +1,5 @@
 ---
-title: "R Markdownで日本語\\texttt{beamer}プレゼンテーション (XeLaTeX)版"
+title: "R Markdownで日本語\\texttt{beamer}プレゼンテーション (LuaLaTeX)版"
 author: "ill-identified"
 date: "`r Sys.Date()`"
 output:
@@ -67,8 +67,8 @@ knitr::opts_chunk$set(cache = T)
 ## 
 
 > `\textrm{Нужны новые формы. Новые формы нужны, а если их нет, то лучше ничего не нужно.}`{=latex}
->
-> `\textrm{新しいフォーマットが必要なんですよ. 新しいフォーマットが. それがないというなら, いっそ何もないほうがいい.}`{=latex} 
+> 
+> `\textmc{新しいフォーマットが必要なんですよ. 新しいフォーマットが. それがないというなら, いっそ何もないほうがいい.}`{=latex} 
 > `r tufte::quote_footer('--- A. チェーホフ『かもめ』')`
 
 ## 目次
@@ -737,14 +737,15 @@ Table: 主なプリセット名対照表
 * 明朝/ローマンにしたいなら `\textmc`/`\textrm`
 * 本文中の一部だけフォントを変更したい時は `\jfontspec{}` を使う
   + 欧文なら `\fontspec{}`
-* 詳しくは[ここ](http://zrbabbler.sp.land.to/xelatex.html#sssec-newfont)
+  + \LuaLaTeX では和文欧文の**同時一括切り替え不可**
+* 詳しくは [`luatex-ja` のマニュアル](http://mirror.ctan.org/macros/luatex/generic/luatexja/doc/luatexja-ja.pdf)
 
 ```md
 ここはいつものフォント.
-`\textmc{ここだけ明朝}`{=latex}
+`\textmc{ここだけ明朝 \textrm{Mincho}}`{=latex}
 ```
 
-ここはいつものフォント.`\textmc{ここだけ明朝.}`{=latex}
+ここはいつものフォント.`\textmc{ ここだけ明朝 \textrm{Mincho}.}`{=latex}
 
 ## スライドのテーマ変更
 
