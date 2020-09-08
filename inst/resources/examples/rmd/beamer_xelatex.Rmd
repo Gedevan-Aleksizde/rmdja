@@ -175,7 +175,7 @@ knitr::include_graphics(file.path(file_loc, "img/readme-selection.png"))
 ## 最低限必要な設定
 
 * フォントがOSごとに異なるのが問題
-* 以下は Linux / Win / Mac のいずれでも動く
+* このファイルの設定なら Linux / Win / Mac のいずれでも動く?
 
 ```yaml
 output:
