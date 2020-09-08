@@ -160,4 +160,9 @@ file.copy(file.path(system.file("resources/examples/rmd", package = "rmdja"), "b
 
 # 更新履歴
 
+* v0.2
+  + 新規作成時のテンプレートとして選べるように
+  + 用例ファイルのフォント選択を自動判別化
+* v0.1
+  + 最初の公開版
 * (0.0.5) LuaLaTeX/XeLaTeX 両方に対応できるように, 再度の名前変更
