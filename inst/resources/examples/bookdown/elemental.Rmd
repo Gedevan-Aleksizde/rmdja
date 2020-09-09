@@ -1,0 +1,256 @@
+# (PART) R Markdown と Bookdown の基本機能 {-}
+
+# 技術文書の執筆が捗る機能
+
+ここではまず, R Markdown の基本的な機能を紹介する. つまり `bookdown` 特有のものではなく, R Markdown 全般で使用できる機能である. これ以降は自己言及的な説明が多いため, この文書を生成しているソースコードと比較しながら確認することをおすすめする.
+
+## Markdown 準拠の構文
+
+Markdown に準拠しており, HTML や LaTeX のようにいちいちタグやトークンを付ける必要がない. 以下の機能の詳細は "[Ch. 2.2 Markdown Syntax](https://bookdown.org/yihui/bookdown/markdown-syntax.html)" を参照.
+
+## 見出し
+
+Markdown では `#` は見出しを意味するが, `bookdown` にはさらにオプションが用意されている.
+
+`# 見出し名 {-}` で, セクション番号のつかない見出しを用意できる. 序文, 章末の参考文献, 付録のセクションに使えるだろう. さらに,
+
+`# (PART) 見出し名` で「部」の見出しを作ることができる. この見出しは セクションの合間に挟まるが, 選択することはできない. 文書が長くなったときに, より大きな区切りを付けるのに役に立つだろう. さらに, `# (APPENDIX) 見出し名 {-}` で, 以降の見出しの頭に 「補遺 A, B, C, ...」と付番できる.
+
+## 数式
+
+LaTeX 記法で数式を記述できる. HTML ならば Mathjax によってレンダリングされる. 数式の記述ルールは少々ややこしい. これは現在の `pandoc` の仕様で HTML, LaTeX, epub の規格で矛盾なく出力するためやむをえない措置である.
+
+1. 改行をしない行内数式は `$` で囲む, または `\(`, `\)` で囲む.
+2. 改行を伴う独立行数式は `$$` で囲む, または `\[`, `\]` で囲む.
+3. `align`, `equation` 環境等を使う場合は, 上記の記号を**使わず**, 直接 LaTeX コマンド `\begin{align}...` を打ち込む.
+
+```markdown
+\@ref(eq:binom) は二項分布の確率関数である
+\begin{align}
+f(k) &= {n \choose k} p^{k} (1-p)^{n-k} (\#eq:binom)
+\end{align}
+```
+
+その出力は, 以下のようになる.
+
+\@ref(eq:binom) は二項分布の確率関数である
+
+\begin{align}
+f(k) &= {n \choose k} p^{k} (1-p)^{n-k} (\#eq:binom)
+\end{align}
+
+Bookdown 特有の制約として,  付番したい場合は `\label{ID}` ではなく `(\#eq:ID)` を使う. また,  PDF (LaTeX) と HTML (Mathjax) の仕様には
+
+1. PDF では `align` は常に数式が付番され, `align*` 等はどうやっても付番されない
+2. HTML では `align` でも `align*` であってもラベルを書かなければ付番されず, 書けば付番される.
+
+という違いがある. 両者で同じ表示にこだわるのなら, 付番を取り消す `\notag` を多用することになるだろう.
+
+
+さらに, bookdown の機能として, LaTeX の「定理」「定義」「証明」などの環境に対応するものが提供されている (参考: [Ch. 2.2 Markdown extensions by bookdown](https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html)).
+
+
+```{lemma borelcantelli, echo=T, name="ボレル-カンテリの補題"}
+${E_1,E_2,\cdots}$をある確率空間の事象とする. これらの事象の確率の和が有限であるなら, それらが無限に多く起こる確率はゼロである. つまり,
+
+\begin{align*}
+& \sum_{n=1}^\infty \mathrm{P}(X_n) <\infty \Rightarrow \mathrm{P}\left(\lim_{n\to\infty}\sup X_n\right) = 0,\\
+& \lim_{n\to\infty}\sup X_n = \bigcap_{n=1}^\infty\bigcup_{k\leq n}^\infty E_k
+\end{align*}
+
+である.
+```
+
+```{theorem}
+aaa
+```
+
+
+## プログラムチャンク
+
+以降は頻繁に使うパッケージをインポートしている前提の説明とする.
+
+```{r base-packages, echo=T}
+require(tidyverse)
+require(ggthemes)
+```
+このように, ログを掲載することができる. これは再現性を重視する際に重宝するが, 一方で単に画像などの主力だけを掲載したい場合もあるだろう. どちらもチャンクオプションで簡単に切り替え可能である.
+
+* `echo`: プログラムを掲載するかどうか
+* `message`: プログラム実行結果の標準出力を掲載するかどうか
+* `warning`: プログラム実行結果の警告を掲載するかどうか
+* `error`: プログラム実行結果のエラーを掲載するかどうか
+* `eval`: 文書作成時にプログラムを実行するかどうか
+* `include`: 文書作成時にプログラムを実行し, **かつ掲載しない**かどうか
+
+これらはチャンクごとに個別に設定することも, デフォルトとして設定することもできる. 後者の場合
+
+```{r chunk-default, eval=F}
+knitr::opts_chunk$set(
+  echo = F,
+  message = T,
+  warnings = F,
+  error = F
+)
+```
+
+などと書く. なおこのチャンクは `eval=F` を設定することで, 実行されることなくプログラムのみ掲載している. ただし, プログラムのみを掲載するなら, Markdown の機能でも可能である.
+
+```{r bored, comment=""}
+txt <- "```sh
+echo Hello, Bookdown
+```"
+cat(txt)
+```
+
+
+チャンクに使用できる言語は R だけではない. 以下で対応しているエンジンの一覧を表示できる
+
+```{r engine-list}
+names(knitr::knit_engines$get())
+```
+
+また, 新たにプログラムを追加することもできる. 詳細は RDG [Ch. 2.7 Other language engines](https://bookdown.org/yihui/rmarkdown/language-engines.html) を参考に.
+
+## カスタムブロック
+
+数式のセクションの定理ブロックやプログラムチャンクの応用で, 独自のブロックセクションを定義することができる. `rmdja` は BKD で紹介されている例を予め使えるようにした.
+
+```{block2, type="warning"}
+Some text for this block.
+```
+
+## 図の挿入
+
+R Markdown 同様, markdown 形式と R チャンク内で表示させる2通りがある. Rのグラフィックデバイスを使っている限り, 通常のRのコンソールと同じコードをチャンく内に書くだけで表示できる.
+
+R のグラフィックデバイスではないとは, RGL や `plotly` など外部ライブラリに頼ったグラフ作成ツールのことである. 判断できない人は, RStudio 上で実行して, "Plots" ペーンに表示されたら R のグラフィックデバイス, "Viewer" ペーンに表示されたらそうでない, で覚えていただきたい. 後者を表示する方法はセクション \@ref(sec:webapp) 後述する.
+
+まずは通常のグラフィックデバイスを使用した例.
+
+`bookdown` はキャプション機能があるため, **`plot()` 側でタイトルを付けないほうが良い**. 例えば以下のようになチャンクを書く.
+
+
+```{r display-chunk-plot-sample, comment=""}
+txt <- '```{r plot-sample, echo=T, fig.cap="`plot()` 関数によるグラフ"}
+plot(x = 1:10, y = 1:10, col = 1:10, xlab = "X軸", ylab = "y軸")
+```'
+cat(txt)
+```
+
+最後の `fig.cap=""` がキャプションである. ただし, どうも日本語キャプションを書いたあとに他のチャンクオプションを指定するとエラーになるようだ. よって **`fig.cap=` はオプションの末尾に書くべきである**. また, `fig.cap=""` に数式や一部の特殊なテキストを直接入力することができない. この問題は相互参照について解説するセクション \@ref(sec:crossref) で詳細を述べる. 実際の表示は次のようになる.
+
+PDF ならばフロート設定のため, 図が離れた位置に配置されることがある. そのため, 「図 \@ref(fig:plot-sample)」 のような相互参照を使うと良いだろう.
+
+```{r plot-sample, echo=T, fig.cap="`plot()` 関数によるグラフ"}
+plot(x = 1:10, y = 1:10, col = 1:10, xlab = "X軸", ylab = "y軸")
+```
+ 
+もちろん `ggplot2` も使用可能である. 図 \@ref(fig:plot-sample-ggplot2) がその出力である.
+
+```{r plot-sample-ggplot2, echo=T, fig.cap="`ggplot2` によるグラフ"}
+data("diamonds")
+ggplot(diamonds, aes(x=carat, y=price, color=clarity)) +
+  geom_point() +
+  labs( x = "カラット数", y = "価格") +
+  scale_color_pander(name = "クラリティ") + 
+  theme_classic(base_family = "Noto Sans CJK JP") +
+  theme(legend.position = "bottom")
+```
+
+
+## 表の挿入
+
+Markdown 記法と, R チャンクでデータフレームとして表示する方法の2通りがある (表 \@ref(tab:tab-md)).
+
+```markdown
+Table: (\#tab:tab-md) Markdown 記法の表
+
+ Sepal.Length   Sepal.Width   Petal.Length   Petal.Width
+-------------  ------------  -------------  ------------
+          5.1           3.5            1.4           0.2
+          4.9           3.0            1.4           0.2
+          4.7           3.2            1.3           0.2
+          4.6           3.1            1.5           0.2
+          5.0           3.6            1.4           0.2
+          5.4           3.9            1.7           0.4
+```
+
+
+Table: (\#tab:tab-md) Markdown 記法の表
+
+ Sepal.Length   Sepal.Width   Petal.Length   Petal.Width
+-------------  ------------  -------------  ------------
+          5.1           3.5            1.4           0.2
+          4.9           3.0            1.4           0.2
+          4.7           3.2            1.3           0.2
+          4.6           3.1            1.5           0.2
+          5.0           3.6            1.4           0.2
+          5.4           3.9            1.7           0.4
+
+R Markdown のデフォルトでは R のコンソールと同様にテキストとして出力されるが, bookdown では異なるデザインで表示されている. これは `knitr`, `kableExtra` パッケージなどで事後処理をかけることで見やすいデザインの表に変換しているからである.
+
+```{r display-dataframe-kable}
+data(iris)
+knitr::kable(
+  head(iris), booktabs = T,
+  caption = '`knitr::kable()` で出力された表'
+  )
+```
+
+こちらは関数内にキャプションを書く必要がある. 表\@ref(tab:display-dataframe-kable).
+
+## 相互参照 {#sec:crossref}
+
+図, 表, 式などに番号を自動で割り当て, さらにハイパーリンクを付加できる. `\@ref(ID)` を使う. 現状では `refstyle` や `prettyref` のように接頭語を自動で付けてくれないが, そのうちなんとかなるかもしれない.
+
+bookdown の相互参照は, LaTeX の `prettyref.sty` のように, `接頭辞:参照ID` という記法になる. 既に紹介したように, 数式は `eq` で, 定理は `thm` である. 図表は `fig`, `tab`. その他の参照名は [Ch. 2.2 Markdown extensions by bookdown](https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html#equations)
+
+チャンクオプションの `fig.cap` などに TeX 数式を書いても正しく表示できない. そのような場合は `ref` 参照を使う
+
+(ref:figcap1) 🌸$\alpha$ のなんやかんや🌸
+
+```{r foo, fig.cap='🌸(ref:figcap1)🌸'}
+plot(cars)  # a scatterplot
+```
+ 
+## 文献引用
+
+`@引用ID` で本文に引用を与えられ, 巻末に引用した文献の一覧が自動で生成される. また, `citr` パッケージにより, RStudio Addins に文献に対応する引用IDを取り出して挿入する機能が追加される. `BibTeX`, `BibLaTeX`, または `pandoc-citeproc` で処理される.
+
+(ref:citr-caption) `citr` パッケージの例
+
+```{r citr-image, fig.cap="(ref:citr-caption)"}
+knitr::include_graphics(file.path(img_dir, "citr.png"))
+```
+
+## 脚注
+
+脚注はインラインと, 巻末に書く2通りがある.
+
+```markdown
+ここにインラインで脚注^[脚注の本文]
+```
+
+ここにインラインで脚注^[脚注の本文]
+
+```markdown
+本文は巻末に書く[^example-1][^example-2].
+
+[^example-1]: 脚注の本文その2
+[^example-2]: 脚注の本文その2
+```
+
+本文は巻末に書く[^example-1][^example-2].
+
+
+ここにインラインで脚注[^脚注の本文]
+
+インラインで書くほうがシンプルに見えるが, この記法では間を空けずに連続して脚注を書くことができない.
+
+```markdown
+このように書くと^[脚注その1]^[脚注その2]上付きとして認識される
+```
+
+[^example-1]: 脚注の本文その2
+[^example-2]: 脚注の本文その2

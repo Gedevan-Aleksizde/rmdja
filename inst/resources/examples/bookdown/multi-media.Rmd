@@ -1,0 +1,105 @@
+# (PART) `rmdja` が提供する機能と製本方法 {-}
+
+# `rmdja` の提供する機能
+
+`rmdja` は日本語文書を作成する際の煩雑な下準備を省くことを目的に作っており, 主に `rmarkdown` および `bookdown` のフォーマット関数のデフォルト値などを調整するなどでそれを実現している. そして `bookdown` に対応する製本機能については, PDF, HTML, 電子書籍など異なる媒体でもなるべくレイアウトやコンテンツの差異が逸脱しないようにすることも考慮している.
+
+# マルチメディア特有の問題と対処
+
+出力方法で言えば, HTML と PDF に大別できる. Rmdは HTMLタグも LaTeX コマンドも受け付けるが, それぞれ HTML と PDF に変換する際にしか反映できない. よって, 例えば複雑な図表を LaTeX で書いてしまった場合, HTML では表示されない.
+
+紙媒体と電子媒体では表現できることに差がある. 例えば紙はあらゆる環境で同じような見た目になるが, ハイパーリンクは付けられないし, 一度出版してしまうと修正は容易ではない. PDF の見た目も読者の環境に依存しにくいが, やはり更新が容易ではない.
+
+`bookdown` には既に印刷された本を改ざんする機能はないが, 出力ごとに内容を変えることで, PDF にのみ更新履歴を表示することはできる.
+
+`knitr::is_latex()`, `knitr::is_html()` などは, knit 時にどの媒体への変換処理なのかを判定するのに使える.
+
+また,  `_bookdown.yml` の設定, `rmd_files` は, 媒体別に設定することができる.
+
+```yaml
+rmd_files:
+  html:
+    - index.Rmd
+    - html-only.Rmd
+  latex:
+    - index.Rmd
+    - latex-only.Rmd
+```
+
+## 製本のためのファイル構成
+
+bookdown-demo を念頭に置いた解説. `rmdja` も基本的に同じ.
+
+* `index.Rmd`: ソース (名前を変えてもいいが...)
+* それ以外の `Rmd` ファイル: 連結して読み込むことが可能
+* `_output.yml`: マルチメディア展開のための設定. PDF, HTML, EPUB それぞれの設定を書く
+* `_bookdown.yml`: bookdown のレイアウト設定
+* その他の設定ファイル: その他製本に必要なもの, `.tex`, `.css` ファイル, `.bib` 等
+
+`_output.yaml`, `_bookdown.yml` は `index.Rmd` のヘッダに書くこともできるが, 長くなりすぎるので分割できる. `bookdown::render()` 関数を呼び出した時に, カレントディレクトリのこれらを自動で読み込んでくれるため.
+
+### `_output.yml`
+
+本来の YAML の `output:` 以下の記述をこの `_output.yml` ファイルに書くことができる.
+`output:` を複数書くと`bookdown::remder_book()` による製本時にそれぞれ作成してくれる.
+
+```yaml
+output:
+  bookdown::gitbook:
+    lib_dir: assets
+    split_by: section
+    config:
+      toolbar:
+        position: static
+  bookdown::pdf_book:
+    keep_tex: yes
+  bookdown::html_book:
+    css: toc.css
+documentclass: book
+```
+
+詳しくは @R-bookdown の "[Ch. 3 Output Formats](https://bookdown.org/yihui/bookdown/output-formats.html)" の章を読め
+
+### `_bookdown.yml`
+
+`_bookdown.yml` も `index.Rmd` の YAML ヘッダの `bookdown:` 以下に対応する内容を書くことができる. 例えばどの Rmd ファイルを読み込むかとか, LaTeX のときだけ, HTML のときだけ読み込むような設定も可能.
+
+
+https://ill-identified.hatenablog.com/entry/2020/09/05/202403
+
+詳しくは, @R-bookdown の [Ch. 4.4 Configuration](https://bookdown.org/yihui/bookdown/configuration.html)
+
+
+Build ペーンから文書をビルドするには,  `index.Rmd` のYAML ヘッダに `site: bookdown::bookdown_site` を書く必要がある. さらに,  `index.Rmd` をプロジェクトディレクトリのルートに置いていない場合は, ツールバーの `Build` -> `Configure Build Tools...` から `index.Rmd` を置いているディレクトリを site ディレクトリとする設定が必要になる.
+
+```{r build-pane, fig.cap="Build ペーンの手動設定"}
+knitr::include_graphics(file.path(img_dir, c("build-pane.png", "build-pane-build.png")))
+```
+
+
+
+## どのフォーマットを選べばいいのか
+
+TODO: bookdown で追加されたフォーマットはどういう継承関係になっているか
+
+
+## 画像の形式
+
+技術文書での画像の多くはプロットなど単純な図形なので, PDF で出力する場合はプロット画像も PDF にするのが望ましい. JPG や PNG などのラスタ画像では拡大すると粗くなるが, PDF などのベクタ画像ならば拡大しても粗くならず, かつ単純な図形ならばはファイルサイズも小さく済むことが多い. 一方で HTML は通常 Webブラウザで閲覧するため, PDF に対応していないことが多い.  そこで, HTML では SVG 形式で出力する.
+
+R による SVG への出力は, 従来組み込みの `SVG()` で行うことが多かったが, 近年は新たなパッケージが出ている. 有力なのは `svglite` と `rsvg` である.
+
+https://oku.edu.mie-u.ac.jp/~okumura/stat/svg.html
+
+## Web アプレットの挿入 {#sec:webapp}
+
+### plotly
+
+### shiny
+
+
+## 参考文献リストの体裁
+
+これはR Markdownで日本語技術文書を作る際の特にアレな障害の1つである. PDF は BibTeX があるが, HTML では使えない. pandoc の出力に頼るしかない. pandoc は CSL という, Word でも使われている参考文献リストのフォーマットに対応しているが, これの機能が少ないため日本語文献の引用スタイルが崩れてしまう.
+
+TODO: ただし現在 jecon.bst の表示も少しおかしいので修正中.

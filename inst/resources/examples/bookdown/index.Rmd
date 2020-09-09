@@ -1,0 +1,144 @@
+---
+title: "`bookdown` + `rmdja` による多様なファイル形式の日本語技術文書の作成 "
+author: "Katagiri, Satoshi"
+date: "2020/9/8"
+site: bookdown::bookdown_site                    # RStudio GUIでビルド操作したい場合に必要
+description: "bookdown を使って無非無償出版!!!"  # HTML <metadata> に出力されるサイト概要
+url: 'https\://bookdown.org/john/awesome/'       # URL
+github-repo: "john/awesome"                      # Github レポジトリ
+cover-image: "img/Johannes_Gutenberg.jpg"        # 表紙画像. epub でのみ有効?
+apple-touch-icon: "touch-icon.png"               # iOS でホームスクリーンに登録した際に見えるもの
+apple-touch-icon-size: 120                       # そのサイズ
+favicon: "favicon.ico"                           # そのまんまファビコン.
+bibliography: ../../bibliography/rmdja.bib # 書誌情報ファイル
+biblio-style: apalike                            # csl または bst
+link-citations: true                             # 引用に参考文献リストへのハイパーリンクをつける
+mainfont: DejaVu Serif
+sansfont: DejaVu Sans
+monofont: Ricty
+jfontpreset: noto
+linkcolor: blue
+citecolor: blue
+urlcolor: magenta
+figurename: 図
+tablename: 表
+appendix-name: 補遺
+biblio-title: 参考文献
+toc-title: 目次
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = F,
+  comment = "",
+  error = F,
+  warning = F,
+  cache = F
+  )
+img_dir <- "../../img"
+```
+
+# (PART) イントロダクション {-}
+
+# 序文 {-}
+
+> Нужны новые формы. Новые формы нужны, а если их нет, то лучше ничего не нужно.
+>
+> 新しいフォーマットが必要なんですよ. 新しいフォーマットが. それがないというなら, いっそ何もないほうがいい. 
+>
+> `r tufte::quote_footer('--- A. チェーホフ『かもめ』')`
+
+R Markdown (`rmarkdown`) は, R プログラムを埋め込んだ動的なドキュメントから pandoc を利用して PDF や HTML 形式の文書を作成するパッケージであり, 数式, 図表, シンタックスハイライトされたプログラムなどを簡単な記述で掲載できる. 名前の通り, その基本構文は Markdown である. よって, Markdown と R の知識が最低限あれば (R プログラムが必要ないなら Markdown だけでも) 文書を作成することができる.
+
+`bookdown` パッケージは `rmarkdown` をもとに, ページ数の多い文書を作成し, 配布するための機能を拡張したものである. しかし, PDF の出力に関しては欧文を前提としたフォーマットを使用しているため, 日本語の適切な表示 (組版やフォントの埋め込みなど)   のできる文書を作成するには高いハードルが存在した.
+
+本稿では, `bookdown` で日本語文書を作成する際の設定を容易にしたパッケージ `rmdja` を利用した日本語技術文書の作成方法を解説する.
+
+```{r, echo=F}
+getCC <- function(adapt = c("yes", "no", "inherit"), commercial = T, language="ja", size = c("normal", "compact")){
+  adapt <- match.arg(adapt, c("yes", "no", "inherit"))
+  size <- match.arg(size, c("normal", "compact"))
+  if(commercial){
+    nc <- ""
+  } else {
+    nc <- "nc"
+  }
+  cc <- switch (adapt,
+      "yes" = "",
+      "no"  = "nd",
+      "inherit" = "sa"
+    )
+  if(commercial){
+    cc <- paste("by", cc, sep = "-")
+  } else {
+    cc <- paste("by", "nc", cc, sep = "-")
+  }
+  cc <- sub("-$", "", cc)
+  size = switch(size,
+                "normal" = "88x31.png",
+                "compact" = "80x15.png"
+                )
+  url_icon <- paste0("https://i.creativecommons.org/l/", cc, "/4.0/", size)
+  url_text <- paste0("https://creativecommons.org/licenses/", cc, "/4.0")
+  if(!is.null(language)){
+    url_text <- paste0(url_text, "/deed.", language)
+  }
+  return(list(url_icon, url_text))
+}
+cc_url <- getCC(adapt = "yes", commercial = F)
+knitr::include_graphics(cc_url[[1]])
+```
+
+# 本稿の目標 {-}
+
+長大な技術文書や良質な技術文書を作成するには手間がかかる. しかし時間をかければ良い文書になるわけではない. 無駄な手間を省き, 効率よく快適に文書を作成するべきである.
+
+たとえばこういう経験はないだろうか.
+
+
+* プログラムの解説に, シンタックスハイライトされたテキストを貼り付ける
+* 図表に言及する際に「図 1」「表 2」とタイプした上で, 参照先へハイパーリンクを張る
+* 本文中で引用した参考文献のリストを巻末にコピーペーストし, 過不足がないか目視で確認する
+* $\sum_{k=1}^K\int_0^\infty f_k(x) dx$ などといった複雑な数式はプレーンテキストや HTML では表現できないため, 画像を作成して貼り付ける
+* 冒頭にかっこいいエピグラフを掲載したいので, 1時間かけて特別に枠やフォントを作成した
+* 市販のワードプロセッサで作成した文書を渡したら, レイアウトが崩れて読めないと言われた
+
+本稿は文書作成者をこのような様々なブルシットから解放するのが目的である.
+
+## 既存のフォーマットとの違い {-}
+
+もちろん, 同様のことは既存のソフトウェアやサービスでも可能である.
+
+たとえば はてなブログ, Qiita, といった既存のブログサービスには, Mathjax による数式レンダリングやプログラムをシンタックスハイライトして表示する機能が最初から用意されているものもある. しかしながら現状では以下のような制約がある.
+
+* 独自規格の構文が使いづらい, 一部本来と違う構文で数式を書く必要がある, ページ内リンクが使えない, など.
+* テキストエディタでしか書けない
+* **数十ページ相当のテキストを投稿しようとしただけ**でエラーが発生する.
+
+また, LaTeX を普段使っている人間にとっては以下のような利点がある. R Markdown はそもそも PDF 出力時は LaTeX に依存しているため, 主な違いは操作の簡略化にある.
+
+* 外部プログラムで作成した画像や計算結果をコピーペーストせずそのまま貼り付けられる
+* LaTeX とほぼ同じ構文で数式を記入できる
+
+Word を普段使っている人間にとっては以下のような利点がある.
+
+* 数十, 数百ページの文書を書いてもクラッシュすることがあまりない
+* 輪郭のはっきりしたベクタ画像を簡単に貼り付けられる
+* 図表の配置や相互参照を手動で書く必要がない
+* 読み手の環境に依存してレイアウトが崩れにくいPDFファイルを出力できる
+
+さらに, 作成した文書は PDF 形式で出力することはもちろん, HTML 形式で様々なサイトで掲載でき[^blogdown]たり, 電子書籍ファイルとしても出力可能である. このような多様な出力形式への対応しているソフトウェアはあまり例を見ない.
+
+`bookdown` はこのように便利で, 公式ドキュメントがとても充実しているにも関わらず, 日本語に適したレイアウトの設定の煩雑さからあまり普及していない[^bookdown-example].
+
+* [開発者のドキュメント](https://bookdown.org/yihui/bookdown/)
+* [github テンプレート](https://github.com/rstudio/bookdown-demo)
+* [R Markdown Definiteiv Guide](https://bookdown.org/yihui/rmarkdown/)
+
+基本的なことがらの多くは上記を読めば分かるのでここでは基本機能をダイジェストで伝えた上で, これらの資料に書いてない応用技を紹介する. YAML のオプションの意味についてはソースコードにコメントを書いた. 以下, 単に, BKD と書けば [@R-bookdown] を, RDG と書けば "R Markdown: The Definitive GUide" [@rmarkdown2018] を指すことにする.
+
+さらに, Python の `jupyter` は Python のコードチャンクとその結果を簡単に表示できる文書作成ツールである. 出力オプションの少なさ (たとえば長大なコードもそのまま掲載されてしまう) や,  IDE として見ても機能が少ないことからあまり使い勝手がよくなかったが, 最近登場した **Jupyter book は R Markdown や `bookdown` にかなり近い機能を持っている**. 本題から外れるが, 後ほど簡単な機能比較も行う.
+
+
+[^blogdown]: `bookdown` 同様に R Markdown で作成した文書をブログ風のフォーマットで出力する `blogdown` パッケージというものも存在する.
+[^bookdown-example]: 前例として bookdown で作成した文書を技術書展で配布している人が書いたブログが存在する: https://teastat.blogspot.com/2019/01/bookdown.html

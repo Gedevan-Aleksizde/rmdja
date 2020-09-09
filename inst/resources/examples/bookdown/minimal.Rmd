@@ -1,0 +1,23 @@
+# (PART) 最低限のチュートリアル {-}
+
+# 準備
+
+
+```{r gutenberg, fig.cap="Johannes Gutenberg"}
+knitr::include_graphics(file.path(img_dir, "Johannes_Gutenberg.jpg"))  
+```
+
+このドキュメントは `rmdja` パッケージに含まれている. よってまずはこれをダウンロードしてほしい.
+
+```{r, eval=F}
+remotes::install_github("Gedevan-Aleksizde/my_latex_template", subdir = "rmdja", repos = NULL)
+```
+
+以下のコマンドで, `rmdja` パッケージに含まれるサンプルファイルをカレントディレクトリにコピーする. bookdown の文書生成は従来の R Markdown と違い, RStudio の `knit` ボタンでは**できない**. 代わりに, 以下の2通りの方法がある.
+
+1. `bookdown::render_book('index.Rmd', format = "bookdown::gitbook")` などを呼び出す
+2. RStudio の Build ペーンを使う
+
+これで `_book` フォルダに出力がされる.
+
+TODO
