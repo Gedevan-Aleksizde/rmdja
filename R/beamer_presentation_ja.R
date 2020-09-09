@@ -104,7 +104,7 @@ beamer_presentation_ja <- function(
     pandoc_args_base <- c(pandoc_args_base, rmarkdown::pandoc_variable_arg("tablename", "図"))
   }
   if(missing(template) || identical(template, "") || identical(template, "default")){
-    template <- file.path(system.file("resources", package = "rmdja"), "pandoc-template/beamer-ja.template")
+    template <- file.path(system.file("resources", package = "rmdja"), "pandoc-templates/beamer-ja.tex.template")
   }
   
   if("preamble" %in% names(includes)){
