@@ -26,30 +26,15 @@ Customized bearmer presentation format function for Japanese users
 ```
 remotes::install_github('Gedevan-Aleksizde/my_latex_templates', subdir = 'rmdja')
 ```
-3. RStudio で R Markdown を作成し, `output: rmdja::beamer_presentation_ja` を書く
-  + または新規作成時に [R Markdown] -> [From Template] -> [Beamer in Japanese] を選択します  
-
+3. 新規作成時に [R Markdown] -> [From Template] -> [Beamer in Japanese] を選択します  
 ![select templete](inst/resources/img/readme-selection.png)
-
-3. `Rmd` ファイルを新規作成する
-  + 最初は `examples/beamer_blank.Rmd` か `examples/beamer_xelatex_{使用しているOS名}.Rmd` をコピーして使ってみてください
-  + OSごとの違いはほぼデフォルトのフォントだけです
-4. `Rmd`ファイルに`output::rmdja::beamer_presentation_ja` を指定
-  + フォントを手動で指定する必要があります
-  + MS なら 
-  ```
-  jfontpreset: ms
-  ```
-  + Ubuntuなら
-  ```
-  jfontpreset: noto
-  ```
-  + macなら
-  ```
-  jfontpreset: hiragino-pro
-  ```
-  でとりあえずは動くはずです.
-  + 詳しくは [`examples/`](inst/resources/examples/rmd/) 以下の pdf を確認してください.
+  * またはこのパッケージが提供するフォーマットを `Rmd` に指定する
+  * 例: `output: rmdja::beamer_presentation_ja`
+    + このやり方ではフォント指定などOS依存の設定ができないことがあります
+    + Rmd の操作に自信がない場合はテンプレートから新規作成することをおすすめします
+  * あるいは [`examples`](inst/resources/examples/rmd/) にある `beamer_*.Rmd` をコピーして使ってみてください
+  * インストール後は `file.copy(sytem.file("examples/beamer_*.Rmd", package = "rmdja"), to = "./")` でもコピーできます
+  * 同フォルダの同名 PDF ファイルが出力例です
 
 ## 初期バージョン (rmdCJK) をお使いの場合
 
@@ -59,9 +44,25 @@ remotes::install_github('Gedevan-Aleksizde/my_latex_templates', subdir = 'rmdja'
 remove.package("rmdCJK")
 ```
 
-## 必要なパッケージなど
+## 要件
 
-* 最低限必要なのは `rmarkdown` のみです.
+### 最低限必要なもの
+
+R >= 3.6
+R Studio >= 1.3.1056
+
+
+### R パッケージ
+
+最低限必要なのは以下2つです
+
+* `rmarkdown` > 2.3
+  + 完全に動作するには 2020/9/10 時点で CRAN 最新版 2.3 より新しい開発版が必要です
+  + `remotes::install_github("rstudio/rmarkdown", refs = "ff1b279e795b62b1ffeabcc9aa5bf7386a7ebb83")`, または `refs = "master"` でのインストールを推奨します
+  + レイアウトにそこまで神経質でないなら安定版でも大きな問題はありません
+* `bookdown` > 0.20
+  + `remotes::install_github("rstudio/bookdown")` でのインストールを推奨します
+  + ソースファイルをサブディレクトリに配置した際の挙動が改善されたバージョンがあったほうが良いです
 
 ### 外部プログラム
 
