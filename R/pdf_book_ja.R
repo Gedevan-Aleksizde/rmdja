@@ -124,8 +124,6 @@ pdf_book_ja <- function (
       ),
       opts_hooks = list(
         echo = function(options){
-          print("-- hook --")
-          print(DUMMY_ENGINES())
           if(options$engine %in% DUMMY_ENGINES())
             options$echo = T
           return(options)
