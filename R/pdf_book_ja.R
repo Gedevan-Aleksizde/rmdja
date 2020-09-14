@@ -5,7 +5,7 @@
 #' @description  `rmarkdown` + `bookdown` で PDF文書をビルドする場合, 日本語を適切に表示するためにいろいろ必要だった調整を済ませたフォーマット. 基本的に YAML フロントマター (+ `_ouput.yml`) や knitr チャンクオプションで設定できることをデフォルト値として埋め込んだだけ.
 #'  
 #' @param chunk_number デフォルト: TRUE. boolean. コードセルに行番号を表示するかどうか. 
-#' @param tonbow boolean. デフォルト: FALSE. 製本時に必要なトンボ (trim markers) を付けるかどうか. トンボは `gentombow.sty` で作成される. 
+#' @param tombow boolean. デフォルト: FALSE. 製本時に必要なトンボ (trim markers) を付けるかどうか. トンボは `gentombow.sty` で作成される. 
 #' @return rmarkdown_output_format
 #'
 #' @export
@@ -31,7 +31,7 @@ pdf_book_ja <- function (
   highlight = "default",
   highlight_bw = FALSE,
   chunk_number = TRUE,
-  tonbow = FALSE,
+  tombow = FALSE,
   template = "default",
   keep_tex = TRUE,
   keep_md = TRUE,
@@ -70,11 +70,11 @@ pdf_book_ja <- function (
     pandoc_args <- c('--top-level-division=chapter', "--extract-media", '.')
   }
   if(identical(extra_dependencies, NULL)){
-    if(identical(tonbow, T)){
+    if(identical(tombow, T)){
       extra_dependencies <- "gentombow"
     }
   } else if(is.list(extra_dependencies)){
-    if(identical(tonbow, T)){
+    if(identical(tombow, T)){
       extra_dependencies <- c(extra_dependencies, gentombow = NULL)
     }
   }  #TODO: latex_dependency() を引数に想定するときの使い方が不明
