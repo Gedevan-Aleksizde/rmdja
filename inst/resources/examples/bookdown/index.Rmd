@@ -22,8 +22,7 @@ citecolor: blue
 urlcolor: magenta
 documentclass: bxjsbook
 classoption: a4paper
-fontsize: 10pt
-# header-includes: \usepackage{gentombow}  # トンボが適切なのかは検証困難
+fontsize: 10pt  # header-includes: \usepackage{gentombow}  # トンボが適切なのかは検証困難
 ---
 
 ```{r setup, include=FALSE}
@@ -116,7 +115,7 @@ getCC <- function(adapt = c("yes", "no", "inherit"),
   return(list(url_icon, url_text))
 }
 cc_url <- getCC(adapt = "yes", commercial = F, size = "normal")
-knitr::include_graphics(cc_url[[1]])
+# knitr::include_graphics(cc_url[[1]])
 ```
 
 # 本稿の目標 {-}

@@ -55,21 +55,23 @@ bookdown::pdf_book:
   toc_appendix: true                         # 目次に Appendix の項目を加えるか
   toc_bib: true                              # 目次に 参考文献の項目を加えるか
   highlight_bw: false                        # シンタックスハイライトをグレースケールに変換するかどうか (カラー印刷できないときのため?)
-  includes: default
+  includes: null
   latex_engine: xelatex                      # 日本語を扱うならxelatex/lualatexが良い
   keep_tex: true                             # .texファイルを残すかどうか
+  keep_md: true
   citation_package: natbib                   # 引用スタイルパッケージ
   pandoc_args:
-    - "--top-level-division=chapter"
-    - "--extract-media"
-    - "."
-  template: "`r file.path(system.file('resources' package = 'rmdja'), 'pandoc-templates/document-ja.tex.template')`"
+    - '--top-level-division=chapter'
+    - '--extract-media'
+    - '.'
+  template: "../../pandoc-templates/document-ja.tex.template"  # "`r file.path(system.file('resources' package = 'rmdja'), 'pandoc-templates/document-ja.tex.template')`"
   dev: "cairo_pdf"                           # 画像デバイス
   out_width: "100%"
   out_height: "100%"
   quote_footer: ["\\VA{", "}{}"]             # 引用ブロック前後の修飾文字
 
-rmdja::pdf_book_ja: default
+rmdja::pdf_book_ja:
+  tombow: false
 
 # ---- epubの出力設定 ----
 bookdown::epub_book:
