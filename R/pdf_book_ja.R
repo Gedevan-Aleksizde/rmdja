@@ -47,11 +47,12 @@ pdf_book_ja <- function (
   ...
   )
 {
-  # knitr のデフォルト値設定
   # 動的な設定: エンジンごとのデフォルト値変更
   # --- check values ---
   match.arg(latex_engine, c("xelatex", "lualatex"))
   match.arg(citation_package, c("default", "biblatex", "natbib"))
+  
+  top_level <- "chapter"
   if(identical(citation_package, "natbib")){
     if(!identical(citation_options, "default")){
       pandoc_args <- c(pandoc_args, rmarkdown::pandoc_variable_arg("natbiboptions", citation_options))
@@ -59,16 +60,17 @@ pdf_book_ja <- function (
   }
   if(missing(template) || identical(template, "") || identical(template, "default")){
     template <- file.path(system.file("resources", package = "rmdja"), "pandoc-templates/document-ja.tex.template")
-    # template <- "~/Documents/developping/my_latex_templates/rmdja/inst/resources/pandoc-templates/document-ja.tex.template"
   }
   if(identical(chunk_number, T)){
     attr_source <- c(".numberLines .lineAnchors") 
   } else {
     attr_source <- NULL
   }
-  if(identical(pandoc_args, NULL)){
-    pandoc_args <- c('--top-level-division=chapter', "--extract-media", '.')
+  if(!any(grepl("^--top-lvel-division", pandoc_args))){
+    pandoc_args <- c(pandoc_args, paste0('--top-level-division=', top_level))
   }
+  if(!any(grepl("^--extract-media", pandoc_args)))
+  pandoc_args <- c(pandoc_args, "--extract-media", '.')
   if(identical(extra_dependencies, NULL)){
     if(identical(tombow, T)){
       extra_dependencies <- "gentombow"
@@ -77,9 +79,9 @@ pdf_book_ja <- function (
     if(identical(tombow, T)){
       extra_dependencies <- c(extra_dependencies, gentombow = NULL)
     }
-  }  #TODO: latex_dependency() を引数に想定するときの使い方が不明
+  } 
   fontsize_as_integer <- function(fontsize = fontsize){
-    if(is.null(fontsize)) fontsize = "12pt"
+    if(is.null(fontsize)) fontsize = "10pt"
     ps <- as.integer(regmatches(fontsize, regexpr("^[0-9]+", fontsize)))
     return(ps)
   }
@@ -105,9 +107,9 @@ pdf_book_ja <- function (
       citation_package = citation_package,
       includes = includes,
       md_extensions = md_extensions,
-      pandoc_args = pandoc_args,
       extra_dependencies = extra_dependencies,
       quote_footer = quote_footer,
+      pandoc_args = pandoc_args,
       ...
       ),
     knitr = list(
@@ -119,6 +121,15 @@ pdf_book_ja <- function (
         out.height = out_height,
         out.extra = out_extra,
         attr.source = attr_source
+      ),
+      opts_hooks = list(
+        echo = function(options){
+          print("-- hook --")
+          print(DUMMY_ENGINES())
+          if(options$engine %in% DUMMY_ENGINES())
+            options$echo = T
+          return(options)
+        }
       )
     )
   )
@@ -130,24 +141,24 @@ pdf_book_ja <- function (
     knitr_options <- do.call(rmarkdown::knitr_options, args$knitr)
     out <- rmarkdown::output_format(
       pre_knit = function(input, ...) {
-        knitr::opts_chunk$set(dev.args = list(pointsize = fontsize_as_integer(rmarkdown::metadata$fontsize)))
+        font_pt <- fontsize_as_integer(rmarkdown::metadata$fontsize)
+        knitr::opts_chunk$set(dev.args = list(pointsize = font_pt))
         return(input)
       },
       knitr = args$knitr,
-      pandoc =  do.call(rmarkdown::pandoc_options(base_format_$pandoc)),
+      pandoc = NULL,
       keep_md = keep_md,
       clean_supporting = NULL, base_format = base_format_
     )
     return(out)
   }
-  args$bookdown_format <- args$base
-  args$bookdown_format$base <- base_
   if(identical(citation_package, "natbib")){
     if(!file.exists("./.latexmkrc")){
       file.copy(file.path(system.file("resources", package = "rmdja"),
                           "latexmk/.latexmkrc"), to = "./")
     }
   }
-  out <- do.call(what = bookdown::pdf_book, args = args$bookdown_format)
+  out <- do.call(what = bookdown::pdf_book, args = list(base_format = base_))
   return(out)
 }
+

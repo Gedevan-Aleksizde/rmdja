@@ -22,7 +22,7 @@ citecolor: blue
 urlcolor: magenta
 documentclass: bxjsbook
 classoption: a4paper
-fontsize: 12pt
+fontsize: 10pt
 # header-includes: \usepackage{gentombow}  # トンボが適切なのかは検証困難
 ---
 
