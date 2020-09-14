@@ -69,7 +69,7 @@ bookdown::pdf_book:
   out_height: "100%"
   quote_footer: ["\\VA{", "}{}"]             # 引用ブロック前後の修飾文字
 
-pdf_book_ja: default
+rmdja::pdf_book_ja: default
 
 # ---- epubの出力設定 ----
 bookdown::epub_book:

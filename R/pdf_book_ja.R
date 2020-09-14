@@ -37,6 +37,7 @@ pdf_book_ja <- function (
   keep_md = TRUE,
   latex_engine = "xelatex",
   citation_package = "natbib",
+  citation_options = "default",
   includes = NULL,
   md_extensions = NULL,
   output_extensions = NULL,
@@ -53,7 +54,7 @@ pdf_book_ja <- function (
   match.arg(citation_package, c("default", "biblatex", "natbib"))
   if(identical(citation_package, "natbib")){
     if(!identical(citation_options, "default")){
-      pandoc_args_base <- c(pandoc_args_base, rmarkdown::pandoc_variable_arg("natbiboptions", citation_options))
+      pandoc_args <- c(pandoc_args, rmarkdown::pandoc_variable_arg("natbiboptions", citation_options))
     }
   }
   if(missing(template) || identical(template, "") || identical(template, "default")){
