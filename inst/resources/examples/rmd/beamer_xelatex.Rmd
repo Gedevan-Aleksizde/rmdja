@@ -1,10 +1,10 @@
 ---
-title: "R Markdownで日本語\\texttt{beamer}プレゼンテーション (LuaLaTeX)版"
+title: "R Markdownで日本語\\texttt{beamer}プレゼンテーション (XeLaTeX)版"
 author: "ill-identified"
 date: "`r Sys.Date()`"
 output:
   rmdja::beamer_presentation_ja:
-    latex_engine: lualatex
+    latex_engine: xelatex
     theme: metropolis
     theme_options: 
       - 'progressbar=frametitle'
@@ -39,18 +39,13 @@ fontsize: 12pt
 bibliography: examples.bib
 biblo-title: 参考文献
 biblio-style: jplain
-mainfont: Noto Serif
+mainfont: "`r if(Sys.info()['sysname'] == 'Linux'){'DejaVu Serif'} else {'Times New Roman'}`"
 mainfontoptions:
   - Scale=MatchLowercase
   - Ligatures=TeX
-sansfont: Noto Sans
-sansfontoptions:
-  - Scale=1.1
-monofont: Ricty Diminished
-monofontoptions:
-  - Scale=0.9
-jfontpreset: noto-otf
-jfontpresetoptions:
+sansfont: "`r if(Sys.info()['sysname'] == 'Linux'){'DejaVu Sans'} else {'Arial'}`"
+monofont: 'Courier New'
+jfontpreset: "`r switch(Sys.info()['sysname'], 'Linux' = 'noto', 'Darwin' = 'yu-osx', 'Windows' = 'ms')`"
 linkcolor: blue
 citecolor: blue
 urlcolor: magenta
@@ -62,7 +57,7 @@ options(tinytex.latexmk.emulation = F)
 # 上記は日本語引用文献リストのために必要
 
 # サンプル画像等を参照するパス
-file_loc <- system.file("extdata", package = "rmdja")
+file_loc <- system.file("resources", package = "rmdja")
 # サンプル引用文献リストを取得する
 file.copy(file.path(file_loc, "examples/examples.bib"), to = "./")
 
@@ -105,7 +100,7 @@ knitr::opts_chunk$set(cache = T)
 ## 先行事例の紹介
 
 * 伊東『[R MarkdownとBeamerでプレゼンテーション資料作成](https://www.slideshare.net/hirokito/r-markdownbeamer-88777082)』
-  + \LuaLaTeX を使って日本語でBeamerスライド作成する方法
+  + \LuaLaTeX を使って日本語でBeamerスライド作成
 * Atusy 『[R Markdown + XeLaTeX で日本語含め好きなフォントを使って PDF を出力する](https://blog.atusy.net/2019/05/14/rmd2pdf-any-font/)』
 * 先行事例との違い:
   + 使用者が設定を書く負担削減のためテンプレート化
@@ -152,7 +147,7 @@ remotes::install_github(
   + 分からなければ[TeX wiki のページ](https://texwiki.texjp.org/?TeX%20Live)を参考に
   + Debian/Ubuntuのユーザは`apt`より公式ダウンローダの方が良いかも
 
-## 基本
+## 基本 (1/2)
 
 1. yamlヘッダに以下を書く
   + 詳しくは`example/`のテンプレートを参考に
@@ -167,22 +162,30 @@ output: rmdja::beamer_presentation_ja
 knitr::include_graphics(file.path(file_loc, "img/render.png"))
 ```
 
+
+## 基本 (2/2)
+
+* または テンプレートから選択
+
+```{r template-selection-image, out.width="80%"}
+knitr::include_graphics(file.path(file_loc, "img/readme-selection.png"))
+```
+
+
 ## 最低限必要な設定
 
-* 実際は**細かい設定不要**
-  + examplesの長いyamlヘッダは単なる見本
-  + 文献引用をしないなら `biblio*` も不要
-* 使えるフォントはマシン依存
-  + なくても動くが**見た目が悪い**
+* フォントがOSごとに異なるのが問題
+* このファイルの設定なら Linux / Win / Mac のいずれでも動く?
 
 ```yaml
 output:
   rmdja::beamer_presentation_ja:
     latex_engine: xelatex
-mainfont: Noto Serif
-sansfont: Noto Sans
-monofont: Ricty Diminished
-jfontpreset: noto
+mainfont: "`r if(Sys.info()['sysname'] == 'Linux'){'DejaVu Serif'} else {'Times New Roman'}`"
+mainfontoptions:
+sansfont: "`r if(Sys.info()['sysname'] == 'Linux'){'DejaVu Sans'} else {'Arial'}`"
+monofont: 'Courier New'
+jfontpreset: "`r switch(Sys.info()['sysname'], 'Linux' = 'noto', 'Darwin' = 'yu-osx', 'Windows' = 'ms')`"
 ```
 
 ## 基本構文 (1/2)
@@ -627,7 +630,7 @@ Table: 得点一覧
 * `[@ref1; @ref1]` で連番引用 `[1, 2]`
 * 以下引用テスト
 
-```markdown
+```
 [@R-tidyverse; @R-rmarkdown; @rmarkdown2018; @R-bookdown]
 [@R-citr; @wickham2016Data; @Okumura2017LaTeX]
 ```
@@ -658,7 +661,7 @@ knitr::include_graphics(file.path(file_loc, "img/citr.png"))
 
 # 基本的なカスタマイズ
 
-## フォント変更 (欧文)
+## フォント変更: 欧文 (1/2)
 
 * 欧文/和文それぞれ3種類指定できる
 * 欧文フォントは `fontspec`で制御
@@ -666,6 +669,10 @@ knitr::include_graphics(file.path(file_loc, "img/citr.png"))
   + `beamer`なので `main` という名に反して**サンセリフが主に使われる**
 * それぞれに `*options` というオプションパラメータ指定が可能
   + 相対文字サイズの手動調整などに使う
+
+## フォント変更: 欧文 (2/2)
+
+* 設定例
 
 ```yaml
 mainfont: <欧文フォント>
@@ -692,7 +699,7 @@ jmonofont: <和文等幅フォント>
 ## フォント変更: 和文プリセット
 
 * 和文フォント指定は**プリセットを使うと楽**.
-* 対応フォント: `{\jfontspec{Noto Serif CJK JP} Noto}`{=latex}, `{\jfontspec{IPAMincho} IPA}`{=latex}, `{\jfontspec{Harano Aji Mincho} 原ノ味}`{=latex}, ヒラギノ, 游, モリサワ, 小塚, MS など
+* 対応フォント: `{\CJKfamily{Noto Serif CJK JP} Noto}`{=latex}, `{\CJKfamily{IPAMincho} IPA}`{=latex}, `{\CJKfamily{Harano Aji Mincho} 原ノ味}`{=latex}, ヒラギノ, 游, モリサワ, 小塚, MS など
   + プリセットにないものは手動設定
   + \LuaLaTeX は[ここ](https://ja.osdn.net/projects/luatex-ja/wiki/LuaTeX-ja%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9)や[公式ドキュメント](http://mirrors.ibiblio.org/CTAN/macros/luatex/generic/luatexja/doc/luatexja-ja.pdf)を参考に
   + \XeLaTeX は[ここ](http://zrbabbler.sp.land.to/zxjafont.html)や[公式ドキュメント](https://github.com/zr-tex8r/ZXjafont/blob/master/zxjafont.pdf)を参考に
@@ -711,31 +718,34 @@ jfontpresetoptions:
 
 ## フォント変更: 和文フォントプリセット
 
-* 詳しくは\XeLaTeX の[マニュアル](http://ctan.math.washington.edu/tex-archive/language/japanese/zxjafont/zxjafont.pdf)と\LuaLaTeX の[マニュアル](https://ja.osdn.net/projects/luatex-ja/wiki/LuaTeX-ja%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9)
+* 詳細: [\XeLaTeX](http://ctan.math.washington.edu/tex-archive/language/japanese/zxjafont/zxjafont.pdf), [\LuaLaTeX](https://ja.osdn.net/projects/luatex-ja/wiki/LuaTeX-ja%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9)
 
 Table: 主なプリセット名対照表
 
 |フォント |\XeLaTeX  |\LuaLaTeX|
 |:--------|---------:|-------------:|
-|小塚Pro6 |`kozuka6` |`kozuka-pro6` |
 |ヒラギノ |`hiragino`|`hiragino-pro`|
-|IPA      |`ipa`     |`ipa`|
 |MS       |`ms`      |`ms`|
-|NOTO     |`noto`    |`noto-otf`|
+|Noto     |`noto`/`noto-jp`|`noto-otf`/`noto-otc`|
 
+* 游書体はOSバージョンごとに異なる
+  + `ym-win`, `yu-win10`, `yu-osx`
+* Ubuntu で Noto を選ぶ場合は `noto` で OK
+* 上記以外にも多数
 
 ## インラインでのフォント変更
 
+* 明朝/ローマンにしたいなら `\textrm`
 * 本文中の一部だけフォントを変更したい時は `\jfontspec{}` を使う
-* 欧文なら `\fontspec{}` に置き換える
+  + 欧文なら `\fontspec{}`
 * 詳しくは[ここ](http://zrbabbler.sp.land.to/xelatex.html#sssec-newfont)
 
 ```md
 ここはいつものフォント.
-`\textrm{\jfontspec{IPAMIncho} ここだけIPA明朝.}`{=latex}
+`\textrm{ここだけ明朝 Mincho}`{=latex}
 ```
 
-ここはいつものフォント.`\textrm{\jfontspec{IPAMincho} ここだけIPA明朝.}`{=latex}
+ここはいつものフォント.`\textrm{ ここだけ明朝 Mincho.}`{=latex}
 
 ## スライドのテーマ変更
 
@@ -795,11 +805,14 @@ aspectratio: 169
 
 * 3種類の出力方法
 * `natbib`以外で良いなら**TeXLive不要**
-* `natbib`: [`jecon.bst`](https://github.com/ShiroTakeda/jecon-bst) が使える
+* `natbib`
+  + [`jecon.bst`](https://github.com/ShiroTakeda/jecon-bst) が使える
   + **TeXLiveが必要な原因**
-* `biblatex`(+`biber`): 有力な日本語フォーマットがない?
+* `biblatex`(+`biber`)
+  + 有力な日本語フォーマットがない?
   + **TeXLive不要**
-* `citeproc`: `pandoc`の機能. `csl`ファイルで参考文献リストの体裁指定.
+* `citeproc`: `pandoc-citeproc`の機能
+  + `csl`ファイルで参考文献リストの体裁指定
   + **TeXLive不要**
 
 ## 引用形式の変更例
@@ -846,9 +859,7 @@ biblio-title: Further Readings
 * A1. PDFの生成に失敗しただけで, 前回のPDFから更新されていないかも
 * A2. 書く場所を間違っている
   + yamlヘッダの入れ子には意味がある.
-  + トップレベル: `pandoc`に与える
-  + フォーマット関数の下: 関数に与える引数
-  + 関数ヘルプの引数一覧がこのフォーマットで指定できるもの
+  + すこしややこしいので[解説](https://ill-identified.hatenablog.com/entry/2020/09/05/202403)
 ```{r call-help, eval=F, echo=T}
 ?rmdja::beamer_presentation_ja
 ```
@@ -870,15 +881,14 @@ biblio-title: Further Readings
 # まとめ
 
 ## 結果どうなったか
-* **良く**なったこと
+* **改善**したこと
   + `lstlisting.sty`**より見やすい**シンタックスハイライト
   + Rの画像や数値出力を**コピペしなくて済む**
   + 一画面に収めるための構成だけ考えれば済むように
-* **悪く**なったこと
-  + (パワポユーザ的に)WYSIWYGでないので作りづらい?
-  + 数式のリアルタイムレンダリング/補完はLyXが依然優秀
-  + python作業中(jupyter notebookへの)**不満高まり**
-  + ポンチ絵も`ggplot2`で作らねばという**強迫症状**
+* **悪化**したこと
+  + 数式のリアルタイム補完はLyXが依然優秀
+  + python作業中(jupyterへの)**不満高まり**
+  + ポンチ絵も`ggplot2`で作らねばという**強迫症状**   
   + 以前より**組版に神経質**になった
 
 ## 改良・機能追加したいところ
@@ -902,7 +912,7 @@ biblio-title: Further Readings
 * 単に使いたいだけの人は見る必要なし
   + 内部処理知りたい人向け
 
-## 既知の不具合
+## ハマりポイント
 
 1. \XeLaTeX で取り消し線を付ける場合の問題
   + 和文に取り消し線を付けるとタイプセットエラーが発生**した**
@@ -929,15 +939,6 @@ biblio-title: Further Readings
 * 初期バージョンではR側で設定を書いていた
 * pandocのテンプレートでかなり代替できると気づく
 * 結果だいぶシンプルな仕様に
-
-## \LaTeX プリアンブル: その他の設定
-
-* ハイパーリンクの色を見やすく変更
-* "Figure 1", "Table 1" を 「図1」「表1」に
-* 参考文献リストのフォントサイズ縮小
-* コードチャンクに行番号
-  + 表示は選択式
-* その他いろいろな微調整を書いたTeXファイルのpandocテンプレートを用意
 
 ## 日本語文献にどう対応しているか
 

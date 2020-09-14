@@ -22,17 +22,21 @@ Customized bearmer presentation format function for Japanese users
 # 使い方
 
 1. 後述の必要なパッケージや外部プログラムをインストールする
-2. このパッケージをインストールする
-
+2. このパッケージをインストールする 
 ```
 remotes::install_github('Gedevan-Aleksizde/my_latex_templates', subdir = 'rmdja')
 ```
+3. RStudio で R Markdown を作成し, `output: rmdja::beamer_presentation_ja` を書く
+  + または新規作成時に [R Markdown] -> [From Template] -> [Beamer in Japanese] を選択します  
+
+![select templete](inst/resources/img/readme-selection.png)
 
 3. `Rmd` ファイルを新規作成する
   + 最初は `examples/beamer_blank.Rmd` か `examples/beamer_xelatex_{使用しているOS名}.Rmd` をコピーして使ってみてください
-  + OSごとの違いはほぼデフォルトのフォントだけです
-4. `Rmd`ファイルに`output::rmdja::beamer_presentation_ja` を指定
-  + フォントを手動で指定する必要があります
+  + (上記どちらでもないなら) `Rmd`ファイルに`output::rmdja::beamer_presentation_ja` を指定
+
+4. フォントの指定 (オプション)
+  + OSごとの違いはほぼデフォルトのフォントだけです. 現在は自動で動作するようになっていますが, もしフォントが合わない場合は手動で指定してください. 例えば,
   + MS なら 
   ```
   jfontpreset: ms
@@ -43,10 +47,12 @@ remotes::install_github('Gedevan-Aleksizde/my_latex_templates', subdir = 'rmdja'
   ```
   + macなら
   ```
-  jfontpreset: yu-osx
+  jfontpreset: hiragino-pro
   ```
   でとりあえずは動くはずです.
-  + 詳しくは `examples/` 以下の pdf を確認してください.
+  + XeLaTeX をお使いなら `zxjafont`, LuaLaTeX をお使いなら `luatex-ja` のプリセット名で指定できます
+  + 混植も可能です
+  + 詳しくは [`examples/`](inst/resources/examples/rmd/) 以下の pdf を確認してください.
 
 ## 初期バージョン (rmdCJK) をお使いの場合
 
@@ -114,23 +120,31 @@ sudo apt install graphiviz
 
 # サンプル
 
-`examples/` 以下にサンプルが存在します.
+[`examples/`](inst/resources/examples/rmd/) 以下にサンプルが存在します.
 
+以下はフォントを自動判別します.
+
+* `beamer_xelate.Rmd`
+* `beamer_lualatex.Rmd`
+
+以下はフォントを判別しないため OS 別になっているサンプルです.
 
 * `beamer_xelatex_linux.Rmd` (linuxというよりubuntu)
 * `beamer_xelatex_macos.Rmd`
 * `beamer_xelatex_windows.Rmd`
 
+
 `*.pdf` はそれぞれに対応する出力例です. `xelatex` を `lualatex` に置き換えると LuaLaTeX 版のサンプルになります.
 
-各OSでよく使われるフォントを指定している以外は上記は全て同じです. 適当なディレクトリに上記いずれをコピーしてknitしてみてください.
+各OSでよく使われるフォントを指定している以外は上記は全て同じです. 適当なディレクトリに上記いずれかをコピーしてknitしてみてください.
 コピーする際には
 
 ```
-file.copy(file.path(system.file("examples", package = "rmdCJK"), "beamer_*.Rmd"), "HOGEHOGE")
+file.copy(file.path(system.file("resources/examples/rmd", package = "rmdja"), "beamer_xelatex.Rmd"), to = "./")
+file.copy(file.path(system.file("resources/examples/rmd", package = "rmdja"), "beamer_lualatex.Rmd"), to = "./")
 ```
 
-でコピーすると楽です.
+と言うふうにコピーすると楽です.
 
 **NOTE**: 用例の一環として, knit時に同じフォルダに `tab.tex`, `examples.bib`, `.latexmkrc` というファイルが生成されます. **上書きに注意**してください.
 
@@ -156,5 +170,10 @@ file.copy(file.path(system.file("examples", package = "rmdCJK"), "beamer_*.Rmd")
 
 # 更新履歴
 
+* v0.2
+  + 新規作成時のテンプレートとして選べるように
+  + 用例ファイルのフォント選択を自動判別化
+* v0.1
+  + 最初の公開版
 * (0.0.5) LuaLaTeX/XeLaTeX 両方に対応できるように, 再度の名前変更
 * (0.1.0) win/ubuntu/macで対応, XeLaTeX/LuaLaTeX で動作確認したのでmasterにマージ.

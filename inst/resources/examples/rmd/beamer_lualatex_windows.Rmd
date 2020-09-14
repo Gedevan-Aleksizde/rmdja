@@ -1,10 +1,10 @@
 ---
-title: "R Markdownで日本語\\texttt{beamer}プレゼンテーション (XeLaTeX)版"
+title: "R Markdownで日本語\\texttt{beamer}プレゼンテーション (LuaLaTeX)版"
 author: "ill-identified"
 date: "`r Sys.Date()`"
 output:
   rmdja::beamer_presentation_ja:
-    latex_engine: xelatex
+    latex_engine: lualatex
     theme: metropolis
     theme_options: 
       - 'progressbar=frametitle'
@@ -61,7 +61,7 @@ options(tinytex.latexmk.emulation = F)
 # 上記は日本語引用文献リストのために必要
 
 # サンプル画像等を参照するパス
-file_loc <- system.file("extdata", package = "rmdja")
+file_loc <- system.file("resources", package = "rmdja")
 # サンプル引用文献リストを取得する
 file.copy(file.path(file_loc, "examples/examples.bib"), to = "./")
 
@@ -548,7 +548,6 @@ file.copy(file.path(file_loc, "examples/tab.tex"), "./")
 ## 表の挿入: .texで書かれた表を掲載
 
 \input{tab.tex}
-
 ## 表の挿入: `stargazer` の表示
 
 * `{r, results="asis"}` で出力texコードを直接表示
@@ -691,7 +690,7 @@ jmonofont: <和文等幅フォント>
 ## フォント変更: 和文プリセット
 
 * 和文フォント指定は**プリセットを使うと楽**.
-* 対応フォント: `{\CJKfamily{Noto Serif CJK JP} Noto}`{=latex}, `{\CJKfamily{IPAMincho} IPA}`{=latex}, `{\CJKfamily{Harano Aji Mincho} 原ノ味}`{=latex}, ヒラギノ, 游, モリサワ, 小塚, MS など
+* 対応フォント: Noto, `{\jfontspec{IPAMincho} IPA}`{=latex}, `{\jfontspec{Harano Aji Mincho} 原ノ味}`{=latex}, ヒラギノ, 游, モリサワ, 小塚, MS など
   + プリセットにないものは手動設定
   + \LuaLaTeX は[ここ](https://ja.osdn.net/projects/luatex-ja/wiki/LuaTeX-ja%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9)や[公式ドキュメント](http://mirrors.ibiblio.org/CTAN/macros/luatex/generic/luatexja/doc/luatexja-ja.pdf)を参考に
   + \XeLaTeX は[ここ](http://zrbabbler.sp.land.to/zxjafont.html)や[公式ドキュメント](https://github.com/zr-tex8r/ZXjafont/blob/master/zxjafont.pdf)を参考に
@@ -725,16 +724,16 @@ Table: 主なプリセット名対照表
 
 ## インラインでのフォント変更
 
-* 本文中の一部だけフォントを変更したい時は `\CJKfamily{}` を使う
+* 本文中の一部だけフォントを変更したい時は `\jfontspec{}` を使う
 * 欧文なら `\fontspec{}` に置き換える
 * 詳しくは[ここ](http://zrbabbler.sp.land.to/xelatex.html#sssec-newfont)
 
 ```md
 ここはいつものフォント.
-`\textrm{\CJKfamily{IPAMIncho} ここだけIPA明朝.}`{=latex}
+`\textrm{\jfontspec{IPAMIncho} ここだけIPA明朝.}`{=latex}
 ```
 
-ここはいつものフォント.`\textrm{\CJKfamily{IPAMincho} ここだけIPA明朝.}`{=latex}
+ここはいつものフォント.`\textrm{\jfontspec{IPAMincho} ここだけIPA明朝.}`{=latex}
 
 ## スライドのテーマ変更
 

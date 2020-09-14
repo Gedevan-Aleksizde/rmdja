@@ -1,0 +1,55 @@
+---
+title: "無題"
+author: ""
+date: "`r Sys.Date()`"
+output:
+  rmdja::beamer_presentation_ja:
+    latex_engine: xelatex
+    theme: metropolis
+    includes:
+      preamble:
+        - \makeatletter
+        - \setlength{\metropolis@progressinheadfoot@linewidth}{2pt}
+        - \patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip0.5em}{}{}
+        - \makeatother
+fontsize: 12pt
+mainfont: "`r if(Sys.info()['sysname'] == 'Linux'){'DejaVu Serif'} else {'Times New Roman'}`"
+mainfontoptions:
+  - Scale=MatchLowercase
+  - Ligatures=TeX
+sansfont: "`r if(Sys.info()['sysname'] == 'Linux'){'DejaVu Sans'} else {'Arial'}`"
+monofont: 'Courier New'
+jfontpreset: "`r switch(Sys.info()['sysname'], 'Linux' = 'noto', 'Darwin' = 'hiragino-pro', 'Windows' = 'ms')`"
+---
+
+```{r setup-document, include=F}
+options(tinytex.latexmk.emulation = F)
+# 上記は日本語引用文献リストのために必要
+
+# サンプル画像等を参照するパス
+file_loc <- system.file("resources", package = "rmdja")
+# サンプル引用文献リストを取得する
+file.copy(file.path(file_loc, "examples/examples.bib"), to = "./")
+
+knitr::opts_chunk$set(cache = T)
+```
+
+## 
+
+> `\textrm{Нужны новые формы. Новые формы нужны, а если их нет, то лучше ничего не нужно.}`{=latex}
+>
+> `\textrm{新しいフォーマットが必要なんですよ. 新しいフォーマットが. それがないというなら, いっそ何もないほうがいい.}`{=latex} 
+> `r tufte::quote_footer('--- A. チェーホフ『かもめ』')`
+
+## 目次
+
+\tableofcontents[hideallsubsections]
+
+# イントロダクション
+
+## このスライドは何?
+* あまり情報が流れていない, R Markdownと`beamer`で日本語を含むスライドを作るためのテンプレート兼用例集
+* `reveal.js`などHTML媒体は他の資料を参照
+  + [ここ](https://kazutan.github.io/SappoRoR6/rmd_slide.html#/)や[ここ](https://kazutan.github.io/fukuokaR11/intro_rmarkdown_d.html)を見よ
+* もともとは自分用に作ったテンプレだったものを万人向けに修正
+* OS ごとの詳細な事例は `examples` を参考に

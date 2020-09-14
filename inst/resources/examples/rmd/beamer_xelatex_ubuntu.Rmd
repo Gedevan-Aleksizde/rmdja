@@ -39,13 +39,17 @@ fontsize: 12pt
 bibliography: examples.bib
 biblo-title: 参考文献
 biblio-style: jplain
-mainfont: Palatino
+mainfont: Noto Serif
 mainfontoptions:
   - Scale=MatchLowercase
   - Ligatures=TeX
-sansfont: Helvetica
-monofont: SF Mono
-jfontpreset: yu-osx
+sansfont: Noto Sans
+sansfontoptions:
+  - Scale=1.1
+monofont: Ricty Diminished
+monofontoptions:
+  - Scale=0.9
+jfontpreset: noto
 linkcolor: blue
 citecolor: blue
 urlcolor: magenta
@@ -57,7 +61,7 @@ options(tinytex.latexmk.emulation = F)
 # 上記は日本語引用文献リストのために必要
 
 # サンプル画像等を参照するパス
-file_loc <- system.file("extdata", package = "rmdja")
+file_loc <- system.file("resources", package = "rmdja")
 # サンプル引用文献リストを取得する
 file.copy(file.path(file_loc, "examples/examples.bib"), to = "./")
 
