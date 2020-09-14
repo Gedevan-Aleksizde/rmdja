@@ -1,0 +1,28 @@
+\usepackage{fmtcount}
+\ifdefined\theFancyVerbLine\renewcommand{\theFancyVerbLine}{\small \padzeroes[2]{\decimal{FancyVerbLine}}}\fi
+\usepackage{prettyref}
+  \newrefformat{eq}{\textup{(\ref{#1})}}
+  \newrefformat{cha}{\ref{#1} 章}
+  \newrefformat{sec}{\ref{#1} 節}
+  \newrefformat{alg}{アルゴリズム \ref{#1}}
+  \newrefformat{pgm}{プログラム \ref{#1}}
+  \newrefformat{tabp}{\pageref{#1} ページの表\ref{#1}}
+  \newrefformat{figb}{\pageref{#1} ページの図 \ref{#1}}
+\ifdefined\proofname
+  \renewcommand{\proofname}{証明}
+\fi
+\usepackage{float}
+\floatstyle{ruled}
+\newfloat{program}{htp}{loa}[section]
+%????
+\def\ref#1{\prettyref{#1}}
+% \let\ref\prettyref 
+%\renewcommand*{\ref}[1]{\prettyref{#1}}
+%
+\definecolor{LightGray}{gray}{0.05}
+\usepackage{tikz}
+\usepackage{colortbl}
+\usepackage{adjustbox}
+\setcounter{tocdepth}{5}
+% table の下に注記を付けるために必要
+\usepackage[flushleft]{threeparttable}

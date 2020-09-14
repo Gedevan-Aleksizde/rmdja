@@ -1,0 +1,57 @@
+# (PART) 最低限のチュートリアル {-}
+
+# 準備
+
+
+```{r gutenberg, fig.cap="Johannes Gutenberg"}
+knitr::include_graphics(file.path(img_dir, "Johannes_Gutenberg.jpg"))  
+```
+
+## インストール
+
+文書を生成するのに必要なものをインストールする.
+
+このドキュメントは `rmdja` パッケージに含まれている. よってまずはこれをダウンロードしてほしい.
+
+```{r installation, eval=F}
+install.packages(c("rmarkdown", "bookdown"))
+remotes::install_github("Gedevan-Aleksizde/my_latex_template", subdir = "rmdja", repos = NULL)
+```
+
+ただし, `bookdown` ver. 0.2 時点ではソースファイルのフォルダ配置していに不具合があるため[^bookdown-subdir-error], もし0.2以前のバージョンを使用しているなら, 更新するか, github から開発版をインストールする.
+
+```{r bookdown-dev, eval=F, echo=T}
+remotes::install_github('rstudio/bookdown')
+```
+
+
+さらに, この文書の完全な再現には以下が必要である.
+
+PDF 出力のためにはこの文書では参考文献の生成に (u)pBibTeX を使用しているため  Windows および Linux では TeX Live 2020, Mac では MacTeX といった TeX 配布バンドルが必要だが, 使用しないのならインストールは必要ない[^biblio-options].
+
+```{r}
+
+```
+
+
+1. `bxcoloremoji.sty` パッケージ
+2. `svglite` パッケージ
+
+TODO: そもそもサンプルにそういうややこしい例を使うべきか?
+TODO svglite か rsvg か組み込みか
+
+以下のコマンドで, `rmdja` パッケージに含まれるサンプルファイルをカレントディレクトリにコピーする.
+
+
+
+bookdown の文書生成は従来の R Markdown と違い, RStudio の `knit` ボタンでは**できない**. 代わりに, 以下の2通りの方法がある.
+
+1. `bookdown::render_book('index.Rmd', format = "bookdown::gitbook")` などを呼び出す
+2. RStudio の Build ペーンを使う
+
+これで `_book` フォルダに出力がされる.
+
+TODO
+
+[^bookdown-subdir-error]: https://github.com/rstudio/bookdown/pull/886
+[^biblio-options]: あまり詳しくない人へのヒント: 参考文献リストの細かいカスタマイズ, 例えば欧文と和文とで表示形式を変える等といった処理に興味がないのなら, 必要ない. この問題の詳細はセクション \@ref(sec:bibliography) で解説する.

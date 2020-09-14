@@ -7,6 +7,7 @@ Encoding: UTF-8
 Language: ja
 LazyData: true
 Roxygen: list(markdown = TRUE)
-Imports: rmarkdown
+Depeds: rmarkdown
+Imports: bookdown
 RoxygenNote: 7.1.1
 Licence: BSD-3

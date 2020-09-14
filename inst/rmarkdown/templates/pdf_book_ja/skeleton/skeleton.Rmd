@@ -1,0 +1,26 @@
+---
+title: "無題"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+description: ""
+output:
+  rmdja::pdf_book_ja
+link-citations: true
+mainfont: DejaVu Serif
+sansfont: DejaVu Sans
+monofont: Ricty
+jfontpreset: noto
+linkcolor: blue
+citecolor: blue
+urlcolor: magenta
+documentclass: bxjsbook
+classoption: a4paper
+fontsize: 10pt
+biblio-style: apalike
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = F,
+  )
+```
