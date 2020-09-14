@@ -4,10 +4,8 @@ bookdown::gitbook:
   number_sections: true                      # セクションに番号を振る
   self_contained: false                      # 外部ファイルに一切依存しないようなスタンドアローン版にするかどうか
   lib_dir: libs                              # .js ファイルとかの置き場所
-  # pandoc_args:
-  template: default                          # pandoc テンプレート
   split_by: chapter                          # ページを分割する単位. 長過ぎるなら section を指定
-  split_bib: false                           # 参考文献リストを章ごとに配置するかどうか
+  split_bib: true                            # 参考文献リストを章ごとに配置するかどうか
   table_css: true                            # gitbook 用の表CSSを使用するかどうか
   dev: png                                   # 画像の出力デバイス.
   dev-args:
@@ -43,6 +41,8 @@ bookdown::gitbook:
       twitter: true
       facebook: true
       all: ['linkedin', 'vk', 'weibo', 'instapaper']  # まとめることもできる.
+
+rmdja::gitbook_ja
 
 # ---- pdfの出力設定 ----
 bookdown::pdf_book:
