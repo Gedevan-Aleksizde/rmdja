@@ -9,7 +9,9 @@ bookdown::gitbook:
   split_by: chapter                          # ページを分割する単位. 長過ぎるなら section を指定
   split_bib: false                           # 参考文献リストを章ごとに配置するかどうか
   table_css: true                            # gitbook 用の表CSSを使用するかどうか
-  dev: svglite                               # 画像の出力デバイス. HTML なので SVG ファイルにする
+  dev: png                                   # 画像の出力デバイス.
+  dev-args:
+    res: 200
   css: 
     - '../../styles/css/style.css'
     - '../../styles/css/toc.css'    # 出力ディレクトリにコピーするするcssファイルの場所
@@ -48,29 +50,26 @@ bookdown::pdf_book:
   number_sections: true
   fig_caption: true
   base_format: rmarkdown::pdf_document
-  documentclass: bxjsbook
   toc_unnumbered: true                       # 番号を振ってない見出しも目次に加えるかどうか
   toc_depth: 3                               # 目次に表示する項目のレベル
   toc_appendix: true                         # 目次に Appendix の項目を加えるか
   toc_bib: true                              # 目次に 参考文献の項目を加えるか
   highlight_bw: false                        # シンタックスハイライトをグレースケールに変換するかどうか (カラー印刷できないときのため?)
-  includes:
-  #  in_header: '../../styles/latex/preamble.tex'            # プリアンブルで読み込むtexファイル. bookdown固有のプリアンブルの後に読み込まれる
-  #  before_body: '../../styles/latex/before_body.tex'       # 本文 (document環境) 開始直後に読み込む
-  #  after_body: '../../styles/latex/after_body.tex'         # 本文最後に読み込む. 索引リスト出力などに使う.
+  includes: default
   latex_engine: xelatex                      # 日本語を扱うならxelatex/lualatexが良い
   keep_tex: true                             # .texファイルを残すかどうか
   citation_package: natbib                   # 引用スタイルパッケージ
-  pandoc_args: 
-    - --top-level-division=chapter
+  pandoc_args:
+    - "--top-level-division=chapter"
     - "--extract-media"
     - "."
-  template: '../../pandoc-templates/document-ja.tex.template'
-  
+  template: "`r file.path(system.file('resources' package = 'rmdja'), 'pandoc-templates/document-ja.tex.template')`"
   dev: "cairo_pdf"                           # 画像デバイス
-  out.width: "100%"
-  out.height: "100%"
+  out_width: "100%"
+  out_height: "100%"
   quote_footer: ["\\VA{", "}{}"]             # 引用ブロック前後の修飾文字
+
+pdf_book_ja: default
 
 # ---- epubの出力設定 ----
 bookdown::epub_book:
@@ -82,8 +81,8 @@ bookdown::epub_book:
   toc: false
   toc_depth: 3
   stylesheet: 
-    - '../../styles/style.css'
-    - '../../styles/css/toc.css'
+    - 'style.css'
+    - 'toc.css'
   chapter_level: 1
   template: default
   epub_version: epub3

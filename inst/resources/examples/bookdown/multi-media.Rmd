@@ -1,16 +1,16 @@
-# (PART) `rmdja` が提供する機能と製本方法 {-}
+(ref:part-title) `rmdja` が提供する機能と製本方法
+
+# (PART) (ref:part-title) {-}
 
 # `rmdja` の提供する機能
 
 `rmdja` は日本語文書を作成する際の煩雑な下準備を省くことを目的に作っており, 主に `rmarkdown` および `bookdown` のフォーマット関数のデフォルト値などを調整するなどでそれを実現している. そして `bookdown` に対応する製本機能については, PDF, HTML, 電子書籍など異なる媒体でもなるべくレイアウトやコンテンツの差異が逸脱しないようにすることも考慮している.
 
-# マルチメディア特有の問題と対処
-
 出力方法で言えば, HTML と PDF に大別できる. Rmdは HTMLタグも LaTeX コマンドも受け付けるが, それぞれ HTML と PDF に変換する際にしか反映できない. よって, 例えば複雑な図表を LaTeX で書いてしまった場合, HTML では表示されない.
 
 紙媒体と電子媒体では表現できることに差がある. 例えば紙はあらゆる環境で同じような見た目になるが, ハイパーリンクは付けられないし, 一度出版してしまうと修正は容易ではない. PDF の見た目も読者の環境に依存しにくいが, やはり更新が容易ではない.
 
-`bookdown` には既に印刷された本を改ざんする機能はないが, 出力ごとに内容を変えることで, PDF にのみ更新履歴を表示することはできる.
+`bookdown` には既に印刷された本の中身を書き換えるする機能はないが, 出力ごとに内容を変えることで, PDF にのみ更新履歴を表示することはできる.
 
 `knitr::is_latex()`, `knitr::is_html()` などは, knit 時にどの媒体への変換処理なのかを判定するのに使える.
 
@@ -25,6 +25,12 @@ rmd_files:
     - index.Rmd
     - latex-only.Rmd
 ```
+
+# Web アプレットの挿入 {#sec:webapp}
+
+### plotly
+
+### shiny
 
 ## 製本のためのファイル構成
 
@@ -58,7 +64,7 @@ output:
 documentclass: book
 ```
 
-詳しくは @R-bookdown の "[Ch. 3 Output Formats](https://bookdown.org/yihui/bookdown/output-formats.html)" の章を読め
+詳しくは (ref:BKD) の "[Ch. 3 Output Formats](https://bookdown.org/yihui/bookdown/output-formats.html)" の章を読め
 
 ### `_bookdown.yml`
 
@@ -67,7 +73,7 @@ documentclass: book
 
 https://ill-identified.hatenablog.com/entry/2020/09/05/202403
 
-詳しくは, @R-bookdown の [Ch. 4.4 Configuration](https://bookdown.org/yihui/bookdown/configuration.html)
+詳しくは, (ref:BKD) の [Ch. 4.4 Configuration](https://bookdown.org/yihui/bookdown/configuration.html)
 
 
 Build ペーンから文書をビルドするには,  `index.Rmd` のYAML ヘッダに `site: bookdown::bookdown_site` を書く必要がある. さらに,  `index.Rmd` をプロジェクトディレクトリのルートに置いていない場合は, ツールバーの `Build` -> `Configure Build Tools...` から `index.Rmd` を置いているディレクトリを site ディレクトリとする設定が必要になる.
@@ -76,30 +82,192 @@ Build ペーンから文書をビルドするには,  `index.Rmd` のYAML ヘッ
 knitr::include_graphics(file.path(img_dir, c("build-pane.png", "build-pane-build.png")))
 ```
 
+# 製本した文書を配布する
 
+## Wepページのホスティング
+
+HTML ファイルは様々な配布方法がある. もちろん自分でサーバを立てても良い. 特に簡単なのは以下の2点である.
+
+1. github pages を利用する
+2. bookdown.org に投稿する
+
+(1) の詳細は github.com の[公式ドキュメント](https://docs.github.com/ja/github/working-with-github-pages/about-github-pages)を見るのが一番良いだろう.
+
+既にbookdownで作成した文書を公開している例は多数ある. 例えば既に紹介したようにそれじたいドキュメントが `bookdown` で作られているし, "R for Data Science" [@wickham2016Data] [^r4ds-source]は, 内容の良さも含め一見に値する. また, "Hands-On Data Visualization: Interactive Storytelling from Spreadsheets to Code" [@doughertyforthcomingHandsOn] という本[^handon-source]が来年出るらしい. そして面白いことにこれは R Google スプレッドシートとか R 以外のWeb上のサービスの利用法を紹介する文書である.
+
+これらはいずれもソースコードまで公開されている. もちろんここでいうソースコードとは, 本文中のプログラムだけでなく文書を生成する `Rmd` ファイルなどである.
+
+それ以外にも有名無名の多くのドキュメントが公開されているが, 一方で日本語はまだまだ少ない. 内容が豊富で, かつソースコードまで公開されている例として以下が見つかった.
+
+* 『[Rで計量政治学入門](https://shohei-doi.github.io/quant_polisci/)[^poli-source]』
+* 『[AIレベルの倫理学](https://mtoyokura.github.io/Ethics-for-A-Level-Japanese/)[^ethics-source]』
+
+bookdown の機能や見た目を確認することができる. さらに以下2つは私が作成したものである.
+
+* 『[三國志で学ぶデータ分析 (Japan.R 2019)](https://gedevan-aleksizde.github.io/Japan.R2019/)』[^sangokushi-source] (Japan.R 2019 の資料)
+* 『[経済学と反事実分析 接触篇 Economics and Counterfactual Analysis: A Contact](https://gedevan-aleksizde.github.io/20190125_tokyor/)』[^structural-source] (Tokyo.R 第83回の資料)
+
+特に私の2作品は PDF のレイアウトにも注意を払っているが,  当時は kazutan 氏作の [`bookdown_ja_template`](https://github.com/kazutan/bookdown_ja_template) をさらに改良した [kenjimyzk 氏のテンプレート](https://github.com/kenjimyzk/bookdown_ja_template) を元にワンオフで作成したフォーマットを使用しており, 今回の `rmdja` を使用していない.
+
+
+ また, HTML 形式の文書には PDF など他のファイル形式のダウンロードリンクを設置することができる.
+
+`bookdown` は `epub` や `mobi` 形式でも出力できるため, 電子書籍として利用することも可能である.
+
+## TODO: 入稿するには
+
+国内の印刷所で PDF 入稿する際のスタンダードは何だろうか? 紙媒体でやったことがないので全くわからない. 少なくとも Type 3 フォントは回避するように設定しているが, おそらくそれだけでは不十分.
+
+
+トンボを付けるとか?
+
+https://teastat.blogspot.com/2019/01/bookdown.html を参考に
+
+# (PART) 応用 {-}
+
+# TODO: 文芸作品の作成のために
+
+作家の京極夏彦は自分の作品を1ページごとに切り取っても作品として成立するようなレイアウトにこだわっているらしい. すでに説明したように技術文書や学術論文では図表の配置や改行などにあまりこだわりがない. しかし, 不可能ではない. HTML では難しいが (不可能ではないがHTMLでやるメリットが感じられないので対応する気がない), PDF ではある程度のレイアウトの制御が可能である.
+
+ただし, 本当に厳格なJIS準拠の組版にこだわるなら, LaTeX を直接編集しなければならない.
+
+# (PART) デバッグ {-}
+
+残念ながら, 現状 `bookdown` は完全にプログラミング知識のないエンドユーザでも縦横無尽に使用できるかと言うと, まだまだ不安定でそのレベルには達していない. さらに悪いことに, `rmarkdown` および `bookdown` は `knitr`, `pandoc`, LaTeX といった様々なプログラムを継ぎ接ぎして実装されているため, R の知識だけではエラーが起こった場合や, 意図したとおりの出力が得られないときに原因が分かりにくいことがある. そこで, ここではエラーが出た際にどう対処するかのヒントを書いておく.
+
+# 製本時のエラーへの対処
+
+## エラーがどのタイミングで発生したかを特定する
+
+逆に言えば, `Rmd` ファイルを `md` ファイルに変換 (`knitr`による処理) するときにエラーが出たのか, `md` を各ファイルに変換 `pandoc` する際に起こったのかをまず特定するのが重要である. そのためには
+
+1. `keep_md: true` を設定する
+2. うまくいかないときはキャッシュを削除してから再実行する
+
+
+という手を取る. (1) は文字通り中間出力ファイルである `.md` を残すことを意味する. これが生成されないなら `knitr` でのエラーだと分かるし, 中身を見て不自然な内容になっているのなら Rmd の書き方が `knitr` に正しく評価されていないことがわかる. 
+
+キャッシュも私の経験上よくエラーの原因となっている. 以前に実行していたチャンクの結果が更新されていないせいで, `knitr` の処理の不整合を起こすことがある. `*_files` には出力に必要な画像ファイルが, `*_cache` にはチャンク実行結果のキャッシュが残っている. 後者は `knitr::opts_chunk$set(cache = T)` などでキャッシュを残す設定にできるので, `F` に設定した上でこれらのファイルを削除する.
+
+処理に時間がかかるチャンクがあってキャッシュを作りたい場合は, 別途 `rds` や `RData` ファイルに結果を保存するという方法もある. しかしもしプログラムの再現性を重視する場合, この方法は望ましくないだろう. しかし残念ながら現状はこうするか, ひたすら長い時間を待つしかない.
+
+TODO: https://bookdown.org/yihui/rmarkdown-cookbook/cache.html
+
+## YAML フロントマターを確認する
+
+以前『[[R] R Markdown の YAML ヘッダでハマったおまえのための記事](https://ill-identified.hatenablog.com/entry/2020/09/05/202403)』というブログ記事にも書いたように, YAML フロントマターは慣れないと書き間違えやすいのが現状である. もし自分で変更したのなら, 改めて確認すべきだろう.
+
+以下の**4原則**を覚えておこう. 以前は `bookdown` の話を想定してなかったので, さらに条文を1つ加えた.
+
+1. `output:` 以下はフォーマット関数への引数
+2. トップレベルのオプションは `pandoc` のオプション
+3. タイプミスや位置間違えでも**動いたり, 動かなかったりする**
+4. 
+
+`output:` には bookdown::gitbook など, `bookdown` で提供されているフォーマット関数を指定しており, その配下に記入するのはフォーマット関数に与える引数である. よって, 関数ヘルプを確認すれば有効な引数を知ることができる. しかし一方で, `...` が引数になっていることがあるので, タイプミスしてもエラーが出ないことがある.
+
+また, YAMLの構文でサポートされている配列は誤評価を引き起こすことがある.
+
+```yaml
+output:
+  bookdown::gitbook:
+    toc_depth: 3
+    toc: true
+```
+
+```yaml
+output:
+  bookdown::gitbook:
+    - toc_depth: 3
+    - toc: true
+```
+
+上の例は正しい記法である. 一方でハイフン `-` は YAML では配列を記述するために用意されている. 下記の場合, キーワード引数ではなく位置引数のような扱いになるため, `toc` に対して `3` を代入することになり, エラーが発生する. 逆に言えば, `-` を使う場合, キーワードを書かずに値だけを正しい順番で書けば機能する.
+
+インデントしないトップレベルの引数は, 基本的に `pandoc` に与える引数である. これ意味のない引数を与えてもエラーを返さないことが多いので, タイプミスに注意する.
+
+しかし, フォーマット関数に `pandoc_args` という構文をサポートしていることや, フォーマット関数で `pandoc` の同名の引数を上書きする仕様のフォーマットもあるため, 上記は絶対ではない. これが原因で, 「`output:` 以下に書くべきものを間違えてトップレベルに書いたが, 意図したとおりに機能した」あるいはその逆が発生することがある. また, **`pandoc` の構文ではキーワードにハイフンを使うことができる**が, フォーマットはRの関数でもあるため, ハイフンを使えず, アンダースコアで置き換えられる. この違いも書き間違えの原因になる.
+
+
+## PDF の生成に失敗する場合
+
+それでもエラーが出る場合, 私の経験上ほとんどが生成した `.tex` ファイルをタイプセットする際にエラーが発生している. `html` との両立を考えると, どうしても `pandoc` が解釈できる構文に限界がくるためである. 
+
+```
+! LaTeX Error: XXXXX
+```
+
+とか
+
+```
+Error: LaTeX failed to XXXX
+```
+
+といったメッセージが表示されるのですぐ分かる. さらに丁寧なことに, `tinytex` のデバッグ方法への[リンク](https://yihui.org/tinytex/r/#debugging)まで表示される
+
+
+この場合最も重要なのは, 以下に尽きる.
+
+1 `options(tinytex.verbose = TRUE)` を設定する
+2 `keep_tex: true` を設定する
+
+これは `keep_md` と同様に, 中間ファイルである `.tex` を残すことを意味する.
+
+それでも解決しない場合, 改めてこのファイルを手動でタイプセットするのも1つの方法だ. もしうまくいったり, 異なるエラーが出るのなら, 環境の違いが問題かもしれない. そして upBibTeX を使うのなら, 後者が唯一のデバッグ方法だ.
+
+# TODO: マルチメディア特有の問題と対処
+
+## チャンクの条件分岐
+
+## `asis` エンジン
 
 ## どのフォーマットを選べばいいのか
 
 TODO: bookdown で追加されたフォーマットはどういう継承関係になっているか
 
+この章はやや技術的な内容で, 単なる使用法だけでなくパッケージの内部処理に関する説明も行う.
 
-## 画像の形式
+## 画像の保存形式
 
-技術文書での画像の多くはプロットなど単純な図形なので, PDF で出力する場合はプロット画像も PDF にするのが望ましい. JPG や PNG などのラスタ画像では拡大すると粗くなるが, PDF などのベクタ画像ならば拡大しても粗くならず, かつ単純な図形ならばはファイルサイズも小さく済むことが多い. 一方で HTML は通常 Webブラウザで閲覧するため, PDF に対応していないことが多い.  そこで, HTML では SVG 形式で出力する.
+技術文書での画像の多くはプロットなど単純な図形なので, 写真などを掲載するのでない限り, PDF で出力する場合はプロット画像も PDF にするのが望ましい. JPG や PNG などのラスタ画像では拡大すると粗くなるが, PDF などのベクタ画像ならば拡大しても粗くならず, かつ単純な図形ならばはファイルサイズも小さく済むことが多い. 一方で HTML は通常 Webブラウザで閲覧するため, PDF に対応していないことが多い.  HTML でベクタ画像を掲載したい場合は **SVG 形式**で出力する.
 
 R による SVG への出力は, 従来組み込みの `SVG()` で行うことが多かったが, 近年は新たなパッケージが出ている. 有力なのは `svglite` と `rsvg` である.
 
 https://oku.edu.mie-u.ac.jp/~okumura/stat/svg.html
 
-## Web アプレットの挿入 {#sec:webapp}
+https://bookdown.org/yihui/rmarkdown-cookbook/graphical-device.html
 
-### plotly
-
-### shiny
-
-
-## 参考文献リストの体裁
+## 参考文献リストの体裁 {#sec:bibliography}
 
 これはR Markdownで日本語技術文書を作る際の特にアレな障害の1つである. PDF は BibTeX があるが, HTML では使えない. pandoc の出力に頼るしかない. pandoc は CSL という, Word でも使われている参考文献リストのフォーマットに対応しているが, これの機能が少ないため日本語文献の引用スタイルが崩れてしまう.
 
-TODO: ただし現在 jecon.bst の表示も少しおかしいので修正中.
+`jecon.bst` の公式ではなく, 私がカスタマイズしたバージョンでも良い. これは本来よりも電子媒体としての利用を重視して,
+
+* 参照URLを表示せず, ハイパーリンクのみにする
+* ArXiv ID の表示とハイパーリンク追加
+
+といった変更をしている. 後者は, BibTeX エントリに以下のように `archivePrefix` に `arxiv` と言う値が入っていると, `eprint` の値が ArXiv ID として表示される. これは ArXiv から直接 `.bib` ファイルを取得したり, Zotero などでインポートすれば必ず入力される項目である.
+
+```bibtex
+archivePrefix = {arXiv},
+eprint = {XXXX.YYYYY},
+...
+```
+
+TODO: 現在 jecon.bst の表示も少しおかしいので確認中.
+
+
+## 絵文字の出力
+
+絵文字をHTMLでもPDFでも出力したい場合, `\coloremoji{⛄}`  のように絵文字を囲む. ただし, RStudio のエディタは一部のマルチバイト文字の表示に対応していないので予期せぬ不具合に注意する.
+
+現在の主要Webブラウザでは, 特に設定せずとも Unicode 絵文字をカラー画像に置き換えて表示できるものが多い. しかし PDF 生成時には明示的にフォントを指定するか, 画像に置き換える記述が必要である. その実現のため `bxcoloremoji` という LaTeX パッケージを使用している[^bxcoloremoji]. このパッケージは CTAN に登録されていないため, 別途インストールする必要がある.
+
+[^r4ds-source]: https://github.com/hadley/r4ds
+[^handon-source]: ソース: https://github.com/handsondataviz/book
+[^poli-source]: ソース: https://github.com/shohei-doi/quant_polisci
+[^ethics-source]: ソース: https://github.com/MToyokura/Ethics-for-A-Level-Japanese
+[^sangokushi-source]: ソース: https://github.com/Gedevan-Aleksizde/Japan.R2019
+[^structural-source]: ソース: https://github.com/Gedevan-Aleksizde/20190125_tokyor
+[^bxcoloremoji]: https://github.com/zr-tex8r/BXcoloremoji
+
