@@ -33,9 +33,10 @@ remotes::install_github('Gedevan-Aleksizde/my_latex_templates', subdir = 'rmdja'
 
 3. `Rmd` ファイルを新規作成する
   + 最初は `examples/beamer_blank.Rmd` か `examples/beamer_xelatex_{使用しているOS名}.Rmd` をコピーして使ってみてください
-  + OSごとの違いはほぼデフォルトのフォントだけです
-4. `Rmd`ファイルに`output::rmdja::beamer_presentation_ja` を指定
-  + フォントを手動で指定する必要があります
+  + (上記どちらでもないなら) `Rmd`ファイルに`output::rmdja::beamer_presentation_ja` を指定
+
+4. フォントの指定 (オプション)
+  + OSごとの違いはほぼデフォルトのフォントだけです. 現在は自動で動作するようになっていますが, もしフォントが合わない場合は手動で指定してください. 例えば,
   + MS なら 
   ```
   jfontpreset: ms
@@ -49,6 +50,8 @@ remotes::install_github('Gedevan-Aleksizde/my_latex_templates', subdir = 'rmdja'
   jfontpreset: hiragino-pro
   ```
   でとりあえずは動くはずです.
+  + XeLaTeX をお使いなら `zxjafont`, LuaLaTeX をお使いなら `luatex-ja` のプリセット名で指定できます
+  + 混植も可能です
   + 詳しくは [`examples/`](inst/resources/examples/rmd/) 以下の pdf を確認してください.
 
 ## 初期バージョン (rmdCJK) をお使いの場合
