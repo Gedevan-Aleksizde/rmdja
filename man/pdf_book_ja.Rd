@@ -26,12 +26,13 @@ pdf_book_ja(
   highlight = "default",
   highlight_bw = FALSE,
   chunk_number = TRUE,
-  tonbow = FALSE,
+  tombow = FALSE,
   template = "default",
   keep_tex = TRUE,
   keep_md = TRUE,
   latex_engine = "xelatex",
   citation_package = "natbib",
+  citation_options = "default",
   includes = NULL,
   md_extensions = NULL,
   output_extensions = NULL,
@@ -72,7 +73,7 @@ black-and-white (grayscale).}
 
 \item{chunk_number}{デフォルト: TRUE. boolean. コードセルに行番号を表示するかどうか.}
 
-\item{tonbow}{boolean. デフォルト: FALSE. 製本時に必要なトンボ (trim markers) を付けるかどうか. トンボは \code{gentombow.sty} で作成される.}
+\item{tombow}{boolean. デフォルト: FALSE. 製本時に必要なトンボ (trim markers) を付けるかどうか. トンボは \code{gentombow.sty} で作成される.}
 
 \item{pandoc_args}{See
 \code{rmarkdown::\link{pdf_document}}, or the documentation of the
