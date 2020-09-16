@@ -18,6 +18,11 @@
 .rmdwarning {
   background-image: url("../img/warning.png");
 }
+
+.theorem, .lemma, .proposition, .corollary, .conjecture, .definition, .example, .exercise {
+  background: #f5f5f5;
+}
+
 p.caption {
   color: #777;
   margin-top: 10px;
