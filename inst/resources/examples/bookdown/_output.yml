@@ -1,4 +1,14 @@
 # ---- html(github pages) の出力設定 ----
+bookdown::html_book:
+  theme: united
+  fig_caption: true
+  number_sections: true
+  split_bib: true
+  table_css: true
+  dev: png
+  dev-args:
+    res: 200
+
 bookdown::gitbook:
   fig_caption: true                          # 図表のキャプション表示
   number_sections: true                      # セクションに番号を振る
@@ -71,7 +81,8 @@ bookdown::pdf_book:
   quote_footer: ["\\VA{", "}{}"]             # 引用ブロック前後の修飾文字
 
 rmdja::pdf_book_ja:
-  tombow: false
+  tombow: true
+  theme_bw: true
 
 # ---- epubの出力設定 ----
 bookdown::epub_book:

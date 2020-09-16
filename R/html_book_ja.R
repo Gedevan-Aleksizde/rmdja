@@ -114,8 +114,19 @@ gitbook_ja <- function(
     table_css = table_css,
     ...
   )
-  args_gitbook <- args[names(args) %in% formalArgs(bookdown::gitbook)]
+  
   out <- do.call(bookdown::gitbook, args)
+  out <- rmarkdown::output_format(
+    knitr = list(opts_hooks = list(
+      echo = function(options){
+        if(options$engine %in% DUMMY_ENGINES())
+          options$echo = T
+        return(options)
+        }
+      )),
+    pandoc = NULL,
+    base_format = out
+    )
   # out$knit$preprocess <- list(copy_style = copy_style)
   return(out)
 }
