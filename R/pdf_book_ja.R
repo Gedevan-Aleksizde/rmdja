@@ -136,7 +136,6 @@ pdf_book_ja <- function (
     icon_dir <- file.path(files_dir, "_latex/_img")
     if(!file.exists(icon_dir)) dir.create(path = icon_dir, recursive = T, showWarnings = F)
     file.copy(file.path(system.file("resources/styles/img", package = "rmdja"), ICONS()), icon_dir)
-    return(NULL)
   }
 
   base_format_ <- do.call(
