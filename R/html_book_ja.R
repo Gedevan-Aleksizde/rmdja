@@ -132,7 +132,7 @@ gitbook_ja <- function(
              ),
            base_format = rmarkdown::html_document
            )
-      )
+      ),
     ...
   )
   
