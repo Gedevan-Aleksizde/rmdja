@@ -40,16 +40,6 @@ knitr::opts_chunk$set(
   tidy = "styler",
   attr.source = c(".numberLines .lineAnchors")  # TODO: 出力セルの付番
   )
-dummy_engines <- c("cat", "asis", "block", "block2",
-                   "theorem", "lemma", "corollary", "proposition", "conjecture", "definition",
-                   "example", "exercise", "proof", "remark", "solution")
-knitr::opts_hooks$set(
-  echo = function(options){
-    if(options$engine %in% dummy_engines)
-    options$echo = T
-    return(options)
-  }
-)
 img_dir <- "../../img"
 ```
 

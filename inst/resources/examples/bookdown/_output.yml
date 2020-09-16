@@ -42,7 +42,7 @@ bookdown::gitbook:
       facebook: true
       all: ['linkedin', 'vk', 'weibo', 'instapaper']  # まとめることもできる.
 
-rmdja::gitbook_ja
+rmdja::gitbook_ja: default
 
 # ---- pdfの出力設定 ----
 bookdown::pdf_book:

@@ -47,7 +47,6 @@ pdf_book_ja <- function (
   ...
   )
 {
-  # 動的な設定: エンジンごとのデフォルト値変更
   # --- check values ---
   match.arg(latex_engine, c("xelatex", "lualatex"))
   match.arg(citation_package, c("default", "biblatex", "natbib"))

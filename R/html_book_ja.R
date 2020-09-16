@@ -95,7 +95,7 @@ gitbook_ja <- function(
     dev.args = dev.args,
     df_print = df_print,
     mathjax = mathjax,
-    template = ttemplate,
+    template = template,
     extra_dependencies = extra_dependencies,
     css = css,
     includes = includes,
