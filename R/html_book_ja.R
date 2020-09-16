@@ -84,7 +84,6 @@ gitbook_ja <- function(
     split_by = split_by,
     self_contained = self_contained,
     split_bib = split_bib,
-    template = template,
     config = config,
     code_folding = code_folding,
     code_download = code_download,
