@@ -11,9 +11,7 @@ gitbook_ja <- function(
   fig_height = 5,
   fig_retina = 2,
   table_css = TRUE,
-  toc = TRUE,
   toc_depth = 3,
-  toc_float = TRUE,
   number_sections = TRUE,
   section_divs = TRUE,
   split_by = 'chapter',
@@ -21,7 +19,6 @@ gitbook_ja <- function(
   split_bib = TRUE,
   code_folding = "none",
   code_download = FALSE,
-  theme = "default",
   highlight = "default",
   dev = 'png',
   dev.args = list(res = 200),
@@ -66,43 +63,59 @@ gitbook_ja <- function(
       )
     )
   }
+  css_default <-  c("toc.css", "style.css")
+  css_img_default <- c("caution.png", "important.png", "note.png", "tip.png", "warning.png")
+  style_dir <- "styles"
+  css_path_default <- file.path(system.file("resources/styles/css", package = "rmdja"), css_default)
+  css_img_path_default <- file.path(system.file("resources/styles/img", package = "rmdja"), css_img_default)
   if(missing(css) || is.null(css) || length(css) <= 0){
-    css <- file.path(system.file("resources/styles/css", package = "rmdja"), c("toc.css", "style.css"))
+    css <- file.path(file.path(style_dir, "css", css_default))
   }
+  copy_style <- function(){
+    css_path_default <- file.path(system.file("resources/styles/css", package = "rmdja"), css_default)
+    css_img_path_default <- file.path(system.file("resources/styles/img", package = "rmdja"), css_img_default)
+    if(!file.exists(style_dir)) {
+      dir.create(style_dir, recursive = T)
+    }
+    if(!file.exists(file.path(style_dir, "css"))) dir.create(file.path(style_dir, "css"))
+    if(!file.exists(file.path(style_dir, "img"))) dir.create(file.path(style_dir, "img"))
+    file.copy(css_path_default, rep(file.path(style_dir, "css"), length(css_path_default)))
+    file.copy(css_img_path_default, rep(file.path(style_dir, "css"), length(css_img_path_default)))
+  }
+
   args <- list(
     fig_caption = fig_caption,
+    number_sections = number_sections,
+    self_contained = self_contained,
+    lib_dir = lib_dir,
+    pandoc_args = pandoc_args,
+    toc_depth = toc_depth,
     fig_align = fig_align,
     fig_width = fig_width,
     fig_height = fig_height,
     fig_retina = fig_retina,
-    table_css = table_css,
-    # toc = toc,
-    toc_depth = toc_depth,
-    toc_float = toc_float,
-    number_sections = number_sections,
     section_divs = section_divs,
-    split_by = split_by,
-    self_contained = self_contained,
-    split_bib = split_bib,
-    config = config,
     code_folding = code_folding,
     code_download = code_download,
-    theme = theme,
     highlight = highlight,
     dev = dev,
     dev.args = dev.args,
     df_print = df_print,
     mathjax = mathjax,
-    template = template,
     extra_dependencies = extra_dependencies,
     css = css,
     includes = includes,
     keep_md = keep_md,
-    lib_dir = lib_dir,
     md_extensions = md_extensions,
-    pandoc_args = pandoc_args,
+    template = template,
+    split_by = split_by,
+    split_bib = split_bib,
+    config = config,
+    table_css = table_css,
     ...
   )
+  args_gitbook <- args[names(args) %in% formalArgs(bookdown::gitbook)]
   out <- do.call(bookdown::gitbook, args)
+  # out$knit$preprocess <- list(copy_style = copy_style)
   return(out)
 }
