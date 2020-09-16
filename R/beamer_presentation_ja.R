@@ -167,6 +167,12 @@ beamer_presentation_ja <- function(
                               args = NULL,
                               keep_tex = keep_tex,
                               latex_engine = latex_engine)
+  preproc <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
+    if(!file.exists(file.path(output_dir, ".latexmkrc"))){
+      file.copy(file.path(system.file("resources/latexmk", package = "rmdja"), ".latexmkrc"), to = output_dir)
+    }
+    return(NULL)
+  }
   
   # FIXME: I want to load rmarkdown::metadata directly.
   out <- rmarkdown::output_format(
@@ -176,12 +182,11 @@ beamer_presentation_ja <- function(
     },
     knitr = do.call(rmarkdown::knitr_options, list(opts_chunk = args_opts_chunk)),
     pandoc = do.call(rmarkdown::pandoc_options, args_pandoc_options),
+    pre_processor = preproc,
     clean_supporting = !keep_tex,
     keep_md = keep_md,
     base_format = base
     )
-  if(!file.exists("./.latexmkrc")){
-    file.copy(file.path(system.file("resources", package = "rmdja"), "latexmk/.latexmkrc"), to = "./")
-  }
+  
   return(out)
 }
