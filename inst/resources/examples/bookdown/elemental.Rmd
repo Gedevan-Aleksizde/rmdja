@@ -205,27 +205,46 @@ ${E_1,E_2,\cdots}$をある確率空間の事象とする. これらの事象の
 である.
 ```
 
-```{theorem, name="TODO の定理"}
+さらに, 定理 \@ref(thm:thorem1) がある.
+
+```{theorem thorem1, name="TODO の定理"}
 TODO
 ```
 
-## TODO: カスタムブロック
+## カスタムブロック
 
-数式のセクションの定理ブロックの応用で, 独自のブロックセクションを定義することができる. `rmdja` では (ref:BKD)  [Ch. 2.7 Custom blocks](https://bookdown.org/yihui/bookdown/custom-blocks.html) で紹介されている例を予め使えるようにしている. それらは 
+数式のセクションの定理ブロックの応用で, 独自のブロックセクションを定義することができる. `rmdja` では (ref:BKD)  [Ch. 2.7 Custom blocks](https://bookdown.org/yihui/bookdown/custom-blocks.html) で紹介されている例を予め使えるようにしている. それらは `type="..."` で指定できて, 以下の5種類がある.
 
 * `rmdcaution`
-* `rmdwarning`
-* `rmdnote`
 * `rmdimportant`
+* `rmdnote`
 * `rmdtip`
+* `rmdwarning`
+
 
 である.
 
-```{block boloc-example, type="rmdcaution"}
-技術書によくある注意を喚起するブロック.
+```{block boloc-example-caution, type="rmdcaution"}
+技術書によくある注意を喚起するブロック (`rmdcaution`).
 ```
 
-このブロック内では Markdown の基本構文しか使えず, 引用や相互参照などは使えない. これらをブロック内で使いたい場合は代わりに `block2`  と書く. ただしこちらは pandoc の機能のハックであるため, 将来使えなくなる可能性もある.
+```{block boloc-example-important, type="rmdimportant"}
+技術書によくある注意を喚起するブロック (`rmdimportant`).
+```
+
+```{block boloc-example-note, type="rmdnote"}
+技術書によくある注意を喚起するブロック (`rmdcnote`).
+```
+
+```{block boloc-example-tip, type="rmdtip"}
+技術書によくある注意を喚起するブロック (`rmdtip`).
+```
+
+```{block boloc-example-warning, type="rmdwarning"}
+技術書によくある注意を喚起するブロック (`rmdwarning`).
+```
+
+このブロック内では Markdown の基本構文しか使えず, 引用や相互参照などは使えない. これらをブロック内で使いたい場合は `block` の代わりに `block2`  と書く. ただしこちらは pandoc の機能のハックであるため, 将来使えなくなる可能性もある.
 
 
 ## 脚注
@@ -364,7 +383,7 @@ TODO: この書き方だと PDF で付番できない
 既に Markdown 記法による図表の挿入方法を紹介したが, プログラムチャンクを介して画像を読み込み表示させることもできる. まずは, R のプログラムで既存の画像ファイルを表示させる方法.
 
 ```{r includegraphic-example, out.width="50%", out.height="50%", fig.align="center", fig.cap="Johannes Gutenberg"}
-knitr::include_graphics("../img/Johannes_Gutenberg.jpg")
+knitr::include_graphics(file.path(img_dir, "Johannes_Gutenberg.jpg"))
 ```
 
 
@@ -485,29 +504,19 @@ Table: (\#tab:tab-md) Markdown 記法の表
 
 ### 特殊な相互参照
 
-それ以外にも, 相互参照と似たような構文でマクロ的にテキストを置き換えることができる. 例えばここまで何度も (ref:BKD) と (ref:RDG) に言及してきたが, 毎回ハイパーリンクと強調フォントにするのは面倒である. そこで, 次のように参照トークンを作成している.
+それ以外にも, 相互参照と似たような構文でマクロ的にテキストを置き換えることができる. 例えばここまで何度も (ref:BKD) と (ref:RDG) に言及してきたが, 毎回ハイパーリンクと強調フォントにするのは面倒である. そこで, `(ref:RDG) [**RDG**](https://bookdown.org/yihui/rmarkdown/)` のような宣言を前後に改行を入れて書くことでトークンを作成できる
 
-```md
-(ref:BKD) [**BKD**](https://bookdown.org/yihui/bookdown/)
+後は本文中に `(ref:RDG)` と書くだけでリンクが作られる.
 
-(ref:RDG) [**RDG**](https://bookdown.org/yihui/rmarkdown/)
-```
+別の利用方法として, チャンクオプションの `fig.cap` などに TeX 数式を書いても正しく表示できない. そのような場合は `ref` 参照を使う. `(ref:figcap1) \coloremoji{🌸} $\sum \oint \mathfrak{A} \mathscr{B} \mathbb{C}$ \coloremoji{🌸}` と書くと, 図 \@ref(fig:caption) のキャプションにも特殊な記号が使える.
 
-後は本文中に `(ref:BKD)` と書くだけでリンクが作られる.
-
-別の利用方法として, チャンクオプションの `fig.cap` などに TeX 数式を書いても正しく表示できない. そのような場合は `ref` 参照を使う(図 \@ref(fig:caption)).
-
-```markdown
-\(ref:figcap1) \coloremoji{🌸} キャプションに特殊な記号を挿入する $\sum \oint \mathfrak{A} \mathscr{B} \mathbb{C}$ \coloremoji{🌸}
-```
-
-(ref:figcap1) \coloremoji{🌸} キャプションに特殊な記号を挿入する $\sum \oint \mathfrak{A} \mathscr{B} \mathbb{C}$ \coloremoji{🌸}
+(ref:figcap1) \coloremoji{🌸} $\sum \oint \mathfrak{A} \mathscr{B} \mathbb{C}$ \coloremoji{🌸}
 
 なお, 複数指定する場合は連続させず, 改行で1行空けて宣言する必要がある.
 
 
-```{r caption, fig.cap='🌸(ref:figcap1)🌸'}
-plot(cars)  # a scatterplot
+```{r caption, fig.cap='🌸(ref:figcap1)🌸', out.width="30%"}
+ggplot(tibble(x = 1, y = 1, z = "テスト")) + geom_label(aes(x = x, y = y, label = z)) + theme_classic()
 ```
 
  
