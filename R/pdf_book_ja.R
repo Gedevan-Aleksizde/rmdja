@@ -2,7 +2,8 @@
 #'
 #' @inheritParams bookdown::pdf_book
 #' @title `rmarkdown` + `bookdown` で簡単に日本語文書を作るためのプリセットフォーマット
-#' @description  `rmarkdown` + `bookdown` で PDF文書をビルドする場合, 日本語を適切に表示するためにいろいろ必要だった調整を済ませたフォーマット. 基本的に YAML フロントマター (+ `_ouput.yml`) や knitr チャンクオプションで設定できることをデフォルト値として埋め込んだだけ.
+#' @description  `rmarkdown` + `bookdown` で PDF文書をビルドする場合, 日本語を適切に表示するためにいろいろ必要だった調整を済ませたフォーマット. 基本的に YAML フロントマター (+ `_ouput.yml`) や knitr チャンクオプションで設定できることをデフォルト値として埋め込んだだけ. `index.Rmd` 
+#' 
 #'  
 #' @param chunk_number デフォルト: TRUE. boolean. コードセルに行番号を表示するかどうか. 
 #' @param tombow boolean. デフォルト: FALSE. 製本時に必要なトンボ (trim markers) を付けるかどうか. トンボは `gentombow.sty` で作成される. 
@@ -130,6 +131,14 @@ pdf_book_ja <- function (
       )
     )
   )
+  
+  preproc <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
+    icon_dir <- file.path(files_dir, "_latex/_img")
+    if(!file.exists(icon_dir)) dir.create(path = icon_dir, recursive = T, showWarnings = F)
+    file.copy(file.path(system.file("resources/styles/img", package = "rmdja"), ICONS()), icon_dir)
+    return(NULL)
+  }
+
   base_format_ <- do.call(
     what = base_format,
     args = if("..." %in% formalArgs(base_format)) args$base else args$base[names(args$base) %in% formalArgs(base_format)]
@@ -143,6 +152,7 @@ pdf_book_ja <- function (
         return(input)
       },
       knitr = args$knitr,
+      pre_processor = preproc,
       pandoc = NULL,
       keep_md = keep_md,
       clean_supporting = NULL, base_format = base_format_
