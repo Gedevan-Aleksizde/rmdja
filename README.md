@@ -28,11 +28,8 @@ remotes::install_github('Gedevan-Aleksizde/my_latex_templates', subdir = 'rmdja'
 ```
 3. 新規作成時に [R Markdown] -> [From Template] -> [Beamer in Japanese] を選択します  
 ![select templete](inst/resources/img/readme-selection.png)
-
-3. `Rmd` ファイルを新規作成する
-  + 最初は `examples/beamer_blank.Rmd` か `examples/beamer_xelatex_{使用しているOS名}.Rmd` をコピーして使ってみてください
+  + または最初は [`examples/beamer`](inst/resources/examples/beamer/) の `beamer_blank.Rmd` か `examples/beamer_xelatex_{使用しているOS名}.Rmd` をコピーして使ってみてください
   + (上記どちらでもないなら) `Rmd`ファイルに`output::rmdja::beamer_presentation_ja` を指定
-
 4. フォントの指定 (オプション)
   + OSごとの違いはほぼデフォルトのフォントだけです. 現在は自動で動作するようになっていますが, もしフォントが合わない場合は手動で指定してください. 例えば,
   + MS なら 
@@ -50,7 +47,7 @@ remotes::install_github('Gedevan-Aleksizde/my_latex_templates', subdir = 'rmdja'
   でとりあえずは動くはずです.
   + XeLaTeX をお使いなら `zxjafont`, LuaLaTeX をお使いなら `luatex-ja` のプリセット名で指定できます
   + 混植も可能です
-  + 詳しくは [`examples/`](inst/resources/examples/rmd/) 以下の pdf を確認してください.
+  + 詳しくは [`examples/beamer`](inst/resources/examples/beamer/) 以下の pdf を確認してください.
 
 ## 初期バージョン (rmdCJK) をお使いの場合
 
@@ -136,7 +133,7 @@ sudo apt install graphiviz
 
 # サンプル
 
-[`examples/`](inst/resources/examples/rmd/) 以下にサンプルが存在します.
+[`examples/`](inst/resources/examples/beamer/) 以下にサンプルが存在します.
 
 
 * `beamer_xelate.Rmd`
@@ -148,8 +145,8 @@ sudo apt install graphiviz
 コピーする際には
 
 ```
-file.copy(file.path(system.file("resources/examples/rmd", package = "rmdja"), "beamer_xelatex.Rmd"), to = "./")
-file.copy(file.path(system.file("resources/examples/rmd", package = "rmdja"), "beamer_lualatex.Rmd"), to = "./")
+file.copy(file.path(system.file("resources/examples/beamer", package = "rmdja"), "beamer_xelatex.Rmd"), to = "./")
+file.copy(file.path(system.file("resources/examples/beamer", package = "rmdja"), "beamer_lualatex.Rmd"), to = "./")
 ```
 
 と言うふうにコピーすると楽です.
