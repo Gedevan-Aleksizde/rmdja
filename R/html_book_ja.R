@@ -113,7 +113,7 @@ gitbook_ja <- function(
     config = config,
     table_css = table_css,
     base_format = do.call(
-      rmakdown::output_format,
+      rmarkdown::output_format,
       list(pandoc = NULL,
            knitr = list(
              opts_hooks = list(
@@ -130,7 +130,7 @@ gitbook_ja <- function(
                  }
                }
              ),
-           base_format = rmarkdown::html_document
+           base_format = rmarkdown::html_document()
            )
       ),
     ...
