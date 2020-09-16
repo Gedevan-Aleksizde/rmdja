@@ -112,6 +112,27 @@ gitbook_ja <- function(
     split_bib = split_bib,
     config = config,
     table_css = table_css,
+    base_format = do.call(
+      rmakdown::output_format,
+      list(pandoc = NULL,
+           knitr = list(
+             opts_hooks = list(
+               echo = function(options){
+                 if(options$engine %in% DUMMY_ENGINES())
+                   options$echo = T
+                 return(options)
+                 }),
+             pre_processor = function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
+               for(x in list(list(d = "styles/img", f = ICONS()), list(d = "styles/css", f = c("toc.css", "style.css")))){
+                 if(!file.exists(file.path(files_dir, x$d))) dir.create(file.path(output_dir, x$d), recursive = T)
+                 file.copy(file.path(system.file(paste0("resources/", x$d), package = "rmdja"), x$f),
+                           file.path(output_dir, x$d))
+                 }
+               }
+             ),
+           base_format = rmarkdown::html_document
+           )
+      )
     ...
   )
   
