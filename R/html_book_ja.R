@@ -105,6 +105,6 @@ gitbook_ja <- function(
     pandoc_args = pandoc_args,
     ...
   )
-  out <- do_call(bookdown::gitbook, args)
+  out <- do.call(bookdown::gitbook, args)
   return(out)
 }
