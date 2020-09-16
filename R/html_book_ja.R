@@ -76,7 +76,7 @@ gitbook_ja <- function(
     fig_height = fig_height,
     fig_retina = fig_retina,
     table_css = table_css,
-    toc = toc,
+    # toc = toc,
     toc_depth = toc_depth,
     toc_float = toc_float,
     number_sections = number_sections,
