@@ -40,7 +40,17 @@ knitr::opts_chunk$set(
   tidy = "styler",
   attr.source = c(".numberLines .lineAnchors")  # TODO: 出力セルの付番
   )
-img_dir <- "../../img"
+img_dir <- "img/"
+```
+
+
+```{r ruby-universal, include=F}
+ruby_b <- function(text, ruby){
+  glue::glue("`\\textbf{\\aruby{[text]}{[ruby]}}`{=latex}`<ruby><strong>[text]</strong><rp>(</rp><rt>[ruby]</rt><rp>)</rp></ruby>`{=html}", .open = "[", .close = "]")
+}
+ruby <- function(text, ruby){
+  glue::glue("`\\aruby{[text]}{[ruby]}`{=latex}`<ruby>[text]<rp>(</rp><rt>[ruby]</rt><rp>)</rp></ruby>`{=html}", .open = "[", .close = "]")
+}
 ```
 
 # (PART) イントロダクション {-}
@@ -68,7 +78,7 @@ R Markdown (`rmarkdown`) は, R プログラムを埋め込んだ動的なドキ
 
 本稿では, `bookdown` で日本語文書を作成する際の設定を容易にしたパッケージ `rmdja` を利用した日本語技術文書の作成方法を解説する.
 
-```{r, echo=F}
+```{r CC-function}
 getCC <- function(adapt = c("yes", "no", "inherit"),
                   commercial = T,
                   size = c("normal", "compact"),
