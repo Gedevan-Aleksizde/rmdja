@@ -74,12 +74,6 @@ beamer_presentation_ja <- function(
   match.arg(latex_engine, c("xelatex", "lualatex"))
   
   # ----- reshape arguments -----
-  
-  fontsize_as_integer <- function(fontsize = "12pt"){
-    if(is.null(fontsize)) fontsize = "12pt"
-    ps <- as.integer(regmatches(fontsize, regexpr("^[0-9]+", fontsize)))
-    return(ps)
-  }
 
   pandoc_args_base <- c()
 
@@ -167,19 +161,15 @@ beamer_presentation_ja <- function(
                               args = NULL,
                               keep_tex = keep_tex,
                               latex_engine = latex_engine)
-  preproc <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
-    if(!file.exists(file.path(output_dir, ".latexmkrc"))){
-      file.copy(file.path(system.file("resources/latexmk", package = "rmdja"), ".latexmkrc"), to = output_dir)
-    }
-    return(NULL)
-  }
   
-  # FIXME: I want to load rmarkdown::metadata directly.
+  preproc <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
+    if(identical(citation_package, "natbib")){
+      copy_latexmkrc(...)
+    }
+    return(autodetect_and_set_jfont(metadata, input_file, runtime, knit_meta, files_dir, output_dir, latex_engine))
+  }
   out <- rmarkdown::output_format(
-    pre_knit = function(input, ...) {
-      knitr::opts_chunk$set(dev.args = list(pointsize = fontsize_as_integer(rmarkdown::metadata$fontsize)))
-      return(input)
-    },
+    pre_knit = adjust_fontsize,
     knitr = do.call(rmarkdown::knitr_options, list(opts_chunk = args_opts_chunk)),
     pandoc = do.call(rmarkdown::pandoc_options, args_pandoc_options),
     pre_processor = preproc,
