@@ -1,12 +1,12 @@
 #' bookdown::pdf_book wrapper for Japanese typesetting with XeLaTeX/LuaLaTeX 
 #'
-#' @inheritParams bookdown::pdf_book
+
 #' @title `rmarkdown` + `bookdown` で簡単に日本語文書を作るためのプリセットフォーマット
 #' @description  `rmarkdown` + `bookdown` で PDF文書をビルドする場合, 日本語を適切に表示するためにいろいろ必要だった調整を済ませたフォーマット. 基本的に YAML フロントマター (+ `_ouput.yml`) や knitr チャンクオプションで設定できることをデフォルト値として埋め込んだだけ. `index.Rmd` 
-#' 
+#' @inheritParams bookdown::pdf_book
 #'  
-#' @param chunk_number デフォルト: TRUE. boolean. コードセルに行番号を表示するかどうか. 
-#' @param tombow boolean. デフォルト: FALSE. 製本時に必要なトンボ (trim markers) を付けるかどうか. トンボは `gentombow.sty` で作成される. 
+#' @param rownumber_chunk デフォルト: TRUE. logical. コードセルに行番号を表示するかどうか. 
+#' @param tombow logical. デフォルト: FALSE. 製本時に必要なトンボ (trim markers) を付けるかどうか. トンボは `gentombow.sty` で作成される. 
 #' @return rmarkdown_output_format
 #'
 #' @export
@@ -31,7 +31,7 @@ pdf_book_ja <- function (
   quote_footer = NULL,
   highlight = "default",
   highlight_bw = FALSE,
-  chunk_number = TRUE,
+  rownumber_chunk = TRUE,
   tombow = FALSE,
   template = "default",
   keep_tex = TRUE,
@@ -61,7 +61,7 @@ pdf_book_ja <- function (
   if(missing(template) || identical(template, "") || identical(template, "default")){
     template <- file.path(system.file("resources", package = "rmdja"), "pandoc-templates/document-ja.tex.template")
   }
-  if(identical(chunk_number, T)){
+  if(identical(rownumber_chunk, T)){
     attr_source <- c(".numberLines .lineAnchors") 
   } else {
     attr_source <- NULL
@@ -77,15 +77,10 @@ pdf_book_ja <- function (
     }
   } else if(is.list(extra_dependencies)){
     if(identical(tombow, T)){
-      extra_dependencies <- c(extra_dependencies, gentombow = NULL)
+      extra_dependencies <- c(extra_dependencies, list(gentombow = NULL))
     }
   } 
-  fontsize_as_integer <- function(fontsize = fontsize){
-    if(is.null(fontsize)) fontsize = "10pt"
-    ps <- as.integer(regmatches(fontsize, regexpr("^[0-9]+", fontsize)))
-    return(ps)
-  }
-  
+
   args <- list(
     base = list(
       toc = toc,
@@ -133,36 +128,34 @@ pdf_book_ja <- function (
   )
   
   preproc <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
+    if(identical(citation_package, "natbib")) copy_latexmkrc(metadata, input_file, runtime, knit_meta, files_dir, output_dir)
+    args_extra <- autodetect_and_set_jfont(metadata, input_file, runtime, knit_meta, files_dir, output_dir, latex_engine = latex_engine)
     icon_dir <- file.path(files_dir, "_latex/_img")
     if(!file.exists(icon_dir)) dir.create(path = icon_dir, recursive = T, showWarnings = F)
-    file.copy(file.path(system.file("resources/styles/img", package = "rmdja"), ICONS()), icon_dir)
+    file.copy(file.path(system.file("resources/styles/img", package = "rmdja"), ICON_FILES()), icon_dir)
+    args_extra <- c(args_extra,
+                    if(!identical(metadata$fontsize, "10pt") & tombow) "-Mclassoption=nomag" else NULL
+                    )
+    
+    return(args_extra)
   }
 
   base_format_ <- do.call(
     what = base_format,
     args = if("..." %in% formalArgs(base_format)) args$base else args$base[names(args$base) %in% formalArgs(base_format)]
     )
-  base_ <- function(...){
+  base_ <- function(){
     knitr_options <- do.call(rmarkdown::knitr_options, args$knitr)
     out <- rmarkdown::output_format(
-      pre_knit = function(input, ...) {
-        font_pt <- fontsize_as_integer(rmarkdown::metadata$fontsize)
-        knitr::opts_chunk$set(dev.args = list(pointsize = font_pt))
-        return(input)
-      },
+      pre_knit = adjust_fontsize,
       knitr = args$knitr,
       pre_processor = preproc,
       pandoc = NULL,
       keep_md = keep_md,
-      clean_supporting = NULL, base_format = base_format_
+      clean_supporting = NULL,
+      base_format = base_format_
     )
     return(out)
-  }
-  if(identical(citation_package, "natbib")){
-    if(!file.exists("./.latexmkrc")){
-      file.copy(file.path(system.file("resources", package = "rmdja"),
-                          "latexmk/.latexmkrc"), to = "./")
-    }
   }
   out <- do.call(what = bookdown::pdf_book, args = list(base_format = base_))
   return(out)
