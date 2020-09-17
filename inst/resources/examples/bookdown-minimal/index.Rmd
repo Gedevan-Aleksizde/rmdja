@@ -1,0 +1,69 @@
+---
+title: "`bookdown` + `rmdja` による多様なファイル形式の日本語技術文書の作成 (短縮版)"
+author: "No Name"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site                    # RStudio GUIでビルド操作したい場合に必要
+description: "bookdown でまともな日本語文書を作る資料"  # HTML <metadata> に出力されるサイト概要
+link-citations: true
+linkcolor: blue
+citecolor: blue
+urlcolor: magenta
+citation-package: biblatex
+bibliography: rmdja.bib # 書誌情報ファイル
+biblio-style: apalike   # csl または bst
+---
+
+```{r setup, include=FALSE}
+# 確実にアンダースコアを回避するにはコピーしかない
+file.copy(system.file("resources/bibliography/rmdja.bib", package="rmdja"), "./") 
+img_dir <- "img/"
+dir.create(img_dir, recursive = T)
+file.copy(file.path(system.file("resources/img", package = "rmdja"), c("Johannes_Gutenberg.jpg")), img_dir)
+options(tinytex.latexmk.emulation = T)
+knitr::opts_chunk$set(
+  echo = F,
+  comment = "",
+  dev.args = list(family = if(knitr::is_html_output()) list() else list(family = "Noto Sans Serif CJK JP")),
+  tidy = "styler"
+  )
+require(tidyverse)
+```
+
+
+
+# (PART) イントロダクション {-}
+
+# 序文 {-}
+
+(ここに壮大な幕開け)
+
+# 画像
+
+```{r header, out.width="50%", fig.cap="Johannes Guternberg"}
+knitr::include_graphics("img/Johannes_Gutenberg.jpg")
+```
+
+# (PART) 第2部などない {-}
+
+# 表の表示
+
+```{r tab, echo = T}
+data(iris)
+head(iris, n = 10) %>% kable(booktabs = T, caption = "表のスタイルを自由に変更") %>% 
+  kableExtra::row_spec(seq(1, 10, by = 2), color = "red")
+```
+
+# R のプロットの埋め込み
+
+```{r plot1, echo=T, fig.cap="iris"}
+data(iris)
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
+  geom_point()
+```
+
+# 数式
+
+
+$$
+f(x|\mu,\,\sigma^{2})=\frac{1}{\sqrt{2\pi}\sigma}\exp\left(-\frac{(x-\mu)^{2}}{2\sigma^{2}}\right)
+$$

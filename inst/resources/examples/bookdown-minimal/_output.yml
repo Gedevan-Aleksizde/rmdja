@@ -1,0 +1,12 @@
+rmdja::gitbook_ja:
+  keep_md: true
+  css:
+    - ../../styles/css/style.css
+    - ../../styles/css/toc.css
+
+rmdja::pdf_book_ja:
+  code_rownumber: true
+
+# ---- epubの出力設定 ----
+bookdown::epub_book:
+  epub_version: epub3
