@@ -19,6 +19,7 @@ gitbook_ja(
   split_bib = TRUE,
   code_folding = "none",
   code_download = FALSE,
+  code_rownumber = TRUE,
   highlight = "default",
   dev = "png",
   dev.args = list(res = 200),
@@ -39,7 +40,9 @@ gitbook_ja(
 \arguments{
 \item{split_by}{character. デフォルト: 'chapter'. 'chapter', 'chapter+number', 'section', 'section+number', 'rmd', 'none' から選ぶ. ページを区切る単位.}
 
-\item{config}{list. デフォルト: 実際に出力して確認したほうが早い. 詳しくは bookdown のマニュアル.}
+\item{config:}{list. デフォルト: 実際に出力して確認したほうが早い. 詳しくは bookdown のマニュアル.}
+
+\item{code_rownumber:}{logical. デフォルト: TRUE. 行番号を表示するかどうか}
 }
 \description{
 bookdown::gotbook wrapper for Japanese

@@ -16,6 +16,8 @@ biblio-style: apalike   # csl または bst
 ```{r setup, include=FALSE}
 # 確実にアンダースコアを回避するにはコピーしかない
 file.copy(system.file("resources/bibliography/rmdja.bib", package="rmdja"), "./") 
+file.copy(system.file("resources/styles/css", package="rmdja"), "./", recursive = T)
+file.copy(system.file("resources/styles/img", package="rmdja"), "./", recursive = T)
 img_dir <- "img/"
 dir.create(img_dir, recursive = T)
 file.copy(file.path(system.file("resources/img", package = "rmdja"), c("Johannes_Gutenberg.jpg")), img_dir)

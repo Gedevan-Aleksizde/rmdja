@@ -5,7 +5,7 @@
 #' @description  `rmarkdown` + `bookdown` で PDF文書をビルドする場合, 日本語を適切に表示するためにいろいろ必要だった調整を済ませたフォーマット. 基本的に YAML フロントマター (+ `_ouput.yml`) や knitr チャンクオプションで設定できることをデフォルト値として埋め込んだだけ. `index.Rmd` 
 #' @inheritParams bookdown::pdf_book
 #'  
-#' @param rownumber_chunk デフォルト: TRUE. logical. コードセルに行番号を表示するかどうか. 
+#' @param code_rownumber デフォルト: TRUE. logical. コードセルに行番号を表示するかどうか. 
 #' @param tombow logical. デフォルト: FALSE. 製本時に必要なトンボ (trim markers) を付けるかどうか. トンボは `gentombow.sty` で作成される. 
 #' @return rmarkdown_output_format
 #'
@@ -31,7 +31,7 @@ pdf_book_ja <- function (
   quote_footer = NULL,
   highlight = "default",
   highlight_bw = FALSE,
-  rownumber_chunk = TRUE,
+  code_rownumber = TRUE,
   tombow = FALSE,
   template = "default",
   keep_tex = TRUE,
@@ -61,8 +61,8 @@ pdf_book_ja <- function (
   if(missing(template) || identical(template, "") || identical(template, "default")){
     template <- system.file("resources/pandoc-templates/document-ja.tex.template", package = "rmdja")
   }
-  if(identical(rownumber_chunk, T)){
-    attr_source <- c(".numberLines .lineAnchors") 
+  if(identical(code_rownumber, T)){
+    attr_source <- c(".numberLines .lineAnchors")
   } else {
     attr_source <- NULL
   }

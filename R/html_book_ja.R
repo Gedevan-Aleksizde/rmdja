@@ -1,7 +1,8 @@
 #' bookdown::gotbook wrapper for Japanese 
 #'
 #' @param split_by character. デフォルト: 'chapter'. 'chapter', 'chapter+number', 'section', 'section+number', 'rmd', 'none' から選ぶ. ページを区切る単位.
-#' @param config list. デフォルト: 実際に出力して確認したほうが早い. 詳しくは bookdown のマニュアル. 
+#' @param config: list. デフォルト: 実際に出力して確認したほうが早い. 詳しくは bookdown のマニュアル. 
+#' @param code_rownumber: logical. デフォルト: TRUE. 行番号を表示するかどうか
 #' @export
 gitbook_ja <- function(
   fig_caption = TRUE,
@@ -18,6 +19,7 @@ gitbook_ja <- function(
   split_bib = TRUE,
   code_folding = "none",
   code_download = FALSE,
+  code_rownumber = TRUE,
   highlight = "default",
   dev = 'png',
   dev.args = list(res = 200),
@@ -111,7 +113,9 @@ gitbook_ja <- function(
     base_format = do.call(
       rmarkdown::output_format,
       list(pandoc = NULL,
-           knitr = list(opts_hooks = list(echo = hook_display_block)),
+           knitr = list(
+             opts_chunk = if(code_rownumber) list(attr.source = c(".numberLines .lineAnchors")) else list(),
+             opts_hooks = list(echo = hook_display_block)),
            pre_processor = preproc,
            post_processor = postproc,
            base_format = rmarkdown::html_document()
@@ -123,6 +127,7 @@ gitbook_ja <- function(
   out$knitr$opts_hooks <- list(echo = hook_display_block)  # bookdown の修正待ち
   # """ヤバ"""イ
   # out$pre_processor <- preproc
+  bookdownpost <- out$post_processor
   out$post_processor <- function(metadata, input_file, output_file, clean, verbose){
     print("--- postporc called ---")
     print(input_file)
@@ -130,5 +135,6 @@ gitbook_ja <- function(
     print(metadata)
     bookdownpost(metadata, input_file, output_file, clean, verbose)
   }
+  if(code_rownumber) out$knitr$opts_chunk <- c(out$knitr$opts_chunk, attr.source = c(".numberLines .lineAnchors"))
   return(out)
 }

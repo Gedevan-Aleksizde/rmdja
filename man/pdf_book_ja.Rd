@@ -25,7 +25,7 @@ pdf_book_ja(
   quote_footer = NULL,
   highlight = "default",
   highlight_bw = FALSE,
-  rownumber_chunk = TRUE,
+  code_rownumber = TRUE,
   tombow = FALSE,
   template = "default",
   keep_tex = TRUE,
@@ -71,7 +71,7 @@ prepended to the footer, and \code{quote_footer[2]} will be appended; if
 \item{highlight_bw}{Whether to convert colors for syntax highlighting to
 black-and-white (grayscale).}
 
-\item{rownumber_chunk}{デフォルト: TRUE. logical. コードセルに行番号を表示するかどうか.}
+\item{code_rownumber}{デフォルト: TRUE. logical. コードセルに行番号を表示するかどうか.}
 
 \item{tombow}{logical. デフォルト: FALSE. 製本時に必要なトンボ (trim markers) を付けるかどうか. トンボは \code{gentombow.sty} で作成される.}
 
