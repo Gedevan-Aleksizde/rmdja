@@ -110,8 +110,11 @@ $if(mathspec)$
 $else$
   \usepackage{unicode-math}
 $endif$
+$if(beamer)$
+$else$
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+$endif$
 $if(mainfont)$
   \setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]{$mainfont$}
 $endif$
