@@ -59,7 +59,7 @@ pdf_book_ja <- function (
     }
   }
   if(missing(template) || identical(template, "") || identical(template, "default")){
-    template <- file.path(system.file("resources", package = "rmdja"), "pandoc-templates/document-ja.tex.template")
+    template <- system.file("resources/pandoc-templates/document-ja.tex.template", package = "rmdja")
   }
   if(identical(rownumber_chunk, T)){
     attr_source <- c(".numberLines .lineAnchors") 
@@ -131,7 +131,7 @@ pdf_book_ja <- function (
     if(identical(citation_package, "natbib")) copy_latexmkrc(metadata, input_file, runtime, knit_meta, files_dir, output_dir)
     args_extra <- autodetect_and_set_jfont(metadata, input_file, runtime, knit_meta, files_dir, output_dir, latex_engine = latex_engine)
     icon_dir <- file.path(files_dir, "_latex/_img")
-    if(!file.exists(icon_dir)) dir.create(path = icon_dir, recursive = T, showWarnings = F)
+    if(!file.exists(icon_dir)) dir.create(path = icon_dir, recursive = T, showWarnings = T)
     file.copy(file.path(system.file("resources/styles/img", package = "rmdja"), ICON_FILES()), icon_dir)
     args_extra <- c(args_extra,
                     if(!identical(metadata$fontsize, "10pt") & tombow) "-Mclassoption=nomag" else NULL
