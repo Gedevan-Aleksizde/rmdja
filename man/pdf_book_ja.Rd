@@ -25,7 +25,7 @@ pdf_book_ja(
   quote_footer = NULL,
   highlight = "default",
   highlight_bw = FALSE,
-  chunk_number = TRUE,
+  rownumber_chunk = TRUE,
   tombow = FALSE,
   template = "default",
   keep_tex = TRUE,
@@ -71,9 +71,9 @@ prepended to the footer, and \code{quote_footer[2]} will be appended; if
 \item{highlight_bw}{Whether to convert colors for syntax highlighting to
 black-and-white (grayscale).}
 
-\item{chunk_number}{デフォルト: TRUE. boolean. コードセルに行番号を表示するかどうか.}
+\item{rownumber_chunk}{デフォルト: TRUE. logical. コードセルに行番号を表示するかどうか.}
 
-\item{tombow}{boolean. デフォルト: FALSE. 製本時に必要なトンボ (trim markers) を付けるかどうか. トンボは \code{gentombow.sty} で作成される.}
+\item{tombow}{logical. デフォルト: FALSE. 製本時に必要なトンボ (trim markers) を付けるかどうか. トンボは \code{gentombow.sty} で作成される.}
 
 \item{pandoc_args}{See
 \code{rmarkdown::\link{pdf_document}}, or the documentation of the
@@ -87,7 +87,7 @@ black-and-white (grayscale).}
 rmarkdown_output_format
 }
 \description{
-\code{rmarkdown} + \code{bookdown} で PDF文書をビルドする場合, 日本語を適切に表示するためにいろいろ必要だった調整を済ませたフォーマット. 基本的に YAML フロントマター (+ \verb{_ouput.yml}) や knitr チャンクオプションで設定できることをデフォルト値として埋め込んだだけ.
+\code{rmarkdown} + \code{bookdown} で PDF文書をビルドする場合, 日本語を適切に表示するためにいろいろ必要だった調整を済ませたフォーマット. 基本的に YAML フロントマター (+ \verb{_ouput.yml}) や knitr チャンクオプションで設定できることをデフォルト値として埋め込んだだけ. \code{index.Rmd}
 }
 \details{
 bookdown::pdf_book wrapper for Japanese typesetting with XeLaTeX/LuaLaTeX

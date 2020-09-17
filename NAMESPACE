@@ -3,3 +3,4 @@
 export(beamer_presentation_ja)
 export(gitbook_ja)
 export(pdf_book_ja)
+export(ruby)
