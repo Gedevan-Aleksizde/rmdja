@@ -106,7 +106,7 @@ autodetect_and_set_jfont <- function(metadata, input_file, runtime, knit_meta, f
 # call at pre_processor
 copy_latexmkrc <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
   if(!file.exists(file.path(output_dir, ".latexmkrc"))){
-    file.copy(file.path(system.file("resources/latexmk", package = "rmdja"), ".latexmkrc"), to = output_dir)
+    file.copy(file.path(system.file("resources/latexmk", package = "rmdja"), ".latexmkrc"), to = output_dir, overwrite = F)
   }
   return(NULL)
 }
