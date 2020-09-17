@@ -5,17 +5,13 @@ site: bookdown::bookdown_site
 description: ""
 output:
   rmdja::pdf_book_ja
+  rmdja::gitbook_ja
+documentclass: bxjsbook
+classoption: a4paper
 link-citations: true
-mainfont: DejaVu Serif
-sansfont: DejaVu Sans
-monofont: Ricty
-jfontpreset: noto
 linkcolor: blue
 citecolor: blue
 urlcolor: magenta
-documentclass: bxjsbook
-classoption: a4paper
-fontsize: 10pt
 biblio-style: apalike
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "無題"
-author: ""
 date: "`r Sys.Date()`"
 output:
   rmdja::beamer_presentation_ja:
@@ -13,13 +12,6 @@ output:
         - \patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip0.5em}{}{}
         - \makeatother
 fontsize: 12pt
-mainfont: "`r if(Sys.info()['sysname'] == 'Linux'){'DejaVu Serif'} else {'Times New Roman'}`"
-mainfontoptions:
-  - Scale=MatchLowercase
-  - Ligatures=TeX
-sansfont: "`r if(Sys.info()['sysname'] == 'Linux'){'DejaVu Sans'} else {'Arial'}`"
-monofont: 'Courier New'
-jfontpreset: "`r switch(Sys.info()['sysname'], 'Linux' = 'noto', 'Darwin' = 'hiragino-pro', 'Windows' = 'ms')`"
 ---
 
 ```{r setup-document, include=F}
