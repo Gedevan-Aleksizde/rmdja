@@ -136,7 +136,7 @@ pdf_book_ja <- function (
     args_extra <- c(args_extra,
                     if(!identical(metadata$fontsize, "10pt") & tombow) "-Mclassoption=nomag" else NULL
                     )
-    
+    if(is.null(metadata$documentclass)) args_extra <- c(args_extra, "-Mdocumentclass=bxjsbook")
     return(args_extra)
   }
 
