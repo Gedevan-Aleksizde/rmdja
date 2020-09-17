@@ -123,7 +123,7 @@ gitbook_ja <- function(
                  return(options)
                  }),
              pre_processor = function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
-               for(x in list(list(d = "styles/img", f = ICONS()), list(d = "styles/css", f = c("toc.css", "style.css")))){
+               for(x in list(list(d = "styles/img", f = ICON_FILESS()), list(d = "styles/css", f = CSS_FILES()))){
                  if(!file.exists(file.path(files_dir, x$d))) dir.create(file.path(output_dir, x$d), recursive = T)
                  file.copy(file.path(system.file(paste0("resources/", x$d), package = "rmdja"), x$f),
                            file.path(output_dir, x$d))
