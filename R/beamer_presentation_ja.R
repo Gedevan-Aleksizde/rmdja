@@ -19,7 +19,7 @@
 #' @param out.width character. 画像を貼り付ける際のサイズ. チャンクごとに指定することも可能. デフォルト: "100%"
 #' @param out.heigt character. `out.height` 参照. デフォルト: "100%"
 #' @param highlight character. チャンク内のコードのシンタックスハイライトのデザイン. `rmarkdown::beamer_presentation` 参照. デフォルト: default
-#' @param rownumber_chunk logical チャンクに行番号を付けるかどうか. デフォルト: FALSE
+#' @param code_rownumber logical チャンクに行番号を付けるかどうか. デフォルト: FALSE
 #' @param citation_package character.  本文中の引用トークンに関するパッケージ. デフォルト: default
 #' @param citation_options character. `citation_package` のオプション. デフォルトの natbib+numbersでは "[1]" のような引用トークンが生成される. デフォルト: numbers.
 #' @param figurename character. 図X の「図」の部分のテキスト. デフォルト: "図"
@@ -53,7 +53,7 @@ beamer_presentation_ja <- function(
   out.width = "100%",
   out.height = "100%",
   highlight = "default",
-  rownumber_chunk = FALSE,
+  code_rownumber = FALSE,
   citation_package = "default",
   citation_options = "default",
   figurename = "図",
@@ -154,7 +154,7 @@ beamer_presentation_ja <- function(
     out.height = out.height,
     dev = dev
     )
-  if(rownumber_chunk) args_opts_chunk$class.source <- "numberLines LineAnchors"
+  if(code_rownumber) args_opts_chunk$class.source <- "numberLines LineAnchors"
   
   args_pandoc_options <- list(to = "beamer",
                               from = rmarkdown::from_rmarkdown(fig_caption, md_extensions),
