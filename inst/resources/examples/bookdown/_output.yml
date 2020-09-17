@@ -1,88 +1,10 @@
-# ---- html(github pages) の出力設定 ----
-bookdown::html_book:
-  theme: united
-  fig_caption: true
-  number_sections: true
-  split_bib: true
-  table_css: true
-  dev: png
-  dev-args:
-    res: 200
-
-bookdown::gitbook:
-  fig_caption: true                          # 図表のキャプション表示
-  number_sections: true                      # セクションに番号を振る
-  self_contained: false                      # 外部ファイルに一切依存しないようなスタンドアローン版にするかどうか
-  lib_dir: libs                              # .js ファイルとかの置き場所
-  split_by: chapter                          # ページを分割する単位. 長過ぎるなら section を指定
-  split_bib: true                            # 参考文献リストを章ごとに配置するかどうか
-  table_css: true                            # gitbook 用の表CSSを使用するかどうか
-  dev: png                                   # 画像の出力デバイス.
-  dev-args:
-    res: 200
-  css: 
-    - '../../styles/css/style.css'
-    - '../../styles/css/toc.css'    # 出力ディレクトリにコピーするするcssファイルの場所
-  keep_md: true                              # Rmdからpandocで変換したmdファイルを残すかどうか
-  config:
-    toc:
-      collapse: none                         # 目次の自動折りたたみの単位. section/subsection/none
-      before: |
-        <li><a href="./">Top</a></li>
-      after: |
-        <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
-# 各種ボタンの設定
-# 編集ボタン. URLまたは null.  _bokdown.yml と一致させないと死ぬ?
-    toolbar:
-      position: fixed  # or `static` ツールバーをトップに固定するか常に表示するか
-    edit : null
-    download:
-      - pdf            # HTML版からダウンロードできるファイル
-      - epub
-      - mobi
-    search: true       # 検索バーの有無
-    fontsettings:
-      theme: white    # 白地
-      family: sans    # 標準フォントファミリー
-      size: 2         # 標準サイズ
-    info: true        # info ボタンの有無
-    sharing:
-      github: true     # 以下各種ソーシャルリンク. 果たしていくつあるのか
-      twitter: true
-      facebook: true
-      all: ['linkedin', 'vk', 'weibo', 'instapaper']  # まとめることもできる.
-
-rmdja::gitbook_ja: default
-
-# ---- pdfの出力設定 ----
-bookdown::pdf_book:
-  toc: true
-  number_sections: true
-  fig_caption: true
-  base_format: rmarkdown::pdf_document
-  toc_unnumbered: true                       # 番号を振ってない見出しも目次に加えるかどうか
-  toc_depth: 3                               # 目次に表示する項目のレベル
-  toc_appendix: true                         # 目次に Appendix の項目を加えるか
-  toc_bib: true                              # 目次に 参考文献の項目を加えるか
-  highlight_bw: false                        # シンタックスハイライトをグレースケールに変換するかどうか (カラー印刷できないときのため?)
-  includes: null
-  latex_engine: xelatex                      # 日本語を扱うならxelatex/lualatexが良い
-  keep_tex: true                             # .texファイルを残すかどうか
+rmdja::gitbook_ja:
   keep_md: true
-  citation_package: natbib                   # 引用スタイルパッケージ
-  pandoc_args:
-    - '--top-level-division=chapter'
-    - '--extract-media'
-    - '.'
-  template: "../../pandoc-templates/document-ja.tex.template"  # "`r file.path(system.file('resources' package = 'rmdja'), 'pandoc-templates/document-ja.tex.template')`"
-  dev: "cairo_pdf"                           # 画像デバイス
-  out_width: "100%"
-  out_height: "100%"
-  quote_footer: ["\\VA{", "}{}"]             # 引用ブロック前後の修飾文字
+  css:
+    - ../../styles/css/style.css
+    - ../../styles/css/toc.css
 
-rmdja::pdf_book_ja:
-  tombow: true
-  theme_bw: true
+rmdja::pdf_book_ja: default
 
 # ---- epubの出力設定 ----
 bookdown::epub_book:

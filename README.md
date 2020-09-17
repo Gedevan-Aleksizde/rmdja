@@ -1,23 +1,18 @@
 # What's this?
 
-Customized bearmer presentation format function for Japanese users
+Customized R Markdown/Bookdown format functions for Japanese users
 
 # なにこれ
 
-* R Markdown で 日本語Beamerスライドを作るためにフォーマットを梱包したパッケージです
-* ~~名称は (Xe)LaTeX の `zxjatype` パッケージから取っていますが, 同パッケージ開発者の八登崇之氏は一切関知していません~~
-* ~~一旦 `zxjatype` ではなく `XeCJK` で和文フォントを埋め込むようにしました~~
-  + ~~スライドでは`zxjatype`を使えないことによる大きな影響はないですが, そのうち`zxjatype`で表示するようにしたいです~~
-* 0.1 から `zxjatype` の使用を再開しました. さらにCJKといいつつ中韓の言語に対応する予定はないため `rmdja` に改名しました.
-* LuaLaTeXまたはXeLaTeXでのタイプセットを前提にしています
-  + それぞれ `luatex-ja`, `zxjatype` を利用して和文表示をしています
+* R Markdown で 日本語文書を作るためのフォーマットを梱包したパッケージです
+* 現時点では Beamer スライド (`rmarkdown::beamer_presentation`), `bookdown` に対応しています.
+* XeLaTeXまたはLuaLaTeXでのタイプセットを前提にしています
+  + それぞれ `zxjatype`, `luatex-ja`, を利用して和文表示をしています
   
 ## 既知の問題点
 
 * `rmarkdown` 2.3 (現時点でのCRAN最新版) では標準グラフィックデバイスのフォントサイズが自動調整されません
   + 気になる方は[githubリポジトリ](https://github.com/rstudio/rmarkdown) から2.3.2以降をインストールしてください
-* `XeLaTeX` ではヒラギノフォントのプリセット`hiragino-pro`/`hiragino-pron`は, OS Xにバンドルされていないヒラギノ明朝 W2を要求します
-* WindowsかつLuaLaTeXのとき, `\jfontspec` でフォント変更する歳, Noto Serif CJK JP が読み込めないことがあります (原因調査中)
 
 # 使い方
 
@@ -31,23 +26,27 @@ remotes::install_github('Gedevan-Aleksizde/my_latex_templates', subdir = 'rmdja'
   + または最初は [`examples/beamer`](inst/resources/examples/beamer/) の `beamer_blank.Rmd` か `examples/beamer_xelatex_{使用しているOS名}.Rmd` をコピーして使ってみてください
   + (上記どちらでもないなら) `Rmd`ファイルに`output::rmdja::beamer_presentation_ja` を指定
 4. フォントの指定 (オプション)
-  + OSごとの違いはほぼデフォルトのフォントだけです. 現在は自動で動作するようになっていますが, もしフォントが合わない場合は手動で指定してください. 例えば,
-  + MS なら 
+  + OSごとの違いはほぼデフォルトのフォントだけです. もしフォントが表示されない/気に入らない場合は手動で指定してください. 例えば,
+  + MS (Win10) なら 
   ```
-  jfontpreset: ms
+  jfontpreset: bizud
   ```
   + Ubuntuなら
   ```
-  jfontpreset: noto
+  jfontpreset: ipaex
   ```
-  + macなら
-  ```
-  jfontpreset: hiragino-pro
-  ```
-  でとりあえずは動くはずです.
+  など.
   + XeLaTeX をお使いなら `zxjafont`, LuaLaTeX をお使いなら `luatex-ja` のプリセット名で指定できます
   + 混植も可能です
   + 詳しくは [`examples/beamer`](inst/resources/examples/beamer/) 以下の pdf を確認してください.
+
+**NOTE**: `jmainfont`, `jsansfont`, `jmonofont` で書体ごとにフォントを設定できます. `mainfont`/`sansfont`/`monofont` は欧文用です. 特に `monofont`/`jamonofont`はソースコードの掲載に使われます. プログラムの解説をしたい場合は[M+](http://mix-mplus-ipa.osdn.jp/)や[Ricty](https://rictyfonts.github.io/)などのインストールを推奨します
+
+**NOTE**: 現時点での XeLaTeX 版と LuaLaTeX 版の違いは以下のとおりです.
+
+1. 一部のLaTeXコマンドが違う
+2. 文字の相対的な大きさ, 字間などのレイアウトが微妙に違う
+3. LuaLaTeX のほうがやや処理が遅い
 
 ## 初期バージョン (rmdCJK) をお使いの場合
 
@@ -80,16 +79,68 @@ R Studio >= 1.3.1056
 ### 外部プログラム
 
 * TeX Live (>= 2020)
-もし (u)pBibTeX を一切使わない(BibLaTeX や pandoc-citeproc で良い), 参考文献を一切使わないというのであれば不要です
+もし (u)pBibTeX を一切使わない(BibLaTeX や pandoc-citeproc で良い), 参考文献を一切使わないというのであれば**不要**です
   + upBibTeX を使う必要があるためです
   + BiBLaTeX または pandoc-citeproc の出力する参考文献で満足している, または参考文献リストを一切使わないのなら不要です
   + Mac OS なら MacTeX, Ubuntu なら[公式](https://www.tug.org/texlive/acquire-netinstall.html)から落としてください
     - Ubuntu は `apt` を使わずインストールしたほうが良いです
   + [TeX wiki](https://texwiki.texjp.org/?TeX%20Live)などを参考にしてください
-*. [`jecon.bst`](https://github.com/ShiroTakeda/jecon-bst) 
+* [`jecon.bst`](https://github.com/ShiroTakeda/jecon-bst) 
   + 日本語文献リスト用のスタイルファイルです
   + 他の`bst`ファイルを使っている, 参考文献を表示するつもりがない, なら**不要**です
   + TeX Live にも `jplain.bst`, `jipsj.bst` などの日本語対応スタイルがバンドルされていますが, `jecon.bst` は日本語出力用のオプションが充実しています.
+
+
+# フォントについて
+
+## デフォルトフォント
+
+日本語フォントを指定しなかった場合 (`jfontpreset` 未設定, かつ`j~~font`の設定が3つ揃っていない場合), OSを判別して以下のようにデフォルトフォントを決めています. これらは (Linux 以外) OS標準インストールフォントのはずです.
+
+|         | Mac          | Linux | windows (8以降)  | windows(それ以前) |
+|:------- | ------------:| -----:| ----------------:| -----------------:|
+| XeLaTeX | 游書体       | Noto  | 游書体           | MSフォント        |
+| LuaLaTeX| ヒラギノProN | Noto  | 游書体           | MSフォント        |
+
+Linux は Ubuntu 18 以降の設定に準拠して Noto をデフォルトにしています. Debian とか Cent OS とかは手動で変えるか Noto をインストールしてください.
+
+Debian:
+
+```sh
+sudo apt install fonts-noto-cjk-extra -t stretch-backports
+```
+
+Cent OS とか Fedora とか:
+
+https://www.google.com/get/noto/help/install/
+
+## 注意事項
+
+* 現時点では実際にフォントがインストールされているか判定していません.
+* `XeLaTeX` ではヒラギノフォントのプリセット`hiragino-pro`/`hiragino-pron`は, OS Xにバンドルされていないヒラギノ明朝 W2を必要とします. インストールされていない場合, この設定ではエラーが発生します.
+* WindowsかつLuaLaTeXのとき, `\jfontspec` でフォント変更する歳, Noto Serif CJK JP が読み込めないことがあります (原因調査中)
+
+# サンプル
+
+[`examples/`](inst/resources/examples/beamer/) 以下に用例が存在します.
+
+
+* `beamer_xelate.Rmd`
+* `beamer_lualatex.Rmd`
+
+`*.pdf` はそれぞれに対応する出力例です.
+
+各OSでよく使われるフォントを指定している以外は上記は全て同じです. 適当なディレクトリに上記いずれかをコピーしてknitしてみてください.
+コピーする際には
+
+```
+file.copy(system.file("resources/examples/beamer/beamer_xelatex.Rmd", package = "rmdja"), to = "./")
+file.copy(system.file("resources/examples/beamer/beamer_lualatex.Rmd", package = "rmdja"), to = "./")
+```
+
+と言うふうにコピーすると楽です.
+
+**NOTE**: 用例の一環として, knit時に同じフォルダに `tab.tex`, `examples.bib`, `.latexmkrc` というファイルが生成されます. 上書きに注意してください.
 
 ### examples に必要なRパッケージ
 
@@ -131,35 +182,6 @@ sudo apt install graphiviz
 * [BXcoloremoji.sty](https://github.com/zr-tex8r/BXcoloremoji)
   + カラー絵文字を出力したい場合に必要です. CTANに登録されてないため手動インストールする必要があります
 
-# サンプル
-
-[`examples/`](inst/resources/examples/beamer/) 以下にサンプルが存在します.
-
-
-* `beamer_xelate.Rmd`
-* `beamer_lualatex.Rmd`
-
-`*.pdf` はそれぞれに対応する出力例です.
-
-各OSでよく使われるフォントを指定している以外は上記は全て同じです. 適当なディレクトリに上記いずれかをコピーしてknitしてみてください.
-コピーする際には
-
-```
-file.copy(file.path(system.file("resources/examples/beamer", package = "rmdja"), "beamer_xelatex.Rmd"), to = "./")
-file.copy(file.path(system.file("resources/examples/beamer", package = "rmdja"), "beamer_lualatex.Rmd"), to = "./")
-```
-
-と言うふうにコピーすると楽です.
-
-**NOTE**: 用例の一環として, knit時に同じフォルダに `tab.tex`, `examples.bib`, `.latexmkrc` というファイルが生成されます. 上書きに注意してください.
-
-**NOTE**: `monofont`/`jamonofont`はソースコードの掲載に使われます. [M+](http://mix-mplus-ipa.osdn.jp/)や[Ricty](https://rictyfonts.github.io/)などのインストールを推奨します
-
-**NOTE**: 現時点での XeLaTeX 版と LuaLaTeX 版の違いは以下のとおりです.
-
-1. 一部のLaTeXコマンドが違う
-2. 文字の相対的な大きさ, 字間などのレイアウトが微妙に違う
-3. LuaLaTeX のほうがやや処理が遅い
 
 # 謝辞
 
@@ -174,9 +196,13 @@ file.copy(file.path(system.file("resources/examples/beamer", package = "rmdja"),
 
 # 更新履歴
 
+* v0.3
+  + `bookdown` 日本語版に対応
+  + フォントを指定しなかった場合, OSに応じて自動設定するように
+  + 複数形式に対応したルビ出力関数 `ruby()` を追加
 * v0.2
   + 新規作成時のテンプレートとして選べるように
-  + 用例ファイルのフォント選択を自動判別化
+  + 用例ファイルのフォント選択を自動判別化 (フロントマターにベタ書きしただけ)
 * v0.1
   + 最初の公開版
 * (0.0.5) LuaLaTeX/XeLaTeX 両方に対応できるように, 再度の名前変更

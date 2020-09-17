@@ -13,6 +13,11 @@ CSS_FILES <- function(){
   c("style.css", "toc.css")
 }
 
+hook_display_block <- function(options){
+    if(options$engine %in% DUMMY_ENGINES()) options$echo <- T
+    return(options)
+}
+
 fontsize_as_integer <- function(fontsize = "12pt"){
   if(is.null(fontsize)) fontsize = "12pt"
   ps <- as.integer(regmatches(fontsize, regexpr("^[0-9]+", fontsize)))

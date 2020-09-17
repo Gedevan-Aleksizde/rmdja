@@ -3,7 +3,6 @@
 #' @param split_by character. デフォルト: 'chapter'. 'chapter', 'chapter+number', 'section', 'section+number', 'rmd', 'none' から選ぶ. ページを区切る単位.
 #' @param config list. デフォルト: 実際に出力して確認したほうが早い. 詳しくは bookdown のマニュアル. 
 #' @export
-
 gitbook_ja <- function(
   fig_caption = TRUE,
   fig_align = "center",
@@ -51,7 +50,7 @@ gitbook_ja <- function(
       search = TRUE,
       fontsettings = list(
         theme = "white",
-        family = "sans",
+        family = "serif",
         size = 2
       ),
       info = TRUE,
@@ -63,24 +62,21 @@ gitbook_ja <- function(
       )
     )
   }
-  css_default <-  c("toc.css", "style.css")
-  css_img_default <- c("caution.png", "important.png", "note.png", "tip.png", "warning.png")
-  style_dir <- "styles"
-  css_path_default <- file.path(system.file("resources/styles/css", package = "rmdja"), css_default)
-  css_img_path_default <- file.path(system.file("resources/styles/img", package = "rmdja"), css_img_default)
-  if(missing(css) || is.null(css) || length(css) <= 0){
-    css <- file.path(file.path(style_dir, "css", css_default))
-  }
-  copy_style <- function(){
-    css_path_default <- file.path(system.file("resources/styles/css", package = "rmdja"), css_default)
-    css_img_path_default <- file.path(system.file("resources/styles/img", package = "rmdja"), css_img_default)
-    if(!file.exists(style_dir)) {
-      dir.create(style_dir, recursive = T)
+
+  preproc <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
+    print(files_dir)
+    print(output_dir)
+    for(x in list(list(d = "styles/img", f = ICON_FILES()), list(d = "styles/css", f = CSS_FILES()))){
+      print(file.path(output_dir, x$d))
+      if(!file.exists(file.path(output_dir, x$d))) dir.create(output_dir, recursive = T)
+      file.copy(system.file(file.path("resources", x$d, x$f), package = "rmdja"),
+                file.path(output_dir, x$d))
     }
-    if(!file.exists(file.path(style_dir, "css"))) dir.create(file.path(style_dir, "css"))
-    if(!file.exists(file.path(style_dir, "img"))) dir.create(file.path(style_dir, "img"))
-    file.copy(css_path_default, rep(file.path(style_dir, "css"), length(css_path_default)))
-    file.copy(css_img_path_default, rep(file.path(style_dir, "css"), length(css_img_path_default)))
+  }
+  postproc <- function(metadata, input_file, output_file, clean, verbose){
+    print("postproc called")
+    print(input_file)
+    print(output_file)
   }
 
   args <- list(
@@ -115,27 +111,24 @@ gitbook_ja <- function(
     base_format = do.call(
       rmarkdown::output_format,
       list(pandoc = NULL,
-           knitr = list(
-             opts_hooks = list(
-               echo = function(options){
-                 if(options$engine %in% DUMMY_ENGINES())
-                   options$echo = T
-                 return(options)
-                 }),
-             pre_processor = function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
-               for(x in list(list(d = "styles/img", f = ICON_FILESS()), list(d = "styles/css", f = CSS_FILES()))){
-                 if(!file.exists(file.path(files_dir, x$d))) dir.create(file.path(output_dir, x$d), recursive = T)
-                 file.copy(file.path(system.file(paste0("resources/", x$d), package = "rmdja"), x$f),
-                           file.path(output_dir, x$d))
-                 }
-               }
-             ),
+           knitr = list(opts_hooks = list(echo = hook_display_block)),
+           pre_processor = preproc,
+           post_processor = postproc,
            base_format = rmarkdown::html_document()
            )
       ),
     ...
   )
-  
   out <- do.call(bookdown::gitbook, args)
+  out$knitr$opts_hooks <- list(echo = hook_display_block)  # bookdown の修正待ち
+  # """ヤバ"""イ
+  # out$pre_processor <- preproc
+  out$post_processor <- function(metadata, input_file, output_file, clean, verbose){
+    print("--- postporc called ---")
+    print(input_file)
+    print(output_file)
+    print(metadata)
+    bookdownpost(metadata, input_file, output_file, clean, verbose)
+  }
   return(out)
 }

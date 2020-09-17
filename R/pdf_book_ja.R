@@ -117,13 +117,7 @@ pdf_book_ja <- function (
         out.extra = out_extra,
         attr.source = attr_source
       ),
-      opts_hooks = list(
-        echo = function(options){
-          if(options$engine %in% DUMMY_ENGINES())
-            options$echo = T
-          return(options)
-        }
-      )
+      opts_hooks = list(echo = hook_display_block)
     )
   )
   

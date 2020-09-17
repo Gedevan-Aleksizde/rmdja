@@ -1,5 +1,5 @@
-# book_filename: main.Rmd                # Rmd をマージして作ったファイルの名前
-# output_dir: "book-output"               # 製本したファイルの出力先
+# book_filename: _main.Rmd                 # マージして作ったファイルの名前. かなりバグの元なので使ってはならない
+output_dir: "docs"                      # 製本したファイルの出力先
 delete_merged_file: true                # 中間生成された Rmd を製本後に消すかどうか
 clean: [search_index.json, reference-keys.txt]  # 製本後に削除するファイル. 多分 LaTeX の中間ファイルなどを消す
 before_chapter_scrip: null              # 章の開始ごとに挿入する処理, .R ファイル
@@ -9,11 +9,11 @@ rmd_subdir: null  # Rmd を探索するディレクトリ. デフォルトでは
 # どのファイルを読み込むか. デフォルトでは同じディレクトリの全ての.Rmdを読み込む. ここでファイルを指定するとそれしか読み込まない.
 rmd_files:
     - index.Rmd
-    - minimal.Rmd
-    - elemental.Rmd
-    - multi-media.Rmd
-    - appendix.Rmd
-    - reference-title.Rmd
+    - chapters/minimal.Rmd
+    - chapters/elemental.Rmd
+    - chapters/multi-media.Rmd
+    - chapters/appendix.Rmd
+    - chapters/reference-title.Rmd
 view: Gedevan-Aleksizde/my_latex_templates/blob/master/%s # 現在のページのソースを確認するためのリンク
 history: Gedevan-Aleksizde/my_latex_templates/blob/master/%s # 現在のページのコミットログ確認するためのリンク
 edit: Gedevan-Aleksizde/my_latex_templates/edit/master/%s # 現在のページを編集するためのリンク, github pages でホスティングする前提
