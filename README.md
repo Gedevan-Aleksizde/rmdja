@@ -21,7 +21,7 @@ Customized R Markdown/Bookdown format functions for Japanese users
 ```
 remotes::install_github('Gedevan-Aleksizde/my_latex_templates', subdir = 'rmdja')
 ```
-3. 新規作成時に [R Markdown] -> [From Template] -> [Beamer in Japanese] を選択します  
+3. 新規作成時に [R Markdown] -> [From Template] -> [Beamer in Japanese {rmdja}] を選択します  
 ![select templete](inst/resources/img/readme-selection.png)
   + または最初は [`examples/beamer`](inst/resources/examples/beamer/) の `beamer_blank.Rmd` か `examples/beamer_xelatex_{使用しているOS名}.Rmd` をコピーして使ってみてください
   + (上記どちらでもないなら) `Rmd`ファイルに`output::rmdja::beamer_presentation_ja` を指定
@@ -200,6 +200,7 @@ sudo apt install graphiviz
   + `bookdown` 日本語版に対応
   + フォントを指定しなかった場合, OSに応じて自動設定するように
   + 複数形式に対応したルビ出力関数 `ruby()` を追加
+  + クリエイティブコモンズのアイコン表示 `get_CC()` を追加
 * v0.2
   + 新規作成時のテンプレートとして選べるように
   + 用例ファイルのフォント選択を自動判別化 (フロントマターにベタ書きしただけ)
