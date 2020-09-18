@@ -1,7 +1,7 @@
 ---
 title: "`bookdown` + `rmdja` による多様なファイル形式の日本語技術文書の作成 "
 author: "Katagiri, Satoshi"
-date: "2020/9/8"
+date: "`r Sys.Date()`"
 site: bookdown::bookdown_site                    # RStudio GUIでビルド操作したい場合に必要
 description: "bookdown でまともな日本語文書を作る資料"  # HTML <metadata> に出力されるサイト概要
 url: 'https\://bookdown.org/john/awesome/'       # URL
@@ -10,50 +10,46 @@ cover-image: "img/Johannes_Gutenberg.jpg"        # 表紙画像. epub でのみ�
 apple-touch-icon: "touch-icon.png"               # iOS でホームスクリーンに登録した際に見えるもの
 apple-touch-icon-size: 120                       # そのサイズ
 favicon: "favicon.ico"                           # そのまんまファビコン.
-bibliography: ../../bibliography/rmdja.bib # 書誌情報ファイル
-biblio-style: apalike                            # csl または bst
 link-citations: true                             # 引用に参考文献リストへのハイパーリンクをつける
-mainfont: DejaVu Serif
-sansfont: DejaVu Sans
 monofont: Ricty
-jfontpreset: noto
+jmonofont: Ricty
 linkcolor: blue
 citecolor: blue
 urlcolor: magenta
-documentclass: bxjsbook
-classoption: a4paper
-fontsize: 10pt  # header-includes: \usepackage{gentombow}  # トンボが適切なのかは検証困難
+citation-package: biblatex
+bibliography: rmdja.bib # 書誌情報ファイル
+biblio-style: apalike                      # csl または bst
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(
+file.copy(system.file("resources/bibliography/rmdja.bib", package="rmdja"), "./") # アンダースコア回避のためコピーするしかない
+options(tinytex.latexmk.emulation = T)
+require(knitr)
+require(kableExtra)
+opts_chunk$set(
   echo = F,
   comment = "",
   error = F,
   warning = F,
   cache = F,
-  dev = if(knitr::is_html_output()) "png" else "cairo_pdf",
   dev.args = list(family = if(knitr::is_html_output()) list() else list(family = "Noto Sans Serif CJK JP")),
   # TODO: soft wrap がうまく行かない問題
   # tidy = T,
   # tidy.opts = list(width.cutoff = 20, wrap = T),
-  tidy = "styler",
-  attr.source = c(".numberLines .lineAnchors")  # TODO: 出力セルの付番
+  tidy = "styler"
   )
 img_dir <- "img/"
 ```
 
 
-```{r ruby-universal, include=F}
-ruby_b <- function(text, ruby){
-  glue::glue("`\\textbf{\\aruby{[text]}{[ruby]}}`{=latex}`<ruby><strong>[text]</strong><rp>(</rp><rt>[ruby]</rt><rp>)</rp></ruby>`{=html}", .open = "[", .close = "]")
-}
-ruby <- function(text, ruby){
-  glue::glue("`\\aruby{[text]}{[ruby]}`{=latex}`<ruby>[text]<rp>(</rp><rt>[ruby]</rt><rp>)</rp></ruby>`{=html}", .open = "[", .close = "]")
-}
-```
 
 # (PART) イントロダクション {-}
+
+(ref:BKD) [**BKD**](https://bookdown.org/yihui/bookdown/)
+
+(ref:RDG) [**RDG**](https://bookdown.org/yihui/rmarkdown/)
+
+(ref:RCB) [**RCB**](https://bookdown.org/yihui/rmarkdown-cookbook/)
 
 # 序文 {-}
 
@@ -63,12 +59,13 @@ ruby <- function(text, ruby){
 
 たとえばこういう経験はないだろうか.
 
-* プログラムの解説に, シンタックスハイライトされたテキストを貼り付ける
-* 図表に言及する際に「図 1」「表 2」とタイプした上で, 参照先へハイパーリンクを張る
-* 本文中で引用した参考文献のリストを巻末にコピーペーストし, 過不足がないか目視で確認する
-* $\sum_{k=1}^K\int_0^\infty f_k(x) dx$ などといった複雑な数式はプレーンテキストや HTML では表現できないため, 画像を作成して貼り付ける
-* 冒頭にかっこいいエピグラフを掲載したいので, 1時間かけて特別に枠やフォントを作成した
-* 市販のワードプロセッサで作成した文書を渡したら, レイアウトが崩れて読めないと言われた
+* プログラムの解説のため, 外部サービスでシンタックスハイライトしてもらったテキストを**コピーペーストで貼り付ける**
+* グラフや図解を専用アプリケーションで作成し貼り付ける. **修正のたびに貼り付け直す**
+* 図表に言及する際に「図 1」「表 2」と**番号をタイプし, 参照先へハイパーリンクを指定する**
+* 本文中で引用した参考文献のリストを巻末に**コピーペーストし, 過不足がないか目視で確認**
+* $\sum_{k=1}^K\int_0^\infty f_k(x) dx$ などといった複雑な数式はプレーンテキストや HTML では表現できないため, **画像を生成して貼り付ける**
+* 冒頭にかっこいいエピグラフを掲載したいので, **1時間かけて特別に枠やフォントを作成した**
+* 市販のワードプロセッサで作成した文書を渡したら, **レイアウトが崩れて読めない**と言われた
 
 本稿は文書作成者をこのような様々なブルシットから解放するのが目的である.
 
@@ -78,44 +75,8 @@ R Markdown (`rmarkdown`) は, R プログラムを埋め込んだ動的なドキ
 
 本稿では, `bookdown` で日本語文書を作成する際の設定を容易にしたパッケージ `rmdja` を利用した日本語技術文書の作成方法を解説する.
 
-```{r CC-function}
-getCC <- function(adapt = c("yes", "no", "inherit"),
-                  commercial = T,
-                  size = c("normal", "compact"),
-                  language="ja"
-                  ){
-  match.arg(adapt, c("yes", "no", "inherit"))
-  match.arg(size, c("normal", "compact"))
-  if(commercial){
-    nc <- ""
-  } else {
-    nc <- "nc"
-  }
-  cc <- switch (adapt,
-      "yes" = "",
-      "no"  = "nd",
-      "inherit" = "sa"
-    )
-  if(commercial){
-    cc <- paste("by", cc, sep = "-")
-  } else {
-    cc <- paste("by", "nc", cc, sep = "-")
-  }
-  cc <- sub("-$", "", cc)
-  file_name <- switch(
-    size,
-    "normal" = "88x31.png",
-    "compact" = "80x15.png"
-    )
-  url_icon <- paste0("https://i.creativecommons.org/l/", cc, "/4.0/", file_name)
-  url_text <- paste0("https://creativecommons.org/licenses/", cc, "/4.0")
-  if(!is.null(language)){
-    url_text <- paste0(url_text, "/deed.", language)
-  }
-  return(list(url_icon, url_text))
-}
-cc_url <- getCC(adapt = "yes", commercial = F, size = "normal")
-# knitr::include_graphics(cc_url[[1]])
+```{r CC-display, results="asis", echo=F}
+rmdja::get_CC("yes", F, "normal")
 ```
 
 # 本稿の目標 {-}
@@ -154,18 +115,13 @@ Word を普段使っている人間にとっては以下のような利点があ
 * "[_R Markdown Definiteive Guide_](https://bookdown.org/yihui/rmarkdown/)"
 * "[_R Markdown Cookbook_](https://bookdown.org/yihui/rmarkdown-cookbook)"[^rmd-cookbook-publish]
 
-(ref:BKD) [**BKD**](https://bookdown.org/yihui/bookdown/)
-
-(ref:RDG) [**RDG**](https://bookdown.org/yihui/rmarkdown/)
-
-(ref:RCB) [**RCB**](https://bookdown.org/yihui/rmarkdown-cookbook/)
-
 基本的なことがらの多くは上記を読めば分かるのでここでは基本機能をダイジェストで伝えた上で, これらの資料に書いてない応用技を紹介する. YAML のオプションの意味についてはソースコードにコメントを書いた. 以下, 単に, (ref:BKD) と書けば "_`bookdown`: Authoring Books and Technical Documents with R Markdown_" [@R-bookdown] を, (ref:RDG) と書けば "_R Markdown: The Definitive GUide_" [@rmarkdown2018] を, (ref:RCB) と書けば "_R Markdown Cookbook_" [@xie2020Markdown] を指すことにする.
 
-さらに, Python の `jupyter` は Python のコードチャンクとその結果を簡単に表示できる文書作成ツールである. 出力オプションの少なさ (たとえば長大なコードもそのまま掲載されてしまう) や,  IDE として見ても機能が少ないことからあまり使い勝手がよくなかったが, 最近登場した **Jupyter book は R Markdown や `bookdown` にかなり近い機能を持っている**. 本題から外れるが, 後ほど簡単な機能比較も行う.
+さらに, Python の `jupyter` は Python のコードチャンクとその結果を簡単に表示できる文書作成ツールである. 出力オプションの少なさ (たとえば長大なコードもそのまま掲載されてしまう) や,  IDE として見ても機能が少ないことからあまり使い勝手がよくなかったが, 最近登場した **Jupyter book** はドキュメント生成能力を強化している. しかし `R Markdown`/`bookdown` ほどPDF形式のことは考慮していないように見える.
 
 
 ## 昔話あるいは既存資料との違い {-}
+
 
 日本語コミュニティにおいて `bookdown` は以前から言及されていた.
 例えば 2016 年の kazutan 氏のスライド『[Rで本を作りたい](https://kazutan.github.io/JapanR2016/JapanR2016.html#/)』があり, 同じく `bookdown` 製のデモページ, 『[Bookdownを用いた図表番号の自動付与と参照のテスト](https://kazutan.github.io/bookdown_test/hoge.html)』がある[^kazutan-source].
@@ -213,6 +169,86 @@ CJKmainfont: Noto Serif CJK JP
 ## 想定読者 {-}
 
 既に紹介したように, R を普段使わない人間でも `bookdown` で同人技術書を執筆したという事例もある. よって非Rユーザにもある程度配慮して書いておくが, あまりに細かいRの仕様説明などは行わない. **良い参考書が既に数多く存在する**からだ. よって 非Rユーザは, 本稿にある使用例のうち, 自分の書きたいものに使えそうなのものをつまみ食いして使用することになるだろう. 本稿ではそのような使い方をするのに最低限必要なセットアップの知識のみ記載する.
+
+
+## R Markdown ユーザ向けのメリット {-}
+
+R Markdown を使ったことのある人ならわかるろうが, HTML を作るのに納得の行く `output` の指定をしていたらこうなった
+
+```yaml
+bookdown::gitbook:
+  split_by: chapter
+  dev: png
+  dev-args:
+    res: 200
+  css: 
+    - '../../styles/css/style.css'
+    - '../../styles/css/toc.css'
+  keep_md: true
+  config:
+    toc:
+      collapse: none
+      before: |
+        <li><a href="./">Top</a></li>
+      after: |
+        <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
+    toolbar:
+      position: fixed
+    edit : null
+    download:
+      - pdf
+      - epub
+      - mobi
+    fontsettings:
+      theme: white
+      family: serif
+    sharing:
+      github: true
+      twitter: true
+      facebook: true
+      all: ['linkedin', 'vk', 'weibo', 'instapaper']
+```
+
+しかし `rmdja` ではこうだ.
+
+```yaml
+rmdja::gitbook_ja:
+  keep_md: true
+```
+
+PDF の場合も紹介しよう.
+
+```yaml
+bookdown::pdf_book:
+  toc_depth: 3
+  toc_appendix: true
+  toc_bib: true
+  latex_engine: xelatex
+  keep_tex: true
+  keep_md: true
+  citation_package: natbib
+  pandoc_args:
+    - '--top-level-division=chapter'
+    - '--extract-media'
+    - '.'
+  template: XXXXX.tex.template'
+  dev: "cairo_pdf"
+  out_width: "100%"
+  out_height: "100%"
+  quote_footer: ["\\VA{", "}{}"]
+  extra_dependencies: gentombow
+```
+
+こうなる
+
+```yaml
+rmdja::pdf_book_ja:
+  keep_tex: true
+  keep_md: true
+  tombow: true
+```
+
+さらにチャンクオプションや場合によっては .tex ファイルのテンプレートすら調整する必要もあった. これらは和文と欧文の組版の違いに由来するものである. これらの煩雑な設定を内蔵し, かつフォントの設定など環境に応じて変更する必要のあるものをある程度**自動的に設定**するようにしている.
 
 [^word-out-of-date]: ただし筆者は数年来 Word を使っていないため, これらのいくつかは既に改善されているかもしれない.
 [^blogdown]: `bookdown` 同様に R Markdown で作成した文書をブログ風のフォーマットで出力する `blogdown` パッケージというものも存在する.

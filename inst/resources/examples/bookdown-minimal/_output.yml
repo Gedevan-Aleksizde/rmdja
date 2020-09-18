@@ -9,4 +9,7 @@ rmdja::pdf_book_ja:
 
 # ---- epubの出力設定 ----
 bookdown::epub_book:
+  stylesheet:
+    - 'style/css/style.css'
+    - 'style/css/toc.css'
   epub_version: epub3

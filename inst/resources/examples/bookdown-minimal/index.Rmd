@@ -20,7 +20,8 @@ file.copy(system.file("resources/styles/css", package="rmdja"), "./", recursive 
 file.copy(system.file("resources/styles/img", package="rmdja"), "./", recursive = T)
 img_dir <- "img/"
 dir.create(img_dir, recursive = T)
-file.copy(file.path(system.file("resources/img", package = "rmdja"), c("Johannes_Gutenberg.jpg")), img_dir)
+file.copy(file.path(system.file("resources/img", package = "rmdja"),
+                    c("Johannes_Gutenberg.jpg", "build-pane.png", "build-pane-build.png")), img_dir)
 options(tinytex.latexmk.emulation = T)
 knitr::opts_chunk$set(
   echo = F,
