@@ -143,7 +143,7 @@ $endif$
 $if(jfontpreset)$
 % if the preset is specified
 \ifxetex
-  \usepackage{zxjatype}
+  \usepackage[AutoFallBack=true]{zxjatype}
   \usepackage[$jfontpreset$,$for(jfontpresetoptions)$$jfontpresetoptions$$sep$,$endfor$]{zxjafont}
   \usepackage{xeCJKfntef}
 \fi
@@ -154,28 +154,28 @@ $if(jfontpreset)$
 $else$
 % if fonts are set by each family
 \ifxetex
-  \usepackage{zxjatype}
+  \usepackage[AutoFallBack=true]{zxjatype}
 $if(jmainfont)$
-  \setjamainfont[$for(jmainoptions)$$jmainoptions$$sep$,$endfor$]{$jmainfont$}
+  \setjamainfont[$for(jmainfontoptions)$$jmainfontoptions$$sep$,$endfor$]{$jmainfont$}
 $endif$
 $if(jsansfont)$
-  \setjasansfont[$for(jsansoptions)$$jsansoptions$$sep$,$endfor$]{$jsansfont$}
+  \setjasansfont[$for(jsansfontoptions)$$jsansfontoptions$$sep$,$endfor$]{$jsansfont$}
 $endif$
 $if(jmonofont)$
-  \setjamonofont[$for(jmonoptions)$$jmonooptions$$sep$,$endfor$]{$jmonofont$}
+  \setjamonofont[$for(jmonfontoptions)$$jmonofontoptions$$sep$,$endfor$]{$jmonofont$}
 $endif$
 \fi
 \ifluatex
   \usepackage[$for(jfontpresetoptions)$$jfontpresetoptions$$sep$,$endfor$]{luatexja-fontspec}
   \renewcommand{\kanjifamilydefault}{\gtdefault}
 $if(jmainfont)$
-  \setmainjfont[$for(jmainoptions)$$jmainoptions$$sep$,$endfor$]{$jmainfont$}
+  \setmainjfont[$for(jmainfontoptions)$$jmainfontoptions$$sep$,$endfor$]{$jmainfont$}
 $endif$
 $if(jsansfont)$
-  \setsansjfont[$for(jsansoptions)$$jsansoptions$$sep$,$endfor$]{$jsansfont$}
+  \setsansjfont[$for(jsansfontoptions)$$jsansfontoptions$$sep$,$endfor$]{$jsansfont$}
 $endif$
 $if(jmonofont)$
-  \setmonojfont[$for(jmonoptions)$$jmonooptions$$sep$,$endfor$]{$jmonofont$}
+  \setmonojfont[$for(jmonofontptions)$$jmonofontoptions$$sep$,$endfor$]{$jmonofont$}
 $endif$
 \fi
 $endif$
