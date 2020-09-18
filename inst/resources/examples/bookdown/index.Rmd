@@ -1,0 +1,52 @@
+---
+title: "`bookdown` + `rmdja` による多様なファイル形式の日本語技術文書の作成 "
+author: "Katagiri, Satoshi"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site                    # RStudio GUIでビルド操作したい場合に必要
+description: "bookdown でまともな日本語文書を作る資料"  # HTML <metadata> に出力されるサイト概要
+url: 'https\://bookdown.org/john/awesome/'       # URL
+github-repo: "john/awesome"                      # Github レポジトリ
+cover-image: "img/Johannes_Gutenberg.jpg"        # 表紙画像. epub でのみ有効?
+apple-touch-icon: "touch-icon.png"               # iOS でホームスクリーンに登録した際に見えるもの
+apple-touch-icon-size: 120                       # そのサイズ
+favicon: "favicon.ico"                           # そのまんまファビコン.
+link-citations: true                             # 引用に参考文献リストへのハイパーリンクをつける
+monofont: Ricty
+jmonofont: Ricty
+linkcolor: blue
+citecolor: blue
+urlcolor: magenta
+citation-package: natbib
+bibliography: rmdja.bib # 書誌情報ファイル
+biblio-style: jecon
+---
+
+```{r setup, include=FALSE}
+file.copy(system.file("resources/bibliography/rmdja.bib", package="rmdja"), "./") # アンダースコア回避のためコピーするしかない
+options(tinytex.latexmk.emulation = F)
+require(knitr)
+require(kableExtra)
+opts_chunk$set(
+  echo = F,
+  comment = "",
+  error = F,
+  warning = F,
+  cache = F,
+  dev.args = list(family = if(knitr::is_html_output()) list() else list(family = "Noto Sans Serif CJK JP")),
+  # TODO: soft wrap がうまく行かない問題
+  # tidy = T,
+  # tidy.opts = list(width.cutoff = 20, wrap = T),
+  tidy = "styler"
+  )
+img_dir <- "img/"
+```
+
+# (PART) イントロダクション {-}
+
+# 序文 {-}
+
+```{r CC-display, results="asis", echo=F}
+rmdja::get_CC("yes", F, "normal")
+```
+
+**注意: 絶賛作りかけ**

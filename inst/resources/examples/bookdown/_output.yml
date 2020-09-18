@@ -1,0 +1,25 @@
+rmdja::gitbook_ja:
+  keep_md: true
+  css:
+    - styles/css/style.css
+    - styles/css/toc.css
+
+rmdja::pdf_book_ja:
+  tombow: false
+  add_folio: false
+
+# ---- epubの出力設定 ----
+bookdown::epub_book:
+  fig_width: 5
+  fig_height: 4
+  dev: svglite
+  fig_caption: true
+  number_sections: true
+  toc: false
+  toc_depth: 3
+  stylesheet: 
+    - 'style.css'
+    - 'toc.css'
+  chapter_level: 1
+  template: default
+  epub_version: epub3

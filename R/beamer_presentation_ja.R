@@ -19,7 +19,7 @@
 #' @param out.width character. 画像を貼り付ける際のサイズ. チャンクごとに指定することも可能. デフォルト: "100%"
 #' @param out.heigt character. `out.height` 参照. デフォルト: "100%"
 #' @param highlight character. チャンク内のコードのシンタックスハイライトのデザイン. `rmarkdown::beamer_presentation` 参照. デフォルト: default
-#' @param rownumber_chunk logical チャンクに行番号を付けるかどうか. デフォルト: FALSE
+#' @param code_rownumber logical チャンクに行番号を付けるかどうか. デフォルト: FALSE
 #' @param citation_package character.  本文中の引用トークンに関するパッケージ. デフォルト: default
 #' @param citation_options character. `citation_package` のオプション. デフォルトの natbib+numbersでは "[1]" のような引用トークンが生成される. デフォルト: numbers.
 #' @param figurename character. 図X の「図」の部分のテキスト. デフォルト: "図"
@@ -53,7 +53,7 @@ beamer_presentation_ja <- function(
   out.width = "100%",
   out.height = "100%",
   highlight = "default",
-  rownumber_chunk = FALSE,
+  code_rownumber = FALSE,
   citation_package = "default",
   citation_options = "default",
   figurename = "図",
@@ -74,12 +74,6 @@ beamer_presentation_ja <- function(
   match.arg(latex_engine, c("xelatex", "lualatex"))
   
   # ----- reshape arguments -----
-  
-  fontsize_as_integer <- function(fontsize = "12pt"){
-    if(is.null(fontsize)) fontsize = "12pt"
-    ps <- as.integer(regmatches(fontsize, regexpr("^[0-9]+", fontsize)))
-    return(ps)
-  }
 
   pandoc_args_base <- c()
 
@@ -104,7 +98,11 @@ beamer_presentation_ja <- function(
     pandoc_args_base <- c(pandoc_args_base, rmarkdown::pandoc_variable_arg("tablename", "図"))
   }
   if(missing(template) || identical(template, "") || identical(template, "default")){
+<<<<<<< HEAD
     template <- file.path(system.file("resources", package = "rmdja"), "pandoc-template/beamer-ja.template")
+=======
+    template <- system.file("resources/pandoc-templates/beamer-ja.tex.template", package = "rmdja")
+>>>>>>> development
   }
   
   if("preamble" %in% names(includes)){
@@ -160,7 +158,7 @@ beamer_presentation_ja <- function(
     out.height = out.height,
     dev = dev
     )
-  if(rownumber_chunk) args_opts_chunk$class.source <- "numberLines LineAnchors"
+  if(code_rownumber) args_opts_chunk$class.source <- "numberLines LineAnchors"
   
   args_pandoc_options <- list(to = "beamer",
                               from = rmarkdown::from_rmarkdown(fig_caption, md_extensions),
@@ -168,20 +166,34 @@ beamer_presentation_ja <- function(
                               keep_tex = keep_tex,
                               latex_engine = latex_engine)
   
-  # FIXME: I want to load rmarkdown::metadata directly.
+  preproc <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
+    if(identical(citation_package, "natbib")){
+      copy_latexmkrc(...)
+    }
+    return(autodetect_and_set_jfont(metadata, input_file, runtime, knit_meta, files_dir, output_dir, latex_engine))
+  }
   out <- rmarkdown::output_format(
+<<<<<<< HEAD
     pre_knit = function(input, ...) {
       knitr::opts_chunk$set(dev.args = list(pointsize = fontsize_as_integer(rmarkdown::metadata$fontsize)))
       return(input)
     },
+=======
+    pre_knit = adjust_fontsize,
+>>>>>>> development
     knitr = do.call(rmarkdown::knitr_options, list(opts_chunk = args_opts_chunk)),
     pandoc = do.call(rmarkdown::pandoc_options, args_pandoc_options),
+    pre_processor = preproc,
     clean_supporting = !keep_tex,
     keep_md = keep_md,
     base_format = base
     )
+<<<<<<< HEAD
   if(!file.exists("./.latexmkrc")){
     file.copy(file.path(system.file("resources", package = "rmdja"), "latexmk/.latexmkrc"), to = "./")
   }
+=======
+  
+>>>>>>> development
   return(out)
 }

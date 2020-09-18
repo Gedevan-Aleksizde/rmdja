@@ -1,0 +1,10 @@
+\usepackage{titling}
+\predate{\begin{center}\placetitlepicture\large}
+\postdate{\par\end{center}}
+\newcommand{\titlepicture}[2][]{%
+  \renewcommand\placetitlepicture{%
+  \includegraphics[#1]{#2}\par\medskip
+  } %
+}
+\newcommand{\placetitlepicture}{}
+\titlepicture[width=0.7\textwidth]{img/logo_fan_1200x600_fillwhite.png}
