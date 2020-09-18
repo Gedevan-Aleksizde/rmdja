@@ -40,3 +40,13 @@ opts_chunk$set(
   )
 img_dir <- "img/"
 ```
+
+# (PART) イントロダクション {-}
+
+# 序文 {-}
+
+```{r CC-display, results="asis", echo=F}
+rmdja::get_CC("yes", F, "normal")
+```
+
+**注意: 絶賛作りかけ**

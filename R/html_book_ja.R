@@ -43,7 +43,7 @@ gitbook_ja <- function(
     config <- list(
       toc = list(
         collapse = "none",
-        before = '<li><a href="./">Top</a></li>',
+        before = '<li><a href="index.html">Top</a></li>',
         after = '<li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>'
         ),
       toolbar = list(position = "fixed"),
