@@ -33,6 +33,31 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <link rel="prev" href="準備.html"/>
 <link rel="next" href="静的なコンテンツの作成.html"/>
+<script src="libs/header-attrs-2.3.5/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.6.1/grViz.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -99,8 +124,8 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<link rel="stylesheet" href="../../styles/css/style.css" type="text/css" />
-<link rel="stylesheet" href="../../styles/css/toc.css" type="text/css" />
+<link rel="stylesheet" href="styles/css/style.css" type="text/css" />
+<link rel="stylesheet" href="styles/css/toc.css" type="text/css" />
 </head>
 
 <body>
@@ -116,7 +141,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Top</a></li>
 <li class="divider"></li>
 <li class="part"><span><b>I イントロダクション</b></span></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>序文</a></li>
+<li class="chapter" data-level="" data-path="序文.html"><a href="序文.html"><i class="fa fa-check"></i>序文</a></li>
 <li class="chapter" data-level="" data-path="本稿の目標.html"><a href="本稿の目標.html"><i class="fa fa-check"></i>本稿の目標</a>
 <ul>
 <li class="chapter" data-level="" data-path="本稿の目標.html"><a href="本稿の目標.html#既存のフォーマットとの違い"><i class="fa fa-check"></i>既存のフォーマットとの違い</a></li>
@@ -235,7 +260,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="B.3" data-path="pdf-の組版に関する細かい話.html"><a href="pdf-の組版に関する細かい話.html#todo-しかし英文で書きたい場合"><i class="fa fa-check"></i><b>B.3</b> TODO: しかし英文で書きたい場合</a></li>
 </ul></li>
 <li class="chapter" data-level="C" data-path="jecon-bst-の紹介.html"><a href="jecon-bst-の紹介.html"><i class="fa fa-check"></i><b>C</b> jecon.bst の紹介</a></li>
-<li class="chapter" data-level="" data-path="参考文献.html"><a href="参考文献.html"><i class="fa fa-check"></i>参考文献</a></li>
+<li class="chapter" data-level="D" data-path="参考文献-.html"><a href="参考文献-.html"><i class="fa fa-check"></i><b>D</b> 参考文献 {-}"</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
 </ul>
@@ -257,7 +282,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="この部の概要" class="section level1 unnumbered" number="">
 <h1>この部の概要</h1>
-<p>ここではまず, R Markdown の基本的な機能を紹介する. つまり <code>bookdown</code> 特有のものではなく, R Markdown 全般で使用できる機能も含めて紹介する. これ以降は自己言及的な説明が多いため, この文書を生成しているソースコードと比較しながら確認することをおすすめする. ここで紹介する機能は (ref:BKD), <a href="https://bookdown.org/yihui/rmarkdown/"><strong>RDG</strong></a>, <a href="https://bookdown.org/yihui/rmarkdown-cookbook/"><strong>RCB</strong></a> での記述に基づく.
+<p>ここではまず, R Markdown の基本的な機能を紹介する. つまり <code>bookdown</code> 特有のものではなく, R Markdown 全般で使用できる機能も含めて紹介する. これ以降は自己言及的な説明が多いため, この文書を生成しているソースコードと比較しながら確認することをおすすめする. ここで紹介する機能は BKD, RDG, RCB での記述に基づく.
 これら3つのドキュメントを読めば, ほとんどのことは可能になる — <code>rmdja</code> を作る理由になった LaTeX テンプレートの修正以外は — のだが, 本稿の重要な目的の1つは<strong>複数のファイル形式を両立すること</strong>であるので, それができない書き方には触れないし, 技術文書の作成にあまり使わないような機能の動作確認はおこなわず, 技術文書作成で頻繁に使われ, 便利と思える機能のみ紹介する.</p>
 <p>どちらにしろそのうちこれらを翻訳してくれる人が現れることだろう…たぶん.</p>
 </div>
@@ -270,6 +295,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a href="静的なコンテンツの作成.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -289,15 +323,15 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "Gedevan-Aleksizde/my_latex_templates/edit/master/chapters/elemental.Rmd",
+"link": "Gedevan-Aleksizde/my_latex_templates/edit/master/rmdja/inst/resources/examples/bookdown/chapter/chapters/elemental.Rmd",
 "text": "Edit"
 },
 "history": {
-"link": "Gedevan-Aleksizde/my_latex_templates/blob/master/chapters/elemental.Rmd",
+"link": "Gedevan-Aleksizde/my_latex_templates/blob/master/rmdja/inst/resources/examples/bookdown/chapter/chapters/elemental.Rmd",
 "text": null
 },
 "view": {
-"link": "Gedevan-Aleksizde/my_latex_templates/blob/master/chapters/elemental.Rmd",
+"link": "Gedevan-Aleksizde/my_latex_templates/blob/master/rmdja/inst/resources/examples/bookdown/chapter/chapters/elemental.Rmd",
 "text": null
 },
 "download": ["main.pdf", "main.epub", "main.mobi"],
@@ -313,6 +347,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

@@ -33,6 +33,31 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <link rel="prev" href="rmdja-による文書作成支援機能.html"/>
 <link rel="next" href="出力形式による表現の限界.html"/>
+<script src="libs/header-attrs-2.3.5/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.6.1/grViz.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -99,8 +124,8 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<link rel="stylesheet" href="../../styles/css/style.css" type="text/css" />
-<link rel="stylesheet" href="../../styles/css/toc.css" type="text/css" />
+<link rel="stylesheet" href="styles/css/style.css" type="text/css" />
+<link rel="stylesheet" href="styles/css/toc.css" type="text/css" />
 </head>
 
 <body>
@@ -116,7 +141,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Top</a></li>
 <li class="divider"></li>
 <li class="part"><span><b>I イントロダクション</b></span></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>序文</a></li>
+<li class="chapter" data-level="" data-path="序文.html"><a href="序文.html"><i class="fa fa-check"></i>序文</a></li>
 <li class="chapter" data-level="" data-path="本稿の目標.html"><a href="本稿の目標.html"><i class="fa fa-check"></i>本稿の目標</a>
 <ul>
 <li class="chapter" data-level="" data-path="本稿の目標.html"><a href="本稿の目標.html#既存のフォーマットとの違い"><i class="fa fa-check"></i>既存のフォーマットとの違い</a></li>
@@ -235,7 +260,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="B.3" data-path="pdf-の組版に関する細かい話.html"><a href="pdf-の組版に関する細かい話.html#todo-しかし英文で書きたい場合"><i class="fa fa-check"></i><b>B.3</b> TODO: しかし英文で書きたい場合</a></li>
 </ul></li>
 <li class="chapter" data-level="C" data-path="jecon-bst-の紹介.html"><a href="jecon-bst-の紹介.html"><i class="fa fa-check"></i><b>C</b> jecon.bst の紹介</a></li>
-<li class="chapter" data-level="" data-path="参考文献.html"><a href="参考文献.html"><i class="fa fa-check"></i>参考文献</a></li>
+<li class="chapter" data-level="D" data-path="参考文献-.html"><a href="参考文献-.html"><i class="fa fa-check"></i><b>D</b> 参考文献 {-}"</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
 </ul>
@@ -286,22 +311,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb43-10"><a href="製本方法の詳細.html#cb43-10"></a><span class="at">  bookdown:</span><span class="fu">:html_book</span><span class="kw">:</span></span>
 <span id="cb43-11"><a href="製本方法の詳細.html#cb43-11"></a><span class="at">    </span><span class="fu">css</span><span class="kw">:</span><span class="at"> toc.css</span></span>
 <span id="cb43-12"><a href="製本方法の詳細.html#cb43-12"></a><span class="fu">documentclass</span><span class="kw">:</span><span class="at"> book</span></span></code></pre></div>
-<p>詳しくは (ref:BKD) の “<a href="https://bookdown.org/yihui/bookdown/output-formats.html">Ch. 3 Output Formats</a>” の章を.</p>
+<p>詳しくは BKD “<a href="https://bookdown.org/yihui/bookdown/output-formats.html">Ch. 3 Output Formats</a>” の章を.</p>
 </div>
 <div id="bookdown.yml" class="section level3" number="7.1.2">
 <h3><span class="header-section-number">7.1.2</span> <code>_bookdown.yml</code></h3>
 <p><code>_bookdown.yml</code> も <code>index.Rmd</code> の YAML ヘッダの <code>bookdown:</code> 以下に対応する内容を書くことができる. 例えばどの Rmd ファイルを読み込むかとか, LaTeX のときだけ, HTML のときだけ読み込むような設定も可能.</p>
 <p><a href="https://ill-identified.hatenablog.com/entry/2020/09/05/202403" class="uri">https://ill-identified.hatenablog.com/entry/2020/09/05/202403</a></p>
-<p>詳しくは, (ref:BKD) の <a href="https://bookdown.org/yihui/bookdown/configuration.html">Ch. 4.4 Configuration</a></p>
-<p>Build ペーンから文書をビルドするには, <code>index.Rmd</code> のYAML ヘッダに <code>site: bookdown::bookdown_site</code> を書く必要がある. さらに, <code>index.Rmd</code> をプロジェクトディレクトリのルートに置いていない場合は, ツールバーの <code>Build</code> -&gt; <code>Configure Build Tools...</code> から <code>index.Rmd</code> を置いているディレクトリを site ディレクトリとする設定が必要になる(図 <a href="#fig:build-pane2"><strong>??</strong></a>).</p>
+<p>詳しくは, BKD <a href="https://bookdown.org/yihui/bookdown/configuration.html">Ch. 4.4 Configuration</a></p>
+<p>Build ペーンから文書をビルドするには, <code>index.Rmd</code> のYAML ヘッダに <code>site: bookdown::bookdown_site</code> を書く必要がある. さらに, <code>index.Rmd</code> をプロジェクトディレクトリのルートに置いていない場合は, ツールバーの <code>Build</code> -&gt; <code>Configure Build Tools...</code> から <code>index.Rmd</code> を置いているディレクトリを site ディレクトリとする設定が必要になる(図 <a href="製本方法の詳細.html#fig:build-pane2-1">7.1</a>, <a href="製本方法の詳細.html#fig:build-pane2-2">7.2</a>).</p>
 <div class="figure"><span id="fig:build-pane2-1"></span>
-<img src="media/ks/DATA/User/Documents/Documents/developping/my_latex_templates/rmdja/inst/resources/examples/bookdown/img/build-pane.png" alt="Build ペーンの手動設定" width="549" />
+<img src="img/build-pane.png" alt="Build ペーンの手動設定" width="549" />
 <p class="caption">
 図 7.1: Build ペーンの手動設定
 </p>
 </div>
 <div class="figure"><span id="fig:build-pane2-2"></span>
-<img src="media/ks/DATA/User/Documents/Documents/developping/my_latex_templates/rmdja/inst/resources/examples/bookdown/img/build-pane-build.png" alt="Build ペーンの手動設定" width="757" />
+<img src="img/build-pane-build.png" alt="Build ペーンの手動設定" width="757" />
 <p class="caption">
 図 7.2: Build ペーンの手動設定
 </p>
@@ -319,6 +344,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a href="出力形式による表現の限界.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -338,15 +372,15 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "Gedevan-Aleksizde/my_latex_templates/edit/master/chapters/multi-media.Rmd",
+"link": "Gedevan-Aleksizde/my_latex_templates/edit/master/rmdja/inst/resources/examples/bookdown/chapter/chapters/multi-media.Rmd",
 "text": "Edit"
 },
 "history": {
-"link": "Gedevan-Aleksizde/my_latex_templates/blob/master/chapters/multi-media.Rmd",
+"link": "Gedevan-Aleksizde/my_latex_templates/blob/master/rmdja/inst/resources/examples/bookdown/chapter/chapters/multi-media.Rmd",
 "text": null
 },
 "view": {
-"link": "Gedevan-Aleksizde/my_latex_templates/blob/master/chapters/multi-media.Rmd",
+"link": "Gedevan-Aleksizde/my_latex_templates/blob/master/rmdja/inst/resources/examples/bookdown/chapter/chapters/multi-media.Rmd",
 "text": null
 },
 "download": ["main.pdf", "main.epub", "main.mobi"],
@@ -362,6 +396,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

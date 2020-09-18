@@ -118,11 +118,6 @@ gitbook_ja <- function(
   out <- do.call(bookdown::gitbook, args)
   # なんか不安になる書き方
   out$knitr$opts_hooks <- list(echo = hook_display_block)
-  out$pre_processor <- preproc
-  bookdownpost <- out$post_processor
-  out$post_processor <- function(metadata, input_file, output_file, clean, verbose){
-    bookdownpost(metadata, input_file, output_file, clean, verbose)
-  }
   if(code_rownumber) out$knitr$opts_chunk <- c(out$knitr$opts_chunk, attr.source = c(".numberLines .lineAnchors"))
   return(out)
 }

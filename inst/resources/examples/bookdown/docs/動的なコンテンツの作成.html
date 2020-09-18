@@ -33,6 +33,31 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <link rel="prev" href="静的なコンテンツの作成.html"/>
 <link rel="next" href="相互参照と引用.html"/>
+<script src="libs/header-attrs-2.3.5/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.6.1/grViz.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -99,8 +124,8 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<link rel="stylesheet" href="../../styles/css/style.css" type="text/css" />
-<link rel="stylesheet" href="../../styles/css/toc.css" type="text/css" />
+<link rel="stylesheet" href="styles/css/style.css" type="text/css" />
+<link rel="stylesheet" href="styles/css/toc.css" type="text/css" />
 </head>
 
 <body>
@@ -116,7 +141,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Top</a></li>
 <li class="divider"></li>
 <li class="part"><span><b>I イントロダクション</b></span></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>序文</a></li>
+<li class="chapter" data-level="" data-path="序文.html"><a href="序文.html"><i class="fa fa-check"></i>序文</a></li>
 <li class="chapter" data-level="" data-path="本稿の目標.html"><a href="本稿の目標.html"><i class="fa fa-check"></i>本稿の目標</a>
 <ul>
 <li class="chapter" data-level="" data-path="本稿の目標.html"><a href="本稿の目標.html#既存のフォーマットとの違い"><i class="fa fa-check"></i>既存のフォーマットとの違い</a></li>
@@ -235,7 +260,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="B.3" data-path="pdf-の組版に関する細かい話.html"><a href="pdf-の組版に関する細かい話.html#todo-しかし英文で書きたい場合"><i class="fa fa-check"></i><b>B.3</b> TODO: しかし英文で書きたい場合</a></li>
 </ul></li>
 <li class="chapter" data-level="C" data-path="jecon-bst-の紹介.html"><a href="jecon-bst-の紹介.html"><i class="fa fa-check"></i><b>C</b> jecon.bst の紹介</a></li>
-<li class="chapter" data-level="" data-path="参考文献.html"><a href="参考文献.html"><i class="fa fa-check"></i>参考文献</a></li>
+<li class="chapter" data-level="D" data-path="参考文献-.html"><a href="参考文献-.html"><i class="fa fa-check"></i><b>D</b> 参考文献 {-}"</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
 </ul>
@@ -268,20 +293,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb22-5"><a href="動的なコンテンツの作成.html#cb22-5"></a><span class="cf">if</span> (<span class="op">!</span><span class="st">&quot;rmarkdown&quot;</span> <span class="op">%in%</span><span class="st"> </span>pkgs) remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;rstudio/rmarkdown&quot;</span>)</span>
 <span id="cb22-6"><a href="動的なコンテンツの作成.html#cb22-6"></a><span class="cf">if</span> (<span class="op">!</span><span class="st">&quot;bookdown&quot;</span> <span class="op">%in%</span><span class="st"> </span>pkgs) remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;rstudio/bookdown&quot;</span>)</span>
 <span id="cb22-7"><a href="動的なコンテンツの作成.html#cb22-7"></a><span class="kw">require</span>(tidyverse)</span></code></pre></div>
-<pre><code> 要求されたパッケージ tidyverse をロード中です </code></pre>
-<pre><code>─ Attaching packages ──────────────────────────────────────────────── tidyverse 1.3.0 ─</code></pre>
+<pre><code>Loading required package: tidyverse</code></pre>
+<pre><code>─ Attaching packages ─────────────────────────────────────────────── tidyverse 1.3.0 ─</code></pre>
 <pre><code>✓ ggplot2 3.3.2     ✓ purrr   0.3.4
 ✓ tibble  3.0.3     ✓ dplyr   1.0.2
 ✓ tidyr   1.1.2     ✓ stringr 1.4.0
 ✓ readr   1.3.1     ✓ forcats 0.5.0</code></pre>
-<pre><code>─ Conflicts ───────────────────────────────────────────────── tidyverse_conflicts() ─
+<pre><code>─ Conflicts ──────────────────────────────────────────────── tidyverse_conflicts() ─
 x dplyr::filter()     masks stats::filter()
 x dplyr::group_rows() masks kableExtra::group_rows()
 x dplyr::lag()        masks stats::lag()</code></pre>
 <div class="sourceCode" id="cb27"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb27-1"><a href="動的なコンテンツの作成.html#cb27-1"></a><span class="kw">require</span>(ggthemes)</span></code></pre></div>
-<pre><code> 要求されたパッケージ ggthemes をロード中です </code></pre>
+<pre><code>Loading required package: ggthemes</code></pre>
 <div class="sourceCode" id="cb29"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb29-1"><a href="動的なコンテンツの作成.html#cb29-1"></a><span class="kw">require</span>(equatiomatic)</span></code></pre></div>
-<pre><code> 要求されたパッケージ equatiomatic をロード中です </code></pre>
+<pre><code>Loading required package: equatiomatic</code></pre>
 <div class="sourceCode" id="cb31"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb31-1"><a href="動的なコンテンツの作成.html#cb31-1"></a><span class="kw">require</span>(kableExtra)</span></code></pre></div>
 <p>このように, ログを掲載することもできる. これは再現性を重視する際に重宝するが, 一方で単に画像などの主力だけを掲載したい場合もあるだろう. あるいは, プログラムの解説のため, <strong>プログラムは掲載するが実行しない</strong>, ということも必要になるかもしれない. <strong>プログラムと結果の表示/非表示はどちらも簡単に切り替え可能</strong>である. そのためには, チャンクオプションを指定する.</p>
 <ul>
@@ -315,7 +340,7 @@ echo Hello, Bookdown
 [41] &quot;sass&quot;        &quot;scss&quot;        &quot;theorem&quot;     &quot;lemma&quot;       &quot;corollary&quot;  
 [46] &quot;proposition&quot; &quot;conjecture&quot;  &quot;definition&quot;  &quot;example&quot;     &quot;exercise&quot;   
 [51] &quot;proof&quot;       &quot;remark&quot;      &quot;solution&quot;   </code></pre>
-<p>また, 新たにプログラムを追加することもできる. 詳細は <a href="https://bookdown.org/yihui/rmarkdown/"><strong>RDG</strong></a> <a href="https://bookdown.org/yihui/rmarkdown/language-engines.html">Ch. 2.7 Other language engines</a> を参考に.</p>
+<p>また, 新たにプログラムを追加することもできる. 詳細は RDG <a href="https://bookdown.org/yihui/rmarkdown/language-engines.html">Ch. 2.7 Other language engines</a> を参考に.</p>
 <p>TODO: 他の言語のプログラムを実行する際の注意点</p>
 </div>
 <div id="プログラムで数式を生成する" class="section level2" number="3.2">
@@ -323,19 +348,19 @@ echo Hello, Bookdown
 <p>プログラムチャンクは, 単にプログラムの計算結果を埋め込むだけでなく, 静的なコンテンツを臨機応変に変更して出力させたり, あるいは手作業でやるには煩雑な加工処理を挟んでから表示させるのに役に立つ.</p>
 <p>R のプログラムと組み合わせることで<strong>回帰分析の結果の数値をコピペすることなく数式で表示することができる</strong>. そのためには <a href="https://github.com/datalorax/equatiomatic"><code>equatiomatic</code></a> パッケージの <code>extract_eq()</code> を使う.</p>
 <p>まずは, 回帰係数を記号で表現するタイプ. LaTeX 数式をそのまま出力するため, チャンクオプションに <code>results="asis"</code> を付ける必要があることに注意する.</p>
-<p><br /><span class="math display">$$
+<p><span class="math display">\[
 \begin{aligned}
 Sepal.Length &amp;= \alpha + \beta_{1}(Sepal.Width) + \beta_{2}(Petal.Length) + \beta_{3}(Petal.Width)\ + \\
 &amp;\quad \beta_{4}(Species_{versicolor}) + \beta_{5}(Species_{virginica}) + \epsilon
 \end{aligned}
-$$</span><br /></p>
+\]</span></p>
 <p>さらに <code>use_coef = T</code> で係数を推定結果の数値に置き換えた.</p>
-<p><br /><span class="math display">$$
+<p><span class="math display">\[
 \begin{aligned}
 Sepal.Length &amp;= 2.17 + 0.5(Sepal.Width) + 0.83(Petal.Length) - 0.32(Petal.Width)\ - \\
 &amp;\quad 0.72(Species_{versicolor}) - 1.02(Species_{virginica}) + \epsilon
 \end{aligned}
-$$</span><br /></p>
+\]</span></p>
 <p><code>equatiomatic</code> パッケージは現時点では <code>lm</code> <code>glm</code> に対応しており, <code>lmer</code> への対応も進めているようだ.</p>
 <p>TODO: この書き方だと PDF で付番できない</p>
 </div>
@@ -343,7 +368,7 @@ $$</span><br /></p>
 <h2><span class="header-section-number">3.3</span> プログラムを使った図の挿入</h2>
 <p>既に Markdown 記法による図表の挿入方法を紹介したが, プログラムチャンクを介して画像を読み込み表示させることもできる. まずは, R のプログラムで既存の画像ファイルを表示させる方法.</p>
 <div class="figure" style="text-align: center"><span id="fig:includegraphic-example"></span>
-<img src="media/ks/DATA/User/Documents/Documents/developping/my_latex_templates/rmdja/inst/resources/examples/bookdown/img/Johannes_Gutenberg.jpg" alt="Johannes Gutenberg" width="50%" height="50%" />
+<img src="img/Johannes_Gutenberg.jpg" alt="Johannes Gutenberg" width="50%" height="50%" />
 <p class="caption">
 図 3.1: Johannes Gutenberg
 </p>
@@ -356,17 +381,19 @@ $$</span><br /></p>
 <span id="cb34-3"><a href="動的なコンテンツの作成.html#cb34-3"></a><span class="st">diamonds &lt;- diamonds[sample(1:NROW(diamonds), size =), ]</span></span>
 <span id="cb34-4"><a href="動的なコンテンツの作成.html#cb34-4"></a><span class="st">ggplot(diamonds, aes(x=carat, y=price, color=clarity)) +</span></span>
 <span id="cb34-5"><a href="動的なコンテンツの作成.html#cb34-5"></a><span class="st">  geom_point() +</span></span>
-<span id="cb34-6"><a href="動的なコンテンツの作成.html#cb34-6"></a><span class="st">  labs( x = &quot;カラット数&quot;, y = &quot;価格&quot;) + scale_color_pander(name = &quot;クラリティ&quot;) +  theme_classic(base_family = &quot;Noto Sans CJK JP&quot;) + theme(legend.position = &quot;bottom&quot;)```&#39;</span></span>
-<span id="cb34-7"><a href="動的なコンテンツの作成.html#cb34-7"></a><span class="kw">cat</span>(txt)</span></code></pre></div>
+<span id="cb34-6"><a href="動的なコンテンツの作成.html#cb34-6"></a><span class="st">  labs( x = &quot;カラット数&quot;, y = &quot;価格&quot;) + scale_color_pander(name = &quot;クラリティ&quot;) +</span></span>
+<span id="cb34-7"><a href="動的なコンテンツの作成.html#cb34-7"></a><span class="st">  theme_classic(base_family = &quot;Noto Sans CJK JP&quot;) + theme(legend.position = &quot;bottom&quot;)```&#39;</span></span>
+<span id="cb34-8"><a href="動的なコンテンツの作成.html#cb34-8"></a><span class="kw">cat</span>(txt)</span></code></pre></div>
 <pre><code>```{r plot-sample, echo=T, fig.cap=&quot;`ggplot2` によるグラフ&quot;}
 data(&quot;diamonds&quot;)
 diamonds &lt;- diamonds[sample(1:NROW(diamonds), size =), ]
 ggplot(diamonds, aes(x=carat, y=price, color=clarity)) +
   geom_point() +
-  labs( x = &quot;カラット数&quot;, y = &quot;価格&quot;) + scale_color_pander(name = &quot;クラリティ&quot;) +  theme_classic(base_family = &quot;Noto Sans CJK JP&quot;) + theme(legend.position = &quot;bottom&quot;)```</code></pre>
+  labs( x = &quot;カラット数&quot;, y = &quot;価格&quot;) + scale_color_pander(name = &quot;クラリティ&quot;) +
+  theme_classic(base_family = &quot;Noto Sans CJK JP&quot;) + theme(legend.position = &quot;bottom&quot;)```</code></pre>
 <p>実際の表示は図 <a href="動的なコンテンツの作成.html#fig:plot-sample">3.2</a> のようになる.</p>
 <div class="figure"><span id="fig:plot-sample"></span>
-<img src="media/ks/DATA/User/Documents/Documents/developping/my_latex_templates/rmdja/inst/resources/examples/bookdown/main_files/figure-html/plot-sample-1.png" alt="`ggplot2` によるグラフ"  />
+<img src="main_files/figure-html/plot-sample-1.png" alt="`ggplot2` によるグラフ"  />
 <p class="caption">
 図 3.2: <code>ggplot2</code> によるグラフ
 </p>
@@ -376,16 +403,16 @@ ggplot(diamonds, aes(x=carat, y=price, color=clarity)) +
 <h2><span class="header-section-number">3.4</span> それ以外のグラフィックデバイス</h2>
 <p>LaTeX の <code>tikzDevice</code> を利用した作図が可能である. チャンクのエンジンを <code>tikz</code> に設定すれば, そのブロック内では <code>\begin{tikzpicture}</code> で始まる内容を記述できる. これは HTML でも出力される(図 <a href="動的なコンテンツの作成.html#fig:tikz-venn">3.3</a>).</p>
 <div class="figure"><span id="fig:tikz-venn"></span>
-<img src="media/ks/DATA/User/Documents/Documents/developping/my_latex_templates/rmdja/inst/resources/examples/bookdown/main_files/figure-html/tikz-venn-1.png" alt="tikzを利用した図の表示"  />
+<img src="main_files/figure-html/tikz-venn-1.png" alt="tikzを利用した図の表示"  />
 <p class="caption">
 図 3.3: tikzを利用した図の表示
 </p>
 </div>
 <p>それ以外にも <code>knitr</code> が対応しているドローイングプログラムがある. 例えば DOT言語 (<code>dot</code>), Asymptote (<code>asy</code>). node.js や D3.js も使用できるが, HTMLベースのものの多くはPDFでは表示できないことに注意.</p>
 <div class="figure"><span id="fig:asymptote-graph"></span>
-<img src="media/ks/DATA/User/Documents/Documents/developping/my_latex_templates/rmdja/inst/resources/examples/bookdown/main_files/figure-html/asymptote-graph-1.png" alt="Asymptote による画像(RCBと同じもの)"  />
+<img src="main_files/figure-html/asymptote-graph-1.png" alt="Asymptote による画像(RCB と同じもの)"  />
 <p class="caption">
-図 3.4: Asymptote による画像(<a href="https://bookdown.org/yihui/rmarkdown-cookbook/"><strong>RCB</strong></a>と同じもの)
+図 3.4: Asymptote による画像(RCB と同じもの)
 </p>
 </div>
 <p>なお, DOT言語は <code>DiagrammeR</code> パッケージを経由して使うこともできる<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a>(図: <a href="動的なコンテンツの作成.html#fig:diagrammer-graph">3.5</a>). グラフィカルモデルの記述などはこちらのほうが簡単かもしれない.</p>
@@ -405,14 +432,10 @@ ggplot(diamonds, aes(x=carat, y=price, color=clarity)) +
 <span id="cb36-13"><a href="動的なコンテンツの作成.html#cb36-13"></a>  <span class="dt">height =</span> <span class="dv">500</span></span>
 <span id="cb36-14"><a href="動的なコンテンツの作成.html#cb36-14"></a>)</span></code></pre></div>
 <div class="figure"><span id="fig:diagrammer-graph"></span>
-<!--html_preserve-->
-<div id="htmlwidget-b5ad9679f1ee47e72111" class="grViz html-widget" style="width:672px;height:500px;">
-
-</div>
-<script type="application/json" data-for="htmlwidget-b5ad9679f1ee47e72111">{"x":{"diagram":"digraph {\n  graph [layout = dot, rankdir = TB]\n  \n  node [shape = rectangle]        \n  rec1 [label = \"Step 1. 起床する\"]\n  rec2 [label = \"Step 2. コードを書く\"]\n  rec3 [label =  \"Step 3. ???\"]\n  rec4 [label = \"Step 4. 給料をもらう\"]\n  \n  # edge definitions with the node IDs\n  rec1 -> rec2 -> rec3 -> rec4\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
-<!--/html_preserve-->
+<div id="htmlwidget-dd77604bcc6fdac4e922" style="width:672px;height:500px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-dd77604bcc6fdac4e922">{"x":{"diagram":"digraph {\n  graph [layout = dot, rankdir = TB]\n  \n  node [shape = rectangle]        \n  rec1 [label = \"Step 1. 起床する\"]\n  rec2 [label = \"Step 2. コードを書く\"]\n  rec3 [label =  \"Step 3. ???\"]\n  rec4 [label = \"Step 4. 給料をもらう\"]\n  \n  # edge definitions with the node IDs\n  rec1 -> rec2 -> rec3 -> rec4\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
-図 3.5: <code>DiagrammeR</code> によるグラフィカルモデル ((ref:RCB), Ch. 4.15 より)
+図 3.5: <code>DiagrammeR</code> によるグラフィカルモデル (RCB, Ch. 4.15 より)
 </p>
 </div>
 </div>
@@ -844,7 +867,7 @@ setosa
 </tr>
 </tbody>
 </table>
-<p>さらに, <a href="https://bookdown.org/yihui/rmarkdown-cookbook/"><strong>RCB</strong></a> の <a href="https://bookdown.org/yihui/rmarkdown-cookbook/kable.html">Ch. 10.1 The function <code>knitr::kable()</code></a> ではその他いろいろな書式設定を紹介している.</p>
+<p>さらに, RCB の <a href="https://bookdown.org/yihui/rmarkdown-cookbook/kable.html">Ch. 10.1 The function <code>knitr::kable()</code></a> ではその他いろいろな書式設定を紹介している.</p>
 </div>
 </div>
 <div class="footnotes">
@@ -863,6 +886,15 @@ setosa
 <a href="相互参照と引用.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -882,15 +914,15 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "Gedevan-Aleksizde/my_latex_templates/edit/master/chapters/elemental.Rmd",
+"link": "Gedevan-Aleksizde/my_latex_templates/edit/master/rmdja/inst/resources/examples/bookdown/chapter/chapters/elemental.Rmd",
 "text": "Edit"
 },
 "history": {
-"link": "Gedevan-Aleksizde/my_latex_templates/blob/master/chapters/elemental.Rmd",
+"link": "Gedevan-Aleksizde/my_latex_templates/blob/master/rmdja/inst/resources/examples/bookdown/chapter/chapters/elemental.Rmd",
 "text": null
 },
 "view": {
-"link": "Gedevan-Aleksizde/my_latex_templates/blob/master/chapters/elemental.Rmd",
+"link": "Gedevan-Aleksizde/my_latex_templates/blob/master/rmdja/inst/resources/examples/bookdown/chapter/chapters/elemental.Rmd",
 "text": null
 },
 "download": ["main.pdf", "main.epub", "main.mobi"],
@@ -906,6 +938,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

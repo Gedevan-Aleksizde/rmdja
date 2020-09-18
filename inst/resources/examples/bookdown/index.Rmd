@@ -16,14 +16,14 @@ jmonofont: Ricty
 linkcolor: blue
 citecolor: blue
 urlcolor: magenta
-citation-package: biblatex
+citation-package: natbib
 bibliography: rmdja.bib # 書誌情報ファイル
-biblio-style: apalike                      #  bst
+biblio-style: jecon
 ---
 
 ```{r setup, include=FALSE}
 file.copy(system.file("resources/bibliography/rmdja.bib", package="rmdja"), "./") # アンダースコア回避のためコピーするしかない
-options(tinytex.latexmk.emulation = T)
+options(tinytex.latexmk.emulation = F)
 require(knitr)
 require(kableExtra)
 opts_chunk$set(
@@ -40,4 +40,3 @@ opts_chunk$set(
   )
 img_dir <- "img/"
 ```
-
