@@ -2,7 +2,7 @@
 
 # この部の概要 {-}
 
-ここではまず, R Markdown の基本的な機能を紹介する. つまり `bookdown` 特有のものではなく, R Markdown 全般で使用できる機能も含めて紹介する. これ以降は自己言及的な説明が多いため, この文書を生成しているソースコードと比較しながら確認することをおすすめする. ここで紹介する機能は (ref:BKD), (ref:RDG), (ref:RCB) での記述に基づく.
+ここではまず, R Markdown の基本的な機能を紹介する. つまり `bookdown` 特有のものではなく, R Markdown 全般で使用できる機能も含めて紹介する. これ以降は自己言及的な説明が多いため, この文書を生成しているソースコードと比較しながら確認することをおすすめする. ここで紹介する機能は BKD, RDG, RCB での記述に基づく.
 これら3つのドキュメントを読めば, ほとんどのことは可能になる --- `rmdja` を作る理由になった LaTeX テンプレートの修正以外は --- のだが, 本稿の重要な目的の1つは**複数のファイル形式を両立すること**であるので, それができない書き方には触れないし, 技術文書の作成にあまり使わないような機能の動作確認はおこなわず, 技術文書作成で頻繁に使われ, 便利と思える機能のみ紹介する.
 
 どちらにしろそのうちこれらを翻訳してくれる人が現れることだろう...たぶん.
@@ -17,7 +17,7 @@
 
 ## Markdown の基本構文
 
-一応基本の Markdown の構文も挙げておく. 詳細は (ref:BKD) "[Ch. 2.2 Markdown Syntax](https://bookdown.org/yihui/bookdown/markdown-syntax.html)" を参照.
+一応基本の Markdown の構文も挙げておく. 詳細は(ref:BKDB)"[Ch. 2.2 Markdown Syntax](https://bookdown.org/yihui/bookdown/markdown-syntax.html)" を参照.
 
 ### インラインでの書式変更
 
@@ -147,7 +147,7 @@ Table:Markdown 記法の表
 
 画像ファイルも貼り付けられる.
 
-![Johannes Gutenberg]{img/Johannes_Gutenberg.jpg}
+![Johannes Gutenberg](img/Johannes_Gutenberg.jpg){ width=50% }
 
 
 しかし, キャプションを付けたり, 表示位置やサイズを細かく調整したりするためには, 後述するように**Rプログラムを経由して出力**したほうが良い.
@@ -189,7 +189,7 @@ Bookdown では**従来の R Markdown でできなかった数式への付番と
 
 という違いがある. 両者で同じ表示にこだわるのなら, 付番を取り消す `\notag` を多用することになるだろう.
 
-さらに, bookdown の機能として, LaTeX の「定理」「定義」「証明」などの環境に対応するものが提供されている (参考: (ref:BKD) [Ch. 2.2 Markdown extensions by bookdown](https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html)). これらの相互参照も可能である.
+さらに, bookdown の機能として, LaTeX の「定理」「定義」「証明」などの環境に対応するものが提供されている (参考: BKD [Ch. 2.2 Markdown extensions by bookdown](https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html)). これらの相互参照も可能である.
 
 例: 以下に補題 \@ref(lem:borelcantelli), 定理 \@ref(thm:theorem1) を示す.
 
@@ -219,7 +219,7 @@ ${E_1,E_2,\cdots}$をある確率空間の事象とする. これらの事象の
 
 ## カスタムブロック
 
-数式のセクションの定理ブロックの応用で, 独自のブロックセクションを定義することができる. `rmdja` では (ref:BKD)  [Ch. 2.7 Custom blocks](https://bookdown.org/yihui/bookdown/custom-blocks.html) で紹介されている例を予め使えるようにしている. それらは `type="..."` で指定できて, 以下の5種類がある.
+数式のセクションの定理ブロックの応用で, 独自のブロックセクションを定義することができる. `rmdja` では BKD [Ch. 2.7 Custom blocks](https://bookdown.org/yihui/bookdown/custom-blocks.html) で紹介されている例を予め使えるようにしている. それらは `type="..."` で指定できて, 以下の5種類がある.
 
 * `rmdcaution`
 * `rmdimportant`
@@ -358,7 +358,7 @@ cat(txt)
 names(knitr::knit_engines$get())
 ```
 
-また, 新たにプログラムを追加することもできる. 詳細は (ref:RDG) [Ch. 2.7 Other language engines](https://bookdown.org/yihui/rmarkdown/language-engines.html) を参考に.
+また, 新たにプログラムを追加することもできる. 詳細は RDG [Ch. 2.7 Other language engines](https://bookdown.org/yihui/rmarkdown/language-engines.html) を参考に.
 
 TODO: 他の言語のプログラムを実行する際の注意点
 
@@ -407,7 +407,8 @@ data("diamonds")
 diamonds <- diamonds[sample(1:NROW(diamonds), size =), ]
 ggplot(diamonds, aes(x=carat, y=price, color=clarity)) +
   geom_point() +
-  labs( x = "カラット数", y = "価格") + scale_color_pander(name = "クラリティ") +  theme_classic(base_family = "Noto Sans CJK JP") + theme(legend.position = "bottom")```'
+  labs( x = "カラット数", y = "価格") + scale_color_pander(name = "クラリティ") +
+  theme_classic(base_family = "Noto Sans CJK JP") + theme(legend.position = "bottom")```'
 cat(txt)
 ```
 
@@ -418,7 +419,8 @@ data("diamonds")
 diamonds <- diamonds[sample(1:NROW(diamonds), size =), ]
 ggplot(diamonds, aes(x=carat, y=price, color=clarity)) +
   geom_point() +
-  labs( x = "カラット数", y = "価格") + scale_color_pander(name = "クラリティ") +  theme_classic(base_family = "Noto Sans CJK JP") + theme(legend.position = "bottom")
+  labs( x = "カラット数", y = "価格") + scale_color_pander(name = "クラリティ") +
+  theme_classic(base_family = "Noto Sans CJK JP") + theme(legend.position = "bottom")
 ```
 
 ## それ以外のグラフィックデバイス
@@ -493,7 +495,7 @@ LaTeX の `tikzDevice` を利用した作図が可能である. チャンクの�
 
 それ以外にも `knitr` が対応しているドローイングプログラムがある. 例えば DOT言語 (`dot`), Asymptote (`asy`). node.js や D3.js も使用できるが, HTMLベースのものの多くはPDFでは表示できないことに注意.
 
-```{asy asymptote-graph, echo=F, fig.cap="Asymptote による画像((ref:RCB)と同じもの)"}
+```{asy asymptote-graph, echo=F, fig.cap="Asymptote による画像(RCB と同じもの)"}
 import graph3;
 import grid3;
 import palette;
@@ -516,7 +518,7 @@ grid3(XYZgrid);
 
 なお, DOT言語は `DiagrammeR` パッケージを経由して使うこともできる[^rcb-diagrammer](図: \@ref(fig:diagrammer-graph)). グラフィカルモデルの記述などはこちらのほうが簡単かもしれない.
 
-(ref:diagrammer-cap) `DiagrammeR` によるグラフィカルモデル ((ref:RCB), Ch. 4.15 より)
+(ref:diagrammer-cap) `DiagrammeR` によるグラフィカルモデル (RCB, Ch. 4.15 より)
 
 ```{r diagrammer-graph, echo=T, fig.cap="(ref:diagrammer-cap)"}
 DiagrammeR::grViz("digraph {
@@ -593,7 +595,7 @@ kable(
   ) %>% row_spec(seq(1, 10, by = 2), background = "gray")
 ```
 
-さらに, (ref:RCB) の [Ch. 10.1 The function `knitr::kable()`](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html) ではその他いろいろな書式設定を紹介している.
+さらに, RCB の [Ch. 10.1 The function `knitr::kable()`](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html) ではその他いろいろな書式設定を紹介している.
 
 # 相互参照と引用
 
@@ -603,7 +605,7 @@ kable(
 
 図, 表, 式などに番号を自動で割り当て, さらにハイパーリンクを付加できる. `\@ref(ID)` を使う. 現状では `refstyle` や `prettyref` のように接頭語を自動で付けてくれないが, そのうちなんとかなるかもしれない.
 
-bookdown の相互参照は, LaTeX の `prettyref.sty` のように, `接頭語:参照ID` という記法になる. 参照IDは通常, チャンクIDと同じである. 既に紹介したように, 数式参照の接頭語は `eq` で, 定理は `thm` である. 図表は `fig`, `tab`. その他の接頭語は (ref:BKD) [Ch. 2.2 Markdown extensions by bookdown](https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html#equations) を参考に.
+bookdown の相互参照は, LaTeX の `prettyref.sty` のように, `接頭語:参照ID` という記法になる. 参照IDは通常, チャンクIDと同じである. 既に紹介したように, 数式参照の接頭語は `eq` で, 定理は `thm` である. 図表は `fig`, `tab`. その他の接頭語は BKD [Ch. 2.2 Markdown extensions by bookdown](https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html#equations) を参考に.
 
 ### 表への相互参照
 
@@ -640,11 +642,7 @@ Table: (\#tab:tab-md) Markdown 記法の表
 
 ### 特殊な相互参照
 
-それ以外にも, 相互参照と似たような構文でマクロ的にテキストを置き換えることができる. 例えばここまで何度も (ref:BKD) と (ref:RDG) に言及してきたが, 毎回ハイパーリンクと強調フォントにするのは面倒である. そこで, `(ref:RDG) [**RDG**](https://bookdown.org/yihui/rmarkdown/)` のような宣言を前後に改行を入れて書くことでトークンを作成できる
-
-後は本文中に `(ref:RDG)` と書くだけでリンクが作られる.
-
-別の利用方法として, チャンクオプションの `fig.cap` などに TeX 数式を書いても正しく表示できない. そのような場合は `ref` 参照を使う. `(ref:figcap1) \coloremoji{🌸} $\sum \oint \mathfrak{A} \mathscr{B} \mathbb{C}$ \coloremoji{🌸}` と書くと, 図 \@ref(fig:caption) のキャプションにも特殊な記号が使える.
+チャンクオプションの `fig.cap` などに TeX 数式を書いても正しく表示できない. そのような場合は `ref` 参照を使う. `(ref:figcap1) \coloremoji{🌸} $\sum \oint \mathfrak{A} \mathscr{B} \mathbb{C}$ \coloremoji{🌸}` と書くと, 図 \@ref(fig:caption) のキャプションにも特殊な記号が使える.
 
 (ref:figcap1) \coloremoji{🌸} $\sum \oint \mathfrak{A} \mathscr{B} \mathbb{C}$ \coloremoji{🌸}
 
@@ -655,6 +653,7 @@ Table: (\#tab:tab-md) Markdown 記法の表
 ggplot(tibble(x = 1, y = 1, z = "テスト")) + geom_label(aes(x = x, y = y, label = z)) + theme_classic()
 ```
 
+この参照は**一度しか使えない**.
  
 PDF での表示では, 図 \@ref(fig:caption) のキャプションの外側が文字化けしていることだろう. これは絵文字出力に関する問題で, 別のセクションで解説する.
 
@@ -688,10 +687,14 @@ knitr::include_graphics(file.path(img_dir, "citr.png"))
 
 これはR Markdownで日本語技術文書を作る際の特にアレな障害の1つである. PDF は BibTeX があるが, HTML では使えない. pandoc の出力に頼るしかない. pandoc は CSL という, Word でも使われている参考文献リストのフォーマットに対応しているが, 機能が少ないため日本語文献の引用スタイルが崩れてしまう.
 
-
 日本語対応 `.bst` ファイルを使いたい場合は少しトリッキーな操作が必要になる. `rmarkdown` は `tinytex` というパッケージでインストールされたスタンドアローンな処理系で PDF を生成している. 冒頭のチャンクで `options(tinytex.latexmk.emulation = F)` を指定することで, 自分のマシンにインストールされている普段使っている処理系に処理させることができる. さらに `rmdja` では `natbib` を指定した場合に自動でカレントディレクトリに `.latexmkrc` をコピーするようにしている. しかしログが残らないなどデバッグしづらいところがあるため, このやり方はやや使いづらい.
 
 TODO: この操作なしに (u)`\pBibTeX`{=latex}`pBibTeX`{=html} を使うには, たぶん `tinytex` と `rmarkdown` 両方の修正が必要. そこまで複雑ではないと思うのでそのうち修正してみたい.
+
+
+なお, 普段文献管理ソフトを使っていないが, 数本程度の文献を引用リストに載せたい利用者は, `biblatex` の構文を利用して書くのがよいかもしれない. 例えばここに書いてあるように.
+
+https://teastat.blogspot.com/2019/01/bookdown.html
 
 # 簡単なレイアウト変更
 

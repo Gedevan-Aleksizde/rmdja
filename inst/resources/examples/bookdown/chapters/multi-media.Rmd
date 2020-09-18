@@ -39,7 +39,7 @@ output:
 documentclass: book
 ```
 
-詳しくは (ref:BKD) の "[Ch. 3 Output Formats](https://bookdown.org/yihui/bookdown/output-formats.html)" の章を.
+詳しくは BKD "[Ch. 3 Output Formats](https://bookdown.org/yihui/bookdown/output-formats.html)" の章を.
 
 ### `_bookdown.yml`
 
@@ -48,10 +48,10 @@ documentclass: book
 
 https://ill-identified.hatenablog.com/entry/2020/09/05/202403
 
-詳しくは, (ref:BKD) の [Ch. 4.4 Configuration](https://bookdown.org/yihui/bookdown/configuration.html)
+詳しくは, BKD [Ch. 4.4 Configuration](https://bookdown.org/yihui/bookdown/configuration.html)
 
 
-Build ペーンから文書をビルドするには,  `index.Rmd` のYAML ヘッダに `site: bookdown::bookdown_site` を書く必要がある. さらに,  `index.Rmd` をプロジェクトディレクトリのルートに置いていない場合は, ツールバーの `Build` -> `Configure Build Tools...` から `index.Rmd` を置いているディレクトリを site ディレクトリとする設定が必要になる(図  \@ref(fig:build-pane2)).
+Build ペーンから文書をビルドするには,  `index.Rmd` のYAML ヘッダに `site: bookdown::bookdown_site` を書く必要がある. さらに,  `index.Rmd` をプロジェクトディレクトリのルートに置いていない場合は, ツールバーの `Build` -> `Configure Build Tools...` から `index.Rmd` を置いているディレクトリを site ディレクトリとする設定が必要になる(図  \@ref(fig:build-pane2-1), \@ref(fig:build-pane2-2)).
 
 ```{r build-pane2, fig.cap="Build ペーンの手動設定"}
 include_graphics(file.path(img_dir, c("build-pane.png", "build-pane-build.png")))

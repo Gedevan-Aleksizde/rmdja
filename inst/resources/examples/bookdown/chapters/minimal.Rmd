@@ -2,11 +2,6 @@
 
 # 準備
 
-
-```{r gutenberg, fig.cap="Johannes Gutenberg"}
-knitr::include_graphics(file.path(img_dir, "Johannes_Gutenberg.jpg"))  
-```
-
 ## インストール
 
 文書を生成するのに必要なものをインストールする.
@@ -46,9 +41,9 @@ bookdown::render_book("index.Rmd", "bookdown::epub_book")
 ```
 
 
-コピーしたディレクトリ `bookdown-minimal` を設定する (図 \@ref(fig:build-pane1)).
+コピーしたディレクトリ `bookdown-minimal` を設定する (図 \@ref(fig:build-pane1-1), \@ref(fig:build-pane1-2)).
 
-```{r build-pane1, fig.cap="Build ペーンの手動設定"}
+```{r build-pane1, fig.cap="Build ペーンの手動設定", results="hold"}
 include_graphics(file.path(img_dir, c("build-pane.png", "build-pane-build.png")))
 ```
 
