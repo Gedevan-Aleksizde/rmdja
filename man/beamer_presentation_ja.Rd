@@ -19,7 +19,7 @@ beamer_presentation_ja(
   out.width = "100\%",
   out.height = "100\%",
   highlight = "default",
-  rownumber_chunk = FALSE,
+  code_rownumber = FALSE,
   citation_package = "default",
   citation_options = "default",
   figurename = "図",
@@ -64,7 +64,7 @@ beamer_presentation_ja(
 
 \item{highlight}{character. チャンク内のコードのシンタックスハイライトのデザイン. \code{rmarkdown::beamer_presentation} 参照. デフォルト: default}
 
-\item{rownumber_chunk}{logical チャンクに行番号を付けるかどうか. デフォルト: FALSE}
+\item{code_rownumber}{logical チャンクに行番号を付けるかどうか. デフォルト: FALSE}
 
 \item{citation_package}{character.  本文中の引用トークンに関するパッケージ. デフォルト: default}
 

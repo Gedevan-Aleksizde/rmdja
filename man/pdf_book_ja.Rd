@@ -27,6 +27,7 @@ pdf_book_ja(
   highlight_bw = FALSE,
   code_rownumber = TRUE,
   tombow = FALSE,
+  add_folio = FALSE,
   template = "default",
   keep_tex = TRUE,
   keep_md = TRUE,
@@ -74,6 +75,8 @@ black-and-white (grayscale).}
 \item{code_rownumber}{デフォルト: TRUE. logical. コードセルに行番号を表示するかどうか.}
 
 \item{tombow}{logical. デフォルト: FALSE. 製本時に必要なトンボ (trim markers) を付けるかどうか. トンボは \code{gentombow.sty} で作成される.}
+
+\item{add_folio}{logica. デフォルト: FALSE. 製本時に全ページにノンブルが必要な場合があるらしいので全ページに表示したい時に.}
 
 \item{pandoc_args}{See
 \code{rmarkdown::\link{pdf_document}}, or the documentation of the
