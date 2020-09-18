@@ -5,7 +5,8 @@ rmdja::gitbook_ja:
     - ../../styles/css/toc.css
 
 rmdja::pdf_book_ja:
-  code_rownumber: true
+  tombow: false
+  add_folio: false
 
 # ---- epubの出力設定 ----
 bookdown::epub_book:
