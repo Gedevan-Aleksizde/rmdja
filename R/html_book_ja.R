@@ -66,19 +66,12 @@ gitbook_ja <- function(
   }
 
   preproc <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
-    print(files_dir)
-    print(output_dir)
     for(x in list(list(d = "styles/img", f = ICON_FILES()), list(d = "styles/css", f = CSS_FILES()))){
-      print(file.path(output_dir, x$d))
-      if(!file.exists(file.path(output_dir, x$d))) dir.create(output_dir, recursive = T)
+      dir_copy_to <- file.path(files_dir, x$d)
+      if(!file.exists(dir_copy_to)) dir.create(dir_copy_to, recursive = T)
       file.copy(system.file(file.path("resources", x$d, x$f), package = "rmdja"),
-                file.path(output_dir, x$d))
+                dir_copy_to)
     }
-  }
-  postproc <- function(metadata, input_file, output_file, clean, verbose){
-    print("postproc called")
-    print(input_file)
-    print(output_file)
   }
 
   args <- list(
@@ -117,22 +110,17 @@ gitbook_ja <- function(
              opts_chunk = if(code_rownumber) list(attr.source = c(".numberLines .lineAnchors")) else list(),
              opts_hooks = list(echo = hook_display_block)),
            pre_processor = preproc,
-           post_processor = postproc,
            base_format = rmarkdown::html_document()
            )
       ),
     ...
   )
   out <- do.call(bookdown::gitbook, args)
-  out$knitr$opts_hooks <- list(echo = hook_display_block)  # bookdown の修正待ち
-  # """ヤバ"""イ
-  # out$pre_processor <- preproc
+  # なんか不安になる書き方
+  out$knitr$opts_hooks <- list(echo = hook_display_block)
+  out$pre_processor <- preproc
   bookdownpost <- out$post_processor
   out$post_processor <- function(metadata, input_file, output_file, clean, verbose){
-    print("--- postporc called ---")
-    print(input_file)
-    print(output_file)
-    print(metadata)
     bookdownpost(metadata, input_file, output_file, clean, verbose)
   }
   if(code_rownumber) out$knitr$opts_chunk <- c(out$knitr$opts_chunk, attr.source = c(".numberLines .lineAnchors"))

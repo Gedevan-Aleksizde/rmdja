@@ -7,6 +7,7 @@
 #'  
 #' @param code_rownumber デフォルト: TRUE. logical. コードセルに行番号を表示するかどうか. 
 #' @param tombow logical. デフォルト: FALSE. 製本時に必要なトンボ (trim markers) を付けるかどうか. トンボは `gentombow.sty` で作成される. 
+#' @param add_folio logica. デフォルト: FALSE. 製本時に全ページにノンブルが必要な場合があるらしいので全ページに表示したい時に.
 #' @return rmarkdown_output_format
 #'
 #' @export
@@ -33,6 +34,7 @@ pdf_book_ja <- function (
   highlight_bw = FALSE,
   code_rownumber = TRUE,
   tombow = FALSE,
+  add_folio = FALSE,
   template = "default",
   keep_tex = TRUE,
   keep_md = TRUE,
@@ -73,13 +75,21 @@ pdf_book_ja <- function (
   pandoc_args <- c(pandoc_args, "--extract-media", '.')
   if(identical(extra_dependencies, NULL)){
     if(identical(tombow, T)){
-      extra_dependencies <- "gentombow"
+      extra_dependencies <- list(gentombow = "pdfbox")
     }
   } else if(is.list(extra_dependencies)){
     if(identical(tombow, T)){
-      extra_dependencies <- c(extra_dependencies, list(gentombow = NULL))
+      extra_dependencies <- c(extra_dependencies, list(gentombow = "pdfbox"))
     }
   } 
+  if(identical(add_folio, T)){
+    if(is.null(includes)){
+      includes <- rmarkdown::includes(before_body = system.file("resources/styles/latex/folio.tex", package = "rmdja"))
+    } else {
+      includes$before_body <- c(includes$before_body, system.file("resources/styles/latex/folio.tex", package = "rmdja"))
+    }
+  }
+  print(includes)
 
   args <- list(
     base = list(
@@ -133,7 +143,7 @@ pdf_book_ja <- function (
     if(is.null(metadata$documentclass)) args_extra <- c(args_extra, "-Mdocumentclass=bxjsbook")
     return(args_extra)
   }
-
+  print(args$base$includes)
   base_format_ <- do.call(
     what = base_format,
     args = if("..." %in% formalArgs(base_format)) args$base else args$base[names(args$base) %in% formalArgs(base_format)]
