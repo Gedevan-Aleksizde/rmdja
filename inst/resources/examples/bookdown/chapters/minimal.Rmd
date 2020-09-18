@@ -1,0 +1,56 @@
+# (PART) 最低限のチュートリアル {-}
+
+# 準備
+
+
+```{r gutenberg, fig.cap="Johannes Gutenberg"}
+knitr::include_graphics(file.path(img_dir, "Johannes_Gutenberg.jpg"))  
+```
+
+## インストール
+
+文書を生成するのに必要なものをインストールする.
+
+このドキュメントは `rmdja` パッケージに含まれている. よってまずはこれをダウンロードしてほしい.
+
+```{r installation, eval=F}
+install.packages(c("rmarkdown", "bookdown"))
+remotes::install_github("Gedevan-Aleksizde/my_latex_template", subdir = "rmdja", repos = NULL)
+```
+
+ただし, `bookdown` ver. 0.2 時点ではソースファイルのフォルダ配置していに不具合があるため[^bookdown-subdir-error], もし0.2以前のバージョンを使用しているなら, 更新するか, github から開発版をインストールする. 同様に, `rmarkdown` も CRAN ではなく開発版をインストールしたほうがよい.
+
+```{r bookdown-dev, eval=F, echo=T}
+remotes::install_github('rstudio/rmarkdown')
+remotes::install_github('rstudio/bookdown')
+```
+
+次に, 最低限のファイルやパッケージで動くほうのデモ用ディレクトリをコピーする
+
+```{r copy, echo=T}
+file.copy(system.file("resources/examples/bookdown-minimal", package = "rmdja"), "./", recursive = T)
+```
+
+
+bookdown の文書生成は従来の R Markdown と違い, RStudio の `knit` ボタンでは**できない**. 代わりに, 以下の2通りの方法がある.
+
+1. `bookdown::render_book('index.Rmd', format = "bookdown::gitbook")` などを呼び出す
+2. RStudio の Build ペーンを使う
+
+前者は, 以下のように実行する. 順にHTML, PDF, epub を出力している
+
+```{r render-book, echo=T, eval=F}
+bookdown::render_book("index.Rmd", "rmdja::gitbook_ja")
+bookdown::render_book("index.Rmd", "rmdja::pdf_book_ja")
+bookdown::render_book("index.Rmd", "bookdown::epub_book")
+```
+
+
+コピーしたディレクトリ `bookdown-minimal` を設定する (図 \@ref(fig:build-pane1)).
+
+```{r build-pane1, fig.cap="Build ペーンの手動設定"}
+include_graphics(file.path(img_dir, c("build-pane.png", "build-pane-build.png")))
+```
+
+これで `_book` フォルダに出力がされる.
+

@@ -5,10 +5,7 @@
 ここではまず, R Markdown の基本的な機能を紹介する. つまり `bookdown` 特有のものではなく, R Markdown 全般で使用できる機能も含めて紹介する. これ以降は自己言及的な説明が多いため, この文書を生成しているソースコードと比較しながら確認することをおすすめする. ここで紹介する機能は (ref:BKD), (ref:RDG), (ref:RCB) での記述に基づく.
 これら3つのドキュメントを読めば, ほとんどのことは可能になる --- `rmdja` を作る理由になった LaTeX テンプレートの修正以外は --- のだが, 本稿の重要な目的の1つは**複数のファイル形式を両立すること**であるので, それができない書き方には触れないし, 技術文書の作成にあまり使わないような機能の動作確認はおこなわず, 技術文書作成で頻繁に使われ, 便利と思える機能のみ紹介する.
 
-どちらにしろそのうちこれらを翻訳してくれる人が現れることだろう.
-
-(ていうか俺が試行錯誤して調べたことだいたい最後のやつに書いてあんじゃん……)
-
+どちらにしろそのうちこれらを翻訳してくれる人が現れることだろう...たぶん.
 
 # 静的なコンテンツの作成
 
@@ -185,14 +182,16 @@ f(k) &= {n \choose k} p^{k} (1-p)^{n-k} (\#eq:binom)
 \end{align}
 
 
-Bookdown では従来の R Markdown でできなかった数式への付番と, 本文中での参照アンカーリンクの自動作成が可能となっている (詳細は相互参照のセクション \@ref(sec:crossref) で). LaTeX にすでに慣れている読者に注意が必要だが, Bookdown 特有の制約として,  付番したい場合は `\label{ID}` ではなく `(\#eq:ID)` を使う. また,  PDF (LaTeX) と HTML (Mathjax) の仕様には
+Bookdown では**従来の R Markdown でできなかった数式への付番と, 本文中での参照アンカーリンクの自動作成が可能**となっている (詳細は \@ref(crossref) 章で). LaTeX にすでに慣れている読者に注意が必要だが, Bookdown 特有の制約として,  付番したい場合は `\label{ID}` ではなく `(\#eq:ID)` を使う. また,  PDF (LaTeX) と HTML (Mathjax) の仕様には
 
 1. PDF では `align` は常に数式が付番され, `align*` 等はどうやっても付番されない
 2. HTML では `align` でも `align*` であってもラベルを書かなければ付番されず, 書けば付番される.
 
 という違いがある. 両者で同じ表示にこだわるのなら, 付番を取り消す `\notag` を多用することになるだろう.
 
-さらに, bookdown の機能として, LaTeX の「定理」「定義」「証明」などの環境に対応するものが提供されている (参考: (ref:BKD) [Ch. 2.2 Markdown extensions by bookdown](https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html)).
+さらに, bookdown の機能として, LaTeX の「定理」「定義」「証明」などの環境に対応するものが提供されている (参考: (ref:BKD) [Ch. 2.2 Markdown extensions by bookdown](https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html)). これらの相互参照も可能である.
+
+例: 以下に補題 \@ref(lem:borelcantelli), 定理 \@ref(thm:theorem1) を示す.
 
 ```{lemma borelcantelli, name="ボレル-カンテリの補題"}
 ${E_1,E_2,\cdots}$をある確率空間の事象とする. これらの事象の確率の和が有限であるなら, それらが無限に多く起こる確率はゼロである. つまり,
@@ -205,10 +204,17 @@ ${E_1,E_2,\cdots}$をある確率空間の事象とする. これらの事象の
 である.
 ```
 
-さらに, 定理 \@ref(thm:thorem1) がある.
+```{proof borelcantelli-proof}
+証明は読者の課題とする.
+```
 
-```{theorem thorem1, name="TODO の定理"}
-TODO
+
+```{theorem theorem1, name="無限の猿定理"}
+猿がほとんど確実にタイプライタの全てのキーを無限回叩くならば, ほとんど確実にテキストには任意の作品が含まれる.
+```
+
+```{proof theorem1-proof}
+補題 \@ref(lem:borelcantelli) より自明.
 ```
 
 ## カスタムブロック
@@ -288,14 +294,16 @@ TODO
 以降は R で多くのユーザが頻繁に使うパッケージと, いくつかの技術文書作成に役に立つパッケージをインポートしている前提の説明とする. なお, `rmarkdown`, `bookdown` はチャンク内で特に読み込む必要がない.
 
 ```{r base-packages, echo=T, results="hold"}
-for(p in c("tidyverse", "ggthemes", "equatiomatic", "tufte")){
-  if(!p %in% installed.packages()) install.packages(p)
+pkgs <- installed.packages()
+for(p in c("tidyverse", "ggthemes", "equatiomatic", "tufte", "kableExtra")){
+  if(!p %in% pkgs) install.packages(p)
 }
-if(!"rmarkdown" %in% installed.packages()) remotes::install_github("rstudio/rmarkdown")
-if(!"bookdown" %in% installed.packages()) remotes::install_github("rstudio/bookdown")
+if(!"rmarkdown" %in% pkgs) remotes::install_github("rstudio/rmarkdown")
+if(!"bookdown" %in% pkgs) remotes::install_github("rstudio/bookdown")
 require(tidyverse)
 require(ggthemes)
 require(equatiomatic)
+require(kableExtra)
 ```
 
 このように, ログを掲載することもできる. これは再現性を重視する際に重宝するが, 一方で単に画像などの主力だけを掲載したい場合もあるだろう. あるいは, プログラムの解説のため, **プログラムは掲載するが実行しない**, ということも必要になるかもしれない. **プログラムと結果の表示/非表示はどちらも簡単に切り替え可能**である. そのためには, チャンクオプションを指定する.
@@ -413,15 +421,132 @@ ggplot(diamonds, aes(x=carat, y=price, color=clarity)) +
   labs( x = "カラット数", y = "価格") + scale_color_pander(name = "クラリティ") +  theme_classic(base_family = "Noto Sans CJK JP") + theme(legend.position = "bottom")
 ```
 
+## それ以外のグラフィックデバイス
+
+LaTeX の `tikzDevice` を利用した作図が可能である. チャンクのエンジンを `tikz`  に設定すれば, そのブロック内では `\begin{tikzpicture}` で始まる内容を記述できる. これは HTML でも出力される(図 \@ref(fig:tikz-venn)).
+
+```{tikz tikz-venn, fig.cap="tikzを利用した図の表示"}
+\def\firstcenter{(135:1.75cm)}
+\def\secondcenter{(45:1.75cm)}
+\def\firstcircle{\firstcenter circle (2.0cm)}
+\def\secondcircle{\secondcenter circle (2.0cm)}
+\def\wholerect{(-4.0, -1.1) rectangle(4.0, 3.35)}
+\begin{tabular}{cc}
+  % A cap B
+  \begin{tikzpicture}
+    \begin{scope}
+       \clip \secondcircle;
+       \fill[cyan] \firstcircle;
+    \end{scope}
+    \draw \wholerect;
+    \draw \firstcircle;
+    \draw \secondcircle;
+    \begin{scope}[font=\small]
+      \draw(90:.5cm) node[text=black, below]{\texttt{A INNER JOIN B}};
+    \end{scope}
+  \end{tikzpicture}
+&
+  % A u B
+  \begin{tikzpicture}
+    \begin{scope}
+       \draw \wholerect;
+       \fill[cyan]\firstcircle;
+       \fill[cyan]\secondcircle;
+     \end{scope}
+     \begin{scope}[font=\small]
+       \draw(90:.5cm) node[text=white, below]{\texttt{A OUTER JOIN B}};
+     \end{scope}
+  \end{tikzpicture}
+\\
+  % A LEFT B
+  \begin{tikzpicture}
+    \draw \wholerect;
+    \draw \firstcircle;
+    \draw \secondcircle;
+    \begin{scope}
+      \fill[cyan]\firstcircle;
+      \draw\firstcenter;
+      \draw\secondcenter;
+   \end{scope}
+   \begin{scope}[font=\small]
+      \draw\firstcenter node[text=black, below]{\texttt{A LEFT JOIN B}};
+   \end{scope}
+  \end{tikzpicture}
+&
+  % A RIGHT B
+  \begin{tikzpicture}
+    \draw \wholerect;
+    \draw \firstcircle;
+    \draw \secondcircle;
+    \begin{scope}
+      \fill[cyan]\secondcircle;
+      \draw\firstcenter;
+      \draw\secondcenter;
+   \end{scope}
+   \begin{scope}[font=\small]
+      \draw\secondcenter node[text=black, below]{\texttt{A RIGHT JOIN B}};
+   \end{scope}
+  \end{tikzpicture}
+\\
+\end{tabular}
+```
+
+それ以外にも `knitr` が対応しているドローイングプログラムがある. 例えば DOT言語 (`dot`), Asymptote (`asy`). node.js や D3.js も使用できるが, HTMLベースのものの多くはPDFでは表示できないことに注意.
+
+```{asy asymptote-graph, echo=F, fig.cap="Asymptote による画像((ref:RCB)と同じもの)"}
+import graph3;
+import grid3;
+import palette;
+settings.prc = false;
+
+currentprojection=orthographic(0.8,1,2);
+size(500,400,IgnoreAspect);
+
+real f(pair z) {return cos(2*pi*z.x)*sin(2*pi*z.y);}
+
+surface s=surface(f,(-1/2,-1/2),(1/2,1/2),50,Spline);
+
+surface S=planeproject(unitsquare3)*s;
+S.colors(palette(s.map(zpart),Rainbow()));
+draw(S,nolight);
+draw(s,lightgray+opacity(0.7));
+
+grid3(XYZgrid);
+```
+
+なお, DOT言語は `DiagrammeR` パッケージを経由して使うこともできる[^rcb-diagrammer](図: \@ref(fig:diagrammer-graph)). グラフィカルモデルの記述などはこちらのほうが簡単かもしれない.
+
+(ref:diagrammer-cap) `DiagrammeR` によるグラフィカルモデル ((ref:RCB), Ch. 4.15 より)
+
+```{r diagrammer-graph, echo=T, fig.cap="(ref:diagrammer-cap)"}
+DiagrammeR::grViz("digraph {
+  graph [layout = dot, rankdir = TB]
+  
+  node [shape = rectangle]        
+  rec1 [label = 'Step 1. 起床する']
+  rec2 [label = 'Step 2. コードを書く']
+  rec3 [label =  'Step 3. ???']
+  rec4 [label = 'Step 4. 給料をもらう']
+  
+  # edge definitions with the node IDs
+  rec1 -> rec2 -> rec3 -> rec4
+  }", 
+  height = 500)
+```
+
+[^rcb-diagrammer]: https://bookdown.org/yihui/rmarkdown-cookbook/diagrams.html
+
+## TODO: 図のレイアウト設定
+
 もしかすると技術文書ではなく文芸作品を作成したいユーザもいるかもしれない. そのような場合は別の章で解説する.
 
 PDF ならばフロート設定のため, 図が離れた位置に配置されることがある. そのため, 「図 \@ref(fig:plot-sample)」 のような相互参照を使うと良いだろう. フロートを使うかどうかは, 後のセクションで解説する TODO
 
 Rのグラフィックデバイスを使っている限り, 通常のRのコンソールと同じコードをチャンク内に書くだけで表示できる.
 
-R のグラフィックデバイスではないとは, RGL や `plotly` など外部ライブラリに頼ったグラフ作成ツールのことである. 判断できない人は, RStudio 上で実行して, "Plots" ペーンに表示されたら R のグラフィックデバイス, "Viewer" ペーンに表示されたらそうでない, で覚えていただきたい. 後者を表示する方法はセクション \@ref(sec:webapp) 後述する. R をこれまで使ったことがなく, それすらも何を言っているのか分からない, という場合は `ggplot2` を使ってもらう.
+R のグラフィックデバイスではないとは, RGL や `plotly` など外部ライブラリに頼ったグラフ作成ツールのことである. 判断できない人は, RStudio 上で実行して, "Plots" ペーンに表示されたら R のグラフィックデバイス, "Viewer" ペーンに表示されたらそうでない, で覚えていただきたい. 後者を表示する方法は \@ref(webapp) 章で後述する. R をこれまで使ったことがなく, それすらも何を言っているのか分からない, という場合は `ggplot2` を使ってもらう.
 
-最後の `fig.cap=""` がキャプションである. ただし, どうも日本語キャプションを書いたあとに他のチャンクオプションを指定するとエラーになるようだ. よって **`fig.cap=` はオプションの末尾に書くべきである**. また, `fig.cap=""` に数式や一部の特殊なテキストを直接入力することができない. この問題は相互参照について解説するセクション \@ref(sec:crossref) で詳細を述べる. 
+最後の `fig.cap=""` がキャプションである. ただし, どうも日本語キャプションを書いたあとに他のチャンクオプションを指定するとエラーになるようだ. よって **`fig.cap=` はオプションの末尾に書くべきである**. また, `fig.cap=""` に数式や一部の特殊なテキストを直接入力することができない. この問題は相互参照について解説するセクション \@ref(crossref) で詳細を述べる. 
 
 `fig.cap` 以外のオプションはおそらく頻繁には変えないため, 冒頭でまとめて設定したほうが楽だろう.
 
@@ -443,35 +568,42 @@ TODO
 
 [^standard-graphics]: なお, Rユーザーならば標準グラフィック関数である `plot()` 関数をご存知だろうが, 本稿では**標準グラフィック関数の使用を推奨しない**. 標準グラフィック関数のデバイスはもともと日本語フォントを想定しておらず, OSごとに使用できるフォントも異なるためで, 品質維持のためには使用させない方針とした. 工夫すれば標準グラフィック関数でも日本語を適切に出力できるが, `ggplot2` を使用したほうが簡単であることが多いため, 標準グラフィック関数の解説書を作る以外では使うべきでない.
 
-## R プログラムを使った表の挿入
+## R プログラムを使った表の装飾
 
-既に Markdown 記法を使った表記を紹介した.
-
+Markdown 記法を使った表記は既に紹介した. しかしこれは表の数値を全て手動で書かなければならない. もちろんこれも R 内のデータを手書きなどせずとも表示できるし, テーブルのデザインもある程度自由に設定できる.
+ 
 R Markdown のデフォルトでは R のコンソールと同様にテキストとして出力されるが, bookdown では異なるデザインで表示されている. これは `knitr`, `kableExtra` パッケージなどで事後処理をかけることで見やすいデザインの表に変換しているからである.
 
 この方法はシンプルで使いやすいが, R はテーブル状のデータ処理に長けているため, 手動で数値を書くよりも簡単な方法がある.
 
-```{r display-dataframe-kable}
+```{r display-dataframe-kable, echo=T}
 data(iris)
-knitr::kable(
-  head(iris), booktabs = T,
-  caption = '`knitr::kable()` で出力された表'
+kable(
+  head(iris, n = 10), caption = '`knitr::kable()` で出力された (PDFではあまりかっこよくない) 表'
   )
 ```
 
-こちらは関数内にキャプションを書く必要がある. 表\@ref(tab:display-dataframe-kable).
+こちらは関数内にキャプションを書く必要があり, チャンクオプションに指定する方法はない (表\@ref(tab:display-dataframe-kable)).
 
-TODO: cookbook も確認
+```{r display-dataframe-kable-2, echo=T}
+data(iris)
+kable(
+  head(iris, n = 10), booktabs = T,
+  caption = '奇数行を強調し, PDF では booktabs を利用'
+  ) %>% row_spec(seq(1, 10, by = 2), background = "gray")
+```
+
+さらに, (ref:RCB) の [Ch. 10.1 The function `knitr::kable()`](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html) ではその他いろいろな書式設定を紹介している.
 
 # 相互参照と引用
 
-## 相互参照 {#sec:crossref}
+## 相互参照 {#crossref}
 
 ### 図表や式へのアンカーリンク
 
 図, 表, 式などに番号を自動で割り当て, さらにハイパーリンクを付加できる. `\@ref(ID)` を使う. 現状では `refstyle` や `prettyref` のように接頭語を自動で付けてくれないが, そのうちなんとかなるかもしれない.
 
-bookdown の相互参照は, LaTeX の `prettyref.sty` のように, `接頭語:参照ID` という記法になる. 既に紹介したように, 数式参照の接頭語は `eq` で, 定理は `thm` である. 図表は `fig`, `tab`. その他の接頭語は (ref:BKD) [Ch. 2.2 Markdown extensions by bookdown](https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html#equations) を参考に.
+bookdown の相互参照は, LaTeX の `prettyref.sty` のように, `接頭語:参照ID` という記法になる. 参照IDは通常, チャンクIDと同じである. 既に紹介したように, 数式参照の接頭語は `eq` で, 定理は `thm` である. 図表は `fig`, `tab`. その他の接頭語は (ref:BKD) [Ch. 2.2 Markdown extensions by bookdown](https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html#equations) を参考に.
 
 ### 表への相互参照
 
@@ -502,6 +634,10 @@ Table: (\#tab:tab-md) Markdown 記法の表
           5.0           3.6            1.4           0.2
           5.4           3.9            1.7           0.4
 
+### 章への相互参照
+
+章見出しへの相互参照も可能である. これはPandocの機能を利用しているため, 接頭辞は不要である. Pandocの仕様により欧文であればタイトルがそのまま参照IDとなるが, 非欧文の文字に対して適用されないため, 参照したい章の見出しにの後にスペースを入れて `{#参照ID}` と書く必要がある.
+
 ### 特殊な相互参照
 
 それ以外にも, 相互参照と似たような構文でマクロ的にテキストを置き換えることができる. 例えばここまで何度も (ref:BKD) と (ref:RDG) に言及してきたが, 毎回ハイパーリンクと強調フォントにするのは面倒である. そこで, `(ref:RDG) [**RDG**](https://bookdown.org/yihui/rmarkdown/)` のような宣言を前後に改行を入れて書くことでトークンを作成できる
@@ -531,9 +667,9 @@ PDF での表示では, 図 \@ref(fig:caption) のキャプションの外側が
 
 TODO: 自己言及的な文章は書かないならこれくらいの認識でいいだろうが, より正確な話はどうするか
 
-## 文献引用
+## 文献引用 {#bibliography}
 
-`@引用ID` で本文に引用を与えられ, 巻末に引用した文献の一覧が自動で生成される. また, `citr` パッケージにより, RStudio Addins に文献に対応する引用IDを取り出して挿入する機能が追加される. `BibTeX`, `BibLaTeX`, または `pandoc-citeproc` で処理される.
+YAMLフロントマターの `biblography:` に文献管理ファイル (`.bib`, `.json` 等) を指定することで, ファイルに含まれる文献への参照が可能になる. `@引用ID` で本文に引用を与えられ, 文書に引用した文献の一覧が自動で生成される. また, `citr` パッケージにより, RStudio Addins に文献に対応する引用IDを取り出して挿入する機能が追加される. 
 
 (ref:citr-caption) `citr` パッケージの例
 
@@ -541,18 +677,60 @@ TODO: 自己言及的な文章は書かないならこれくらいの認識で�
 knitr::include_graphics(file.path(img_dir, "citr.png"))
 ```
 
+`BibTeX`, `BibLaTeX`, または `pandoc-citeproc` で処理される. これは `citation-package` または  `_output.yml` の `citation_package` に依存する. HTML は基本的に `pandoc-citeproc` を使用した出力であり, 影響が大きいのは PDF である.
+
+* `default`: `pandoc-citeproc` を使用して参考文献を出力する.
+* `biblatex`: `biblatex` を使用する.
+* `natbib`: `bibtex` を使用し, 本文中の参照には `natbib.sty` を使う.
+  + `natbiboptions:` で `number`, `authoryear` などの `natbib.sty` のオプションを指定できる.
+
+そのスタイルファイル (`.bst`, `.csl`) はそれぞれ `biblio-style:`/`csl:` で指定できる. しかし国内論文雑誌などで規定された, 日本語文献に対応した `.bst` ファイルを使って参考文献を記載したい場合には (u)`\pBibTeX`{=latex}`pBibTeX`{=html} が必要となるはずである.
+
+これはR Markdownで日本語技術文書を作る際の特にアレな障害の1つである. PDF は BibTeX があるが, HTML では使えない. pandoc の出力に頼るしかない. pandoc は CSL という, Word でも使われている参考文献リストのフォーマットに対応しているが, 機能が少ないため日本語文献の引用スタイルが崩れてしまう.
 
 
-# YAML フロントマターを使ったレイアウト変更
+日本語対応 `.bst` ファイルを使いたい場合は少しトリッキーな操作が必要になる. `rmarkdown` は `tinytex` というパッケージでインストールされたスタンドアローンな処理系で PDF を生成している. 冒頭のチャンクで `options(tinytex.latexmk.emulation = F)` を指定することで, 自分のマシンにインストールされている普段使っている処理系に処理させることができる. さらに `rmdja` では `natbib` を指定した場合に自動でカレントディレクトリに `.latexmkrc` をコピーするようにしている. しかしログが残らないなどデバッグしづらいところがあるため, このやり方はやや使いづらい.
 
+TODO: この操作なしに (u)`\pBibTeX`{=latex}`pBibTeX`{=html} を使うには, たぶん `tinytex` と `rmarkdown` 両方の修正が必要. そこまで複雑ではないと思うのでそのうち修正してみたい.
 
-## TODO: HTML のレイアウト
+# 簡単なレイアウト変更
+
+## HTML
+
+### フォント変更
 
 HTML は文字通りHTMLで出力しているため, CSS の使い方次第でいくらでもデザインを変えることができる.
 
-TODO
 
-## PDF のレイアウト
+## PDF
+
+### フォント変更
+
+PDF を生成する場合, ver 0.3 時点ではデフォルトのフォントを OS に応じて変えている. もし変更したい場合はYAMLフロントマターの以下の項目を変更する
+
+* `mainfont`: 欧文セリフフォント
+* `sansfont`: 欧文サンセリフフォント
+* `monofont`: 等幅フォント (コードの表示などに使用)
+* `jfontpreset`: 和文フォントのプリセット
+* `jmainfont`: 和文メインフォント (一般に明朝体を指定)
+* `jsansfont`: 和文セリフフォント (一般にゴシック体を指定)
+* `jmonofont`: 和文等幅フォント (コードの表示などに使用)
+
+`jfontpreset` は `zxjafont` または `luatex-ja` によるプリセットで, 3種類のフォントを一括指定できる. 個別指定したフォントはこれを上書きする. 特にこだわりがないなら一括指定で良いが, ソースコードを多く掲載する場合は `M+` や `Ricty` などのフォントを用意すると良いだろう.
+
+さらに, それぞれの項目には `options` と接尾辞のついた項目が用意されている. フォントの相対サイズが合わず不格好な場合は
+
+```yaml
+mainfont: Palatinno
+mainfontoptions:
+  - Scale=0.9
+```
+
+などと書いて調整できる.
+
+インラインのフォント変更は TODO
+
+### 文書クラスの変更
 
 HTMLは利用者側が見え方をある程度カスタマイズできる. かつて存在した Evernote Clearly やカスタム CSS を使って. そのぶんPDFは作成者側がよりレイアウトに注意を払うことになるだろう. 本稿では文章の区切りを章立てにしている. しかし PDF 数十ページしかない文書を大きな文字サイズの見出しで区切るのは少しものものしい感じがする. YAML フロントマターを変更すれば, トップレベルの見出しを変更できる.
 
@@ -562,7 +740,7 @@ HTMLは利用者側が見え方をある程度カスタマイズできる. か�
 documentclass: bxjsreport
 ```
 
-`documentclass` には LaTeX の文書クラスファイル (`.cls`) ならなんでも与えることができるが, \XeLaTeX または \LuaLaTeX で日本語文書を作成することを想定しているため, BXjscls シリーズのクラスから選ぶことを推奨する[^bxjscls].
+`documentclass` には LaTeX の文書クラスファイル (`.cls`) ならなんでも与えることができるが, \XeLaTeX または \LuaLaTeX で日本語文書を作成することを想定しているため, BXjscls シリーズのクラスから選ぶことを推奨する[^bxjscls]. よって, 以下3種類の中から選ぶとよい. デフォルトは `bxjsbook` なので, これは明示的に指定する必要はない.
 
 * `bxjsbook`
 * `bxjsreport`
@@ -572,42 +750,26 @@ documentclass: bxjsreport
 
 文書クラスとは別に, 文書
 
+その他, `_output.yml` や `_bookdown.yml` のコメントを参考に.
+
+
 [^bxjscls]: https://www.ctan.org/pkg/bxjscls. 但し, スライド用クラスである `bxjsslide` の使用は想定していない.
 
-# `rmdja` で追加されたガジェット的機能
 
-ここでは上記に分類できないが, 技術文書を書く上であると便利そうな機能を紹介する. いずれも `rmdja` で提供される機能である.
+# `rmdja` による文書作成支援機能
 
-## 技術文書でよく使われるパーツ
+### クリエイティブ・コモンズの表記
 
-### TODO: クリエイティブ・コモンズの表記
+Web公開する文書ならばクリエイティブ・コモンズの表記をつけたいところだ. 公式サイトで毎回発行するのは面倒なので表示する関数を用意にした. ハイパーリンクも付けるようにしている. チャンクでは `results="asis"` オプションが必要になる. また, 通常は `echo=F` を設定すべきだろう. 冒頭の表記もこれで作成している. もちろんそれぞれの媒体に対応している. 
 
-公式サイトで毎回発行するのは面倒なのでチャンク内で実行できる関数にした. 冒頭の表記もこれで作成している. もちろんそれぞれの媒体に対応している.
+文言の生成は未対応
 
-```{r cc-example}
-cc <- getCC(adapt = "yes", commercial = F, size = "normal")
-```
+### ルビ表記
 
-TODO: 文言も生成する
+ルビはおそらくCJK言語など一部の言語でしか使われていない (アラビア語とかヘブライ語とかの補助記号は詳しく知らないが多分グリフとしてサポートされてるっぽいので無視) ため, ルビ表記も R Markdown ではサポートされていない. そこで簡単にルビを表示できる関数 `rmdja::ruby()` を用意した. インライン実行で使う. PDF での配置は `pxrubrica.sty` を利用したグループルビである. よって, 1字ごとに配置 (モノルビ) にしたいとか, 突出指定とか, 細かいことはHTMLタグやCSSやLaTeXコマンドを自分で書く. 妥協案として, 1字ごとに呼び出す手もある.
 
-### TODO: コンピュータ技術書っぽいブロック
+グループルビの例: とある科学の`r rmdja::ruby("超電磁砲", "レールガン")`, `r rmdja::ruby("皇帝", "カイザー")`ラインハルト, `r rmdja::ruby("柊館", "シュテッヒパルムシュロス")`, `r rmdja::ruby("黒色槍騎兵", "シュワルツ・ランツェンレイター")`, `r rmdja::ruby("喜連瓜破", "きれうりわり")`,  , `r rmdja::ruby("MEXICO", "メキシコ")`
 
-TODO: Atusy の本や関数リファレンスみたいなやつを書く時になんかできないか
+分割して出力した例: `r rmdja::ruby("喜", "き")``r rmdja::ruby("連", "れ")``r rmdja::ruby("瓜", "うり")``r rmdja::ruby("破", "わり")`, `r rmdja::ruby("黒色", "シュワルツ")``r rmdja::ruby("槍騎兵", "ランツェンレイター")` ,
 
-
-### TODO: バージョン管理
-
-TODO: 特に PDF 版にバージョン履歴自動生成したい
-
-
-### TODO: 縦書き文書
-
-できるか?
-
-なろうやカクヨムに入稿できるか? なろうやカクヨムのライバルになれるか?!
-
-
-
-## TODO: R Markdown 関連の参考資料
-
-TODO: R Markdown の仕組み, pandoc, 媒体ごとの違い
+TODO: それ以外にも便利機能を少しづつ増やしていく予定

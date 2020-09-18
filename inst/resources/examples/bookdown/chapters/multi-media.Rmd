@@ -1,53 +1,28 @@
-(ref:part-title) `rmdja` が提供する機能と製本方法
+# (PART) 製本と多様な形式への対応 {-}
 
-# (PART) (ref:part-title) {-}
 
-# `rmdja` の提供する機能
+# 製本方法の詳細
 
-`rmdja` は日本語文書を作成する際の煩雑な下準備を省くことを目的に作っており, 主に `rmarkdown` および `bookdown` のフォーマット関数のデフォルト値などを調整するなどでそれを実現している. そして `bookdown` に対応する製本機能については, PDF, HTML, 電子書籍など異なる媒体でもなるべくレイアウトやコンテンツの差異が逸脱しないようにすることも考慮している.
-
-出力方法で言えば, HTML と PDF に大別できる. Rmdは HTMLタグも LaTeX コマンドも受け付けるが, それぞれ HTML と PDF に変換する際にしか反映できない. よって, 例えば複雑な図表を LaTeX で書いてしまった場合, HTML では表示されない.
-
-紙媒体と電子媒体では表現できることに差がある. 例えば紙はあらゆる環境で同じような見た目になるが, ハイパーリンクは付けられないし, 一度出版してしまうと修正は容易ではない. PDF の見た目も読者の環境に依存しにくいが, やはり更新が容易ではない.
-
-`bookdown` には既に印刷された本の中身を書き換えるする機能はないが, 出力ごとに内容を変えることで, PDF にのみ更新履歴を表示することはできる.
-
-`knitr::is_latex()`, `knitr::is_html()` などは, knit 時にどの媒体への変換処理なのかを判定するのに使える.
-
-また,  `_bookdown.yml` の設定, `rmd_files` は, 媒体別に設定することができる.
-
-```yaml
-rmd_files:
-  html:
-    - index.Rmd
-    - html-only.Rmd
-  latex:
-    - index.Rmd
-    - latex-only.Rmd
-```
-
-# Web アプレットの挿入 {#sec:webapp}
-
-### plotly
-
-### shiny
-
-## 製本のためのファイル構成
+冒頭のチュートリアルで行った製本 (ビルド) の仕組みをもう少し詳しく解説する.
 
 bookdown-demo を念頭に置いた解説. `rmdja` も基本的に同じ.
 
-* `index.Rmd`: ソース (名前を変えてもいいが...)
+* `index.Rmd`: デフォルトで最初に読み込まれる`Rmd` ファイル (名前を変える機能もあるが, 現時点では不具合が起こりやすいのでおすすめしない)
 * それ以外の `Rmd` ファイル: 連結して読み込むことが可能
 * `_output.yml`: マルチメディア展開のための設定. PDF, HTML, EPUB それぞれの設定を書く
 * `_bookdown.yml`: bookdown のレイアウト設定
-* その他の設定ファイル: その他製本に必要なもの, `.tex`, `.css` ファイル, `.bib` 等
+* その他の設定ファイル: その他製本に必要なもの, 画像ファイル, `.css` ファイル, `.bib` 等
 
-`_output.yaml`, `_bookdown.yml` は `index.Rmd` のヘッダに書くこともできるが, 長くなりすぎるので分割できる. `bookdown::render()` 関数を呼び出した時に, カレントディレクトリのこれらを自動で読み込んでくれるため.
+`_output.yaml`, `_bookdown.yml` は `index.Rmd` のヘッダに書くこともできるが, 長くなりすぎるので分割できる. `bookdown::render_book()` 関数は, ルートディレクトリのこれらを自動で読み込んでくれる.
+
+## ファイル構成
+
+これらのファイルの中身を解説する.
 
 ### `_output.yml`
 
 本来の YAML の `output:` 以下の記述をこの `_output.yml` ファイルに書くことができる.
-`output:` を複数書くと`bookdown::remder_book()` による製本時にそれぞれ作成してくれる.
+`output:` を複数書くと`rmarkdown::render_site()` やビルドツールでそれぞれの形式に一括作成してくれる.
 
 ```yaml
 output:
@@ -64,7 +39,7 @@ output:
 documentclass: book
 ```
 
-詳しくは (ref:BKD) の "[Ch. 3 Output Formats](https://bookdown.org/yihui/bookdown/output-formats.html)" の章を読め
+詳しくは (ref:BKD) の "[Ch. 3 Output Formats](https://bookdown.org/yihui/bookdown/output-formats.html)" の章を.
 
 ### `_bookdown.yml`
 
@@ -76,11 +51,71 @@ https://ill-identified.hatenablog.com/entry/2020/09/05/202403
 詳しくは, (ref:BKD) の [Ch. 4.4 Configuration](https://bookdown.org/yihui/bookdown/configuration.html)
 
 
-Build ペーンから文書をビルドするには,  `index.Rmd` のYAML ヘッダに `site: bookdown::bookdown_site` を書く必要がある. さらに,  `index.Rmd` をプロジェクトディレクトリのルートに置いていない場合は, ツールバーの `Build` -> `Configure Build Tools...` から `index.Rmd` を置いているディレクトリを site ディレクトリとする設定が必要になる.
+Build ペーンから文書をビルドするには,  `index.Rmd` のYAML ヘッダに `site: bookdown::bookdown_site` を書く必要がある. さらに,  `index.Rmd` をプロジェクトディレクトリのルートに置いていない場合は, ツールバーの `Build` -> `Configure Build Tools...` から `index.Rmd` を置いているディレクトリを site ディレクトリとする設定が必要になる(図  \@ref(fig:build-pane2)).
 
-```{r build-pane, fig.cap="Build ペーンの手動設定"}
-knitr::include_graphics(file.path(img_dir, c("build-pane.png", "build-pane-build.png")))
+```{r build-pane2, fig.cap="Build ペーンの手動設定"}
+include_graphics(file.path(img_dir, c("build-pane.png", "build-pane-build.png")))
 ```
+
+または, `bookdown::render_book("index.Rmd", "rmdja::pdf_book_ja")` などでも実行できるから, コマンドラインからも実行できる. 同時製本は `rmarkdown::render_site()`.
+
+# 出力形式による表現の限界
+
+## HTMLとPDFで処理を場合分けする
+
+出力方法で言えば, HTML と PDF に大別できる. Rmdは HTMLタグも LaTeX コマンドも受け付けるが, それぞれ HTML と PDF に変換する際にしか反映できない. よって, 例えば複雑な図表を LaTeX コマンドでじかに Rmd ファイルに書いてしまった場合, HTML では表示されない.
+
+紙媒体と電子媒体では表現できることに差がある. 例えば紙はあらゆる環境で同じような見た目になるが, ハイパーリンクは付けられないし, 一度出版してしまうと修正は容易ではない. PDF の見た目も読者の環境に依存しにくいが, やはり更新が容易ではない.
+
+`bookdown` には既に印刷された本の中身を書き換えるする機能はないが, 出力ごとに内容を変えることで, PDF にのみ更新履歴を表示することはできる.
+
+`knitr::is_latex_output()`, `knitr::is_html_output()` などは, knit 時にどの媒体への変換処理なのかを判定するのに使える. `rmdja::ruby()` もこの機能を利用しているし, 本文中の `\LaTeX`{=latex}`LaTeX`{=html} のロゴも HTML と PDF で使い分けている.
+
+また,  `_bookdown.yml` の設定, `rmd_files` は, 媒体別に設定することができる.
+
+```yaml
+rmd_files:
+  html:
+    - index.Rmd
+    - html-only.Rmd
+  latex:
+    - index.Rmd
+    - latex-only.Rmd
+```
+
+
+## 絵文字の出力
+
+絵文字をHTMLでもPDFでも出力したい場合, `\coloremoji{⛄}`  のように絵文字を囲む. ただし, RStudio のエディタは一部のマルチバイト文字の表示に対応していないので予期せぬ不具合に注意する.
+
+現在の主要Webブラウザでは, 特に設定せずとも Unicode 絵文字をカラー画像に置き換えて表示できるものが多い. しかし PDF 生成時には明示的にフォントを指定するか, 画像に置き換える記述が必要である. その実現のため `bxcoloremoji` という LaTeX パッケージ[^bxcoloremoji]を利用する. このパッケージは CTAN に登録されていないため, 別途インストールする必要がある.
+
+
+## 画像の保存形式
+
+技術文書での画像の多くはプロットなど単純な図形なので, 写真などを掲載するのでない限り, PDF で出力する場合はプロット画像も PDF にするのが望ましい. JPG や PNG などのラスタ画像では拡大すると粗くなるが, PDF などのベクタ画像ならば拡大しても粗くならず, かつ単純な図形ならばはファイルサイズも小さく済むことが多い. 一方で HTML は通常 Webブラウザで閲覧するため, PDF に対応していないことが多い.  HTML でベクタ画像を掲載したい場合は **SVG 形式** で出力する.
+
+R による SVG への出力は, 従来組み込みの `SVG()` で行うことが多かったが, 近年は新たなパッケージが出ている. 有力なのは `svglite` と `rsvg` である.
+
+https://oku.edu.mie-u.ac.jp/~okumura/stat/svg.html
+
+`rsvg` のほうが高性能だが,  `knitr` で対応しているのは `svglite` なので簡単に使いたいならこちらを推奨する.
+
+## デフォルトの保存形式
+
+デフォルトでは, PDF は `cairo_pdf`, HTML では解像度を高めに設定した `PNG` を使用している. これは, 件数の多い散布図など, ベクタ形式ではファイルサイズが大きくなりすぎる場合もありうるための判断である.
+
+画像形式を変更したい場合は, チャンクオプションの `dev`  で, オプションは `dev.args=list(...)` で変更できる.
+
+https://bookdown.org/yihui/rmarkdown-cookbook/graphical-device.html
+
+
+# Web アプレットの挿入 {#webapp}
+
+### TODO: plotly
+
+### TODO: shiny
+
 
 # 製本した文書を配布する
 
@@ -93,9 +128,9 @@ HTML ファイルは様々な配布方法がある. もちろん自分でサー�
 
 (1) の詳細は github.com の[公式ドキュメント](https://docs.github.com/ja/github/working-with-github-pages/about-github-pages)を見るのが一番良いだろう.
 
-既にbookdownで作成した文書を公開している例は多数ある. 例えば既に紹介したようにそれじたいドキュメントが `bookdown` で作られているし, "R for Data Science" [@wickham2016Data] [^r4ds-source]は, 内容の良さも含め一見に値する. また, "Hands-On Data Visualization: Interactive Storytelling from Spreadsheets to Code" [@doughertyforthcomingHandsOn] という本[^handon-source]が来年出るらしい. そして面白いことにこれは R Google スプレッドシートとか R 以外のWeb上のサービスの利用法を紹介する文書である.
+既にbookdownで作成した文書を公開している例は多数ある. 例えば既に何度も言及した公式解説サイトはそれじたいが `bookdown` で作られているし, "R for Data Science" [@wickham2016Data] [^r4ds-source]は, 内容の良さも含め一見に値する. また, "Hands-On Data Visualization: Interactive Storytelling from Spreadsheets to Code" [@doughertyforthcomingHandsOn] という本[^handon-source]が来年出るらしい. そして面白いことにこれは R Google スプレッドシートとか R 以外のWeb上のサービスの利用法を紹介する文書である.
 
-これらはいずれもソースコードまで公開されている. もちろんここでいうソースコードとは, 本文中のプログラムだけでなく文書を生成する `Rmd` ファイルなどである.
+これらはいずれもソースコードまで公開されている. もちろんここでいうソースコードとは, 本文中のプログラムだけでなく文書を生成する `Rmd` ファイルなども含める.
 
 それ以外にも有名無名の多くのドキュメントが公開されているが, 一方で日本語はまだまだ少ない. 内容が豊富で, かつソースコードまで公開されている例として以下が見つかった.
 
@@ -107,21 +142,32 @@ bookdown の機能や見た目を確認することができる. さらに以下
 * 『[三國志で学ぶデータ分析 (Japan.R 2019)](https://gedevan-aleksizde.github.io/Japan.R2019/)』[^sangokushi-source] (Japan.R 2019 の資料)
 * 『[経済学と反事実分析 接触篇 Economics and Counterfactual Analysis: A Contact](https://gedevan-aleksizde.github.io/20190125_tokyor/)』[^structural-source] (Tokyo.R 第83回の資料)
 
-特に私の2作品は PDF のレイアウトにも注意を払っているが,  当時は kazutan 氏作の [`bookdown_ja_template`](https://github.com/kazutan/bookdown_ja_template) をさらに改良した [kenjimyzk 氏のテンプレート](https://github.com/kenjimyzk/bookdown_ja_template) を元にワンオフで作成したフォーマットを使用しており, 今回の `rmdja` を使用していない.
+特に私の2作品は PDF のレイアウトにも注意を払っているが,  当時は kazutan 氏作の [`bookdown_ja_template`](https://github.com/kazutan/bookdown_ja_template) をさらに改良した [kenjimyzk 氏のテンプレート](https://github.com/kenjimyzk/bookdown_ja_template) を元にワンオフで作成したフォーマットを使用し, `rmdja` を使用していないため, あまりスマートでない書き方が見られる.
 
 
- また, HTML 形式の文書には PDF など他のファイル形式のダウンロードリンクを設置することができる.
-
-`bookdown` は `epub` や `mobi` 形式でも出力できるため, 電子書籍として利用することも可能である.
+また, HTML 形式の文書には PDF など他のファイル形式のダウンロードリンクを設置することができる. これは `_bookdown.yml` で表示を指定できる.
 
 ## TODO: 入稿するには
 
-国内の印刷所で PDF 入稿する際のスタンダードは何だろうか? 紙媒体でやったことがないので全くわからない. 少なくとも Type 3 フォントは回避するように設定しているが, おそらくそれだけでは不十分.
+国内の印刷所で PDF 入稿する際のスタンダードは何だろうか? 紙媒体でやったことがないので全くわからない. ver. 0.3 時点での対応を紹介する. 
+
+### トンボの表示
+
+`_output.yml` で
+
+```yaml
+rmdja::pdf_book_ja:
+  tombow:true
+```
+
+とするとPDFにトンボ (trimming mark) を表示する. これは `gentombow.sty` によるものである. しかし私はこの出力が適切なのか判断することができない.
 
 
-トンボを付けるとか?
+### フォントの埋め込み
 
-https://teastat.blogspot.com/2019/01/bookdown.html を参考に
+少なくとも PDF ではフォントを埋め込みそこなったり, Type 3 フォントが設定されないようにしている. ただし Python 等を利用して描いたPDFは個別に設定が必要な場合があり, 保証できない.
+
+TODO: https://teastat.blogspot.com/2019/01/bookdown.html の記述のうち, まだ対応してないものがある.
 
 # (PART) 応用 {-}
 
@@ -215,53 +261,6 @@ Error: LaTeX failed to XXXX
 
 それでも解決しない場合, 改めてこのファイルを手動でタイプセットするのも1つの方法だ. もしうまくいったり, 異なるエラーが出るのなら, 環境の違いが問題かもしれない. そして upBibTeX を使うのなら, 後者が唯一のデバッグ方法だ.
 
-# TODO: マルチメディア特有の問題と対処
-
-## チャンクの条件分岐
-
-## `asis` エンジン
-
-## どのフォーマットを選べばいいのか
-
-TODO: bookdown で追加されたフォーマットはどういう継承関係になっているか
-
-この章はやや技術的な内容で, 単なる使用法だけでなくパッケージの内部処理に関する説明も行う.
-
-## 画像の保存形式
-
-技術文書での画像の多くはプロットなど単純な図形なので, 写真などを掲載するのでない限り, PDF で出力する場合はプロット画像も PDF にするのが望ましい. JPG や PNG などのラスタ画像では拡大すると粗くなるが, PDF などのベクタ画像ならば拡大しても粗くならず, かつ単純な図形ならばはファイルサイズも小さく済むことが多い. 一方で HTML は通常 Webブラウザで閲覧するため, PDF に対応していないことが多い.  HTML でベクタ画像を掲載したい場合は **SVG 形式**で出力する.
-
-R による SVG への出力は, 従来組み込みの `SVG()` で行うことが多かったが, 近年は新たなパッケージが出ている. 有力なのは `svglite` と `rsvg` である.
-
-https://oku.edu.mie-u.ac.jp/~okumura/stat/svg.html
-
-https://bookdown.org/yihui/rmarkdown-cookbook/graphical-device.html
-
-## 参考文献リストの体裁 {#sec:bibliography}
-
-これはR Markdownで日本語技術文書を作る際の特にアレな障害の1つである. PDF は BibTeX があるが, HTML では使えない. pandoc の出力に頼るしかない. pandoc は CSL という, Word でも使われている参考文献リストのフォーマットに対応しているが, これの機能が少ないため日本語文献の引用スタイルが崩れてしまう.
-
-`jecon.bst` の公式ではなく, 私がカスタマイズしたバージョンでも良い. これは本来よりも電子媒体としての利用を重視して,
-
-* 参照URLを表示せず, ハイパーリンクのみにする
-* ArXiv ID の表示とハイパーリンク追加
-
-といった変更をしている. 後者は, BibTeX エントリに以下のように `archivePrefix` に `arxiv` と言う値が入っていると, `eprint` の値が ArXiv ID として表示される. これは ArXiv から直接 `.bib` ファイルを取得したり, Zotero などでインポートすれば必ず入力される項目である.
-
-```bibtex
-archivePrefix = {arXiv},
-eprint = {XXXX.YYYYY},
-...
-```
-
-TODO: 現在 jecon.bst の表示も少しおかしいので確認中.
-
-
-## 絵文字の出力
-
-絵文字をHTMLでもPDFでも出力したい場合, `\coloremoji{⛄}`  のように絵文字を囲む. ただし, RStudio のエディタは一部のマルチバイト文字の表示に対応していないので予期せぬ不具合に注意する.
-
-現在の主要Webブラウザでは, 特に設定せずとも Unicode 絵文字をカラー画像に置き換えて表示できるものが多い. しかし PDF 生成時には明示的にフォントを指定するか, 画像に置き換える記述が必要である. その実現のため `bxcoloremoji` という LaTeX パッケージを使用している[^bxcoloremoji]. このパッケージは CTAN に登録されていないため, 別途インストールする必要がある.
 
 [^r4ds-source]: https://github.com/hadley/r4ds
 [^handon-source]: ソース: https://github.com/handsondataviz/book
