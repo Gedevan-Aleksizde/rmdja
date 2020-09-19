@@ -24,7 +24,7 @@ output:
     fig_caption: true
     figurename: "図"
     tablename: "表"
-    citation_package: natbib
+    citation_package: biblatex
     citation_options: numbers
     number_sections: false
     slide_level: 2
@@ -36,16 +36,8 @@ output:
         - \patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip0.5em}{}{}
         - \makeatother
 fontsize: 12pt
-bibliography: examples.bib
+bibliography: rmdja.bib
 biblo-title: 参考文献
-biblio-style: jplain
-mainfont: "`r if(Sys.info()['sysname'] == 'Linux'){'DejaVu Serif'} else {'Times New Roman'}`"
-mainfontoptions:
-  - Scale=MatchLowercase
-  - Ligatures=TeX
-sansfont: "`r if(Sys.info()['sysname'] == 'Linux'){'DejaVu Sans'} else {'Arial'}`"
-monofont: 'Courier New'
-jfontpreset: "`r switch(Sys.info()['sysname'], 'Linux' = 'noto', 'Darwin' = 'yu-osx', 'Windows' = 'ms')`"
 linkcolor: blue
 citecolor: blue
 urlcolor: magenta
@@ -53,14 +45,13 @@ biblio-title: "参考文献"
 ---
 
 ```{r setup-document, include=F}
-options(tinytex.latexmk.emulation = F)
+# サンプル引用文献リストを取得する
+file.copy(system.file("resources/bibliography/rmdja.bib", package = "rmdja"), "./")
+# options(tinytex.latexmk.emulation = F)
 # 上記は日本語引用文献リストのために必要
 
 # サンプル画像等を参照するパス
 file_loc <- system.file("resources", package = "rmdja")
-# サンプル引用文献リストを取得する
-file.copy(file.path(file_loc, "examples/examples.bib"), to = "./")
-
 knitr::opts_chunk$set(cache = T)
 ```
 
