@@ -164,7 +164,7 @@ beamer_presentation_ja <- function(
   
   preproc <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
     if(identical(citation_package, "natbib")){
-      copy_latexmkrc(...)
+      copy_latexmkrc(metadata, input_file, runtime, knit_meta, files_dir, output_dir)
     }
     return(autodetect_and_set_jfont(metadata, input_file, runtime, knit_meta, files_dir, output_dir, latex_engine))
   }
