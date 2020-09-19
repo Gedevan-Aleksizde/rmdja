@@ -89,7 +89,6 @@ pdf_book_ja <- function (
       includes$before_body <- c(includes$before_body, system.file("resources/styles/latex/folio.tex", package = "rmdja"))
     }
   }
-  print(includes)
 
   args <- list(
     base = list(
@@ -134,7 +133,7 @@ pdf_book_ja <- function (
   preproc <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
     if(identical(citation_package, "natbib")) copy_latexmkrc(metadata, input_file, runtime, knit_meta, files_dir, output_dir)
     args_extra <- autodetect_and_set_jfont(metadata, input_file, runtime, knit_meta, files_dir, output_dir, latex_engine = latex_engine)
-    icon_dir <- file.path(files_dir, "_latex/_img")
+    icon_dir <- file.path(output_dir, "_latex/_img")
     if(!file.exists(icon_dir)) dir.create(path = icon_dir, recursive = T, showWarnings = T)
     file.copy(file.path(system.file("resources/styles/img", package = "rmdja"), ICON_FILES()), icon_dir)
     args_extra <- c(args_extra,
@@ -143,7 +142,6 @@ pdf_book_ja <- function (
     if(is.null(metadata$documentclass)) args_extra <- c(args_extra, "-Mdocumentclass=bxjsbook")
     return(args_extra)
   }
-  print(args$base$includes)
   base_format_ <- do.call(
     what = base_format,
     args = if("..." %in% formalArgs(base_format)) args$base else args$base[names(args$base) %in% formalArgs(base_format)]
