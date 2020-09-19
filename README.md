@@ -19,7 +19,7 @@ Customized R Markdown/Bookdown format functions for Japanese users
 1. 後述の必要なパッケージや外部プログラムをインストールする
 2. このパッケージをインストールする 
 ```
-remotes::install_github('Gedevan-Aleksizde/my_latex_templates', subdir = 'rmdja')
+remotes::install_github('Gedevan-Aleksizde/rmdja')
 ```
 3. 新規作成時に [R Markdown] -> [From Template] -> [Beamer in Japanese {rmdja}] を選択します  
 ![select templete](inst/resources/img/readme-selection.png)
@@ -210,6 +210,11 @@ sudo apt install graphiviz
 
 # 更新履歴
 
+* v0.3.1
+  + ミスしたので微修正版
+ 
+ 以下はリポジトリ分割前のバージョンです.
+ 
 * v0.3
   + `bookdown` 日本語版に対応
   + フォントを指定しなかった場合, OSに応じて自動設定するように
