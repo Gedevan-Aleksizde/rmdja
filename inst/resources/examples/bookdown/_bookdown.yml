@@ -1,5 +1,5 @@
 book_filename: main.Rmd                 # マージして作ったファイルの名前.
-output_dir: "docs"                      # ビルドしたファイルの出力先.
+output_dir: "../../../../docs"          # ビルドしたファイルの出力先.
 delete_merged_file: true                # 中間生成された Rmd を製本後に消すかどうか
 clean: null                             # ビルド後に削除するファイル. 多分 LaTeX の中間ファイルなどを消す
 before_chapter_scrip: null              # 章の開始ごとに挿入する処理, .R ファイル
@@ -12,6 +12,7 @@ rmd_files:
     - chapters/introduction.Rmd
     - chapters/minimal.Rmd
     - chapters/elemental.Rmd
+    - chapters/advanced.Rmd
     - chapters/multi-media.Rmd
     - chapters/appendix.Rmd
     - chapters/reference-title.Rmd
