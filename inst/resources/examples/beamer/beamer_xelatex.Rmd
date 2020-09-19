@@ -22,26 +22,22 @@ output:
     out.height: "100%"
     fig_crop: true
     fig_caption: true
-    figurename: "図"
-    tablename: "表"
     citation_package: biblatex
     citation_options: numbers
     number_sections: false
     slide_level: 2
     incremental: false
-    includes:
-      preamble:
-        - \makeatletter
-        - \setlength{\metropolis@progressinheadfoot@linewidth}{2pt}
-        - \patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip0.5em}{}{}
-        - \makeatother
 fontsize: 12pt
+biblio-title: "参考文献"
 bibliography: rmdja.bib
-biblo-title: 参考文献
 linkcolor: blue
 citecolor: blue
 urlcolor: magenta
-biblio-title: "参考文献"
+header-includes:
+  - \makeatletter
+  - \setlength{\metropolis@progressinheadfoot@linewidth}{2pt}
+  - \patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip0.5em}{}{}
+  - \makeatother
 ---
 
 ```{r setup-document, include=F}
@@ -507,7 +503,7 @@ digraph boxes_and_circles {
 * \LaTeX の`tikz`を使用可能
   + `tikz`を知らない人は[ここ](https://www.opt.mist.i.u-tokyo.ac.jp/~tasuku/tikz.html)や[TeX Wiki](https://texwiki.texjp.org/?TikZ)を読む
   + 現時点では**日本語表示が面倒** ([参考](https://stackoverflow.com/questions/51689570/how-to-force-tikz-in-rmarkdown-document-to-show-cyrillic-text))
-  + ~~そこまでやるなら全部\LaTeX で書いたほうがいいのではないか?~~
+  + ~~そこまでやるなら全部 \LaTeX でいいのでは?~~
 
 ## 表の挿入: データフレーム
 
