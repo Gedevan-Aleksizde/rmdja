@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>参考文献 | bookdown + rmdja による多様なファイル形式の日本語技術文書の作成</title>
+  <meta name="description" content="bookdown でまともな日本語文書を作る資料" />
+  <meta name="generator" content="bookdown 0.20.6 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="参考文献 | bookdown + rmdja による多様なファイル形式の日本語技術文書の作成" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://bookdown.org/john/awesome/" />
+  <meta property="og:image" content="https://bookdown.org/john/awesome/img/Johannes_Gutenberg.jpg" />
+  <meta property="og:description" content="bookdown でまともな日本語文書を作る資料" />
+  <meta name="github-repo" content="Gedevan-Aleksizde/rmdja" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="参考文献 | bookdown + rmdja による多様なファイル形式の日本語技術文書の作成" />
+  
+  <meta name="twitter:description" content="bookdown でまともな日本語文書を作る資料" />
+  <meta name="twitter:image" content="https://bookdown.org/john/awesome/img/Johannes_Gutenberg.jpg" />
+
+<meta name="author" content="Katagiri, Satoshi" />
+
+
+<meta name="date" content="2020-09-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="touch-icon.png" />
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<link rel="prev" href="jecon-bst-の紹介.html"/>
+
+<script src="libs/header-attrs-2.3.8/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.6.1/grViz.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="styles/css/style.css" type="text/css" />
+<link rel="stylesheet" href="styles/css/toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="index.html">Top</a></li>
+<li class="divider"></li>
+<li class="part"><span><b>I イントロダクション</b></span></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>序文</a></li>
+<li class="chapter" data-level="" data-path="本稿の目標.html"><a href="本稿の目標.html"><i class="fa fa-check"></i>本稿の目標</a>
+<ul>
+<li class="chapter" data-level="" data-path="本稿の目標.html"><a href="本稿の目標.html#既存のフォーマットとの違い"><i class="fa fa-check"></i>既存のフォーマットとの違い</a></li>
+<li class="chapter" data-level="" data-path="本稿の目標.html"><a href="本稿の目標.html#昔話あるいは既存資料との違い"><i class="fa fa-check"></i>昔話あるいは既存資料との違い</a></li>
+<li class="chapter" data-level="" data-path="本稿の目標.html"><a href="本稿の目標.html#想定読者"><i class="fa fa-check"></i>想定読者</a></li>
+<li class="chapter" data-level="" data-path="本稿の目標.html"><a href="本稿の目標.html#r-markdown-ユーザ向けのメリット"><i class="fa fa-check"></i>R Markdown ユーザ向けのメリット</a></li>
+</ul></li>
+<li class="part"><span><b>II 最低限のチュートリアル</b></span></li>
+<li class="chapter" data-level="1" data-path="準備.html"><a href="準備.html"><i class="fa fa-check"></i><b>1</b> 準備</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="準備.html"><a href="準備.html#インストール"><i class="fa fa-check"></i><b>1.1</b> インストール</a></li>
+</ul></li>
+<li class="part"><span><b>III R Markdown と Bookdown の基本機能</b></span></li>
+<li class="chapter" data-level="" data-path="この部の概要.html"><a href="この部の概要.html"><i class="fa fa-check"></i>この部の概要</a></li>
+<li class="chapter" data-level="2" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html"><i class="fa fa-check"></i><b>2</b> 静的なコンテンツの作成</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#markdown-の基本構文"><i class="fa fa-check"></i><b>2.1</b> Markdown の基本構文</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#インラインでの書式変更"><i class="fa fa-check"></i><b>2.1.1</b> インラインでの書式変更</a></li>
+<li class="chapter" data-level="2.1.2" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#ブロック要素"><i class="fa fa-check"></i><b>2.1.2</b> ブロック要素</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#markdown-を使った図表の挿入"><i class="fa fa-check"></i><b>2.2</b> Markdown を使った図表の挿入</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#コメントアウト"><i class="fa fa-check"></i><b>2.2.1</b> コメントアウト</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#数式"><i class="fa fa-check"></i><b>2.3</b> 数式</a></li>
+<li class="chapter" data-level="2.4" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#カスタムブロック"><i class="fa fa-check"></i><b>2.4</b> カスタムブロック</a></li>
+<li class="chapter" data-level="2.5" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#脚注"><i class="fa fa-check"></i><b>2.5</b> 脚注</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="動的なコンテンツの作成.html"><a href="動的なコンテンツの作成.html"><i class="fa fa-check"></i><b>3</b> 動的なコンテンツの作成</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="動的なコンテンツの作成.html"><a href="動的なコンテンツの作成.html#プログラムチャンク"><i class="fa fa-check"></i><b>3.1</b> プログラムチャンク</a></li>
+<li class="chapter" data-level="3.2" data-path="動的なコンテンツの作成.html"><a href="動的なコンテンツの作成.html#プログラムで数式を生成する"><i class="fa fa-check"></i><b>3.2</b> プログラムで数式を生成する</a></li>
+<li class="chapter" data-level="3.3" data-path="動的なコンテンツの作成.html"><a href="動的なコンテンツの作成.html#プログラムを使った図の挿入"><i class="fa fa-check"></i><b>3.3</b> プログラムを使った図の挿入</a></li>
+<li class="chapter" data-level="3.4" data-path="動的なコンテンツの作成.html"><a href="動的なコンテンツの作成.html#todo-図のレイアウト設定"><i class="fa fa-check"></i><b>3.4</b> TODO: 図のレイアウト設定</a></li>
+<li class="chapter" data-level="3.5" data-path="動的なコンテンツの作成.html"><a href="動的なコンテンツの作成.html#r-プログラムを使った表の装飾"><i class="fa fa-check"></i><b>3.5</b> R プログラムを使った表の装飾</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="相互参照と引用.html"><a href="相互参照と引用.html"><i class="fa fa-check"></i><b>4</b> 相互参照と引用</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="相互参照と引用.html"><a href="相互参照と引用.html#crossref"><i class="fa fa-check"></i><b>4.1</b> 相互参照</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="相互参照と引用.html"><a href="相互参照と引用.html#図表や式へのアンカーリンク"><i class="fa fa-check"></i><b>4.1.1</b> 図表や式へのアンカーリンク</a></li>
+<li class="chapter" data-level="4.1.2" data-path="相互参照と引用.html"><a href="相互参照と引用.html#表への相互参照"><i class="fa fa-check"></i><b>4.1.2</b> 表への相互参照</a></li>
+<li class="chapter" data-level="4.1.3" data-path="相互参照と引用.html"><a href="相互参照と引用.html#章への相互参照"><i class="fa fa-check"></i><b>4.1.3</b> 章への相互参照</a></li>
+<li class="chapter" data-level="4.1.4" data-path="相互参照と引用.html"><a href="相互参照と引用.html#特殊な相互参照"><i class="fa fa-check"></i><b>4.1.4</b> 特殊な相互参照</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="相互参照と引用.html"><a href="相互参照と引用.html#bibliography"><i class="fa fa-check"></i><b>4.2</b> 文献引用</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="簡単なレイアウト変更.html"><a href="簡単なレイアウト変更.html"><i class="fa fa-check"></i><b>5</b> 簡単なレイアウト変更</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="簡単なレイアウト変更.html"><a href="簡単なレイアウト変更.html#html"><i class="fa fa-check"></i><b>5.1</b> HTML</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="簡単なレイアウト変更.html"><a href="簡単なレイアウト変更.html#フォント変更"><i class="fa fa-check"></i><b>5.1.1</b> フォント変更</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="簡単なレイアウト変更.html"><a href="簡単なレイアウト変更.html#pdf"><i class="fa fa-check"></i><b>5.2</b> PDF</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="簡単なレイアウト変更.html"><a href="簡単なレイアウト変更.html#フォント変更-1"><i class="fa fa-check"></i><b>5.2.1</b> フォント変更</a></li>
+<li class="chapter" data-level="5.2.2" data-path="簡単なレイアウト変更.html"><a href="簡単なレイアウト変更.html#文書クラスの変更"><i class="fa fa-check"></i><b>5.2.2</b> 文書クラスの変更</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="rmdja-による文書作成支援機能.html"><a href="rmdja-による文書作成支援機能.html"><i class="fa fa-check"></i><b>6</b> <code>rmdja</code> による文書作成支援機能</a>
+<ul>
+<li class="chapter" data-level="6.0.1" data-path="rmdja-による文書作成支援機能.html"><a href="rmdja-による文書作成支援機能.html#クリエイティブコモンズの表記"><i class="fa fa-check"></i><b>6.0.1</b> クリエイティブ・コモンズの表記</a></li>
+<li class="chapter" data-level="6.0.2" data-path="rmdja-による文書作成支援機能.html"><a href="rmdja-による文書作成支援機能.html#ルビ表記"><i class="fa fa-check"></i><b>6.0.2</b> ルビ表記</a></li>
+</ul></li>
+<li class="part"><span><b>IV 応用編</b></span></li>
+<li class="chapter" data-level="" data-path="このパートについて.html"><a href="このパートについて.html"><i class="fa fa-check"></i>このパートについて</a></li>
+<li class="chapter" data-level="7" data-path="advanced-graph.html"><a href="advanced-graph.html"><i class="fa fa-check"></i><b>7</b> 様々なグラフィックプログラムの埋め込み</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="advanced-graph.html"><a href="advanced-graph.html#tikz-を使う"><i class="fa fa-check"></i><b>7.1</b> <code>tikz</code> を使う</a></li>
+<li class="chapter" data-level="7.2" data-path="advanced-graph.html"><a href="advanced-graph.html#asymptote-を使う"><i class="fa fa-check"></i><b>7.2</b> Asymptote を使う</a></li>
+<li class="chapter" data-level="7.3" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他のプログラム"><i class="fa fa-check"></i><b>7.3</b> TODO その他のプログラム</a></li>
+<li class="chapter" data-level="7.4" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他の-r-プログラム"><i class="fa fa-check"></i><b>7.4</b> TODO: その他の R プログラム</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="表の掲載.html"><a href="表の掲載.html"><i class="fa fa-check"></i><b>8</b> 表の掲載</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="表の掲載.html"><a href="表の掲載.html#texhtml-を出力する関数"><i class="fa fa-check"></i><b>8.1</b> TeX/HTML を出力する関数</a></li>
+<li class="chapter" data-level="8.2" data-path="表の掲載.html"><a href="表の掲載.html#todo-gt-パッケージ"><i class="fa fa-check"></i><b>8.2</b> TODO: <code>gt</code> パッケージ</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="webapp.html"><a href="webapp.html"><i class="fa fa-check"></i><b>9</b> TODO Web アプレットの挿入</a>
+<ul>
+<li class="chapter" data-level="9.0.1" data-path="webapp.html"><a href="webapp.html#todo-plotly"><i class="fa fa-check"></i><b>9.0.1</b> TODO: plotly</a></li>
+<li class="chapter" data-level="9.0.2" data-path="webapp.html"><a href="webapp.html#todo-shiny"><i class="fa fa-check"></i><b>9.0.2</b> TODO: shiny</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="python.html"><a href="python.html"><i class="fa fa-check"></i><b>10</b> TODO Python スクリプトの埋め込み</a></li>
+<li class="part"><span><b>V 製本と多様な形式への対応</b></span></li>
+<li class="chapter" data-level="11" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html"><i class="fa fa-check"></i><b>11</b> 製本方法の詳細</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#ファイル構成"><i class="fa fa-check"></i><b>11.1</b> ファイル構成</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#output.yml"><i class="fa fa-check"></i><b>11.1.1</b> <code>_output.yml</code></a></li>
+<li class="chapter" data-level="11.1.2" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#bookdown.yml"><i class="fa fa-check"></i><b>11.1.2</b> <code>_bookdown.yml</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html"><i class="fa fa-check"></i><b>12</b> 出力形式による表現の限界</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#htmlとpdfで処理を場合分けする"><i class="fa fa-check"></i><b>12.1</b> HTMLとPDFで処理を場合分けする</a></li>
+<li class="chapter" data-level="12.2" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#絵文字の出力"><i class="fa fa-check"></i><b>12.2</b> 絵文字の出力</a></li>
+<li class="chapter" data-level="12.3" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#画像の保存形式"><i class="fa fa-check"></i><b>12.3</b> 画像の保存形式</a></li>
+<li class="chapter" data-level="12.4" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#デフォルトの保存形式"><i class="fa fa-check"></i><b>12.4</b> デフォルトの保存形式</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html"><i class="fa fa-check"></i><b>13</b> 製本した文書を配布する</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#wepページのホスティング"><i class="fa fa-check"></i><b>13.1</b> Wepページのホスティング</a></li>
+<li class="chapter" data-level="13.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#todo-入稿するには"><i class="fa fa-check"></i><b>13.2</b> TODO: 入稿するには</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#トンボの表示"><i class="fa fa-check"></i><b>13.2.1</b> トンボの表示</a></li>
+<li class="chapter" data-level="13.2.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#フォントの埋め込み"><i class="fa fa-check"></i><b>13.2.2</b> フォントの埋め込み</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>VI 応用</b></span></li>
+<li class="chapter" data-level="14" data-path="todo-文芸作品の作成のために.html"><a href="todo-文芸作品の作成のために.html"><i class="fa fa-check"></i><b>14</b> TODO: 文芸作品の作成のために</a></li>
+<li class="part"><span><b>VII デバッグ</b></span></li>
+<li class="chapter" data-level="15" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html"><i class="fa fa-check"></i><b>15</b> 製本時のエラーへの対処</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>15.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
+<li class="chapter" data-level="15.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>15.2</b> YAML フロントマターを確認する</a></li>
+<li class="chapter" data-level="15.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-の生成に失敗する場合"><i class="fa fa-check"></i><b>15.3</b> PDF の生成に失敗する場合</a></li>
+</ul></li>
+<li class="appendix"><span><b>補遺</b></span></li>
+<li class="chapter" data-level="A" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html"><i class="fa fa-check"></i><b>A</b> デフォルト値の自動調整</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html#デフォルトのフォント"><i class="fa fa-check"></i><b>A.1</b> デフォルトのフォント</a></li>
+<li class="chapter" data-level="A.2" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html#チャンクのデフォルト設定"><i class="fa fa-check"></i><b>A.2</b> チャンクのデフォルト設定</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="pdf-の組版に関する細かい話.html"><a href="pdf-の組版に関する細かい話.html"><i class="fa fa-check"></i><b>B</b> PDF の組版に関する細かい話</a>
+<ul>
+<li class="chapter" data-level="B.1" data-path="pdf-の組版に関する細かい話.html"><a href="pdf-の組版に関する細かい話.html#画像の配置"><i class="fa fa-check"></i><b>B.1</b> 画像の配置</a></li>
+<li class="chapter" data-level="B.2" data-path="pdf-の組版に関する細かい話.html"><a href="pdf-の組版に関する細かい話.html#取り消し線"><i class="fa fa-check"></i><b>B.2</b> 取り消し線</a></li>
+<li class="chapter" data-level="B.3" data-path="pdf-の組版に関する細かい話.html"><a href="pdf-の組版に関する細かい話.html#todo-しかし英文で書きたい場合"><i class="fa fa-check"></i><b>B.3</b> TODO: しかし英文で書きたい場合</a></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="jecon-bst-の紹介.html"><a href="jecon-bst-の紹介.html"><i class="fa fa-check"></i><b>C</b> jecon.bst の紹介</a></li>
+<li class="part"><span><b>VIII 参考文献</b></span></li>
+<li class="chapter" data-level="" data-path="参考文献.html"><a href="参考文献.html"><i class="fa fa-check"></i>参考文献</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>bookdown</code> + <code>rmdja</code> による多様なファイル形式の日本語技術文書の作成</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="参考文献" class="section level1 unnumbered" number="">
+<h1>参考文献</h1>
+<p></p>
+
+<div id="refs" class="references hanging-indent">
+<div>
+<p>Dougherty, Jack, and Ilya Ilyankou. n.d. “Hands-on Data Visualization Interactive Storytelling from Spreadsheets to Code.” <a href="https://handsondataviz.org/">https://handsondataviz.org/</a>.</p>
+</div>
+<div>
+<p>Wickham, Hadley, and Garrett Grolemund. 2016. <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em>. First edition. Sebastopol, CA: O’Reilly. <a href="https://r4ds.had.co.nz/">https://r4ds.had.co.nz/</a>.</p>
+</div>
+<div>
+<p>Xie, Yihui. 2020. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. Chapman &amp; Hall. <a href="https://bookdown.org/yihui/bookdown/">https://bookdown.org/yihui/bookdown/</a>.</p>
+</div>
+<div>
+<p>Xie, Yihui, J. J. Allaire, and Garrett Grolemund. 2018. <em>R Markdown: The Definitive Guide</em>. Boca Raton, Florida: Chapman and Hall/CRC. <a href="https://bookdown.org/yihui/rmarkdown">https://bookdown.org/yihui/rmarkdown</a>.</p>
+</div>
+<div>
+<p>Xie, Yihui, Christophe Dervieux, and Emily Riederer. 2020. <em>R Markdown Cookbook</em>. S.l.: CRC PRESS. <a href="https://bookdown.org/yihui/rmarkdown-cookbook/">https://bookdown.org/yihui/rmarkdown-cookbook/</a>.</p>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="jecon-bst-の紹介.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["linkedin", "vk", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "serif",
+"size": 2
+},
+"edit": {
+"link": "edit/master/rmdja/inst/resources/examples/bookdown/chapter/chapters/reference-title.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": "blob/master/rmdja/inst/resources/examples/bookdown/chapter/chapters/reference-title.Rmd",
+"text": null
+},
+"view": {
+"link": "tree/rmdja/inst/resources/examples/bookdown/chapter/chapters/reference-title.Rmd",
+"text": null
+},
+"download": ["main.pdf", "main.epub", "main.mobi"],
+"toc": {
+"collapse": "none"
+},
+"toolbar": {
+"position": "fixed"
+},
+"search": true,
+"info": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
