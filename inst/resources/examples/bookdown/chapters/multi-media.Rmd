@@ -109,14 +109,6 @@ https://oku.edu.mie-u.ac.jp/~okumura/stat/svg.html
 
 https://bookdown.org/yihui/rmarkdown-cookbook/graphical-device.html
 
-
-# Web アプレットの挿入 {#webapp}
-
-### TODO: plotly
-
-### TODO: shiny
-
-
 # 製本した文書を配布する
 
 ## Wepページのホスティング

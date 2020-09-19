@@ -423,124 +423,9 @@ ggplot(diamonds, aes(x=carat, y=price, color=clarity)) +
   theme_classic(base_family = "Noto Sans CJK JP") + theme(legend.position = "bottom")
 ```
 
-## それ以外のグラフィックデバイス
-
-LaTeX の `tikzDevice` を利用した作図が可能である. チャンクのエンジンを `tikz`  に設定すれば, そのブロック内では `\begin{tikzpicture}` で始まる内容を記述できる. これは HTML でも出力される(図 \@ref(fig:tikz-venn)).
-
-```{tikz tikz-venn, fig.cap="tikzを利用した図の表示"}
-\def\firstcenter{(135:1.75cm)}
-\def\secondcenter{(45:1.75cm)}
-\def\firstcircle{\firstcenter circle (2.0cm)}
-\def\secondcircle{\secondcenter circle (2.0cm)}
-\def\wholerect{(-4.0, -1.1) rectangle(4.0, 3.35)}
-\begin{tabular}{cc}
-  % A cap B
-  \begin{tikzpicture}
-    \begin{scope}
-       \clip \secondcircle;
-       \fill[cyan] \firstcircle;
-    \end{scope}
-    \draw \wholerect;
-    \draw \firstcircle;
-    \draw \secondcircle;
-    \begin{scope}[font=\small]
-      \draw(90:.5cm) node[text=black, below]{\texttt{A INNER JOIN B}};
-    \end{scope}
-  \end{tikzpicture}
-&
-  % A u B
-  \begin{tikzpicture}
-    \begin{scope}
-       \draw \wholerect;
-       \fill[cyan]\firstcircle;
-       \fill[cyan]\secondcircle;
-     \end{scope}
-     \begin{scope}[font=\small]
-       \draw(90:.5cm) node[text=white, below]{\texttt{A OUTER JOIN B}};
-     \end{scope}
-  \end{tikzpicture}
-\\
-  % A LEFT B
-  \begin{tikzpicture}
-    \draw \wholerect;
-    \draw \firstcircle;
-    \draw \secondcircle;
-    \begin{scope}
-      \fill[cyan]\firstcircle;
-      \draw\firstcenter;
-      \draw\secondcenter;
-   \end{scope}
-   \begin{scope}[font=\small]
-      \draw\firstcenter node[text=black, below]{\texttt{A LEFT JOIN B}};
-   \end{scope}
-  \end{tikzpicture}
-&
-  % A RIGHT B
-  \begin{tikzpicture}
-    \draw \wholerect;
-    \draw \firstcircle;
-    \draw \secondcircle;
-    \begin{scope}
-      \fill[cyan]\secondcircle;
-      \draw\firstcenter;
-      \draw\secondcenter;
-   \end{scope}
-   \begin{scope}[font=\small]
-      \draw\secondcenter node[text=black, below]{\texttt{A RIGHT JOIN B}};
-   \end{scope}
-  \end{tikzpicture}
-\\
-\end{tabular}
-```
-
-それ以外にも `knitr` が対応しているドローイングプログラムがある. 例えば DOT言語 (`dot`), Asymptote (`asy`). node.js や D3.js も使用できるが, HTMLベースのものの多くはPDFでは表示できないことに注意.
-
-```{asy asymptote-graph, echo=F, fig.cap="Asymptote による画像(RCB と同じもの)"}
-import graph3;
-import grid3;
-import palette;
-settings.prc = false;
-
-currentprojection=orthographic(0.8,1,2);
-size(500,400,IgnoreAspect);
-
-real f(pair z) {return cos(2*pi*z.x)*sin(2*pi*z.y);}
-
-surface s=surface(f,(-1/2,-1/2),(1/2,1/2),50,Spline);
-
-surface S=planeproject(unitsquare3)*s;
-S.colors(palette(s.map(zpart),Rainbow()));
-draw(S,nolight);
-draw(s,lightgray+opacity(0.7));
-
-grid3(XYZgrid);
-```
-
-なお, DOT言語は `DiagrammeR` パッケージを経由して使うこともできる[^rcb-diagrammer](図: \@ref(fig:diagrammer-graph)). グラフィカルモデルの記述などはこちらのほうが簡単かもしれない.
-
-(ref:diagrammer-cap) `DiagrammeR` によるグラフィカルモデル (RCB, Ch. 4.15 より)
-
-```{r diagrammer-graph, echo=T, fig.cap="(ref:diagrammer-cap)"}
-DiagrammeR::grViz("digraph {
-  graph [layout = dot, rankdir = TB]
-  
-  node [shape = rectangle]        
-  rec1 [label = 'Step 1. 起床する']
-  rec2 [label = 'Step 2. コードを書く']
-  rec3 [label =  'Step 3. ???']
-  rec4 [label = 'Step 4. 給料をもらう']
-  
-  # edge definitions with the node IDs
-  rec1 -> rec2 -> rec3 -> rec4
-  }", 
-  height = 500)
-```
-
-[^rcb-diagrammer]: https://bookdown.org/yihui/rmarkdown-cookbook/diagrams.html
+`ggplot2` 以外のパッケージや言語, たとえば `tikz` や `asymptote`, DOT言語も使用できる. これらは \@ref(advanced-graph) 章で紹介する.
 
 ## TODO: 図のレイアウト設定
-
-もしかすると技術文書ではなく文芸作品を作成したいユーザもいるかもしれない. そのような場合は別の章で解説する.
 
 PDF ならばフロート設定のため, 図が離れた位置に配置されることがある. そのため, 「図 \@ref(fig:plot-sample)」 のような相互参照を使うと良いだろう. フロートを使うかどうかは, 後のセクションで解説する TODO
 
@@ -564,9 +449,7 @@ knitr::opts_chunk$set(
 
 なお, これらは `rmdja` でのデフォルト値であるため, 実際にこの値をあえて記述する必要はない.
 
-ここで, `fig.width` と `out.width` の違いも述べておく
-
-TODO
+ここで, `fig.width` と `out.width` の違いも述べておく. `out.width`/`out.height` は表示する画像サイズの違いで, `fig.width`/`fig.height` はプログラムが出力した画像の保存サイズである. よって `ggplot2` などを使わず画像ファイルを貼り付けるだけの場合は `fig.*` は意味をなさない.
 
 [^standard-graphics]: なお, Rユーザーならば標準グラフィック関数である `plot()` 関数をご存知だろうが, 本稿では**標準グラフィック関数の使用を推奨しない**. 標準グラフィック関数のデバイスはもともと日本語フォントを想定しておらず, OSごとに使用できるフォントも異なるためで, 品質維持のためには使用させない方針とした. 工夫すれば標準グラフィック関数でも日本語を適切に出力できるが, `ggplot2` を使用したほうが簡単であることが多いため, 標準グラフィック関数の解説書を作る以外では使うべきでない.
 
@@ -683,7 +566,7 @@ knitr::include_graphics(file.path(img_dir, "citr.png"))
 * `natbib`: `bibtex` を使用し, 本文中の参照には `natbib.sty` を使う.
   + `natbiboptions:` で `number`, `authoryear` などの `natbib.sty` のオプションを指定できる.
 
-そのスタイルファイル (`.bst`, `.csl`) はそれぞれ `biblio-style:`/`csl:` で指定できる. しかし国内論文雑誌などで規定された, 日本語文献に対応した `.bst` ファイルを使って参考文献を記載したい場合には (u)`\pBibTeX`{=latex}`pBibTeX`{=html} が必要となるはずである.
+そのスタイルファイル (`.bst`, `.csl`) はそれぞれ `biblio-style:`/`csl:` で指定できる. また, `biblatex` の場合はここにオプションを指定することになる. しかし国内論文雑誌などで規定された, 日本語文献に対応した `.bst` ファイルを使って参考文献を記載したい場合には (u)`\pBibTeX`{=latex}`pBibTeX`{=html} が必要となるはずである.
 
 これはR Markdownで日本語技術文書を作る際の特にアレな障害の1つである. PDF は BibTeX があるが, HTML では使えない. pandoc の出力に頼るしかない. pandoc は CSL という, Word でも使われている参考文献リストのフォーマットに対応しているが, 機能が少ないため日本語文献の引用スタイルが崩れてしまう.
 
@@ -692,7 +575,7 @@ knitr::include_graphics(file.path(img_dir, "citr.png"))
 TODO: この操作なしに (u)`\pBibTeX`{=latex}`pBibTeX`{=html} を使うには, たぶん `tinytex` と `rmarkdown` 両方の修正が必要. そこまで複雑ではないと思うのでそのうち修正してみたい.
 
 
-なお, 普段文献管理ソフトを使っていないが, 数本程度の文献を引用リストに載せたい利用者は, `biblatex` の構文を利用して書くのがよいかもしれない. 例えばここに書いてあるように.
+なお, 普段文献管理ソフトを使っていないが, 数本程度の文献を引用リストに載せたい利用者は, `biblatex` の構文を利用して書くのがよいかもしれない. 例えばここに書いてあるように. その場合, デフォルトでは本文の引用は [1], [2] のような番号形式となる. `biblio-style: authoryear` とすることで, `natbib` のような 「著者 (出版年)」 スタイルとなる.
 
 https://teastat.blogspot.com/2019/01/bookdown.html
 
@@ -703,7 +586,6 @@ https://teastat.blogspot.com/2019/01/bookdown.html
 ### フォント変更
 
 HTML は文字通りHTMLで出力しているため, CSS の使い方次第でいくらでもデザインを変えることができる.
-
 
 ## PDF
 

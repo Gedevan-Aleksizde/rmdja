@@ -1,0 +1,158 @@
+# (PART) 応用編 {-}
+
+# このパートについて {-}
+
+このパートでは, ここまでで紹介した基本機能の応用で,  さまざまな R パッケージやその他の外部プログラムの出力を埋め込む方法を紹介する
+
+# 様々なグラフィックプログラムの埋め込み {#advanced-graph}
+
+
+## `tikz` を使う
+
+`\LaTeX`{=latex}`LaTeX`{=html} で使われる `tikzdevice` を利用して, 直接  `tikz` の記述による画像を埋め込むことができる. チャンクのエンジンを `tikz` とすることで使用でき, 相互参照やキャプション, 画像サイズの指定といったチャンクオプションも使える. 図 \@ref(fig:tikz-venn) は `tikz` で生成した図である. これはHTMLでも表示できる.
+
+```{tikz tikz-venn, out.height="50%", fig.cap="tikzを利用した図の表示"}
+\def\firstcenter{(135:1.75cm)}
+\def\secondcenter{(45:1.75cm)}
+\def\firstcircle{\firstcenter circle (2.0cm)}
+\def\secondcircle{\secondcenter circle (2.0cm)}
+\def\wholerect{(-4.0, -1.1) rectangle(4.0, 3.35)}
+\begin{tabular}{cc}
+  % A cap B
+  \begin{tikzpicture}
+    \begin{scope}
+       \clip \secondcircle;
+       \fill[cyan] \firstcircle;
+    \end{scope}
+    \draw \wholerect;
+    \draw \firstcircle;
+    \draw \secondcircle;
+    \begin{scope}[font=\small]
+      \draw(90:.5cm) node[text=black, below]{\texttt{A INNER JOIN B}};
+    \end{scope}
+  \end{tikzpicture}
+&
+  % A u B
+  \begin{tikzpicture}
+    \begin{scope}
+       \draw \wholerect;
+       \fill[cyan]\firstcircle;
+       \fill[cyan]\secondcircle;
+     \end{scope}
+     \begin{scope}[font=\small]
+       \draw(90:.5cm) node[text=white, below]{\texttt{A OUTER JOIN B}};
+     \end{scope}
+  \end{tikzpicture}
+\\
+  % A LEFT B
+  \begin{tikzpicture}
+    \draw \wholerect;
+    \draw \firstcircle;
+    \draw \secondcircle;
+    \begin{scope}
+      \fill[cyan]\firstcircle;
+      \draw\firstcenter;
+      \draw\secondcenter;
+   \end{scope}
+   \begin{scope}[font=\small]
+      \draw\firstcenter node[text=black, below]{\texttt{A LEFT JOIN B}};
+   \end{scope}
+  \end{tikzpicture}
+&
+  % A RIGHT B
+  \begin{tikzpicture}
+    \draw \wholerect;
+    \draw \firstcircle;
+    \draw \secondcircle;
+    \begin{scope}
+      \fill[cyan]\secondcircle;
+      \draw\firstcenter;
+      \draw\secondcenter;
+   \end{scope}
+   \begin{scope}[font=\small]
+      \draw\secondcenter node[text=black, below]{\texttt{A RIGHT JOIN B}};
+   \end{scope}
+  \end{tikzpicture}
+\\
+\end{tabular}
+```
+
+
+## Asymptote を使う
+
+同様に, Asymptote のプログラムを埋め込むこともできる. 私は Asymptote が分からないので RCB [Ch. 15.9 Create graphics with Asymptote](https://bookdown.org/yihui/rmarkdown-cookbook/eng-asy.html) と同様のプログラムを書いておく. (図 \@ref(fig:asymptote-graph)).
+
+```{asy asymptote-graph, out.height="50%", fig.cap="Asymptote による画像"}
+import graph3;
+import grid3;
+import palette;
+settings.prc = false;
+currentprojection=orthographic(0.8,1,2);
+size(500,400,IgnoreAspect);
+real f(pair z) {return cos(2*pi*z.x)*sin(2*pi*z.y);}
+surface s=surface(f,(-1/2,-1/2),(1/2,1/2),50,Spline);
+surface S=planeproject(unitsquare3)*s;
+S.colors(palette(s.map(zpart),Rainbow()));
+draw(S,nolight);
+draw(s,lightgray+opacity(0.7));
+grid3(XYZgrid);
+```
+
+## TODO その他のプログラム
+
+D3.js なども使える
+
+## TODO: その他の R プログラム
+
+なお, DOT言語は `DiagrammeR` パッケージを経由して使うこともできる[^rcb-diagrammer](図: \@ref(fig:diagrammer-graph)). グラフィカルモデルの記述などはこちらのほうが簡単かもしれない.
+
+(ref:diagrammer-cap) `DiagrammeR` によるグラフィカルモデル (RCB, Ch. 4.15 より)
+
+```{r diagrammer-graph, echo=T, fig.cap="(ref:diagrammer-cap)"}
+DiagrammeR::grViz("digraph {
+  graph [layout = dot, rankdir = TB]
+  
+  node [shape = rectangle]        
+  rec1 [label = 'Step 1. 起床する']
+  rec2 [label = 'Step 2. コードを書く']
+  rec3 [label =  'Step 3. ???']
+  rec4 [label = 'Step 4. 給料をもらう']
+  
+  # edge definitions with the node IDs
+  rec1 -> rec2 -> rec3 -> rec4
+  }", 
+  height = 500)
+```
+
+[^rcb-diagrammer]: https://bookdown.org/yihui/rmarkdown-cookbook/diagrams.html
+
+
+# 表の掲載
+
+## TeX/HTML を出力する関数
+
+`stargazer` や `xtable` のように, HTML や `\LaTeX`{=latex}`LaTeX`{=html} 形式で表を出力してくれるパッケージがある. これらは `results='asis'` のチャンクオプションを指定することで関数の出力するテキストをそのまま埋め込むことができる. よって, あとは HTMLか`\LaTeX`{=latex}`LaTeX`{=html} かといった出力形式の違いに気をつければ表示できる.
+
+(ref:stargazer-title) `stargazer` による表の出力
+
+```{r stargazer-table, echo=T, results='asis', fig.cap="(ref:stargazer-title)"}
+require(stargazer)
+stargazer(mtcars, type = if(knitr::is_latex_output()) 'latex' else 'html', header = F)
+```
+
+##  TODO: `gt` パッケージ
+
+TODO
+
+# TODO Web アプレットの挿入 {#webapp}
+
+### TODO: plotly
+
+### TODO: shiny
+
+
+# TODO Python スクリプトの埋め込み {#python}
+
+グラフィックデバイスをどうするかの話
+
+TODO

@@ -5,7 +5,7 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site                    # RStudio GUIでビルド操作したい場合に必要
 description: "bookdown でまともな日本語文書を作る資料"  # HTML <metadata> に出力されるサイト概要
 url: 'https\://bookdown.org/john/awesome/'       # URL
-github-repo: "john/awesome"                      # Github レポジトリ
+github-repo: "Gedevan-Aleksizde/rmdja"           # Github レポジトリ
 cover-image: "img/Johannes_Gutenberg.jpg"        # 表紙画像. epub でのみ有効?
 apple-touch-icon: "touch-icon.png"               # iOS でホームスクリーンに登録した際に見えるもの
 apple-touch-icon-size: 120                       # そのサイズ
@@ -16,14 +16,28 @@ jmonofont: Ricty
 linkcolor: blue
 citecolor: blue
 urlcolor: magenta
-citation-package: natbib
 bibliography: rmdja.bib # 書誌情報ファイル
-biblio-style: jecon
+biblio-style: authoryear
+# biblio-style: jecon
 ---
 
 ```{r setup, include=FALSE}
-file.copy(system.file("resources/bibliography/rmdja.bib", package="rmdja"), "./") # アンダースコア回避のためコピーするしかない
-options(tinytex.latexmk.emulation = F)
+options(tinytex.latexmk.emulation = T)
+# アンダースコアを各自に回避するためコピーするしかない
+file.copy(system.file("resources/bibliography/rmdja.bib", package="rmdja"), "./") 
+
+# 画像をコピー
+img_dir <- "img/"
+if(!file.exists(img_dir)) dir.create(img_dir, recursive = T)
+for(f in c("build-pane-build.png", "build-pane.png", "Johannes_Gutenberg.jpg", "citr.png")){
+  file.copy(file.path(system.file("resources/img", package = "rmdja"), f), img_dir)
+}
+
+# epub 用にスタイルファイルをコピー
+if(!file.exists("_epub/css")) dir.create("_epub/css", recursive = T)
+file.copy(file.path(system.file("resources/style/css/", package = "rmdja"), c("style.css", "toc.css")), "_epub/css")
+file.copy(file.path(system.file("resources/style/img/", package = "rmdja"), c("caution.png", "important.png", "note.png", "tip.png", "warning.png")), "_epub/css")
+
 require(knitr)
 require(kableExtra)
 opts_chunk$set(
@@ -38,7 +52,7 @@ opts_chunk$set(
   # tidy.opts = list(width.cutoff = 20, wrap = T),
   tidy = "styler"
   )
-img_dir <- "img/"
+
 ```
 
 # (PART) イントロダクション {-}
