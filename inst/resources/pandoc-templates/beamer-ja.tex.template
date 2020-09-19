@@ -155,6 +155,7 @@ $else$
 % if fonts are set by each family
 \ifxetex
   \usepackage[AutoFallBack=true]{zxjatype}
+  \usepackage{xeCJKfntef}
 $if(jmainfont)$
   \setjamainfont[$for(jmainfontoptions)$$jmainfontoptions$$sep$,$endfor$]{$jmainfont$}
 $endif$

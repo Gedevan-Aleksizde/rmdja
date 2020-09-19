@@ -98,11 +98,7 @@ beamer_presentation_ja <- function(
     pandoc_args_base <- c(pandoc_args_base, rmarkdown::pandoc_variable_arg("tablename", "図"))
   }
   if(missing(template) || identical(template, "") || identical(template, "default")){
-<<<<<<< HEAD
-    template <- file.path(system.file("resources", package = "rmdja"), "pandoc-template/beamer-ja.template")
-=======
     template <- system.file("resources/pandoc-templates/beamer-ja.tex.template", package = "rmdja")
->>>>>>> development
   }
   
   if("preamble" %in% names(includes)){
@@ -173,14 +169,7 @@ beamer_presentation_ja <- function(
     return(autodetect_and_set_jfont(metadata, input_file, runtime, knit_meta, files_dir, output_dir, latex_engine))
   }
   out <- rmarkdown::output_format(
-<<<<<<< HEAD
-    pre_knit = function(input, ...) {
-      knitr::opts_chunk$set(dev.args = list(pointsize = fontsize_as_integer(rmarkdown::metadata$fontsize)))
-      return(input)
-    },
-=======
     pre_knit = adjust_fontsize,
->>>>>>> development
     knitr = do.call(rmarkdown::knitr_options, list(opts_chunk = args_opts_chunk)),
     pandoc = do.call(rmarkdown::pandoc_options, args_pandoc_options),
     pre_processor = preproc,
@@ -188,12 +177,5 @@ beamer_presentation_ja <- function(
     keep_md = keep_md,
     base_format = base
     )
-<<<<<<< HEAD
-  if(!file.exists("./.latexmkrc")){
-    file.copy(file.path(system.file("resources", package = "rmdja"), "latexmk/.latexmkrc"), to = "./")
-  }
-=======
-  
->>>>>>> development
   return(out)
 }
