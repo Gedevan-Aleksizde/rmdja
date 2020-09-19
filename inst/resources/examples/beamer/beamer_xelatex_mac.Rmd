@@ -15,7 +15,7 @@ output:
     fonttheme: default
     colortheme: default
     highlight: tango
-    rownumber_chunk: false
+    code_rownumber: false
     fig_width: 6.29921
     fig_height: 3.54331
     out.width: "100%"
@@ -738,13 +738,13 @@ Table: 主なプリセット名対照表
 * 指定できる名前一覧は[ここ](https://deic-web.uab.cat/~iblanes/beamer_gallery/index.html)を参照
   + `metropolis` テーマはあまりカラーバリエーションがない
   + 数式をサンセリフにしたくない場合は以下のように
-  + `rownumber_chunk`=デフォルトで行番号を付けるかどうか
+  + `code_rownumber`=デフォルトで行番号を付けるかどうか
 
 ```yaml
 output:
   rmdja::beamer_presentation_ja:
     fonttheme: professionalfonts
-    rownumber_chunk: true
+    code_rownumber: true
 ```
 
 ## シンタックスハイライトのテーマ変更

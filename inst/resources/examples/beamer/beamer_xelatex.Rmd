@@ -15,7 +15,7 @@ output:
     fonttheme: default
     colortheme: default
     highlight: tango
-    rownumber_chunk: false
+    code_rownumber: false
     fig_width: 6.29921
     fig_height: 3.54331
     out.width: "100%"
