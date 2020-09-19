@@ -5,13 +5,12 @@ output:
   rmdja::beamer_presentation_ja:
     latex_engine: xelatex
     theme: metropolis
-    includes:
-      preamble:
-        - \makeatletter
-        - \setlength{\metropolis@progressinheadfoot@linewidth}{2pt}
-        - \patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip0.5em}{}{}
-        - \makeatother
 fontsize: 12pt
+header-includes:
+  - \makeatletter
+  - \setlength{\metropolis@progressinheadfoot@linewidth}{2pt}
+  - \patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip0.5em}{}{}
+  - \makeatother
 ---
 
 ```{r setup-document, include=F}
