@@ -439,8 +439,7 @@ $endif$
 $endif$
 \usepackage{bxtexlogo}
 \colorlet{shadecolor}{gray!20}
-\ifdefined\bibsection\renewcommand{\bibsection}{}\fi
-\ifdefined\bibfont\renewcommand*{\bibfont}{\footnotesize}\fi
+
 \usepackage{fmtcount}
 \ifdefined\theFancyVerbLine\renewcommand{\theFancyVerbLine}{\small \padzeroes[2]{\decimal{FancyVerbLine}}}\fi % adjust row number position
 \IfFileExists{bxcoloremoji.sty}{\usepackage{bxcoloremoji}}{}
@@ -462,6 +461,12 @@ $endif$
 
 %\renewcommand{\prepartname}{第}
 %\renewcommand{\postpartname}{部}
+
+$if(beamer)$
+% erase bibliography section title if using beamer
+\ifdefined\bibsection\renewcommand{\bibsection}{}\fi
+\ifdefined\bibfont\renewcommand*{\bibfont}{\footnotesize}\fi
+$endif$
 
 % redefine quote format as modern
 \makeatletter
@@ -630,7 +635,7 @@ $if(beamer)$
   \printbibliography[heading=none]
 \end{frame}
 $else$
-\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+\printbibliography$if(biblio-title)$[title=$biblio-title$,heading=bibintoc]$endif$
 $endif$
 
 $endif$
