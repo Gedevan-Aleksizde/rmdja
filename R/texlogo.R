@@ -4,7 +4,7 @@
 #' @details うろ覚えでもいいように大文字小文字問わない. https://github.com/zr-tex8r/BXtexlogo を参考に
 
 #' @export
-texlogos <-function(logoname, isrichtext = FALSE){
+texlogo <-function(logoname, isrichtext = FALSE){
   base <- switch(tolower(logoname),
     "tex"      = "TeX",
     "amslatex" = "AmSLaTeX",
