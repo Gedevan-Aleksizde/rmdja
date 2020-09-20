@@ -218,10 +218,18 @@ sudo apt install graphiviz
 
 『[おまえは万物をRSTUDIOで書ける](https://speakerdeck.com/ktgrstsh/you-can-write-everything-on-rstudio)』
 
+`rmdja` 自身で作成したドキュメント
+
+https://gedevan-aleksizde.github.io/rmdja/
+
+
 # 更新履歴メモ
   
 * v0.3.2
   + v0.3の寝起きで作ったおかしいところを修正したバージョン
+* v0.3.1
+  + ミスしたので微修正版
+ 以下はリポジトリ分割前のバージョンです.
 * v0.3
   + `bookdown` 日本語版に対応
   + フォントを指定しなかった場合, OSに応じて自動設定するように

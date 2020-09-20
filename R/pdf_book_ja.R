@@ -140,6 +140,7 @@ pdf_book_ja <- function (
                     if(!identical(metadata$fontsize, "10pt") & tombow) "-Mclassoption=nomag" else NULL
                     )
     if(is.null(metadata$documentclass)) args_extra <- c(args_extra, "-Mdocumentclass=bxjsbook")
+    if(is.null(metadata[["biblio-title"]])) args_extra <- c(args_extra, "-Mbiblio-title=参考文献")
     return(args_extra)
   }
   base_format_ <- do.call(
