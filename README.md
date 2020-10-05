@@ -8,6 +8,7 @@ Customized R Markdown/Bookdown format functions for Japanese users
 * 現時点では Beamer スライド (`rmarkdown::beamer_presentation`), `bookdown` に対応しています.
 * XeLaTeXまたはLuaLaTeXでのタイプセットを前提にしています
   + それぞれ `zxjatype`, `luatex-ja`, を利用して和文表示をしています
+* 指摘LaTeXテンプレ集である[my_latex_templates](https://github.com/Gedevan-Aleksizde/my_latex_templates/)からパッケージとして独立しました
 
 ## 既知の問題点
 
