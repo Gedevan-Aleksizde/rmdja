@@ -73,7 +73,7 @@ remove.package("rmdCJK")
 * R Studio >= 1.3.1056
 * `knitr` >= 1.30
 * `rmarkdown` >= 2.4
-* `bookdown`
+* `bookdown` >= 0.20.6
 
 ### R パッケージ
 
