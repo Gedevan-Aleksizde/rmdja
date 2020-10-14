@@ -14,6 +14,7 @@ Customized R Markdown/Bookdown format functions for Japanese users
 
 * `rmarkdown` 2.3 (現時点でのCRAN最新版) では標準グラフィックデバイスのフォントサイズが自動調整されません
   + 気になる方は[githubリポジトリ](https://github.com/rstudio/rmarkdown) から2.3.2以降をインストールしてください
+* `knitr` 1.30 を使用している現時点では, `matplotlib` (あるいはそれをバックエンドとしたモジュール) でグラフを描く場合, バージョン 3.2 を使用してください. それより新しいバージョンのものはうまく動作しません
 
 # 使い方
 
@@ -215,7 +216,7 @@ sudo apt install graphiviz
 
 # その他
 
-2020/9/19 で本パッケージの機能を紹介しました.
+2020/9/19 Tokyo.R で本パッケージの機能を紹介しました.
 
 『[おまえは万物をRSTUDIOで書ける](https://speakerdeck.com/ktgrstsh/you-can-write-everything-on-rstudio)』
 
