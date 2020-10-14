@@ -12,8 +12,7 @@ Customized R Markdown/Bookdown format functions for Japanese users
 
 ## 既知の問題点
 
-* `rmarkdown` 2.3 (現時点でのCRAN最新版) では標準グラフィックデバイスのフォントサイズが自動調整されません
-  + 気になる方は[githubリポジトリ](https://github.com/rstudio/rmarkdown) から2.3.2以降をインストールしてください
+* `rmarkdown` 2.3 以前のバージョンでは標準グラフィックデバイスのフォントサイズが自動調整されません
 * `knitr` 1.30 を使用している現時点では, `matplotlib` (あるいはそれをバックエンドとしたモジュール) でグラフを描く場合, バージョン 3.2 を使用してください. それより新しいバージョンのものはうまく動作しません
 
 # 使い方
