@@ -69,9 +69,11 @@ remove.package("rmdCJK")
 
 ### 最低限必要なもの
 
-R >= 3.6
-R Studio >= 1.3.1056
-
+* R >= 3.6
+* R Studio >= 1.3.1056
+* `knitr` >= 1.30
+* `rmarkdown` >= 2.4
+* `bookdown`
 
 ### R パッケージ
 
