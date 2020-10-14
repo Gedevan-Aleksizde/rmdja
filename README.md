@@ -67,7 +67,7 @@ remove.package("rmdCJK")
 
 ## 要件
 
-### 最低限必要なもの
+### R環境で最低限必要なもの
 
 * R >= 3.6
 * R Studio >= 1.3.1056
@@ -75,23 +75,10 @@ remove.package("rmdCJK")
 * `rmarkdown` >= 2.4
 * `bookdown` >= 0.20.6
 
-### R パッケージ
-
-最低限必要なのは以下2つです
-
-* `rmarkdown` > 2.3
-  + 完全に動作するには 2020/9/10 時点で CRAN 最新版 2.3 より新しい開発版が必要です
-  + `remotes::install_github("rstudio/rmarkdown", refs = "ff1b279e795b62b1ffeabcc9aa5bf7386a7ebb83")`, または `refs = "master"` でのインストールを推奨します
-  + レイアウトにそこまで神経質でないなら安定版でも大きな問題はありません
-* `bookdown` > 0.20
-  + `remotes::install_github("rstudio/bookdown")` でのインストールを推奨します
-  + ソースファイルをサブディレクトリに配置した際の挙動が改善されたバージョンがあったほうが良いです
-
 ### 外部プログラム
 
 * TeX Live (>= 2020)
-もし (u)pBibTeX を一切使わない(BibLaTeX や pandoc-citeproc で良い), 参考文献を一切使わないというのであれば**不要**です
-  + upBibTeX を使う必要があるためです
+  + upBibTeX を使う必要がある場合のみ必要です
   + BiBLaTeX または pandoc-citeproc の出力する参考文献で満足している, または参考文献リストを一切使わないのならTeX Live は**不要**です
   + Mac OS なら MacTeX, Ubuntu なら[公式](https://www.tug.org/texlive/acquire-netinstall.html)から落としてください
     - Ubuntu は `apt` を**使わず**インストールしたほうが良いです
@@ -99,7 +86,6 @@ remove.package("rmdCJK")
 * [`jecon.bst`](https://github.com/ShiroTakeda/jecon-bst) 
   + 日本語文献リスト用のスタイルファイルです
   + TeX Live にも `jplain.bst`, `jipsj.bst` などの日本語対応スタイルがバンドルされていますが, `jecon.bst` は日本語出力用のオプションが充実しています.
-
 
 # フォントについて
 
@@ -138,7 +124,7 @@ https://www.google.com/get/noto/help/install/
 * 現時点では実際にフォントがインストールされているか判定していません.
 * `XeLaTeX` ではヒラギノフォントのプリセット`hiragino-pro`/`hiragino-pron`は, OS Xにバンドルされていないヒラギノ明朝 W2を必要とします. インストールされていない場合, この設定ではエラーが発生します.
 * WindowsかつLuaLaTeXのとき, `\jfontspec` でフォント変更する歳, Noto Serif CJK JP が読み込めないことがあります (原因調査中)
-
+* `ggplot2` などのグラフに日本語表示をしたい場合, [`fontregisterer`](https://github.com/Gedevan-Aleksizde/fontregisterer) が役に立つかも知れません
 
 # サンプル
 
