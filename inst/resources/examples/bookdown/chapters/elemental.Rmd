@@ -559,25 +559,76 @@ YAMLフロントマターの `biblography:` に文献管理ファイル (`.bib`,
 knitr::include_graphics(file.path(img_dir, "citr.png"))
 ```
 
-`BibTeX`, `BibLaTeX`, または `pandoc-citeproc` で処理される. これは `citation-package` または  `_output.yml` の `citation_package` に依存する. HTML は基本的に `pandoc-citeproc` を使用した出力であり, 影響が大きいのは PDF である.
 
-* `default`: `pandoc-citeproc` を使用して参考文献を出力する.
-* `biblatex`: `biblatex` を使用する.
-* `natbib`: `bibtex` を使用し, 本文中の参照には `natbib.sty` を使う.
+一方で, この記述がどう反映されるかは文献引用を処理するプログラムによって変化する. さらに厄介なことに, それぞれ全く違うプログラムであるがゆえに, 設定に書き方も変わってくる.
+
+
+R Markdown の文献引用は pandoc を経由して処理され, pandoc は現時点では `pandoc-citeproc`. `bibtex`, `biblatex` の選択をサポートしている. `pandoc-citeproc` 以外はもともと `r rmdja::texlogo("latex")` 用に作られたため, HTML では常に `pandoc-citeproc` で処理される. これはフォーマット引数の `citation_package` で指定できる.
+
+* `default`: `pandoc-citeproc` を使用する
+* `biblatex`: `r rmdja::texlogo("biblatex")` を使用する
+* `natbib`: `r rmdja::texlogo("bibtex")` を使用し, 本文中の参照には `natbib.sty` を使う. ただし本来の `natbib` の引用子オプションは使えない
   + `natbiboptions:` で `number`, `authoryear` などの `natbib.sty` のオプションを指定できる.
 
-そのスタイルファイル (`.bst`, `.csl`) はそれぞれ `biblio-style:`/`csl:` で指定できる. また, `biblatex` の場合はここにオプションを指定することになる. しかし国内論文雑誌などで規定された, 日本語文献に対応した `.bst` ファイルを使って参考文献を記載したい場合には (u)`\pBibTeX`{=latex}`pBibTeX`{=html} が必要となるはずである.
 
-これはR Markdownで日本語技術文書を作る際の特にアレな障害の1つである. PDF は BibTeX があるが, HTML では使えない. pandoc の出力に頼るしかない. pandoc は CSL という, Word でも使われている参考文献リストのフォーマットに対応しているが, 機能が少ないため日本語文献の引用スタイルが崩れてしまう.
+### 文献引用のフォーマット設定
 
-日本語対応 `.bst` ファイルを使いたい場合は少しトリッキーな操作が必要になる. `rmarkdown` は `tinytex` というパッケージでインストールされたスタンドアローンな処理系で PDF を生成している. 冒頭のチャンクで `options(tinytex.latexmk.emulation = F)` を指定することで, 自分のマシンにインストールされている普段使っている処理系に処理させることができる. さらに `rmdja` では `natbib` を指定した場合に自動でカレントディレクトリに `.latexmkrc` をコピーするようにしている. しかしログが残らないなどデバッグしづらいところがあるため, このやり方はやや使いづらい.
+これがややこしい. まず, `pandoc-citeproc`, `bibtex`, `biblatex` はそれぞれ引用文献リストの書式を記述するフォーマットがありそれぞれ拡張子は `.csl`, `.bst`, `.bbx`, である. 前者は MS Word のスタイルと同じもので, XMLで記述されている[^CSL-editor]. 一方で `.bst` は逆ポーランド記法の構文だったりかなりアレである. そして  `biblatex` はこのような専用の書式ファイルを使わず, 細かい書式設定はすべて `r rmdja::texlogo("latex")` のマクロで調整する想定で作られている. また, スタイルファイルを用意しなくとも指定できるスタイルがいくつか存在する.
 
-TODO: この操作なしに (u)`\pBibTeX`{=latex}`pBibTeX`{=html} を使うには, たぶん `tinytex` と `rmarkdown` 両方の修正が必要. そこまで複雑ではないと思うのでそのうち修正してみたい.
+bibtex および biblatex に関する設定は biblio-style だが, CSLファイルの設定は `csl` を使う.
 
+さらに日本語文献引用が必要な場合の特有の事情として, (1)対応文字コードの問題 (2) 和文と欧文のスタイルが異なるという問題がある. まず前者について, `bibtex` は日本語など非ASCII文字に対応していない. よって従来 `r rmdja::texlogo("pbbitex")` または `r rmdja::texlogo("jbibtex")` が使用されていた. しかしこれもJIS規格の範囲までしか対応していないため, 特殊な文字, 例えば浅野「皙」などの表示ができなかった[^pbibtex-unicode]. そのためさらに `r rmdja::texlogo("upbibtex")` というUnicode対応版プログラムが作成されている. しかし R Markdown (および pandoc) はそのような日本語特有の事情などしらないため, これらを使用することができない. よって**オプション選択の範囲では, `biblatex` か `pandoc-citeproc` でしか日本語文献を表示できない**. これはR Markdownで日本語技術文書を作る際の特にアレな障害の1つである.
+
+```{r biblio-comparison}
+tibble(
+  `item` = c("`pandoc-citeproc` (default)", "`biblatex`", "`bibtex`"),
+  `HTML対応` = c(T, F, F),
+  `PDF対応` = c(T, T, T),
+  `日本語表示` = c(T, T, F),
+  `指定名` = c("default", "biblatex", "natbib"),
+  `文献ファイル` = c(".json", ".bib/.bibtex", ".bib"),
+  `文献スタイル` = c(".csl", "なし", ".bst"),
+  `スタイル指定方法` = c("csl:", "biblio-style:", "biblio-style"),
+  `スタイルのオプション` = c("", "", "natbiboptions")
+  ) %>% kable(caption = "引用プログラムごとの違い", booktabs = T)
+```
+
+[^pbibtex-unicode]: `r rmdja::texlogo("pbibtex")` のUNICODEモードは内部でSJISに変換しているだけなので, 全てのUnicodeに対応しているわけではない.
+
+### `pandoc-citeproc` と CSL
+
+### `biblatex`
+
+biblatex の全てのオプションに対応しているわけではないので詳しいことは BibLaTeX のドキュメントを読むべき. ここではよく使う `style` と `backend` のことだけ.
+
+フロントマターの `biblio-style:` で指定できるのは, インクルード時の `style=` に指定できるものに対応する. つまり, 引用文献の見出しをどうするかである. これは引用リストと本文中の引用子のスタイル両方に影響する.
+
+```{r biblatex-styles}
+tibble(
+  item = c("`numeric`", "`alphabetic`", "`authoryear`", "`authortitle`", "`verbose`", "`reading`", "`draft`", "`debug`"),
+  description = c("'[1]' のような番号", "著者名の略称+出版年2桁", "著者-出版年形式, natbib の標準と同じ", "著者名のみ, リストでは出版年は後置され, 引用子では脚注になる", "authortitle と同じだが, 引用子にリスト同様の内容を出力する", "個人的なリーディングリスト向け. ファイルやメモ欄も出力する", ".bib ファイルのIDで表示. 名前通り下書き", "`.bib` の全フィールドを表示")
+) %>% kable(
+  booktabs = T,
+  caption = "biblatex の `bilio-style` で指定できるもの一覧",
+  col.names = c("名称", "概要")
+  )
+```
+
+その他 `apa`, `ieee` など特定の学会が使用するスタイルも用意されているが, これらは基本欧文しか想定していないし, アカデミックの事情に詳しい人しかこれらの使用にこだわらないだろうから詳しくは解説しない. これらを含めたそれぞれの出力例は https://www.overleaf.com/learn/latex/biblatex_bibliography_styles に一覧があるのでそちらを参考に.
+
+なお, もちろん引用リストのスタイルと引用子のスタイルを個別にすることはできるが, R Markdown および Pandoc にそのオプションを通す機能はない. (bibstyle/citestyleで分けられる,bbx/cbx)
+
+和文献を著者名でソートすると五十音順にならない. これは従来の (u)`r rmdja::texlogo("pbibtex")` で使われていた `yomi` フィールドと同様の用途の `sortname` で対処する. 特に変なオプションを使わない限り両者は同等の扱いで良い. つまり, 欧文エントリには何も書かず, 和文のみ `sortname` に読みをひらがなで書けば欧文を全て表示した後に五十音順でソートして表示される.
+
+TODO: その他の非ラテン文字, キリル文字, アラビア文字 ヘブライ文字等は?
+
+upBibTeX や `bibtex` で動作しない `.bst` ファイルの扱いは応用編参照.
 
 なお, 普段文献管理ソフトを使っていないが, 数本程度の文献を引用リストに載せたい利用者は, `biblatex` の構文を利用して書くのがよいかもしれない. 例えばここに書いてあるように. その場合, デフォルトでは本文の引用は [1], [2] のような番号形式となる. `biblio-style: authoryear` とすることで, `natbib` のような 「著者 (出版年)」 スタイルとなる.
 
 https://teastat.blogspot.com/2019/01/bookdown.html
+
+[^CSL-editor]: 簡単なカスタマイズなら CSL editor というWebサービスでできる. しかしあくまでXMLなので, あまり複雑な処理はできないことに注意する.
 
 # 簡単なレイアウト変更
 
