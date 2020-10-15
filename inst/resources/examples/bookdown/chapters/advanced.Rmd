@@ -214,6 +214,8 @@ repl_python()
 
 `matplotlib` エンジンで描いたグラフに日本語フォントを埋め込む場合, `matplotlib-japreset` を使えば必要な設定を一括で行う.
 
+TODO: Linux 以外での動作保証
+
 ```sh
 pip install -U git+https://github.com/Gedevan-Aleksizde/matplotlib-japreset.git@master
 ```

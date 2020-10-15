@@ -4,7 +4,7 @@
 #' @details うろ覚えでもいいように大文字小文字問わない. https://github.com/zr-tex8r/BXtexlogo を参考に
 
 #' @export
-texlogo <-function(logoname, isrichtext = FALSE){
+texlogo <- function(logoname, isrichtext = FALSE){
   base <- switch(tolower(logoname),
     "tex"      = "TeX",
     "amslatex" = "AmSLaTeX",
@@ -31,7 +31,7 @@ texlogo <-function(logoname, isrichtext = FALSE){
     "platex"   = "pLaTeX",
     "ptex"     = "pTeX",
     "tikz"     = "TikZ",
-    "upbitex"  = "upBibTeX",
+    "upbibtex"  = "upBibTeX",
     "uplatex"  = "upLaTeX",
     "uplatexe" = "upLaTeXe",
     "uptex"    = "upTeX",
@@ -60,7 +60,13 @@ texlogo <-function(logoname, isrichtext = FALSE){
     "logoomega" = "logoOmega",
     "ptexst" = "pTeXsT",
     "xym" = "XyM",
-    "xymtex" = "XyMTeX"
+    "xymtex" = "XyMTeX",
+    ""
     )
-  paste0("`\\", base, "`{=latex}`", base, "`{=html}")
+  if(nchar(base) == 0){
+    r <- logoname
+  } else{
+    r <- paste0("`\\", base, "`{=latex}`", base, "`{=html}")
+  }
+  return(r)
 }
