@@ -140,9 +140,45 @@ require(stargazer)
 stargazer(mtcars, type = if(knitr::is_latex_output()) 'latex' else 'html', header = F)
 ```
 
+# 文献引用 
+
+## `(u)p\BibTeX`{=latex}`(u)pBibTeX`{=html} を使う
+
+日本語対応 `.bst` ファイルを使いたい場合は少しトリッキーな操作が必要になる. `rmarkdown` は `tinytex` というパッケージでインストールされたスタンドアローンな処理系で PDF を生成している. 冒頭のチャンクで `options(tinytex.latexmk.emulation = F)` を指定することで, 自分のマシンにインストールされている普段使っている処理系に処理させることができる. さらに `rmdja` では `natbib` を指定した場合に自動でカレントディレクトリに `.latexmkrc` をコピーするようにしている. しかしログが残らないなどデバッグしづらいところがあるため, このやり方はやや使いづらい.
+
+TODO: この操作なしに (u)`\pBibTeX`{=latex}`pBibTeX`{=html} を使うには, たぶん `tinytex` と `rmarkdown` 両方の修正が必要. そこまで複雑ではないと思うのでそのうち修正してみたい.
+
+
+## TODO BibLaTeX
+
+TODO
+
+## TODO: pandoc-citeproc
+
 ##  TODO: `gt` パッケージ
 
 TODO
+
+# `beamer_presentation_ja` について
+
+`beamer_presentation_ja` は `rmdja` の最初期からあったフォーマットで, そもそも当初はこれを作るのが目的だった. このフォーマットは Beamer を使用してプレゼンテーション用スライドをPDFファイルで作成する. Beamer は `rmdja::texlogo("latex")` の文書クラスの1つで, `rmarkdown::beamer_presentation` はこれを利用してるが, 例によって日本語表示は想定されていない (beamerクラス自体も)ため, いろいろ調整込みのラッパーフォーマットである. ただしスライド資料なので組版の禁則処理のような細かい調整は用意していない.
+
+つまりPDF以外の出力は不可能である. PDF の P は "Portable" の P であり, 普段と違う環境で表示することの多いであろうスライド資料はなるべく環境に依存しない方法で表示すべきという考えに基づき, HTML を使用したスライド機能を追加する予定はない.
+
+通常の文書と違い, 主なデザインを決めるのは `theme` である. デフォルトでは [`metropolis`](https://github.com/matze/mtheme)[^metropolis-warn] である. 日本語表示のために調整してあるものの, 日本語表示と直接関係ない部分はカスタマイズの余地としていじっていないが, テンプレートには私の好みが反映された調整 (プログレスバーの位置調整) がYAMLフロントマターに直接書き込まれている.
+
+また, 日本語表示と直接関係ないアレンジとして, 文献引用を行った場合の参考文献リストの表示が
+
+1. 「参考文献」というセクションタイトルのみのスライドが冒頭に自動で挿入される
+2. 引用された文献の数に応じてスライドが自動分割される
+3. 参考文献フレームタイトルが表示されない
+4. 文字サイズが脚注サイズに縮小
+
+という設定になっている. 通常のスライドでは大量の参考文献を読み上げることは少ないという想定で, 紙面の限られたスライドに参考文献のみ羅列したスライドでページ数が増えないように考慮したためこうした.
+
+実際の表示例は `examples` にある.
+
+[^metropolis-warn]: なお `metropolis` テーマ開発者は Fira Sans フォントの使用を想定しており, ビルド時にフォントがないという警告が出ることがあるが無視して良い. (参考: https://github.com/matze/mtheme/issues/280)
 
 # TODO Web アプレットの挿入 {#webapp}
 
@@ -151,8 +187,54 @@ TODO
 ### TODO: shiny
 
 
-# TODO Python スクリプトの埋め込み {#python}
+# Python スクリプトの埋め込み {#python}
 
-グラフィックデバイスをどうするかの話
+Python スクリプトを埋め込むこともできる. 方法は2通りあり, 都度システムコマンドから呼び出す方法と, `reticulate` パッケージを使うものがある. `reticulate` 登場以前はチャンクごとに呼び出していたため複数のチャンクに分割して記述するのが難しかったが, 現在は `reticulate` パッケージを利用することでRと同じような感覚で, あるいは Jupyter のコードセルと同じような感覚で書ける.
 
-TODO
+`pyenv` を使用する場合, 共有ライブラリのインストールが必要なことに注意[^pyenv-lib].
+
+[^pyenv-lib]: 詳しくはこちらを参考に https://ill-identified.hatenablog.com/entry/2019/11/15/010746
+
+初めて使う場合は先に `reticulate` 単体でPythonが実行できるか検証してからの方が良い.
+
+```{r echo=T, eval=F}
+require(reticulate)
+# Python エンジンを認識しているか確認
+py_discover_config()
+repl_python()
+
+# 以下, Python コマンド実行, `exit` で抜ける
+```
+
+現在 (`knitr` 1.18以降) は R Markdown はデフォルトで `reticulate` を使う. システムコマンド経由にしたい場合はチャンクオプション `python.reticulate=F` を設定する, あるいは `reticulate::eng_python` に変わるエンジンを自作する[^reticulate-knitr].
+
+[^reticulate-knitr]: 参考: https://rstudio.github.io/reticulate/articles/r_markdown.html
+
+あとはチャンクのエンジンに `r` ではなく `python` を指定することでPythonコードを埋め込める.
+
+`matplotlib` エンジンで描いたグラフに日本語フォントを埋め込む場合, `matplotlib-japreset` を使えば必要な設定を一括で行う.
+
+```sh
+pip install -U git+https://github.com/Gedevan-Aleksizde/matplotlib-japreset.git@master
+```
+
+```{python py-settings, echo=T}
+from matplotlib_japreset import mplj_cairo
+from matplotlib import rcParams
+from plotnine import *
+from plotnine.data import mtcars
+rcParams['font.family']
+```
+
+`matplotlib-japreset` によって主要OSで標準インストールされている日本語フォントが自動的に選ばれる. 気に入らない場合は `rcParams['font.family']` に好きなフォント名を上書きする.
+
+(ref:py-plotnine-cap) Python の `plotnine` によるグラフ表示例
+
+```{python py-plotnine-cap, echo=T, results='hide', warning=F, fig.width=7, message=F, fig.cap="(ref:py-plotnine-cap)"}
+ggplot(mtcars, aes('wt', 'mpg', color='factor(gear)')
+) + geom_point() + stat_smooth(method='lm') + facet_wrap('~gear')
+```
+
+現状ではmatplotlibの標準出力や警告も表示されてしまうため, チャンクオプション `results='hide', warning=F, message=F` で隠すと良い.
+
+`plotly`, `bokeh` などの `matplotlib` に依存しないモジュールはPDFには対応していないため直接表示できない. 一旦画像を保存して, あらためて画像ファイルを埋め込む必要がある.

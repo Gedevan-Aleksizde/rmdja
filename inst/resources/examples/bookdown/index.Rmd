@@ -11,7 +11,15 @@ apple-touch-icon: "touch-icon.png"               # iOS でホームスクリー�
 apple-touch-icon-size: 120                       # そのサイズ
 favicon: "favicon.ico"                           # そのまんまファビコン.
 link-citations: true                             # 引用に参考文献リストへのハイパーリンクをつける
+mainfont: 'DejaVu Serif'
+seriffont: 'DejaVu Sans'
 monofont: Ricty
+mainfontoptions:
+  - Scale=0.8
+sansfontoptions:
+  - Scale=0.8
+jmainfont: 'Noto Serif CJK JP'
+jseriffont: 'Noto Sans CJK JP'
 jmonofont: Ricty
 linkcolor: blue
 citecolor: blue
