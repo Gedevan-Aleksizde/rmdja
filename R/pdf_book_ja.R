@@ -126,7 +126,10 @@ pdf_book_ja <- function (
         out.extra = out_extra,
         attr.source = attr_source
       ),
-      opts_hooks = list(echo = hook_display_block)
+      opts_hooks = list(
+        dev = hook_python_pdf_dev,
+        echo = hook_display_block
+        )
     )
   )
   

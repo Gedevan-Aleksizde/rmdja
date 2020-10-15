@@ -18,6 +18,11 @@ hook_display_block <- function(options){
     return(options)
 }
 
+hook_python_pdf_dev <- function(options){
+  if(options$engine == "python") options$dev <- "pdf"
+  return(options)
+}
+
 fontsize_as_integer <- function(fontsize = "12pt"){
   if(is.null(fontsize)) fontsize = "12pt"
   ps <- as.integer(regmatches(fontsize, regexpr("^[0-9]+", fontsize)))
@@ -107,7 +112,7 @@ autodetect_and_set_jfont <- function(metadata, input_file, runtime, knit_meta, f
   return(paste0("-M", names(font), "=", font))
 }
 
-# tinytex が upbibtex 対応するまで
+# tinytex が upbibtex 対応していないため
 # call at pre_processor
 copy_latexmkrc <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
   if(!file.exists(file.path(output_dir, ".latexmkrc"))){
