@@ -1,0 +1,21 @@
+rmdja::gitbook_ja:
+  keep_md: true
+
+rmdja::pdf_book_ja:
+  tombow: true
+  add_folio: true
+  citation_package: biblatex
+
+bookdown::epub_book:
+  fig_width: 5
+  fig_height: 4
+  dev: svglite
+  fig_caption: true
+  number_sections: true
+  toc: true
+  toc_depth: 3
+  stylesheet: 
+    - '_epub/style.css'
+    - '_epub/toc.css'
+  chapter_level: 1
+  epub_version: epub3

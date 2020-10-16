@@ -65,6 +65,13 @@ gitbook_ja <- function(
       )
     )
   }
+  opts_chunk_default <- list()
+  if(code_rownumber) {
+    opts_chunk_default <- c(opts_chunk_default, list(attr.source = c(".numberLines .lineAnchors")))
+  }
+  if(!missing(fig_align) || !is.null(fig_align)){
+    opts_chunk_default <- c(opts_chunk_default, list(fig.align = fig_align))
+  }
 
   preproc_css <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
     args_extra <- c()
@@ -115,7 +122,7 @@ gitbook_ja <- function(
       rmarkdown::output_format,
       list(pandoc = NULL,
            knitr = rmarkdown::knitr_options(
-             opts_chunk = if(code_rownumber) list(attr.source = c(".numberLines .lineAnchors")) else list(),
+             opts_chunk = opts_chunk_default,
              opts_hooks = list(echo = hook_display_block)),
            pre_processor = preproc_css,
            base_format = rmarkdown::html_document()
@@ -132,6 +139,6 @@ gitbook_ja <- function(
     return(c(a1, a2))
   }
   out$knitr$opts_hooks <- list(echo = hook_display_block)
-  if(code_rownumber) out$knitr$opts_chunk <- c(out$knitr$opts_chunk, attr.source = c(".numberLines .lineAnchors"))
+  if(code_rownumber) out$knitr$opts_chunk <- rmarkdown:::merge_lists(out$knitr$opts_chunk, opts_chunk_default)
   return(out)
 }

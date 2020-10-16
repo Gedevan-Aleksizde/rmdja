@@ -164,7 +164,7 @@ $endif$
 \fi
 \ifluatex
   \usepackage[$for(jfontpresetoptions)$$jfontpresetoptions$$sep$,$endfor$]{luatexja-fontspec}
-  \renewcommand{\kanjifamilydefault}{\gtdefault}
+  \renewcommand{\kanjifamilydefault}{\mtdefault}
 $if(jmainfont)$
   \setmainjfont[$for(jmainfontoptions)$$jmainfontoptions$$sep$,$endfor$]{$jmainfont$}
 $endif$
