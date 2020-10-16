@@ -68,7 +68,7 @@ pdf_book_ja <- function (
   } else {
     attr_source <- NULL
   }
-  if(!any(grepl("^--top-lvel-division", pandoc_args))){
+  if(!any(grepl("^--top-level-division", pandoc_args))){
     pandoc_args <- c(pandoc_args, paste0('--top-level-division=', top_level))
   }
   if(!any(grepl("^--extract-media", pandoc_args)))

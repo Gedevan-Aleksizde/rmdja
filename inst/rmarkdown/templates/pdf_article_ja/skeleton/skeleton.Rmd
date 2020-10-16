@@ -1,0 +1,76 @@
+---
+title: "無題の論文"
+date: "`r Sys.Date()`"
+author: "RMDJA太郎"
+abstract: "`rmdja` パッケージは, `rmarkdown` および `bookdown` パッケージで自然なレイアウトの日本語文書を作成する際に必要な煩雑な設定を自動で行い, ユーザーの負担を軽減するために作成されたパッケージである."
+output:
+  # bookdown::pdf_document2:
+  rmdja::pdf_book_ja:
+    latex_engine: xelatex
+    toc: false
+    pandoc_args:
+      - '--top-level-division=section'
+documentclass: bxjsarticle
+classoption:
+  - a4paper
+  - 'number-of-lines=30'
+  - 'textwidth=40zw'
+link-citations: true
+linkcolor: blue
+citecolor: blue
+urlcolor: magenta
+bibliography: 
+  - packages.bib
+---
+
+\newpage
+
+```{r init, include=F}
+require(knitr)
+require(tidyverse)
+```
+
+# イントロダクション {#introduction}
+
+文書の作成には `rmarkdown` および `bookdown` パッケージ [@R-rmarkdown;@R-bookdown] が必要である. `citr`, `clipr` [@R-citr;@R-clipr] も執筆に役立つパッケージである.
+
+第 \@ref(related-works) 節は先行研究のサーベイである.
+第 \@ref(methodology) 節は今回提起する問題とその解決方法である.
+第 \@ref(experiment) 節は実験内容である.
+第 \@ref(conclusions) 節は結論である.
+
+# 先行研究 {#related-works}
+
+最も充実したドキュメントは開発メンバーの謝益輝 (Yihui) 氏らによる以下の3つである.
+
+* "[R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
+* "[`bookdown`: Authoring Books and Technical Documents with R Markdown](https://bookdown.org/yihui/bookdown/)"
+* "[R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/)"
+
+
+# 問題の定式化 {#methodology}
+
+このサンプルを動かすには `knitr` [@R-knitr], `tidyverse` [@R-tidyverse] が必要である.
+
+# 実験 {#experiment}
+
+図 \@ref(fig:plot) が結果である.
+
+```{r plot, fig.cap="データのプロット"}
+ggplot(mutate(mtcars, cyl = factor(cyl)),
+       aes(x = mpg, y = wt, color = cyl)) +
+  geom_point() + labs(x = "マイル毎米ガロン", y = "重量 (1000ポンド)")
+```
+
+# 結論 {#conclusions}
+
+ここに結論
+
+<!-- 参考文献 -->
+<!-- コメントはこのように HTMLの記法を使う. tex の % は使えない -->
+
+```{r citations, include=F}
+# ファイルの上書きに注意
+# 本文中で引用があれば参考文献セクションが末尾に自動で生成される.
+knitr::write_bib(c(.packages(), c("rmarkdown", "citr", "clipr", "bookdown")), file = 'packages.bib')
+```
