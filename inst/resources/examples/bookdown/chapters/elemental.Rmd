@@ -1,6 +1,6 @@
 # (PART) R Markdown と Bookdown の基本機能 {-}
 
-# この部の概要 {-}
+# このパートの概要 {-}
 
 ここではまず, R Markdown の基本的な機能を紹介する. つまり `bookdown` 特有のものではなく, R Markdown 全般で使用できる機能も含めて紹介する. これ以降は自己言及的な説明が多いため, この文書を生成しているソースコードと比較しながら確認することをおすすめする. ここで紹介する機能は BKD, RDG, RCB での記述に基づく.
 これら3つのドキュメントを読めば, ほとんどのことは可能になる --- `rmdja` を作る理由になった LaTeX テンプレートの修正以外は --- のだが, 本稿の重要な目的の1つは**複数のファイル形式を両立すること**であるので, それができない書き方には触れないし, 技術文書の作成にあまり使わないような機能の動作確認はおこなわず, 技術文書作成で頻繁に使われ, 便利と思える機能のみ紹介する.
@@ -306,7 +306,7 @@ require(equatiomatic)
 require(kableExtra)
 ```
 
-このように, ログを掲載することもできる. これは再現性を重視する際に重宝するが, 一方で単に画像などの主力だけを掲載したい場合もあるだろう. あるいは, プログラムの解説のため, **プログラムは掲載するが実行しない**, ということも必要になるかもしれない. **プログラムと結果の表示/非表示はどちらも簡単に切り替え可能**である. そのためには, チャンクオプションを指定する.
+このように, ログを掲載することもできる. これは再現性を重視する際に重宝するが, 一方で単に画像などの出力だけを掲載したい場合もあるだろう. あるいは, プログラムを解説するために**プログラムは掲載するが実行しない**, ということも必要になるかもしれない. **プログラムと結果の表示/非表示はどちらも簡単に切り替え可能**である. そのためには, チャンクオプションを指定する.
 
 * `echo`: プログラムを掲載するかどうか
 * `message`: プログラム実行結果の標準出力を掲載するかどうか
@@ -314,23 +314,22 @@ require(kableExtra)
 * `error`: プログラム実行結果のエラーを掲載するかどうか
 * `eval`: 文書作成時にプログラムを実行するかどうか
 * `include`: 文書作成時にプログラムを実行し, **かつ掲載しない**かどうか
-* `results`: 出力をいつもの R の出力風にするか (`markup`), 隠すか (`"hide"`), 出力を区切らずまとめるか (`"hold"`), テキストをそのまま出力するか ("`asis`"). 最後はソースコードを動的に生成したい場合などに使う (後述).
+* `results`: 出力をいつもの R の出力風にするか (`markup`), 隠すか (`"hide"`), 出力を区切らずまとめるか (`"hold"`), テキストをそのまま出力するか (`"asis"`). 最後はソースコードを動的に生成したい場合などに使う (後述).
 
 R の論理値は `TRUE`/`FALSE` または `T`/`F` と書く.
 
-チャンクごとに個別に設定することも, デフォルトとして設定することもできる. 前者の場合,
+チャンクごとに個別に設定することも, デフォルトとして設定することもできる. 前者の場合, チャンクオプションは `{}` 内部にカンマ `,` で区切って書く. `r` は R で実行するという意味である.
 
-チャンクオプションは `{}` 内部に書く. `r` は R で実行するという意味である.
-
-```{r}
+```{r chunk-format}
 txt <- "```{r [<name>], [<options>]}
 ...
 ```"
+cat(txt)
 ```
 
 後者の場合, 以下のようなプログラムでデフォルト値を上書きできる.
 
-```{r chunk-default, eval=F}
+```{r chunk-default, echo=T, eval=F}
 knitr::opts_chunk$set(
   echo = F,
   message = T,
@@ -339,7 +338,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-などと書く. なおこのチャンクは `eval=F` を設定することで, 実行されることなくプログラムのみ掲載している (ただし, プログラムのみを掲載するなら, Markdown の機能でも可能である).
+などと書く. なおこのチャンクは `eval=F` を設定することで, 実行されることなくプログラムのみ掲載している. ただし, プログラムのみを掲載するなら, 以下のように Markdown の機能でも可能である. こちらの記法は `{}` がなくなっていることに注意する.
 
 ```{r sh-only-source, comment=""}
 txt <- "```sh
@@ -348,13 +347,13 @@ echo Hello, Bookdown
 cat(txt)
 ```
 
-`{}` ブロック内の値にはさらに R プログラムを与えることができる. この使い方は後の章で解説する.
+`{}` ブロック内の値にはさらに R プログラムで与えることができる. この使い方は後の章で解説する.
 
 これらのオプションがあるおかげでプログラムとその結果の再現を説明したい場合はソースコードも表示させたり, 回帰分析やシミュレーションの結果だけを掲載したい時は結果のみ表示したりできる. これが R Markdown のチャンクの強みである. 例えば Jupyter notebook/lab などは従来, コードセルと出力セルを自由に隠すことができなかった.
 
 チャンクに使用できる言語は R だけではない. **つまり Python なども使用できる**. 以下で対応しているエンジンの一覧を表示できる.
 
-```{r engine-list}
+```{r engine-list, echo=T}
 names(knitr::knit_engines$get())
 ```
 
@@ -370,7 +369,7 @@ R のプログラムと組み合わせることで**回帰分析の結果の数�
 
 まずは, 回帰係数を記号で表現するタイプ. LaTeX 数式をそのまま出力するため, チャンクオプションに `results="asis"` を付ける必要があることに注意する.
 
-```{r regress-equation-1, results="asis"}
+```{r regress-equation-1, echo=T, results="asis"}
 data(iris)
 fit <- lm(Sepal.Length ~., data = iris)
 extract_eq(fit, wrap = T, ital_vars = T, align_env = "aligned")
@@ -378,7 +377,7 @@ extract_eq(fit, wrap = T, ital_vars = T, align_env = "aligned")
 
 さらに `use_coef = T` で係数を推定結果の数値に置き換えた.
 
-```{r regress-equation-2, results="asis"}
+```{r regress-equation-2, echo=T, results="asis"}
 extract_eq(fit, wrap = T, ital_vars = T, use_coef = T, align_env = "aligned")
 ```
 
@@ -401,20 +400,21 @@ knitr::include_graphics(file.path(img_dir, "Johannes_Gutenberg.jpg"))
 
 プログラムチャンクにはこのキャプションを入力するオプション `fig.cap` があるため, **`plot()` 側でタイトルを付けないほうが良い**. 例えば `ggplot2` パッケージの関数を使い以下のようなチャンクを書く[^standard-graphics].
 
-```{r display-chunk-sample, echo=T, result="asis"}
+```{r display-chunk-sample, result="asis"}
 txt <- '```{r plot-sample, echo=T, fig.cap="`ggplot2` によるグラフ"}
 data("diamonds")
 diamonds <- diamonds[sample(1:NROW(diamonds), size =), ]
 ggplot(diamonds, aes(x=carat, y=price, color=clarity)) +
   geom_point() +
   labs( x = "カラット数", y = "価格") + scale_color_pander(name = "クラリティ") +
-  theme_classic(base_family = "Noto Sans CJK JP") + theme(legend.position = "bottom")```'
+  theme_classic(base_family = "Noto Sans CJK JP") + theme(legend.position = "bottom")
+```'
 cat(txt)
 ```
 
 実際の表示は図 \@ref(fig:plot-sample) のようになる.
 
-```{r plot-sample, echo=F, fig.cap="`ggplot2` によるグラフ"}
+```{r plot-sample, fig.cap="`ggplot2` によるグラフ"}
 data("diamonds")
 diamonds <- diamonds[sample(1:NROW(diamonds), size =), ]
 ggplot(diamonds, aes(x=carat, y=price, color=clarity)) +
@@ -555,7 +555,7 @@ YAMLフロントマターの `biblography:` に文献管理ファイル (`.bib`,
 
 (ref:citr-caption) `citr` パッケージの例
 
-```{r citr-image, out.height="70%", fig.cap="(ref:citr-caption)"}
+```{r citr-image, echo=T, out.height="70%", fig.cap="(ref:citr-caption)"}
 knitr::include_graphics(file.path(img_dir, "citr.png"))
 ```
 
@@ -577,7 +577,9 @@ R Markdown の文献引用は pandoc を経由して処理され, pandoc は現�
 
 bibtex および biblatex に関する設定は biblio-style だが, CSLファイルの設定は `csl` を使う.
 
-さらに日本語文献引用が必要な場合の特有の事情として, (1)対応文字コードの問題 (2) 和文と欧文のスタイルが異なるという問題がある. まず前者について, `bibtex` は日本語など非ASCII文字に対応していない. よって従来 `r rmdja::texlogo("pbbitex")` または `r rmdja::texlogo("jbibtex")` が使用されていた. しかしこれもJIS規格の範囲までしか対応していないため, 特殊な文字, 例えば浅野「皙」などの表示ができなかった[^pbibtex-unicode]. そのためさらに `r rmdja::texlogo("upbibtex")` というUnicode対応版プログラムが作成されている. しかし R Markdown (および pandoc) はそのような日本語特有の事情などしらないため, これらを使用することができない. よって**オプション選択の範囲では, `biblatex` か `pandoc-citeproc` でしか日本語文献を表示できない**. これはR Markdownで日本語技術文書を作る際の特にアレな障害の1つである.
+さらに日本語文献引用が必要な場合の特有の事情として, (1)対応文字コードの問題 (2) 和文と欧文のスタイルが異なるという問題がある. まず前者について, `bibtex` は日本語など非ASCII文字に対応していない. よって従来 `r rmdja::texlogo("pbibtex")` または `r rmdja::texlogo("jbibtex")` が使用されていた. しかしこれもJIS規格の範囲までしか対応していないため, 一部の珍しい人名漢字などの表示ができなかった[^pbibtex-unicode]. そのためさらに `r rmdja::texlogo("upbibtex")` というUnicode対応版プログラムが作成されている. しかし R Markdown (および pandoc) はそのような日本語特有の事情などしらないため, これらを使用することができない. よって**オプション選択の範囲では, `biblatex` か `pandoc-citeproc` でしか日本語文献を表示できない**. これはR Markdownで日本語技術文書を作る際の特にアレな障害の1つである.
+
+[^pbibtex-unicode]: `r rmdja::texlogo("pbibtex")` のUNICODEモードは内部でSJISに変換しているだけなので, 全てのUnicodeに対応しているわけではない.
 
 ```{r biblio-comparison}
 tibble(
@@ -593,7 +595,7 @@ tibble(
   ) %>% kable(caption = "引用プログラムごとの違い", booktabs = T)
 ```
 
-[^pbibtex-unicode]: `r rmdja::texlogo("pbibtex")` のUNICODEモードは内部でSJISに変換しているだけなので, 全てのUnicodeに対応しているわけではない.
+
 
 ### `pandoc-citeproc` と CSL
 

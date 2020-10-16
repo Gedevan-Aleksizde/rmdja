@@ -1,6 +1,6 @@
 ---
-title: "`bookdown` + `rmdja` による多様なファイル形式の日本語技術文書の作成 "
-author: "Katagiri, Satoshi"
+title: "`rmdja` による多様な形式の日本語技術文書の作成 "
+author: "Katagiri, Satoshi (ill-identified)"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site                    # RStudio GUIでビルド操作したい場合に必要
 description: "bookdown でまともな日本語文書を作る資料"  # HTML <metadata> に出力されるサイト概要
@@ -32,8 +32,7 @@ biblio-style: authoryear
 ```{r setup, include=FALSE}
 options(tinytex.latexmk.emulation = T)
 # アンダースコアを各自に回避するためコピーするしかない
-file.copy(system.file("resources/bibliography/rmdja.bib", package="rmdja"), "./") 
-
+file.copy(system.file("resources/bibliography/rmdja.bib", package="rmdja"), "./")
 # 画像をコピー
 img_dir <- "img/"
 if(!file.exists(img_dir)) dir.create(img_dir, recursive = T)

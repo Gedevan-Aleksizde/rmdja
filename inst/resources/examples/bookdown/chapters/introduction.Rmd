@@ -10,13 +10,13 @@
 * 冒頭にかっこいいエピグラフを掲載したいので, **1時間かけて特別に枠やフォントを作成した**
 * 市販のワードプロセッサで作成した文書を渡したら, **レイアウトが崩れて読めない**と言われた
 
-本稿は文書作成者をこのような様々なブルシットから解放するのが目的である.
+本稿は文書作成者をこのような数え切れないブルシットから解放するのが目的である.
 
 R Markdown (`rmarkdown`) は, R プログラムを埋め込んだ動的なドキュメントから pandoc を利用して PDF や HTML 形式の文書を作成するパッケージであり, 数式, 図表の挿入, シンタックスハイライトされたプログラムなどを簡単な記述で掲載できる. 名前の通り, その基本構文は Markdown である. よって, Markdown と R の知識が最低限あれば (R プログラムが必要ないなら Markdown だけでも) 文書を作成することができる.
 
 `bookdown` パッケージは `rmarkdown` をもとに, ページ数の多い文書を作成し, 配布するための機能を拡張したものである. しかし, PDF の出力に関しては欧文を前提としたフォーマットを使用しているため, 日本語の適切な表示 (組版やフォントの埋め込みなど)   のできる文書を作成するには高いハードルが存在した.
 
-本稿では, `bookdown` で日本語文書を作成する際の設定を容易にしたパッケージ `rmdja` を利用した日本語技術文書の作成方法を解説する.
+本稿では, `rmarkdown` および `bookdown` で日本語文書を作成する際の設定を容易にしたパッケージ `rmdja` を利用した日本語技術文書の作成方法を解説する. 現在, 書籍, 論文, プレゼンテーションの体裁での文書を作成するテンプレートが用意されており, この**ドキュメント自体も `rmdja` を利用して作成されている**.
 
 # 本稿の目標 {-}
 
@@ -81,27 +81,23 @@ https://notchained.hatenablog.com/entry/2018/08/12/140637
 3. その範囲で実行するには, `\XeLaTeX`{=latex}`XeLaTeX`{=html} または `\LuaLaTeX`{=latex}`LuaLaTeX`{=html} が必要
 4. しかし, デフォルトでは文書クラスが日本語文書向けでないので, レイアウトがあまりよろしくない. 具体的には禁則処理がおかしいとか, 見出しが英文風だとか.
 
-PDFでも日本語を表示する最低限の設定は, YAML フロントマターだけで行える. これは Atusy 氏が『[R Markdown + XeLaTeX で日本語含め好きなフォントを使って PDF を出力する](https://blog.atusy.net/2019/05/14/rmd2pdf-any-font/)』で紹介しているものとだいたい同じ方法になる.
+実のところPDFでも日本語を表示する最低限の設定は, YAML フロントマターだけで行える. 『[R Markdown + XeLaTeX で日本語含め好きなフォントを使って PDF を出力する](https://blog.atusy.net/2019/05/14/rmd2pdf-any-font/)』で紹介されているものよりもっとシンプルな書き方である.
 
 ```yaml
-output:
-  pdf_document:
+output:   pdf_document:
     latex_engine: xelatex
-header-includes: |
-  \setCJKmonofont{Noto Sans Mono CJK JP}
-  \setCJKsansfont{Noto Sans CJK JP}
-documentclass: bxjsreport
-mainfont: Noto Serif
-sansfont: Noto Serif
-monofont: Noto Mono
-CJKmainfont: Noto Serif CJK JP
+documentclass: bxjsarticle
+classoption:
+  - xelatex
+  - ja=standard
+  - jafont=noto
 ```
 
-このままでも, とりあえず文字化けすることなく日本語を表示できる. しかし文書として整ったものにするのは難しい
+このままでも, とりあえず文字化けすることなく日本語を表示できる. しかし実際に作ってみると, いろいろな障害が立ちはだかり, 文書として整ったものにするのは難しい.
 
-このままでは参考文献リストの表示も不自然なままである. だがこれ以上のカスタマイズは, Atusy 氏がやっているようにテンプレートを修正する必要がある.
+このままでは参考文献リストの表示も不自然なままである. だがこれ以上のカスタマイズは Atusy 氏がやっているようにテンプレートを修正でしか対処できず,  `r rmdja::texlogo("latex")` に対するそれなりの知識が必要となる.
 
-なるべく選択肢は広げておきたいが, なんでもありではかえって余計なことをしがちである. よって既に作成した beamer フォーマットと同様に, `\XeLaTeX`{=latex}`XeLaTeX`{=html} および `\LuaLaTeX`{=latex}`LuaLaTeX`{=html} のみの対応を想定している.
+なるべく選択肢は広げておきたいが, なんでもありではかえって余計なことをしがちである. よって既に作成した beamer フォーマットと同様に, `r rmdja::texlogo("xelatex")` および `r rmdja::texlogo("lualatex")` のみの対応を想定している.
 
 ## 想定読者 {-}
 

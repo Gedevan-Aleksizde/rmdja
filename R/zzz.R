@@ -81,7 +81,7 @@ autodetect_and_set_jfont <- function(metadata, input_file, runtime, knit_meta, f
         jfontpreset <- "noto"
       }
       else if(identical(latex_engine, "lualatex")){
-        jfontpreset <- "noto"
+        jfontpreset <- "noto-otf"
       }
     }
     else if(osinfo$name == "darwin"){
