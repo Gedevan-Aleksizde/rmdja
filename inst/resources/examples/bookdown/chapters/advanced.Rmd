@@ -125,7 +125,7 @@ DiagrammeR::grViz("digraph {
 [^rcb-diagrammer]: https://bookdown.org/yihui/rmarkdown-cookbook/diagrams.html
 
 
-# 表の掲載
+# 表のデザイン
 
 ## TeX/HTML を出力する関数
 
@@ -138,24 +138,16 @@ require(stargazer)
 stargazer(mtcars, type = if(knitr::is_latex_output()) 'latex' else 'html', header = F)
 ```
 
+##  (TODO) `gt` パッケージの対応
+
+TODO
+
+
 # 文献引用 
 
 ## `(u)p\BibTeX`{=latex}`(u)pBibTeX`{=html} を使う
 
 日本語対応 `.bst` ファイルを使いたい場合は少しトリッキーな操作が必要になる. `rmarkdown` は `tinytex` というパッケージでインストールされたスタンドアローンな処理系で PDF を生成している. 冒頭のチャンクで `options(tinytex.latexmk.emulation = F)` を指定することで, 自分のマシンにインストールされている普段使っている処理系に処理させることができる. さらに `rmdja` では `natbib` を指定した場合に自動でカレントディレクトリに `.latexmkrc` をコピーするようにしている. しかしログが残らないなどデバッグしづらいところがあるため, このやり方はやや使いづらい.
-
-TODO: この操作なしに (u)`\pBibTeX`{=latex}`pBibTeX`{=html} を使うには, たぶん `tinytex` と `rmarkdown` 両方の修正が必要. そこまで複雑ではないと思うのでそのうち修正してみたい.
-
-
-## (TODO) BibLaTeX
-
-TODO
-
-## (TODO) pandoc-citeproc
-
-##  (TODO) `gt` パッケージ
-
-TODO
 
 # (TODO) Web アプレットの挿入 {#webapp}
 

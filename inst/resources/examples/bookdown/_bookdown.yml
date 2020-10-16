@@ -1,4 +1,4 @@
-# book_filename: main.Rmd                 # マージして作ったファイルの名前.
+book_filename: rmdja.Rmd                 # マージして作ったファイルの名前.
 output_dir: "../../../../docs"          # ビルドしたファイルの出力先.
 delete_merged_file: true                # 中間生成された Rmd をビルド後に消すかどうか
 clean: null                             # ビルド後に削除するファイル. ビルド中に作られたほとんどの中間ファイルは自動で消されるため, 気になった場合のみ使う.

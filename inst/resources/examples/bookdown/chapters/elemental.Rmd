@@ -230,19 +230,19 @@ ${E_1,E_2,\cdots}$をある確率空間の事象とする. これらの事象の
 
 である.
 
-```{block boloc-example-caution, type="rmdcaution"}
+```{block block-example-caution, type="rmdcaution"}
 技術書によくある注意を喚起するブロック (`rmdcaution`).
 ```
 
-```{block boloc-example-important, type="rmdimportant"}
+```{block block-example-important, type="rmdimportant"}
 技術書によくある注意を喚起するブロック (`rmdimportant`).
 ```
 
-```{block boloc-example-note, type="rmdnote"}
+```{block block-example-note, type="rmdnote"}
 技術書によくある注意を喚起するブロック (`rmdcnote`).
 ```
 
-```{block boloc-example-tip, type="rmdtip"}
+```{block block-example-tip, type="rmdtip"}
 技術書によくある注意を喚起するブロック (`rmdtip`).
 ```
 
@@ -318,16 +318,16 @@ require(kableExtra)
 
 R の論理値は `TRUE`/`FALSE` または `T`/`F` と書く.
 
-チャンクごとに個別に設定することも, デフォルトとして設定することもできる. 前者の場合, チャンクオプションは `{}` 内部にカンマ `,` で区切って書く. `r` は R で実行するという意味である.
+チャンクごとに個別に設定することも, デフォルト値を一括設定することもできる. 前者の場合, チャンクオプションは `{}` 内部にカンマ `,` で区切って書く. `r` は R で実行するという意味である.
 
-```{r chunk-format}
-txt <- "```{r [<name>], [<options>]}
-...
-```"
-cat(txt)
-```
+````
+`r ''````{r [<name>], [<options>]}
+data(cars)
+summary(cars)
+`r ''````
+````
 
-後者の場合, 以下のようなプログラムでデフォルト値を上書きできる.
+一括設定の場合, 以下のようなプログラムでデフォルト値を上書きできる.
 
 ```{r chunk-default, echo=T, eval=F}
 knitr::opts_chunk$set(
@@ -338,14 +338,13 @@ knitr::opts_chunk$set(
 )
 ```
 
-などと書く. なおこのチャンクは `eval=F` を設定することで, 実行されることなくプログラムのみ掲載している. ただし, プログラムのみを掲載するなら, 以下のように Markdown の機能でも可能である. こちらの記法は `{}` がなくなっていることに注意する.
+なおこのチャンクは `eval=F` を設定することで, 実行されることなくプログラムのみ掲載している. ただし, プログラムのみを掲載するなら, 以下のように Markdown の機能でも可能である. こちらの記法は `{}` がなくなっていることに注意する.
 
-```{r sh-only-source, comment=""}
-txt <- "```sh
+````
+`r ''````sh
 echo Hello, Bookdown
-```"
-cat(txt)
-```
+`r ''````
+````
 
 `{}` ブロック内の値にはさらに R プログラムで与えることができる. この使い方は後の章で解説する.
 
@@ -389,7 +388,7 @@ TODO: この書き方だと PDF で付番できない
 
 既に Markdown 記法による図表の挿入方法を紹介したが, プログラムチャンクを介して画像を読み込み表示させることもできる. まずは, R のプログラムで既存の画像ファイルを表示させる方法.
 
-```{r includegraphic-example, out.width="50%", out.height="50%", fig.align="center", fig.cap="Johannes Gutenberg"}
+```{r includegraphic-example, echo=T, out.width="50%", out.height="50%", fig.align="center", fig.cap="Johannes Gutenberg"}
 knitr::include_graphics(file.path(img_dir, "Johannes_Gutenberg.jpg"))
 ```
 
@@ -400,17 +399,17 @@ knitr::include_graphics(file.path(img_dir, "Johannes_Gutenberg.jpg"))
 
 プログラムチャンクにはこのキャプションを入力するオプション `fig.cap` があるため, **`plot()` 側でタイトルを付けないほうが良い**. 例えば `ggplot2` パッケージの関数を使い以下のようなチャンクを書く[^standard-graphics].
 
-```{r display-chunk-sample, result="asis"}
-txt <- '```{r plot-sample, echo=T, fig.cap="`ggplot2` によるグラフ"}
+````
+`r ''````{r plot-sample, echo=T, fig.cap="`ggplot2` によるグラフ"}
 data("diamonds")
 diamonds <- diamonds[sample(1:NROW(diamonds), size =), ]
 ggplot(diamonds, aes(x=carat, y=price, color=clarity)) +
   geom_point() +
   labs( x = "カラット数", y = "価格") + scale_color_pander(name = "クラリティ") +
   theme_classic(base_family = "Noto Sans CJK JP") + theme(legend.position = "bottom")
-```'
-cat(txt)
-```
+`r ''````
+````
+
 
 実際の表示は図 \@ref(fig:plot-sample) のようになる.
 
@@ -597,13 +596,13 @@ tibble(
 
 
 
-### `pandoc-citeproc` と CSL
+### (TODO) `pandoc-citeproc` と CSL
 
-### `biblatex`
+### (WIP) `r rmdja::texlogo("BibLaTeX")`
 
-biblatex の全てのオプションに対応しているわけではないので詳しいことは BibLaTeX のドキュメントを読むべき. ここではよく使う `style` と `backend` のことだけ.
+`r rmdja::texlogo("BibLaTeX")` の全てのオプションに対応しているわけではないので詳しいことは [`r rmdja::texlogo("BibLaTeX")` のドキュメント](https://www.ctan.org/pkg/biblatex)を読んでいただきたい. 残念ながら, 日本語の情報は非常に乏しい. ここではよく使う `style` のことだけ言及する.
 
-フロントマターの `biblio-style:` で指定できるのは, インクルード時の `style=` に指定できるものに対応する. つまり, 引用文献の見出しをどうするかである. これは引用リストと本文中の引用子のスタイル両方に影響する.
+フロントマターの `biblio-style:` で指定できるのは, インクルード時の `style=` に指定できるものに対応する(表 \@ref(tab:biblatex-styles)). つまり, 引用文献の見出しをどうするかである. これは引用リストと本文中の引用子のスタイル両方に影響する.
 
 ```{r biblatex-styles}
 tibble(
@@ -612,19 +611,20 @@ tibble(
 ) %>% kable(
   booktabs = T,
   caption = "biblatex の `bilio-style` で指定できるもの一覧",
-  col.names = c("名称", "概要")
-  )
+  col.names = c("名称", "概要"))
 ```
 
 その他 `apa`, `ieee` など特定の学会が使用するスタイルも用意されているが, これらは基本欧文しか想定していないし, アカデミックの事情に詳しい人しかこれらの使用にこだわらないだろうから詳しくは解説しない. これらを含めたそれぞれの出力例は https://www.overleaf.com/learn/latex/biblatex_bibliography_styles に一覧があるのでそちらを参考に.
 
 なお, もちろん引用リストのスタイルと引用子のスタイルを個別にすることはできるが, R Markdown および Pandoc にそのオプションを通す機能はない. (bibstyle/citestyleで分けられる,bbx/cbx)
 
-和文献を著者名でソートすると五十音順にならない. これは従来の (u)`r rmdja::texlogo("pbibtex")` で使われていた `yomi` フィールドと同様の用途の `sortname` で対処する. 特に変なオプションを使わない限り両者は同等の扱いで良い. つまり, 欧文エントリには何も書かず, 和文のみ `sortname` に読みをひらがなで書けば欧文を全て表示した後に五十音順でソートして表示される.
+現時点では各分野の学会で日本語文献に対応した `r rmdja::texlogo("BibLaTeX")` フォーマットを配布しているという情報は見つけられなかった.  参考として私のブログで対応のヒントについて書いた[^biblatex-note].
+
+[^biblatex-note]: https://ill-identified.hatenablog.com/entry/2020/09/20/231335
 
 TODO: その他の非ラテン文字, キリル文字, アラビア文字 ヘブライ文字等は?
 
-upBibTeX や `bibtex` で動作しない `.bst` ファイルの扱いは応用編参照.
+TODO: upBibTeX や `bibtex` で動作しない `.bst` ファイルの扱い.
 
 なお, 普段文献管理ソフトを使っていないが, 数本程度の文献を引用リストに載せたい利用者は, `biblatex` の構文を利用して書くのがよいかもしれない. 例えばここに書いてあるように. その場合, デフォルトでは本文の引用は [1], [2] のような番号形式となる. `biblio-style: authoryear` とすることで, `natbib` のような 「著者 (出版年)」 スタイルとなる.
 
@@ -632,7 +632,7 @@ https://teastat.blogspot.com/2019/01/bookdown.html
 
 [^CSL-editor]: 簡単なカスタマイズなら CSL editor というWebサービスでできる. しかしあくまでXMLなので, あまり複雑な処理はできないことに注意する.
 
-# 簡単なレイアウト変更
+# (WIP) 簡単なレイアウト変更
 
 ## HTML
 
@@ -668,33 +668,7 @@ mainfontoptions:
 
 インラインのフォント変更は TODO
 
-### 文書クラスの変更
-
-HTMLは利用者側が見え方をある程度カスタマイズできる. かつて存在した Evernote Clearly やカスタム CSS を使って. そのぶんPDFは作成者側がよりレイアウトに注意を払うことになるだろう. 本稿では文章の区切りを章立てにしている. しかし PDF 数十ページしかない文書を大きな文字サイズの見出しで区切るのは少しものものしい感じがする. YAML フロントマターを変更すれば, トップレベルの見出しを変更できる.
-
-まず, 今回は文書ということで書籍の組版をデフォルト設定にしている. もう少し小規模な文書ならば, **レポート**や**論文記事形式**のほうが良いかもしれない. 例えば, 以下のように指定する.
-
-```yaml
-documentclass: bxjsreport
-```
-
-`documentclass` には LaTeX の文書クラスファイル (`.cls`) ならなんでも与えることができるが, \XeLaTeX または \LuaLaTeX で日本語文書を作成することを想定しているため, BXjscls シリーズのクラスから選ぶことを推奨する[^bxjscls]. よって, 以下3種類の中から選ぶとよい. デフォルトは `bxjsbook` なので, これは明示的に指定する必要はない.
-
-* `bxjsbook`
-* `bxjsreport`
-* `bxjsarticle`
-
-このうち, `bxjsbook` がデフォルト設定となっている.
-
-文書クラスとは別に, 文書
-
-その他, `_output.yml` や `_bookdown.yml` のコメントを参考に.
-
-
-[^bxjscls]: https://www.ctan.org/pkg/bxjscls. 但し, スライド用クラスである `bxjsslide` の使用は想定していない.
-
-
-# `rmdja` による文書作成支援機能
+# (WIP) `rmdja` による文書作成支援機能
 
 ### クリエイティブ・コモンズの表記
 

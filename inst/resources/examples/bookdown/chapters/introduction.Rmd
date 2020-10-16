@@ -18,16 +18,21 @@ R Markdown (`rmarkdown`) は, R プログラムを埋め込んだ動的なドキ
 
 本稿では, `rmarkdown` および `bookdown` で日本語文書を作成する際の設定を容易にしたパッケージ `rmdja` を利用した日本語技術文書の作成方法を解説する. 現在, 書籍, 論文, プレゼンテーションの体裁での文書を作成するテンプレートが用意されており, この**ドキュメント自体も `rmdja` を利用して作成されている**.
 
-# 本稿の目標 {-}
+# 本稿の目的 {-}
 
-## R Markdown の現状と問題意識
+## R Markdown の現状と問題意識 {-}
 
-R Markdown を利用した文書作成方法について, すでにそれなりの数の日本語資料は存在する. R Markdown でHTMLファイルのみを作成する場合, 日本語であるか欧文であるかはあまり気にする必要はない. しかし, PDF を出力する, あるいは HTML と PDF を同時に出力したい, となると, 組版に関して細かな設定が必要になるため難易度は一気に上昇する.
+R Markdown を利用した文書作成方法について, すでにそれなりの数と質の日本語資料が存在する. R Markdown でHTMLファイルのみを作成する場合, 日本語であるか欧文であるかはあまり気にする必要はない. HTMLであれば既存の資料でも十分に役に立つ.
 
-実のところPDFでも日本語を表示する最低限の設定は, YAML フロントマターだけで行える. 例えば Atusy氏が『[R Markdown + XeLaTeX で日本語含め好きなフォントを使って PDF を出力する](https://blog.atusy.net/2019/05/14/rmd2pdf-any-font/)』で紹介しているが,  よりもっとシンプルな書き方もできる.
+* kazutan 『[R Markdown再入門](https://kazutan.github.io/fukuokaR11/intro_rmarkdown_d.html)』
+* kazutan 『[R Markdownによるスライド生成](https://kazutan.github.io/SappoRoR6/rmd_slide.html#/)』
+
+しかし, PDF を出力する, あるいは HTML と PDF を同時に出力したい, となると, 組版に関して細かな設定が必要になるため難易度は一気に上昇する.
+
+実のところPDFでも日本語を表示する最低限の設定は, YAML フロントマターだけで行える. 例えば Atusy氏が『[R Markdown + XeLaTeX で日本語含め好きなフォントを使って PDF を出力する](https://blog.atusy.net/2019/05/14/rmd2pdf-any-font/)』で紹介しているが,  よりシンプルな書き方もできる.
 
 ```yaml
-output:   pdf_document:
+output: pdf_document:
     latex_engine: xelatex
 documentclass: bxjsarticle
 classoption:
@@ -38,36 +43,9 @@ classoption:
 
 このままでも, とりあえず文字化けすることなく日本語を表示できる. しかし実際に作ってみると, いろいろな障害が立ちはだかり, 文書として整ったものにするのは難しい. このままでは参考文献リストの表示も不自然なままである. だがこれ以上のカスタマイズは Atusy 氏がやっているようにテンプレートを修正でしか対処できず,  `r rmdja::texlogo("latex")` に対するそれなりの知識が必要となる.
 
-## `rmdja` が提供する機能
+さらに, 同じソースファイルから HTML と PDF を同時に生成すると, また別種の問題が発生する. HTML と PDF は根本的に規格が違うため, 様々な場合分け処理が必要であり, それは pandoc だけでは対応しきれない.
 
-従来LaTeXで文書を作成していたユーザにとっても, 文書の内容から面倒な設定を分離するため, 効率的に執筆できる.
-
-## 既存のフォーマットとの違い {-}
-
-もちろん, 同様のことは既存のソフトウェアやサービスでも可能である.
-
-たとえば はてなブログ, Qiita, といった既存のブログサービスには, Mathjax による数式レンダリングやプログラムをシンタックスハイライトして表示する機能が最初から用意されているものもある. しかしながら現状では以下のような制約がある.
-
-* 独自規格の構文が使いづらい, 一部本来と違う構文で数式を書く必要がある, ページ内リンクが使えない, など.
-* テキストエディタでしか書けない
-* **数十ページ相当のテキストを投稿しようとしただけ**でエラーが発生する.
-
-また, `\LaTeX`{=latex}`LaTeX`{=html} (シンプルなテキストエディタでも, Overleaf や LyX といった強力なエディタでも) を普段使っている人間にとっては以下のような利点がある. R Markdown はそもそも PDF 出力時は `\LaTeX`{=latex}`LaTeX`{=html} に依存しているため, 主な違いは操作の簡略化にある.
-
-* 外部プログラムで作成した画像や計算結果をコピーペーストせずそのまま貼り付けられる
-* LaTeX とほぼ同じ構文で数式を記入できる
-* 主な設定は既に定義済みあり, 本文は簡易な Markdown で書くことができる, よって「TeXは複雑でわかりづらい, 時代遅れのシステム」といった私怨混じりの批判を跳ね返せる
-
-Word を普段使っている人間にとっては以下のような利点がある[^word-out-of-date].
-
-* 数十, 数百ページの文書を書いてもクラッシュすることがあまりない
-* 輪郭のはっきりしたベクタ画像を簡単に貼り付けられる
-* 図表の配置や相互参照を手動で書く必要がない
-* 読み手の環境に依存してレイアウトが崩れにくいPDFファイルを出力できる
-
-さらに, 作成した文書は PDF 形式で出力することはもちろん, HTML 形式で様々なサイトで掲載でき[^blogdown]たり, 電子書籍ファイルとしても出力可能である. このような多様な出力形式への対応しているソフトウェアはあまり例を見ない.
-
-`bookdown` はこのように便利で, 公式ドキュメントがとても充実しているにも関わらず, 日本語に適したレイアウトの設定の煩雑さからあまり普及していない[^bookdown-example].
+HTML出力に限らない R Markdown の全般的な情報は, 既に充実した英語の (公式) ドキュメントが多く存在する[^major-docs].
 
 * "[Dynamic Documents for R・rmarkdown](https://rmarkdown.rstudio.com/docs/index.html)"
 * "[bookdown demo](https://github.com/rstudio/bookdown-demo)"
@@ -75,101 +53,30 @@ Word を普段使っている人間にとっては以下のような利点があ
 * "[_R Markdown Definiteive Guide_](https://bookdown.org/yihui/rmarkdown/)"
 * "[_R Markdown Cookbook_](https://bookdown.org/yihui/rmarkdown-cookbook)"[^rmd-cookbook-publish]
 
-基本的なことがらの多くは上記を読めば分かるのでここでは基本機能をダイジェストで伝えた上で, これらの資料に書いてない応用技を紹介する. YAML のオプションの意味についてはソースコードにコメントを書いた. 以下, 単に, **BKD*  と書けば "_`bookdown`: Authoring Books and Technical Documents with R Markdown_" [@R-bookdown] を, RDG と書けば "_R Markdown: The Definitive GUide_" [@rmarkdown2018] を, RCB と書けば "_R Markdown Cookbook_" [@xie2020Markdown] を指すことにする.
+[^major-docs]: 基本的なことがらの多くは上記を読めば分かるのでここでは基本機能をダイジェストで伝えた上で, これらの資料に書いてない応用技を紹介する. YAML のオプションの意味についてはソースコードにコメントを書いた. 以下, 単に, **BKD*  と書けば "_`bookdown`: Authoring Books and Technical Documents with R Markdown_" [@R-bookdown] を, RDG と書けば "_R Markdown: The Definitive GUide_" [@rmarkdown2018] を, RCB と書けば "_R Markdown Cookbook_" [@xie2020Markdown] を指すことにする.
 
-さらに, Python の `jupyter` は Python のコードチャンクとその結果を簡単に表示できる文書作成ツールである. 出力オプションの少なさ (たとえば長大なコードもそのまま掲載されてしまう) や,  IDE として見ても機能が少ないことからあまり使い勝手がよくなかったが, 最近登場した **Jupyter book** はドキュメント生成能力を強化している. しかし `R Markdown`/`bookdown` ほどPDF形式のことは考慮していないように見える.
+しかしながらこれらを元に1からいろいろな調整を施すのはとても骨が折れるため, `rmdja` パッケージは日本語文書でHTMLやPDFを同時に生成する場合の定番の処理をフォーマットに内蔵することにした.
 
-## 昔話あるいは既存資料との違い {-}
+## `rmdja` の利点 {-}
 
-日本語コミュニティにおいて `bookdown` は以前から言及されていた.
+従来LaTeXやWord, あるいは他の媒体で文書を作成していたユーザにとっても, 文書の内容から面倒な設定を分離するため, 効率的に執筆できる.
 
-それ以降も R Markdown に関する情報を発信する人はいたが, 大きく話題になることが少なかった. ユーザはいるものの, もっぱらHTMLへの出力用途に使い, PDF や同時出力に挑戦する人間はほとんど見られなかった. 普及していない理由は情報の絶対的な少なさ (そして古さ) にある. 本稿の目標はこのような状況を改善することにある.
+Wordユーザにとっては, 以下のような利点がある[^word-out-of-date].
 
-もしすでに R Markdown や Bookdown に触れて, ネット上の情報を元に文書を作った人に対しては, 本稿を読むことで以下のようなメリットがあるかもしれない
+* 数十, 数百ページの文書を書いてもクラッシュすることがあまりない
+* 輪郭のはっきりしたベクタ画像を簡単に貼り付けられる
+* 図表の配置や相互参照を手動で書く必要がない
+* 読み手の環境に依存してレイアウトが崩れにくいPDFファイルを出力できる
 
-* IPA フォント以外のフォントを指定する方法
-* 表のスタイル, 画像の埋め込み方, 見出しのスタイル, といった基本的なレイアウトを見やすく変更する方法
+ただし, `.docx` ファイルの出力はできない. 私が Word を持っておらず, R Markdown や pandoc がサポートしていても動作確認のしようがないため.
 
-なぜかネット上のこの手の情報では IPA フォントを使いたがる例が多い. 10年前ならいざ知らず, もうほとんどの主要OSではIPAフォントはプリインストールされてないのでこだわる理由はあまりないと思うのだが, どうだろうか? ノスタルジーに浸るのはもちろん自由だ, むしろファイルを持ってさえいれば**IPAモナーフォントを埋め込むことも可能**だろう. しかしフリーフォントならむしろカバレッジに優れる Noto フォントが便利だし, あるいは**游書体**とか**ヒラギノ**とか各OSの基本フォントを使いたいだろう. フォントにこだわる人間なら, 欧文と和文で異なるフォントを使う**混植**がしたい人もいるだろう. `rmdja` では, 既に公開した `pdf_presentation_ja` フォーマットと同様に, `bookdown` でも混植できる[^konsyoku].
+`jupyter` は Python のコードチャンクとその結果を簡単に表示できる文書作成ツールである. 出力オプションの少なさ (たとえば長大なコードもそのまま掲載されてしまう) や,  IDE として見ても機能が少ないことからあまり使い勝手がよくなかったが, `rmdja` では **Python スクリプトの埋め込みにもある程度対応**している.
 
-実際に変えようとすると, それでも結構ややこしいことがわかる. 例えば以下のエントリ
+`r rmdja::texlogo("LaTeX")` のユーザー (シンプルなテキストエディタで書いているユーザも, Overleaf や LyX といった強力なエディタを使用しているユーザー) にとっては, `r rmdja::texlogo("LaTeX")` とほぼ同じ構文で数式を入力でき, かつ操作を大きく簡略化でき, 実験結果などをソースに埋め込むことができ, 外部プログラムからいちいちコピペする必要がなくなる. ただし, なるべく選択肢は広げておきたいが, なんでもありではかえって余計なことをしがちである. よって既に作成した beamer フォーマットと同様に, `r rmdja::texlogo("XeLaTeX")` および `r rmdja::texlogo("LuaLaTeX")` のみの対応を想定している. `r rmdja::texlogo("pLaTeX")` や `r rmdja::texlogo("upLaTeX")` には対応していない.
 
-https://notchained.hatenablog.com/entry/2018/08/12/140637
+これまでも R Markdown を使用してきたユーザにとっては, YAML フロントマターに数十行に渡っていた書いていた日本語表示のための設定の多くがフォーマットのデフォルト値になったため, かなり楽になると思われる.
 
-1. R Markdown では通常, `\LaTeX`{=latex}`LaTeX`{=html} は `tinytex` でインストールしたものが呼び出される
-2. そして `tinytex` は `\pLaTeX`{=latex}`pLaTeX`{=html} や `p\BibTeX`{=latex}`pBibTeX`{=html} などを想定していない.
-3. その範囲で実行するには, `\XeLaTeX`{=latex}`XeLaTeX`{=html} または `\LuaLaTeX`{=latex}`LuaLaTeX`{=html} が必要
-4. しかし, デフォルトでは文書クラスが日本語文書向けでないので, レイアウトがあまりよろしくない. 具体的には禁則処理がおかしいとか, 見出しが英文風だとか.
-
-実のところPDFでも日本語を表示する最低限の設定は, YAML フロントマターだけで行える. 『[R Markdown + XeLaTeX で日本語含め好きなフォントを使って PDF を出力する](https://blog.atusy.net/2019/05/14/rmd2pdf-any-font/)』で紹介されているものよりもっとシンプルな書き方である.
-
-```yaml
-output:   pdf_document:
-    latex_engine: xelatex
-documentclass: bxjsarticle
-classoption:
-  - xelatex
-  - ja=standard
-  - jafont=noto
-```
-
-このままでも, とりあえず文字化けすることなく日本語を表示できる. しかし実際に作ってみると, いろいろな障害が立ちはだかり, 文書として整ったものにするのは難しい.
-
-このままでは参考文献リストの表示も不自然なままである. だがこれ以上のカスタマイズは Atusy 氏がやっているようにテンプレートを修正でしか対処できず,  `r rmdja::texlogo("latex")` に対するそれなりの知識が必要となる.
-
-なるべく選択肢は広げておきたいが, なんでもありではかえって余計なことをしがちである. よって既に作成した beamer フォーマットと同様に, `r rmdja::texlogo("xelatex")` および `r rmdja::texlogo("lualatex")` のみの対応を想定している.
-
-## 想定読者 {-}
-
-既に紹介したように, R を普段使わない人間でも `bookdown` で同人技術書を執筆したという事例もある. よって非Rユーザにもある程度配慮して書いておくが, あまりに細かいRの仕様説明などは行わない. **良い参考書が既に数多く存在する**からだ. よって 非Rユーザは, 本稿にある使用例のうち, 自分の書きたいものに使えそうなのものをつまみ食いして使用することになるだろう. 本稿ではそのような使い方をするのに最低限必要なセットアップの知識のみ記載する.
-
-
-## R Markdown ユーザ向けのメリット {-}
-
-R Markdown を使ったことのある人ならわかるろうが, HTML を作るのに納得の行く `output` の指定をしていたらこうなった
-
-```yaml
-bookdown::gitbook:
-  split_by: chapter
-  dev: png
-  dev-args:
-    res: 200
-  css: 
-    - '../../styles/css/style.css'
-    - '../../styles/css/toc.css'
-  keep_md: true
-  config:
-    toc:
-      collapse: none
-      before: |
-        <li><a href="./">Top</a></li>
-      after: |
-        <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
-    toolbar:
-      position: fixed
-    edit : null
-    download:
-      - pdf
-      - epub
-      - mobi
-    fontsettings:
-      theme: white
-      family: serif
-    sharing:
-      github: true
-      twitter: true
-      facebook: true
-      all: ['linkedin', 'vk', 'weibo', 'instapaper']
-```
-
-しかし `rmdja` ではこうだ.
-
-```yaml
-rmdja::gitbook_ja:
-  keep_md: true
-```
-
-PDF の場合も紹介しよう.
+たとえば,
 
 ```yaml
 bookdown::pdf_book:
@@ -192,7 +99,7 @@ bookdown::pdf_book:
   extra_dependencies: gentombow
 ```
 
-こうなる
+のように書いていたものがこうなる.
 
 ```yaml
 rmdja::pdf_book_ja:
@@ -201,11 +108,20 @@ rmdja::pdf_book_ja:
   tombow: true
 ```
 
-さらにチャンクオプションや場合によっては .tex ファイルのテンプレートすら調整する必要もあった. これらは和文と欧文の組版の違いに由来するものである. これらの煩雑な設定を内蔵し, かつフォントの設定など環境に応じて変更する必要のあるものをある程度**自動的に設定**するようにしている.
+さらにチャンクオプションを書いたり場合によっては .tex ファイルのテンプレートすら調整する必要もあった. それらも `rmdja` 内で調整している.
+
+さらに, 作成した文書は PDF 形式で出力することはもちろん, HTML 形式で様々なサイトで掲載でき[^blogdown]たり, 電子書籍ファイルとしても出力可能である. このような多様な出力形式への対応しているソフトウェアはあまり例を見ない.
+
+
+## R使用経験のないユーザへ {-}
+
+Rを使わない, あるいはそもそもプログラミングに詳しくない, という人間にもある使用機会がある. たとえばR を普段使わない人間でも `bookdown` で同人技術書を執筆したという事例がある[^bookdown-example]. この事例は主に数式と画像の貼付けのみだから, 数式出力に必要な `r rmdja::texlogo("LaTeX")` の知識があればほとんどのことはできてしまう. そして `rmdja` ではこの事例で言及されている `r rmdja::texlogo("LaTeX")` の設定の多くは自動で制御される. また, 小説などはほぼテキストであり, 最低限のレイアウトさえ用意すれば数式も, あるいは画像の挿入すらいらないことが多い. `rmdja` では縦書き文書をPDFで出力する方法も用意している.
+
+```{block experimental-features, type="rmdimportant"}
+印刷用フォーマットおよび縦書き文書フォーマットは現在実験的な導入段階であり, 表示の一部に不具合が存在する.
+```
 
 [^word-out-of-date]: ただし筆者は数年来 Word を使っていないため, これらのいくつかは既に改善されているかもしれない.
 [^blogdown]: `bookdown` 同様に R Markdown で作成した文書をブログ風のフォーマットで出力する `blogdown` パッケージというものも存在する.
 [^rmd-cookbook-publish]: 2020/10/19 に書籍としても発売されるらしい.
-[^bookdown-example]: 前例として bookdown で作成した文書を技術書展で配布している人が書いたブログが存在する: https://teastat.blogspot.com/2019/01/bookdown.html
-[^kazutan-source]: ソースはこちら: https://kazutan.github.io/bookdown_test/hoge.html
-[^konsyoku]: ただし, 現時点では HTML に対してフォントを細かく設定する機能, および HTML と PDF のフォントを一致させる機能はない. これは技術的というよりライセンス的に制約が多いからだ.
+[^bookdown-example]: https://teastat.blogspot.com/2019/01/bookdown.html

@@ -1,21 +1,27 @@
 rmdja::gitbook_ja:
   keep_md: true
+  config:
+    toc:
+      collapse: none
+      before: '<li><a href="index.html">Top</a></li>'
+      after: "<p style='text-align:center;display:block;margin: 0 auto;'><img src='https://i.creativecommons.org/l/by-nc/4.0/88x31.png'></p><li><a href='https://bookdown.org' target='_blank'>Published with bookdown</a></li>"
 
 rmdja::pdf_book_ja:
   tombow: true
   add_folio: true
+  keep_tex: true
   citation_package: biblatex
 
 bookdown::epub_book:
   fig_width: 5
   fig_height: 4
-  dev: svglite
+  dev: svg
   fig_caption: true
   number_sections: true
   toc: true
   toc_depth: 3
   stylesheet: 
-    - '_epub/style.css'
-    - '_epub/toc.css'
+    - '../../styles/css/style.css'
+    - '../../styles/css/toc.css'
   chapter_level: 1
   epub_version: epub3

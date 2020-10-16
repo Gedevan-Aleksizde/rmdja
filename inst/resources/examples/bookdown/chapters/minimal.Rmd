@@ -19,7 +19,7 @@ install.packages(c("tidyverse", "ggthemes", "citr", "clipr", "kableExtra"))
 
 RStudio を起動し, 左上から新規作成を選び, "R Markdown" を選ぶ (図 \@ref(fig:new-file)).
 
-```{r new-file, fig.cap="新規作成"}
+```{r new-file, out.height="30%", fig.cap="新規作成"}
 knitr::include_graphics(file.path(img_dir, "new-file.png"))
 ```
 

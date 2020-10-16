@@ -1,7 +1,7 @@
 ---
 title: "`rmdja` による多様な形式の日本語技術文書の作成 "
 author: "Katagiri, Satoshi (ill-identified)"
-date: "2020-10-16"
+date: "2020-10-17"
 site: bookdown::bookdown_site                    # RStudio GUIでビルド操作したい場合に必要
 description: "bookdown でまともな日本語文書を作る資料"  # HTML <metadata> に出力されるサイト概要
 url: 'https\://bookdown.org/john/awesome/'       # URL
@@ -61,73 +61,21 @@ R Markdown (`rmarkdown`) は, R プログラムを埋め込んだ動的なドキ
 
 本稿では, `rmarkdown` および `bookdown` で日本語文書を作成する際の設定を容易にしたパッケージ `rmdja` を利用した日本語技術文書の作成方法を解説する. 現在, 書籍, 論文, プレゼンテーションの体裁での文書を作成するテンプレートが用意されており, この**ドキュメント自体も `rmdja` を利用して作成されている**.
 
-# 本稿の目標 {-}
+# 本稿の目的 {-}
 
+## R Markdown の現状と問題意識 {-}
 
-## 既存のフォーマットとの違い {-}
+R Markdown を利用した文書作成方法について, すでにそれなりの数と質の日本語資料が存在する. R Markdown でHTMLファイルのみを作成する場合, 日本語であるか欧文であるかはあまり気にする必要はない. HTMLであれば既存の資料でも十分に役に立つ.
 
-もちろん, 同様のことは既存のソフトウェアやサービスでも可能である.
+* kazutan 『[R Markdown再入門](https://kazutan.github.io/fukuokaR11/intro_rmarkdown_d.html)』
+* kazutan 『[R Markdownによるスライド生成](https://kazutan.github.io/SappoRoR6/rmd_slide.html#/)』
 
-たとえば はてなブログ, Qiita, といった既存のブログサービスには, Mathjax による数式レンダリングやプログラムをシンタックスハイライトして表示する機能が最初から用意されているものもある. しかしながら現状では以下のような制約がある.
+しかし, PDF を出力する, あるいは HTML と PDF を同時に出力したい, となると, 組版に関して細かな設定が必要になるため難易度は一気に上昇する.
 
-* 独自規格の構文が使いづらい, 一部本来と違う構文で数式を書く必要がある, ページ内リンクが使えない, など.
-* テキストエディタでしか書けない
-* **数十ページ相当のテキストを投稿しようとしただけ**でエラーが発生する.
-
-また, `\LaTeX`{=latex}`LaTeX`{=html} (シンプルなテキストエディタでも, Overleaf や LyX といった強力なエディタでも) を普段使っている人間にとっては以下のような利点がある. R Markdown はそもそも PDF 出力時は `\LaTeX`{=latex}`LaTeX`{=html} に依存しているため, 主な違いは操作の簡略化にある.
-
-* 外部プログラムで作成した画像や計算結果をコピーペーストせずそのまま貼り付けられる
-* LaTeX とほぼ同じ構文で数式を記入できる
-* 主な設定は既に定義済みあり, 本文は簡易な Markdown で書くことができる, よって「TeXは複雑でわかりづらい, 時代遅れのシステム」といった私怨混じりの批判を跳ね返せる
-
-Word を普段使っている人間にとっては以下のような利点がある[^word-out-of-date].
-
-* 数十, 数百ページの文書を書いてもクラッシュすることがあまりない
-* 輪郭のはっきりしたベクタ画像を簡単に貼り付けられる
-* 図表の配置や相互参照を手動で書く必要がない
-* 読み手の環境に依存してレイアウトが崩れにくいPDFファイルを出力できる
-
-さらに, 作成した文書は PDF 形式で出力することはもちろん, HTML 形式で様々なサイトで掲載でき[^blogdown]たり, 電子書籍ファイルとしても出力可能である. このような多様な出力形式への対応しているソフトウェアはあまり例を見ない.
-
-`bookdown` はこのように便利で, 公式ドキュメントがとても充実しているにも関わらず, 日本語に適したレイアウトの設定の煩雑さからあまり普及していない[^bookdown-example].
-
-* "[Dynamic Documents for R・rmarkdown](https://rmarkdown.rstudio.com/docs/index.html)"
-* "[bookdown demo](https://github.com/rstudio/bookdown-demo)"
-* "[_bookdown: Authoring Books and Technical Documents with R Markdown_](https://bookdown.org/yihui/bookdown/)"
-* "[_R Markdown Definiteive Guide_](https://bookdown.org/yihui/rmarkdown/)"
-* "[_R Markdown Cookbook_](https://bookdown.org/yihui/rmarkdown-cookbook)"[^rmd-cookbook-publish]
-
-基本的なことがらの多くは上記を読めば分かるのでここでは基本機能をダイジェストで伝えた上で, これらの資料に書いてない応用技を紹介する. YAML のオプションの意味についてはソースコードにコメントを書いた. 以下, 単に, **BKD*  と書けば "_`bookdown`: Authoring Books and Technical Documents with R Markdown_" [@R-bookdown] を, RDG と書けば "_R Markdown: The Definitive GUide_" [@rmarkdown2018] を, RCB と書けば "_R Markdown Cookbook_" [@xie2020Markdown] を指すことにする.
-
-さらに, Python の `jupyter` は Python のコードチャンクとその結果を簡単に表示できる文書作成ツールである. 出力オプションの少なさ (たとえば長大なコードもそのまま掲載されてしまう) や,  IDE として見ても機能が少ないことからあまり使い勝手がよくなかったが, 最近登場した **Jupyter book** はドキュメント生成能力を強化している. しかし `R Markdown`/`bookdown` ほどPDF形式のことは考慮していないように見える.
-
-## 昔話あるいは既存資料との違い {-}
-
-日本語コミュニティにおいて `bookdown` は以前から言及されていた.
-例えば 2016 年の kazutan 氏のスライド『[Rで本を作りたい](https://kazutan.github.io/JapanR2016/JapanR2016.html#/)』があり, 同じく `bookdown` 製のデモページ, 『[Bookdownを用いた図表番号の自動付与と参照のテスト](https://kazutan.github.io/bookdown_test/hoge.html)』がある[^kazutan-source].
-
-それ以降も R Markdown に関する情報を発信する人はいたが, 大きく話題になることが少なかった. ユーザはいるものの, もっぱらHTMLへの出力用途に使い, PDF や同時出力に挑戦する人間はほとんど見られなかった. 普及していない理由は情報の絶対的な少なさ (そして古さ) にある. 本稿の目標はこのような状況を改善することにある.
-
-もしすでに R Markdown や Bookdown に触れて, ネット上の情報を元に文書を作った人に対しては, 本稿を読むことで以下のようなメリットがあるかもしれない
-
-* IPA フォント以外のフォントを指定する方法
-* 表のスタイル, 画像の埋め込み方, 見出しのスタイル, といった基本的なレイアウトを見やすく変更する方法
-
-なぜかネット上のこの手の情報では IPA フォントを使いたがる例が多い. 10年前ならいざ知らず, もうほとんどの主要OSではIPAフォントはプリインストールされてないのでこだわる理由はあまりないと思うのだが, どうだろうか? ノスタルジーに浸るのはもちろん自由だ, むしろファイルを持ってさえいれば**IPAモナーフォントを埋め込むことも可能**だろう. しかしフリーフォントならむしろカバレッジに優れる Noto フォントが便利だし, あるいは**游書体**とか**ヒラギノ**とか各OSの基本フォントを使いたいだろう. フォントにこだわる人間なら, 欧文と和文で異なるフォントを使う**混植**がしたい人もいるだろう. `rmdja` では, 既に公開した `pdf_presentation_ja` フォーマットと同様に, `bookdown` でも混植できる[^konsyoku].
-
-実際に変えようとすると, それでも結構ややこしいことがわかる. 例えば以下のエントリ
-
-https://notchained.hatenablog.com/entry/2018/08/12/140637
-
-1. R Markdown では通常, `\LaTeX`{=latex}`LaTeX`{=html} は `tinytex` でインストールしたものが呼び出される
-2. そして `tinytex` は `\pLaTeX`{=latex}`pLaTeX`{=html} や `p\BibTeX`{=latex}`pBibTeX`{=html} などを想定していない.
-3. その範囲で実行するには, `\XeLaTeX`{=latex}`XeLaTeX`{=html} または `\LuaLaTeX`{=latex}`LuaLaTeX`{=html} が必要
-4. しかし, デフォルトでは文書クラスが日本語文書向けでないので, レイアウトがあまりよろしくない. 具体的には禁則処理がおかしいとか, 見出しが英文風だとか.
-
-実のところPDFでも日本語を表示する最低限の設定は, YAML フロントマターだけで行える. 『[R Markdown + XeLaTeX で日本語含め好きなフォントを使って PDF を出力する](https://blog.atusy.net/2019/05/14/rmd2pdf-any-font/)』で紹介されているものよりもっとシンプルな書き方である.
+実のところPDFでも日本語を表示する最低限の設定は, YAML フロントマターだけで行える. 例えば Atusy氏が『[R Markdown + XeLaTeX で日本語含め好きなフォントを使って PDF を出力する](https://blog.atusy.net/2019/05/14/rmd2pdf-any-font/)』で紹介しているが,  よりシンプルな書き方もできる.
 
 ```yaml
-output:   pdf_document:
+output: pdf_document:
     latex_engine: xelatex
 documentclass: bxjsarticle
 classoption:
@@ -136,63 +84,42 @@ classoption:
   - jafont=noto
 ```
 
-このままでも, とりあえず文字化けすることなく日本語を表示できる. しかし実際に作ってみると, いろいろな障害が立ちはだかり, 文書として整ったものにするのは難しい.
+このままでも, とりあえず文字化けすることなく日本語を表示できる. しかし実際に作ってみると, いろいろな障害が立ちはだかり, 文書として整ったものにするのは難しい. このままでは参考文献リストの表示も不自然なままである. だがこれ以上のカスタマイズは Atusy 氏がやっているようにテンプレートを修正でしか対処できず,  `\LaTeX`{=latex}`LaTeX`{=html} に対するそれなりの知識が必要となる.
 
-このままでは参考文献リストの表示も不自然なままである. だがこれ以上のカスタマイズは Atusy 氏がやっているようにテンプレートを修正でしか対処できず,  `\LaTeX`{=latex}`LaTeX`{=html} に対するそれなりの知識が必要となる.
+さらに, 同じソースファイルから HTML と PDF を同時に生成すると, また別種の問題が発生する. HTML と PDF は根本的に規格が違うため, 様々な場合分け処理が必要であり, それは pandoc だけでは対応しきれない.
 
-なるべく選択肢は広げておきたいが, なんでもありではかえって余計なことをしがちである. よって既に作成した beamer フォーマットと同様に, `\XeLaTeX`{=latex}`XeLaTeX`{=html} および `\LuaLaTeX`{=latex}`LuaLaTeX`{=html} のみの対応を想定している.
+HTML出力に限らない R Markdown の全般的な情報は, 既に充実した英語の (公式) ドキュメントが多く存在する[^major-docs].
 
-## 想定読者 {-}
+* "[Dynamic Documents for R・rmarkdown](https://rmarkdown.rstudio.com/docs/index.html)"
+* "[bookdown demo](https://github.com/rstudio/bookdown-demo)"
+* "[_bookdown: Authoring Books and Technical Documents with R Markdown_](https://bookdown.org/yihui/bookdown/)"
+* "[_R Markdown Definiteive Guide_](https://bookdown.org/yihui/rmarkdown/)"
+* "[_R Markdown Cookbook_](https://bookdown.org/yihui/rmarkdown-cookbook)"[^rmd-cookbook-publish]
 
-既に紹介したように, R を普段使わない人間でも `bookdown` で同人技術書を執筆したという事例もある. よって非Rユーザにもある程度配慮して書いておくが, あまりに細かいRの仕様説明などは行わない. **良い参考書が既に数多く存在する**からだ. よって 非Rユーザは, 本稿にある使用例のうち, 自分の書きたいものに使えそうなのものをつまみ食いして使用することになるだろう. 本稿ではそのような使い方をするのに最低限必要なセットアップの知識のみ記載する.
+[^major-docs]: 基本的なことがらの多くは上記を読めば分かるのでここでは基本機能をダイジェストで伝えた上で, これらの資料に書いてない応用技を紹介する. YAML のオプションの意味についてはソースコードにコメントを書いた. 以下, 単に, **BKD*  と書けば "_`bookdown`: Authoring Books and Technical Documents with R Markdown_" [@R-bookdown] を, RDG と書けば "_R Markdown: The Definitive GUide_" [@rmarkdown2018] を, RCB と書けば "_R Markdown Cookbook_" [@xie2020Markdown] を指すことにする.
 
+しかしながらこれらを元に1からいろいろな調整を施すのはとても骨が折れるため, `rmdja` パッケージは日本語文書でHTMLやPDFを同時に生成する場合の定番の処理をフォーマットに内蔵することにした.
 
-## R Markdown ユーザ向けのメリット {-}
+## `rmdja` の利点 {-}
 
-R Markdown を使ったことのある人ならわかるろうが, HTML を作るのに納得の行く `output` の指定をしていたらこうなった
+従来LaTeXやWord, あるいは他の媒体で文書を作成していたユーザにとっても, 文書の内容から面倒な設定を分離するため, 効率的に執筆できる.
 
-```yaml
-bookdown::gitbook:
-  split_by: chapter
-  dev: png
-  dev-args:
-    res: 200
-  css: 
-    - '../../styles/css/style.css'
-    - '../../styles/css/toc.css'
-  keep_md: true
-  config:
-    toc:
-      collapse: none
-      before: |
-        <li><a href="./">Top</a></li>
-      after: |
-        <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
-    toolbar:
-      position: fixed
-    edit : null
-    download:
-      - pdf
-      - epub
-      - mobi
-    fontsettings:
-      theme: white
-      family: serif
-    sharing:
-      github: true
-      twitter: true
-      facebook: true
-      all: ['linkedin', 'vk', 'weibo', 'instapaper']
-```
+Wordユーザにとっては, 以下のような利点がある[^word-out-of-date].
 
-しかし `rmdja` ではこうだ.
+* 数十, 数百ページの文書を書いてもクラッシュすることがあまりない
+* 輪郭のはっきりしたベクタ画像を簡単に貼り付けられる
+* 図表の配置や相互参照を手動で書く必要がない
+* 読み手の環境に依存してレイアウトが崩れにくいPDFファイルを出力できる
 
-```yaml
-rmdja::gitbook_ja:
-  keep_md: true
-```
+ただし, `.docx` ファイルの出力はできない. 私が Word を持っておらず, R Markdown や pandoc がサポートしていても動作確認のしようがないため.
 
-PDF の場合も紹介しよう.
+`jupyter` は Python のコードチャンクとその結果を簡単に表示できる文書作成ツールである. 出力オプションの少なさ (たとえば長大なコードもそのまま掲載されてしまう) や,  IDE として見ても機能が少ないことからあまり使い勝手がよくなかったが, `rmdja` では **Python スクリプトの埋め込みにもある程度対応**している.
+
+`\LaTeX`{=latex}`LaTeX`{=html} のユーザー (シンプルなテキストエディタで書いているユーザも, Overleaf や LyX といった強力なエディタを使用しているユーザー) にとっては, `\LaTeX`{=latex}`LaTeX`{=html} とほぼ同じ構文で数式を入力でき, かつ操作を大きく簡略化でき, 実験結果などをソースに埋め込むことができ, 外部プログラムからいちいちコピペする必要がなくなる. ただし, なるべく選択肢は広げておきたいが, なんでもありではかえって余計なことをしがちである. よって既に作成した beamer フォーマットと同様に, `\XeLaTeX`{=latex}`XeLaTeX`{=html} および `\LuaLaTeX`{=latex}`LuaLaTeX`{=html} のみの対応を想定している. `\pLaTeX`{=latex}`pLaTeX`{=html} や `\upLaTeX`{=latex}`upLaTeX`{=html} には対応していない.
+
+これまでも R Markdown を使用してきたユーザにとっては, YAML フロントマターに数十行に渡っていた書いていた日本語表示のための設定の多くがフォーマットのデフォルト値になったため, かなり楽になると思われる.
+
+たとえば,
 
 ```yaml
 bookdown::pdf_book:
@@ -215,7 +142,7 @@ bookdown::pdf_book:
   extra_dependencies: gentombow
 ```
 
-こうなる
+のように書いていたものがこうなる.
 
 ```yaml
 rmdja::pdf_book_ja:
@@ -224,14 +151,23 @@ rmdja::pdf_book_ja:
   tombow: true
 ```
 
-さらにチャンクオプションや場合によっては .tex ファイルのテンプレートすら調整する必要もあった. これらは和文と欧文の組版の違いに由来するものである. これらの煩雑な設定を内蔵し, かつフォントの設定など環境に応じて変更する必要のあるものをある程度**自動的に設定**するようにしている.
+さらにチャンクオプションを書いたり場合によっては .tex ファイルのテンプレートすら調整する必要もあった. それらも `rmdja` 内で調整している.
+
+さらに, 作成した文書は PDF 形式で出力することはもちろん, HTML 形式で様々なサイトで掲載でき[^blogdown]たり, 電子書籍ファイルとしても出力可能である. このような多様な出力形式への対応しているソフトウェアはあまり例を見ない.
+
+
+## R使用経験のないユーザへ {-}
+
+Rを使わない, あるいはそもそもプログラミングに詳しくない, という人間にもある使用機会がある. たとえばR を普段使わない人間でも `bookdown` で同人技術書を執筆したという事例がある[^bookdown-example]. この事例は主に数式と画像の貼付けのみだから, 数式出力に必要な `\LaTeX`{=latex}`LaTeX`{=html} の知識があればほとんどのことはできてしまう. そして `rmdja` ではこの事例で言及されている `\LaTeX`{=latex}`LaTeX`{=html} の設定の多くは自動で制御される. また, 小説などはほぼテキストであり, 最低限のレイアウトさえ用意すれば数式も, あるいは画像の挿入すらいらないことが多い. `rmdja` では縦書き文書をPDFで出力する方法も用意している.
+
+<div class="rmdimportant">
+<p>印刷用フォーマットおよび縦書き文書フォーマットは現在実験的な導入段階であり, 表示の一部に不具合が存在する.</p>
+</div>
 
 [^word-out-of-date]: ただし筆者は数年来 Word を使っていないため, これらのいくつかは既に改善されているかもしれない.
 [^blogdown]: `bookdown` 同様に R Markdown で作成した文書をブログ風のフォーマットで出力する `blogdown` パッケージというものも存在する.
 [^rmd-cookbook-publish]: 2020/10/19 に書籍としても発売されるらしい.
-[^bookdown-example]: 前例として bookdown で作成した文書を技術書展で配布している人が書いたブログが存在する: https://teastat.blogspot.com/2019/01/bookdown.html
-[^kazutan-source]: ソースはこちら: https://kazutan.github.io/bookdown_test/hoge.html
-[^konsyoku]: ただし, 現時点では HTML に対してフォントを細かく設定する機能, および HTML と PDF のフォントを一致させる機能はない. これは技術的というよりライセンス的に制約が多いからだ.
+[^bookdown-example]: https://teastat.blogspot.com/2019/01/bookdown.html
 
 <!--chapter:end:chapters/introduction.Rmd-->
 
@@ -258,14 +194,14 @@ install.packages(c("tidyverse", "ggthemes", "citr", "clipr", "kableExtra"))
 
 RStudio を起動し, 左上から新規作成を選び, "R Markdown" を選ぶ (図 \@ref(fig:new-file)).
 
-<div class="figure">
-<img src="img//new-file.png" alt="新規作成" width="198" />
+<div class="figure" style="text-align: center">
+<img src="img//new-file.png" alt="新規作成" width="198" height="30%" />
 <p class="caption">(\#fig:new-file)新規作成</p>
 </div>
 
 "From Template" からテンプレートを選択する (\@ref(fig:rmdja-templates)).
 
-<div class="figure">
+<div class="figure" style="text-align: center">
 <img src="img//rmd-templates.png" alt="R Markdown のテンプレート" width="532" />
 <p class="caption">(\#fig:rmdja-templates)R Markdown のテンプレート</p>
 </div>
@@ -339,10 +275,10 @@ Build ペーンの "Build Book" の三角形を押すと, 使用できるフォ�
 
 デフォルトでは "All Formats" にチェックが入っているため, これら3種類のファイル形式を一度に生成する. 
 
-<div class="figure">
+<div class="figure" style="text-align: center">
 <img src="img//build-pane.png" alt="Build ペーンの手動設定" width="549" />
 <p class="caption">(\#fig:build-pane1-1)Build ペーンの手動設定</p>
-</div><div class="figure">
+</div><div class="figure" style="text-align: center">
 <img src="img//build-pane-build.png" alt="Build ペーンの手動設定" width="757" />
 <p class="caption">(\#fig:build-pane1-2)Build ペーンの手動設定</p>
 </div>
@@ -704,16 +640,16 @@ require(kableExtra)
 
 R の論理値は `TRUE`/`FALSE` または `T`/`F` と書く.
 
-チャンクごとに個別に設定することも, デフォルトとして設定することもできる. 前者の場合, チャンクオプションは `{}` 内部にカンマ `,` で区切って書く. `r` は R で実行するという意味である.
-
+チャンクごとに個別に設定することも, デフォルト値を一括設定することもできる. 前者の場合, チャンクオプションは `{}` 内部にカンマ `,` で区切って書く. `r` は R で実行するという意味である.
 
 ````
 ```{r [<name>], [<options>]}
-...
+data(cars)
+summary(cars)
 ```
 ````
 
-後者の場合, 以下のようなプログラムでデフォルト値を上書きできる.
+一括設定の場合, 以下のようなプログラムでデフォルト値を上書きできる.
 
 
 ```{.r .numberLines .lineAnchors}
@@ -725,8 +661,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-などと書く. なおこのチャンクは `eval=F` を設定することで, 実行されることなくプログラムのみ掲載している. ただし, プログラムのみを掲載するなら, 以下のように Markdown の機能でも可能である. こちらの記法は `{}` がなくなっていることに注意する.
-
+なおこのチャンクは `eval=F` を設定することで, 実行されることなくプログラムのみ掲載している. ただし, プログラムのみを掲載するなら, 以下のように Markdown の機能でも可能である. こちらの記法は `{}` がなくなっていることに注意する.
 
 ````
 ```sh
@@ -807,6 +742,11 @@ TODO: この書き方だと PDF で付番できない
 
 既に Markdown 記法による図表の挿入方法を紹介したが, プログラムチャンクを介して画像を読み込み表示させることもできる. まずは, R のプログラムで既存の画像ファイルを表示させる方法.
 
+
+```{.r .numberLines .lineAnchors}
+knitr::include_graphics(file.path(img_dir, "Johannes_Gutenberg.jpg"))
+```
+
 <div class="figure" style="text-align: center">
 <img src="img//Johannes_Gutenberg.jpg" alt="Johannes Gutenberg" width="50%" height="50%" />
 <p class="caption">(\#fig:includegraphic-example)Johannes Gutenberg</p>
@@ -819,7 +759,6 @@ TODO: この書き方だと PDF で付番できない
 
 プログラムチャンクにはこのキャプションを入力するオプション `fig.cap` があるため, **`plot()` 側でタイトルを付けないほうが良い**. 例えば `ggplot2` パッケージの関数を使い以下のようなチャンクを書く[^standard-graphics].
 
-
 ````
 ```{r plot-sample, echo=T, fig.cap="`ggplot2` によるグラフ"}
 data("diamonds")
@@ -831,10 +770,11 @@ ggplot(diamonds, aes(x=carat, y=price, color=clarity)) +
 ```
 ````
 
+
 実際の表示は図 \@ref(fig:plot-sample) のようになる.
 
-<div class="figure">
-<img src="main_files/figure-html/plot-sample-1.png" alt="`ggplot2` によるグラフ"  />
+<div class="figure" style="text-align: center">
+<img src="rmdja_files/figure-html/plot-sample-1.png" alt="`ggplot2` によるグラフ"  />
 <p class="caption">(\#fig:plot-sample)`ggplot2` によるグラフ</p>
 </div>
 
@@ -1122,8 +1062,8 @@ Table: (\#tab:tab-md) Markdown 記法の表
 なお, 複数指定する場合は連続させず, 改行で1行空けて宣言する必要がある.
 
 
-<div class="figure">
-<img src="main_files/figure-html/caption-1.png" alt="🌸(ref:figcap1)🌸" width="30%" />
+<div class="figure" style="text-align: center">
+<img src="rmdja_files/figure-html/caption-1.png" alt="🌸(ref:figcap1)🌸" width="30%" />
 <p class="caption">(\#fig:caption)🌸(ref:figcap1)🌸</p>
 </div>
 
@@ -1151,7 +1091,7 @@ YAMLフロントマターの `biblography:` に文献管理ファイル (`.bib`,
 knitr::include_graphics(file.path(img_dir, "citr.png"))
 ```
 
-<div class="figure">
+<div class="figure" style="text-align: center">
 <img src="img//citr.png" alt="(ref:citr-caption)" width="622" height="70%" />
 <p class="caption">(\#fig:citr-image)(ref:citr-caption)</p>
 </div>
@@ -1232,13 +1172,13 @@ bibtex および biblatex に関する設定は biblio-style だが, CSLファ�
 
 
 
-### `pandoc-citeproc` と CSL
+### (TODO) `pandoc-citeproc` と CSL
 
-### `biblatex`
+### (WIP) BibLaTeX
 
-biblatex の全てのオプションに対応しているわけではないので詳しいことは BibLaTeX のドキュメントを読むべき. ここではよく使う `style` と `backend` のことだけ.
+BibLaTeX の全てのオプションに対応しているわけではないので詳しいことは [BibLaTeX のドキュメント](https://www.ctan.org/pkg/biblatex)を読んでいただきたい. 残念ながら, 日本語の情報は非常に乏しい. ここではよく使う `style` のことだけ言及する.
 
-フロントマターの `biblio-style:` で指定できるのは, インクルード時の `style=` に指定できるものに対応する. つまり, 引用文献の見出しをどうするかである. これは引用リストと本文中の引用子のスタイル両方に影響する.
+フロントマターの `biblio-style:` で指定できるのは, インクルード時の `style=` に指定できるものに対応する(表 \@ref(tab:biblatex-styles)). つまり, 引用文献の見出しをどうするかである. これは引用リストと本文中の引用子のスタイル両方に影響する.
 
 <table>
 <caption>(\#tab:biblatex-styles)biblatex の `bilio-style` で指定できるもの一覧</caption>
@@ -1288,11 +1228,13 @@ biblatex の全てのオプションに対応しているわけではないの�
 
 なお, もちろん引用リストのスタイルと引用子のスタイルを個別にすることはできるが, R Markdown および Pandoc にそのオプションを通す機能はない. (bibstyle/citestyleで分けられる,bbx/cbx)
 
-和文献を著者名でソートすると五十音順にならない. これは従来の (u)`\pBibTeX`{=latex}`pBibTeX`{=html} で使われていた `yomi` フィールドと同様の用途の `sortname` で対処する. 特に変なオプションを使わない限り両者は同等の扱いで良い. つまり, 欧文エントリには何も書かず, 和文のみ `sortname` に読みをひらがなで書けば欧文を全て表示した後に五十音順でソートして表示される.
+現時点では各分野の学会で日本語文献に対応した BibLaTeX フォーマットを配布しているという情報は見つけられなかった.  参考として私のブログで対応のヒントについて書いた[^biblatex-note].
+
+[^biblatex-note]: https://ill-identified.hatenablog.com/entry/2020/09/20/231335
 
 TODO: その他の非ラテン文字, キリル文字, アラビア文字 ヘブライ文字等は?
 
-upBibTeX や `bibtex` で動作しない `.bst` ファイルの扱いは応用編参照.
+TODO: upBibTeX や `bibtex` で動作しない `.bst` ファイルの扱い.
 
 なお, 普段文献管理ソフトを使っていないが, 数本程度の文献を引用リストに載せたい利用者は, `biblatex` の構文を利用して書くのがよいかもしれない. 例えばここに書いてあるように. その場合, デフォルトでは本文の引用は [1], [2] のような番号形式となる. `biblio-style: authoryear` とすることで, `natbib` のような 「著者 (出版年)」 スタイルとなる.
 
@@ -1300,7 +1242,7 @@ https://teastat.blogspot.com/2019/01/bookdown.html
 
 [^CSL-editor]: 簡単なカスタマイズなら CSL editor というWebサービスでできる. しかしあくまでXMLなので, あまり複雑な処理はできないことに注意する.
 
-# 簡単なレイアウト変更
+# (WIP) 簡単なレイアウト変更
 
 ## HTML
 
@@ -1336,33 +1278,7 @@ mainfontoptions:
 
 インラインのフォント変更は TODO
 
-### 文書クラスの変更
-
-HTMLは利用者側が見え方をある程度カスタマイズできる. かつて存在した Evernote Clearly やカスタム CSS を使って. そのぶんPDFは作成者側がよりレイアウトに注意を払うことになるだろう. 本稿では文章の区切りを章立てにしている. しかし PDF 数十ページしかない文書を大きな文字サイズの見出しで区切るのは少しものものしい感じがする. YAML フロントマターを変更すれば, トップレベルの見出しを変更できる.
-
-まず, 今回は文書ということで書籍の組版をデフォルト設定にしている. もう少し小規模な文書ならば, **レポート**や**論文記事形式**のほうが良いかもしれない. 例えば, 以下のように指定する.
-
-```yaml
-documentclass: bxjsreport
-```
-
-`documentclass` には LaTeX の文書クラスファイル (`.cls`) ならなんでも与えることができるが, \XeLaTeX または \LuaLaTeX で日本語文書を作成することを想定しているため, BXjscls シリーズのクラスから選ぶことを推奨する[^bxjscls]. よって, 以下3種類の中から選ぶとよい. デフォルトは `bxjsbook` なので, これは明示的に指定する必要はない.
-
-* `bxjsbook`
-* `bxjsreport`
-* `bxjsarticle`
-
-このうち, `bxjsbook` がデフォルト設定となっている.
-
-文書クラスとは別に, 文書
-
-その他, `_output.yml` や `_bookdown.yml` のコメントを参考に.
-
-
-[^bxjscls]: https://www.ctan.org/pkg/bxjscls. 但し, スライド用クラスである `bxjsslide` の使用は想定していない.
-
-
-# `rmdja` による文書作成支援機能
+# (WIP) `rmdja` による文書作成支援機能
 
 ### クリエイティブ・コモンズの表記
 
@@ -1390,13 +1306,12 @@ TODO: それ以外にも便利機能を少しづつ増やしていく予定
 
 # 様々なグラフィックプログラムの埋め込み {#advanced-graph}
 
-
 ## `tikz` を使う
 
 `\LaTeX`{=latex}`LaTeX`{=html} で使われる `tikzdevice` を利用して, 直接  `tikz` の記述による画像を埋め込むことができる. チャンクのエンジンを `tikz` とすることで使用でき, 相互参照やキャプション, 画像サイズの指定といったチャンクオプションも使える. 図 \@ref(fig:tikz-venn) は `tikz` で生成した図である. これはHTMLでも表示できる. TODO: しかし現状ではpdflatex以外のエンジンに変更できないため, 日本語表示が難しい.
 
-<div class="figure">
-<img src="main_files/figure-html/tikz-venn-1.png" alt="tikzを利用した図の表示" height="50%" />
+<div class="figure" style="text-align: center">
+<img src="rmdja_files/figure-html/tikz-venn-1.png" alt="tikzを利用した図の表示"  />
 <p class="caption">(\#fig:tikz-venn)tikzを利用した図の表示</p>
 </div>
 
@@ -1404,16 +1319,16 @@ TODO: それ以外にも便利機能を少しづつ増やしていく予定
 
 同様に, Asymptote のプログラムを埋め込むこともできる. 私は Asymptote が分からないので RCB [Ch. 15.9 Create graphics with Asymptote](https://bookdown.org/yihui/rmarkdown-cookbook/eng-asy.html) と同様のプログラムを書いておく. (図 \@ref(fig:asymptote-graph)).
 
-<div class="figure">
-<img src="main_files/figure-html/asymptote-graph-1.png" alt="Asymptote による画像" height="50%" />
+<div class="figure" style="text-align: center">
+<img src="rmdja_files/figure-html/asymptote-graph-1.png" alt="Asymptote による画像" height="50%" />
 <p class="caption">(\#fig:asymptote-graph)Asymptote による画像</p>
 </div>
 
-## TODO その他のプログラム
+## (TODO) その他のプログラム
 
 D3.js なども使える
 
-## TODO: その他の R プログラム
+## (TODO) その他の R プログラム
 
 なお, DOT言語は `DiagrammeR` パッケージを経由して使うこともできる[^rcb-diagrammer](図: \@ref(fig:diagrammer-graph)). グラフィカルモデルの記述などはこちらのほうが簡単かもしれない.
 
@@ -1437,16 +1352,16 @@ DiagrammeR::grViz("digraph {
 )
 ```
 
-<div class="figure">
-<!--html_preserve--><div id="htmlwidget-eae95e4512552a8107c3" style="width:672px;height:500px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-eae95e4512552a8107c3">{"x":{"diagram":"digraph {\n  graph [layout = dot, rankdir = TB]\n  \n  node [shape = rectangle]        \n  rec1 [label = \"Step 1. 起床する\"]\n  rec2 [label = \"Step 2. コードを書く\"]\n  rec3 [label =  \"Step 3. ???\"]\n  rec4 [label = \"Step 4. 給料をもらう\"]\n  \n  # edge definitions with the node IDs\n  rec1 -> rec2 -> rec3 -> rec4\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
+<div class="figure" style="text-align: center">
+<!--html_preserve--><div id="htmlwidget-e7150a668fb13602fe8a" style="width:672px;height:500px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e7150a668fb13602fe8a">{"x":{"diagram":"digraph {\n  graph [layout = dot, rankdir = TB]\n  \n  node [shape = rectangle]        \n  rec1 [label = \"Step 1. 起床する\"]\n  rec2 [label = \"Step 2. コードを書く\"]\n  rec3 [label =  \"Step 3. ???\"]\n  rec4 [label = \"Step 4. 給料をもらう\"]\n  \n  # edge definitions with the node IDs\n  rec1 -> rec2 -> rec3 -> rec4\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
 <p class="caption">(\#fig:diagrammer-graph)(ref:diagrammer-cap)</p>
 </div>
 
 [^rcb-diagrammer]: https://bookdown.org/yihui/rmarkdown-cookbook/diagrams.html
 
 
-# 表の掲載
+# 表のデザイン
 
 ## TeX/HTML を出力する関数
 
@@ -1495,100 +1410,22 @@ stargazer(mtcars, type = if (knitr::is_latex_output()) "latex" else "html", head
 <tr><td style="text-align:left">carb</td><td>32</td><td>2.812</td><td>1.615</td><td>1</td><td>2</td><td>4</td><td>8</td></tr>
 <tr><td colspan="8" style="border-bottom: 1px solid black"></td></tr></table>
 
+##  (TODO) `gt` パッケージの対応
+
+TODO
+
+
 # 文献引用 
 
 ## `(u)p\BibTeX`{=latex}`(u)pBibTeX`{=html} を使う
 
 日本語対応 `.bst` ファイルを使いたい場合は少しトリッキーな操作が必要になる. `rmarkdown` は `tinytex` というパッケージでインストールされたスタンドアローンな処理系で PDF を生成している. 冒頭のチャンクで `options(tinytex.latexmk.emulation = F)` を指定することで, 自分のマシンにインストールされている普段使っている処理系に処理させることができる. さらに `rmdja` では `natbib` を指定した場合に自動でカレントディレクトリに `.latexmkrc` をコピーするようにしている. しかしログが残らないなどデバッグしづらいところがあるため, このやり方はやや使いづらい.
 
-TODO: この操作なしに (u)`\pBibTeX`{=latex}`pBibTeX`{=html} を使うには, たぶん `tinytex` と `rmarkdown` 両方の修正が必要. そこまで複雑ではないと思うのでそのうち修正してみたい.
-
-
-## TODO BibLaTeX
-
-TODO
-
-## TODO: pandoc-citeproc
-
-##  TODO: `gt` パッケージ
-
-TODO
-
-# 文書タイプごとの解説
-
-`rmdja` は異なるタイプの文書をサポートしている. ここでは各テンプレートの特徴や内部構造について簡単に解説する.
-
-## プレゼンテーション資料の作成
-
-`beamer_presentation_ja` は `rmdja` の最初期からあったフォーマットで, そもそも当初はこれを作るのが目的だった. このフォーマットは Beamer を使用してプレゼンテーション用スライドをPDFファイルで作成する. Beamer は `rmdja::texlogo("latex")` の文書クラスの1つで, `rmarkdown::beamer_presentation` はこれを利用しているが, 例によって日本語表示は想定されていないため, そのためのもろもろの調整込みのラッパーフォーマットである. ただしスライド資料なので組版の禁則処理のような細かい調整は用意していない. `rmdja`ではスライドはPDF以外の出力は不可能である[^slide-html].
-
-通常の文書と違い, デザインを決めるのは主に `theme` である. デフォルトでは [`metropolis`](https://github.com/matze/mtheme)[^metropolis-warn] である. 日本語表示のために調整してあるものの, 日本語表示と直接関係ない部分はカスタマイズの余地としていじっていないが, テンプレートには私の好みが反映された調整 (プログレスバーの位置調整) がYAMLフロントマターに直接書き込まれている.
-
-また, 日本語表示と直接関係ないアレンジとして, 文献引用を行った場合の参考文献リストの表示が
-
-1. 「参考文献」というセクションタイトルのみのスライドが冒頭に自動で挿入される
-2. 引用された文献の数に応じてフレームが自動分割される
-3. これらの参考文献フレームでは上部のタイトルが表示されない
-4. 文字サイズが脚注サイズに縮小
-
-という設定になっている. 通常のプレゼンテーションでは大量の参考文献を読み上げることは少ないという想定で, 紙面の限られたスライドに参考文献のみ羅列したスライドでページ数が増えないように考慮したためこうした.
-
-実際の表示例は `examples` にある.
-
-[^slide-html]: HTML形式のスライドはサポート対象外である. 日本語文書特有の処理はあまりないということ, 普段と違う環境で表示することの多いであろうスライド資料はなるべく環境に依存しない方法で表示すべきと考えているのが理由である. HTMLでスライドを作成したい場合, 次のページが参考になる: https://kazutan.github.io/SappoRoR6/rmd_slide.html#/ 
-[^metropolis-warn]: なお `metropolis` テーマ開発者は Fira Sans フォントの使用を想定しており, ビルド時にフォントがないという警告が出ることがあるが無視して良い. (参考: https://github.com/matze/mtheme/issues/280)
-
-## (WIP) 卒業論文の作成
-
-卒業論文...というか学術論文での体裁でPDFファイルを作成することも可能である. `pdf article in Japanese` として論文形式のPDFファイルを用意している --- HTML 形式で論文提出を要求するという話は聞いたことがないのでPDFのみ対応している.
-
-書籍形式との違いは,
-
-* 文書の見出しが 「X章」ではなく「1. YYYY」のようになる (したがって, `Rmd` ファイルで `#` で記述した見出しは, PDFではセクションタイトルとなる)
-* 余白が見開きを想定したものでなくなる
-
-など些細である. 実際のところ, 文書テンプレートの設定を少しいじっている程度のことしかしていない. テンプレートを開いて確認すればわかるように,
-
-```yaml
-output:
-  rmdja::pdf_book_ja:
-    toc: false
-    pandoc_args:
-      - '--top-level-division=section'
-documentclass: bxjsarticle
-```
-
-という設定を追加しているだけである[^ltjsarticle].
-
-大学によっては論文の体裁が細かく指定されている場合もあるかもしれない. 例えば1ページあたりの行数や, 1行あたりの文字数とか. 例えば1ページあたり50行, 1行あたり40字とする場合, 以下のような設定を追加する. ただし, 行数は図表の挿入などで変動するし, プロポーショナルフォントや字幅の異なる欧文を多用すれば1行あたりの文字数は多くなりうる.
-
-```yaml
-classoptions:
-  - 'number-of-lines=50'
-  - 'textwidth=40zw'
-```
-
-[^ltjsarticle]: このテンプレートでは論文形式のフォーマットとして `bxjsarticle` を使用している. `\LuaLaTeX`{=latex}`LuaLaTeX`{=html} を使用するならば代わりに `ltjsarticle` クラスも使用可能なはずだが, 私は使ったことがないので説明を省く.
-
-## (WIP) 小説の執筆
-
-作家の京極夏彦は自分の作品を1ページごとに切り取っても作品として成立するようなレイアウトにこだわっているらしい. すでに説明したように技術文書や学術論文では図表の配置や改行などにあまりこだわりがない. しかし, 不可能ではない. HTML では難しいが (不可能ではないがHTMLでやるメリットが感じられないので対応する気がない), PDF ではある程度のレイアウトの制御が可能である. ただし, 本当に厳格なJIS準拠の組版にこだわるなら, LaTeX を直接編集しなければならない.
-
-`rmdja` で用意されている縦書き文書テンプレート `pdf vertical writing in Japanese` は, `luatex-ja` を利用して縦書き文書のPDFを作成する. **HTML には未対応である**.
-
-<div class="figure">
-<img src="img//tategaki.png" alt="縦書き文書の出力例" width="655" />
-<p class="caption">(\#fig:tategaki)縦書き文書の出力例</p>
-</div>
-
-小説家になろうとかに自動投稿する機能もいまのところない.
-
-# TODO Web アプレットの挿入 {#webapp}
+# (TODO) Web アプレットの挿入 {#webapp}
 
 ### TODO: plotly
 
 ### TODO: shiny
-
 
 # Python スクリプトの埋め込み {#python}
 
@@ -1658,8 +1495,8 @@ ggplot(mtcars, aes('wt', 'mpg', color='factor(gear)')
 ) + geom_point() + stat_smooth(method='lm') + facet_wrap('~gear')
 ```
 
-<div class="figure">
-<img src="main_files/figure-html/py-plotnine-cap-1.png" alt="(ref:py-plotnine-cap)" width="614" />
+<div class="figure" style="text-align: center">
+<img src="rmdja_files/figure-html/py-plotnine-cap-1.png" alt="(ref:py-plotnine-cap)" width="614" />
 <p class="caption">(\#fig:py-plotnine-cap)(ref:py-plotnine-cap)</p>
 </div>
 
@@ -1671,6 +1508,120 @@ ggplot(mtcars, aes('wt', 'mpg', color='factor(gear)')
 
 # (PART) 製本と多様な形式への対応 {-}
 
+# プレゼンテーション資料の作成
+
+`beamer_presentation_ja` は `rmdja` の最初期からあったフォーマットで, そもそも当初はこれを作るのが目的だった. このフォーマットは Beamer を使用してプレゼンテーション用スライドをPDFファイルで作成する. Beamer は `rmdja::texlogo("LaTeX")` の文書クラスの1つで, `rmarkdown::beamer_presentation` はこれを利用しているが, 例によって日本語表示は想定されていないため, そのためのもろもろの調整込みのラッパーフォーマットである. ただしスライド資料なので組版の禁則処理のような細かい調整は用意していない. `rmdja`ではスライドはPDF以外の出力は不可能である[^slide-html].
+
+通常の文書と違い, デザインを決めるのは主に `theme` である. デフォルトでは [`metropolis`](https://github.com/matze/mtheme)[^metropolis-warn] である. 日本語表示のために調整してあるものの, 日本語表示と直接関係ない部分はカスタマイズの余地としていじっていないが, テンプレートには私の好みが反映された調整 (プログレスバーの位置調整) がYAMLフロントマターに直接書き込まれている.
+
+また, 日本語表示と直接関係ないアレンジとして, 文献引用を行った場合の参考文献リストの表示が
+
+1. 「参考文献」というセクションタイトルのみのスライドが冒頭に自動で挿入される
+2. 引用された文献の数に応じてフレームが自動分割される
+3. これらの参考文献フレームでは上部のタイトルが表示されない
+4. 文字サイズが脚注サイズに縮小
+
+という設定になっている. 通常のプレゼンテーションでは大量の参考文献を読み上げることは少ないという想定で, 紙面の限られたスライドに参考文献のみ羅列したスライドでページ数が増えないように考慮したためこうした.
+
+実際の表示例は `examples` にある.
+
+[^slide-html]: HTML形式のスライドはサポート対象外である. 日本語文書特有の処理はあまりないということ, 普段と違う環境で表示することの多いであろうスライド資料はなるべく環境に依存しない方法で表示すべきと考えているのが理由である. HTMLでスライドを作成したい場合, 次のページが参考になる: https://kazutan.github.io/SappoRoR6/rmd_slide.html#/ 
+[^metropolis-warn]: なお `metropolis` テーマ開発者は Fira Sans フォントの使用を想定しており, ビルド時にフォントがないという警告が出ることがあるが無視して良い. (参考: https://github.com/matze/mtheme/issues/280)
+
+# PDF の文書クラス
+
+HTMLは利用者側が見え方をある程度カスタマイズできる. かつて存在した Evernote Clearly やカスタム CSS を使って. そのぶんPDFは作成者側がよりレイアウトに注意を払うことになるだろう. 本稿では文章の区切りを章立てにしている. しかし PDF 数十ページしかない文書を大きな文字サイズの見出しで区切るのは少しものものしい感じがする. YAML フロントマターを変更すれば, トップレベルの見出しを変更できる.
+
+`pdf book in Japanese` は "book" ということで書籍の組版をデフォルト設定にしている. もう少し小規模な文書ならば, **レポート**や**論文記事**形式のほうが良いかもしれない. 例えば, 以下のように指定する.
+
+```yaml
+documentclass: bxjsreport
+```
+
+`documentclass` には LaTeX の文書クラスファイル (`.cls`) ならなんでも与えることができるが, \XeLaTeX または \LuaLaTeX で日本語文書を作成することを想定しているため, 以下2種類の BXjscls の文書クラス[^bxjscls]の中から選ぶとよい. デフォルトは `bxjsbook` なので, これは明示的に指定する必要はない.
+
+* `bxjsbook`
+* `bxjsreport`
+
+このうち, `bxjsbook` が `pdf book in Japanese` のデフォルト設定となっている. `rmdja::texlogo("LaTeX")` の文書クラスは, 行間や見出しのレイアウトなどを日本語文書に準じたものにするが, それ以外の細かい調整は `_output.yml` や `_bookdown.yml` の設定を書き換えて調整する. それでも不十分な場合は, .tex ファイルやpandocテンプレートを直接編集したり, 追加のスタイルファイルを読み込んだりするしかない.
+
+
+[^bxjscls]: 詳細はここにあるドキュメント参照: https://www.ctan.org/pkg/bxjscls 但し, スライド用クラスである `bxjsslide` の使用は想定していない. また, `bxjsarticle` を使う場合は後述の `pdf article in Japanese` テンプレートから作成したほうがよい. さらに `rmdja::texlogo("LuaLaTeX")` を使用するならば `luatex-ja` で提供される日本語文書クラスも指定することができるが, あまりつかったことがないためレイアウトに不備があるかもしれない.
+
+# (WIP) 卒業論文の作成
+
+卒業論文...というか学術論文での体裁でPDFファイルを作成することも可能である. `pdf article in Japanese` として論文形式のPDFファイルを用意している --- HTML 形式で論文提出を要求するという話は聞いたことがないのでPDFのみ対応している.
+
+書籍形式との違いは,
+
+* 文書の見出しが 「X章」ではなく「1. YYYY」のようになる (したがって, `Rmd` ファイルで `#` で記述した見出しは, PDFではセクションタイトルとなる)
+* 余白が見開きを想定したものでなくなる
+
+など些細である. 実際のところ, 文書テンプレートの設定を少しいじっている程度のことしかしていない. テンプレートを開いて確認すればわかるように,
+
+```yaml
+output:
+  rmdja::pdf_book_ja:
+    toc: false
+    pandoc_args:
+      - '--top-level-division=section'
+documentclass: bxjsarticle
+```
+
+という設定を追加しているだけである[^ltjsarticle].
+
+大学によっては論文の体裁が細かく指定されている場合もあるかもしれない. 例えば1ページあたりの行数や, 1行あたりの文字数とか. 例えば1ページあたり50行, 1行あたり40字とする場合, 以下のような設定を追加する. ただし, 行数は図表の挿入などで変動するし, プロポーショナルフォントや字幅の異なる欧文を多用すれば1行あたりの文字数は多くなりうる.
+
+```yaml
+classoptions:
+  - 'number-of-lines=50'
+  - 'textwidth=40zw'
+```
+
+さらに, カラー印刷が許容されない場合もある. `ggplot2` は `scale_*_grey()` などでカラーパレットを簡単に変更できる (図 \@ref(fig:plot-grey-scale)).
+
+
+```{.r .numberLines .lineAnchors}
+ggplot(
+  mutate(mtcars, cyl = factor(cyl)),
+  aes(x = mpg, y = wt, color = cyl)
+) +
+  geom_point() +
+  labs(x = "マイル毎米ガロン", y = "重量 (1000ポンド)") +
+  theme_bw() +
+  scale_color_grey() +
+  scale_fill_grey()
+```
+
+<div class="figure" style="text-align: center">
+<img src="rmdja_files/figure-html/plot-grey-scale-1.png" alt="グレースケールでのプロット"  />
+<p class="caption">(\#fig:plot-grey-scale)グレースケールでのプロット</p>
+</div>
+
+[^ltjsarticle]: このテンプレートでは論文形式のフォーマットとして `bxjsarticle` を使用している. `\LuaLaTeX`{=latex}`LuaLaTeX`{=html} を使用するならば代わりに `ltjsarticle` クラスも使用可能なはずだが, 私は使ったことがないので説明を省く.
+
+# (WIP) 小説の執筆
+
+作家の京極夏彦は自分の作品を1ページごとに切り取っても作品として成立するようなレイアウトにこだわっているらしい. すでに説明したように技術文書や学術論文では図表の配置や改行などにあまりこだわりがない. しかし, 不可能ではない. HTML では難しいが (不可能ではないがHTMLでやるメリットが感じられないので対応する気がない), PDF ではある程度のレイアウトの制御が可能である. ただし, 本当に厳格なJIS準拠の組版にこだわるなら, LaTeX を直接編集しなければならない.
+
+`rmdja` で用意されている縦書き文書テンプレート `pdf vertical writing in Japanese` は, `jlreq` を利用して[^luatex-ja-tate]縦書き文書のPDFを作成する(図: \@ref(fig:tategaki)). **HTML には未対応である**.
+
+<div class="figure" style="text-align: center">
+<img src="img//tategaki.png" alt="縦書き文書の出力例" width="780" />
+<p class="caption">(\#fig:tategaki)縦書き文書の出力例</p>
+</div>
+
+<div class="rmdwarning">
+<p>現在, 縦書き文書では図のようにゴシック体になってしまうことがある.</p>
+</div>
+
+<div class="rmdtip">
+<p>エディタは横書きのままである. また, 段落改行も Markdown のルールに則して1行空けによってなされる.</p>
+</div>
+
+小説家になろうとかに自動投稿する機能もいまのところない.
+
+[^luatex-ja-tate]: `luatex-ja` にも縦書き文書クラス `ltjt` シリーズが存在するが, 公式ドキュメントにすら詳しい解説がなかったため採用しなかった.
 
 # 製本方法の詳細
 
@@ -1724,10 +1675,10 @@ https://ill-identified.hatenablog.com/entry/2020/09/05/202403
 
 Build ペーンから文書をビルドするには,  `index.Rmd` のYAML ヘッダに `site: bookdown::bookdown_site` を書く必要がある. さらに,  `index.Rmd` をプロジェクトディレクトリのルートに置いていない場合は, ツールバーの `Build` -> `Configure Build Tools...` から `index.Rmd` を置いているディレクトリを site ディレクトリとする設定が必要になる(図  \@ref(fig:build-pane2-1), \@ref(fig:build-pane2-2)).
 
-<div class="figure">
+<div class="figure" style="text-align: center">
 <img src="img//build-pane.png" alt="Build ペーンの手動設定" width="549" />
 <p class="caption">(\#fig:build-pane2-1)Build ペーンの手動設定</p>
-</div><div class="figure">
+</div><div class="figure" style="text-align: center">
 <img src="img//build-pane-build.png" alt="Build ペーンの手動設定" width="757" />
 <p class="caption">(\#fig:build-pane2-2)Build ペーンの手動設定</p>
 </div>
@@ -1838,13 +1789,15 @@ TODO: https://teastat.blogspot.com/2019/01/bookdown.html の記述のうち, ま
 
 # (PART) デバッグ {-}
 
+# このパートで説明すること {-}
+
 残念ながら, 現状 `bookdown` は完全にプログラミング知識のないエンドユーザでも縦横無尽に使用できるかと言うと, まだまだ不安定でそのレベルには達していない. さらに悪いことに, `rmarkdown` および `bookdown` は `knitr`, `pandoc`, LaTeX といった様々なプログラムを継ぎ接ぎして実装されているため, R の知識だけではエラーが起こった場合や, 意図したとおりの出力が得られないときに原因が分かりにくいことがある. そこで, ここではエラーが出た際にどう対処するかのヒントを書いておく.
 
 # 製本時のエラーへの対処
 
 ## エラーがどのタイミングで発生したかを特定する
 
-逆に言えば, `Rmd` ファイルを `md` ファイルに変換 (`knitr`による処理) するときにエラーが出たのか, `md` を各ファイルに変換 `pandoc` する際に起こったのかをまず特定するのが重要である. そのためには
+R Markdown はさまざまな外部プログラムを利用して, 数段階のプロセスを経てソースファイルを変換して文書を作成する複雑なプログラムである. 逆に言えば, `Rmd` ファイルを `md` ファイルに変換 (`knitr`による処理) するときにエラーが出たのか, `md` を各ファイルに変換 `pandoc` する際に起こったのかをまず特定するのが重要である. そのためには
 
 1. `keep_md: true` を設定する
 2. うまくいかないときはキャッシュを削除してから再実行する
@@ -1894,7 +1847,7 @@ output:
 しかし, フォーマット関数に `pandoc_args` という構文をサポートしていることや, フォーマット関数で `pandoc` の同名の引数を上書きする仕様のフォーマットもあるため, 上記は絶対ではない. これが原因で, 「`output:` 以下に書くべきものを間違えてトップレベルに書いたが, 意図したとおりに機能した」あるいはその逆が発生することがある. また, **`pandoc` の構文ではキーワードにハイフンを使うことができる**が, フォーマットはRの関数でもあるため, ハイフンを使えず, アンダースコアで置き換えられる. この違いも書き間違えの原因になる.
 
 
-## PDF の生成に失敗する場合
+## PDF 生成時のエラーを確認する
 
 それでもエラーが出る場合, 私の経験上ほとんどが生成した `.tex` ファイルをタイプセットする際にエラーが発生している. `html` との両立を考えると, どうしても `pandoc` が解釈できる構文に限界がくるためである. 
 
@@ -1913,12 +1866,12 @@ Error: LaTeX failed to XXXX
 
 この場合最も重要なのは, 以下に尽きる.
 
-1 `options(tinytex.verbose = TRUE)` を設定する
-2 `keep_tex: true` を設定する
+1. `options(tinytex.verbose = TRUE)` を設定する
+2. `keep_tex: true` を設定する
 
 これは `keep_md` と同様に, 中間ファイルである `.tex` を残すことを意味する.
 
-それでも解決しない場合, 改めてこのファイルを手動でタイプセットするのも1つの方法だ. もしうまくいったり, 異なるエラーが出るのなら, 環境の違いが問題かもしれない. そして upBibTeX を使うのなら, 後者が唯一のデバッグ方法だ.
+それでも解決しない場合, 改めてこのファイルを手動でタイプセットするのも1つの方法だ. もしうまくいったり, 異なるエラーが出るのなら, 環境の違いが問題かもしれない. そして `\upBibTeX`{=latex}`upBibTeX`{=html} を使うのなら, 後者が唯一のデバッグ方法だ.
 
 
 [^r4ds-source]: https://github.com/hadley/r4ds
@@ -1928,7 +1881,6 @@ Error: LaTeX failed to XXXX
 [^sangokushi-source]: ソース: https://github.com/Gedevan-Aleksizde/Japan.R2019
 [^structural-source]: ソース: https://github.com/Gedevan-Aleksizde/20190125_tokyor
 [^bxcoloremoji]: https://github.com/zr-tex8r/BXcoloremoji
-
 
 <!--chapter:end:chapters/multi-media.Rmd-->
 
@@ -2035,6 +1987,24 @@ eprint = {XXXX.YYYYY},
 ```
 
 TODO: 現在 jecon.bst の表示も少しおかしいので確認中.
+
+# `fontregisterer` でグラフ用フォントを自動登録
+
+Rで描いたグラフに日本語を表示する場合, Linux 系 OS ならばフォント名を適切に設定するだけで表示されるが, Windows や Mac ではフォントをグラフィックデバイスに登録する必要がある. しかし手動登録は面倒なので, インストールされているシステムフォントを全て自動登録するパッケージ, [`fontregisterer`](https://github.com/Gedevan-Aleksizde/fontregisterer) を用意している.
+
+
+```{.r .numberLines .lineAnchors}
+remotes::install_github("Gedevan-Aleksizde/fontregisterer", repos = NULL, type = "source")
+```
+
+もちろんこれは R Markdown 以外でも使用できる. このパッケージは読み込まれた時点で登録処理を行うため,
+
+
+```{.r .numberLines .lineAnchors}
+require(fontregisterer)
+```
+
+を最初に実行するだけで良い. 詳しい仕組みの解説は『[おまえはもうRのグラフの日本語表示に悩まない (各OS対応)](https://ill-identified.hatenablog.com/entry/2020/10/03/200618)』に書いている.
 
 <!--chapter:end:chapters/appendix.Rmd-->
 
