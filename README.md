@@ -10,6 +10,10 @@ Customized R Markdown/Bookdown format functions for Japanese users
   + それぞれ `zxjatype`, `luatex-ja`, を利用して和文表示をしています
 * 私的LaTeXテンプレ集である[my_latex_templates](https://github.com/Gedevan-Aleksizde/my_latex_templates/)からパッケージとして独立しました
 
+以下は `rmdja` 自身で作成したドキュメントです. HTML/PDF/EPUB を用意しています.
+
+https://gedevan-aleksizde.github.io/rmdja/
+
 ## 既知の問題点
 
 * `rmarkdown` 2.3 以前のバージョンでは標準グラフィックデバイスのフォントサイズが自動調整されません
@@ -211,11 +215,6 @@ sudo apt install graphiviz
 2020/9/19 Tokyo.R で本パッケージの機能を紹介しました.
 
 『[おまえは万物をRSTUDIOで書ける](https://speakerdeck.com/ktgrstsh/you-can-write-everything-on-rstudio)』
-
-`rmdja` 自身で作成したドキュメント
-
-https://gedevan-aleksizde.github.io/rmdja/
-
 
 # 更新履歴メモ
 
