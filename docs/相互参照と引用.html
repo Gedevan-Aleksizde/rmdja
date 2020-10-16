@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 相互参照と引用 | bookdown + rmdja による多様なファイル形式の日本語技術文書の作成</title>
+  <title>5 相互参照と引用 | rmdja による多様な形式の日本語技術文書の作成</title>
   <meta name="description" content="bookdown でまともな日本語文書を作る資料" />
   <meta name="generator" content="bookdown 0.20.6 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4 相互参照と引用 | bookdown + rmdja による多様なファイル形式の日本語技術文書の作成" />
+  <meta property="og:title" content="5 相互参照と引用 | rmdja による多様な形式の日本語技術文書の作成" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://bookdown.org/john/awesome/" />
   <meta property="og:image" content="https://bookdown.org/john/awesome/img/Johannes_Gutenberg.jpg" />
@@ -16,15 +16,15 @@
   <meta name="github-repo" content="Gedevan-Aleksizde/rmdja" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 相互参照と引用 | bookdown + rmdja による多様なファイル形式の日本語技術文書の作成" />
+  <meta name="twitter:title" content="5 相互参照と引用 | rmdja による多様な形式の日本語技術文書の作成" />
   
   <meta name="twitter:description" content="bookdown でまともな日本語文書を作る資料" />
   <meta name="twitter:image" content="https://bookdown.org/john/awesome/img/Johannes_Gutenberg.jpg" />
 
-<meta name="author" content="Katagiri, Satoshi" />
+<meta name="author" content="Katagiri, Satoshi (ill-identified)" />
 
 
-<meta name="date" content="2020-09-19" />
+<meta name="date" content="2020-10-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <link rel="prev" href="動的なコンテンツの作成.html"/>
 <link rel="next" href="簡単なレイアウト変更.html"/>
-<script src="libs/header-attrs-2.3.8/header-attrs.js"></script>
+<script src="libs/header-attrs-2.4/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -54,7 +54,7 @@
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
 <script src="libs/viz-1.8.2/viz.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
 <script src="libs/grViz-binding-1.0.6.1/grViz.js"></script>
@@ -150,116 +150,133 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="本稿の目標.html"><a href="本稿の目標.html#r-markdown-ユーザ向けのメリット"><i class="fa fa-check"></i>R Markdown ユーザ向けのメリット</a></li>
 </ul></li>
 <li class="part"><span><b>II 最低限のチュートリアル</b></span></li>
-<li class="chapter" data-level="1" data-path="準備.html"><a href="準備.html"><i class="fa fa-check"></i><b>1</b> 準備</a>
+<li class="chapter" data-level="1" data-path="quick-start.html"><a href="quick-start.html"><i class="fa fa-check"></i><b>1</b> クイックスタート</a></li>
+<li class="chapter" data-level="2" data-path="下準備.html"><a href="下準備.html"><i class="fa fa-check"></i><b>2</b> 下準備</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="準備.html"><a href="準備.html#インストール"><i class="fa fa-check"></i><b>1.1</b> インストール</a></li>
+<li class="chapter" data-level="2.1" data-path="下準備.html"><a href="下準備.html#より丁寧なインストール解説"><i class="fa fa-check"></i><b>2.1</b> より丁寧なインストール解説</a></li>
+<li class="chapter" data-level="2.2" data-path="下準備.html"><a href="下準備.html#書籍形式のビルド操作"><i class="fa fa-check"></i><b>2.2</b> 書籍形式のビルド操作</a></li>
 </ul></li>
 <li class="part"><span><b>III R Markdown と Bookdown の基本機能</b></span></li>
-<li class="chapter" data-level="" data-path="この部の概要.html"><a href="この部の概要.html"><i class="fa fa-check"></i>この部の概要</a></li>
-<li class="chapter" data-level="2" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html"><i class="fa fa-check"></i><b>2</b> 静的なコンテンツの作成</a>
+<li class="chapter" data-level="" data-path="このパートの概要.html"><a href="このパートの概要.html"><i class="fa fa-check"></i>このパートの概要</a></li>
+<li class="chapter" data-level="3" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html"><i class="fa fa-check"></i><b>3</b> 静的なコンテンツの作成</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#markdown-の基本構文"><i class="fa fa-check"></i><b>2.1</b> Markdown の基本構文</a>
+<li class="chapter" data-level="3.1" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#markdown-の基本構文"><i class="fa fa-check"></i><b>3.1</b> Markdown の基本構文</a>
 <ul>
-<li class="chapter" data-level="2.1.1" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#インラインでの書式変更"><i class="fa fa-check"></i><b>2.1.1</b> インラインでの書式変更</a></li>
-<li class="chapter" data-level="2.1.2" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#ブロック要素"><i class="fa fa-check"></i><b>2.1.2</b> ブロック要素</a></li>
+<li class="chapter" data-level="3.1.1" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#インラインでの書式変更"><i class="fa fa-check"></i><b>3.1.1</b> インラインでの書式変更</a></li>
+<li class="chapter" data-level="3.1.2" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#ブロック要素"><i class="fa fa-check"></i><b>3.1.2</b> ブロック要素</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#markdown-を使った図表の挿入"><i class="fa fa-check"></i><b>2.2</b> Markdown を使った図表の挿入</a>
+<li class="chapter" data-level="3.2" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#markdown-を使った図表の挿入"><i class="fa fa-check"></i><b>3.2</b> Markdown を使った図表の挿入</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#コメントアウト"><i class="fa fa-check"></i><b>2.2.1</b> コメントアウト</a></li>
+<li class="chapter" data-level="3.2.1" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#コメントアウト"><i class="fa fa-check"></i><b>3.2.1</b> コメントアウト</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#数式"><i class="fa fa-check"></i><b>2.3</b> 数式</a></li>
-<li class="chapter" data-level="2.4" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#カスタムブロック"><i class="fa fa-check"></i><b>2.4</b> カスタムブロック</a></li>
-<li class="chapter" data-level="2.5" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#脚注"><i class="fa fa-check"></i><b>2.5</b> 脚注</a></li>
+<li class="chapter" data-level="3.3" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#数式"><i class="fa fa-check"></i><b>3.3</b> 数式</a></li>
+<li class="chapter" data-level="3.4" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#カスタムブロック"><i class="fa fa-check"></i><b>3.4</b> カスタムブロック</a></li>
+<li class="chapter" data-level="3.5" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#脚注"><i class="fa fa-check"></i><b>3.5</b> 脚注</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="動的なコンテンツの作成.html"><a href="動的なコンテンツの作成.html"><i class="fa fa-check"></i><b>3</b> 動的なコンテンツの作成</a>
+<li class="chapter" data-level="4" data-path="動的なコンテンツの作成.html"><a href="動的なコンテンツの作成.html"><i class="fa fa-check"></i><b>4</b> 動的なコンテンツの作成</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="動的なコンテンツの作成.html"><a href="動的なコンテンツの作成.html#プログラムチャンク"><i class="fa fa-check"></i><b>3.1</b> プログラムチャンク</a></li>
-<li class="chapter" data-level="3.2" data-path="動的なコンテンツの作成.html"><a href="動的なコンテンツの作成.html#プログラムで数式を生成する"><i class="fa fa-check"></i><b>3.2</b> プログラムで数式を生成する</a></li>
-<li class="chapter" data-level="3.3" data-path="動的なコンテンツの作成.html"><a href="動的なコンテンツの作成.html#プログラムを使った図の挿入"><i class="fa fa-check"></i><b>3.3</b> プログラムを使った図の挿入</a></li>
-<li class="chapter" data-level="3.4" data-path="動的なコンテンツの作成.html"><a href="動的なコンテンツの作成.html#todo-図のレイアウト設定"><i class="fa fa-check"></i><b>3.4</b> TODO: 図のレイアウト設定</a></li>
-<li class="chapter" data-level="3.5" data-path="動的なコンテンツの作成.html"><a href="動的なコンテンツの作成.html#r-プログラムを使った表の装飾"><i class="fa fa-check"></i><b>3.5</b> R プログラムを使った表の装飾</a></li>
+<li class="chapter" data-level="4.1" data-path="動的なコンテンツの作成.html"><a href="動的なコンテンツの作成.html#プログラムチャンク"><i class="fa fa-check"></i><b>4.1</b> プログラムチャンク</a></li>
+<li class="chapter" data-level="4.2" data-path="動的なコンテンツの作成.html"><a href="動的なコンテンツの作成.html#プログラムで数式を生成する"><i class="fa fa-check"></i><b>4.2</b> プログラムで数式を生成する</a></li>
+<li class="chapter" data-level="4.3" data-path="動的なコンテンツの作成.html"><a href="動的なコンテンツの作成.html#プログラムを使った図の挿入"><i class="fa fa-check"></i><b>4.3</b> プログラムを使った図の挿入</a></li>
+<li class="chapter" data-level="4.4" data-path="動的なコンテンツの作成.html"><a href="動的なコンテンツの作成.html#todo-図のレイアウト設定"><i class="fa fa-check"></i><b>4.4</b> TODO: 図のレイアウト設定</a></li>
+<li class="chapter" data-level="4.5" data-path="動的なコンテンツの作成.html"><a href="動的なコンテンツの作成.html#r-プログラムを使った表の装飾"><i class="fa fa-check"></i><b>4.5</b> R プログラムを使った表の装飾</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="相互参照と引用.html"><a href="相互参照と引用.html"><i class="fa fa-check"></i><b>4</b> 相互参照と引用</a>
+<li class="chapter" data-level="5" data-path="相互参照と引用.html"><a href="相互参照と引用.html"><i class="fa fa-check"></i><b>5</b> 相互参照と引用</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="相互参照と引用.html"><a href="相互参照と引用.html#crossref"><i class="fa fa-check"></i><b>4.1</b> 相互参照</a>
+<li class="chapter" data-level="5.1" data-path="相互参照と引用.html"><a href="相互参照と引用.html#crossref"><i class="fa fa-check"></i><b>5.1</b> 相互参照</a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="相互参照と引用.html"><a href="相互参照と引用.html#図表や式へのアンカーリンク"><i class="fa fa-check"></i><b>4.1.1</b> 図表や式へのアンカーリンク</a></li>
-<li class="chapter" data-level="4.1.2" data-path="相互参照と引用.html"><a href="相互参照と引用.html#表への相互参照"><i class="fa fa-check"></i><b>4.1.2</b> 表への相互参照</a></li>
-<li class="chapter" data-level="4.1.3" data-path="相互参照と引用.html"><a href="相互参照と引用.html#章への相互参照"><i class="fa fa-check"></i><b>4.1.3</b> 章への相互参照</a></li>
-<li class="chapter" data-level="4.1.4" data-path="相互参照と引用.html"><a href="相互参照と引用.html#特殊な相互参照"><i class="fa fa-check"></i><b>4.1.4</b> 特殊な相互参照</a></li>
+<li class="chapter" data-level="5.1.1" data-path="相互参照と引用.html"><a href="相互参照と引用.html#図表や式へのアンカーリンク"><i class="fa fa-check"></i><b>5.1.1</b> 図表や式へのアンカーリンク</a></li>
+<li class="chapter" data-level="5.1.2" data-path="相互参照と引用.html"><a href="相互参照と引用.html#表への相互参照"><i class="fa fa-check"></i><b>5.1.2</b> 表への相互参照</a></li>
+<li class="chapter" data-level="5.1.3" data-path="相互参照と引用.html"><a href="相互参照と引用.html#章への相互参照"><i class="fa fa-check"></i><b>5.1.3</b> 章への相互参照</a></li>
+<li class="chapter" data-level="5.1.4" data-path="相互参照と引用.html"><a href="相互参照と引用.html#特殊な相互参照"><i class="fa fa-check"></i><b>5.1.4</b> 特殊な相互参照</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="相互参照と引用.html"><a href="相互参照と引用.html#bibliography"><i class="fa fa-check"></i><b>4.2</b> 文献引用</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="簡単なレイアウト変更.html"><a href="簡単なレイアウト変更.html"><i class="fa fa-check"></i><b>5</b> 簡単なレイアウト変更</a>
+<li class="chapter" data-level="5.2" data-path="相互参照と引用.html"><a href="相互参照と引用.html#bibliography"><i class="fa fa-check"></i><b>5.2</b> 文献引用</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="簡単なレイアウト変更.html"><a href="簡単なレイアウト変更.html#html"><i class="fa fa-check"></i><b>5.1</b> HTML</a>
-<ul>
-<li class="chapter" data-level="5.1.1" data-path="簡単なレイアウト変更.html"><a href="簡単なレイアウト変更.html#フォント変更"><i class="fa fa-check"></i><b>5.1.1</b> フォント変更</a></li>
-</ul></li>
-<li class="chapter" data-level="5.2" data-path="簡単なレイアウト変更.html"><a href="簡単なレイアウト変更.html#pdf"><i class="fa fa-check"></i><b>5.2</b> PDF</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="簡単なレイアウト変更.html"><a href="簡単なレイアウト変更.html#フォント変更-1"><i class="fa fa-check"></i><b>5.2.1</b> フォント変更</a></li>
-<li class="chapter" data-level="5.2.2" data-path="簡単なレイアウト変更.html"><a href="簡単なレイアウト変更.html#文書クラスの変更"><i class="fa fa-check"></i><b>5.2.2</b> 文書クラスの変更</a></li>
+<li class="chapter" data-level="5.2.1" data-path="相互参照と引用.html"><a href="相互参照と引用.html#文献引用のフォーマット設定"><i class="fa fa-check"></i><b>5.2.1</b> 文献引用のフォーマット設定</a></li>
+<li class="chapter" data-level="5.2.2" data-path="相互参照と引用.html"><a href="相互参照と引用.html#pandoc-citeproc-と-csl"><i class="fa fa-check"></i><b>5.2.2</b> <code>pandoc-citeproc</code> と CSL</a></li>
+<li class="chapter" data-level="5.2.3" data-path="相互参照と引用.html"><a href="相互参照と引用.html#biblatex"><i class="fa fa-check"></i><b>5.2.3</b> <code>biblatex</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="rmdja-による文書作成支援機能.html"><a href="rmdja-による文書作成支援機能.html"><i class="fa fa-check"></i><b>6</b> <code>rmdja</code> による文書作成支援機能</a>
+<li class="chapter" data-level="6" data-path="簡単なレイアウト変更.html"><a href="簡単なレイアウト変更.html"><i class="fa fa-check"></i><b>6</b> 簡単なレイアウト変更</a>
 <ul>
-<li class="chapter" data-level="6.0.1" data-path="rmdja-による文書作成支援機能.html"><a href="rmdja-による文書作成支援機能.html#クリエイティブコモンズの表記"><i class="fa fa-check"></i><b>6.0.1</b> クリエイティブ・コモンズの表記</a></li>
-<li class="chapter" data-level="6.0.2" data-path="rmdja-による文書作成支援機能.html"><a href="rmdja-による文書作成支援機能.html#ルビ表記"><i class="fa fa-check"></i><b>6.0.2</b> ルビ表記</a></li>
+<li class="chapter" data-level="6.1" data-path="簡単なレイアウト変更.html"><a href="簡単なレイアウト変更.html#html"><i class="fa fa-check"></i><b>6.1</b> HTML</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="簡単なレイアウト変更.html"><a href="簡単なレイアウト変更.html#フォント変更"><i class="fa fa-check"></i><b>6.1.1</b> フォント変更</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="簡単なレイアウト変更.html"><a href="簡単なレイアウト変更.html#pdf"><i class="fa fa-check"></i><b>6.2</b> PDF</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="簡単なレイアウト変更.html"><a href="簡単なレイアウト変更.html#フォント変更-1"><i class="fa fa-check"></i><b>6.2.1</b> フォント変更</a></li>
+<li class="chapter" data-level="6.2.2" data-path="簡単なレイアウト変更.html"><a href="簡単なレイアウト変更.html#文書クラスの変更"><i class="fa fa-check"></i><b>6.2.2</b> 文書クラスの変更</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="rmdja-による文書作成支援機能.html"><a href="rmdja-による文書作成支援機能.html"><i class="fa fa-check"></i><b>7</b> <code>rmdja</code> による文書作成支援機能</a>
+<ul>
+<li class="chapter" data-level="7.0.1" data-path="rmdja-による文書作成支援機能.html"><a href="rmdja-による文書作成支援機能.html#クリエイティブコモンズの表記"><i class="fa fa-check"></i><b>7.0.1</b> クリエイティブ・コモンズの表記</a></li>
+<li class="chapter" data-level="7.0.2" data-path="rmdja-による文書作成支援機能.html"><a href="rmdja-による文書作成支援機能.html#ルビ表記"><i class="fa fa-check"></i><b>7.0.2</b> ルビ表記</a></li>
 </ul></li>
 <li class="part"><span><b>IV 応用編</b></span></li>
 <li class="chapter" data-level="" data-path="このパートについて.html"><a href="このパートについて.html"><i class="fa fa-check"></i>このパートについて</a></li>
-<li class="chapter" data-level="7" data-path="advanced-graph.html"><a href="advanced-graph.html"><i class="fa fa-check"></i><b>7</b> 様々なグラフィックプログラムの埋め込み</a>
+<li class="chapter" data-level="8" data-path="advanced-graph.html"><a href="advanced-graph.html"><i class="fa fa-check"></i><b>8</b> 様々なグラフィックプログラムの埋め込み</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="advanced-graph.html"><a href="advanced-graph.html#tikz-を使う"><i class="fa fa-check"></i><b>7.1</b> <code>tikz</code> を使う</a></li>
-<li class="chapter" data-level="7.2" data-path="advanced-graph.html"><a href="advanced-graph.html#asymptote-を使う"><i class="fa fa-check"></i><b>7.2</b> Asymptote を使う</a></li>
-<li class="chapter" data-level="7.3" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他のプログラム"><i class="fa fa-check"></i><b>7.3</b> TODO その他のプログラム</a></li>
-<li class="chapter" data-level="7.4" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他の-r-プログラム"><i class="fa fa-check"></i><b>7.4</b> TODO: その他の R プログラム</a></li>
+<li class="chapter" data-level="8.1" data-path="advanced-graph.html"><a href="advanced-graph.html#tikz-を使う"><i class="fa fa-check"></i><b>8.1</b> <code>tikz</code> を使う</a></li>
+<li class="chapter" data-level="8.2" data-path="advanced-graph.html"><a href="advanced-graph.html#asymptote-を使う"><i class="fa fa-check"></i><b>8.2</b> Asymptote を使う</a></li>
+<li class="chapter" data-level="8.3" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他のプログラム"><i class="fa fa-check"></i><b>8.3</b> TODO その他のプログラム</a></li>
+<li class="chapter" data-level="8.4" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他の-r-プログラム"><i class="fa fa-check"></i><b>8.4</b> TODO: その他の R プログラム</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="表の掲載.html"><a href="表の掲載.html"><i class="fa fa-check"></i><b>8</b> 表の掲載</a>
+<li class="chapter" data-level="9" data-path="表の掲載.html"><a href="表の掲載.html"><i class="fa fa-check"></i><b>9</b> 表の掲載</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="表の掲載.html"><a href="表の掲載.html#texhtml-を出力する関数"><i class="fa fa-check"></i><b>8.1</b> TeX/HTML を出力する関数</a></li>
-<li class="chapter" data-level="8.2" data-path="表の掲載.html"><a href="表の掲載.html#todo-gt-パッケージ"><i class="fa fa-check"></i><b>8.2</b> TODO: <code>gt</code> パッケージ</a></li>
+<li class="chapter" data-level="9.1" data-path="表の掲載.html"><a href="表の掲載.html#texhtml-を出力する関数"><i class="fa fa-check"></i><b>9.1</b> TeX/HTML を出力する関数</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="webapp.html"><a href="webapp.html"><i class="fa fa-check"></i><b>9</b> TODO Web アプレットの挿入</a>
+<li class="chapter" data-level="10" data-path="文献引用.html"><a href="文献引用.html"><i class="fa fa-check"></i><b>10</b> 文献引用</a>
 <ul>
-<li class="chapter" data-level="9.0.1" data-path="webapp.html"><a href="webapp.html#todo-plotly"><i class="fa fa-check"></i><b>9.0.1</b> TODO: plotly</a></li>
-<li class="chapter" data-level="9.0.2" data-path="webapp.html"><a href="webapp.html#todo-shiny"><i class="fa fa-check"></i><b>9.0.2</b> TODO: shiny</a></li>
+<li class="chapter" data-level="10.1" data-path="文献引用.html"><a href="文献引用.html#を使う"><i class="fa fa-check"></i><b>10.1</b> (u)pBibTeX を使う</a></li>
+<li class="chapter" data-level="10.2" data-path="文献引用.html"><a href="文献引用.html#todo-biblatex"><i class="fa fa-check"></i><b>10.2</b> TODO BibLaTeX</a></li>
+<li class="chapter" data-level="10.3" data-path="文献引用.html"><a href="文献引用.html#todo-pandoc-citeproc"><i class="fa fa-check"></i><b>10.3</b> TODO: pandoc-citeproc</a></li>
+<li class="chapter" data-level="10.4" data-path="文献引用.html"><a href="文献引用.html#todo-gt-パッケージ"><i class="fa fa-check"></i><b>10.4</b> TODO: <code>gt</code> パッケージ</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="python.html"><a href="python.html"><i class="fa fa-check"></i><b>10</b> TODO Python スクリプトの埋め込み</a></li>
+<li class="chapter" data-level="11" data-path="文書タイプごとの解説.html"><a href="文書タイプごとの解説.html"><i class="fa fa-check"></i><b>11</b> 文書タイプごとの解説</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="文書タイプごとの解説.html"><a href="文書タイプごとの解説.html#プレゼンテーション資料の作成"><i class="fa fa-check"></i><b>11.1</b> プレゼンテーション資料の作成</a></li>
+<li class="chapter" data-level="11.2" data-path="文書タイプごとの解説.html"><a href="文書タイプごとの解説.html#wip-卒業論文の作成"><i class="fa fa-check"></i><b>11.2</b> (WIP) 卒業論文の作成</a></li>
+<li class="chapter" data-level="11.3" data-path="文書タイプごとの解説.html"><a href="文書タイプごとの解説.html#wip-小説の執筆"><i class="fa fa-check"></i><b>11.3</b> (WIP) 小説の執筆</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="webapp.html"><a href="webapp.html"><i class="fa fa-check"></i><b>12</b> TODO Web アプレットの挿入</a>
+<ul>
+<li class="chapter" data-level="12.0.1" data-path="webapp.html"><a href="webapp.html#todo-plotly"><i class="fa fa-check"></i><b>12.0.1</b> TODO: plotly</a></li>
+<li class="chapter" data-level="12.0.2" data-path="webapp.html"><a href="webapp.html#todo-shiny"><i class="fa fa-check"></i><b>12.0.2</b> TODO: shiny</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="python.html"><a href="python.html"><i class="fa fa-check"></i><b>13</b> Python スクリプトの埋め込み</a></li>
 <li class="part"><span><b>V 製本と多様な形式への対応</b></span></li>
-<li class="chapter" data-level="11" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html"><i class="fa fa-check"></i><b>11</b> 製本方法の詳細</a>
+<li class="chapter" data-level="14" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html"><i class="fa fa-check"></i><b>14</b> 製本方法の詳細</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#ファイル構成"><i class="fa fa-check"></i><b>11.1</b> ファイル構成</a>
+<li class="chapter" data-level="14.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#ファイル構成"><i class="fa fa-check"></i><b>14.1</b> ファイル構成</a>
 <ul>
-<li class="chapter" data-level="11.1.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#output.yml"><i class="fa fa-check"></i><b>11.1.1</b> <code>_output.yml</code></a></li>
-<li class="chapter" data-level="11.1.2" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#bookdown.yml"><i class="fa fa-check"></i><b>11.1.2</b> <code>_bookdown.yml</code></a></li>
+<li class="chapter" data-level="14.1.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#output.yml"><i class="fa fa-check"></i><b>14.1.1</b> <code>_output.yml</code></a></li>
+<li class="chapter" data-level="14.1.2" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#bookdown.yml"><i class="fa fa-check"></i><b>14.1.2</b> <code>_bookdown.yml</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html"><i class="fa fa-check"></i><b>12</b> 出力形式による表現の限界</a>
+<li class="chapter" data-level="15" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html"><i class="fa fa-check"></i><b>15</b> 出力形式による表現の限界</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#htmlとpdfで処理を場合分けする"><i class="fa fa-check"></i><b>12.1</b> HTMLとPDFで処理を場合分けする</a></li>
-<li class="chapter" data-level="12.2" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#絵文字の出力"><i class="fa fa-check"></i><b>12.2</b> 絵文字の出力</a></li>
-<li class="chapter" data-level="12.3" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#画像の保存形式"><i class="fa fa-check"></i><b>12.3</b> 画像の保存形式</a></li>
-<li class="chapter" data-level="12.4" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#デフォルトの保存形式"><i class="fa fa-check"></i><b>12.4</b> デフォルトの保存形式</a></li>
+<li class="chapter" data-level="15.1" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#htmlとpdfで処理を場合分けする"><i class="fa fa-check"></i><b>15.1</b> HTMLとPDFで処理を場合分けする</a></li>
+<li class="chapter" data-level="15.2" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#絵文字の出力"><i class="fa fa-check"></i><b>15.2</b> 絵文字の出力</a></li>
+<li class="chapter" data-level="15.3" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#画像の保存形式"><i class="fa fa-check"></i><b>15.3</b> 画像の保存形式</a></li>
+<li class="chapter" data-level="15.4" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#デフォルトの保存形式"><i class="fa fa-check"></i><b>15.4</b> デフォルトの保存形式</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html"><i class="fa fa-check"></i><b>13</b> 製本した文書を配布する</a>
+<li class="chapter" data-level="16" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html"><i class="fa fa-check"></i><b>16</b> 製本した文書を配布する</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#wepページのホスティング"><i class="fa fa-check"></i><b>13.1</b> Wepページのホスティング</a></li>
-<li class="chapter" data-level="13.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#todo-入稿するには"><i class="fa fa-check"></i><b>13.2</b> TODO: 入稿するには</a>
+<li class="chapter" data-level="16.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#wepページのホスティング"><i class="fa fa-check"></i><b>16.1</b> Wepページのホスティング</a></li>
+<li class="chapter" data-level="16.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#todo-入稿するには"><i class="fa fa-check"></i><b>16.2</b> TODO: 入稿するには</a>
 <ul>
-<li class="chapter" data-level="13.2.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#トンボの表示"><i class="fa fa-check"></i><b>13.2.1</b> トンボの表示</a></li>
-<li class="chapter" data-level="13.2.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#フォントの埋め込み"><i class="fa fa-check"></i><b>13.2.2</b> フォントの埋め込み</a></li>
+<li class="chapter" data-level="16.2.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#トンボの表示"><i class="fa fa-check"></i><b>16.2.1</b> トンボの表示</a></li>
+<li class="chapter" data-level="16.2.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#フォントの埋め込み"><i class="fa fa-check"></i><b>16.2.2</b> フォントの埋め込み</a></li>
 </ul></li>
 </ul></li>
-<li class="part"><span><b>VI 応用</b></span></li>
-<li class="chapter" data-level="14" data-path="todo-文芸作品の作成のために.html"><a href="todo-文芸作品の作成のために.html"><i class="fa fa-check"></i><b>14</b> TODO: 文芸作品の作成のために</a></li>
-<li class="part"><span><b>VII デバッグ</b></span></li>
-<li class="chapter" data-level="15" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html"><i class="fa fa-check"></i><b>15</b> 製本時のエラーへの対処</a>
+<li class="part"><span><b>VI デバッグ</b></span></li>
+<li class="chapter" data-level="17" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html"><i class="fa fa-check"></i><b>17</b> 製本時のエラーへの対処</a>
 <ul>
-<li class="chapter" data-level="15.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>15.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
-<li class="chapter" data-level="15.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>15.2</b> YAML フロントマターを確認する</a></li>
-<li class="chapter" data-level="15.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-の生成に失敗する場合"><i class="fa fa-check"></i><b>15.3</b> PDF の生成に失敗する場合</a></li>
+<li class="chapter" data-level="17.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>17.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
+<li class="chapter" data-level="17.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>17.2</b> YAML フロントマターを確認する</a></li>
+<li class="chapter" data-level="17.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-の生成に失敗する場合"><i class="fa fa-check"></i><b>17.3</b> PDF の生成に失敗する場合</a></li>
 </ul></li>
 <li class="appendix"><span><b>補遺</b></span></li>
 <li class="chapter" data-level="A" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html"><i class="fa fa-check"></i><b>A</b> デフォルト値の自動調整</a>
@@ -274,7 +291,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="B.3" data-path="pdf-の組版に関する細かい話.html"><a href="pdf-の組版に関する細かい話.html#todo-しかし英文で書きたい場合"><i class="fa fa-check"></i><b>B.3</b> TODO: しかし英文で書きたい場合</a></li>
 </ul></li>
 <li class="chapter" data-level="C" data-path="jecon-bst-の紹介.html"><a href="jecon-bst-の紹介.html"><i class="fa fa-check"></i><b>C</b> jecon.bst の紹介</a></li>
-<li class="part"><span><b>VIII 参考文献</b></span></li>
+<li class="part"><span><b>VII 参考文献</b></span></li>
 <li class="chapter" data-level="" data-path="参考文献.html"><a href="参考文献.html"><i class="fa fa-check"></i>参考文献</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
@@ -287,7 +304,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>bookdown</code> + <code>rmdja</code> による多様なファイル形式の日本語技術文書の作成</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>rmdja</code> による多様な形式の日本語技術文書の作成</a>
           </h1>
         </div>
 
@@ -295,30 +312,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="相互参照と引用" class="section level1" number="4">
-<h1><span class="header-section-number">4</span> 相互参照と引用</h1>
-<div id="crossref" class="section level2" number="4.1">
-<h2><span class="header-section-number">4.1</span> 相互参照</h2>
-<div id="図表や式へのアンカーリンク" class="section level3" number="4.1.1">
-<h3><span class="header-section-number">4.1.1</span> 図表や式へのアンカーリンク</h3>
+<div id="相互参照と引用" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> 相互参照と引用</h1>
+<div id="crossref" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> 相互参照</h2>
+<div id="図表や式へのアンカーリンク" class="section level3" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> 図表や式へのアンカーリンク</h3>
 <p>図, 表, 式などに番号を自動で割り当て, さらにハイパーリンクを付加できる. <code>\@ref(ID)</code> を使う. 現状では <code>refstyle</code> や <code>prettyref</code> のように接頭語を自動で付けてくれないが, そのうちなんとかなるかもしれない.</p>
 <p>bookdown の相互参照は, LaTeX の <code>prettyref.sty</code> のように, <code>接頭語:参照ID</code> という記法になる. 参照IDは通常, チャンクIDと同じである. 既に紹介したように, 数式参照の接頭語は <code>eq</code> で, 定理は <code>thm</code> である. 図表は <code>fig</code>, <code>tab</code>. その他の接頭語は BKD <a href="https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html#equations">Ch. 2.2 Markdown extensions by bookdown</a> を参考に.</p>
 </div>
-<div id="表への相互参照" class="section level3" number="4.1.2">
-<h3><span class="header-section-number">4.1.2</span> 表への相互参照</h3>
-<p>Markdown 記法で表を書く場合, 以下のように <code>Table:</code> の直後にラベルを記入する (表 <a href="相互参照と引用.html#tab:tab-md">4.1</a>).</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb39-1"><a href="相互参照と引用.html#cb39-1"></a><span class="an">Table:</span><span class="co"> (\#tab:tab-md) Markdown 記法の表</span></span>
-<span id="cb39-2"><a href="相互参照と引用.html#cb39-2"></a></span>
-<span id="cb39-3"><a href="相互参照と引用.html#cb39-3"></a> Sepal.Length   Sepal.Width   Petal.Length   Petal.Width</span>
-<span id="cb39-4"><a href="相互参照と引用.html#cb39-4"></a>-------------  ------------  -------------  ------------</span>
-<span id="cb39-5"><a href="相互参照と引用.html#cb39-5"></a><span class="in">          5.1           3.5            1.4           0.2</span></span>
-<span id="cb39-6"><a href="相互参照と引用.html#cb39-6"></a><span class="in">          4.9           3.0            1.4           0.2</span></span>
-<span id="cb39-7"><a href="相互参照と引用.html#cb39-7"></a><span class="in">          4.7           3.2            1.3           0.2</span></span>
-<span id="cb39-8"><a href="相互参照と引用.html#cb39-8"></a><span class="in">          4.6           3.1            1.5           0.2</span></span>
-<span id="cb39-9"><a href="相互参照と引用.html#cb39-9"></a><span class="in">          5.0           3.6            1.4           0.2</span></span>
-<span id="cb39-10"><a href="相互参照と引用.html#cb39-10"></a><span class="in">          5.4           3.9            1.7           0.4</span></span></code></pre></div>
+<div id="表への相互参照" class="section level3" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> 表への相互参照</h3>
+<p>Markdown 記法で表を書く場合, 以下のように <code>Table:</code> の直後にラベルを記入する (表 <a href="相互参照と引用.html#tab:tab-md">5.1</a>).</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb45-1"><a href="相互参照と引用.html#cb45-1"></a><span class="an">Table:</span><span class="co"> (\#tab:tab-md) Markdown 記法の表</span></span>
+<span id="cb45-2"><a href="相互参照と引用.html#cb45-2"></a></span>
+<span id="cb45-3"><a href="相互参照と引用.html#cb45-3"></a> Sepal.Length   Sepal.Width   Petal.Length   Petal.Width</span>
+<span id="cb45-4"><a href="相互参照と引用.html#cb45-4"></a>-------------  ------------  -------------  ------------</span>
+<span id="cb45-5"><a href="相互参照と引用.html#cb45-5"></a><span class="in">          5.1           3.5            1.4           0.2</span></span>
+<span id="cb45-6"><a href="相互参照と引用.html#cb45-6"></a><span class="in">          4.9           3.0            1.4           0.2</span></span>
+<span id="cb45-7"><a href="相互参照と引用.html#cb45-7"></a><span class="in">          4.7           3.2            1.3           0.2</span></span>
+<span id="cb45-8"><a href="相互参照と引用.html#cb45-8"></a><span class="in">          4.6           3.1            1.5           0.2</span></span>
+<span id="cb45-9"><a href="相互参照と引用.html#cb45-9"></a><span class="in">          5.0           3.6            1.4           0.2</span></span>
+<span id="cb45-10"><a href="相互参照と引用.html#cb45-10"></a><span class="in">          5.4           3.9            1.7           0.4</span></span></code></pre></div>
 <table>
-<caption><span id="tab:tab-md">表 4.1: </span> Markdown 記法の表</caption>
+<caption><span id="tab:tab-md">表 5.1: </span> Markdown 記法の表</caption>
 <thead>
 <tr class="header">
 <th align="right">Sepal.Length</th>
@@ -367,23 +384,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 </div>
-<div id="章への相互参照" class="section level3" number="4.1.3">
-<h3><span class="header-section-number">4.1.3</span> 章への相互参照</h3>
+<div id="章への相互参照" class="section level3" number="5.1.3">
+<h3><span class="header-section-number">5.1.3</span> 章への相互参照</h3>
 <p>章見出しへの相互参照も可能である. これはPandocの機能を利用しているため, 接頭辞は不要である. Pandocの仕様により欧文であればタイトルがそのまま参照IDとなるが, 非欧文の文字に対して適用されないため, 参照したい章の見出しにの後にスペースを入れて <code>{#参照ID}</code> と書く必要がある.</p>
 </div>
-<div id="特殊な相互参照" class="section level3" number="4.1.4">
-<h3><span class="header-section-number">4.1.4</span> 特殊な相互参照</h3>
-<p>チャンクオプションの <code>fig.cap</code> などに TeX 数式を書いても正しく表示できない. そのような場合は <code>ref</code> 参照を使う. <code>(ref:figcap1) \coloremoji{🌸} $\sum \oint \mathfrak{A} \mathscr{B} \mathbb{C}$ \coloremoji{🌸}</code> と書くと, 図 <a href="相互参照と引用.html#fig:caption">4.1</a> のキャプションにも特殊な記号が使える.</p>
+<div id="特殊な相互参照" class="section level3" number="5.1.4">
+<h3><span class="header-section-number">5.1.4</span> 特殊な相互参照</h3>
+<p>チャンクオプションの <code>fig.cap</code> などに TeX 数式を書いても正しく表示できない. そのような場合は <code>ref</code> 参照を使う. <code>(ref:figcap1) \coloremoji{🌸} $\sum \oint \mathfrak{A} \mathscr{B} \mathbb{C}$ \coloremoji{🌸}</code> と書くと, 図 <a href="相互参照と引用.html#fig:caption">5.1</a> のキャプションにも特殊な記号が使える.</p>
 
 <p>なお, 複数指定する場合は連続させず, 改行で1行空けて宣言する必要がある.</p>
 <div class="figure"><span id="fig:caption"></span>
 <img src="main_files/figure-html/caption-1.png" alt="🌸 \(\sum \oint \mathfrak{A} \mathscr{B} \mathbb{C}\) 🌸" width="30%" />
 <p class="caption">
-図 4.1: 🌸 <span class="math inline">\(\sum \oint \mathfrak{A} \mathscr{B} \mathbb{C}\)</span> 🌸
+図 5.1: 🌸 <span class="math inline">\(\sum \oint \mathfrak{A} \mathscr{B} \mathbb{C}\)</span> 🌸
 </p>
 </div>
 <p>この参照は<strong>一度しか使えない</strong>.</p>
-<p>PDF での表示では, 図 <a href="相互参照と引用.html#fig:caption">4.1</a> のキャプションの外側が文字化けしていることだろう. これは絵文字出力に関する問題で, 別のセクションで解説する.</p>
+<p>PDF での表示では, 図 <a href="相互参照と引用.html#fig:caption">5.1</a> のキャプションの外側が文字化けしていることだろう. これは絵文字出力に関する問題で, 別のセクションで解説する.</p>
 <p>これはかなり強力で,</p>
 <ol style="list-style-type: decimal">
 <li>定義される前の行にも適用される</li>
@@ -393,32 +410,260 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>TODO: 自己言及的な文章は書かないならこれくらいの認識でいいだろうが, より正確な話はどうするか</p>
 </div>
 </div>
-<div id="bibliography" class="section level2" number="4.2">
-<h2><span class="header-section-number">4.2</span> 文献引用</h2>
+<div id="bibliography" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> 文献引用</h2>
 <p>YAMLフロントマターの <code>biblography:</code> に文献管理ファイル (<code>.bib</code>, <code>.json</code> 等) を指定することで, ファイルに含まれる文献への参照が可能になる. <code>@引用ID</code> で本文に引用を与えられ, 文書に引用した文献の一覧が自動で生成される. また, <code>citr</code> パッケージにより, RStudio Addins に文献に対応する引用IDを取り出して挿入する機能が追加される.</p>
 
+<div class="sourceCode" id="cb46"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb46-1"><a href="相互参照と引用.html#cb46-1"></a>knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="kw">file.path</span>(img_dir, <span class="st">&quot;citr.png&quot;</span>))</span></code></pre></div>
 <div class="figure"><span id="fig:citr-image"></span>
 <img src="img/citr.png" alt="citr パッケージの例" width="622" height="70%" />
 <p class="caption">
-図 4.2: <code>citr</code> パッケージの例
+図 5.2: <code>citr</code> パッケージの例
 </p>
 </div>
-<p><code>BibTeX</code>, <code>BibLaTeX</code>, または <code>pandoc-citeproc</code> で処理される. これは <code>citation-package</code> または <code>_output.yml</code> の <code>citation_package</code> に依存する. HTML は基本的に <code>pandoc-citeproc</code> を使用した出力であり, 影響が大きいのは PDF である.</p>
+<p>一方で, この記述がどう反映されるかは文献引用を処理するプログラムによって変化する. さらに厄介なことに, それぞれ全く違うプログラムであるがゆえに, 設定に書き方も変わってくる.</p>
+<p>R Markdown の文献引用は pandoc を経由して処理され, pandoc は現時点では <code>pandoc-citeproc</code>. <code>bibtex</code>, <code>biblatex</code> の選択をサポートしている. <code>pandoc-citeproc</code> 以外はもともと LaTeX 用に作られたため, HTML では常に <code>pandoc-citeproc</code> で処理される. これはフォーマット引数の <code>citation_package</code> で指定できる.</p>
 <ul>
-<li><code>default</code>: <code>pandoc-citeproc</code> を使用して参考文献を出力する.</li>
-<li><code>biblatex</code>: <code>biblatex</code> を使用する.</li>
-<li><code>natbib</code>: <code>bibtex</code> を使用し, 本文中の参照には <code>natbib.sty</code> を使う.
+<li><code>default</code>: <code>pandoc-citeproc</code> を使用する</li>
+<li><code>biblatex</code>: biblatex を使用する</li>
+<li><code>natbib</code>: BibTeX を使用し, 本文中の参照には <code>natbib.sty</code> を使う. ただし本来の <code>natbib</code> の引用子オプションは使えない
 <ul>
 <li><code>natbiboptions:</code> で <code>number</code>, <code>authoryear</code> などの <code>natbib.sty</code> のオプションを指定できる.</li>
 </ul></li>
 </ul>
-<p>そのスタイルファイル (<code>.bst</code>, <code>.csl</code>) はそれぞれ <code>biblio-style:</code>/<code>csl:</code> で指定できる. また, <code>biblatex</code> の場合はここにオプションを指定することになる. しかし国内論文雑誌などで規定された, 日本語文献に対応した <code>.bst</code> ファイルを使って参考文献を記載したい場合には (u)pBibTeX が必要となるはずである.</p>
-<p>これはR Markdownで日本語技術文書を作る際の特にアレな障害の1つである. PDF は BibTeX があるが, HTML では使えない. pandoc の出力に頼るしかない. pandoc は CSL という, Word でも使われている参考文献リストのフォーマットに対応しているが, 機能が少ないため日本語文献の引用スタイルが崩れてしまう.</p>
-<p>日本語対応 <code>.bst</code> ファイルを使いたい場合は少しトリッキーな操作が必要になる. <code>rmarkdown</code> は <code>tinytex</code> というパッケージでインストールされたスタンドアローンな処理系で PDF を生成している. 冒頭のチャンクで <code>options(tinytex.latexmk.emulation = F)</code> を指定することで, 自分のマシンにインストールされている普段使っている処理系に処理させることができる. さらに <code>rmdja</code> では <code>natbib</code> を指定した場合に自動でカレントディレクトリに <code>.latexmkrc</code> をコピーするようにしている. しかしログが残らないなどデバッグしづらいところがあるため, このやり方はやや使いづらい.</p>
-<p>TODO: この操作なしに (u)pBibTeX を使うには, たぶん <code>tinytex</code> と <code>rmarkdown</code> 両方の修正が必要. そこまで複雑ではないと思うのでそのうち修正してみたい.</p>
+<div id="文献引用のフォーマット設定" class="section level3" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> 文献引用のフォーマット設定</h3>
+<p>これがややこしい. まず, <code>pandoc-citeproc</code>, <code>bibtex</code>, <code>biblatex</code> はそれぞれ引用文献リストの書式を記述するフォーマットがありそれぞれ拡張子は <code>.csl</code>, <code>.bst</code>, <code>.bbx</code>, である. 前者は MS Word のスタイルと同じもので, XMLで記述されている<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a>. 一方で <code>.bst</code> は逆ポーランド記法の構文だったりかなりアレである. そして <code>biblatex</code> はこのような専用の書式ファイルを使わず, 細かい書式設定はすべて LaTeX のマクロで調整する想定で作られている. また, スタイルファイルを用意しなくとも指定できるスタイルがいくつか存在する.</p>
+<p>bibtex および biblatex に関する設定は biblio-style だが, CSLファイルの設定は <code>csl</code> を使う.</p>
+<p>さらに日本語文献引用が必要な場合の特有の事情として, (1)対応文字コードの問題 (2) 和文と欧文のスタイルが異なるという問題がある. まず前者について, <code>bibtex</code> は日本語など非ASCII文字に対応していない. よって従来 pBibTeX または JBibTeX が使用されていた. しかしこれもJIS規格の範囲までしか対応していないため, 一部の珍しい人名漢字などの表示ができなかった<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>. そのためさらに upBibTeX というUnicode対応版プログラムが作成されている. しかし R Markdown (および pandoc) はそのような日本語特有の事情などしらないため, これらを使用することができない. よって<strong>オプション選択の範囲では, <code>biblatex</code> か <code>pandoc-citeproc</code> でしか日本語文献を表示できない</strong>. これはR Markdownで日本語技術文書を作る際の特にアレな障害の1つである.</p>
+<table>
+<caption>
+<span id="tab:biblio-comparison">表 5.2: </span>引用プログラムごとの違い
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+item
+</th>
+<th style="text-align:left;">
+HTML対応
+</th>
+<th style="text-align:left;">
+PDF対応
+</th>
+<th style="text-align:left;">
+日本語表示
+</th>
+<th style="text-align:left;">
+指定名
+</th>
+<th style="text-align:left;">
+文献ファイル
+</th>
+<th style="text-align:left;">
+文献スタイル
+</th>
+<th style="text-align:left;">
+スタイル指定方法
+</th>
+<th style="text-align:left;">
+スタイルのオプション
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<code>pandoc-citeproc</code> (default)
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+default
+</td>
+<td style="text-align:left;">
+.json
+</td>
+<td style="text-align:left;">
+.csl
+</td>
+<td style="text-align:left;">
+csl:
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>biblatex</code>
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+biblatex
+</td>
+<td style="text-align:left;">
+.bib/.bibtex
+</td>
+<td style="text-align:left;">
+なし
+</td>
+<td style="text-align:left;">
+biblio-style:
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>bibtex</code>
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+<td style="text-align:left;">
+natbib
+</td>
+<td style="text-align:left;">
+.bib
+</td>
+<td style="text-align:left;">
+.bst
+</td>
+<td style="text-align:left;">
+biblio-style
+</td>
+<td style="text-align:left;">
+natbiboptions
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="pandoc-citeproc-と-csl" class="section level3" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> <code>pandoc-citeproc</code> と CSL</h3>
+</div>
+<div id="biblatex" class="section level3" number="5.2.3">
+<h3><span class="header-section-number">5.2.3</span> <code>biblatex</code></h3>
+<p>biblatex の全てのオプションに対応しているわけではないので詳しいことは BibLaTeX のドキュメントを読むべき. ここではよく使う <code>style</code> と <code>backend</code> のことだけ.</p>
+<p>フロントマターの <code>biblio-style:</code> で指定できるのは, インクルード時の <code>style=</code> に指定できるものに対応する. つまり, 引用文献の見出しをどうするかである. これは引用リストと本文中の引用子のスタイル両方に影響する.</p>
+<table>
+<caption>
+<span id="tab:biblatex-styles">表 5.3: </span>biblatex の <code>bilio-style</code> で指定できるもの一覧
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+名称
+</th>
+<th style="text-align:left;">
+概要
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<code>numeric</code>
+</td>
+<td style="text-align:left;">
+‘[1]’ のような番号
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>alphabetic</code>
+</td>
+<td style="text-align:left;">
+著者名の略称+出版年2桁
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>authoryear</code>
+</td>
+<td style="text-align:left;">
+著者-出版年形式, natbib の標準と同じ
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>authortitle</code>
+</td>
+<td style="text-align:left;">
+著者名のみ, リストでは出版年は後置され, 引用子では脚注になる
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>verbose</code>
+</td>
+<td style="text-align:left;">
+authortitle と同じだが, 引用子にリスト同様の内容を出力する
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>reading</code>
+</td>
+<td style="text-align:left;">
+個人的なリーディングリスト向け. ファイルやメモ欄も出力する
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>draft</code>
+</td>
+<td style="text-align:left;">
+.bib ファイルのIDで表示. 名前通り下書き
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<code>debug</code>
+</td>
+<td style="text-align:left;">
+<code>.bib</code> の全フィールドを表示
+</td>
+</tr>
+</tbody>
+</table>
+<p>その他 <code>apa</code>, <code>ieee</code> など特定の学会が使用するスタイルも用意されているが, これらは基本欧文しか想定していないし, アカデミックの事情に詳しい人しかこれらの使用にこだわらないだろうから詳しくは解説しない. これらを含めたそれぞれの出力例は <a href="https://www.overleaf.com/learn/latex/biblatex_bibliography_styles" class="uri">https://www.overleaf.com/learn/latex/biblatex_bibliography_styles</a> に一覧があるのでそちらを参考に.</p>
+<p>なお, もちろん引用リストのスタイルと引用子のスタイルを個別にすることはできるが, R Markdown および Pandoc にそのオプションを通す機能はない. (bibstyle/citestyleで分けられる,bbx/cbx)</p>
+<p>和文献を著者名でソートすると五十音順にならない. これは従来の (u)pBibTeX で使われていた <code>yomi</code> フィールドと同様の用途の <code>sortname</code> で対処する. 特に変なオプションを使わない限り両者は同等の扱いで良い. つまり, 欧文エントリには何も書かず, 和文のみ <code>sortname</code> に読みをひらがなで書けば欧文を全て表示した後に五十音順でソートして表示される.</p>
+<p>TODO: その他の非ラテン文字, キリル文字, アラビア文字 ヘブライ文字等は?</p>
+<p>upBibTeX や <code>bibtex</code> で動作しない <code>.bst</code> ファイルの扱いは応用編参照.</p>
 <p>なお, 普段文献管理ソフトを使っていないが, 数本程度の文献を引用リストに載せたい利用者は, <code>biblatex</code> の構文を利用して書くのがよいかもしれない. 例えばここに書いてあるように. その場合, デフォルトでは本文の引用は [1], [2] のような番号形式となる. <code>biblio-style: authoryear</code> とすることで, <code>natbib</code> のような 「著者 (出版年)」 スタイルとなる.</p>
 <p><a href="https://teastat.blogspot.com/2019/01/bookdown.html" class="uri">https://teastat.blogspot.com/2019/01/bookdown.html</a></p>
 </div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="11">
+<li id="fn11"><p>簡単なカスタマイズなら CSL editor というWebサービスでできる. しかしあくまでXMLなので, あまり複雑な処理はできないことに注意する.<a href="相互参照と引用.html#fnref11" class="footnote-back">↩︎</a></p></li>
+<li id="fn12"><p>pBibTeX のUNICODEモードは内部でSJISに変換しているだけなので, 全てのUnicodeに対応しているわけではない.<a href="相互参照と引用.html#fnref12" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
             </section>
 

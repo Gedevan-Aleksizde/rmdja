@@ -8,12 +8,14 @@ link-citations: true
 linkcolor: blue
 citecolor: blue
 urlcolor: magenta
-citation-package: biblatex
 bibliography: rmdja.bib # 書誌情報ファイル
-biblio-style: apalike   # csl または bst
+biblio-style: jecon
+biblio-title: "参考文献"
+documentclass: bxjsbook
 ---
 
 ```{r setup, include=FALSE}
+options(tinytex.latexmk.emulation = F)
 # 確実にアンダースコアを回避するにはコピーしかない
 file.copy(system.file("resources/bibliography/rmdja.bib", package="rmdja"), "./") 
 file.copy(system.file("resources/styles/css", package="rmdja"), "./", recursive = T)
@@ -22,7 +24,6 @@ img_dir <- "img/"
 dir.create(img_dir, recursive = T)
 file.copy(file.path(system.file("resources/img", package = "rmdja"),
                     c("Johannes_Gutenberg.jpg", "build-pane.png", "build-pane-build.png")), img_dir)
-options(tinytex.latexmk.emulation = T)
 knitr::opts_chunk$set(
   echo = F,
   comment = "",
@@ -30,6 +31,7 @@ knitr::opts_chunk$set(
   tidy = "styler"
   )
 require(tidyverse)
+require(knitr)
 ```
 
 
@@ -70,3 +72,8 @@ ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
 $$
 f(x|\mu,\,\sigma^{2})=\frac{1}{\sqrt{2\pi}\sigma}\exp\left(-\frac{(x-\mu)^{2}}{2\sigma^{2}}\right)
 $$
+
+
+# 引用
+
+[@Okumura2017LaTeX] [@doughertyforthcomingHandsOn; @R-ggdag; @R-ggthemes; @R-rmarkdown; @R-tidyverse; @Ban1991; @hasegawa2004]

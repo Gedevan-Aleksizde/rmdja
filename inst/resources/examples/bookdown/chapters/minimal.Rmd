@@ -1,8 +1,48 @@
 # (PART) 最低限のチュートリアル {-}
 
-# 準備
+# クイックスタート {#quick-start}
 
-## インストール
+`rmdja` パッケージをインストールする. 依存している `rmarkdown`, `bookdown`, `knitr` なども同時にインストールされる.
+
+```{r install-guide, echo=T, eval=F}
+install.packages("remotes")
+remotes::install_github("Gedevan-Aleksizde/my_latex_template", repos = NULL)
+```
+
+まだ RStudio を使っていないのなら, RStudio 上で作業することを強く推奨する. さらに, もしもRの操作自体にあまり慣れていないのなら, 森知晴 『[卒業論文のためのR入門](https://tomoecon.github.io/R_for_graduate_thesis/)』などを読むことを薦める. 
+
+加えて, 以下のパッケージが役に立つので気に入ったらインストールしていただきたい.
+
+```{r install-suggets, echo=T, eval=F}
+install.packages(c("tidyverse", "ggthemes", "citr", "clipr", "kableExtra"))
+```
+
+RStudio を起動し, 左上から新規作成を選び, "R Markdown" を選ぶ (図 \@ref(fig:new-file)).
+
+```{r new-file, fig.cap="新規作成"}
+knitr::include_graphics(file.path(img_dir, "new-file.png"))
+```
+
+"From Template" からテンプレートを選択する (\@ref(fig:rmdja-templates)).
+
+```{r rmdja-templates, fig.cap="R Markdown のテンプレート"}
+knitr::include_graphics(file.path(img_dir, "rmd-templates.png"))
+```
+
+現在 (Ver. `r packageDescription("rmdja")$Version`) 用意されているのは以下の4つである.
+
+* プレゼンテーション用スライド形式のテンプレート - `Beamer in Japanese`
+* 論文形式のテンプレート - `pdf article in Japanese`
+* 書籍形式のテンプレート - `pdf book in Japanese`
+* 縦書き文書のテンプレート - `pdf vertical writing in Japanese`
+
+動作確認として, 今回はシンプルな論文形式を選ぶ. ファイルを開いたら, 適当な名称で保存し, "knit" ボタンを押すと PDF が作成される.
+
+# 下準備
+
+以降は順を追って細かい解説をする.
+
+## より丁寧なインストール解説
 
 文書を生成するのに必要なものをインストールする.
 
@@ -10,22 +50,26 @@
 
 ```{r installation, eval=F}
 install.packages(c("rmarkdown", "bookdown"))
-remotes::install_github("Gedevan-Aleksizde/my_latex_template", subdir = "rmdja", repos = NULL)
+remotes::install_github("Gedevan-Aleksizde/my_latex_template", repos = NULL)
 ```
 
-ただし, `bookdown` ver. 0.2 時点ではソースファイルのフォルダ配置していに不具合があるため[^bookdown-subdir-error], もし0.2以前のバージョンを使用しているなら, 更新するか, github から開発版をインストールする. 同様に, `rmarkdown` も CRAN ではなく開発版をインストールしたほうがよい.
+ただし, `bookdown` ver. 0.2 時点ではソースファイルのフォルダ配置指定に不具合があるため[^bookdown-subdir-error], もし0.2以前のバージョンを使用しているなら, 更新するか, github から開発版をインストールする. 同様に, `rmarkdown` も CRAN ではなく開発版をインストールしたほうがよい.
 
 ```{r bookdown-dev, eval=F, echo=T}
 remotes::install_github('rstudio/rmarkdown')
 remotes::install_github('rstudio/bookdown')
 ```
 
-次に, 最低限のファイルやパッケージで動くほうのデモ用ディレクトリをコピーする
+
+3種類のテンプレートのうち, `pdf book in Japanese` のみ, 文書のビルドのための下準備が追加で必要になるため, その方法を解説する. それ以外は第 \@ref(#quick-start) 節で書いたように "knit" ボタンを押すだけで良い.
+
+最低限のファイルやパッケージで動くほうのデモ用ディレクトリをコピーする
 
 ```{r copy, echo=T}
 file.copy(system.file("resources/examples/bookdown-minimal", package = "rmdja"), "./", recursive = T)
 ```
 
+## 書籍形式のビルド操作
 
 bookdown の文書生成は従来の R Markdown と違い, RStudio の `knit` ボタンでは**できない**. 代わりに, 以下の2通りの方法がある.
 
@@ -40,8 +84,15 @@ bookdown::render_book("index.Rmd", "rmdja::pdf_book_ja")
 bookdown::render_book("index.Rmd", "bookdown::epub_book")
 ```
 
-
 コピーしたディレクトリ `bookdown-minimal` を設定する (図 \@ref(fig:build-pane1-1), \@ref(fig:build-pane1-2)).
+
+Build ペーンの "Build Book" の三角形を押すと, 使用できるフォーマット一覧が表示される. これはスライド, 縦書き文書, 書籍などといった文書の種類と1対1で対応しているわけではなく, フォーマット関数に対応している.
+
+* HTML形式 - `rmdja::gitbook_ja`
+* PDF形式 - `rmdja::pdf_book_ja`
+* 電子書籍 (EPUB) 形式 - `bookdown::epub_book`
+
+デフォルトでは "All Formats" にチェックが入っているため, これら3種類のファイル形式を一度に生成する. 
 
 ```{r build-pane1, fig.cap="Build ペーンの手動設定", results="hold"}
 include_graphics(file.path(img_dir, c("build-pane.png", "build-pane-build.png")))

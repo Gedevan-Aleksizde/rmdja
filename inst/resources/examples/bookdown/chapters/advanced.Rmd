@@ -6,12 +6,11 @@
 
 # 様々なグラフィックプログラムの埋め込み {#advanced-graph}
 
-
 ## `tikz` を使う
 
-`\LaTeX`{=latex}`LaTeX`{=html} で使われる `tikzdevice` を利用して, 直接  `tikz` の記述による画像を埋め込むことができる. チャンクのエンジンを `tikz` とすることで使用でき, 相互参照やキャプション, 画像サイズの指定といったチャンクオプションも使える. 図 \@ref(fig:tikz-venn) は `tikz` で生成した図である. これはHTMLでも表示できる.
+`r rmdja::texlogo("latex")` で使われる `tikzdevice` を利用して, 直接  `tikz` の記述による画像を埋め込むことができる. チャンクのエンジンを `tikz` とすることで使用でき, 相互参照やキャプション, 画像サイズの指定といったチャンクオプションも使える. 図 \@ref(fig:tikz-venn) は `tikz` で生成した図である. これはHTMLでも表示できる. TODO: しかし現状ではpdflatex以外のエンジンに変更できないため, 日本語表示が難しい.
 
-```{tikz tikz-venn, out.height="50%", fig.cap="tikzを利用した図の表示"}
+```{tikz tikz-venn, fig.cap="tikzを利用した図の表示"}
 \def\firstcenter{(135:1.75cm)}
 \def\secondcenter{(45:1.75cm)}
 \def\firstcircle{\firstcenter circle (2.0cm)}
@@ -77,7 +76,6 @@
 \end{tabular}
 ```
 
-
 ## Asymptote を使う
 
 同様に, Asymptote のプログラムを埋め込むこともできる. 私は Asymptote が分からないので RCB [Ch. 15.9 Create graphics with Asymptote](https://bookdown.org/yihui/rmarkdown-cookbook/eng-asy.html) と同様のプログラムを書いておく. (図 \@ref(fig:asymptote-graph)).
@@ -98,11 +96,11 @@ draw(s,lightgray+opacity(0.7));
 grid3(XYZgrid);
 ```
 
-## TODO その他のプログラム
+## (TODO) その他のプログラム
 
 D3.js なども使える
 
-## TODO: その他の R プログラム
+## (TODO) その他の R プログラム
 
 なお, DOT言語は `DiagrammeR` パッケージを経由して使うこともできる[^rcb-diagrammer](図: \@ref(fig:diagrammer-graph)). グラフィカルモデルの記述などはこちらのほうが簡単かもしれない.
 
@@ -149,43 +147,21 @@ stargazer(mtcars, type = if(knitr::is_latex_output()) 'latex' else 'html', heade
 TODO: この操作なしに (u)`\pBibTeX`{=latex}`pBibTeX`{=html} を使うには, たぶん `tinytex` と `rmarkdown` 両方の修正が必要. そこまで複雑ではないと思うのでそのうち修正してみたい.
 
 
-## TODO BibLaTeX
+## (TODO) BibLaTeX
 
 TODO
 
-## TODO: pandoc-citeproc
+## (TODO) pandoc-citeproc
 
-##  TODO: `gt` パッケージ
+##  (TODO) `gt` パッケージ
 
 TODO
 
-# `beamer_presentation_ja` について
-
-`beamer_presentation_ja` は `rmdja` の最初期からあったフォーマットで, そもそも当初はこれを作るのが目的だった. このフォーマットは Beamer を使用してプレゼンテーション用スライドをPDFファイルで作成する. Beamer は `rmdja::texlogo("latex")` の文書クラスの1つで, `rmarkdown::beamer_presentation` はこれを利用してるが, 例によって日本語表示は想定されていない (beamerクラス自体も)ため, いろいろ調整込みのラッパーフォーマットである. ただしスライド資料なので組版の禁則処理のような細かい調整は用意していない.
-
-つまりPDF以外の出力は不可能である. PDF の P は "Portable" の P であり, 普段と違う環境で表示することの多いであろうスライド資料はなるべく環境に依存しない方法で表示すべきという考えに基づき, HTML を使用したスライド機能を追加する予定はない.
-
-通常の文書と違い, 主なデザインを決めるのは `theme` である. デフォルトでは [`metropolis`](https://github.com/matze/mtheme)[^metropolis-warn] である. 日本語表示のために調整してあるものの, 日本語表示と直接関係ない部分はカスタマイズの余地としていじっていないが, テンプレートには私の好みが反映された調整 (プログレスバーの位置調整) がYAMLフロントマターに直接書き込まれている.
-
-また, 日本語表示と直接関係ないアレンジとして, 文献引用を行った場合の参考文献リストの表示が
-
-1. 「参考文献」というセクションタイトルのみのスライドが冒頭に自動で挿入される
-2. 引用された文献の数に応じてスライドが自動分割される
-3. 参考文献フレームタイトルが表示されない
-4. 文字サイズが脚注サイズに縮小
-
-という設定になっている. 通常のスライドでは大量の参考文献を読み上げることは少ないという想定で, 紙面の限られたスライドに参考文献のみ羅列したスライドでページ数が増えないように考慮したためこうした.
-
-実際の表示例は `examples` にある.
-
-[^metropolis-warn]: なお `metropolis` テーマ開発者は Fira Sans フォントの使用を想定しており, ビルド時にフォントがないという警告が出ることがあるが無視して良い. (参考: https://github.com/matze/mtheme/issues/280)
-
-# TODO Web アプレットの挿入 {#webapp}
+# (TODO) Web アプレットの挿入 {#webapp}
 
 ### TODO: plotly
 
 ### TODO: shiny
-
 
 # Python スクリプトの埋め込み {#python}
 
@@ -214,7 +190,9 @@ repl_python()
 
 `matplotlib` エンジンで描いたグラフに日本語フォントを埋め込む場合, `matplotlib-japreset` を使えば必要な設定を一括で行う.
 
-TODO: Linux 以外での動作保証
+```{block type="rmdwarning"}
+`matplotlib-japreset` は現在, Linux 以外での動作保証をしていない
+```
 
 ```sh
 pip install -U git+https://github.com/Gedevan-Aleksizde/matplotlib-japreset.git@master

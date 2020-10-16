@@ -83,3 +83,19 @@ eprint = {XXXX.YYYYY},
 ```
 
 TODO: 現在 jecon.bst の表示も少しおかしいので確認中.
+
+# `fontregisterer` でグラフ用フォントを自動登録
+
+Rで描いたグラフに日本語を表示する場合, Linux 系 OS ならばフォント名を適切に設定するだけで表示されるが, Windows や Mac ではフォントをグラフィックデバイスに登録する必要がある. しかし手動登録は面倒なので, インストールされているシステムフォントを全て自動登録するパッケージ, [`fontregisterer`](https://github.com/Gedevan-Aleksizde/fontregisterer) を用意している.
+
+```{r fontregisterer-install, echo=T, eval=F}
+remotes::install_github("Gedevan-Aleksizde/fontregisterer", repos = NULL, type = "source")
+```
+
+もちろんこれは R Markdown 以外でも使用できる. このパッケージは読み込まれた時点で登録処理を行うため,
+
+```{r load-fontregisterer, echo=T, eval=F}
+require(fontregisterer)
+```
+
+を最初に実行するだけで良い. 詳しい仕組みの解説は『[おまえはもうRのグラフの日本語表示に悩まない (各OS対応)](https://ill-identified.hatenablog.com/entry/2020/10/03/200618)』に書いている.

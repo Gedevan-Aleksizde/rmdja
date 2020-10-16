@@ -6,6 +6,7 @@ rmdja::gitbook_ja:
 
 rmdja::pdf_book_ja:
   code_rownumber: true
+  citation_package: natbib
 
 # ---- epubの出力設定 ----
 bookdown::epub_book:
