@@ -8,11 +8,12 @@ Customized R Markdown/Bookdown format functions for Japanese users
 * 現時点では Beamer スライド (`rmarkdown::beamer_presentation`), `bookdown` に対応しています.
 * XeLaTeXまたはLuaLaTeXでのタイプセットを前提にしています
   + それぞれ `zxjatype`, `luatex-ja`, を利用して和文表示をしています
+* 私的LaTeXテンプレ集である[my_latex_templates](https://github.com/Gedevan-Aleksizde/my_latex_templates/)からパッケージとして独立しました
 
 ## 既知の問題点
 
-* `rmarkdown` 2.3 (現時点でのCRAN最新版) では標準グラフィックデバイスのフォントサイズが自動調整されません
-  + 気になる方は[githubリポジトリ](https://github.com/rstudio/rmarkdown) から2.3.2以降をインストールしてください
+* `rmarkdown` 2.3 以前のバージョンでは標準グラフィックデバイスのフォントサイズが自動調整されません
+* `knitr` 1.30 を使用している現時点では, `matplotlib` (あるいはそれをバックエンドとしたモジュール) でグラフを描く場合, バージョン 3.2 を使用してください. それより新しいバージョンのものはうまく動作しません
 
 # 使い方
 
@@ -67,7 +68,7 @@ remove.package("rmdCJK")
 
 ## 要件
 
-### 最低限必要なもの
+### R環境で最低限必要なもの
 
 R >= 3.6
 R Studio >= 1.3.1056
@@ -89,8 +90,7 @@ R Studio >= 1.3.1056
 ### 外部プログラム
 
 * TeX Live (>= 2020)
-もし (u)pBibTeX を一切使わない(BibLaTeX や pandoc-citeproc で良い), 参考文献を一切使わないというのであれば**不要**です
-  + upBibTeX を使う必要があるためです
+  + upBibTeX を使う必要がある場合のみ必要です
   + BiBLaTeX または pandoc-citeproc の出力する参考文献で満足している, または参考文献リストを一切使わないのならTeX Live は**不要**です
   + Mac OS なら MacTeX, Ubuntu なら[公式](https://www.tug.org/texlive/acquire-netinstall.html)から落としてください
     - Ubuntu は `apt` を**使わず**インストールしたほうが良いです
@@ -98,7 +98,6 @@ R Studio >= 1.3.1056
 * [`jecon.bst`](https://github.com/ShiroTakeda/jecon-bst) 
   + 日本語文献リスト用のスタイルファイルです
   + TeX Live にも `jplain.bst`, `jipsj.bst` などの日本語対応スタイルがバンドルされていますが, `jecon.bst` は日本語出力用のオプションが充実しています.
-
 
 # フォントについて
 
@@ -130,7 +129,7 @@ https://www.google.com/get/noto/help/install/
 * 現時点では実際にフォントがインストールされているか判定していません.
 * `XeLaTeX` ではヒラギノフォントのプリセット`hiragino-pro`/`hiragino-pron`は, OS Xにバンドルされていないヒラギノ明朝 W2を必要とします. インストールされていない場合, この設定ではエラーが発生します.
 * WindowsかつLuaLaTeXのとき, `\jfontspec` でフォント変更する歳, Noto Serif CJK JP が読み込めないことがあります (原因調査中)
-
+* `ggplot2` などのグラフに日本語表示をしたい場合, [`fontregisterer`](https://github.com/Gedevan-Aleksizde/fontregisterer) が役に立つかも知れません
 
 # サンプル
 
@@ -209,7 +208,7 @@ sudo apt install graphiviz
 
 # その他
 
-2020/9/19 で本パッケージの機能を紹介しました.
+2020/9/19 Tokyo.R で本パッケージの機能を紹介しました.
 
 『[おまえは万物をRSTUDIOで書ける](https://speakerdeck.com/ktgrstsh/you-can-write-everything-on-rstudio)』
 
