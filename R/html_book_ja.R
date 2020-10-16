@@ -1,5 +1,6 @@
-#' bookdown::gotbook wrapper for Japanese 
-#'
+#' bookdown::gotbook wrapper for Japanese
+#'  
+#' @inheritParams bookdown::gitbook
 #' @param split_by character. デフォルト: 'chapter'. 'chapter', 'chapter+number', 'section', 'section+number', 'rmd', 'none' から選ぶ. ページを区切る単位.
 #' @param config: list. デフォルト: 実際に出力して確認したほうが早い. 詳しくは bookdown のマニュアル. 
 #' @param code_rownumber: logical. デフォルト: TRUE. 行番号を表示するかどうか
@@ -65,13 +66,20 @@ gitbook_ja <- function(
     )
   }
 
-  preproc <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
-    for(x in list(list(d = "styles/img", f = ICON_FILES()), list(d = "styles/css", f = CSS_FILES()))){
+  preproc_css <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
+    args_extra <- c()
+    img_list <- list(d = "styles/img", f = ICON_FILES())
+    css_list <- list(d = "styles/css", f = CSS_FILES())
+    for(x in list(img_list, css_list)){
       dir_copy_to <- file.path(files_dir, x$d)
       if(!file.exists(dir_copy_to)) dir.create(dir_copy_to, recursive = T)
       file.copy(system.file(file.path("resources", x$d, x$f), package = "rmdja"),
                 dir_copy_to)
+      for(css_file in file.path(dir_copy_to, subset(x$f, subset = substr(x$f, nchar(x$f) - 3, nchar(x$f)) == ".css"))){
+        args_extra <- c(args_extra, c("--css", css_file))
+        }
     }
+    return(args_extra)
   }
 
   args <- list(
@@ -106,17 +114,23 @@ gitbook_ja <- function(
     base_format = do.call(
       rmarkdown::output_format,
       list(pandoc = NULL,
-           knitr = list(
+           knitr = rmarkdown::knitr_options(
              opts_chunk = if(code_rownumber) list(attr.source = c(".numberLines .lineAnchors")) else list(),
              opts_hooks = list(echo = hook_display_block)),
-           pre_processor = preproc,
+           pre_processor = preproc_css,
            base_format = rmarkdown::html_document()
            )
       ),
     ...
   )
   out <- do.call(bookdown::gitbook, args)
-  # なんか不安になる書き方
+  # TODO refactoring
+  preproc_base <- out$pre_processor
+  out$pre_processor <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
+    a1 <- preproc_css(metadata, input_file, runtime, knit_meta, files_dir, output_dir)
+    a2 <- preproc_base(metadata, input_file, runtime, knit_meta, files_dir, output_dir)
+    return(c(a1, a2))
+  }
   out$knitr$opts_hooks <- list(echo = hook_display_block)
   if(code_rownumber) out$knitr$opts_chunk <- c(out$knitr$opts_chunk, attr.source = c(".numberLines .lineAnchors"))
   return(out)

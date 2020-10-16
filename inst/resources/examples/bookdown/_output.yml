@@ -1,8 +1,5 @@
 rmdja::gitbook_ja:
   keep_md: true
-  css:
-    - styles/css/style.css
-    - styles/css/toc.css
 
 rmdja::pdf_book_ja:
   tombow: true

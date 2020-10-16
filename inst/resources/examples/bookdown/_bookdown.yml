@@ -1,7 +1,7 @@
-book_filename: main.Rmd                 # マージして作ったファイルの名前.
+# book_filename: main.Rmd                 # マージして作ったファイルの名前.
 output_dir: "../../../../docs"          # ビルドしたファイルの出力先.
-delete_merged_file: true                # 中間生成された Rmd を製本後に消すかどうか
-clean: null                             # ビルド後に削除するファイル. 多分 LaTeX の中間ファイルなどを消す
+delete_merged_file: true                # 中間生成された Rmd をビルド後に消すかどうか
+clean: null                             # ビルド後に削除するファイル. ビルド中に作られたほとんどの中間ファイルは自動で消されるため, 気になった場合のみ使う.
 before_chapter_scrip: null              # 章の開始ごとに挿入する処理, .R ファイル
 after_chapter_script: null              # 章の終了ごとに挿入する処理, .R ファイル
 new_session: false                      # "knit and merge," 各 Rmd で個別に knit してから連結. false なら 連結してから knit.

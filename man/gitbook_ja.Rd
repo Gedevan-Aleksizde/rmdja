@@ -38,7 +38,48 @@ gitbook_ja(
 )
 }
 \arguments{
+\item{fig_caption}{...
+Arguments to be passed to \code{rmarkdown::\link{html_document}()}
+(\code{...} not including \code{toc}, and \code{theme}).}
+
+\item{table_css}{\code{TRUE} to load gitbook's default CSS for tables. Choose
+\code{FALSE} to unload and use customized CSS (for exmaple, bootstrap) via
+the \code{css} option. Default is \code{TRUE}.}
+
+\item{number_sections}{...
+Arguments to be passed to \code{rmarkdown::\link{html_document}()}
+(\code{...} not including \code{toc}, and \code{theme}).}
+
 \item{split_by}{character. デフォルト: 'chapter'. 'chapter', 'chapter+number', 'section', 'section+number', 'rmd', 'none' から選ぶ. ページを区切る単位.}
+
+\item{self_contained}{...
+Arguments to be passed to \code{rmarkdown::\link{html_document}()}
+(\code{...} not including \code{toc}, and \code{theme}).}
+
+\item{split_bib}{Whether to split the bibliography onto separate pages where
+the citations are actually used.}
+
+\item{template}{Pandoc template to use for rendering. Pass \code{"default"}
+to use the bookdown default template; pass a path to use a custom template.
+The default template should be sufficient for most use cases. In case you
+want to develop a custom template, we highly recommend to start from the
+default template:
+\url{https://github.com/rstudio/bookdown/blob/master/inst/templates/gitbook.html}.}
+
+\item{config}{A list of configuration options for the gitbook style, such as
+the font/theme settings.}
+
+\item{lib_dir}{...
+Arguments to be passed to \code{rmarkdown::\link{html_document}()}
+(\code{...} not including \code{toc}, and \code{theme}).}
+
+\item{pandoc_args}{...
+Arguments to be passed to \code{rmarkdown::\link{html_document}()}
+(\code{...} not including \code{toc}, and \code{theme}).}
+
+\item{...}{Other arguments to be passed to \code{base_format}. For
+\code{html_book()} and \code{tufte_html_book()}, \code{...} is passed to
+\code{html_chapters()}.}
 
 \item{config:}{list. デフォルト: 実際に出力して確認したほうが早い. 詳しくは bookdown のマニュアル.}
 

@@ -70,6 +70,11 @@ h1.title {
   font-weight: 600;
 }
 
+/* コードブロックの行番号の位置修正 */
+.book .book-body .page-wrapper .page-inner section.normal pre {
+  padding: 0.95em 2em;
+}
+
 /* テキストブロックの soft-wrap を許すかどうか */
 pre code {
   white-space: pre-wrap;
