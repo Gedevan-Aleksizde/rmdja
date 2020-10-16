@@ -312,7 +312,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">14</span> PDF の文書クラス</h1>
 <p>HTMLは利用者側が見え方をある程度カスタマイズできる. かつて存在した Evernote Clearly やカスタム CSS を使って. そのぶんPDFは作成者側がよりレイアウトに注意を払うことになるだろう. 本稿では文章の区切りを章立てにしている. しかし PDF 数十ページしかない文書を大きな文字サイズの見出しで区切るのは少しものものしい感じがする. YAML フロントマターを変更すれば, トップレベルの見出しを変更できる.</p>
 <p><code>pdf book in Japanese</code> は “book” ということで書籍の組版をデフォルト設定にしている. もう少し小規模な文書ならば, <strong>レポート</strong>や<strong>論文記事</strong>形式のほうが良いかもしれない. 例えば, 以下のように指定する.</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb61-1"><a href="pdf-の文書クラス.html#cb61-1"></a><span class="fu">documentclass</span><span class="kw">:</span><span class="at"> bxjsreport</span></span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb60-1"><a href="pdf-の文書クラス.html#cb60-1"></a><span class="fu">documentclass</span><span class="kw">:</span><span class="at"> bxjsreport</span></span></code></pre></div>
 <p><code>documentclass</code> には LaTeX の文書クラスファイル (<code>.cls</code>) ならなんでも与えることができるが, または で日本語文書を作成することを想定しているため, 以下2種類の BXjscls の文書クラス<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a>の中から選ぶとよい. デフォルトは <code>bxjsbook</code> なので, これは明示的に指定する必要はない.</p>
 <ul>
 <li><code>bxjsbook</code></li>

@@ -19,13 +19,13 @@ Customized R Markdown/Bookdown format functions for Japanese users
 1. 後述の必要なパッケージや外部プログラムをインストールする
 2. このパッケージをインストールする 
 ```
-remotes::install_github('Gedevan-Aleksizde/rmdja')
+remotes::install_github('Gedevan-Aleksizde/rmdja', type = "source", repos = NULL)
 ```
 特定のバージョンをインストールする場合は, 以下のようにして指定できます.
 ```
-remotes::install_github('Gedevan-Aleksizde/rmdja', ref="v0.3.2")
+remotes::install_github('Gedevan-Aleksizde/rmdja', ref="v0.4")
 ```
-3. 新規作成時に [R Markdown] -> [From Template] -> [Beamer in Japanese {rmdja}] を選択します  
+3. 新規作成時に [R Markdown] -> [From Template] -> `{rmdja}` のテンプレートのいずれかを選択します  
 ![select templete](inst/resources/img/readme-selection.png)
   + または最初は [`examples/beamer`](inst/resources/examples/beamer/) の `beamer_blank.Rmd` か `examples/beamer_xelatex_{使用しているOS名}.Rmd` をコピーして使ってみてください
   + (上記どちらでもないなら) `Rmd`ファイルに`output::rmdja::beamer_presentation_ja` を指定
@@ -55,6 +55,7 @@ remotes::install_github('Gedevan-Aleksizde/rmdja', ref="v0.3.2")
 1. 一部のLaTeXコマンドが違う
 2. 文字の相対的な大きさ, 字間などのレイアウトが微妙に違う
 3. LuaLaTeX のほうがやや処理が遅い
+4. 縦書き文書は LuaLaTeX のみ対応
 
 ## 初期バージョン (rmdCJK) をお使いの場合
 
@@ -71,16 +72,17 @@ remove.package("rmdCJK")
 R >= 3.6
 R Studio >= 1.3.1056
 
+`rmarkdown` (>= 2.4)
+`bookdown` (>= 0.20.6)
 
 ### R パッケージ
 
 最低限必要なのは以下2つです
 
-* `rmarkdown` > 2.3
-  + 完全に動作するには 2020/9/10 時点で CRAN 最新版 2.3 より新しい開発版が必要です
-  + `remotes::install_github("rstudio/rmarkdown", refs = "ff1b279e795b62b1ffeabcc9aa5bf7386a7ebb83")`, または `refs = "master"` でのインストールを推奨します
+* `rmarkdown` > 2.4
+でのインストールを推奨します
   + レイアウトにそこまで神経質でないなら安定版でも大きな問題はありません
-* `bookdown` > 0.20
+* `bookdown` > 0.20.6
   + `remotes::install_github("rstudio/bookdown")` でのインストールを推奨します
   + ソースファイルをサブディレクトリに配置した際の挙動が改善されたバージョンがあったほうが良いです
 
@@ -122,13 +124,6 @@ Cent OS とか Fedora とか:
 https://www.google.com/get/noto/help/install/
 
 **NOTE**: `monofont`/`jamonofont`はソースコードの掲載に使われます. [M+](http://mix-mplus-ipa.osdn.jp/)や[Ricty](https://rictyfonts.github.io/)などのインストールを推奨します
-
-**NOTE**: 現時点での XeLaTeX 版と LuaLaTeX 版の主な違いは以下のとおりです.
-
-1. 一部のLaTeXコマンドが違う
-2. 文字の相対的な大きさ, 字間などのレイアウトが微妙に違う
-3. LuaLaTeX のほうがやや処理が遅い
-
 
 ## 注意事項
 
@@ -224,7 +219,8 @@ https://gedevan-aleksizde.github.io/rmdja/
 
 
 # 更新履歴メモ
-  
+
+* v0.4 以降の更新情報は NEWS.md を参照してください
 * v0.3.2
   + v0.3の寝起きで作ったおかしいところを修正したバージョン
 * v0.3.1

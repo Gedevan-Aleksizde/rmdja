@@ -311,9 +311,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="fontregisterer-でグラフ用フォントを自動登録" class="section level1" number="24">
 <h1><span class="header-section-number">補遺D</span> <code>fontregisterer</code> でグラフ用フォントを自動登録</h1>
 <p>Rで描いたグラフに日本語を表示する場合, Linux 系 OS ならばフォント名を適切に設定するだけで表示されるが, Windows や Mac ではフォントをグラフィックデバイスに登録する必要がある. しかし手動登録は面倒なので, インストールされているシステムフォントを全て自動登録するパッケージ, <a href="https://github.com/Gedevan-Aleksizde/fontregisterer"><code>fontregisterer</code></a> を用意している.</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb73-1"><a href="fontregisterer-でグラフ用フォントを自動登録.html#cb73-1"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;Gedevan-Aleksizde/fontregisterer&quot;</span>, <span class="dt">repos =</span> <span class="ot">NULL</span>, <span class="dt">type =</span> <span class="st">&quot;source&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb72-1"><a href="fontregisterer-でグラフ用フォントを自動登録.html#cb72-1"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;Gedevan-Aleksizde/fontregisterer&quot;</span>, <span class="dt">repos =</span> <span class="ot">NULL</span>, <span class="dt">type =</span> <span class="st">&quot;source&quot;</span>)</span></code></pre></div>
 <p>もちろんこれは R Markdown 以外でも使用できる. このパッケージは読み込まれた時点で登録処理を行うため,</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb74-1"><a href="fontregisterer-でグラフ用フォントを自動登録.html#cb74-1"></a><span class="kw">require</span>(fontregisterer)</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb73-1"><a href="fontregisterer-でグラフ用フォントを自動登録.html#cb73-1"></a><span class="kw">require</span>(fontregisterer)</span></code></pre></div>
 <p>を最初に実行するだけで良い. 詳しい仕組みの解説は『<a href="https://ill-identified.hatenablog.com/entry/2020/10/03/200618">おまえはもうRのグラフの日本語表示に悩まない (各OS対応)</a>』に書いている.</p>
 
 </div>

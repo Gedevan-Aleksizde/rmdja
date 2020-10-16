@@ -314,13 +314,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">9.1</span> TeX/HTML を出力する関数</h2>
 <p><code>stargazer</code> や <code>xtable</code> のように, HTML や LaTeX 形式で表を出力してくれるパッケージがある. これらは <code>results='asis'</code> のチャンクオプションを指定することで関数の出力するテキストをそのまま埋め込むことができる. よって, あとは HTMLかLaTeX かといった出力形式の違いに気をつければ表示できる.</p>
 
-<div class="sourceCode" id="cb48"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb48-1"><a href="表のデザイン.html#cb48-1"></a><span class="kw">require</span>(stargazer)</span></code></pre></div>
-<pre><code>Loading required package: stargazer</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb47-1"><a href="表のデザイン.html#cb47-1"></a><span class="kw">require</span>(stargazer)</span></code></pre></div>
+<pre><code> 要求されたパッケージ stargazer をロード中です </code></pre>
 <pre><code>
 Please cite as: </code></pre>
 <pre><code> Hlavac, Marek (2018). stargazer: Well-Formatted Regression and Summary Statistics Tables.</code></pre>
 <pre><code> R package version 5.2.2. https://CRAN.R-project.org/package=stargazer </code></pre>
-<div class="sourceCode" id="cb53"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb53-1"><a href="表のデザイン.html#cb53-1"></a><span class="kw">stargazer</span>(mtcars, <span class="dt">type =</span> <span class="cf">if</span> (knitr<span class="op">::</span><span class="kw">is_latex_output</span>()) <span class="st">&quot;latex&quot;</span> <span class="cf">else</span> <span class="st">&quot;html&quot;</span>, <span class="dt">header =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb52-1"><a href="表のデザイン.html#cb52-1"></a><span class="kw">stargazer</span>(mtcars, <span class="dt">type =</span> <span class="cf">if</span> (knitr<span class="op">::</span><span class="kw">is_latex_output</span>()) <span class="st">&quot;latex&quot;</span> <span class="cf">else</span> <span class="st">&quot;html&quot;</span>, <span class="dt">header =</span> F)</span></code></pre></div>
 <table style="text-align:center">
 <tr>
 <td colspan="8" style="border-bottom: 1px solid black">

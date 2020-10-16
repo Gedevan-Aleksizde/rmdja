@@ -338,23 +338,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">8.4</span> (TODO) その他の R プログラム</h2>
 <p>なお, DOT言語は <code>DiagrammeR</code> パッケージを経由して使うこともできる<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a>(図: <a href="advanced-graph.html#fig:diagrammer-graph">8.3</a>). グラフィカルモデルの記述などはこちらのほうが簡単かもしれない.</p>
 
-<div class="sourceCode" id="cb47"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb47-1"><a href="advanced-graph.html#cb47-1"></a>DiagrammeR<span class="op">::</span><span class="kw">grViz</span>(<span class="st">&quot;digraph {</span></span>
-<span id="cb47-2"><a href="advanced-graph.html#cb47-2"></a><span class="st">  graph [layout = dot, rankdir = TB]</span></span>
-<span id="cb47-3"><a href="advanced-graph.html#cb47-3"></a><span class="st">  </span></span>
-<span id="cb47-4"><a href="advanced-graph.html#cb47-4"></a><span class="st">  node [shape = rectangle]        </span></span>
-<span id="cb47-5"><a href="advanced-graph.html#cb47-5"></a><span class="st">  rec1 [label = &#39;Step 1. 起床する&#39;]</span></span>
-<span id="cb47-6"><a href="advanced-graph.html#cb47-6"></a><span class="st">  rec2 [label = &#39;Step 2. コードを書く&#39;]</span></span>
-<span id="cb47-7"><a href="advanced-graph.html#cb47-7"></a><span class="st">  rec3 [label =  &#39;Step 3. ???&#39;]</span></span>
-<span id="cb47-8"><a href="advanced-graph.html#cb47-8"></a><span class="st">  rec4 [label = &#39;Step 4. 給料をもらう&#39;]</span></span>
-<span id="cb47-9"><a href="advanced-graph.html#cb47-9"></a><span class="st">  </span></span>
-<span id="cb47-10"><a href="advanced-graph.html#cb47-10"></a><span class="st">  # edge definitions with the node IDs</span></span>
-<span id="cb47-11"><a href="advanced-graph.html#cb47-11"></a><span class="st">  rec1 -&gt; rec2 -&gt; rec3 -&gt; rec4</span></span>
-<span id="cb47-12"><a href="advanced-graph.html#cb47-12"></a><span class="st">  }&quot;</span>,</span>
-<span id="cb47-13"><a href="advanced-graph.html#cb47-13"></a>  <span class="dt">height =</span> <span class="dv">500</span></span>
-<span id="cb47-14"><a href="advanced-graph.html#cb47-14"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb46-1"><a href="advanced-graph.html#cb46-1"></a>DiagrammeR<span class="op">::</span><span class="kw">grViz</span>(<span class="st">&quot;digraph {</span></span>
+<span id="cb46-2"><a href="advanced-graph.html#cb46-2"></a><span class="st">  graph [layout = dot, rankdir = TB]</span></span>
+<span id="cb46-3"><a href="advanced-graph.html#cb46-3"></a><span class="st">  </span></span>
+<span id="cb46-4"><a href="advanced-graph.html#cb46-4"></a><span class="st">  node [shape = rectangle]        </span></span>
+<span id="cb46-5"><a href="advanced-graph.html#cb46-5"></a><span class="st">  rec1 [label = &#39;Step 1. 起床する&#39;]</span></span>
+<span id="cb46-6"><a href="advanced-graph.html#cb46-6"></a><span class="st">  rec2 [label = &#39;Step 2. コードを書く&#39;]</span></span>
+<span id="cb46-7"><a href="advanced-graph.html#cb46-7"></a><span class="st">  rec3 [label =  &#39;Step 3. ???&#39;]</span></span>
+<span id="cb46-8"><a href="advanced-graph.html#cb46-8"></a><span class="st">  rec4 [label = &#39;Step 4. 給料をもらう&#39;]</span></span>
+<span id="cb46-9"><a href="advanced-graph.html#cb46-9"></a><span class="st">  </span></span>
+<span id="cb46-10"><a href="advanced-graph.html#cb46-10"></a><span class="st">  # edge definitions with the node IDs</span></span>
+<span id="cb46-11"><a href="advanced-graph.html#cb46-11"></a><span class="st">  rec1 -&gt; rec2 -&gt; rec3 -&gt; rec4</span></span>
+<span id="cb46-12"><a href="advanced-graph.html#cb46-12"></a><span class="st">  }&quot;</span>,</span>
+<span id="cb46-13"><a href="advanced-graph.html#cb46-13"></a>  <span class="dt">height =</span> <span class="dv">500</span></span>
+<span id="cb46-14"><a href="advanced-graph.html#cb46-14"></a>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:diagrammer-graph"></span>
-<div id="htmlwidget-e7150a668fb13602fe8a" style="width:672px;height:500px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e7150a668fb13602fe8a">{"x":{"diagram":"digraph {\n  graph [layout = dot, rankdir = TB]\n  \n  node [shape = rectangle]        \n  rec1 [label = \"Step 1. 起床する\"]\n  rec2 [label = \"Step 2. コードを書く\"]\n  rec3 [label =  \"Step 3. ???\"]\n  rec4 [label = \"Step 4. 給料をもらう\"]\n  \n  # edge definitions with the node IDs\n  rec1 -> rec2 -> rec3 -> rec4\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-126443040a9c324c98aa" style="width:672px;height:500px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-126443040a9c324c98aa">{"x":{"diagram":"digraph {\n  graph [layout = dot, rankdir = TB]\n  \n  node [shape = rectangle]        \n  rec1 [label = \"Step 1. 起床する\"]\n  rec2 [label = \"Step 2. コードを書く\"]\n  rec3 [label =  \"Step 3. ???\"]\n  rec4 [label = \"Step 4. 給料をもらう\"]\n  \n  # edge definitions with the node IDs\n  rec1 -> rec2 -> rec3 -> rec4\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 図 8.3: <code>DiagrammeR</code> によるグラフィカルモデル (RCB, Ch. 4.15 より)
 </p>

@@ -314,14 +314,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">4.1</span> プログラムチャンク</h2>
 <p>プログラムチャンクは, R Markdown 最大の特徴であり, R のソースコードや, その実行結果を Markdown に挿入できる. さらには <strong>R 以外の言語の動作も可能</strong>である. 順番が前後してしまったが, 定理などのカスタムブロックは本来はプログラムを入力するためのチャンクブロックであり, それを静的なテキストコンテンツの挿入に流用しているだけである.</p>
 <p>以降は R で多くのユーザが頻繁に使うパッケージと, いくつかの技術文書作成に役に立つパッケージをインポートしている前提の説明とする. なお, <code>rmarkdown</code>, <code>bookdown</code> はチャンク内で特に読み込む必要がない.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb22-1"><a href="動的なコンテンツの作成.html#cb22-1"></a>pkgs &lt;-<span class="st"> </span><span class="kw">installed.packages</span>()</span>
-<span id="cb22-2"><a href="動的なコンテンツの作成.html#cb22-2"></a><span class="cf">for</span> (p <span class="cf">in</span> <span class="kw">c</span>(<span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;ggthemes&quot;</span>, <span class="st">&quot;equatiomatic&quot;</span>, <span class="st">&quot;tufte&quot;</span>, <span class="st">&quot;kableExtra&quot;</span>)) {</span>
-<span id="cb22-3"><a href="動的なコンテンツの作成.html#cb22-3"></a>  <span class="cf">if</span> (<span class="op">!</span>p <span class="op">%in%</span><span class="st"> </span>pkgs) <span class="kw">install.packages</span>(p)</span>
-<span id="cb22-4"><a href="動的なコンテンツの作成.html#cb22-4"></a>}</span>
-<span id="cb22-5"><a href="動的なコンテンツの作成.html#cb22-5"></a><span class="cf">if</span> (<span class="op">!</span><span class="st">&quot;rmarkdown&quot;</span> <span class="op">%in%</span><span class="st"> </span>pkgs) remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;rstudio/rmarkdown&quot;</span>)</span>
-<span id="cb22-6"><a href="動的なコンテンツの作成.html#cb22-6"></a><span class="cf">if</span> (<span class="op">!</span><span class="st">&quot;bookdown&quot;</span> <span class="op">%in%</span><span class="st"> </span>pkgs) remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;rstudio/bookdown&quot;</span>)</span>
-<span id="cb22-7"><a href="動的なコンテンツの作成.html#cb22-7"></a><span class="kw">require</span>(tidyverse)</span></code></pre></div>
-<pre><code>Loading required package: tidyverse</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb21-1"><a href="動的なコンテンツの作成.html#cb21-1"></a>pkgs &lt;-<span class="st"> </span><span class="kw">installed.packages</span>()</span>
+<span id="cb21-2"><a href="動的なコンテンツの作成.html#cb21-2"></a><span class="cf">for</span> (p <span class="cf">in</span> <span class="kw">c</span>(<span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;ggthemes&quot;</span>, <span class="st">&quot;equatiomatic&quot;</span>, <span class="st">&quot;tufte&quot;</span>, <span class="st">&quot;kableExtra&quot;</span>)) {</span>
+<span id="cb21-3"><a href="動的なコンテンツの作成.html#cb21-3"></a>  <span class="cf">if</span> (<span class="op">!</span>p <span class="op">%in%</span><span class="st"> </span>pkgs) <span class="kw">install.packages</span>(p)</span>
+<span id="cb21-4"><a href="動的なコンテンツの作成.html#cb21-4"></a>}</span>
+<span id="cb21-5"><a href="動的なコンテンツの作成.html#cb21-5"></a><span class="cf">if</span> (<span class="op">!</span><span class="st">&quot;rmarkdown&quot;</span> <span class="op">%in%</span><span class="st"> </span>pkgs) remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;rstudio/rmarkdown&quot;</span>)</span>
+<span id="cb21-6"><a href="動的なコンテンツの作成.html#cb21-6"></a><span class="cf">if</span> (<span class="op">!</span><span class="st">&quot;bookdown&quot;</span> <span class="op">%in%</span><span class="st"> </span>pkgs) remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;rstudio/bookdown&quot;</span>)</span>
+<span id="cb21-7"><a href="動的なコンテンツの作成.html#cb21-7"></a><span class="kw">require</span>(tidyverse)</span></code></pre></div>
+<pre><code> 要求されたパッケージ tidyverse をロード中です </code></pre>
 <pre><code>─ Attaching packages ──────────────────── tidyverse 1.3.0 ─</code></pre>
 <pre><code>✓ ggplot2 3.3.2     ✓ purrr   0.3.4
 ✓ tibble  3.0.3     ✓ dplyr   1.0.2
@@ -331,11 +331,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 x dplyr::filter()     masks stats::filter()
 x dplyr::group_rows() masks kableExtra::group_rows()
 x dplyr::lag()        masks stats::lag()</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb27-1"><a href="動的なコンテンツの作成.html#cb27-1"></a><span class="kw">require</span>(ggthemes)</span></code></pre></div>
-<pre><code>Loading required package: ggthemes</code></pre>
-<div class="sourceCode" id="cb29"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb29-1"><a href="動的なコンテンツの作成.html#cb29-1"></a><span class="kw">require</span>(equatiomatic)</span></code></pre></div>
-<pre><code>Loading required package: equatiomatic</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb31-1"><a href="動的なコンテンツの作成.html#cb31-1"></a><span class="kw">require</span>(kableExtra)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb26-1"><a href="動的なコンテンツの作成.html#cb26-1"></a><span class="kw">require</span>(ggthemes)</span></code></pre></div>
+<pre><code> 要求されたパッケージ ggthemes をロード中です </code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb28-1"><a href="動的なコンテンツの作成.html#cb28-1"></a><span class="kw">require</span>(equatiomatic)</span></code></pre></div>
+<pre><code> 要求されたパッケージ equatiomatic をロード中です </code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb30-1"><a href="動的なコンテンツの作成.html#cb30-1"></a><span class="kw">require</span>(kableExtra)</span></code></pre></div>
 <p>このように, ログを掲載することもできる. これは再現性を重視する際に重宝するが, 一方で単に画像などの出力だけを掲載したい場合もあるだろう. あるいは, プログラムを解説するために<strong>プログラムは掲載するが実行しない</strong>, ということも必要になるかもしれない. <strong>プログラムと結果の表示/非表示はどちらも簡単に切り替え可能</strong>である. そのためには, チャンクオプションを指定する.</p>
 <ul>
 <li><code>echo</code>: プログラムを掲載するかどうか</li>
@@ -353,12 +353,12 @@ data(cars)
 summary(cars)
 ```</code></pre>
 <p>一括設定の場合, 以下のようなプログラムでデフォルト値を上書きできる.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb33-1"><a href="動的なコンテンツの作成.html#cb33-1"></a>knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(</span>
-<span id="cb33-2"><a href="動的なコンテンツの作成.html#cb33-2"></a>  <span class="dt">echo =</span> F,</span>
-<span id="cb33-3"><a href="動的なコンテンツの作成.html#cb33-3"></a>  <span class="dt">message =</span> T,</span>
-<span id="cb33-4"><a href="動的なコンテンツの作成.html#cb33-4"></a>  <span class="dt">warnings =</span> F,</span>
-<span id="cb33-5"><a href="動的なコンテンツの作成.html#cb33-5"></a>  <span class="dt">error =</span> F</span>
-<span id="cb33-6"><a href="動的なコンテンツの作成.html#cb33-6"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb32-1"><a href="動的なコンテンツの作成.html#cb32-1"></a>knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(</span>
+<span id="cb32-2"><a href="動的なコンテンツの作成.html#cb32-2"></a>  <span class="dt">echo =</span> F,</span>
+<span id="cb32-3"><a href="動的なコンテンツの作成.html#cb32-3"></a>  <span class="dt">message =</span> T,</span>
+<span id="cb32-4"><a href="動的なコンテンツの作成.html#cb32-4"></a>  <span class="dt">warnings =</span> F,</span>
+<span id="cb32-5"><a href="動的なコンテンツの作成.html#cb32-5"></a>  <span class="dt">error =</span> F</span>
+<span id="cb32-6"><a href="動的なコンテンツの作成.html#cb32-6"></a>)</span></code></pre></div>
 <p>なおこのチャンクは <code>eval=F</code> を設定することで, 実行されることなくプログラムのみ掲載している. ただし, プログラムのみを掲載するなら, 以下のように Markdown の機能でも可能である. こちらの記法は <code>{}</code> がなくなっていることに注意する.</p>
 <pre><code>```sh
 echo Hello, Bookdown
@@ -366,7 +366,7 @@ echo Hello, Bookdown
 <p><code>{}</code> ブロック内の値にはさらに R プログラムで与えることができる. この使い方は後の章で解説する.</p>
 <p>これらのオプションがあるおかげでプログラムとその結果の再現を説明したい場合はソースコードも表示させたり, 回帰分析やシミュレーションの結果だけを掲載したい時は結果のみ表示したりできる. これが R Markdown のチャンクの強みである. 例えば Jupyter notebook/lab などは従来, コードセルと出力セルを自由に隠すことができなかった.</p>
 <p>チャンクに使用できる言語は R だけではない. <strong>つまり Python なども使用できる</strong>. 以下で対応しているエンジンの一覧を表示できる.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb35-1"><a href="動的なコンテンツの作成.html#cb35-1"></a><span class="kw">names</span>(knitr<span class="op">::</span>knit_engines<span class="op">$</span><span class="kw">get</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb34-1"><a href="動的なコンテンツの作成.html#cb34-1"></a><span class="kw">names</span>(knitr<span class="op">::</span>knit_engines<span class="op">$</span><span class="kw">get</span>())</span></code></pre></div>
 <pre><code> [1] &quot;awk&quot;         &quot;bash&quot;        &quot;coffee&quot;      &quot;gawk&quot;        &quot;groovy&quot;     
  [6] &quot;haskell&quot;     &quot;lein&quot;        &quot;mysql&quot;       &quot;node&quot;        &quot;octave&quot;     
 [11] &quot;perl&quot;        &quot;psql&quot;        &quot;Rscript&quot;     &quot;ruby&quot;        &quot;sas&quot;        
@@ -386,9 +386,9 @@ echo Hello, Bookdown
 <p>プログラムチャンクは, 単にプログラムの計算結果を埋め込むだけでなく, 静的なコンテンツを臨機応変に変更して出力させたり, あるいは手作業でやるには煩雑な加工処理を挟んでから表示させるのに役に立つ.</p>
 <p>R のプログラムと組み合わせることで<strong>回帰分析の結果の数値をコピペすることなく数式で表示することができる</strong>. そのためには <a href="https://github.com/datalorax/equatiomatic"><code>equatiomatic</code></a> パッケージの <code>extract_eq()</code> を使う.</p>
 <p>まずは, 回帰係数を記号で表現するタイプ. LaTeX 数式をそのまま出力するため, チャンクオプションに <code>results="asis"</code> を付ける必要があることに注意する.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb37-1"><a href="動的なコンテンツの作成.html#cb37-1"></a><span class="kw">data</span>(iris)</span>
-<span id="cb37-2"><a href="動的なコンテンツの作成.html#cb37-2"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(Sepal.Length <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> iris)</span>
-<span id="cb37-3"><a href="動的なコンテンツの作成.html#cb37-3"></a><span class="kw">extract_eq</span>(fit, <span class="dt">wrap =</span> T, <span class="dt">ital_vars =</span> T, <span class="dt">align_env =</span> <span class="st">&quot;aligned&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb36-1"><a href="動的なコンテンツの作成.html#cb36-1"></a><span class="kw">data</span>(iris)</span>
+<span id="cb36-2"><a href="動的なコンテンツの作成.html#cb36-2"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(Sepal.Length <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> iris)</span>
+<span id="cb36-3"><a href="動的なコンテンツの作成.html#cb36-3"></a><span class="kw">extract_eq</span>(fit, <span class="dt">wrap =</span> T, <span class="dt">ital_vars =</span> T, <span class="dt">align_env =</span> <span class="st">&quot;aligned&quot;</span>)</span></code></pre></div>
 <p><span class="math display">\[
 \begin{aligned}
 Sepal.Length &amp;= \alpha + \beta_{1}(Sepal.Width) + \beta_{2}(Petal.Length) + \beta_{3}(Petal.Width)\ + \\
@@ -396,7 +396,7 @@ Sepal.Length &amp;= \alpha + \beta_{1}(Sepal.Width) + \beta_{2}(Petal.Length) + 
 \end{aligned}
 \]</span></p>
 <p>さらに <code>use_coef = T</code> で係数を推定結果の数値に置き換えた.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb38-1"><a href="動的なコンテンツの作成.html#cb38-1"></a><span class="kw">extract_eq</span>(fit, <span class="dt">wrap =</span> T, <span class="dt">ital_vars =</span> T, <span class="dt">use_coef =</span> T, <span class="dt">align_env =</span> <span class="st">&quot;aligned&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb37-1"><a href="動的なコンテンツの作成.html#cb37-1"></a><span class="kw">extract_eq</span>(fit, <span class="dt">wrap =</span> T, <span class="dt">ital_vars =</span> T, <span class="dt">use_coef =</span> T, <span class="dt">align_env =</span> <span class="st">&quot;aligned&quot;</span>)</span></code></pre></div>
 <p><span class="math display">\[
 \begin{aligned}
 Sepal.Length &amp;= 2.17 + 0.5(Sepal.Width) + 0.83(Petal.Length) - 0.32(Petal.Width)\ - \\
@@ -409,7 +409,7 @@ Sepal.Length &amp;= 2.17 + 0.5(Sepal.Width) + 0.83(Petal.Length) - 0.32(Petal.Wi
 <div id="プログラムを使った図の挿入" class="section level2" number="4.3">
 <h2><span class="header-section-number">4.3</span> プログラムを使った図の挿入</h2>
 <p>既に Markdown 記法による図表の挿入方法を紹介したが, プログラムチャンクを介して画像を読み込み表示させることもできる. まずは, R のプログラムで既存の画像ファイルを表示させる方法.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb39-1"><a href="動的なコンテンツの作成.html#cb39-1"></a>knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="kw">file.path</span>(img_dir, <span class="st">&quot;Johannes_Gutenberg.jpg&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb38-1"><a href="動的なコンテンツの作成.html#cb38-1"></a>knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="kw">file.path</span>(img_dir, <span class="st">&quot;Johannes_Gutenberg.jpg&quot;</span>))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:includegraphic-example"></span>
 <img src="img/Johannes_Gutenberg.jpg" alt="Johannes Gutenberg" width="50%" height="50%" />
 <p class="caption">
@@ -443,13 +443,13 @@ ggplot(diamonds, aes(x=carat, y=price, color=clarity)) +
 <p>R のグラフィックデバイスではないとは, RGL や <code>plotly</code> など外部ライブラリに頼ったグラフ作成ツールのことである. 判断できない人は, RStudio 上で実行して, “Plots” ペーンに表示されたら R のグラフィックデバイス, “Viewer” ペーンに表示されたらそうでない, で覚えていただきたい. 後者を表示する方法は <a href="webapp.html#webapp">11</a> 章で後述する. R をこれまで使ったことがなく, それすらも何を言っているのか分からない, という場合は <code>ggplot2</code> を使ってもらう.</p>
 <p>最後の <code>fig.cap=""</code> がキャプションである. ただし, どうも日本語キャプションを書いたあとに他のチャンクオプションを指定するとエラーになるようだ. よって <strong><code>fig.cap=</code> はオプションの末尾に書くべきである</strong>. また, <code>fig.cap=""</code> に数式や一部の特殊なテキストを直接入力することができない. この問題は相互参照について解説するセクション <a href="相互参照と引用.html#crossref">5.1</a> で詳細を述べる.</p>
 <p><code>fig.cap</code> 以外のオプションはおそらく頻繁には変えないため, 冒頭でまとめて設定したほうが楽だろう.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb41-1"><a href="動的なコンテンツの作成.html#cb41-1"></a>knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(</span>
-<span id="cb41-2"><a href="動的なコンテンツの作成.html#cb41-2"></a>  <span class="dt">fig.align =</span> <span class="st">&quot;center&quot;</span>,</span>
-<span id="cb41-3"><a href="動的なコンテンツの作成.html#cb41-3"></a>  <span class="dt">fig.width =</span> <span class="fl">6.5</span>,</span>
-<span id="cb41-4"><a href="動的なコンテンツの作成.html#cb41-4"></a>  <span class="dt">fig.height =</span> <span class="fl">4.5</span>,</span>
-<span id="cb41-5"><a href="動的なコンテンツの作成.html#cb41-5"></a>  <span class="dt">out.width =</span> <span class="st">&quot;100%&quot;</span>,</span>
-<span id="cb41-6"><a href="動的なコンテンツの作成.html#cb41-6"></a>  <span class="dt">out.height =</span> <span class="st">&quot;100%&quot;</span></span>
-<span id="cb41-7"><a href="動的なコンテンツの作成.html#cb41-7"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb40-1"><a href="動的なコンテンツの作成.html#cb40-1"></a>knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(</span>
+<span id="cb40-2"><a href="動的なコンテンツの作成.html#cb40-2"></a>  <span class="dt">fig.align =</span> <span class="st">&quot;center&quot;</span>,</span>
+<span id="cb40-3"><a href="動的なコンテンツの作成.html#cb40-3"></a>  <span class="dt">fig.width =</span> <span class="fl">6.5</span>,</span>
+<span id="cb40-4"><a href="動的なコンテンツの作成.html#cb40-4"></a>  <span class="dt">fig.height =</span> <span class="fl">4.5</span>,</span>
+<span id="cb40-5"><a href="動的なコンテンツの作成.html#cb40-5"></a>  <span class="dt">out.width =</span> <span class="st">&quot;100%&quot;</span>,</span>
+<span id="cb40-6"><a href="動的なコンテンツの作成.html#cb40-6"></a>  <span class="dt">out.height =</span> <span class="st">&quot;100%&quot;</span></span>
+<span id="cb40-7"><a href="動的なコンテンツの作成.html#cb40-7"></a>)</span></code></pre></div>
 <p>なお, これらは <code>rmdja</code> でのデフォルト値であるため, 実際にこの値をあえて記述する必要はない.</p>
 <p>ここで, <code>fig.width</code> と <code>out.width</code> の違いも述べておく. <code>out.width</code>/<code>out.height</code> は表示する画像サイズの違いで, <code>fig.width</code>/<code>fig.height</code> はプログラムが出力した画像の保存サイズである. よって <code>ggplot2</code> などを使わず画像ファイルを貼り付けるだけの場合は <code>fig.*</code> は意味をなさない.</p>
 </div>
@@ -458,11 +458,11 @@ ggplot(diamonds, aes(x=carat, y=price, color=clarity)) +
 <p>Markdown 記法を使った表記は既に紹介した. しかしこれは表の数値を全て手動で書かなければならない. もちろんこれも R 内のデータを手書きなどせずとも表示できるし, テーブルのデザインもある程度自由に設定できる.</p>
 <p>R Markdown のデフォルトでは R のコンソールと同様にテキストとして出力されるが, bookdown では異なるデザインで表示されている. これは <code>knitr</code>, <code>kableExtra</code> パッケージなどで事後処理をかけることで見やすいデザインの表に変換しているからである.</p>
 <p>この方法はシンプルで使いやすいが, R はテーブル状のデータ処理に長けているため, 手動で数値を書くよりも簡単な方法がある.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb42-1"><a href="動的なコンテンツの作成.html#cb42-1"></a><span class="kw">data</span>(iris)</span>
-<span id="cb42-2"><a href="動的なコンテンツの作成.html#cb42-2"></a><span class="kw">kable</span>(</span>
-<span id="cb42-3"><a href="動的なコンテンツの作成.html#cb42-3"></a>  <span class="kw">head</span>(iris, <span class="dt">n =</span> <span class="dv">10</span>),</span>
-<span id="cb42-4"><a href="動的なコンテンツの作成.html#cb42-4"></a>  <span class="dt">caption =</span> <span class="st">&quot;`knitr::kable()` で出力された (PDFではあまりかっこよくない) 表&quot;</span></span>
-<span id="cb42-5"><a href="動的なコンテンツの作成.html#cb42-5"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb41-1"><a href="動的なコンテンツの作成.html#cb41-1"></a><span class="kw">data</span>(iris)</span>
+<span id="cb41-2"><a href="動的なコンテンツの作成.html#cb41-2"></a><span class="kw">kable</span>(</span>
+<span id="cb41-3"><a href="動的なコンテンツの作成.html#cb41-3"></a>  <span class="kw">head</span>(iris, <span class="dt">n =</span> <span class="dv">10</span>),</span>
+<span id="cb41-4"><a href="動的なコンテンツの作成.html#cb41-4"></a>  <span class="dt">caption =</span> <span class="st">&quot;`knitr::kable()` で出力された (PDFではあまりかっこよくない) 表&quot;</span></span>
+<span id="cb41-5"><a href="動的なコンテンツの作成.html#cb41-5"></a>)</span></code></pre></div>
 <table>
 <caption>
 <span id="tab:display-dataframe-kable">表 4.1: </span><code>knitr::kable()</code> で出力された (PDFではあまりかっこよくない) 表
@@ -660,12 +660,12 @@ setosa
 </tbody>
 </table>
 <p>こちらは関数内にキャプションを書く必要があり, チャンクオプションに指定する方法はない (表<a href="動的なコンテンツの作成.html#tab:display-dataframe-kable">4.1</a>).</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb43-1"><a href="動的なコンテンツの作成.html#cb43-1"></a><span class="kw">data</span>(iris)</span>
-<span id="cb43-2"><a href="動的なコンテンツの作成.html#cb43-2"></a><span class="kw">kable</span>(</span>
-<span id="cb43-3"><a href="動的なコンテンツの作成.html#cb43-3"></a>  <span class="kw">head</span>(iris, <span class="dt">n =</span> <span class="dv">10</span>),</span>
-<span id="cb43-4"><a href="動的なコンテンツの作成.html#cb43-4"></a>  <span class="dt">booktabs =</span> T,</span>
-<span id="cb43-5"><a href="動的なコンテンツの作成.html#cb43-5"></a>  <span class="dt">caption =</span> <span class="st">&quot;奇数行を強調し, PDF では booktabs を利用&quot;</span></span>
-<span id="cb43-6"><a href="動的なコンテンツの作成.html#cb43-6"></a>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">row_spec</span>(<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dt">by =</span> <span class="dv">2</span>), <span class="dt">background =</span> <span class="st">&quot;gray&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb42-1"><a href="動的なコンテンツの作成.html#cb42-1"></a><span class="kw">data</span>(iris)</span>
+<span id="cb42-2"><a href="動的なコンテンツの作成.html#cb42-2"></a><span class="kw">kable</span>(</span>
+<span id="cb42-3"><a href="動的なコンテンツの作成.html#cb42-3"></a>  <span class="kw">head</span>(iris, <span class="dt">n =</span> <span class="dv">10</span>),</span>
+<span id="cb42-4"><a href="動的なコンテンツの作成.html#cb42-4"></a>  <span class="dt">booktabs =</span> T,</span>
+<span id="cb42-5"><a href="動的なコンテンツの作成.html#cb42-5"></a>  <span class="dt">caption =</span> <span class="st">&quot;奇数行を強調し, PDF では booktabs を利用&quot;</span></span>
+<span id="cb42-6"><a href="動的なコンテンツの作成.html#cb42-6"></a>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">row_spec</span>(<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dt">by =</span> <span class="dv">2</span>), <span class="dt">background =</span> <span class="st">&quot;gray&quot;</span>)</span></code></pre></div>
 <table>
 <caption>
 <span id="tab:display-dataframe-kable-2">表 4.2: </span>奇数行を強調し, PDF では booktabs を利用

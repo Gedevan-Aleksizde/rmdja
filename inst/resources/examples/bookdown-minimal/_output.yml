@@ -1,14 +1,10 @@
 rmdja::gitbook_ja:
   keep_md: true
-  css:
-    - ../../styles/css/style.css
-    - ../../styles/css/toc.css
 
 rmdja::pdf_book_ja:
   code_rownumber: true
-  citation_package: natbib
+  citation_package: biblatex
 
-# ---- epubの出力設定 ----
 bookdown::epub_book:
   stylesheet:
     - 'style/css/style.css'

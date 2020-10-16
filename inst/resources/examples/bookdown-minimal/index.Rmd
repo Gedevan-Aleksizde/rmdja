@@ -9,13 +9,11 @@ linkcolor: blue
 citecolor: blue
 urlcolor: magenta
 bibliography: rmdja.bib # 書誌情報ファイル
-biblio-style: jecon
 biblio-title: "参考文献"
-documentclass: bxjsbook
 ---
 
 ```{r setup, include=FALSE}
-options(tinytex.latexmk.emulation = F)
+options(tinytex.latexmk.emulation = T)
 # 確実にアンダースコアを回避するにはコピーしかない
 file.copy(system.file("resources/bibliography/rmdja.bib", package="rmdja"), "./") 
 file.copy(system.file("resources/styles/css", package="rmdja"), "./", recursive = T)
@@ -23,7 +21,7 @@ file.copy(system.file("resources/styles/img", package="rmdja"), "./", recursive 
 img_dir <- "img/"
 dir.create(img_dir, recursive = T)
 file.copy(file.path(system.file("resources/img", package = "rmdja"),
-                    c("Johannes_Gutenberg.jpg", "build-pane.png", "build-pane-build.png")), img_dir)
+                    c("Johannes_Gutenberg.jpg")), img_dir)
 knitr::opts_chunk$set(
   echo = F,
   comment = "",
@@ -76,4 +74,4 @@ $$
 
 # 引用
 
-[@Okumura2017LaTeX] [@doughertyforthcomingHandsOn; @R-ggdag; @R-ggthemes; @R-rmarkdown; @R-tidyverse; @Ban1991; @hasegawa2004]
+[@Okumura2017LaTeX] [@doughertyforthcomingHandsOn; @R-ggdag; @R-ggthemes; @R-rmarkdown; @R-tidyverse;]

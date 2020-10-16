@@ -6,7 +6,7 @@
 
 ```{r install-guide, echo=T, eval=F}
 install.packages("remotes")
-remotes::install_github("Gedevan-Aleksizde/my_latex_template", repos = NULL)
+remotes::install_github("Gedevan-Aleksizde/my_latex_template", repos = NULL, type = "source")
 ```
 
 まだ RStudio を使っていないのなら, RStudio 上で作業することを強く推奨する. さらに, もしもRの操作自体にあまり慣れていないのなら, 森知晴 『[卒業論文のためのR入門](https://tomoecon.github.io/R_for_graduate_thesis/)』などを読むことを薦める. 
@@ -50,7 +50,7 @@ knitr::include_graphics(file.path(img_dir, "rmd-templates.png"))
 
 ```{r installation, eval=F}
 install.packages(c("rmarkdown", "bookdown"))
-remotes::install_github("Gedevan-Aleksizde/my_latex_template", repos = NULL)
+remotes::install_github("Gedevan-Aleksizde/my_latex_template", repos = NULL, type = "source")
 ```
 
 ただし, `bookdown` ver. 0.2 時点ではソースファイルのフォルダ配置指定に不具合があるため[^bookdown-subdir-error], もし0.2以前のバージョンを使用しているなら, 更新するか, github から開発版をインストールする. 同様に, `rmarkdown` も CRAN ではなく開発版をインストールしたほうがよい.
@@ -63,9 +63,9 @@ remotes::install_github('rstudio/bookdown')
 
 3種類のテンプレートのうち, `pdf book in Japanese` のみ, 文書のビルドのための下準備が追加で必要になるため, その方法を解説する. それ以外は第 \@ref(#quick-start) 節で書いたように "knit" ボタンを押すだけで良い.
 
-最低限のファイルやパッケージで動くほうのデモ用ディレクトリをコピーする
+最低限のファイルやパッケージで動くほうのデモ用ディレクトリをコピーする. ただし, `tidyverse` と `kableExtra` のインストールも必要である.
 
-```{r copy, echo=T}
+```{r copy, echo=T, eval=F}
 file.copy(system.file("resources/examples/bookdown-minimal", package = "rmdja"), "./", recursive = T)
 ```
 

@@ -319,9 +319,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb6-1"><a href="下準備.html#cb6-1"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;rstudio/rmarkdown&quot;</span>)</span>
 <span id="cb6-2"><a href="下準備.html#cb6-2"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;rstudio/bookdown&quot;</span>)</span></code></pre></div>
 <p>3種類のテンプレートのうち, <code>pdf book in Japanese</code> のみ, 文書のビルドのための下準備が追加で必要になるため, その方法を解説する. それ以外は第 @ref(#quick-start) 節で書いたように “knit” ボタンを押すだけで良い.</p>
-<p>最低限のファイルやパッケージで動くほうのデモ用ディレクトリをコピーする</p>
+<p>最低限のファイルやパッケージで動くほうのデモ用ディレクトリをコピーする. ただし, <code>tidyverse</code> と <code>kableExtra</code> のインストールも必要である.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb7-1"><a href="下準備.html#cb7-1"></a><span class="kw">file.copy</span>(<span class="kw">system.file</span>(<span class="st">&quot;resources/examples/bookdown-minimal&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;rmdja&quot;</span>), <span class="st">&quot;./&quot;</span>, <span class="dt">recursive =</span> T)</span></code></pre></div>
-<pre><code>[1] TRUE</code></pre>
 </div>
 <div id="書籍形式のビルド操作" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> 書籍形式のビルド操作</h2>
@@ -331,9 +330,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>RStudio の Build ペーンを使う</li>
 </ol>
 <p>前者は, 以下のように実行する. 順にHTML, PDF, epub を出力している</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb9-1"><a href="下準備.html#cb9-1"></a>bookdown<span class="op">::</span><span class="kw">render_book</span>(<span class="st">&quot;index.Rmd&quot;</span>, <span class="st">&quot;rmdja::gitbook_ja&quot;</span>)</span>
-<span id="cb9-2"><a href="下準備.html#cb9-2"></a>bookdown<span class="op">::</span><span class="kw">render_book</span>(<span class="st">&quot;index.Rmd&quot;</span>, <span class="st">&quot;rmdja::pdf_book_ja&quot;</span>)</span>
-<span id="cb9-3"><a href="下準備.html#cb9-3"></a>bookdown<span class="op">::</span><span class="kw">render_book</span>(<span class="st">&quot;index.Rmd&quot;</span>, <span class="st">&quot;bookdown::epub_book&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb8-1"><a href="下準備.html#cb8-1"></a>bookdown<span class="op">::</span><span class="kw">render_book</span>(<span class="st">&quot;index.Rmd&quot;</span>, <span class="st">&quot;rmdja::gitbook_ja&quot;</span>)</span>
+<span id="cb8-2"><a href="下準備.html#cb8-2"></a>bookdown<span class="op">::</span><span class="kw">render_book</span>(<span class="st">&quot;index.Rmd&quot;</span>, <span class="st">&quot;rmdja::pdf_book_ja&quot;</span>)</span>
+<span id="cb8-3"><a href="下準備.html#cb8-3"></a>bookdown<span class="op">::</span><span class="kw">render_book</span>(<span class="st">&quot;index.Rmd&quot;</span>, <span class="st">&quot;bookdown::epub_book&quot;</span>)</span></code></pre></div>
 <p>コピーしたディレクトリ <code>bookdown-minimal</code> を設定する (図 <a href="下準備.html#fig:build-pane1-1">2.1</a>, <a href="下準備.html#fig:build-pane1-2">2.2</a>).</p>
 <p>Build ペーンの “Build Book” の三角形を押すと, 使用できるフォーマット一覧が表示される. これはスライド, 縦書き文書, 書籍などといった文書の種類と1対1で対応しているわけではなく, フォーマット関数に対応している.</p>
 <ul>

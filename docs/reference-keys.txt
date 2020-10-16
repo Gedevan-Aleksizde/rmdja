@@ -3,8 +3,6 @@ fig:rmdja-templates
 fig:build-pane1-1
 fig:build-pane1-2
 eq:binom
-lem:borelcantelli
-thm:theorem1
 fig:includegraphic-example
 fig:plot-sample
 tab:display-dataframe-kable

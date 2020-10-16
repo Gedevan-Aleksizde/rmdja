@@ -317,27 +317,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>余白が見開きを想定したものでなくなる</li>
 </ul>
 <p>など些細である. 実際のところ, 文書テンプレートの設定を少しいじっている程度のことしかしていない. テンプレートを開いて確認すればわかるように,</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb62-1"><a href="wip-卒業論文の作成.html#cb62-1"></a><span class="fu">output</span><span class="kw">:</span></span>
-<span id="cb62-2"><a href="wip-卒業論文の作成.html#cb62-2"></a><span class="at">  rmdja:</span><span class="fu">:pdf_book_ja</span><span class="kw">:</span></span>
-<span id="cb62-3"><a href="wip-卒業論文の作成.html#cb62-3"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
-<span id="cb62-4"><a href="wip-卒業論文の作成.html#cb62-4"></a><span class="at">    </span><span class="fu">pandoc_args</span><span class="kw">:</span></span>
-<span id="cb62-5"><a href="wip-卒業論文の作成.html#cb62-5"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;--top-level-division=section&#39;</span></span>
-<span id="cb62-6"><a href="wip-卒業論文の作成.html#cb62-6"></a><span class="fu">documentclass</span><span class="kw">:</span><span class="at"> bxjsarticle</span></span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb61-1"><a href="wip-卒業論文の作成.html#cb61-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb61-2"><a href="wip-卒業論文の作成.html#cb61-2"></a><span class="at">  rmdja:</span><span class="fu">:pdf_book_ja</span><span class="kw">:</span></span>
+<span id="cb61-3"><a href="wip-卒業論文の作成.html#cb61-3"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb61-4"><a href="wip-卒業論文の作成.html#cb61-4"></a><span class="at">    </span><span class="fu">pandoc_args</span><span class="kw">:</span></span>
+<span id="cb61-5"><a href="wip-卒業論文の作成.html#cb61-5"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;--top-level-division=section&#39;</span></span>
+<span id="cb61-6"><a href="wip-卒業論文の作成.html#cb61-6"></a><span class="fu">documentclass</span><span class="kw">:</span><span class="at"> bxjsarticle</span></span></code></pre></div>
 <p>という設定を追加しているだけである<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a>.</p>
 <p>大学によっては論文の体裁が細かく指定されている場合もあるかもしれない. 例えば1ページあたりの行数や, 1行あたりの文字数とか. 例えば1ページあたり50行, 1行あたり40字とする場合, 以下のような設定を追加する. ただし, 行数は図表の挿入などで変動するし, プロポーショナルフォントや字幅の異なる欧文を多用すれば1行あたりの文字数は多くなりうる.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb63-1"><a href="wip-卒業論文の作成.html#cb63-1"></a><span class="fu">classoptions</span><span class="kw">:</span></span>
-<span id="cb63-2"><a href="wip-卒業論文の作成.html#cb63-2"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;number-of-lines=50&#39;</span></span>
-<span id="cb63-3"><a href="wip-卒業論文の作成.html#cb63-3"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;textwidth=40zw&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb62-1"><a href="wip-卒業論文の作成.html#cb62-1"></a><span class="fu">classoptions</span><span class="kw">:</span></span>
+<span id="cb62-2"><a href="wip-卒業論文の作成.html#cb62-2"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;number-of-lines=50&#39;</span></span>
+<span id="cb62-3"><a href="wip-卒業論文の作成.html#cb62-3"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;textwidth=40zw&#39;</span></span></code></pre></div>
 <p>さらに, カラー印刷が許容されない場合もある. <code>ggplot2</code> は <code>scale_*_grey()</code> などでカラーパレットを簡単に変更できる (図 <a href="wip-卒業論文の作成.html#fig:plot-grey-scale">15.1</a>).</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb64-1"><a href="wip-卒業論文の作成.html#cb64-1"></a><span class="kw">ggplot</span>(</span>
-<span id="cb64-2"><a href="wip-卒業論文の作成.html#cb64-2"></a>  <span class="kw">mutate</span>(mtcars, <span class="dt">cyl =</span> <span class="kw">factor</span>(cyl)),</span>
-<span id="cb64-3"><a href="wip-卒業論文の作成.html#cb64-3"></a>  <span class="kw">aes</span>(<span class="dt">x =</span> mpg, <span class="dt">y =</span> wt, <span class="dt">color =</span> cyl)</span>
-<span id="cb64-4"><a href="wip-卒業論文の作成.html#cb64-4"></a>) <span class="op">+</span></span>
-<span id="cb64-5"><a href="wip-卒業論文の作成.html#cb64-5"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
-<span id="cb64-6"><a href="wip-卒業論文の作成.html#cb64-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;マイル毎米ガロン&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;重量 (1000ポンド)&quot;</span>) <span class="op">+</span></span>
-<span id="cb64-7"><a href="wip-卒業論文の作成.html#cb64-7"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
-<span id="cb64-8"><a href="wip-卒業論文の作成.html#cb64-8"></a><span class="st">  </span><span class="kw">scale_color_grey</span>() <span class="op">+</span></span>
-<span id="cb64-9"><a href="wip-卒業論文の作成.html#cb64-9"></a><span class="st">  </span><span class="kw">scale_fill_grey</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb63-1"><a href="wip-卒業論文の作成.html#cb63-1"></a><span class="kw">ggplot</span>(</span>
+<span id="cb63-2"><a href="wip-卒業論文の作成.html#cb63-2"></a>  <span class="kw">mutate</span>(mtcars, <span class="dt">cyl =</span> <span class="kw">factor</span>(cyl)),</span>
+<span id="cb63-3"><a href="wip-卒業論文の作成.html#cb63-3"></a>  <span class="kw">aes</span>(<span class="dt">x =</span> mpg, <span class="dt">y =</span> wt, <span class="dt">color =</span> cyl)</span>
+<span id="cb63-4"><a href="wip-卒業論文の作成.html#cb63-4"></a>) <span class="op">+</span></span>
+<span id="cb63-5"><a href="wip-卒業論文の作成.html#cb63-5"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb63-6"><a href="wip-卒業論文の作成.html#cb63-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;マイル毎米ガロン&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;重量 (1000ポンド)&quot;</span>) <span class="op">+</span></span>
+<span id="cb63-7"><a href="wip-卒業論文の作成.html#cb63-7"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
+<span id="cb63-8"><a href="wip-卒業論文の作成.html#cb63-8"></a><span class="st">  </span><span class="kw">scale_color_grey</span>() <span class="op">+</span></span>
+<span id="cb63-9"><a href="wip-卒業論文の作成.html#cb63-9"></a><span class="st">  </span><span class="kw">scale_fill_grey</span>()</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:plot-grey-scale"></span>
 <img src="rmdja_files/figure-html/plot-grey-scale-1.png" alt="グレースケールでのプロット"  />
 <p class="caption">

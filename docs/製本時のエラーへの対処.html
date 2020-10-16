@@ -334,14 +334,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p><code>output:</code> には bookdown::gitbook など, <code>bookdown</code> で提供されているフォーマット関数を指定しており, その配下に記入するのはフォーマット関数に与える引数である. よって, 関数ヘルプを確認すれば有効な引数を知ることができる. しかし一方で, <code>...</code> が引数になっていることがあるので, タイプミスしてもエラーが出ないことがある.</p>
 <p>また, YAMLの構文でサポートされている配列は誤評価を引き起こすことがある.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb67-1"><a href="製本時のエラーへの対処.html#cb67-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb67-2"><a href="製本時のエラーへの対処.html#cb67-2"></a><span class="at">  bookdown:</span><span class="fu">:gitbook</span><span class="kw">:</span></span>
+<span id="cb67-3"><a href="製本時のエラーへの対処.html#cb67-3"></a><span class="at">    </span><span class="fu">toc_depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
+<span id="cb67-4"><a href="製本時のエラーへの対処.html#cb67-4"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
 <div class="sourceCode" id="cb68"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb68-1"><a href="製本時のエラーへの対処.html#cb68-1"></a><span class="fu">output</span><span class="kw">:</span></span>
 <span id="cb68-2"><a href="製本時のエラーへの対処.html#cb68-2"></a><span class="at">  bookdown:</span><span class="fu">:gitbook</span><span class="kw">:</span></span>
-<span id="cb68-3"><a href="製本時のエラーへの対処.html#cb68-3"></a><span class="at">    </span><span class="fu">toc_depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
-<span id="cb68-4"><a href="製本時のエラーへの対処.html#cb68-4"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
-<div class="sourceCode" id="cb69"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb69-1"><a href="製本時のエラーへの対処.html#cb69-1"></a><span class="fu">output</span><span class="kw">:</span></span>
-<span id="cb69-2"><a href="製本時のエラーへの対処.html#cb69-2"></a><span class="at">  bookdown:</span><span class="fu">:gitbook</span><span class="kw">:</span></span>
-<span id="cb69-3"><a href="製本時のエラーへの対処.html#cb69-3"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">toc_depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
-<span id="cb69-4"><a href="製本時のエラーへの対処.html#cb69-4"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
+<span id="cb68-3"><a href="製本時のエラーへの対処.html#cb68-3"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">toc_depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
+<span id="cb68-4"><a href="製本時のエラーへの対処.html#cb68-4"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
 <p>上の例は正しい記法である. 一方でハイフン <code>-</code> は YAML では配列を記述するために用意されている. 下記の場合, キーワード引数ではなく位置引数のような扱いになるため, <code>toc</code> に対して <code>3</code> を代入することになり, エラーが発生する. 逆に言えば, <code>-</code> を使う場合, キーワードを書かずに値だけを正しい順番で書けば機能する.</p>
 <p>インデントしないトップレベルの引数は, 基本的に <code>pandoc</code> に与える引数である. これ意味のない引数を与えてもエラーを返さないことが多いので, タイプミスに注意する.</p>
 <p>しかし, フォーマット関数に <code>pandoc_args</code> という構文をサポートしていることや, フォーマット関数で <code>pandoc</code> の同名の引数を上書きする仕様のフォーマットもあるため, 上記は絶対ではない. これが原因で, 「<code>output:</code> 以下に書くべきものを間違えてトップレベルに書いたが, 意図したとおりに機能した」あるいはその逆が発生することがある. また, <strong><code>pandoc</code> の構文ではキーワードにハイフンを使うことができる</strong>が, フォーマットはRの関数でもあるため, ハイフンを使えず, アンダースコアで置き換えられる. この違いも書き間違えの原因になる.</p>

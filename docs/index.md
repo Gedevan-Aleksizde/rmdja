@@ -238,15 +238,11 @@ remotes::install_github("rstudio/bookdown")
 
 3種類のテンプレートのうち, `pdf book in Japanese` のみ, 文書のビルドのための下準備が追加で必要になるため, その方法を解説する. それ以外は第 \@ref(#quick-start) 節で書いたように "knit" ボタンを押すだけで良い.
 
-最低限のファイルやパッケージで動くほうのデモ用ディレクトリをコピーする
+最低限のファイルやパッケージで動くほうのデモ用ディレクトリをコピーする. ただし, `tidyverse` と `kableExtra` のインストールも必要である.
 
 
 ```{.r .numberLines .lineAnchors}
 file.copy(system.file("resources/examples/bookdown-minimal", package = "rmdja"), "./", recursive = T)
-```
-
-```
-[1] TRUE
 ```
 
 ## 書籍形式のビルド操作
@@ -587,7 +583,7 @@ require(tidyverse)
 ```
 
 ```
-Loading required package: tidyverse
+ 要求されたパッケージ tidyverse をロード中です 
 ```
 
 ```
@@ -613,7 +609,7 @@ require(ggthemes)
 ```
 
 ```
-Loading required package: ggthemes
+ 要求されたパッケージ ggthemes をロード中です 
 ```
 
 ```{.r .numberLines .lineAnchors}
@@ -621,7 +617,7 @@ require(equatiomatic)
 ```
 
 ```
-Loading required package: equatiomatic
+ 要求されたパッケージ equatiomatic をロード中です 
 ```
 
 ```{.r .numberLines .lineAnchors}
@@ -1353,8 +1349,8 @@ DiagrammeR::grViz("digraph {
 ```
 
 <div class="figure" style="text-align: center">
-<!--html_preserve--><div id="htmlwidget-e7150a668fb13602fe8a" style="width:672px;height:500px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e7150a668fb13602fe8a">{"x":{"diagram":"digraph {\n  graph [layout = dot, rankdir = TB]\n  \n  node [shape = rectangle]        \n  rec1 [label = \"Step 1. 起床する\"]\n  rec2 [label = \"Step 2. コードを書く\"]\n  rec3 [label =  \"Step 3. ???\"]\n  rec4 [label = \"Step 4. 給料をもらう\"]\n  \n  # edge definitions with the node IDs\n  rec1 -> rec2 -> rec3 -> rec4\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
+<!--html_preserve--><div id="htmlwidget-126443040a9c324c98aa" style="width:672px;height:500px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-126443040a9c324c98aa">{"x":{"diagram":"digraph {\n  graph [layout = dot, rankdir = TB]\n  \n  node [shape = rectangle]        \n  rec1 [label = \"Step 1. 起床する\"]\n  rec2 [label = \"Step 2. コードを書く\"]\n  rec3 [label =  \"Step 3. ???\"]\n  rec4 [label = \"Step 4. 給料をもらう\"]\n  \n  # edge definitions with the node IDs\n  rec1 -> rec2 -> rec3 -> rec4\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
 <p class="caption">(\#fig:diagrammer-graph)(ref:diagrammer-cap)</p>
 </div>
 
@@ -1375,7 +1371,7 @@ require(stargazer)
 ```
 
 ```
-Loading required package: stargazer
+ 要求されたパッケージ stargazer をロード中です 
 ```
 
 ```
