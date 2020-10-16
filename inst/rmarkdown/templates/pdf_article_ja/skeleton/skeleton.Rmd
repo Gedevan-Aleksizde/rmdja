@@ -4,7 +4,6 @@ date: "`r Sys.Date()`"
 author: "RMDJA太郎"
 abstract: "`rmdja` パッケージは, `rmarkdown` および `bookdown` パッケージで自然なレイアウトの日本語文書を作成する際に必要な煩雑な設定を自動で行い, ユーザーの負担を軽減するために作成されたパッケージである."
 output:
-  # bookdown::pdf_document2:
   rmdja::pdf_book_ja:
     latex_engine: xelatex
     toc: false
@@ -59,7 +58,9 @@ require(tidyverse)
 ```{r plot, fig.cap="データのプロット"}
 ggplot(mutate(mtcars, cyl = factor(cyl)),
        aes(x = mpg, y = wt, color = cyl)) +
-  geom_point() + labs(x = "マイル毎米ガロン", y = "重量 (1000ポンド)")
+  geom_point() + labs(x = "マイル毎米ガロン", y = "重量 (1000ポンド)") +
+  theme_bw(base_family = "Noto Sans CJK JP") +
+  scale_color_grey() + scale_fill_grey()
 ```
 
 # 結論 {#conclusions}

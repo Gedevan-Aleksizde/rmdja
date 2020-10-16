@@ -1,6 +1,7 @@
 ---
 title: "無題"
 date: "`r Sys.Date()`"
+author: "RMDJA太郎"
 output:
   rmdja::beamer_presentation_ja:
     latex_engine: xelatex

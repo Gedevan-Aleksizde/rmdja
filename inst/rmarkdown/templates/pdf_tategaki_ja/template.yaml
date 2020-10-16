@@ -1,5 +1,5 @@
-name: pdf book in Japanese 
+name: pdf vartical writing in Japanese 
 description: >
-  PDF bookdown with Japanese typesetting presets
+  PDF bookdown with Japanese vertical writing typesetting presets
   IF you want to use (u)pBibTeX, PDF output requires standalone TeX installation (MacTeX on Mac, Tex Live on Windows & Linux)
 create_dir: false

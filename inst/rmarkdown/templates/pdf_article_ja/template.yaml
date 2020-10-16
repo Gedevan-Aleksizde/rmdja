@@ -1,5 +1,5 @@
 name: pdf article in Japanese 
 description: >
-  PDF bookdown with Japanese typesettimg presets with bxjsarticle class
+  PDF bookdown with Japanese typesetting presets with bxjsarticle class
   IF you want to use (u)pBibTeX, PDF output requires standalone TeX installation (MacTeX on Mac, Tex Live on Windows & Linux)
 create_dir: false
