@@ -19,7 +19,7 @@ Customized R Markdown/Bookdown format functions for Japanese users
 # インストールから使用まで
 
 1. 後述の必要なパッケージや外部プログラムをインストールする
-2. このパッケージをインストールする (`remotes` パッケージが必要です)
+2. このパッケージをインストールする (`remotes` パッケージを使うのが簡単です)
 ```
 remotes::install_github('Gedevan-Aleksizde/rmdja', repos = NULL, type = "source")
 ```
