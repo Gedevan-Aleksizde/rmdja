@@ -17,14 +17,20 @@ Customized R Markdown/Bookdown format functions for Japanese users
 # 使い方
 
 1. 後述の必要なパッケージや外部プログラムをインストールする
-2. このパッケージをインストールする 
+2. このパッケージをインストールする (`remotes` パッケージが必要です)
 ```
-remotes::install_github('Gedevan-Aleksizde/rmdja', type = "source", repos = NULL)
+remotes::install_github('Gedevan-Aleksizde/rmdja', repos = NULL, type = "source")
 ```
 特定のバージョンをインストールする場合は, 以下のようにして指定できます.
 ```
-remotes::install_github('Gedevan-Aleksizde/rmdja', ref="v0.4")
+remotes::install_github('Gedevan-Aleksizde/rmdja', ref="v0.4", repos = NULL, type = "source")
 ```
+または以下のような記法も可能です
+```
+remotes::install_github('Gedevan-Aleksizde/rmdja@v0.4', repos = NULL, type = "source")
+```
+リリース一覧からダウンロードしたアーカイブファイルからインストールすることもできます.
+
 3. 新規作成時に [R Markdown] -> [From Template] -> `{rmdja}` のテンプレートのいずれかを選択します  
 ![select templete](inst/resources/img/readme-selection.png)
   + または最初は [`examples/beamer`](inst/resources/examples/beamer/) の `beamer_blank.Rmd` か `examples/beamer_xelatex_{使用しているOS名}.Rmd` をコピーして使ってみてください
