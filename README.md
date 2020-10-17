@@ -9,11 +9,6 @@ Customized R Markdown/Bookdown format functions for Japanese users
 * XeLaTeXまたはLuaLaTeXでのタイプセットを前提にしています
   + それぞれ `zxjatype`, `luatex-ja`, を利用して和文表示をしています
 
-## 既知の問題点
-
-* `rmarkdown` 2.3 (現時点でのCRAN最新版) では標準グラフィックデバイスのフォントサイズが自動調整されません
-  + 気になる方は[githubリポジトリ](https://github.com/rstudio/rmarkdown) から2.3.2以降をインストールしてください
-
 # 使い方
 
 1. 後述の必要なパッケージや外部プログラムをインストールする
@@ -75,11 +70,10 @@ remove.package("rmdCJK")
 
 ### 最低限必要なもの
 
-R >= 3.6
-R Studio >= 1.3.1056
-
-`rmarkdown` (>= 2.4)
-`bookdown` (>= 0.20.6)
+* R >= 3.6
+* R Studio >= 1.3.1056
+* `rmarkdown` (>= 2.4)
+* `bookdown` (>= 0.20.6)
 
 ### R パッケージ
 
