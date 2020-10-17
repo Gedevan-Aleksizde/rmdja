@@ -9,7 +9,14 @@ Customized R Markdown/Bookdown format functions for Japanese users
 * XeLaTeXまたはLuaLaTeXでのタイプセットを前提にしています
   + それぞれ `zxjatype`, `luatex-ja`, を利用して和文表示をしています
 
-# 使い方
+# 最低限必要なもの
+
+* R >= 3.6
+* R Studio >= 1.3.1056
+* `rmarkdown` (>= 2.4)
+* `bookdown` (>= 0.20.6)
+
+# インストールから使用まで
 
 1. 後述の必要なパッケージや外部プログラムをインストールする
 2. このパッケージをインストールする (`remotes` パッケージが必要です)
@@ -66,43 +73,19 @@ remotes::install_github('Gedevan-Aleksizde/rmdja@v0.4', repos = NULL, type = "so
 remove.package("rmdCJK")
 ```
 
-## 要件
+# 用途によっては追加インストールが必要なもの
 
-### 最低限必要なもの
+## (u)pBibTeX を使用したい場合
 
-* R >= 3.6
-* R Studio >= 1.3.1056
-* `rmarkdown` (>= 2.4)
-* `bookdown` (>= 0.20.6)
-
-### R パッケージ
-
-最低限必要なのは以下2つです
-
-* `rmarkdown` > 2.4
-でのインストールを推奨します
-  + レイアウトにそこまで神経質でないなら安定版でも大きな問題はありません
-* `bookdown` > 0.20.6
-  + `remotes::install_github("rstudio/bookdown")` でのインストールを推奨します
-  + ソースファイルをサブディレクトリに配置した際の挙動が改善されたバージョンがあったほうが良いです
-
-### 外部プログラム
-
-* TeX Live (>= 2020)
-もし (u)pBibTeX を一切使わない(BibLaTeX や pandoc-citeproc で良い), 参考文献を一切使わないというのであれば**不要**です
-  + upBibTeX を使う必要があるためです
-  + BiBLaTeX または pandoc-citeproc の出力する参考文献で満足している, または参考文献リストを一切使わないのならTeX Live は**不要**です
-  + Mac OS なら MacTeX, Ubuntu なら[公式](https://www.tug.org/texlive/acquire-netinstall.html)から落としてください
-    - Ubuntu は `apt` を**使わず**インストールしたほうが良いです
+* upBibTeX を使って参考文献を出力したい (≒ .bst ファイルを指定したい) 場合, TeX Live のインストールが必要になります. BibLaTeX や pandoc-citeproc で良い, 参考文献を一切使わないというのであれば**不要**です
+* Mac OS なら MacTeX, Ubuntu なら[公式](https://www.tug.org/texlive/acquire-netinstall.html)から落としてください
+  +  Ubuntu は `apt` を**使わず**インストールしたほうが良いです
   + [TeX wiki](https://texwiki.texjp.org/?TeX%20Live)などを参考にしてください
-* [`jecon.bst`](https://github.com/ShiroTakeda/jecon-bst) 
+* [`jecon.bst`](https://github.com/ShiroTakeda/jecon-bst) が役に立つかも知れません
   + 日本語文献リスト用のスタイルファイルです
   + TeX Live にも `jplain.bst`, `jipsj.bst` などの日本語対応スタイルがバンドルされていますが, `jecon.bst` は日本語出力用のオプションが充実しています.
 
-
-# フォントについて
-
-## デフォルトフォント
+## フォントについて
 
 日本語フォントを指定しなかった場合 (`jfontpreset` 未設定, かつ`j~~font`の設定が3つ揃っていない場合), OSを判別して以下のようにデフォルトフォントを決めています. これらは (Linux 以外) OS標準インストールフォントのはずです.
 
@@ -125,17 +108,16 @@ https://www.google.com/get/noto/help/install/
 
 **NOTE**: `monofont`/`jamonofont`はソースコードの掲載に使われます. [M+](http://mix-mplus-ipa.osdn.jp/)や[Ricty](https://rictyfonts.github.io/)などのインストールを推奨します
 
-## 注意事項
+### 注意事項
 
 * 現時点では実際にフォントがインストールされているか判定していません.
 * `XeLaTeX` ではヒラギノフォントのプリセット`hiragino-pro`/`hiragino-pron`は, OS Xにバンドルされていないヒラギノ明朝 W2を必要とします. インストールされていない場合, この設定ではエラーが発生します.
 * WindowsかつLuaLaTeXのとき, `\jfontspec` でフォント変更する歳, Noto Serif CJK JP が読み込めないことがあります (原因調査中)
+* LuaLaTeX ではフォントが常にゴシック体になります, また, 一部のフォントプリセットが正しく認識されないことがあります (詳細は公式ドキュメントを参照してください)
 
+## サンプルの内容を再現したい場合
 
-# サンプル
-
-[`examples/`](inst/resources/examples/beamer/) 以下に用例が存在します.
-
+[`examples/`](inst/resources/examples/beamer/) 以下に用例がいくつか存在します.
 
 * `beamer_xelate.Rmd`
 * `beamer_lualatex.Rmd`
