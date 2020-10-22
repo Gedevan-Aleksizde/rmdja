@@ -209,4 +209,14 @@ ggplot(mtcars, aes('wt', 'mpg', color='factor(gear)')
 
 現状ではmatplotlibの標準出力や警告も表示されてしまうため, チャンクオプション `results='hide', warning=F, message=F` で隠すと良い.
 
-`plotly`, `bokeh` などの `matplotlib` に依存しないモジュールはPDFには対応していないため直接表示できない. 一旦画像を保存して, あらためて画像ファイルを埋め込む必要がある.
+## Python のグラフィックに関する制約
+
+`matplotlib` ベースのグラフィックを出力したい場合, いくつかの制約がある.
+
+* `matplotlib` > 3.2 では R がクラッシュするため, 3.2 を使用する必要
+* `axes` を使用した場合 (`subplot` などが依存), `matplotlib.pyplot.show` の呼び出しと, 次に別のグラフを呼び出す前の `matplotlib.pyplot.close()` が必要
+* `seaborn.FacetGrid` を Cairo デバイスで保存できない ( = フォントのサブセット化処理が複雑になる)
+
+よって, 現状では `matplotlib` エンジンでグラフィックを描くときはなるべく `plotnine` を使ったほうがトラブルが少ない.
+
+また `plotly`, `bokeh` などの `matplotlib` に依存しないモジュールはPDFには対応していないため直接表示できない. 一旦画像を保存して, あらためて画像ファイルを埋め込む必要がある.
