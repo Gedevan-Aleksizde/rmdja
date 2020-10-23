@@ -23,7 +23,6 @@ output:
     fig_crop: true
     fig_caption: true
     citation_package: biblatex
-    citation_options: numbers
     number_sections: false
     slide_level: 2
     incremental: false
@@ -43,6 +42,7 @@ header-includes:
 
 ```{r setup-document, include=F}
 # サンプル引用文献リストを取得する
+dir.create("img")
 file.copy(system.file("resources/bibliography/rmdja.bib", package = "rmdja"), to = "./")
 # options(tinytex.latexmk.emulation = F)
 # 上記は日本語引用文献リストのために必要

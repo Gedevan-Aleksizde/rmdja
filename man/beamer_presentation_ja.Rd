@@ -20,7 +20,7 @@ beamer_presentation_ja(
   out.height = "100\%",
   highlight = "default",
   code_rownumber = FALSE,
-  citation_package = "default",
+  citation_package = "biblatex",
   citation_options = "default",
   figurename = "図",
   tablename = "表",
@@ -38,57 +38,58 @@ beamer_presentation_ja(
 )
 }
 \arguments{
-\item{keep_tex}{logical. 出力時に .tex ファイルを残すかどうか. 経験的にknit時エラーのほとんどは生成された.texファイルに問題があるためデバッグ用に \strong{TRUEを推奨する}. デフォルト: TRUE}
+\item{keep_tex}{logical. 出力時に .tex ファイルを残すかどうか. 経験的にknit時エラーのほとんどは生成された.texファイルに問題があるためデバッグ用に \strong{\code{TRUE}を推奨する}.}
 
-\item{keep_md}{logical. 出力時に .md ファイルを残すかどうか. デフォルト: FALSE}
+\item{keep_md}{logical. 出力時に .md ファイルを残すかどうか.}
 
-\item{theme}{chracter. beamer テーマ. デフォルトは "default"}
+\item{theme}{chracter. beamer テーマ.}
 
 \item{theme_options}{character. テーマオプション. デフォルトはフレームタイトルの下にプログレスバーをつけて, ブロックの背景色を描画するというもの}
 
-\item{fonttheme}{character. フォントテーマ. デフォルトでは数式にローマン体を使う. デフォルト: "default"}
+\item{fonttheme}{character. フォントテーマ. デフォルトでは数式にローマン体を使う.}
 
-\item{colortheme}{character. 色テーマ. デフォルト: "default"}
+\item{colortheme}{character. 色テーマ.}
 
-\item{toc}{logical. 目次をスライド冒頭に出力するかどうか. 白紙フレームになるので見栄えが悪い. examples のように自分で書いたほうが良いと思う. デフォルト: FALSE}
+\item{toc}{logical. 目次をスライド冒頭に出力するかどうか. 白紙フレームになるので見栄えが悪い. examples のように自分で書いたほうが良いと思う.}
 
-\item{fig_width}{numeric. 画像保存時の幅. 単位インチ. デフォルトはbeamerのデフォルト幅と同じ 5.03937}
+\item{fig_width}{numeric. 画像保存時の幅. 単位インチ. デフォルトはbeamerのデフォルト幅と同じ.}
 
-\item{fig_height}{numeric. 画像保存時の高さ. 単位インチ. デフォルトはbeamerのデフォルト高と同じ 3.77953}
+\item{fig_height}{numeric. 画像保存時の高さ. 単位インチ. デフォルトはbeamerのデフォルト高と同じ.}
 
-\item{fig_crop}{logical. pdfcrop を使ってpdf画像の余白を削るかどうか. デフォルト: TRUE}
+\item{fig_crop}{logical. \code{pdfcrop} を使ってpdf画像の余白を削るかどうか.}
 
-\item{fig_caption}{logical. 画像にキャプションを付けるか否か. デフォルト: TRUE}
+\item{fig_caption}{logical. 画像にキャプションを付けるか否か.}
 
-\item{out.width}{character. 画像を貼り付ける際のサイズ. チャンクごとに指定することも可能. デフォルト: "100\%"}
+\item{out.width}{character. 画像を貼り付ける際のサイズ. チャンクごとに指定することも可能.}
 
-\item{highlight}{character. チャンク内のコードのシンタックスハイライトのデザイン. \code{rmarkdown::beamer_presentation} 参照. デフォルト: default}
+\item{highlight}{character. チャンク内のコードのシンタックスハイライトのデザイン. \code{\link[rmarkdown]{beamer_presentation}} 参照.}
 
-\item{code_rownumber}{logical チャンクに行番号を付けるかどうか. デフォルト: FALSE}
+\item{code_rownumber}{logical チャンクに行番号を付けるかどうか.}
 
-\item{citation_package}{character.  本文中の引用トークンに関するパッケージ. デフォルト: default}
+\item{citation_package}{character. 本文中の引用トークンに関するパッケージ. \code{"default"}, \code{"natbib"} or \code{"biblatex"}. \code{"default"} は pandoc-citeproc を, \code{"natbib"} は bibtex を使用する. よって \code{"natbib"} で日本語文献を引用する場合はオプション \code{options(tinytex.latexmk.emulation = F)} が必要. 詳細は \link[=https://gedevan-aleksizde.github.io/rmdja/\%E6\%96\%87\%E7\%8C\%AE\%E5\%BC\%95\%E7\%94\%A8.html#\%E3\%82\%92\%E4\%BD\%BF\%E3\%81\%86]{rmdja の公式ドキュメント} を参照.}
 
-\item{citation_options}{character. \code{citation_package} のオプション. デフォルトの natbib+numbersでは "\link{1}" のような引用トークンが生成される. デフォルト: numbers.}
+\item{citation_options}{character. \code{citation_package} のオプション. \code{"default"}, 空の文字列, \code{NULL} などを指定すると特に何もしない. \code{citation_package = "natbib"} を選んだ場合, \code{"default"} は \code{`numbers`} に書き換えられる.}
 
-\item{figurename}{character. 図X の「図」の部分のテキスト. デフォルト: "図"}
+\item{figurename}{character. 図X の「図」の部分のテキスト.}
 
-\item{tablename}{character. 表Y の「表」の部分のテキスト. デフォルト: "表"}
+\item{tablename}{character. 表Y の「表」の部分のテキスト.}
 
-\item{number_sections}{logical. セクション見出しに番号を付けるかどうか. デフォルト: FALSE}
+\item{number_sections}{logical. セクション見出しに番号を付けるかどうか.}
 
-\item{slide_level}{integer. フレームタイトルに対応する markdown の節レベル. デフォルト: 2. つまり \verb{#} はセクションタイトルで, \verb{##} がフレームタイトルになる}
+\item{slide_level}{integer. フレームタイトルに対応する markdown の節レベル. デフォルト: 2. つまり \verb{#} はセクションタイトルで, \verb{##} がフレームタイトルになる.}
 
-\item{incremental}{logical. 箇条書きが順番に現れるやつ. 文字が回転するアニメーション機能はない. デフォルト: FALSE『...遠慮のないマッポ関係者が失笑した。ナムサン！プレゼンテーションにおける典型的なセンスレス文字操作だ。』--- B. ボンド& F. モーゼズ}
+\item{incremental}{logical. 箇条書きが順番に現れるやつ. 文字が回転するアニメーション機能はない.
+『...遠慮のないマッポ関係者が失笑した。ナムサン！プレゼンテーションにおける典型的なセンスレス文字操作だ。』--- B. ボンド& F. モーゼズ}
 
-\item{self_contained}{logical. (TRUE) LaTeX のプリアンブルも生成する, (FALSE)本文のみ生成する. デフォルト: TRUE}
+\item{self_contained}{logical. tex ファイルのプリアンブルも生成するかどうか. texソースを手動で書き換えたいのでない限り \code{TRUE}.}
 
-\item{includes}{named list. texファイルに追加するファイルパス. \code{in_header}, \code{before_body}, \code{after_body}, にはファイルパス, \code{preamble} は \code{document} 環境直前のプリアンブル記述をインラインで書くことができる. 詳細は \code{rmarkdown::includes} 参照. デフォルト: NULL}
+\item{includes}{named list. texファイルに追加するファイルパス. \code{"in_header"}, \code{"before_body"}, \code{"after_body"}, にはファイルパス, \code{"preamble"} は \code{document} 環境直前のプリアンブル記述をインラインで書くことができる. 詳細は \code{\link[rmarkdown]{includes}} 参照.}
 
-\item{latex_engine}{character. LaTeXエンジンの指定. \code{xelatex} または \code{lualatex} を想定. \code{pdflatex} は現状\strong{非推奨}. デフォルト: xelatex}
+\item{latex_engine}{character. LaTeXエンジンの指定. \code{xelatex} または \code{lualatex} を想定. \code{pdflatex}での日本語表示は\strong{サポートしていない}.}
 
-\item{dev}{character. グラフィックデバイス. 日本語を使う限りデフォルト値から変更する意義はほぼない. デフォルト: cairo_pdf}
+\item{dev}{character. グラフィックデバイス. 日本語を使う限りデフォルト値から変更する利点はほぼない. ただし Mac のみ \code{"quartz"} の選択も考慮する余地がある.}
 
-\item{template}{character. ユーザー定義のpandocテンプレートを使いたい場合はパスを指定する. デフォルト: default}
+\item{template}{character. ユーザー定義のpandocテンプレートを使いたい場合はパスを指定する.}
 
 \item{md_extensions}{Markdown extensions to be added or removed from the
 default definition or R Markdown. See the \code{\link[rmarkdown]{rmarkdown_format}} for
@@ -96,21 +97,28 @@ additional details.}
 
 \item{pandoc_args}{Additional command line options to pass to pandoc}
 
-\item{opts_chunk}{named list. Rmdファイルのチャンク内で \code{knitr::opts_chunk$set(...)} で記入するものと同じ. 画像サイズなどチャンク出力の設定がbeamer向けになるようデフォルト値を変更している 主なデフォルト: list(message = FALSE, echo = FALSE, comment = NA, fig.align = "center")}
+\item{opts_chunk}{named list. Rmdファイルのチャンク内で \code{knitr::opts_chunk$set(...)} で記入するものと同じ. 画像サイズなどチャンク出力の設定がbeamer向けになるようデフォルト値を変更している 多くの場合は次のように設定される: \code{list(message = FALSE, echo = FALSE, comment = NA, fig.align = "center")}}
 
-\item{out.heigt}{character. \code{out.height} 参照. デフォルト: "100\%"}
+\item{out.heigt}{character. \code{out.height} 参照.}
 
-\item{md_extensions.}{named_list. pandoc 変換の際にmdフォーマットに付けるオプション. 詳細は \code{rmarkdown::rmarkdown_format} 参照. デフォルト: NULL}
+\item{md_extensions.}{named_list. pandoc 変換の際にmdフォーマットに付けるオプション. 詳細は \code{\link[rmarkdown]{rmarkdown_format}} 参照.}
 
-\item{pandoc_args.}{named list. pandoc に渡す引数. yamlヘッダのトップレベルに概ね対応する. 詳細は \code{rmarkdown::pdf_document}, \code{rmarkdown::rmd_metadata} や pandoc の公式ドキュメント参照. デフォルト: NULL}
+\item{pandoc_args.}{named list. pandoc に渡す引数. yamlヘッダのトップレベルに概ね対応する. 詳細は \code{\link[rmarkdown]{pdf_document}}, \code{\link[rmarkdown]{rmd_metadata}} や pandoc の公式ドキュメント参照.}
 }
 \value{
-rmarkdown_output_format
+\code{rmarkdown_output_format} class
 }
 \description{
-rmarkdownで \LaTeX を使う場合, 日本語を適切に表示するためにいろいろ必要だった調整を済ませたフォーマット
-基本的なオプションだけに限定することで簡単にポンチ絵スライドになってしまうことを回避する画期的な機能もあります
+rmarkdown::beamer_presentation wrapper format for Japanese typesetting with XeLaTeX or LuaLaTeX / XeLaTeX または LuaLaTeX で \code{beamer_presentation} で日本語タイプセットをするためのラッパフォーマット.
 }
 \details{
-XeLaTeX + beamer + XeCJK
+beamer presentation format for Japanese typesetting with XeLaTeX or LuaLaTeX
+
+rmarkdownで \LaTeX を使う場合, 日本語を適切に表示するためにいろいろ必要だった調整を済ませたフォーマット
+基本的なオプションだけに限定することで簡単にポンチ絵スライドになってしまうことを回避する画期的な機能もあります.
 }
+\seealso{
+Other pdf formats: 
+\code{\link{pdf_book_ja}()}
+}
+\concept{pdf formats}

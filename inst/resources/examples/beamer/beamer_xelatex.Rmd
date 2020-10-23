@@ -23,7 +23,6 @@ output:
     fig_crop: true
     fig_caption: true
     citation_package: biblatex
-    citation_options: numbers
     number_sections: false
     slide_level: 2
     incremental: false

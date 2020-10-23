@@ -1,41 +1,44 @@
-#' XeLaTeX + beamer + XeCJK 
+#' beamer presentation format for Japanese typesetting with XeLaTeX or LuaLaTeX
 #'
 #' @inheritParams rmarkdown::beamer_presentation
+#' @family pdf formats
 #' @title R Markdown 上で XeLaTeX を使い日本語 beamer スライドを作成するフォーマット
-#' @description  rmarkdownで \LaTeX を使う場合, 日本語を適切に表示するためにいろいろ必要だった調整を済ませたフォーマット
-#' 基本的なオプションだけに限定することで簡単にポンチ絵スライドになってしまうことを回避する画期的な機能もあります
+#' @description rmarkdown::beamer_presentation wrapper format for Japanese typesetting with XeLaTeX or LuaLaTeX / XeLaTeX または LuaLaTeX で `beamer_presentation` で日本語タイプセットをするためのラッパフォーマット.
+#' @details rmarkdownで \LaTeX を使う場合, 日本語を適切に表示するためにいろいろ必要だった調整を済ませたフォーマット
+#' 基本的なオプションだけに限定することで簡単にポンチ絵スライドになってしまうことを回避する画期的な機能もあります.
 #' 
-#' @param keep_tex logical. 出力時に .tex ファイルを残すかどうか. 経験的にknit時エラーのほとんどは生成された.texファイルに問題があるためデバッグ用に **TRUEを推奨する**. デフォルト: TRUE
-#' @param keep_md logical. 出力時に .md ファイルを残すかどうか. デフォルト: FALSE
-#' @param theme chracter. beamer テーマ. デフォルトは "default"
+#' @param keep_tex logical. 出力時に .tex ファイルを残すかどうか. 経験的にknit時エラーのほとんどは生成された.texファイルに問題があるためデバッグ用に **\code{TRUE}を推奨する**. 
+#' @param keep_md logical. 出力時に .md ファイルを残すかどうか. 
+#' @param theme chracter. beamer テーマ. 
 #' @param theme_options character. テーマオプション. デフォルトはフレームタイトルの下にプログレスバーをつけて, ブロックの背景色を描画するというもの
-#' @param fonttheme character. フォントテーマ. デフォルトでは数式にローマン体を使う. デフォルト: "default"
-#' @param colortheme character. 色テーマ. デフォルト: "default"
-#' @param toc logical. 目次をスライド冒頭に出力するかどうか. 白紙フレームになるので見栄えが悪い. examples のように自分で書いたほうが良いと思う. デフォルト: FALSE
-#' @param fig_width numeric. 画像保存時の幅. 単位インチ. デフォルトはbeamerのデフォルト幅と同じ 5.03937
-#' @param fig_height numeric. 画像保存時の高さ. 単位インチ. デフォルトはbeamerのデフォルト高と同じ 3.77953
-#' @param fig_caption logical. 画像にキャプションを付けるか否か. デフォルト: TRUE
-#' @param fig_crop logical. pdfcrop を使ってpdf画像の余白を削るかどうか. デフォルト: TRUE
-#' @param out.width character. 画像を貼り付ける際のサイズ. チャンクごとに指定することも可能. デフォルト: "100%"
-#' @param out.heigt character. `out.height` 参照. デフォルト: "100%"
-#' @param highlight character. チャンク内のコードのシンタックスハイライトのデザイン. `rmarkdown::beamer_presentation` 参照. デフォルト: default
-#' @param code_rownumber logical チャンクに行番号を付けるかどうか. デフォルト: FALSE
-#' @param citation_package character.  本文中の引用トークンに関するパッケージ. デフォルト: default
-#' @param citation_options character. `citation_package` のオプション. デフォルトの natbib+numbersでは "[1]" のような引用トークンが生成される. デフォルト: numbers.
-#' @param figurename character. 図X の「図」の部分のテキスト. デフォルト: "図"
-#' @param tablename character. 表Y の「表」の部分のテキスト. デフォルト: "表"
-#' @param number_sections logical. セクション見出しに番号を付けるかどうか. デフォルト: FALSE
-#' @param slide_level integer. フレームタイトルに対応する markdown の節レベル. デフォルト: 2. つまり `#` はセクションタイトルで, `##` がフレームタイトルになる
-#' @param incremental logical. 箇条書きが順番に現れるやつ. 文字が回転するアニメーション機能はない. デフォルト: FALSE『...遠慮のないマッポ関係者が失笑した。ナムサン！プレゼンテーションにおける典型的なセンスレス文字操作だ。』--- B. ボンド& F. モーゼズ
-#' @param self_contained logical. (TRUE) LaTeX のプリアンブルも生成する, (FALSE)本文のみ生成する. デフォルト: TRUE
-#' @param includes named list. texファイルに追加するファイルパス. `in_header`, `before_body`, `after_body`, にはファイルパス, `preamble` は `document` 環境直前のプリアンブル記述をインラインで書くことができる. 詳細は `rmarkdown::includes` 参照. デフォルト: NULL
-#' @param template character. ユーザー定義のpandocテンプレートを使いたい場合はパスを指定する. デフォルト: default
-#' @param latex_engine character. LaTeXエンジンの指定. `xelatex` または `lualatex` を想定. `pdflatex` は現状**非推奨**. デフォルト: xelatex
-#' @param dev character. グラフィックデバイス. 日本語を使う限りデフォルト値から変更する意義はほぼない. デフォルト: cairo_pdf
-#' @param md_extensions. named_list. pandoc 変換の際にmdフォーマットに付けるオプション. 詳細は `rmarkdown::rmarkdown_format` 参照. デフォルト: NULL
-#' @param pandoc_args. named list. pandoc に渡す引数. yamlヘッダのトップレベルに概ね対応する. 詳細は `rmarkdown::pdf_document`, `rmarkdown::rmd_metadata` や pandoc の公式ドキュメント参照. デフォルト: NULL
-#' @param opts_chunk named list. Rmdファイルのチャンク内で `knitr::opts_chunk$set(...)` で記入するものと同じ. 画像サイズなどチャンク出力の設定がbeamer向けになるようデフォルト値を変更している 主なデフォルト: list(message = FALSE, echo = FALSE, comment = NA, fig.align = "center")
-#' @return rmarkdown_output_format
+#' @param fonttheme character. フォントテーマ. デフォルトでは数式にローマン体を使う.
+#' @param colortheme character. 色テーマ.
+#' @param toc logical. 目次をスライド冒頭に出力するかどうか. 白紙フレームになるので見栄えが悪い. examples のように自分で書いたほうが良いと思う. 
+#' @param fig_width numeric. 画像保存時の幅. 単位インチ. デフォルトはbeamerのデフォルト幅と同じ.
+#' @param fig_height numeric. 画像保存時の高さ. 単位インチ. デフォルトはbeamerのデフォルト高と同じ.
+#' @param fig_caption logical. 画像にキャプションを付けるか否か.
+#' @param fig_crop logical. `pdfcrop` を使ってpdf画像の余白を削るかどうか.
+#' @param out.width character. 画像を貼り付ける際のサイズ. チャンクごとに指定することも可能. 
+#' @param out.heigt character. `out.height` 参照. 
+#' @param highlight character. チャンク内のコードのシンタックスハイライトのデザイン. \code{\link[rmarkdown]{beamer_presentation}} 参照. 
+#' @param code_rownumber logical チャンクに行番号を付けるかどうか. 
+#' @param citation_package character. 本文中の引用トークンに関するパッケージ. \code{"default"}, \code{"natbib"} or \code{"biblatex"}. \code{"default"} は pandoc-citeproc を, \code{"natbib"} は bibtex を使用する. よって \code{"natbib"} で日本語文献を引用する場合はオプション \code{options(tinytex.latexmk.emulation = F)} が必要. 詳細は \link[=https://gedevan-aleksizde.github.io/rmdja/%E6%96%87%E7%8C%AE%E5%BC%95%E7%94%A8.html#%E3%82%92%E4%BD%BF%E3%81%86]{rmdja の公式ドキュメント} を参照.
+#' @param citation_options character. `citation_package` のオプション. `"default"`, 空の文字列, \code{NULL} などを指定すると特に何もしない. \code{citation_package = "natbib"} を選んだ場合, \code{"default"} は \code{`numbers`} に書き換えられる. 
+#' @param figurename character. 図X の「図」の部分のテキスト.
+#' @param tablename character. 表Y の「表」の部分のテキスト.
+#' @param number_sections logical. セクション見出しに番号を付けるかどうか.
+#' @param slide_level integer. フレームタイトルに対応する markdown の節レベル. デフォルト: 2. つまり `#` はセクションタイトルで, `##` がフレームタイトルになる.
+#' @param incremental logical. 箇条書きが順番に現れるやつ. 文字が回転するアニメーション機能はない. 
+#' 『...遠慮のないマッポ関係者が失笑した。ナムサン！プレゼンテーションにおける典型的なセンスレス文字操作だ。』--- B. ボンド& F. モーゼズ
+#' @param self_contained logical. tex ファイルのプリアンブルも生成するかどうか. texソースを手動で書き換えたいのでない限り `TRUE`.
+#' @param includes named list. texファイルに追加するファイルパス. \code{"in_header"}, \code{"before_body"}, \code{"after_body"}, にはファイルパス, \code{"preamble"} は \code{document} 環境直前のプリアンブル記述をインラインで書くことができる. 詳細は \code{\link[rmarkdown]{includes}} 参照.
+#' @param template character. ユーザー定義のpandocテンプレートを使いたい場合はパスを指定する.
+#' @param latex_engine character. LaTeXエンジンの指定. `xelatex` または `lualatex` を想定. `pdflatex`での日本語表示は**サポートしていない**.
+#' @param dev character. グラフィックデバイス. 日本語を使う限りデフォルト値から変更する利点はほぼない. ただし Mac のみ `"quartz"` の選択も考慮する余地がある.
+#' @param md_extensions. named_list. pandoc 変換の際にmdフォーマットに付けるオプション. 詳細は \code{\link[rmarkdown]{rmarkdown_format}} 参照.
+#' @param pandoc_args. named list. pandoc に渡す引数. yamlヘッダのトップレベルに概ね対応する. 詳細は \code{\link[rmarkdown]{pdf_document}}, \code{\link[rmarkdown]{rmd_metadata}} や pandoc の公式ドキュメント参照.
+#' @param opts_chunk named list. Rmdファイルのチャンク内で `knitr::opts_chunk$set(...)` で記入するものと同じ. 画像サイズなどチャンク出力の設定がbeamer向けになるようデフォルト値を変更している 多くの場合は次のように設定される: \code{list(message = FALSE, echo = FALSE, comment = NA, fig.align = "center")}
+#' @return \code{rmarkdown_output_format} class
 
 #' @export
 beamer_presentation_ja <- function(
@@ -54,7 +57,7 @@ beamer_presentation_ja <- function(
   out.height = "100%",
   highlight = "default",
   code_rownumber = FALSE,
-  citation_package = "default",
+  citation_package = "biblatex",
   citation_options = "default",
   figurename = "図",
   tablename = "表",
@@ -83,8 +86,18 @@ beamer_presentation_ja <- function(
     }
   }
   if(identical(citation_package, "natbib")){
+    if(identical(citation_options, "default")){
+      pandoc_args_base <- c(pandoc_args_base, rmarkdown::pandoc_variable_arg("natbiboptions", "numbers"))
+    } else {
+      if(!is.null(citation_options) && !identical(citation_options, "") && !is.na(citation_options)){
+        pandoc_args_base <- c(pandoc_args_base, rmarkdown::pandoc_variable_arg("natbiboptions", citation_options))
+      }
+    }
+  } else if(identical(citation_package, "biblatex")){
     if(!identical(citation_options, "default")){
-      pandoc_args_base <- c(pandoc_args_base, rmarkdown::pandoc_variable_arg("natbiboptions", citation_options))
+      if(!is.null(citation_options) && !identical(citation_options, "") && !is.na(citation_options)){
+        pandoc_args_base <- c(pandoc_args_base, rmarkdown::pandoc_variable_arg("biblatexoptions", citation_options))
+      }
     }
   }
   if(!missing(figurename) || !identical(figurename, "")){
