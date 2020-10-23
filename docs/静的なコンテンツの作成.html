@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3 静的なコンテンツの作成 | rmdja による多様な形式の日本語技術文書の作成</title>
   <meta name="description" content="bookdown でまともな日本語文書を作る資料" />
-  <meta name="generator" content="bookdown 0.20.6 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3 静的なコンテンツの作成 | rmdja による多様な形式の日本語技術文書の作成" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Katagiri, Satoshi (ill-identified)" />
 
 
-<meta name="date" content="2020-10-17" />
+<meta name="date" content="2020-10-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -221,10 +221,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他のプログラム"><i class="fa fa-check"></i><b>8.3</b> (TODO) その他のプログラム</a></li>
 <li class="chapter" data-level="8.4" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他の-r-プログラム"><i class="fa fa-check"></i><b>8.4</b> (TODO) その他の R プログラム</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="表のデザイン.html"><a href="表のデザイン.html"><i class="fa fa-check"></i><b>9</b> 表のデザイン</a>
+<li class="chapter" data-level="9" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html"><i class="fa fa-check"></i><b>9</b> 表のデザイン</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="表のデザイン.html"><a href="表のデザイン.html#texhtml-を出力する関数"><i class="fa fa-check"></i><b>9.1</b> TeX/HTML を出力する関数</a></li>
-<li class="chapter" data-level="9.2" data-path="表のデザイン.html"><a href="表のデザイン.html#todo-gt-パッケージの対応"><i class="fa fa-check"></i><b>9.2</b> (TODO) <code>gt</code> パッケージの対応</a></li>
+<li class="chapter" data-level="9.1" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#texhtml-を出力する関数"><i class="fa fa-check"></i><b>9.1</b> TeX/HTML を出力する関数</a></li>
+<li class="chapter" data-level="9.2" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#kableextra-による表のスタイルのカスタマイズ"><i class="fa fa-check"></i><b>9.2</b> <code>kableExtra</code> による表のスタイルのカスタマイズ</a></li>
+<li class="chapter" data-level="9.3" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#formattable-パッケージとの併用"><i class="fa fa-check"></i><b>9.3</b> <code>formattable</code> パッケージとの併用</a></li>
+<li class="chapter" data-level="9.4" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#huxtable-パッケージによる作表"><i class="fa fa-check"></i><b>9.4</b> <code>huxtable</code> パッケージによる作表</a></li>
+<li class="chapter" data-level="9.5" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#todo-gt-パッケージによる作表"><i class="fa fa-check"></i><b>9.5</b> (TODO) <code>gt</code> パッケージによる作表</a></li>
+<li class="chapter" data-level="9.6" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#その他の作表パッケージ"><i class="fa fa-check"></i><b>9.6</b> その他の作表パッケージ</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="文献引用.html"><a href="文献引用.html"><i class="fa fa-check"></i><b>10</b> 文献引用</a>
 <ul>
@@ -235,43 +239,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.0.1" data-path="webapp.html"><a href="webapp.html#todo-plotly"><i class="fa fa-check"></i><b>11.0.1</b> TODO: plotly</a></li>
 <li class="chapter" data-level="11.0.2" data-path="webapp.html"><a href="webapp.html#todo-shiny"><i class="fa fa-check"></i><b>11.0.2</b> TODO: shiny</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="python.html"><a href="python.html"><i class="fa fa-check"></i><b>12</b> Python スクリプトの埋め込み</a></li>
+<li class="chapter" data-level="12" data-path="python.html"><a href="python.html"><i class="fa fa-check"></i><b>12</b> Python スクリプトの埋め込み</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="python.html"><a href="python.html#python-のグラフィックに関する制約"><i class="fa fa-check"></i><b>12.1</b> Python のグラフィックに関する制約</a></li>
+</ul></li>
 <li class="part"><span><b>V 製本と多様な形式への対応</b></span></li>
-<li class="chapter" data-level="13" data-path="プレゼンテーション資料の作成.html"><a href="プレゼンテーション資料の作成.html"><i class="fa fa-check"></i><b>13</b> プレゼンテーション資料の作成</a></li>
-<li class="chapter" data-level="14" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html"><i class="fa fa-check"></i><b>14</b> PDF の文書クラス</a></li>
-<li class="chapter" data-level="15" data-path="wip-卒業論文の作成.html"><a href="wip-卒業論文の作成.html"><i class="fa fa-check"></i><b>15</b> (WIP) 卒業論文の作成</a></li>
-<li class="chapter" data-level="16" data-path="wip-小説の執筆.html"><a href="wip-小説の執筆.html"><i class="fa fa-check"></i><b>16</b> (WIP) 小説の執筆</a></li>
-<li class="chapter" data-level="17" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html"><i class="fa fa-check"></i><b>17</b> 製本方法の詳細</a>
+<li class="chapter" data-level="13" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html"><i class="fa fa-check"></i><b>13</b> PDF の文書クラス</a>
 <ul>
-<li class="chapter" data-level="17.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#ファイル構成"><i class="fa fa-check"></i><b>17.1</b> ファイル構成</a>
+<li class="chapter" data-level="13.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#プレゼンテーション資料の作成"><i class="fa fa-check"></i><b>13.1</b> プレゼンテーション資料の作成</a>
 <ul>
-<li class="chapter" data-level="17.1.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#output.yml"><i class="fa fa-check"></i><b>17.1.1</b> <code>_output.yml</code></a></li>
-<li class="chapter" data-level="17.1.2" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#bookdown.yml"><i class="fa fa-check"></i><b>17.1.2</b> <code>_bookdown.yml</code></a></li>
+<li class="chapter" data-level="13.1.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#主な設定"><i class="fa fa-check"></i><b>13.1.1</b> 主な設定</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#wip-卒業論文の作成"><i class="fa fa-check"></i><b>13.2</b> (WIP) 卒業論文の作成</a></li>
+<li class="chapter" data-level="13.3" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#wip-小説の執筆"><i class="fa fa-check"></i><b>13.3</b> (WIP) 小説の執筆</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html"><i class="fa fa-check"></i><b>14</b> 製本方法の詳細</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#ファイル構成"><i class="fa fa-check"></i><b>14.1</b> ファイル構成</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#output.yml"><i class="fa fa-check"></i><b>14.1.1</b> <code>_output.yml</code></a></li>
+<li class="chapter" data-level="14.1.2" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#bookdown.yml"><i class="fa fa-check"></i><b>14.1.2</b> <code>_bookdown.yml</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html"><i class="fa fa-check"></i><b>18</b> 出力形式による表現の限界</a>
+<li class="chapter" data-level="15" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html"><i class="fa fa-check"></i><b>15</b> 出力形式による表現の限界</a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#htmlとpdfで処理を場合分けする"><i class="fa fa-check"></i><b>18.1</b> HTMLとPDFで処理を場合分けする</a></li>
-<li class="chapter" data-level="18.2" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#絵文字の出力"><i class="fa fa-check"></i><b>18.2</b> 絵文字の出力</a></li>
-<li class="chapter" data-level="18.3" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#画像の保存形式"><i class="fa fa-check"></i><b>18.3</b> 画像の保存形式</a></li>
-<li class="chapter" data-level="18.4" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#デフォルトの保存形式"><i class="fa fa-check"></i><b>18.4</b> デフォルトの保存形式</a></li>
+<li class="chapter" data-level="15.1" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#htmlとpdfで処理を場合分けする"><i class="fa fa-check"></i><b>15.1</b> HTMLとPDFで処理を場合分けする</a></li>
+<li class="chapter" data-level="15.2" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#絵文字の出力"><i class="fa fa-check"></i><b>15.2</b> 絵文字の出力</a></li>
+<li class="chapter" data-level="15.3" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#画像の保存形式"><i class="fa fa-check"></i><b>15.3</b> 画像の保存形式</a></li>
+<li class="chapter" data-level="15.4" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#デフォルトの保存形式"><i class="fa fa-check"></i><b>15.4</b> デフォルトの保存形式</a></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html"><i class="fa fa-check"></i><b>19</b> 製本した文書を配布する</a>
+<li class="chapter" data-level="16" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html"><i class="fa fa-check"></i><b>16</b> 製本した文書を配布する</a>
 <ul>
-<li class="chapter" data-level="19.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#wepページのホスティング"><i class="fa fa-check"></i><b>19.1</b> Wepページのホスティング</a></li>
-<li class="chapter" data-level="19.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#todo-入稿するには"><i class="fa fa-check"></i><b>19.2</b> TODO: 入稿するには</a>
+<li class="chapter" data-level="16.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#wepページのホスティング"><i class="fa fa-check"></i><b>16.1</b> Wepページのホスティング</a></li>
+<li class="chapter" data-level="16.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#todo-入稿するには"><i class="fa fa-check"></i><b>16.2</b> TODO: 入稿するには</a>
 <ul>
-<li class="chapter" data-level="19.2.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#トンボの表示"><i class="fa fa-check"></i><b>19.2.1</b> トンボの表示</a></li>
-<li class="chapter" data-level="19.2.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#フォントの埋め込み"><i class="fa fa-check"></i><b>19.2.2</b> フォントの埋め込み</a></li>
+<li class="chapter" data-level="16.2.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#トンボの表示"><i class="fa fa-check"></i><b>16.2.1</b> トンボの表示</a></li>
+<li class="chapter" data-level="16.2.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#フォントの埋め込み"><i class="fa fa-check"></i><b>16.2.2</b> フォントの埋め込み</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>VI デバッグ</b></span></li>
 <li class="chapter" data-level="" data-path="このパートで説明すること.html"><a href="このパートで説明すること.html"><i class="fa fa-check"></i>このパートで説明すること</a></li>
-<li class="chapter" data-level="20" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html"><i class="fa fa-check"></i><b>20</b> 製本時のエラーへの対処</a>
+<li class="chapter" data-level="17" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html"><i class="fa fa-check"></i><b>17</b> 製本時のエラーへの対処</a>
 <ul>
-<li class="chapter" data-level="20.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>20.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
-<li class="chapter" data-level="20.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>20.2</b> YAML フロントマターを確認する</a></li>
-<li class="chapter" data-level="20.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-生成時のエラーを確認する"><i class="fa fa-check"></i><b>20.3</b> PDF 生成時のエラーを確認する</a></li>
+<li class="chapter" data-level="17.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>17.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
+<li class="chapter" data-level="17.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>17.2</b> YAML フロントマターを確認する</a></li>
+<li class="chapter" data-level="17.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-生成時のエラーを確認する"><i class="fa fa-check"></i><b>17.3</b> PDF 生成時のエラーを確認する</a></li>
 </ul></li>
 <li class="appendix"><span><b>補遺</b></span></li>
 <li class="chapter" data-level="A" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html"><i class="fa fa-check"></i><b>A</b> デフォルト値の自動調整</a>
@@ -320,19 +332,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">3.1.1</span> インラインでの書式変更</h3>
 <p>テキストの一部のみ書式を変える</p>
 <p>アンダースコアで強調 (イタリック)</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb9-1"><a href="静的なコンテンツの作成.html#cb9-1"></a>_underscore_</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb8-1"><a href="静的なコンテンツの作成.html#cb8-1"></a>_underscore_</span></code></pre></div>
 <p><em>underscore</em></p>
 <p><code>**</code> 2つで太字強調</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb10-1"><a href="静的なコンテンツの作成.html#cb10-1"></a>**太字強調**</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb9-1"><a href="静的なコンテンツの作成.html#cb9-1"></a>**太字強調**</span></code></pre></div>
 <p><strong>太字強調</strong></p>
 <p>等幅フォント</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb11-1"><a href="静的なコンテンツの作成.html#cb11-1"></a><span class="in">`bookdown`</span> と <span class="in">`rmdja`</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb10-1"><a href="静的なコンテンツの作成.html#cb10-1"></a><span class="in">`bookdown`</span> と <span class="in">`rmdja`</span></span></code></pre></div>
 <p><code>bookdown</code> と <code>rmdja</code></p>
 <p>本文中に入力した URL は自動判別され, ハイパーリンクが付けられる. また, <code>[テキスト](URL)</code> という書式で, テキストに対してハイパーリンクを付けることができる.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb12-1"><a href="静的なコンテンツの作成.html#cb12-1"></a></span>
-<span id="cb12-2"><a href="静的なコンテンツの作成.html#cb12-2"></a>URL は自動判別される: https://github.com/Gedevan-Aleksizde/my_latex_templates/tree/master/rmdja</span>
-<span id="cb12-3"><a href="静的なコンテンツの作成.html#cb12-3"></a></span>
-<span id="cb12-4"><a href="静的なコンテンツの作成.html#cb12-4"></a><span class="co">[</span><span class="ot">`rmdja` の github リポジトリ</span><span class="co">](https://github.com/Gedevan-Aleksizde/my_latex_templates/tree/master/rmdja)</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb11-1"><a href="静的なコンテンツの作成.html#cb11-1"></a></span>
+<span id="cb11-2"><a href="静的なコンテンツの作成.html#cb11-2"></a>URL は自動判別される: https://github.com/Gedevan-Aleksizde/my_latex_templates/tree/master/rmdja</span>
+<span id="cb11-3"><a href="静的なコンテンツの作成.html#cb11-3"></a></span>
+<span id="cb11-4"><a href="静的なコンテンツの作成.html#cb11-4"></a><span class="co">[</span><span class="ot">`rmdja` の github リポジトリ</span><span class="co">](https://github.com/Gedevan-Aleksizde/my_latex_templates/tree/master/rmdja)</span></span></code></pre></div>
 <p>URL は自動判別される: <a href="https://github.com/Gedevan-Aleksizde/my_latex_templates/tree/master/rmdja" class="uri">https://github.com/Gedevan-Aleksizde/my_latex_templates/tree/master/rmdja</a></p>
 <p><a href="https://github.com/Gedevan-Aleksizde/my_latex_templates/tree/master/rmdja"><code>rmdja</code> の github リポジトリ</a></p>
 </div>
@@ -340,11 +352,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">3.1.2</span> ブロック要素</h3>
 <p>以降は行内では使えず, <strong>適切に表示するには前後に改行を挟む必要</strong>のあるタイプの構文である.</p>
 <p>まず, 引用ブロックを使えばかっこいいエピグラフを書き放題である.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb13-1"><a href="静的なコンテンツの作成.html#cb13-1"></a><span class="at">&gt; Нужны новые формы. Новые формы нужны, а если их нет, то лучше ничего не нужно.</span></span>
-<span id="cb13-2"><a href="静的なコンテンツの作成.html#cb13-2"></a><span class="at">&gt;</span></span>
-<span id="cb13-3"><a href="静的なコンテンツの作成.html#cb13-3"></a><span class="at">&gt; 新しいフォーマットが必要なんですよ. 新しいフォーマットが. それがないというなら, いっそ何もないほうがいい. </span></span>
-<span id="cb13-4"><a href="静的なコンテンツの作成.html#cb13-4"></a><span class="at">&gt;</span></span>
-<span id="cb13-5"><a href="静的なコンテンツの作成.html#cb13-5"></a><span class="at">&gt; </span><span class="in">`\r tufte::quote_footer(&#39;--- A. チェーホフ『かもめ』&#39;)`</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb12-1"><a href="静的なコンテンツの作成.html#cb12-1"></a><span class="at">&gt; Нужны новые формы. Новые формы нужны, а если их нет, то лучше ничего не нужно.</span></span>
+<span id="cb12-2"><a href="静的なコンテンツの作成.html#cb12-2"></a><span class="at">&gt;</span></span>
+<span id="cb12-3"><a href="静的なコンテンツの作成.html#cb12-3"></a><span class="at">&gt; 新しいフォーマットが必要なんですよ. 新しいフォーマットが. それがないというなら, いっそ何もないほうがいい. </span></span>
+<span id="cb12-4"><a href="静的なコンテンツの作成.html#cb12-4"></a><span class="at">&gt;</span></span>
+<span id="cb12-5"><a href="静的なコンテンツの作成.html#cb12-5"></a><span class="at">&gt; </span><span class="in">`\r tufte::quote_footer(&#39;--- A. チェーホフ『かもめ』&#39;)`</span></span></code></pre></div>
 <blockquote>
 <p>Нужны новые формы. Новые формы нужны, а если их нет, то лучше ничего не нужно.</p>
 <p>新しいフォーマットが必要なんですよ. 新しいフォーマットが. それがないというなら, いっそ何もないほうがいい.</p>
@@ -356,17 +368,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Markdown では <code>#</code> は見出しを意味するが, <code>bookdown</code> にはさらにオプションが用意されている.</p>
 <p><code># 見出し名 {-}</code> で, セクション番号のつかない見出しを用意できる. 序文, 章末の参考文献, 付録のセクションに使えるだろう. さらに, <code>bookdown</code> では <code># (PART) 見出し名</code> で「部」の見出しを作ることができる. この見出しは セクションの合間に挟まるが, 選択することはできない. 文書が長くなったときに, より大きな区切りを付けるのに役に立つだろう. さらに, <code># (APPENDIX) 見出し名 {-}</code> で, 以降の見出しの頭に 「補遺 A, B, C, …」と付番できる.</p>
 <p>箇条書きは以下のように書ける.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb14-1"><a href="静的なコンテンツの作成.html#cb14-1"></a><span class="ss">* </span>iris setosa</span>
-<span id="cb14-2"><a href="静的なコンテンツの作成.html#cb14-2"></a><span class="ss">* </span>iris versicolor</span>
-<span id="cb14-3"><a href="静的なコンテンツの作成.html#cb14-3"></a><span class="ss">* </span>iris virginica</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb13-1"><a href="静的なコンテンツの作成.html#cb13-1"></a><span class="ss">* </span>iris setosa</span>
+<span id="cb13-2"><a href="静的なコンテンツの作成.html#cb13-2"></a><span class="ss">* </span>iris versicolor</span>
+<span id="cb13-3"><a href="静的なコンテンツの作成.html#cb13-3"></a><span class="ss">* </span>iris virginica</span></code></pre></div>
 <ul>
 <li>iris setosa</li>
 <li>iris versicolor</li>
 <li>iris virginica</li>
 </ul>
-<div class="sourceCode" id="cb15"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb15-1"><a href="静的なコンテンツの作成.html#cb15-1"></a><span class="ss">1. </span>iris setosa</span>
-<span id="cb15-2"><a href="静的なコンテンツの作成.html#cb15-2"></a><span class="ss">2. </span>iris versicolor</span>
-<span id="cb15-3"><a href="静的なコンテンツの作成.html#cb15-3"></a><span class="ss">3. </span>iris virginica</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb14-1"><a href="静的なコンテンツの作成.html#cb14-1"></a><span class="ss">1. </span>iris setosa</span>
+<span id="cb14-2"><a href="静的なコンテンツの作成.html#cb14-2"></a><span class="ss">2. </span>iris versicolor</span>
+<span id="cb14-3"><a href="静的なコンテンツの作成.html#cb14-3"></a><span class="ss">3. </span>iris virginica</span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>iris setosa</li>
 <li>iris versicolor</li>
@@ -390,16 +402,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="markdown-を使った図表の挿入" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Markdown を使った図表の挿入</h2>
 <p>markdown は表を記入することもできる.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb16-1"><a href="静的なコンテンツの作成.html#cb16-1"></a><span class="an">Table:</span><span class="co"> Markdown 記法の表</span></span>
-<span id="cb16-2"><a href="静的なコンテンツの作成.html#cb16-2"></a></span>
-<span id="cb16-3"><a href="静的なコンテンツの作成.html#cb16-3"></a> Sepal.Length   Sepal.Width   Petal.Length   Petal.Width</span>
-<span id="cb16-4"><a href="静的なコンテンツの作成.html#cb16-4"></a>-------------  ------------  -------------  ------------</span>
-<span id="cb16-5"><a href="静的なコンテンツの作成.html#cb16-5"></a><span class="in">          5.1           3.5            1.4           0.2</span></span>
-<span id="cb16-6"><a href="静的なコンテンツの作成.html#cb16-6"></a><span class="in">          4.9           3.0            1.4           0.2</span></span>
-<span id="cb16-7"><a href="静的なコンテンツの作成.html#cb16-7"></a><span class="in">          4.7           3.2            1.3           0.2</span></span>
-<span id="cb16-8"><a href="静的なコンテンツの作成.html#cb16-8"></a><span class="in">          4.6           3.1            1.5           0.2</span></span>
-<span id="cb16-9"><a href="静的なコンテンツの作成.html#cb16-9"></a><span class="in">          5.0           3.6            1.4           0.2</span></span>
-<span id="cb16-10"><a href="静的なコンテンツの作成.html#cb16-10"></a><span class="in">          5.4           3.9            1.7           0.4</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb15-1"><a href="静的なコンテンツの作成.html#cb15-1"></a><span class="an">Table:</span><span class="co"> Markdown 記法の表</span></span>
+<span id="cb15-2"><a href="静的なコンテンツの作成.html#cb15-2"></a></span>
+<span id="cb15-3"><a href="静的なコンテンツの作成.html#cb15-3"></a> Sepal.Length   Sepal.Width   Petal.Length   Petal.Width</span>
+<span id="cb15-4"><a href="静的なコンテンツの作成.html#cb15-4"></a>-------------  ------------  -------------  ------------</span>
+<span id="cb15-5"><a href="静的なコンテンツの作成.html#cb15-5"></a><span class="in">          5.1           3.5            1.4           0.2</span></span>
+<span id="cb15-6"><a href="静的なコンテンツの作成.html#cb15-6"></a><span class="in">          4.9           3.0            1.4           0.2</span></span>
+<span id="cb15-7"><a href="静的なコンテンツの作成.html#cb15-7"></a><span class="in">          4.7           3.2            1.3           0.2</span></span>
+<span id="cb15-8"><a href="静的なコンテンツの作成.html#cb15-8"></a><span class="in">          4.6           3.1            1.5           0.2</span></span>
+<span id="cb15-9"><a href="静的なコンテンツの作成.html#cb15-9"></a><span class="in">          5.0           3.6            1.4           0.2</span></span>
+<span id="cb15-10"><a href="静的なコンテンツの作成.html#cb15-10"></a><span class="in">          5.4           3.9            1.7           0.4</span></span></code></pre></div>
 <table>
 <caption>Markdown 記法の表</caption>
 <thead>
@@ -469,10 +481,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>改行を伴う<strong>数式ブロック</strong>は <code>$$</code> で囲む, または <code>\[</code>, <code>\]</code> で囲む.</li>
 <li><code>align</code>, <code>equation</code> 環境等を使う場合は, 上記の記号を<strong>使わず</strong>, 直接 LaTeX コマンド <code>\begin{align}...</code> を打ち込む.</li>
 </ol>
-<div class="sourceCode" id="cb17"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb17-1"><a href="静的なコンテンツの作成.html#cb17-1"></a>\@ref(eq:binom) は二項分布の確率関数である</span>
-<span id="cb17-2"><a href="静的なコンテンツの作成.html#cb17-2"></a>\begin{align}</span>
-<span id="cb17-3"><a href="静的なコンテンツの作成.html#cb17-3"></a>f(k) &amp;= {n \choose k} p^{k} (1-p)^{n-k} (<span class="sc">\#</span>eq:binom)</span>
-<span id="cb17-4"><a href="静的なコンテンツの作成.html#cb17-4"></a>\end{align}</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb16-1"><a href="静的なコンテンツの作成.html#cb16-1"></a>\@ref(eq:binom) は二項分布の確率関数である</span>
+<span id="cb16-2"><a href="静的なコンテンツの作成.html#cb16-2"></a>\begin{align}</span>
+<span id="cb16-3"><a href="静的なコンテンツの作成.html#cb16-3"></a>f(k) &amp;= {n \choose k} p^{k} (1-p)^{n-k} (<span class="sc">\#</span>eq:binom)</span>
+<span id="cb16-4"><a href="静的なコンテンツの作成.html#cb16-4"></a>\end{align}</span></code></pre></div>
 <p>その出力は, 以下のようになる.</p>
 <p><a href="静的なコンテンツの作成.html#eq:binom">(3.1)</a> は二項分布の確率関数である</p>
 <p><span class="math display" id="eq:binom">\[\begin{align}
@@ -549,16 +561,16 @@ f(k) &amp;= {n \choose k} p^{k} (1-p)^{n-k} \tag{3.1}
 <div id="脚注" class="section level2" number="3.5">
 <h2><span class="header-section-number">3.5</span> 脚注</h2>
 <p>脚注はインラインと, 巻末に書く2通りがある.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb18-1"><a href="静的なコンテンツの作成.html#cb18-1"></a>ここにインラインで脚注^<span class="co">[</span><span class="ot">脚注の本文</span><span class="co">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb17-1"><a href="静的なコンテンツの作成.html#cb17-1"></a>ここにインラインで脚注^<span class="co">[</span><span class="ot">脚注の本文</span><span class="co">]</span></span></code></pre></div>
 <p>ここにインラインで脚注<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb19-1"><a href="静的なコンテンツの作成.html#cb19-1"></a>本文は巻末に書く<span class="ot">[^example-1][^example-2]</span>.</span>
-<span id="cb19-2"><a href="静的なコンテンツの作成.html#cb19-2"></a></span>
-<span id="cb19-3"><a href="静的なコンテンツの作成.html#cb19-3"></a><span class="ot">[^example-1]: </span>脚注の本文その2</span>
-<span id="cb19-4"><a href="静的なコンテンツの作成.html#cb19-4"></a><span class="ot">[^example-2]: </span>脚注の本文その2</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb18-1"><a href="静的なコンテンツの作成.html#cb18-1"></a>本文は巻末に書く<span class="ot">[^example-1][^example-2]</span>.</span>
+<span id="cb18-2"><a href="静的なコンテンツの作成.html#cb18-2"></a></span>
+<span id="cb18-3"><a href="静的なコンテンツの作成.html#cb18-3"></a><span class="ot">[^example-1]: </span>脚注の本文その2</span>
+<span id="cb18-4"><a href="静的なコンテンツの作成.html#cb18-4"></a><span class="ot">[^example-2]: </span>脚注の本文その2</span></code></pre></div>
 <p>本文は巻末に書く<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a><a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>.</p>
 <p>ここにインラインで脚注[^脚注の本文]</p>
 <p>インラインで書くほうがシンプルに見えるが, この記法では間を空けずに連続して脚注を書くことができない.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb20-1"><a href="静的なコンテンツの作成.html#cb20-1"></a>このように書くと^<span class="co">[</span><span class="ot">脚注その1</span><span class="co">]</span>^<span class="co">[</span><span class="ot">脚注その2</span><span class="co">]</span>上付きとして認識される</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb19-1"><a href="静的なコンテンツの作成.html#cb19-1"></a>このように書くと^<span class="co">[</span><span class="ot">脚注その1</span><span class="co">]</span>^<span class="co">[</span><span class="ot">脚注その2</span><span class="co">]</span>上付きとして認識される</span></code></pre></div>
 </div>
 </div>
 <div class="footnotes">
@@ -617,7 +629,7 @@ gitbook.start({
 "link": "tree/rmdja/inst/resources/examples/bookdown/chapter/chapters/elemental.Rmd",
 "text": null
 },
-"download": ["rmdja.pdf", "rmdja.epub"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

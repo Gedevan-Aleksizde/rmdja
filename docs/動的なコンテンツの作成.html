@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 動的なコンテンツの作成 | rmdja による多様な形式の日本語技術文書の作成</title>
   <meta name="description" content="bookdown でまともな日本語文書を作る資料" />
-  <meta name="generator" content="bookdown 0.20.6 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 動的なコンテンツの作成 | rmdja による多様な形式の日本語技術文書の作成" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Katagiri, Satoshi (ill-identified)" />
 
 
-<meta name="date" content="2020-10-17" />
+<meta name="date" content="2020-10-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -221,10 +221,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他のプログラム"><i class="fa fa-check"></i><b>8.3</b> (TODO) その他のプログラム</a></li>
 <li class="chapter" data-level="8.4" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他の-r-プログラム"><i class="fa fa-check"></i><b>8.4</b> (TODO) その他の R プログラム</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="表のデザイン.html"><a href="表のデザイン.html"><i class="fa fa-check"></i><b>9</b> 表のデザイン</a>
+<li class="chapter" data-level="9" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html"><i class="fa fa-check"></i><b>9</b> 表のデザイン</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="表のデザイン.html"><a href="表のデザイン.html#texhtml-を出力する関数"><i class="fa fa-check"></i><b>9.1</b> TeX/HTML を出力する関数</a></li>
-<li class="chapter" data-level="9.2" data-path="表のデザイン.html"><a href="表のデザイン.html#todo-gt-パッケージの対応"><i class="fa fa-check"></i><b>9.2</b> (TODO) <code>gt</code> パッケージの対応</a></li>
+<li class="chapter" data-level="9.1" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#texhtml-を出力する関数"><i class="fa fa-check"></i><b>9.1</b> TeX/HTML を出力する関数</a></li>
+<li class="chapter" data-level="9.2" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#kableextra-による表のスタイルのカスタマイズ"><i class="fa fa-check"></i><b>9.2</b> <code>kableExtra</code> による表のスタイルのカスタマイズ</a></li>
+<li class="chapter" data-level="9.3" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#formattable-パッケージとの併用"><i class="fa fa-check"></i><b>9.3</b> <code>formattable</code> パッケージとの併用</a></li>
+<li class="chapter" data-level="9.4" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#huxtable-パッケージによる作表"><i class="fa fa-check"></i><b>9.4</b> <code>huxtable</code> パッケージによる作表</a></li>
+<li class="chapter" data-level="9.5" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#todo-gt-パッケージによる作表"><i class="fa fa-check"></i><b>9.5</b> (TODO) <code>gt</code> パッケージによる作表</a></li>
+<li class="chapter" data-level="9.6" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#その他の作表パッケージ"><i class="fa fa-check"></i><b>9.6</b> その他の作表パッケージ</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="文献引用.html"><a href="文献引用.html"><i class="fa fa-check"></i><b>10</b> 文献引用</a>
 <ul>
@@ -235,43 +239,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.0.1" data-path="webapp.html"><a href="webapp.html#todo-plotly"><i class="fa fa-check"></i><b>11.0.1</b> TODO: plotly</a></li>
 <li class="chapter" data-level="11.0.2" data-path="webapp.html"><a href="webapp.html#todo-shiny"><i class="fa fa-check"></i><b>11.0.2</b> TODO: shiny</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="python.html"><a href="python.html"><i class="fa fa-check"></i><b>12</b> Python スクリプトの埋め込み</a></li>
+<li class="chapter" data-level="12" data-path="python.html"><a href="python.html"><i class="fa fa-check"></i><b>12</b> Python スクリプトの埋め込み</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="python.html"><a href="python.html#python-のグラフィックに関する制約"><i class="fa fa-check"></i><b>12.1</b> Python のグラフィックに関する制約</a></li>
+</ul></li>
 <li class="part"><span><b>V 製本と多様な形式への対応</b></span></li>
-<li class="chapter" data-level="13" data-path="プレゼンテーション資料の作成.html"><a href="プレゼンテーション資料の作成.html"><i class="fa fa-check"></i><b>13</b> プレゼンテーション資料の作成</a></li>
-<li class="chapter" data-level="14" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html"><i class="fa fa-check"></i><b>14</b> PDF の文書クラス</a></li>
-<li class="chapter" data-level="15" data-path="wip-卒業論文の作成.html"><a href="wip-卒業論文の作成.html"><i class="fa fa-check"></i><b>15</b> (WIP) 卒業論文の作成</a></li>
-<li class="chapter" data-level="16" data-path="wip-小説の執筆.html"><a href="wip-小説の執筆.html"><i class="fa fa-check"></i><b>16</b> (WIP) 小説の執筆</a></li>
-<li class="chapter" data-level="17" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html"><i class="fa fa-check"></i><b>17</b> 製本方法の詳細</a>
+<li class="chapter" data-level="13" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html"><i class="fa fa-check"></i><b>13</b> PDF の文書クラス</a>
 <ul>
-<li class="chapter" data-level="17.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#ファイル構成"><i class="fa fa-check"></i><b>17.1</b> ファイル構成</a>
+<li class="chapter" data-level="13.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#プレゼンテーション資料の作成"><i class="fa fa-check"></i><b>13.1</b> プレゼンテーション資料の作成</a>
 <ul>
-<li class="chapter" data-level="17.1.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#output.yml"><i class="fa fa-check"></i><b>17.1.1</b> <code>_output.yml</code></a></li>
-<li class="chapter" data-level="17.1.2" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#bookdown.yml"><i class="fa fa-check"></i><b>17.1.2</b> <code>_bookdown.yml</code></a></li>
+<li class="chapter" data-level="13.1.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#主な設定"><i class="fa fa-check"></i><b>13.1.1</b> 主な設定</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#wip-卒業論文の作成"><i class="fa fa-check"></i><b>13.2</b> (WIP) 卒業論文の作成</a></li>
+<li class="chapter" data-level="13.3" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#wip-小説の執筆"><i class="fa fa-check"></i><b>13.3</b> (WIP) 小説の執筆</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html"><i class="fa fa-check"></i><b>14</b> 製本方法の詳細</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#ファイル構成"><i class="fa fa-check"></i><b>14.1</b> ファイル構成</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#output.yml"><i class="fa fa-check"></i><b>14.1.1</b> <code>_output.yml</code></a></li>
+<li class="chapter" data-level="14.1.2" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#bookdown.yml"><i class="fa fa-check"></i><b>14.1.2</b> <code>_bookdown.yml</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html"><i class="fa fa-check"></i><b>18</b> 出力形式による表現の限界</a>
+<li class="chapter" data-level="15" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html"><i class="fa fa-check"></i><b>15</b> 出力形式による表現の限界</a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#htmlとpdfで処理を場合分けする"><i class="fa fa-check"></i><b>18.1</b> HTMLとPDFで処理を場合分けする</a></li>
-<li class="chapter" data-level="18.2" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#絵文字の出力"><i class="fa fa-check"></i><b>18.2</b> 絵文字の出力</a></li>
-<li class="chapter" data-level="18.3" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#画像の保存形式"><i class="fa fa-check"></i><b>18.3</b> 画像の保存形式</a></li>
-<li class="chapter" data-level="18.4" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#デフォルトの保存形式"><i class="fa fa-check"></i><b>18.4</b> デフォルトの保存形式</a></li>
+<li class="chapter" data-level="15.1" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#htmlとpdfで処理を場合分けする"><i class="fa fa-check"></i><b>15.1</b> HTMLとPDFで処理を場合分けする</a></li>
+<li class="chapter" data-level="15.2" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#絵文字の出力"><i class="fa fa-check"></i><b>15.2</b> 絵文字の出力</a></li>
+<li class="chapter" data-level="15.3" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#画像の保存形式"><i class="fa fa-check"></i><b>15.3</b> 画像の保存形式</a></li>
+<li class="chapter" data-level="15.4" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#デフォルトの保存形式"><i class="fa fa-check"></i><b>15.4</b> デフォルトの保存形式</a></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html"><i class="fa fa-check"></i><b>19</b> 製本した文書を配布する</a>
+<li class="chapter" data-level="16" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html"><i class="fa fa-check"></i><b>16</b> 製本した文書を配布する</a>
 <ul>
-<li class="chapter" data-level="19.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#wepページのホスティング"><i class="fa fa-check"></i><b>19.1</b> Wepページのホスティング</a></li>
-<li class="chapter" data-level="19.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#todo-入稿するには"><i class="fa fa-check"></i><b>19.2</b> TODO: 入稿するには</a>
+<li class="chapter" data-level="16.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#wepページのホスティング"><i class="fa fa-check"></i><b>16.1</b> Wepページのホスティング</a></li>
+<li class="chapter" data-level="16.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#todo-入稿するには"><i class="fa fa-check"></i><b>16.2</b> TODO: 入稿するには</a>
 <ul>
-<li class="chapter" data-level="19.2.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#トンボの表示"><i class="fa fa-check"></i><b>19.2.1</b> トンボの表示</a></li>
-<li class="chapter" data-level="19.2.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#フォントの埋め込み"><i class="fa fa-check"></i><b>19.2.2</b> フォントの埋め込み</a></li>
+<li class="chapter" data-level="16.2.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#トンボの表示"><i class="fa fa-check"></i><b>16.2.1</b> トンボの表示</a></li>
+<li class="chapter" data-level="16.2.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#フォントの埋め込み"><i class="fa fa-check"></i><b>16.2.2</b> フォントの埋め込み</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>VI デバッグ</b></span></li>
 <li class="chapter" data-level="" data-path="このパートで説明すること.html"><a href="このパートで説明すること.html"><i class="fa fa-check"></i>このパートで説明すること</a></li>
-<li class="chapter" data-level="20" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html"><i class="fa fa-check"></i><b>20</b> 製本時のエラーへの対処</a>
+<li class="chapter" data-level="17" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html"><i class="fa fa-check"></i><b>17</b> 製本時のエラーへの対処</a>
 <ul>
-<li class="chapter" data-level="20.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>20.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
-<li class="chapter" data-level="20.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>20.2</b> YAML フロントマターを確認する</a></li>
-<li class="chapter" data-level="20.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-生成時のエラーを確認する"><i class="fa fa-check"></i><b>20.3</b> PDF 生成時のエラーを確認する</a></li>
+<li class="chapter" data-level="17.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>17.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
+<li class="chapter" data-level="17.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>17.2</b> YAML フロントマターを確認する</a></li>
+<li class="chapter" data-level="17.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-生成時のエラーを確認する"><i class="fa fa-check"></i><b>17.3</b> PDF 生成時のエラーを確認する</a></li>
 </ul></li>
 <li class="appendix"><span><b>補遺</b></span></li>
 <li class="chapter" data-level="A" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html"><i class="fa fa-check"></i><b>A</b> デフォルト値の自動調整</a>
@@ -314,28 +326,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">4.1</span> プログラムチャンク</h2>
 <p>プログラムチャンクは, R Markdown 最大の特徴であり, R のソースコードや, その実行結果を Markdown に挿入できる. さらには <strong>R 以外の言語の動作も可能</strong>である. 順番が前後してしまったが, 定理などのカスタムブロックは本来はプログラムを入力するためのチャンクブロックであり, それを静的なテキストコンテンツの挿入に流用しているだけである.</p>
 <p>以降は R で多くのユーザが頻繁に使うパッケージと, いくつかの技術文書作成に役に立つパッケージをインポートしている前提の説明とする. なお, <code>rmarkdown</code>, <code>bookdown</code> はチャンク内で特に読み込む必要がない.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb21-1"><a href="動的なコンテンツの作成.html#cb21-1"></a>pkgs &lt;-<span class="st"> </span><span class="kw">installed.packages</span>()</span>
-<span id="cb21-2"><a href="動的なコンテンツの作成.html#cb21-2"></a><span class="cf">for</span> (p <span class="cf">in</span> <span class="kw">c</span>(<span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;ggthemes&quot;</span>, <span class="st">&quot;equatiomatic&quot;</span>, <span class="st">&quot;tufte&quot;</span>, <span class="st">&quot;kableExtra&quot;</span>)) {</span>
-<span id="cb21-3"><a href="動的なコンテンツの作成.html#cb21-3"></a>  <span class="cf">if</span> (<span class="op">!</span>p <span class="op">%in%</span><span class="st"> </span>pkgs) <span class="kw">install.packages</span>(p)</span>
-<span id="cb21-4"><a href="動的なコンテンツの作成.html#cb21-4"></a>}</span>
-<span id="cb21-5"><a href="動的なコンテンツの作成.html#cb21-5"></a><span class="cf">if</span> (<span class="op">!</span><span class="st">&quot;rmarkdown&quot;</span> <span class="op">%in%</span><span class="st"> </span>pkgs) remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;rstudio/rmarkdown&quot;</span>)</span>
-<span id="cb21-6"><a href="動的なコンテンツの作成.html#cb21-6"></a><span class="cf">if</span> (<span class="op">!</span><span class="st">&quot;bookdown&quot;</span> <span class="op">%in%</span><span class="st"> </span>pkgs) remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;rstudio/bookdown&quot;</span>)</span>
-<span id="cb21-7"><a href="動的なコンテンツの作成.html#cb21-7"></a><span class="kw">require</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb20-1"><a href="動的なコンテンツの作成.html#cb20-1"></a>pkgs &lt;-<span class="st"> </span><span class="kw">installed.packages</span>()</span>
+<span id="cb20-2"><a href="動的なコンテンツの作成.html#cb20-2"></a><span class="cf">for</span> (p <span class="cf">in</span> <span class="kw">c</span>(<span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;ggthemes&quot;</span>, <span class="st">&quot;equatiomatic&quot;</span>, <span class="st">&quot;tufte&quot;</span>, <span class="st">&quot;kableExtra&quot;</span>)) {</span>
+<span id="cb20-3"><a href="動的なコンテンツの作成.html#cb20-3"></a>  <span class="cf">if</span> (<span class="op">!</span>p <span class="op">%in%</span><span class="st"> </span>pkgs) <span class="kw">install.packages</span>(p)</span>
+<span id="cb20-4"><a href="動的なコンテンツの作成.html#cb20-4"></a>}</span>
+<span id="cb20-5"><a href="動的なコンテンツの作成.html#cb20-5"></a><span class="cf">if</span> (<span class="op">!</span><span class="st">&quot;rmarkdown&quot;</span> <span class="op">%in%</span><span class="st"> </span>pkgs) remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;rstudio/rmarkdown&quot;</span>)</span>
+<span id="cb20-6"><a href="動的なコンテンツの作成.html#cb20-6"></a><span class="cf">if</span> (<span class="op">!</span><span class="st">&quot;bookdown&quot;</span> <span class="op">%in%</span><span class="st"> </span>pkgs) remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;rstudio/bookdown&quot;</span>)</span>
+<span id="cb20-7"><a href="動的なコンテンツの作成.html#cb20-7"></a><span class="kw">require</span>(tidyverse)</span></code></pre></div>
 <pre><code> 要求されたパッケージ tidyverse をロード中です </code></pre>
 <pre><code>─ Attaching packages ──────────────────── tidyverse 1.3.0 ─</code></pre>
 <pre><code>✓ ggplot2 3.3.2     ✓ purrr   0.3.4
-✓ tibble  3.0.3     ✓ dplyr   1.0.2
+✓ tibble  3.0.4     ✓ dplyr   1.0.2
 ✓ tidyr   1.1.2     ✓ stringr 1.4.0
-✓ readr   1.3.1     ✓ forcats 0.5.0</code></pre>
+✓ readr   1.4.0     ✓ forcats 0.5.0</code></pre>
 <pre><code>─ Conflicts ───────────────────── tidyverse_conflicts() ─
 x dplyr::filter()     masks stats::filter()
 x dplyr::group_rows() masks kableExtra::group_rows()
 x dplyr::lag()        masks stats::lag()</code></pre>
-<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb26-1"><a href="動的なコンテンツの作成.html#cb26-1"></a><span class="kw">require</span>(ggthemes)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb25-1"><a href="動的なコンテンツの作成.html#cb25-1"></a><span class="kw">require</span>(ggthemes)</span></code></pre></div>
 <pre><code> 要求されたパッケージ ggthemes をロード中です </code></pre>
-<div class="sourceCode" id="cb28"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb28-1"><a href="動的なコンテンツの作成.html#cb28-1"></a><span class="kw">require</span>(equatiomatic)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb27-1"><a href="動的なコンテンツの作成.html#cb27-1"></a><span class="kw">require</span>(equatiomatic)</span></code></pre></div>
 <pre><code> 要求されたパッケージ equatiomatic をロード中です </code></pre>
-<div class="sourceCode" id="cb30"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb30-1"><a href="動的なコンテンツの作成.html#cb30-1"></a><span class="kw">require</span>(kableExtra)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb29-1"><a href="動的なコンテンツの作成.html#cb29-1"></a><span class="kw">require</span>(kableExtra)</span></code></pre></div>
 <p>このように, ログを掲載することもできる. これは再現性を重視する際に重宝するが, 一方で単に画像などの出力だけを掲載したい場合もあるだろう. あるいは, プログラムを解説するために<strong>プログラムは掲載するが実行しない</strong>, ということも必要になるかもしれない. <strong>プログラムと結果の表示/非表示はどちらも簡単に切り替え可能</strong>である. そのためには, チャンクオプションを指定する.</p>
 <ul>
 <li><code>echo</code>: プログラムを掲載するかどうか</li>
@@ -353,20 +365,20 @@ data(cars)
 summary(cars)
 ```</code></pre>
 <p>一括設定の場合, 以下のようなプログラムでデフォルト値を上書きできる.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb32-1"><a href="動的なコンテンツの作成.html#cb32-1"></a>knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(</span>
-<span id="cb32-2"><a href="動的なコンテンツの作成.html#cb32-2"></a>  <span class="dt">echo =</span> F,</span>
-<span id="cb32-3"><a href="動的なコンテンツの作成.html#cb32-3"></a>  <span class="dt">message =</span> T,</span>
-<span id="cb32-4"><a href="動的なコンテンツの作成.html#cb32-4"></a>  <span class="dt">warnings =</span> F,</span>
-<span id="cb32-5"><a href="動的なコンテンツの作成.html#cb32-5"></a>  <span class="dt">error =</span> F</span>
-<span id="cb32-6"><a href="動的なコンテンツの作成.html#cb32-6"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb31-1"><a href="動的なコンテンツの作成.html#cb31-1"></a>knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(</span>
+<span id="cb31-2"><a href="動的なコンテンツの作成.html#cb31-2"></a>  <span class="dt">echo =</span> F,</span>
+<span id="cb31-3"><a href="動的なコンテンツの作成.html#cb31-3"></a>  <span class="dt">message =</span> T,</span>
+<span id="cb31-4"><a href="動的なコンテンツの作成.html#cb31-4"></a>  <span class="dt">warnings =</span> F,</span>
+<span id="cb31-5"><a href="動的なコンテンツの作成.html#cb31-5"></a>  <span class="dt">error =</span> F</span>
+<span id="cb31-6"><a href="動的なコンテンツの作成.html#cb31-6"></a>)</span></code></pre></div>
 <p>なおこのチャンクは <code>eval=F</code> を設定することで, 実行されることなくプログラムのみ掲載している. ただし, プログラムのみを掲載するなら, 以下のように Markdown の機能でも可能である. こちらの記法は <code>{}</code> がなくなっていることに注意する.</p>
 <pre><code>```sh
 echo Hello, Bookdown
 ```</code></pre>
 <p><code>{}</code> ブロック内の値にはさらに R プログラムで与えることができる. この使い方は後の章で解説する.</p>
 <p>これらのオプションがあるおかげでプログラムとその結果の再現を説明したい場合はソースコードも表示させたり, 回帰分析やシミュレーションの結果だけを掲載したい時は結果のみ表示したりできる. これが R Markdown のチャンクの強みである. 例えば Jupyter notebook/lab などは従来, コードセルと出力セルを自由に隠すことができなかった.</p>
-<p>チャンクに使用できる言語は R だけではない. <strong>つまり Python なども使用できる</strong>. 以下で対応しているエンジンの一覧を表示できる.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb34-1"><a href="動的なコンテンツの作成.html#cb34-1"></a><span class="kw">names</span>(knitr<span class="op">::</span>knit_engines<span class="op">$</span><span class="kw">get</span>())</span></code></pre></div>
+<p>チャンクに使用できる言語は R だけではない. <strong>つまり Python なども使用できる</strong>(詳細は @ref(#python) 章を参照). 以下で対応しているエンジンの一覧を表示できる.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb33-1"><a href="動的なコンテンツの作成.html#cb33-1"></a><span class="kw">names</span>(knitr<span class="op">::</span>knit_engines<span class="op">$</span><span class="kw">get</span>())</span></code></pre></div>
 <pre><code> [1] &quot;awk&quot;         &quot;bash&quot;        &quot;coffee&quot;      &quot;gawk&quot;        &quot;groovy&quot;     
  [6] &quot;haskell&quot;     &quot;lein&quot;        &quot;mysql&quot;       &quot;node&quot;        &quot;octave&quot;     
 [11] &quot;perl&quot;        &quot;psql&quot;        &quot;Rscript&quot;     &quot;ruby&quot;        &quot;sas&quot;        
@@ -386,9 +398,9 @@ echo Hello, Bookdown
 <p>プログラムチャンクは, 単にプログラムの計算結果を埋め込むだけでなく, 静的なコンテンツを臨機応変に変更して出力させたり, あるいは手作業でやるには煩雑な加工処理を挟んでから表示させるのに役に立つ.</p>
 <p>R のプログラムと組み合わせることで<strong>回帰分析の結果の数値をコピペすることなく数式で表示することができる</strong>. そのためには <a href="https://github.com/datalorax/equatiomatic"><code>equatiomatic</code></a> パッケージの <code>extract_eq()</code> を使う.</p>
 <p>まずは, 回帰係数を記号で表現するタイプ. LaTeX 数式をそのまま出力するため, チャンクオプションに <code>results="asis"</code> を付ける必要があることに注意する.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb36-1"><a href="動的なコンテンツの作成.html#cb36-1"></a><span class="kw">data</span>(iris)</span>
-<span id="cb36-2"><a href="動的なコンテンツの作成.html#cb36-2"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(Sepal.Length <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> iris)</span>
-<span id="cb36-3"><a href="動的なコンテンツの作成.html#cb36-3"></a><span class="kw">extract_eq</span>(fit, <span class="dt">wrap =</span> T, <span class="dt">ital_vars =</span> T, <span class="dt">align_env =</span> <span class="st">&quot;aligned&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb35-1"><a href="動的なコンテンツの作成.html#cb35-1"></a><span class="kw">data</span>(iris)</span>
+<span id="cb35-2"><a href="動的なコンテンツの作成.html#cb35-2"></a>fit &lt;-<span class="st"> </span><span class="kw">lm</span>(Sepal.Length <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> iris)</span>
+<span id="cb35-3"><a href="動的なコンテンツの作成.html#cb35-3"></a><span class="kw">extract_eq</span>(fit, <span class="dt">wrap =</span> T, <span class="dt">ital_vars =</span> T, <span class="dt">align_env =</span> <span class="st">&quot;aligned&quot;</span>)</span></code></pre></div>
 <p><span class="math display">\[
 \begin{aligned}
 Sepal.Length &amp;= \alpha + \beta_{1}(Sepal.Width) + \beta_{2}(Petal.Length) + \beta_{3}(Petal.Width)\ + \\
@@ -396,7 +408,7 @@ Sepal.Length &amp;= \alpha + \beta_{1}(Sepal.Width) + \beta_{2}(Petal.Length) + 
 \end{aligned}
 \]</span></p>
 <p>さらに <code>use_coef = T</code> で係数を推定結果の数値に置き換えた.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb37-1"><a href="動的なコンテンツの作成.html#cb37-1"></a><span class="kw">extract_eq</span>(fit, <span class="dt">wrap =</span> T, <span class="dt">ital_vars =</span> T, <span class="dt">use_coef =</span> T, <span class="dt">align_env =</span> <span class="st">&quot;aligned&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb36-1"><a href="動的なコンテンツの作成.html#cb36-1"></a><span class="kw">extract_eq</span>(fit, <span class="dt">wrap =</span> T, <span class="dt">ital_vars =</span> T, <span class="dt">use_coef =</span> T, <span class="dt">align_env =</span> <span class="st">&quot;aligned&quot;</span>)</span></code></pre></div>
 <p><span class="math display">\[
 \begin{aligned}
 Sepal.Length &amp;= 2.17 + 0.5(Sepal.Width) + 0.83(Petal.Length) - 0.32(Petal.Width)\ - \\
@@ -409,7 +421,7 @@ Sepal.Length &amp;= 2.17 + 0.5(Sepal.Width) + 0.83(Petal.Length) - 0.32(Petal.Wi
 <div id="プログラムを使った図の挿入" class="section level2" number="4.3">
 <h2><span class="header-section-number">4.3</span> プログラムを使った図の挿入</h2>
 <p>既に Markdown 記法による図表の挿入方法を紹介したが, プログラムチャンクを介して画像を読み込み表示させることもできる. まずは, R のプログラムで既存の画像ファイルを表示させる方法.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb38-1"><a href="動的なコンテンツの作成.html#cb38-1"></a>knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="kw">file.path</span>(img_dir, <span class="st">&quot;Johannes_Gutenberg.jpg&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb37-1"><a href="動的なコンテンツの作成.html#cb37-1"></a>knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="kw">file.path</span>(img_dir, <span class="st">&quot;Johannes_Gutenberg.jpg&quot;</span>))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:includegraphic-example"></span>
 <img src="img/Johannes_Gutenberg.jpg" alt="Johannes Gutenberg" width="50%" height="50%" />
 <p class="caption">
@@ -443,13 +455,13 @@ ggplot(diamonds, aes(x=carat, y=price, color=clarity)) +
 <p>R のグラフィックデバイスではないとは, RGL や <code>plotly</code> など外部ライブラリに頼ったグラフ作成ツールのことである. 判断できない人は, RStudio 上で実行して, “Plots” ペーンに表示されたら R のグラフィックデバイス, “Viewer” ペーンに表示されたらそうでない, で覚えていただきたい. 後者を表示する方法は <a href="webapp.html#webapp">11</a> 章で後述する. R をこれまで使ったことがなく, それすらも何を言っているのか分からない, という場合は <code>ggplot2</code> を使ってもらう.</p>
 <p>最後の <code>fig.cap=""</code> がキャプションである. ただし, どうも日本語キャプションを書いたあとに他のチャンクオプションを指定するとエラーになるようだ. よって <strong><code>fig.cap=</code> はオプションの末尾に書くべきである</strong>. また, <code>fig.cap=""</code> に数式や一部の特殊なテキストを直接入力することができない. この問題は相互参照について解説するセクション <a href="相互参照と引用.html#crossref">5.1</a> で詳細を述べる.</p>
 <p><code>fig.cap</code> 以外のオプションはおそらく頻繁には変えないため, 冒頭でまとめて設定したほうが楽だろう.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb40-1"><a href="動的なコンテンツの作成.html#cb40-1"></a>knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(</span>
-<span id="cb40-2"><a href="動的なコンテンツの作成.html#cb40-2"></a>  <span class="dt">fig.align =</span> <span class="st">&quot;center&quot;</span>,</span>
-<span id="cb40-3"><a href="動的なコンテンツの作成.html#cb40-3"></a>  <span class="dt">fig.width =</span> <span class="fl">6.5</span>,</span>
-<span id="cb40-4"><a href="動的なコンテンツの作成.html#cb40-4"></a>  <span class="dt">fig.height =</span> <span class="fl">4.5</span>,</span>
-<span id="cb40-5"><a href="動的なコンテンツの作成.html#cb40-5"></a>  <span class="dt">out.width =</span> <span class="st">&quot;100%&quot;</span>,</span>
-<span id="cb40-6"><a href="動的なコンテンツの作成.html#cb40-6"></a>  <span class="dt">out.height =</span> <span class="st">&quot;100%&quot;</span></span>
-<span id="cb40-7"><a href="動的なコンテンツの作成.html#cb40-7"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb39-1"><a href="動的なコンテンツの作成.html#cb39-1"></a>knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(</span>
+<span id="cb39-2"><a href="動的なコンテンツの作成.html#cb39-2"></a>  <span class="dt">fig.align =</span> <span class="st">&quot;center&quot;</span>,</span>
+<span id="cb39-3"><a href="動的なコンテンツの作成.html#cb39-3"></a>  <span class="dt">fig.width =</span> <span class="fl">6.5</span>,</span>
+<span id="cb39-4"><a href="動的なコンテンツの作成.html#cb39-4"></a>  <span class="dt">fig.height =</span> <span class="fl">4.5</span>,</span>
+<span id="cb39-5"><a href="動的なコンテンツの作成.html#cb39-5"></a>  <span class="dt">out.width =</span> <span class="st">&quot;100%&quot;</span>,</span>
+<span id="cb39-6"><a href="動的なコンテンツの作成.html#cb39-6"></a>  <span class="dt">out.height =</span> <span class="st">&quot;100%&quot;</span></span>
+<span id="cb39-7"><a href="動的なコンテンツの作成.html#cb39-7"></a>)</span></code></pre></div>
 <p>なお, これらは <code>rmdja</code> でのデフォルト値であるため, 実際にこの値をあえて記述する必要はない.</p>
 <p>ここで, <code>fig.width</code> と <code>out.width</code> の違いも述べておく. <code>out.width</code>/<code>out.height</code> は表示する画像サイズの違いで, <code>fig.width</code>/<code>fig.height</code> はプログラムが出力した画像の保存サイズである. よって <code>ggplot2</code> などを使わず画像ファイルを貼り付けるだけの場合は <code>fig.*</code> は意味をなさない.</p>
 </div>
@@ -457,12 +469,13 @@ ggplot(diamonds, aes(x=carat, y=price, color=clarity)) +
 <h2><span class="header-section-number">4.5</span> R プログラムを使った表の装飾</h2>
 <p>Markdown 記法を使った表記は既に紹介した. しかしこれは表の数値を全て手動で書かなければならない. もちろんこれも R 内のデータを手書きなどせずとも表示できるし, テーブルのデザインもある程度自由に設定できる.</p>
 <p>R Markdown のデフォルトでは R のコンソールと同様にテキストとして出力されるが, bookdown では異なるデザインで表示されている. これは <code>knitr</code>, <code>kableExtra</code> パッケージなどで事後処理をかけることで見やすいデザインの表に変換しているからである.</p>
-<p>この方法はシンプルで使いやすいが, R はテーブル状のデータ処理に長けているため, 手動で数値を書くよりも簡単な方法がある.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb41-1"><a href="動的なコンテンツの作成.html#cb41-1"></a><span class="kw">data</span>(iris)</span>
-<span id="cb41-2"><a href="動的なコンテンツの作成.html#cb41-2"></a><span class="kw">kable</span>(</span>
-<span id="cb41-3"><a href="動的なコンテンツの作成.html#cb41-3"></a>  <span class="kw">head</span>(iris, <span class="dt">n =</span> <span class="dv">10</span>),</span>
-<span id="cb41-4"><a href="動的なコンテンツの作成.html#cb41-4"></a>  <span class="dt">caption =</span> <span class="st">&quot;`knitr::kable()` で出力された (PDFではあまりかっこよくない) 表&quot;</span></span>
-<span id="cb41-5"><a href="動的なコンテンツの作成.html#cb41-5"></a>)</span></code></pre></div>
+<p>また, この方法はシンプルで使いやすいが数値を手作業で書く必要がある. R はテーブル状のデータ処理に長けているため, このような煩雑さを省くことができる.</p>
+
+<div class="sourceCode" id="cb40"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb40-1"><a href="動的なコンテンツの作成.html#cb40-1"></a><span class="kw">data</span>(iris)</span>
+<span id="cb40-2"><a href="動的なコンテンツの作成.html#cb40-2"></a><span class="kw">kable</span>(</span>
+<span id="cb40-3"><a href="動的なコンテンツの作成.html#cb40-3"></a>  <span class="kw">head</span>(iris, <span class="dt">n =</span> <span class="dv">10</span>),</span>
+<span id="cb40-4"><a href="動的なコンテンツの作成.html#cb40-4"></a>  <span class="dt">caption =</span> <span class="st">&quot;<code>knitr::kable()</code> で出力された (PDFではあまりかっこよくない) 表&quot;</span></span>
+<span id="cb40-5"><a href="動的なコンテンツの作成.html#cb40-5"></a>)</span></code></pre></div>
 <table>
 <caption>
 <span id="tab:display-dataframe-kable">表 4.1: </span><code>knitr::kable()</code> で出力された (PDFではあまりかっこよくない) 表
@@ -660,12 +673,12 @@ setosa
 </tbody>
 </table>
 <p>こちらは関数内にキャプションを書く必要があり, チャンクオプションに指定する方法はない (表<a href="動的なコンテンツの作成.html#tab:display-dataframe-kable">4.1</a>).</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb42-1"><a href="動的なコンテンツの作成.html#cb42-1"></a><span class="kw">data</span>(iris)</span>
-<span id="cb42-2"><a href="動的なコンテンツの作成.html#cb42-2"></a><span class="kw">kable</span>(</span>
-<span id="cb42-3"><a href="動的なコンテンツの作成.html#cb42-3"></a>  <span class="kw">head</span>(iris, <span class="dt">n =</span> <span class="dv">10</span>),</span>
-<span id="cb42-4"><a href="動的なコンテンツの作成.html#cb42-4"></a>  <span class="dt">booktabs =</span> T,</span>
-<span id="cb42-5"><a href="動的なコンテンツの作成.html#cb42-5"></a>  <span class="dt">caption =</span> <span class="st">&quot;奇数行を強調し, PDF では booktabs を利用&quot;</span></span>
-<span id="cb42-6"><a href="動的なコンテンツの作成.html#cb42-6"></a>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">row_spec</span>(<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dt">by =</span> <span class="dv">2</span>), <span class="dt">background =</span> <span class="st">&quot;gray&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb41-1"><a href="動的なコンテンツの作成.html#cb41-1"></a><span class="kw">data</span>(iris)</span>
+<span id="cb41-2"><a href="動的なコンテンツの作成.html#cb41-2"></a><span class="kw">kable</span>(</span>
+<span id="cb41-3"><a href="動的なコンテンツの作成.html#cb41-3"></a>  <span class="kw">head</span>(iris, <span class="dt">n =</span> <span class="dv">10</span>),</span>
+<span id="cb41-4"><a href="動的なコンテンツの作成.html#cb41-4"></a>  <span class="dt">booktabs =</span> T,</span>
+<span id="cb41-5"><a href="動的なコンテンツの作成.html#cb41-5"></a>  <span class="dt">caption =</span> <span class="st">&quot;奇数行を強調し, PDF では booktabs を利用&quot;</span></span>
+<span id="cb41-6"><a href="動的なコンテンツの作成.html#cb41-6"></a>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">row_spec</span>(<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dt">by =</span> <span class="dv">2</span>), <span class="dt">background =</span> <span class="st">&quot;gray&quot;</span>)</span></code></pre></div>
 <table>
 <caption>
 <span id="tab:display-dataframe-kable-2">表 4.2: </span>奇数行を強調し, PDF では booktabs を利用
@@ -862,7 +875,7 @@ setosa
 </tr>
 </tbody>
 </table>
-<p>さらに, RCB の <a href="https://bookdown.org/yihui/rmarkdown-cookbook/kable.html">Ch. 10.1 The function <code>knitr::kable()</code></a> ではその他いろいろな書式設定を紹介している.</p>
+<p><code>kable()</code> は R Markdown に必須な <code>knitr</code> パッケージに含まれる関数なので最初に紹介したが, 現在は <code>huxtable</code> や <code>gt</code> というより使いやすいパッケージが存在する. より発展的な表のスタイル指定方法については @ref(#advanced-tabulate) 章で話す.</p>
 </div>
 </div>
 <div class="footnotes">
@@ -919,7 +932,7 @@ gitbook.start({
 "link": "tree/rmdja/inst/resources/examples/bookdown/chapter/chapters/elemental.Rmd",
 "text": null
 },
-"download": ["rmdja.pdf", "rmdja.epub"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>18 出力形式による表現の限界 | rmdja による多様な形式の日本語技術文書の作成</title>
+  <title>15 出力形式による表現の限界 | rmdja による多様な形式の日本語技術文書の作成</title>
   <meta name="description" content="bookdown でまともな日本語文書を作る資料" />
-  <meta name="generator" content="bookdown 0.20.6 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="18 出力形式による表現の限界 | rmdja による多様な形式の日本語技術文書の作成" />
+  <meta property="og:title" content="15 出力形式による表現の限界 | rmdja による多様な形式の日本語技術文書の作成" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://bookdown.org/john/awesome/" />
   <meta property="og:image" content="https://bookdown.org/john/awesome/img/Johannes_Gutenberg.jpg" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="Gedevan-Aleksizde/rmdja" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="18 出力形式による表現の限界 | rmdja による多様な形式の日本語技術文書の作成" />
+  <meta name="twitter:title" content="15 出力形式による表現の限界 | rmdja による多様な形式の日本語技術文書の作成" />
   
   <meta name="twitter:description" content="bookdown でまともな日本語文書を作る資料" />
   <meta name="twitter:image" content="https://bookdown.org/john/awesome/img/Johannes_Gutenberg.jpg" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Katagiri, Satoshi (ill-identified)" />
 
 
-<meta name="date" content="2020-10-17" />
+<meta name="date" content="2020-10-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -221,10 +221,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他のプログラム"><i class="fa fa-check"></i><b>8.3</b> (TODO) その他のプログラム</a></li>
 <li class="chapter" data-level="8.4" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他の-r-プログラム"><i class="fa fa-check"></i><b>8.4</b> (TODO) その他の R プログラム</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="表のデザイン.html"><a href="表のデザイン.html"><i class="fa fa-check"></i><b>9</b> 表のデザイン</a>
+<li class="chapter" data-level="9" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html"><i class="fa fa-check"></i><b>9</b> 表のデザイン</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="表のデザイン.html"><a href="表のデザイン.html#texhtml-を出力する関数"><i class="fa fa-check"></i><b>9.1</b> TeX/HTML を出力する関数</a></li>
-<li class="chapter" data-level="9.2" data-path="表のデザイン.html"><a href="表のデザイン.html#todo-gt-パッケージの対応"><i class="fa fa-check"></i><b>9.2</b> (TODO) <code>gt</code> パッケージの対応</a></li>
+<li class="chapter" data-level="9.1" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#texhtml-を出力する関数"><i class="fa fa-check"></i><b>9.1</b> TeX/HTML を出力する関数</a></li>
+<li class="chapter" data-level="9.2" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#kableextra-による表のスタイルのカスタマイズ"><i class="fa fa-check"></i><b>9.2</b> <code>kableExtra</code> による表のスタイルのカスタマイズ</a></li>
+<li class="chapter" data-level="9.3" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#formattable-パッケージとの併用"><i class="fa fa-check"></i><b>9.3</b> <code>formattable</code> パッケージとの併用</a></li>
+<li class="chapter" data-level="9.4" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#huxtable-パッケージによる作表"><i class="fa fa-check"></i><b>9.4</b> <code>huxtable</code> パッケージによる作表</a></li>
+<li class="chapter" data-level="9.5" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#todo-gt-パッケージによる作表"><i class="fa fa-check"></i><b>9.5</b> (TODO) <code>gt</code> パッケージによる作表</a></li>
+<li class="chapter" data-level="9.6" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#その他の作表パッケージ"><i class="fa fa-check"></i><b>9.6</b> その他の作表パッケージ</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="文献引用.html"><a href="文献引用.html"><i class="fa fa-check"></i><b>10</b> 文献引用</a>
 <ul>
@@ -235,43 +239,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.0.1" data-path="webapp.html"><a href="webapp.html#todo-plotly"><i class="fa fa-check"></i><b>11.0.1</b> TODO: plotly</a></li>
 <li class="chapter" data-level="11.0.2" data-path="webapp.html"><a href="webapp.html#todo-shiny"><i class="fa fa-check"></i><b>11.0.2</b> TODO: shiny</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="python.html"><a href="python.html"><i class="fa fa-check"></i><b>12</b> Python スクリプトの埋め込み</a></li>
+<li class="chapter" data-level="12" data-path="python.html"><a href="python.html"><i class="fa fa-check"></i><b>12</b> Python スクリプトの埋め込み</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="python.html"><a href="python.html#python-のグラフィックに関する制約"><i class="fa fa-check"></i><b>12.1</b> Python のグラフィックに関する制約</a></li>
+</ul></li>
 <li class="part"><span><b>V 製本と多様な形式への対応</b></span></li>
-<li class="chapter" data-level="13" data-path="プレゼンテーション資料の作成.html"><a href="プレゼンテーション資料の作成.html"><i class="fa fa-check"></i><b>13</b> プレゼンテーション資料の作成</a></li>
-<li class="chapter" data-level="14" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html"><i class="fa fa-check"></i><b>14</b> PDF の文書クラス</a></li>
-<li class="chapter" data-level="15" data-path="wip-卒業論文の作成.html"><a href="wip-卒業論文の作成.html"><i class="fa fa-check"></i><b>15</b> (WIP) 卒業論文の作成</a></li>
-<li class="chapter" data-level="16" data-path="wip-小説の執筆.html"><a href="wip-小説の執筆.html"><i class="fa fa-check"></i><b>16</b> (WIP) 小説の執筆</a></li>
-<li class="chapter" data-level="17" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html"><i class="fa fa-check"></i><b>17</b> 製本方法の詳細</a>
+<li class="chapter" data-level="13" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html"><i class="fa fa-check"></i><b>13</b> PDF の文書クラス</a>
 <ul>
-<li class="chapter" data-level="17.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#ファイル構成"><i class="fa fa-check"></i><b>17.1</b> ファイル構成</a>
+<li class="chapter" data-level="13.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#プレゼンテーション資料の作成"><i class="fa fa-check"></i><b>13.1</b> プレゼンテーション資料の作成</a>
 <ul>
-<li class="chapter" data-level="17.1.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#output.yml"><i class="fa fa-check"></i><b>17.1.1</b> <code>_output.yml</code></a></li>
-<li class="chapter" data-level="17.1.2" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#bookdown.yml"><i class="fa fa-check"></i><b>17.1.2</b> <code>_bookdown.yml</code></a></li>
+<li class="chapter" data-level="13.1.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#主な設定"><i class="fa fa-check"></i><b>13.1.1</b> 主な設定</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#wip-卒業論文の作成"><i class="fa fa-check"></i><b>13.2</b> (WIP) 卒業論文の作成</a></li>
+<li class="chapter" data-level="13.3" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#wip-小説の執筆"><i class="fa fa-check"></i><b>13.3</b> (WIP) 小説の執筆</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html"><i class="fa fa-check"></i><b>14</b> 製本方法の詳細</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#ファイル構成"><i class="fa fa-check"></i><b>14.1</b> ファイル構成</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#output.yml"><i class="fa fa-check"></i><b>14.1.1</b> <code>_output.yml</code></a></li>
+<li class="chapter" data-level="14.1.2" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#bookdown.yml"><i class="fa fa-check"></i><b>14.1.2</b> <code>_bookdown.yml</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html"><i class="fa fa-check"></i><b>18</b> 出力形式による表現の限界</a>
+<li class="chapter" data-level="15" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html"><i class="fa fa-check"></i><b>15</b> 出力形式による表現の限界</a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#htmlとpdfで処理を場合分けする"><i class="fa fa-check"></i><b>18.1</b> HTMLとPDFで処理を場合分けする</a></li>
-<li class="chapter" data-level="18.2" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#絵文字の出力"><i class="fa fa-check"></i><b>18.2</b> 絵文字の出力</a></li>
-<li class="chapter" data-level="18.3" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#画像の保存形式"><i class="fa fa-check"></i><b>18.3</b> 画像の保存形式</a></li>
-<li class="chapter" data-level="18.4" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#デフォルトの保存形式"><i class="fa fa-check"></i><b>18.4</b> デフォルトの保存形式</a></li>
+<li class="chapter" data-level="15.1" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#htmlとpdfで処理を場合分けする"><i class="fa fa-check"></i><b>15.1</b> HTMLとPDFで処理を場合分けする</a></li>
+<li class="chapter" data-level="15.2" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#絵文字の出力"><i class="fa fa-check"></i><b>15.2</b> 絵文字の出力</a></li>
+<li class="chapter" data-level="15.3" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#画像の保存形式"><i class="fa fa-check"></i><b>15.3</b> 画像の保存形式</a></li>
+<li class="chapter" data-level="15.4" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#デフォルトの保存形式"><i class="fa fa-check"></i><b>15.4</b> デフォルトの保存形式</a></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html"><i class="fa fa-check"></i><b>19</b> 製本した文書を配布する</a>
+<li class="chapter" data-level="16" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html"><i class="fa fa-check"></i><b>16</b> 製本した文書を配布する</a>
 <ul>
-<li class="chapter" data-level="19.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#wepページのホスティング"><i class="fa fa-check"></i><b>19.1</b> Wepページのホスティング</a></li>
-<li class="chapter" data-level="19.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#todo-入稿するには"><i class="fa fa-check"></i><b>19.2</b> TODO: 入稿するには</a>
+<li class="chapter" data-level="16.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#wepページのホスティング"><i class="fa fa-check"></i><b>16.1</b> Wepページのホスティング</a></li>
+<li class="chapter" data-level="16.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#todo-入稿するには"><i class="fa fa-check"></i><b>16.2</b> TODO: 入稿するには</a>
 <ul>
-<li class="chapter" data-level="19.2.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#トンボの表示"><i class="fa fa-check"></i><b>19.2.1</b> トンボの表示</a></li>
-<li class="chapter" data-level="19.2.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#フォントの埋め込み"><i class="fa fa-check"></i><b>19.2.2</b> フォントの埋め込み</a></li>
+<li class="chapter" data-level="16.2.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#トンボの表示"><i class="fa fa-check"></i><b>16.2.1</b> トンボの表示</a></li>
+<li class="chapter" data-level="16.2.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#フォントの埋め込み"><i class="fa fa-check"></i><b>16.2.2</b> フォントの埋め込み</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>VI デバッグ</b></span></li>
 <li class="chapter" data-level="" data-path="このパートで説明すること.html"><a href="このパートで説明すること.html"><i class="fa fa-check"></i>このパートで説明すること</a></li>
-<li class="chapter" data-level="20" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html"><i class="fa fa-check"></i><b>20</b> 製本時のエラーへの対処</a>
+<li class="chapter" data-level="17" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html"><i class="fa fa-check"></i><b>17</b> 製本時のエラーへの対処</a>
 <ul>
-<li class="chapter" data-level="20.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>20.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
-<li class="chapter" data-level="20.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>20.2</b> YAML フロントマターを確認する</a></li>
-<li class="chapter" data-level="20.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-生成時のエラーを確認する"><i class="fa fa-check"></i><b>20.3</b> PDF 生成時のエラーを確認する</a></li>
+<li class="chapter" data-level="17.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>17.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
+<li class="chapter" data-level="17.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>17.2</b> YAML フロントマターを確認する</a></li>
+<li class="chapter" data-level="17.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-生成時のエラーを確認する"><i class="fa fa-check"></i><b>17.3</b> PDF 生成時のエラーを確認する</a></li>
 </ul></li>
 <li class="appendix"><span><b>補遺</b></span></li>
 <li class="chapter" data-level="A" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html"><i class="fa fa-check"></i><b>A</b> デフォルト値の自動調整</a>
@@ -308,10 +320,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="出力形式による表現の限界" class="section level1" number="18">
-<h1><span class="header-section-number">18</span> 出力形式による表現の限界</h1>
-<div id="htmlとpdfで処理を場合分けする" class="section level2" number="18.1">
-<h2><span class="header-section-number">18.1</span> HTMLとPDFで処理を場合分けする</h2>
+<div id="出力形式による表現の限界" class="section level1" number="15">
+<h1><span class="header-section-number">15</span> 出力形式による表現の限界</h1>
+<div id="htmlとpdfで処理を場合分けする" class="section level2" number="15.1">
+<h2><span class="header-section-number">15.1</span> HTMLとPDFで処理を場合分けする</h2>
 <p>出力方法で言えば, HTML と PDF に大別できる. Rmdは HTMLタグも LaTeX コマンドも受け付けるが, それぞれ HTML と PDF に変換する際にしか反映できない. よって, 例えば複雑な図表を LaTeX コマンドでじかに Rmd ファイルに書いてしまった場合, HTML では表示されない.</p>
 <p>紙媒体と電子媒体では表現できることに差がある. 例えば紙はあらゆる環境で同じような見た目になるが, ハイパーリンクは付けられないし, 一度出版してしまうと修正は容易ではない. PDF の見た目も読者の環境に依存しにくいが, やはり更新が容易ではない.</p>
 <p><code>bookdown</code> には既に印刷された本の中身を書き換えるする機能はないが, 出力ごとに内容を変えることで, PDF にのみ更新履歴を表示することはできる.</p>
@@ -325,20 +337,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb65-6"><a href="出力形式による表現の限界.html#cb65-6"></a><span class="at">    </span><span class="kw">-</span><span class="at"> index.Rmd</span></span>
 <span id="cb65-7"><a href="出力形式による表現の限界.html#cb65-7"></a><span class="at">    </span><span class="kw">-</span><span class="at"> latex-only.Rmd</span></span></code></pre></div>
 </div>
-<div id="絵文字の出力" class="section level2" number="18.2">
-<h2><span class="header-section-number">18.2</span> 絵文字の出力</h2>
+<div id="絵文字の出力" class="section level2" number="15.2">
+<h2><span class="header-section-number">15.2</span> 絵文字の出力</h2>
 <p>絵文字をHTMLでもPDFでも出力したい場合, <code>\coloremoji{⛄}</code> のように絵文字を囲む. ただし, RStudio のエディタは一部のマルチバイト文字の表示に対応していないので予期せぬ不具合に注意する.</p>
 <p>現在の主要Webブラウザでは, 特に設定せずとも Unicode 絵文字をカラー画像に置き換えて表示できるものが多い. しかし PDF 生成時には明示的にフォントを指定するか, 画像に置き換える記述が必要である. その実現のため <code>bxcoloremoji</code> という LaTeX パッケージ<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a>を利用する. このパッケージは CTAN に登録されていないため, 別途インストールする必要がある.</p>
 </div>
-<div id="画像の保存形式" class="section level2" number="18.3">
-<h2><span class="header-section-number">18.3</span> 画像の保存形式</h2>
+<div id="画像の保存形式" class="section level2" number="15.3">
+<h2><span class="header-section-number">15.3</span> 画像の保存形式</h2>
 <p>技術文書での画像の多くはプロットなど単純な図形なので, 写真などを掲載するのでない限り, PDF で出力する場合はプロット画像も PDF にするのが望ましい. JPG や PNG などのラスタ画像では拡大すると粗くなるが, PDF などのベクタ画像ならば拡大しても粗くならず, かつ単純な図形ならばはファイルサイズも小さく済むことが多い. 一方で HTML は通常 Webブラウザで閲覧するため, PDF に対応していないことが多い. HTML でベクタ画像を掲載したい場合は <strong>SVG 形式</strong> で出力する.</p>
 <p>R による SVG への出力は, 従来組み込みの <code>SVG()</code> で行うことが多かったが, 近年は新たなパッケージが出ている. 有力なのは <code>svglite</code> と <code>rsvg</code> である.</p>
 <p><a href="https://oku.edu.mie-u.ac.jp/~okumura/stat/svg.html" class="uri">https://oku.edu.mie-u.ac.jp/~okumura/stat/svg.html</a></p>
 <p><code>rsvg</code> のほうが高性能だが, <code>knitr</code> で対応しているのは <code>svglite</code> なので簡単に使いたいならこちらを推奨する.</p>
 </div>
-<div id="デフォルトの保存形式" class="section level2" number="18.4">
-<h2><span class="header-section-number">18.4</span> デフォルトの保存形式</h2>
+<div id="デフォルトの保存形式" class="section level2" number="15.4">
+<h2><span class="header-section-number">15.4</span> デフォルトの保存形式</h2>
 <p>デフォルトでは, PDF は <code>cairo_pdf</code>, HTML では解像度を高めに設定した <code>PNG</code> を使用している. これは, 件数の多い散布図など, ベクタ形式ではファイルサイズが大きくなりすぎる場合もありうるための判断である.</p>
 <p>画像形式を変更したい場合は, チャンクオプションの <code>dev</code> で, オプションは <code>dev.args=list(...)</code> で変更できる.</p>
 <p><a href="https://bookdown.org/yihui/rmarkdown-cookbook/graphical-device.html" class="uri">https://bookdown.org/yihui/rmarkdown-cookbook/graphical-device.html</a></p>
@@ -398,7 +410,7 @@ gitbook.start({
 "link": "tree/rmdja/inst/resources/examples/bookdown/chapter/chapters/multi-media.Rmd",
 "text": null
 },
-"download": ["rmdja.pdf", "rmdja.epub"],
+"download": null,
 "toc": {
 "collapse": "none"
 }
