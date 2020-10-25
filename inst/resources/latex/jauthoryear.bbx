@@ -1,0 +1,77 @@
+% Encoding of this file: UTF-8.
+\ProvidesFile{jauthoryear.bbx}[2020/10/22 v0.1]
+\RequireBibliographyStyle{authoryear}
+% default load-time options
+% ロード時オプションのデフォルト値
+\ExecuteBibliographyOptions{sortlocale=ja_JP,sorting=nty,hyperref=auto,date=year,doi=true,eprint=true,eprint=true,minbibnames=10,maxbibnames=10,mincitenames=2,maxcitenames=3}
+
+
+%フィールドごとのスタイルは FieldFormat
+%しかし他の .bbx で書き換えられているかも知れないので元スタイルの記述は要確認
+%\DeclareFieldFormat{title}{\textrm{#1}}
+%複数の値が存在するものは ListFormat を使う
+
+\DeclareFieldFormat{year}{%
+(#1)
+}
+\DeclareFieldFormat{doi}{DOI: \href{https://doi.org/#1}{#1}}
+\DeclareFieldFormat{url}{URL: \href{#1}{here}} % TODO: オプションで切り替えられるように
+
+% NameFormat
+% langid で和文かどうかを場合分け
+% 現在のバージョンで和欧混合するにはこれが一番簡単?
+\DeclareNameFormat{author}{%
+	\iffieldequalstr{langid}{japanese}{%
+	\namepartfamily\ifdefvoid{\namepartgiven}{}{\space\namepartgiven}\ifthenelse{\value{listcount}<\value{liststop}}{・}{}%
+	}{%
+		\ifthenelse{\value{listcount}=1}
+		{\namepartfamily\ifdefvoid{\namepartgiven}{}{\addcomma\space\namepartgiven}} % 先頭は 「性, 名」
+		{\ifdefvoid{\namepartgiven}{}{\namepartgiven\space}\namepartfamily}% 2人目以降は 「名 性」
+	\ifthenelse{\value{listcount}<\value{liststop}}{\addcomma\space}{}}
+}
+%\DeclareFieldFormat{journaltitle}{#1}
+\DeclareFieldFormat{volume}{#1}
+\DeclareFieldFormat{issue}{(#1)}
+
+% ---- Japanese-specific fields -----
+\DeclareDatamodelFields[type=field,datatype=literal]{yomi}
+\DeclareNameAlias{yomi}{sortname}
+\DeclareDatamodelFields[type=field,datatype=literal]{jtitle,jnote}
+\DeclareDatamodelFields[type=field,datatype=datepart]{jyear}
+\DeclareDatamodelFields[type=field,datatype=literal]{jauthor}
+\DeclareDatamodelFields[type=field,datatype=literal]{jpublisher}
+
+\DeclareDatamodelEntryfields{jtitle,jyear,jpublisher,jnote}
+\DeclareDatamodelEntryfields{jauthor}
+\DeclareFieldFormat{jauthor}{#1 訳}
+
+\DeclareFieldFormat{jtitle}{『#1』}
+\DeclareFieldFormat{jyear}{#1 年}
+\DeclareFieldFormat{jpublisher}{#1}
+\DeclareFieldFormat{jnote}{#1}
+
+% --- book ----
+\DeclareBibliographyDriver{book}{%
+	\printnames{author}\newblock
+	\printfield{year}\newblock
+	\printfield{title}\newunit\newblock
+	\printfield{pages}\newunit\newblock
+	\printlist{publisher}\newunit\newblock
+	\printfield{doi}\newunit\newblock
+	\printfield{note}\newunit\newblock
+	\printfield{jauthor}\newblock
+	\printfield{jtitle}\newunit\newblock
+	\printfield{jyear}\newunit\newblock
+	\printfield{jpublisher}\newunit\newblock
+	\printfield{jnote}
+	%\printlist{language}
+}
+
+% pbibtex の yomi を反映したソートルール, nty 準拠
+\DeclareSortingScheme{ntypbt}{
+  \sort{\field{sortname}\field{author}\field{editor}}
+  \sort{\field{title}}
+  \sort{\field{sortyear}}
+}
+
+\endinput
