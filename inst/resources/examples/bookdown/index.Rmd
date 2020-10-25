@@ -31,6 +31,7 @@ biblio-style: authoryear
 
 ```{r setup, include=FALSE}
 options(tinytex.latexmk.emulation = T)
+options(huxtable.bookdown = T)
 # アンダースコアを各自に回避するためコピーするしかない
 file.copy(system.file("resources/bibliography/rmdja.bib", package="rmdja"), "./")
 # 画像をコピー
@@ -38,7 +39,8 @@ img_dir <- "img/"
 if(!file.exists(img_dir)) dir.create(img_dir, recursive = T)
 file.copy(file.path(system.file("resources/img", package = "rmdja"),
                     c("Johannes_Gutenberg.jpg", "build-pane.png", "build-pane-build.png",
-                      "tategaki.png", "rmd-templates.png", "new-file.png", "citr.png")), img_dir)
+                      "tategaki.png", "rmd-templates.png", "new-file.png", "citr.png",
+                      "kableExtra.svg", "kableExtra.pdf", "gt.svg", "gt.pdf")), img_dir)
 
 # epub 用にスタイルファイルをコピー
 if(!file.exists("_epub/css")) dir.create("_epub/css", recursive = T)

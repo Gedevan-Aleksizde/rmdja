@@ -1,6 +1,6 @@
 Package: rmdja
 Title: R Markdown Formats for Japanese
-Version: 0.4
+Version: 0.4.2
 Authors@R: person(role = c("aut", "cre"), email = "katagiri.stsh@gmail.com", given = "Satoshi", family = "Katagiri")
 Description: R Markdown end-user PDF templates with Japanese typesetting presets
 Encoding: UTF-8

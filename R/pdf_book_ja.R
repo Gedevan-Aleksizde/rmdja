@@ -1,13 +1,15 @@
-#' bookdown::pdf_book wrapper for Japanese typesetting with XeLaTeX/LuaLaTeX 
+#' bookdown pdf format for Japanese typesetting with XeLaTeX/LuaLaTeX 
 #'
 
 #' @title `rmarkdown` + `bookdown` で簡単に日本語文書を作るためのプリセットフォーマット
-#' @description  `rmarkdown` + `bookdown` で PDF文書をビルドする場合, 日本語を適切に表示するためにいろいろ必要だった調整を済ませたフォーマット. 基本的に YAML フロントマター (+ `_ouput.yml`) や knitr チャンクオプションで設定できることをデフォルト値として埋め込んだだけ. `index.Rmd` 
+#' @family pdf formats
+#' @description  bookdown::pdf_book wrapper format for Japanese typesetting with XeLaTeX or LuaLaTeX /`bookdown` で PDF文書をビルドする場合, 日本語を適切に表示するためにいろいろ必要だった調整を済ませたフォーマット. 
+#' 
+#' @details 基本的に YAML フロントマター (+ `_ouput.yml`) や knitr チャンクオプションで設定できることをデフォルト値として埋め込んだだけ. `index.Rmd` 
 #' @inheritParams bookdown::pdf_book
-#'  
-#' @param code_rownumber デフォルト: TRUE. logical. コードセルに行番号を表示するかどうか. 
-#' @param tombow logical. デフォルト: FALSE. 製本時に必要なトンボ (trim markers) を付けるかどうか. トンボは `gentombow.sty` で作成される. 
-#' @param add_folio logica. デフォルト: FALSE. 製本時に全ページにノンブルが必要な場合があるらしいので全ページに表示したい時に.
+#' @param code_rownumber logical. コードセルに行番号を表示するかどうか. 
+#' @param tombow logical. 製本時に必要なトンボ (trim markers) を付けるかどうか. トンボは `gentombow.sty` で作成される. 
+#' @param add_folio logical. 製本時に全ページにノンブルが必要な場合があるらしいので全ページに表示したい時に.
 #' @return rmarkdown_output_format
 #'
 #' @export
@@ -39,7 +41,7 @@ pdf_book_ja <- function (
   keep_tex = TRUE,
   keep_md = TRUE,
   latex_engine = "xelatex",
-  citation_package = "natbib",
+  citation_package = "biblatex",
   citation_options = "default",
   includes = NULL,
   md_extensions = NULL,
@@ -57,7 +59,16 @@ pdf_book_ja <- function (
   top_level <- "chapter"
   if(identical(citation_package, "natbib")){
     if(!identical(citation_options, "default")){
-      pandoc_args <- c(pandoc_args, rmarkdown::pandoc_variable_arg("natbiboptions", citation_options))
+      if(!is.null(citation_options) && !identical(citation_options, "") && !is.na(citation_options)){
+        pandoc_args <- c(pandoc_args, rmarkdown::pandoc_variable_arg("natbiboptions", citation_options))
+      }
+    }
+  }
+  if(identical(citation_package, "biblatex")){
+    if(!identical(citation_options, "default")){
+      if(!is.null(citation_options) && !identical(citation_options, "") && !is.na(citation_options)){
+        pandoc_args <- c(pandoc_args, rmarkdown::pandoc_variable_arg("biblatexoptions", citation_options))
+      }
     }
   }
   if(missing(template) || identical(template, "") || identical(template, "default")){

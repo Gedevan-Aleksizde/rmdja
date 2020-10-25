@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8 様々なグラフィックプログラムの埋め込み | rmdja による多様な形式の日本語技術文書の作成</title>
   <meta name="description" content="bookdown でまともな日本語文書を作る資料" />
-  <meta name="generator" content="bookdown 0.20.6 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8 様々なグラフィックプログラムの埋め込み | rmdja による多様な形式の日本語技術文書の作成" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Katagiri, Satoshi (ill-identified)" />
 
 
-<meta name="date" content="2020-10-17" />
+<meta name="date" content="2020-10-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   <link rel="apple-touch-icon-precomposed" sizes="120x120" href="touch-icon.png" />
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <link rel="prev" href="このパートについて.html"/>
-<link rel="next" href="表のデザイン.html"/>
+<link rel="next" href="advanced-tabulate.html"/>
 <script src="libs/header-attrs-2.4/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -221,10 +221,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他のプログラム"><i class="fa fa-check"></i><b>8.3</b> (TODO) その他のプログラム</a></li>
 <li class="chapter" data-level="8.4" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他の-r-プログラム"><i class="fa fa-check"></i><b>8.4</b> (TODO) その他の R プログラム</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="表のデザイン.html"><a href="表のデザイン.html"><i class="fa fa-check"></i><b>9</b> 表のデザイン</a>
+<li class="chapter" data-level="9" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html"><i class="fa fa-check"></i><b>9</b> 表のデザイン</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="表のデザイン.html"><a href="表のデザイン.html#texhtml-を出力する関数"><i class="fa fa-check"></i><b>9.1</b> TeX/HTML を出力する関数</a></li>
-<li class="chapter" data-level="9.2" data-path="表のデザイン.html"><a href="表のデザイン.html#todo-gt-パッケージの対応"><i class="fa fa-check"></i><b>9.2</b> (TODO) <code>gt</code> パッケージの対応</a></li>
+<li class="chapter" data-level="9.1" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#kableextra-による表のスタイルのカスタマイズ"><i class="fa fa-check"></i><b>9.1</b> <code>kableExtra</code> による表のスタイルのカスタマイズ</a></li>
+<li class="chapter" data-level="9.2" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#formattable-パッケージとの併用"><i class="fa fa-check"></i><b>9.2</b> <code>formattable</code> パッケージとの併用</a></li>
+<li class="chapter" data-level="9.3" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#huxtable-パッケージによる作表"><i class="fa fa-check"></i><b>9.3</b> <code>huxtable</code> パッケージによる作表</a></li>
+<li class="chapter" data-level="9.4" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#texhtml-を出力する関数"><i class="fa fa-check"></i><b>9.4</b> TeX/HTML を出力する関数</a></li>
+<li class="chapter" data-level="9.5" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#その他の作表パッケージ"><i class="fa fa-check"></i><b>9.5</b> その他の作表パッケージ</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="文献引用.html"><a href="文献引用.html"><i class="fa fa-check"></i><b>10</b> 文献引用</a>
 <ul>
@@ -235,43 +238,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.0.1" data-path="webapp.html"><a href="webapp.html#todo-plotly"><i class="fa fa-check"></i><b>11.0.1</b> TODO: plotly</a></li>
 <li class="chapter" data-level="11.0.2" data-path="webapp.html"><a href="webapp.html#todo-shiny"><i class="fa fa-check"></i><b>11.0.2</b> TODO: shiny</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="python.html"><a href="python.html"><i class="fa fa-check"></i><b>12</b> Python スクリプトの埋め込み</a></li>
+<li class="chapter" data-level="12" data-path="python.html"><a href="python.html"><i class="fa fa-check"></i><b>12</b> Python スクリプトの埋め込み</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="python.html"><a href="python.html#python-のグラフィックに関する制約"><i class="fa fa-check"></i><b>12.1</b> Python のグラフィックに関する制約</a></li>
+</ul></li>
 <li class="part"><span><b>V 製本と多様な形式への対応</b></span></li>
-<li class="chapter" data-level="13" data-path="プレゼンテーション資料の作成.html"><a href="プレゼンテーション資料の作成.html"><i class="fa fa-check"></i><b>13</b> プレゼンテーション資料の作成</a></li>
-<li class="chapter" data-level="14" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html"><i class="fa fa-check"></i><b>14</b> PDF の文書クラス</a></li>
-<li class="chapter" data-level="15" data-path="wip-卒業論文の作成.html"><a href="wip-卒業論文の作成.html"><i class="fa fa-check"></i><b>15</b> (WIP) 卒業論文の作成</a></li>
-<li class="chapter" data-level="16" data-path="wip-小説の執筆.html"><a href="wip-小説の執筆.html"><i class="fa fa-check"></i><b>16</b> (WIP) 小説の執筆</a></li>
-<li class="chapter" data-level="17" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html"><i class="fa fa-check"></i><b>17</b> 製本方法の詳細</a>
+<li class="chapter" data-level="13" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html"><i class="fa fa-check"></i><b>13</b> PDF の文書クラス</a>
 <ul>
-<li class="chapter" data-level="17.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#ファイル構成"><i class="fa fa-check"></i><b>17.1</b> ファイル構成</a>
+<li class="chapter" data-level="13.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#プレゼンテーション資料の作成"><i class="fa fa-check"></i><b>13.1</b> プレゼンテーション資料の作成</a>
 <ul>
-<li class="chapter" data-level="17.1.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#output.yml"><i class="fa fa-check"></i><b>17.1.1</b> <code>_output.yml</code></a></li>
-<li class="chapter" data-level="17.1.2" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#bookdown.yml"><i class="fa fa-check"></i><b>17.1.2</b> <code>_bookdown.yml</code></a></li>
+<li class="chapter" data-level="13.1.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#主な設定"><i class="fa fa-check"></i><b>13.1.1</b> 主な設定</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#wip-卒業論文の作成"><i class="fa fa-check"></i><b>13.2</b> (WIP) 卒業論文の作成</a></li>
+<li class="chapter" data-level="13.3" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#wip-小説の執筆"><i class="fa fa-check"></i><b>13.3</b> (WIP) 小説の執筆</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html"><i class="fa fa-check"></i><b>14</b> 製本方法の詳細</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#ファイル構成"><i class="fa fa-check"></i><b>14.1</b> ファイル構成</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#output.yml"><i class="fa fa-check"></i><b>14.1.1</b> <code>_output.yml</code></a></li>
+<li class="chapter" data-level="14.1.2" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#bookdown.yml"><i class="fa fa-check"></i><b>14.1.2</b> <code>_bookdown.yml</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html"><i class="fa fa-check"></i><b>18</b> 出力形式による表現の限界</a>
+<li class="chapter" data-level="15" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html"><i class="fa fa-check"></i><b>15</b> 出力形式による表現の限界</a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#htmlとpdfで処理を場合分けする"><i class="fa fa-check"></i><b>18.1</b> HTMLとPDFで処理を場合分けする</a></li>
-<li class="chapter" data-level="18.2" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#絵文字の出力"><i class="fa fa-check"></i><b>18.2</b> 絵文字の出力</a></li>
-<li class="chapter" data-level="18.3" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#画像の保存形式"><i class="fa fa-check"></i><b>18.3</b> 画像の保存形式</a></li>
-<li class="chapter" data-level="18.4" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#デフォルトの保存形式"><i class="fa fa-check"></i><b>18.4</b> デフォルトの保存形式</a></li>
+<li class="chapter" data-level="15.1" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#htmlとpdfで処理を場合分けする"><i class="fa fa-check"></i><b>15.1</b> HTMLとPDFで処理を場合分けする</a></li>
+<li class="chapter" data-level="15.2" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#絵文字の出力"><i class="fa fa-check"></i><b>15.2</b> 絵文字の出力</a></li>
+<li class="chapter" data-level="15.3" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#画像の保存形式"><i class="fa fa-check"></i><b>15.3</b> 画像の保存形式</a></li>
+<li class="chapter" data-level="15.4" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#デフォルトの保存形式"><i class="fa fa-check"></i><b>15.4</b> デフォルトの保存形式</a></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html"><i class="fa fa-check"></i><b>19</b> 製本した文書を配布する</a>
+<li class="chapter" data-level="16" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html"><i class="fa fa-check"></i><b>16</b> 製本した文書を配布する</a>
 <ul>
-<li class="chapter" data-level="19.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#wepページのホスティング"><i class="fa fa-check"></i><b>19.1</b> Wepページのホスティング</a></li>
-<li class="chapter" data-level="19.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#todo-入稿するには"><i class="fa fa-check"></i><b>19.2</b> TODO: 入稿するには</a>
+<li class="chapter" data-level="16.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#wepページのホスティング"><i class="fa fa-check"></i><b>16.1</b> Wepページのホスティング</a></li>
+<li class="chapter" data-level="16.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#todo-入稿するには"><i class="fa fa-check"></i><b>16.2</b> TODO: 入稿するには</a>
 <ul>
-<li class="chapter" data-level="19.2.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#トンボの表示"><i class="fa fa-check"></i><b>19.2.1</b> トンボの表示</a></li>
-<li class="chapter" data-level="19.2.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#フォントの埋め込み"><i class="fa fa-check"></i><b>19.2.2</b> フォントの埋め込み</a></li>
+<li class="chapter" data-level="16.2.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#トンボの表示"><i class="fa fa-check"></i><b>16.2.1</b> トンボの表示</a></li>
+<li class="chapter" data-level="16.2.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#フォントの埋め込み"><i class="fa fa-check"></i><b>16.2.2</b> フォントの埋め込み</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>VI デバッグ</b></span></li>
 <li class="chapter" data-level="" data-path="このパートで説明すること.html"><a href="このパートで説明すること.html"><i class="fa fa-check"></i>このパートで説明すること</a></li>
-<li class="chapter" data-level="20" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html"><i class="fa fa-check"></i><b>20</b> 製本時のエラーへの対処</a>
+<li class="chapter" data-level="17" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html"><i class="fa fa-check"></i><b>17</b> 製本時のエラーへの対処</a>
 <ul>
-<li class="chapter" data-level="20.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>20.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
-<li class="chapter" data-level="20.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>20.2</b> YAML フロントマターを確認する</a></li>
-<li class="chapter" data-level="20.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-生成時のエラーを確認する"><i class="fa fa-check"></i><b>20.3</b> PDF 生成時のエラーを確認する</a></li>
+<li class="chapter" data-level="17.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>17.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
+<li class="chapter" data-level="17.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>17.2</b> YAML フロントマターを確認する</a></li>
+<li class="chapter" data-level="17.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-生成時のエラーを確認する"><i class="fa fa-check"></i><b>17.3</b> PDF 生成時のエラーを確認する</a></li>
 </ul></li>
 <li class="appendix"><span><b>補遺</b></span></li>
 <li class="chapter" data-level="A" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html"><i class="fa fa-check"></i><b>A</b> デフォルト値の自動調整</a>
@@ -338,23 +349,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">8.4</span> (TODO) その他の R プログラム</h2>
 <p>なお, DOT言語は <code>DiagrammeR</code> パッケージを経由して使うこともできる<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a>(図: <a href="advanced-graph.html#fig:diagrammer-graph">8.3</a>). グラフィカルモデルの記述などはこちらのほうが簡単かもしれない.</p>
 
-<div class="sourceCode" id="cb46"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb46-1"><a href="advanced-graph.html#cb46-1"></a>DiagrammeR<span class="op">::</span><span class="kw">grViz</span>(<span class="st">&quot;digraph {</span></span>
-<span id="cb46-2"><a href="advanced-graph.html#cb46-2"></a><span class="st">  graph [layout = dot, rankdir = TB]</span></span>
-<span id="cb46-3"><a href="advanced-graph.html#cb46-3"></a><span class="st">  </span></span>
-<span id="cb46-4"><a href="advanced-graph.html#cb46-4"></a><span class="st">  node [shape = rectangle]        </span></span>
-<span id="cb46-5"><a href="advanced-graph.html#cb46-5"></a><span class="st">  rec1 [label = &#39;Step 1. 起床する&#39;]</span></span>
-<span id="cb46-6"><a href="advanced-graph.html#cb46-6"></a><span class="st">  rec2 [label = &#39;Step 2. コードを書く&#39;]</span></span>
-<span id="cb46-7"><a href="advanced-graph.html#cb46-7"></a><span class="st">  rec3 [label =  &#39;Step 3. ???&#39;]</span></span>
-<span id="cb46-8"><a href="advanced-graph.html#cb46-8"></a><span class="st">  rec4 [label = &#39;Step 4. 給料をもらう&#39;]</span></span>
-<span id="cb46-9"><a href="advanced-graph.html#cb46-9"></a><span class="st">  </span></span>
-<span id="cb46-10"><a href="advanced-graph.html#cb46-10"></a><span class="st">  # edge definitions with the node IDs</span></span>
-<span id="cb46-11"><a href="advanced-graph.html#cb46-11"></a><span class="st">  rec1 -&gt; rec2 -&gt; rec3 -&gt; rec4</span></span>
-<span id="cb46-12"><a href="advanced-graph.html#cb46-12"></a><span class="st">  }&quot;</span>,</span>
-<span id="cb46-13"><a href="advanced-graph.html#cb46-13"></a>  <span class="dt">height =</span> <span class="dv">500</span></span>
-<span id="cb46-14"><a href="advanced-graph.html#cb46-14"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb45-1"><a href="advanced-graph.html#cb45-1"></a>DiagrammeR<span class="op">::</span><span class="kw">grViz</span>(<span class="st">&quot;digraph {</span></span>
+<span id="cb45-2"><a href="advanced-graph.html#cb45-2"></a><span class="st">  graph [layout = dot, rankdir = TB]</span></span>
+<span id="cb45-3"><a href="advanced-graph.html#cb45-3"></a><span class="st">  </span></span>
+<span id="cb45-4"><a href="advanced-graph.html#cb45-4"></a><span class="st">  node [shape = rectangle]        </span></span>
+<span id="cb45-5"><a href="advanced-graph.html#cb45-5"></a><span class="st">  rec1 [label = &#39;Step 1. 起床する&#39;]</span></span>
+<span id="cb45-6"><a href="advanced-graph.html#cb45-6"></a><span class="st">  rec2 [label = &#39;Step 2. コードを書く&#39;]</span></span>
+<span id="cb45-7"><a href="advanced-graph.html#cb45-7"></a><span class="st">  rec3 [label =  &#39;Step 3. ???&#39;]</span></span>
+<span id="cb45-8"><a href="advanced-graph.html#cb45-8"></a><span class="st">  rec4 [label = &#39;Step 4. 給料をもらう&#39;]</span></span>
+<span id="cb45-9"><a href="advanced-graph.html#cb45-9"></a><span class="st">  </span></span>
+<span id="cb45-10"><a href="advanced-graph.html#cb45-10"></a><span class="st">  # edge definitions with the node IDs</span></span>
+<span id="cb45-11"><a href="advanced-graph.html#cb45-11"></a><span class="st">  rec1 -&gt; rec2 -&gt; rec3 -&gt; rec4</span></span>
+<span id="cb45-12"><a href="advanced-graph.html#cb45-12"></a><span class="st">  }&quot;</span>,</span>
+<span id="cb45-13"><a href="advanced-graph.html#cb45-13"></a>  <span class="dt">height =</span> <span class="dv">500</span></span>
+<span id="cb45-14"><a href="advanced-graph.html#cb45-14"></a>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:diagrammer-graph"></span>
-<div id="htmlwidget-126443040a9c324c98aa" style="width:672px;height:500px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-126443040a9c324c98aa">{"x":{"diagram":"digraph {\n  graph [layout = dot, rankdir = TB]\n  \n  node [shape = rectangle]        \n  rec1 [label = \"Step 1. 起床する\"]\n  rec2 [label = \"Step 2. コードを書く\"]\n  rec3 [label =  \"Step 3. ???\"]\n  rec4 [label = \"Step 4. 給料をもらう\"]\n  \n  # edge definitions with the node IDs\n  rec1 -> rec2 -> rec3 -> rec4\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-497601d5bfbac9cb5bf6" style="width:672px;height:500px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-497601d5bfbac9cb5bf6">{"x":{"diagram":"digraph {\n  graph [layout = dot, rankdir = TB]\n  \n  node [shape = rectangle]        \n  rec1 [label = \"Step 1. 起床する\"]\n  rec2 [label = \"Step 2. コードを書く\"]\n  rec3 [label =  \"Step 3. ???\"]\n  rec4 [label = \"Step 4. 給料をもらう\"]\n  \n  # edge definitions with the node IDs\n  rec1 -> rec2 -> rec3 -> rec4\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 図 8.3: <code>DiagrammeR</code> によるグラフィカルモデル (RCB, Ch. 4.15 より)
 </p>
@@ -373,7 +384,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="このパートについて.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="表のデザイン.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="advanced-tabulate.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -415,7 +426,7 @@ gitbook.start({
 "link": "tree/rmdja/inst/resources/examples/bookdown/chapter/chapters/advanced.Rmd",
 "text": null
 },
-"download": ["rmdja.pdf", "rmdja.epub"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

@@ -125,23 +125,169 @@ DiagrammeR::grViz("digraph {
 [^rcb-diagrammer]: https://bookdown.org/yihui/rmarkdown-cookbook/diagrams.html
 
 
-# 表のデザイン
+# 表のデザイン {#advanced-tabulate}
+
+## `kableExtra` による表のスタイルのカスタマイズ
+
+```{r kableextra-logo, out.width="10%"}
+include_graphics(if(is_latex_output()) "img/kableExtra.pdf" else "img/kableExtra.svg")
+```
+
+`kableExtra` パッケージは `knitr::kable` の拡張であり, 様々なスタイルの表を出力できる. そしてそれは HTML でも PDF でも有効である.
+
+まず, (これは `kable()` からある機能だが) `booktabs = T` を指定する. `r rmdja::texlogo("LaTeX")` のデフォルトの表は罫線が多すぎる. 罫線は牢獄の格子を暗示するため過剰な罫線にまみれた表を書いたり眺めたりしていると精神が抑圧され有害であると心理学的にも証明されている (**嘘**). しかし `booktabs = T` はこれだけで `booktabs.sty` に準拠した見やすいスタイルに変更してくれる. さらに `kableExtra` の機能として, 表 \@ref(tab:kableextra-color) にみられるように条件書式のような装飾が可能である[^mtcars-term].
+
+(ref:kableextra-color-cap) `kabeExtra` パッケージを利用した表の作成, 公式ドキュメントの用例より
+
+```{r kableextra-color, echo=T, message=F}
+colnames_mtcars_ja <- c(
+  "ガロン毎マイル", "シリンダ", "排気量", "総馬力",
+  "ギア比", "重量", "加速性能", "トランスミッション", "ギア数", "キャブレター数")
+that_cell <- c(rep(F, 7), T)
+mtcars[1:8, 1:8] %>%
+  kbl(booktabs = T, linesep = "",
+      format = if(knitr::is_latex_output()) "latex" else "html",
+      caption = "(ref:kableextra-color-cap)",
+      col.names = colnames_mtcars_ja[1:8]
+      ) %>%
+  kable_paper(full_width = F) %>%
+  kable_styling(latex_options = "scale_down") %>%
+  column_spec(2, color = spec_color(mtcars$mpg[1:8]),
+              link = "https://haozhu233.github.io/kableExtra") %>%
+  column_spec(6, color = "white",
+              background = spec_color(mtcars$drat[1:8], end = 0.7),
+              popover = paste("am:", mtcars$am[1:8])) %>%
+  column_spec(9, strikeout = that_cell, bold = that_cell,
+              color = c(rep("black", 7), "red"))
+```
+
+上記の例で使われている, `kableExtra` の便利な機能をいくつか挙げる.
+
+* `kbl(col.names = )` で列ラベルを指定できる. これは列名の変更ではないので以降も同じ名前で変数を参照できるが, 表示されるのは列ラベルである. 現状, 日本語 (マルチバイト文字) を変数名に与えることを想定していないパッケージはまだ多いので, この機能が役に立つ.
+* `kable_styling(latex_options = "scale_down")` はPDF出力時に本文幅に合わせて自動で縮小するオプションである.
+
+グラフのインライン挿入も可能である (表 \@ref(tab:kableextra-plot)). しかしこのような細かいグラフの羅列は可読性に欠けることに注意する.
+
+(ref:kableextra-plot-cap)  `kabeExtra` パッケージによる表内グラフ, 公式ドキュメントの用例より
+
+```{r kableextra-plot, echo=T}
+mpg_list <- split(mtcars$mpg, mtcars$cyl)
+disp_list <- split(mtcars$disp, mtcars$cyl)
+inline_plot <- data.frame(cyl = c(4, 6, 8), mpg_box = "", mpg_hist = "",
+mpg_line1 = "", mpg_line2 = "", mpg_points1 = "", mpg_points2 = "", mpg_poly = "")
+inline_plot %>%
+  kbl(booktabs = T, format = if(knitr::is_latex_output()) "latex" else "html",
+      caption = "(ref:kableextra-plot-cap)",
+      col.names = c("シリンダ数", "ガロン毎マイル", "", "", "", "", "", "")
+      ) %>%
+kable_paper(full_width = FALSE) %>%
+  column_spec(2, image = spec_boxplot(mpg_list)) %>%
+  column_spec(3, image = spec_hist(mpg_list)) %>%
+  column_spec(4, image = spec_plot(mpg_list, same_lim = TRUE)) %>%
+  column_spec(5, image = spec_plot(mpg_list, same_lim = FALSE)) %>%
+  column_spec(6, image = spec_plot(mpg_list, type = "p")) %>%
+  column_spec(7, image = spec_plot(mpg_list, disp_list, type = "p")) %>%
+  column_spec(8, image = spec_plot(mpg_list, polymin = 5))
+```
+
+その他細かい使用上の注意をいくつか挙げる.
+
+* `kableExtra::` で参照するのではなく, 最初にパッケージをロードしたほうが不具合が起きにくい.
+* PDF に出力する場合, 多くの `r rmdja::texlogo("LaTeX")` パッケージのロードが必要だが, `rmdja` のPDFフォーマットはいずれもテンプレートに組み込んでいるため手動設定は必要ない.
+* `knitr::kable()` または `kableExtra::kbl()` の `format` でHTML/texの出力を決める. 現在は判定が自動化されたとのことだが, まれに不具合があるという報告もみられる. よって, どちらも出力したい場合は上記のように `format = knitr::is_latex_output()` で条件分岐させるのが1つの手である.
+* 表のキャプションは図のようにチャンクオプションに指定するのではなく, `kbl()`/`kable()` の `caption` 引数に指定する
+* キャプション内にMarkdown記法や相互参照など特殊な構文を含めたい場合は, `escape = F` を指定する.
+* もし画像が大きすぎてPDFで余白からはみ出てしまうならば, `kable_styling(latex_options = "scale_down")` を追加することで自動縮小してくれる.
+
+その他, テキストの回り込み, 画像の挿入など様々なことが可能である. 詳細は公式の解説である "[Create Awesome HTML Table with knitr::kable and kableExtra](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html)" および [PDF版](http://haozhu233.github.io/kableExtra/awesome_table_in_pdf.pdf) が役に立つ.
+
+[^mtcars-term]: ところで私は自動車の性能を表す用語に詳しくない. これは `mtcars` データセットの列名を日本語訳したのだが, した表記に誤りがあれば指摘してほしい.
+
+## `formattable` パッケージとの併用
+
+`formattable` パッケージは以前からある表を装飾するパッケージである. `kableExtra` との併用も可能だが, **`r rmdja::texlogo("LaTeX")`  に対応しておらず**, HTMLタグをtexファイルに吐き出してしまうため動作しない. PDF にも同様に表示するには [StackOverflow](https://stackoverflow.com/questions/34983822/how-to-have-r-formattable-rendered-to-pdf-output-and-how-to-have-percents-in-the)で提案されているように, `webshot` 使うなど工夫が必要である. そこまでしてこの装飾にこだわるメリットは薄いと私は考えるので現在この問題に対応する予定はない. かわりに後述する `huxtable` または `gt` を使うべきだと考える. 
+
+## `huxtable` パッケージによる作表
+
+```{r huxtable-logo}
+huxtable::hux_logo(latex = is_latex_output(), html = is_html_output())
+```
+
+[`huxtable`](https://hughjonesd.github.io/huxtable/) は HTML と `r rmdja::texlogo("LaTeX")` に対応した作表パッケージであり, 公式ドキュメントによると他の類似パッケージと比較して多機能であることを強調している. 全体的に `tidyverse` を意識した構文が用意され, `kableExtra` のようにパイプラインを使った記述が捗る. なお `huxtable` のロゴはランダムに生成される. さらに「1行ごとに背景色を変更」「`stargazer`風の表」などよく使われるスタイルを簡単に設定できるようになっていたり, はては `tidyr` のような表のロング・ワイド変形機能まで備えている. 例えば公式用例集を参考に, 条件書式を付けた表 \@ref(tab:huxtable-example) を作成する.
+
+(ref:huxtable-example-cap) `huxtable` パッケージによる作表
+
+```{r huxtable-example, echo=T, message=F, eval=is_html_output(exclude = "epub") | is_latex_output()}
+require(huxtable)
+head(mtcars[1:5]) %>% set_names(colnames_mtcars_ja[1:5]) %>%
+  as_huxtable(add_rownames = "Model") %>%
+  set_caption("(ref:huxtable-example-cap)") %>%
+  set_bold(1, everywhere, T) %>%
+  theme_article() %>%
+  map_text_color(
+    everywhere, "ガロン毎マイル", by_colorspace("navy", "red", "yellow")) %>%
+  map_background_color(
+    everywhere, "総馬力", by_quantiles(0.8, c("white", "yellow"))) %>%
+  map_italic(everywhere, "Model", by_regex("Merc.*" = T)) %>%
+  set_number_format(col = "ギア比", value = fmt_percent(digits = 2))
+```
+
+そのままでは罫線の設定が `set_top_border()`, `set_bottom_border()`, などしかなく, 複雑な条件を指定するのが大変だが, `ggplot2` のテーマ関数のようにスタイルのプリセットが `theme_*()` の名前でいくつか用意されている. 例えば上記では `theme_article()` という学術論文風テーマを適用し, 表の上下とヘッダにだけ罫線を引いている. 条件書式は `map_*()` 関数群で実行できる. また, フォーマットは `set_number_format()` に値を変換するフォーマット関数を与える形で適用できる. こちらはパーセンテージなども正しく表示できる.
+
+* テーマ設定はグローバルオプションでも設定できる. 例えば `options('huxtable.knit_print_df_theme' = theme_article)`.
+
+なお, 動作させるにあたっていくつか注意が必要である.
+
+* `huxtable` は使用しているフォーマットを自動判別して相互参照用のラベルを生成しているが, `rmdja` で HTML を出力する際に正しく認識されないようである. `options(huxtable.bookdown = T)` Rmd の冒頭で実行して, `bookdown` としての処理を強制することで解決できる[^huxtable-bookdown]. 
+* `huxtable` は **EPUB 形式に対応していない**. 警告が表示されるだけのこともあれば, knit処理がハングアップしてしまうこともある.
+
+[^huxtable-bookdown]: おそらくはこの辺の処理の問題だが, 未解決 https://github.com/hughjonesd/huxtable/blob/3eb96b62a5fde1000924daba39078f2e72839383/R/knitr.R
+
+また, `huxreg()` は名前の通り回帰分析の結果を表にするなど `stargazer` パッケージに似た機能を提供する. これも同じクラスなので同様にスタイル設定が可能である (表 \@ref(tab:huxreg-example)).
+
+(ref:huxreg-example-cap) `huxtable::huxreg()` による出力
+
+```{r huxreg-example, echo=T, eval=is_html_output(exclude = "epub") | is_latex_output()}
+lm1 <- lm(mpg ~ cyl, mtcars)
+lm2 <- lm(mpg ~ cyl + hp, mtcars)
+glm1 <- glm(I(mpg > 20) ~ cyl, mtcars,
+          family = binomial)
+huxreg(lm1, lm2, glm1) %>%
+  set_caption("(ref:huxreg-example-cap)") %>%
+  set_text_color(everywhere, "model1", "green") %>%
+  set_text_color(everywhere, "model2", "blue")
+```
+
+その他の作例は [CRANの 公式 vignettes](https://cran.r-project.org/web/packages/huxtable/vignettes/huxtable.html) を参考にせよ.
 
 ## TeX/HTML を出力する関数
 
-`stargazer` や `xtable` のように, HTML や `\LaTeX`{=latex}`LaTeX`{=html} 形式で表を出力してくれるパッケージがある. これらは `results='asis'` のチャンクオプションを指定することで関数の出力するテキストをそのまま埋め込むことができる. よって, あとは HTMLか`\LaTeX`{=latex}`LaTeX`{=html} かといった出力形式の違いに気をつければ表示できる.
+`stargazer` や `xtable` のように, HTML や `\LaTeX`{=latex}`LaTeX`{=html} のソースコードとして表を出力してくれるパッケージがある. これらは `results='asis'` のチャンクオプションを指定することで関数の出力するテキストをそのまま埋め込むことができる. よって, あとは HTMLか`\LaTeX`{=latex}`LaTeX`{=html} かといった出力形式の違いに気をつければ表示できる (図 \@ref(tab:stargazer-table)).
 
 (ref:stargazer-title) `stargazer` による表の出力
 
-```{r stargazer-table, echo=T, results='asis', fig.cap="(ref:stargazer-title)"}
+```{r stargazer-table, echo=T, message=F, results='asis'}
 require(stargazer)
-stargazer(mtcars, type = if(knitr::is_latex_output()) 'latex' else 'html', header = F)
+stargazer(mtcars, header = F,
+          type = if(knitr::is_latex_output()) 'latex' else 'html',
+          title = "(ref:stargazer-title)",
+          label = knitr::opts_current$get("label")
+          )
 ```
 
-##  (TODO) `gt` パッケージの対応
+ただし `stargazer` はここ数年更新されておらず, R Markdown に対応した機能追加なども行われていないため, 相互参照に対応していない. `bookdown` リポジトリの [issue #175](https://github.com/rstudio/bookdown/issues/175) にあるように, PDFに限れば簡易的な方法で対処できるが, HTMLでも相互参照するには [`stargazer_bookdown`](https://github.com/jiewpeng/stargazer_bookdown) のインストールが必要になる.
 
-TODO
+その他, `Hmisc::latex()`, `stats::xtable()` という古典的な関数がある. 後者は名前の通り `r rmdja::texlogo("LaTeX")` のソースをかなりの自由度で出力できるが, ここまでやるならもう最初から `r rmdja::texlogo("LaTeX")` で書いたほうがいいのでは, というレベルである. `r rmdja::texlogo("LaTeX")` に詳しくない場合, かえって難しいかも知れない. 既に紹介した `kableExtra`, `huxtable` などでできる範囲でやったほうが簡単だろう.
 
+## その他の作表パッケージ
+
+`df_print` チャンクオプションで, デフォルトの表示方法を変更することもできる. ここまで `kable` での出力を前提としていたが, 長大な表を掲載したい場合, `paged` オプションがある.
+
+それ以外に有名なパッケージとして, `DT`, `flextable`, `gt` などがある. `DT` はインタラクティブな表ウィジェットを作成し, `flextable` は Word へのエクスポート機能をフィーチャーしているが, PDF に対しては画像として出力するなどくせがある. `gt` は RStudio 社が開発しているパッケージで, `huxtable` のように `tidyverse` 的なシンプルな構文が用意されている一方で, まだ R Markdown の相互参照機能に対応していない[^gt-crossref]. 以上から, `kableExtra` や `huxtable` が `rmdja` の対応する出力媒体に適したパッケージであり, それ以外のパッケージの紹介は避ける.
+
+RCB [10.3 Other packages for creating tables](https://bookdown.org/yihui/rmarkdown-cookbook/table-other.html) も参考にせよ.
+
+[^gt-crossref]: Issue [#115](https://github.com/rstudio/gt/issues/115) にあるように, 機能を追加したいという声はある. しかし現時点では `gt`  のこの機能の開発を積極的に進める様子はない. 
 
 # 文献引用 
 
@@ -209,4 +355,14 @@ ggplot(mtcars, aes('wt', 'mpg', color='factor(gear)')
 
 現状ではmatplotlibの標準出力や警告も表示されてしまうため, チャンクオプション `results='hide', warning=F, message=F` で隠すと良い.
 
-`plotly`, `bokeh` などの `matplotlib` に依存しないモジュールはPDFには対応していないため直接表示できない. 一旦画像を保存して, あらためて画像ファイルを埋め込む必要がある.
+## Python のグラフィックに関する制約
+
+`matplotlib` ベースのグラフィックを出力したい場合, いくつかの制約がある.
+
+* `matplotlib` > 3.2 では R がクラッシュするため, 3.2 を使用する必要
+* `axes` を使用した場合 (`subplot` などが依存), `matplotlib.pyplot.show` の呼び出しと, 次に別のグラフを呼び出す前の `matplotlib.pyplot.close()` が必要
+* `seaborn.FacetGrid` を Cairo デバイスで保存できない ( = フォントのサブセット化処理が複雑になる)
+
+よって, 現状では `matplotlib` エンジンでグラフィックを描くときはなるべく `plotnine` を使ったほうがトラブルが少ない.
+
+また `plotly`, `bokeh` などの `matplotlib` に依存しないモジュールはPDFには対応していないため直接表示できない. 一旦画像を保存して, あらためて画像ファイルを埋め込む必要がある.

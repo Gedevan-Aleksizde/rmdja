@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>20 製本時のエラーへの対処 | rmdja による多様な形式の日本語技術文書の作成</title>
+  <title>17 製本時のエラーへの対処 | rmdja による多様な形式の日本語技術文書の作成</title>
   <meta name="description" content="bookdown でまともな日本語文書を作る資料" />
-  <meta name="generator" content="bookdown 0.20.6 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="20 製本時のエラーへの対処 | rmdja による多様な形式の日本語技術文書の作成" />
+  <meta property="og:title" content="17 製本時のエラーへの対処 | rmdja による多様な形式の日本語技術文書の作成" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://bookdown.org/john/awesome/" />
   <meta property="og:image" content="https://bookdown.org/john/awesome/img/Johannes_Gutenberg.jpg" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="Gedevan-Aleksizde/rmdja" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="20 製本時のエラーへの対処 | rmdja による多様な形式の日本語技術文書の作成" />
+  <meta name="twitter:title" content="17 製本時のエラーへの対処 | rmdja による多様な形式の日本語技術文書の作成" />
   
   <meta name="twitter:description" content="bookdown でまともな日本語文書を作る資料" />
   <meta name="twitter:image" content="https://bookdown.org/john/awesome/img/Johannes_Gutenberg.jpg" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Katagiri, Satoshi (ill-identified)" />
 
 
-<meta name="date" content="2020-10-17" />
+<meta name="date" content="2020-10-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -221,10 +221,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他のプログラム"><i class="fa fa-check"></i><b>8.3</b> (TODO) その他のプログラム</a></li>
 <li class="chapter" data-level="8.4" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他の-r-プログラム"><i class="fa fa-check"></i><b>8.4</b> (TODO) その他の R プログラム</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="表のデザイン.html"><a href="表のデザイン.html"><i class="fa fa-check"></i><b>9</b> 表のデザイン</a>
+<li class="chapter" data-level="9" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html"><i class="fa fa-check"></i><b>9</b> 表のデザイン</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="表のデザイン.html"><a href="表のデザイン.html#texhtml-を出力する関数"><i class="fa fa-check"></i><b>9.1</b> TeX/HTML を出力する関数</a></li>
-<li class="chapter" data-level="9.2" data-path="表のデザイン.html"><a href="表のデザイン.html#todo-gt-パッケージの対応"><i class="fa fa-check"></i><b>9.2</b> (TODO) <code>gt</code> パッケージの対応</a></li>
+<li class="chapter" data-level="9.1" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#kableextra-による表のスタイルのカスタマイズ"><i class="fa fa-check"></i><b>9.1</b> <code>kableExtra</code> による表のスタイルのカスタマイズ</a></li>
+<li class="chapter" data-level="9.2" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#formattable-パッケージとの併用"><i class="fa fa-check"></i><b>9.2</b> <code>formattable</code> パッケージとの併用</a></li>
+<li class="chapter" data-level="9.3" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#huxtable-パッケージによる作表"><i class="fa fa-check"></i><b>9.3</b> <code>huxtable</code> パッケージによる作表</a></li>
+<li class="chapter" data-level="9.4" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#texhtml-を出力する関数"><i class="fa fa-check"></i><b>9.4</b> TeX/HTML を出力する関数</a></li>
+<li class="chapter" data-level="9.5" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#その他の作表パッケージ"><i class="fa fa-check"></i><b>9.5</b> その他の作表パッケージ</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="文献引用.html"><a href="文献引用.html"><i class="fa fa-check"></i><b>10</b> 文献引用</a>
 <ul>
@@ -235,43 +238,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.0.1" data-path="webapp.html"><a href="webapp.html#todo-plotly"><i class="fa fa-check"></i><b>11.0.1</b> TODO: plotly</a></li>
 <li class="chapter" data-level="11.0.2" data-path="webapp.html"><a href="webapp.html#todo-shiny"><i class="fa fa-check"></i><b>11.0.2</b> TODO: shiny</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="python.html"><a href="python.html"><i class="fa fa-check"></i><b>12</b> Python スクリプトの埋め込み</a></li>
+<li class="chapter" data-level="12" data-path="python.html"><a href="python.html"><i class="fa fa-check"></i><b>12</b> Python スクリプトの埋め込み</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="python.html"><a href="python.html#python-のグラフィックに関する制約"><i class="fa fa-check"></i><b>12.1</b> Python のグラフィックに関する制約</a></li>
+</ul></li>
 <li class="part"><span><b>V 製本と多様な形式への対応</b></span></li>
-<li class="chapter" data-level="13" data-path="プレゼンテーション資料の作成.html"><a href="プレゼンテーション資料の作成.html"><i class="fa fa-check"></i><b>13</b> プレゼンテーション資料の作成</a></li>
-<li class="chapter" data-level="14" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html"><i class="fa fa-check"></i><b>14</b> PDF の文書クラス</a></li>
-<li class="chapter" data-level="15" data-path="wip-卒業論文の作成.html"><a href="wip-卒業論文の作成.html"><i class="fa fa-check"></i><b>15</b> (WIP) 卒業論文の作成</a></li>
-<li class="chapter" data-level="16" data-path="wip-小説の執筆.html"><a href="wip-小説の執筆.html"><i class="fa fa-check"></i><b>16</b> (WIP) 小説の執筆</a></li>
-<li class="chapter" data-level="17" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html"><i class="fa fa-check"></i><b>17</b> 製本方法の詳細</a>
+<li class="chapter" data-level="13" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html"><i class="fa fa-check"></i><b>13</b> PDF の文書クラス</a>
 <ul>
-<li class="chapter" data-level="17.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#ファイル構成"><i class="fa fa-check"></i><b>17.1</b> ファイル構成</a>
+<li class="chapter" data-level="13.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#プレゼンテーション資料の作成"><i class="fa fa-check"></i><b>13.1</b> プレゼンテーション資料の作成</a>
 <ul>
-<li class="chapter" data-level="17.1.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#output.yml"><i class="fa fa-check"></i><b>17.1.1</b> <code>_output.yml</code></a></li>
-<li class="chapter" data-level="17.1.2" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#bookdown.yml"><i class="fa fa-check"></i><b>17.1.2</b> <code>_bookdown.yml</code></a></li>
+<li class="chapter" data-level="13.1.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#主な設定"><i class="fa fa-check"></i><b>13.1.1</b> 主な設定</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#wip-卒業論文の作成"><i class="fa fa-check"></i><b>13.2</b> (WIP) 卒業論文の作成</a></li>
+<li class="chapter" data-level="13.3" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#wip-小説の執筆"><i class="fa fa-check"></i><b>13.3</b> (WIP) 小説の執筆</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html"><i class="fa fa-check"></i><b>14</b> 製本方法の詳細</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#ファイル構成"><i class="fa fa-check"></i><b>14.1</b> ファイル構成</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#output.yml"><i class="fa fa-check"></i><b>14.1.1</b> <code>_output.yml</code></a></li>
+<li class="chapter" data-level="14.1.2" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#bookdown.yml"><i class="fa fa-check"></i><b>14.1.2</b> <code>_bookdown.yml</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html"><i class="fa fa-check"></i><b>18</b> 出力形式による表現の限界</a>
+<li class="chapter" data-level="15" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html"><i class="fa fa-check"></i><b>15</b> 出力形式による表現の限界</a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#htmlとpdfで処理を場合分けする"><i class="fa fa-check"></i><b>18.1</b> HTMLとPDFで処理を場合分けする</a></li>
-<li class="chapter" data-level="18.2" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#絵文字の出力"><i class="fa fa-check"></i><b>18.2</b> 絵文字の出力</a></li>
-<li class="chapter" data-level="18.3" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#画像の保存形式"><i class="fa fa-check"></i><b>18.3</b> 画像の保存形式</a></li>
-<li class="chapter" data-level="18.4" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#デフォルトの保存形式"><i class="fa fa-check"></i><b>18.4</b> デフォルトの保存形式</a></li>
+<li class="chapter" data-level="15.1" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#htmlとpdfで処理を場合分けする"><i class="fa fa-check"></i><b>15.1</b> HTMLとPDFで処理を場合分けする</a></li>
+<li class="chapter" data-level="15.2" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#絵文字の出力"><i class="fa fa-check"></i><b>15.2</b> 絵文字の出力</a></li>
+<li class="chapter" data-level="15.3" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#画像の保存形式"><i class="fa fa-check"></i><b>15.3</b> 画像の保存形式</a></li>
+<li class="chapter" data-level="15.4" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#デフォルトの保存形式"><i class="fa fa-check"></i><b>15.4</b> デフォルトの保存形式</a></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html"><i class="fa fa-check"></i><b>19</b> 製本した文書を配布する</a>
+<li class="chapter" data-level="16" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html"><i class="fa fa-check"></i><b>16</b> 製本した文書を配布する</a>
 <ul>
-<li class="chapter" data-level="19.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#wepページのホスティング"><i class="fa fa-check"></i><b>19.1</b> Wepページのホスティング</a></li>
-<li class="chapter" data-level="19.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#todo-入稿するには"><i class="fa fa-check"></i><b>19.2</b> TODO: 入稿するには</a>
+<li class="chapter" data-level="16.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#wepページのホスティング"><i class="fa fa-check"></i><b>16.1</b> Wepページのホスティング</a></li>
+<li class="chapter" data-level="16.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#todo-入稿するには"><i class="fa fa-check"></i><b>16.2</b> TODO: 入稿するには</a>
 <ul>
-<li class="chapter" data-level="19.2.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#トンボの表示"><i class="fa fa-check"></i><b>19.2.1</b> トンボの表示</a></li>
-<li class="chapter" data-level="19.2.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#フォントの埋め込み"><i class="fa fa-check"></i><b>19.2.2</b> フォントの埋め込み</a></li>
+<li class="chapter" data-level="16.2.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#トンボの表示"><i class="fa fa-check"></i><b>16.2.1</b> トンボの表示</a></li>
+<li class="chapter" data-level="16.2.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#フォントの埋め込み"><i class="fa fa-check"></i><b>16.2.2</b> フォントの埋め込み</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>VI デバッグ</b></span></li>
 <li class="chapter" data-level="" data-path="このパートで説明すること.html"><a href="このパートで説明すること.html"><i class="fa fa-check"></i>このパートで説明すること</a></li>
-<li class="chapter" data-level="20" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html"><i class="fa fa-check"></i><b>20</b> 製本時のエラーへの対処</a>
+<li class="chapter" data-level="17" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html"><i class="fa fa-check"></i><b>17</b> 製本時のエラーへの対処</a>
 <ul>
-<li class="chapter" data-level="20.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>20.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
-<li class="chapter" data-level="20.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>20.2</b> YAML フロントマターを確認する</a></li>
-<li class="chapter" data-level="20.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-生成時のエラーを確認する"><i class="fa fa-check"></i><b>20.3</b> PDF 生成時のエラーを確認する</a></li>
+<li class="chapter" data-level="17.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>17.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
+<li class="chapter" data-level="17.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>17.2</b> YAML フロントマターを確認する</a></li>
+<li class="chapter" data-level="17.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-生成時のエラーを確認する"><i class="fa fa-check"></i><b>17.3</b> PDF 生成時のエラーを確認する</a></li>
 </ul></li>
 <li class="appendix"><span><b>補遺</b></span></li>
 <li class="chapter" data-level="A" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html"><i class="fa fa-check"></i><b>A</b> デフォルト値の自動調整</a>
@@ -308,10 +319,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="製本時のエラーへの対処" class="section level1" number="20">
-<h1><span class="header-section-number">20</span> 製本時のエラーへの対処</h1>
-<div id="エラーがどのタイミングで発生したかを特定する" class="section level2" number="20.1">
-<h2><span class="header-section-number">20.1</span> エラーがどのタイミングで発生したかを特定する</h2>
+<div id="製本時のエラーへの対処" class="section level1" number="17">
+<h1><span class="header-section-number">17</span> 製本時のエラーへの対処</h1>
+<div id="エラーがどのタイミングで発生したかを特定する" class="section level2" number="17.1">
+<h2><span class="header-section-number">17.1</span> エラーがどのタイミングで発生したかを特定する</h2>
 <p>R Markdown はさまざまな外部プログラムを利用して, 数段階のプロセスを経てソースファイルを変換して文書を作成する複雑なプログラムである. 逆に言えば, <code>Rmd</code> ファイルを <code>md</code> ファイルに変換 (<code>knitr</code>による処理) するときにエラーが出たのか, <code>md</code> を各ファイルに変換 <code>pandoc</code> する際に起こったのかをまず特定するのが重要である. そのためには</p>
 <ol style="list-style-type: decimal">
 <li><code>keep_md: true</code> を設定する</li>
@@ -322,8 +333,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>処理に時間がかかるチャンクがあってキャッシュを作りたい場合は, 別途 <code>rds</code> や <code>RData</code> ファイルに結果を保存するという方法もある. しかしもしプログラムの再現性を重視する場合, この方法は望ましくないだろう. しかし残念ながら現状はこうするか, ひたすら長い時間を待つしかない.</p>
 <p>TODO: <a href="https://bookdown.org/yihui/rmarkdown-cookbook/cache.html" class="uri">https://bookdown.org/yihui/rmarkdown-cookbook/cache.html</a></p>
 </div>
-<div id="yaml-フロントマターを確認する" class="section level2" number="20.2">
-<h2><span class="header-section-number">20.2</span> YAML フロントマターを確認する</h2>
+<div id="yaml-フロントマターを確認する" class="section level2" number="17.2">
+<h2><span class="header-section-number">17.2</span> YAML フロントマターを確認する</h2>
 <p>以前『<a href="https://ill-identified.hatenablog.com/entry/2020/09/05/202403">[R] R Markdown の YAML ヘッダでハマったおまえのための記事</a>』というブログ記事にも書いたように, YAML フロントマターは慣れないと書き間違えやすいのが現状である. もし自分で変更したのなら, 改めて確認すべきだろう. 特に, 製本直後にすぐに, 心当たりのないRプログラム関係のエラーが出る場合, <strong>チャンクではなく YAML フロントマターの読み取りに失敗している可能性</strong>がある.</p>
 <p>以下の<strong>4原則</strong>を覚えておこう. 以前は <code>bookdown</code> の話を想定してなかったので, さらに条文を1つ加えた.</p>
 <ol style="list-style-type: decimal">
@@ -334,20 +345,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p><code>output:</code> には bookdown::gitbook など, <code>bookdown</code> で提供されているフォーマット関数を指定しており, その配下に記入するのはフォーマット関数に与える引数である. よって, 関数ヘルプを確認すれば有効な引数を知ることができる. しかし一方で, <code>...</code> が引数になっていることがあるので, タイプミスしてもエラーが出ないことがある.</p>
 <p>また, YAMLの構文でサポートされている配列は誤評価を引き起こすことがある.</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb66-1"><a href="製本時のエラーへの対処.html#cb66-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb66-2"><a href="製本時のエラーへの対処.html#cb66-2"></a><span class="at">  bookdown:</span><span class="fu">:gitbook</span><span class="kw">:</span></span>
+<span id="cb66-3"><a href="製本時のエラーへの対処.html#cb66-3"></a><span class="at">    </span><span class="fu">toc_depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
+<span id="cb66-4"><a href="製本時のエラーへの対処.html#cb66-4"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
 <div class="sourceCode" id="cb67"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb67-1"><a href="製本時のエラーへの対処.html#cb67-1"></a><span class="fu">output</span><span class="kw">:</span></span>
 <span id="cb67-2"><a href="製本時のエラーへの対処.html#cb67-2"></a><span class="at">  bookdown:</span><span class="fu">:gitbook</span><span class="kw">:</span></span>
-<span id="cb67-3"><a href="製本時のエラーへの対処.html#cb67-3"></a><span class="at">    </span><span class="fu">toc_depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
-<span id="cb67-4"><a href="製本時のエラーへの対処.html#cb67-4"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
-<div class="sourceCode" id="cb68"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb68-1"><a href="製本時のエラーへの対処.html#cb68-1"></a><span class="fu">output</span><span class="kw">:</span></span>
-<span id="cb68-2"><a href="製本時のエラーへの対処.html#cb68-2"></a><span class="at">  bookdown:</span><span class="fu">:gitbook</span><span class="kw">:</span></span>
-<span id="cb68-3"><a href="製本時のエラーへの対処.html#cb68-3"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">toc_depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
-<span id="cb68-4"><a href="製本時のエラーへの対処.html#cb68-4"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
+<span id="cb67-3"><a href="製本時のエラーへの対処.html#cb67-3"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">toc_depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
+<span id="cb67-4"><a href="製本時のエラーへの対処.html#cb67-4"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
 <p>上の例は正しい記法である. 一方でハイフン <code>-</code> は YAML では配列を記述するために用意されている. 下記の場合, キーワード引数ではなく位置引数のような扱いになるため, <code>toc</code> に対して <code>3</code> を代入することになり, エラーが発生する. 逆に言えば, <code>-</code> を使う場合, キーワードを書かずに値だけを正しい順番で書けば機能する.</p>
 <p>インデントしないトップレベルの引数は, 基本的に <code>pandoc</code> に与える引数である. これ意味のない引数を与えてもエラーを返さないことが多いので, タイプミスに注意する.</p>
 <p>しかし, フォーマット関数に <code>pandoc_args</code> という構文をサポートしていることや, フォーマット関数で <code>pandoc</code> の同名の引数を上書きする仕様のフォーマットもあるため, 上記は絶対ではない. これが原因で, 「<code>output:</code> 以下に書くべきものを間違えてトップレベルに書いたが, 意図したとおりに機能した」あるいはその逆が発生することがある. また, <strong><code>pandoc</code> の構文ではキーワードにハイフンを使うことができる</strong>が, フォーマットはRの関数でもあるため, ハイフンを使えず, アンダースコアで置き換えられる. この違いも書き間違えの原因になる.</p>
 </div>
-<div id="pdf-生成時のエラーを確認する" class="section level2" number="20.3">
-<h2><span class="header-section-number">20.3</span> PDF 生成時のエラーを確認する</h2>
+<div id="pdf-生成時のエラーを確認する" class="section level2" number="17.3">
+<h2><span class="header-section-number">17.3</span> PDF 生成時のエラーを確認する</h2>
 <p>それでもエラーが出る場合, 私の経験上ほとんどが生成した <code>.tex</code> ファイルをタイプセットする際にエラーが発生している. <code>html</code> との両立を考えると, どうしても <code>pandoc</code> が解釈できる構文に限界がくるためである.</p>
 <pre><code>! LaTeX Error: XXXXX</code></pre>
 <p>とか</p>
@@ -415,7 +426,7 @@ gitbook.start({
 "link": "tree/rmdja/inst/resources/examples/bookdown/chapter/chapters/multi-media.Rmd",
 "text": null
 },
-"download": ["rmdja.pdf", "rmdja.epub"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

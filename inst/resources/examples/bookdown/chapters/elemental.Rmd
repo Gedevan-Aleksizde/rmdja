@@ -350,7 +350,7 @@ echo Hello, Bookdown
 
 これらのオプションがあるおかげでプログラムとその結果の再現を説明したい場合はソースコードも表示させたり, 回帰分析やシミュレーションの結果だけを掲載したい時は結果のみ表示したりできる. これが R Markdown のチャンクの強みである. 例えば Jupyter notebook/lab などは従来, コードセルと出力セルを自由に隠すことができなかった.
 
-チャンクに使用できる言語は R だけではない. **つまり Python なども使用できる**. 以下で対応しているエンジンの一覧を表示できる.
+チャンクに使用できる言語は R だけではない. **つまり Python なども使用できる**(詳細は \@ref(#python) 章を参照). 以下で対応しているエンジンの一覧を表示できる.
 
 ```{r engine-list, echo=T}
 names(knitr::knit_engines$get())
@@ -458,12 +458,14 @@ Markdown 記法を使った表記は既に紹介した. しかしこれは表の
  
 R Markdown のデフォルトでは R のコンソールと同様にテキストとして出力されるが, bookdown では異なるデザインで表示されている. これは `knitr`, `kableExtra` パッケージなどで事後処理をかけることで見やすいデザインの表に変換しているからである.
 
-この方法はシンプルで使いやすいが, R はテーブル状のデータ処理に長けているため, 手動で数値を書くよりも簡単な方法がある.
+また, この方法はシンプルで使いやすいが数値を手作業で書く必要がある. R はテーブル状のデータ処理に長けているため, このような煩雑さを省くことができる.
+
+(ref:kable-cap) `knitr::kable()` で出力された (PDFではあまりかっこよくない) 表
 
 ```{r display-dataframe-kable, echo=T}
 data(iris)
 kable(
-  head(iris, n = 10), caption = '`knitr::kable()` で出力された (PDFではあまりかっこよくない) 表'
+  head(iris, n = 10), caption = '(ref:kable-cap)'
   )
 ```
 
@@ -477,7 +479,7 @@ kable(
   ) %>% row_spec(seq(1, 10, by = 2), background = "gray")
 ```
 
-さらに, RCB の [Ch. 10.1 The function `knitr::kable()`](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html) ではその他いろいろな書式設定を紹介している.
+`kable()` は R Markdown に必須な `knitr` パッケージに含まれる関数なので最初に紹介したが, 現在は `huxtable` や `gt` というより使いやすいパッケージが存在する. より発展的な表のスタイル指定方法については \@ref(#advanced-tabulate) 章で話す.
 
 # 相互参照と引用
 

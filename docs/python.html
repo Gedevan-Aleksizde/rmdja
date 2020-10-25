@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>12 Python スクリプトの埋め込み | rmdja による多様な形式の日本語技術文書の作成</title>
   <meta name="description" content="bookdown でまともな日本語文書を作る資料" />
-  <meta name="generator" content="bookdown 0.20.6 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="12 Python スクリプトの埋め込み | rmdja による多様な形式の日本語技術文書の作成" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Katagiri, Satoshi (ill-identified)" />
 
 
-<meta name="date" content="2020-10-17" />
+<meta name="date" content="2020-10-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   <link rel="apple-touch-icon-precomposed" sizes="120x120" href="touch-icon.png" />
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <link rel="prev" href="webapp.html"/>
-<link rel="next" href="プレゼンテーション資料の作成.html"/>
+<link rel="next" href="pdf-の文書クラス.html"/>
 <script src="libs/header-attrs-2.4/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -221,10 +221,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他のプログラム"><i class="fa fa-check"></i><b>8.3</b> (TODO) その他のプログラム</a></li>
 <li class="chapter" data-level="8.4" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他の-r-プログラム"><i class="fa fa-check"></i><b>8.4</b> (TODO) その他の R プログラム</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="表のデザイン.html"><a href="表のデザイン.html"><i class="fa fa-check"></i><b>9</b> 表のデザイン</a>
+<li class="chapter" data-level="9" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html"><i class="fa fa-check"></i><b>9</b> 表のデザイン</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="表のデザイン.html"><a href="表のデザイン.html#texhtml-を出力する関数"><i class="fa fa-check"></i><b>9.1</b> TeX/HTML を出力する関数</a></li>
-<li class="chapter" data-level="9.2" data-path="表のデザイン.html"><a href="表のデザイン.html#todo-gt-パッケージの対応"><i class="fa fa-check"></i><b>9.2</b> (TODO) <code>gt</code> パッケージの対応</a></li>
+<li class="chapter" data-level="9.1" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#kableextra-による表のスタイルのカスタマイズ"><i class="fa fa-check"></i><b>9.1</b> <code>kableExtra</code> による表のスタイルのカスタマイズ</a></li>
+<li class="chapter" data-level="9.2" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#formattable-パッケージとの併用"><i class="fa fa-check"></i><b>9.2</b> <code>formattable</code> パッケージとの併用</a></li>
+<li class="chapter" data-level="9.3" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#huxtable-パッケージによる作表"><i class="fa fa-check"></i><b>9.3</b> <code>huxtable</code> パッケージによる作表</a></li>
+<li class="chapter" data-level="9.4" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#texhtml-を出力する関数"><i class="fa fa-check"></i><b>9.4</b> TeX/HTML を出力する関数</a></li>
+<li class="chapter" data-level="9.5" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#その他の作表パッケージ"><i class="fa fa-check"></i><b>9.5</b> その他の作表パッケージ</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="文献引用.html"><a href="文献引用.html"><i class="fa fa-check"></i><b>10</b> 文献引用</a>
 <ul>
@@ -235,43 +238,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.0.1" data-path="webapp.html"><a href="webapp.html#todo-plotly"><i class="fa fa-check"></i><b>11.0.1</b> TODO: plotly</a></li>
 <li class="chapter" data-level="11.0.2" data-path="webapp.html"><a href="webapp.html#todo-shiny"><i class="fa fa-check"></i><b>11.0.2</b> TODO: shiny</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="python.html"><a href="python.html"><i class="fa fa-check"></i><b>12</b> Python スクリプトの埋め込み</a></li>
+<li class="chapter" data-level="12" data-path="python.html"><a href="python.html"><i class="fa fa-check"></i><b>12</b> Python スクリプトの埋め込み</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="python.html"><a href="python.html#python-のグラフィックに関する制約"><i class="fa fa-check"></i><b>12.1</b> Python のグラフィックに関する制約</a></li>
+</ul></li>
 <li class="part"><span><b>V 製本と多様な形式への対応</b></span></li>
-<li class="chapter" data-level="13" data-path="プレゼンテーション資料の作成.html"><a href="プレゼンテーション資料の作成.html"><i class="fa fa-check"></i><b>13</b> プレゼンテーション資料の作成</a></li>
-<li class="chapter" data-level="14" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html"><i class="fa fa-check"></i><b>14</b> PDF の文書クラス</a></li>
-<li class="chapter" data-level="15" data-path="wip-卒業論文の作成.html"><a href="wip-卒業論文の作成.html"><i class="fa fa-check"></i><b>15</b> (WIP) 卒業論文の作成</a></li>
-<li class="chapter" data-level="16" data-path="wip-小説の執筆.html"><a href="wip-小説の執筆.html"><i class="fa fa-check"></i><b>16</b> (WIP) 小説の執筆</a></li>
-<li class="chapter" data-level="17" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html"><i class="fa fa-check"></i><b>17</b> 製本方法の詳細</a>
+<li class="chapter" data-level="13" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html"><i class="fa fa-check"></i><b>13</b> PDF の文書クラス</a>
 <ul>
-<li class="chapter" data-level="17.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#ファイル構成"><i class="fa fa-check"></i><b>17.1</b> ファイル構成</a>
+<li class="chapter" data-level="13.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#プレゼンテーション資料の作成"><i class="fa fa-check"></i><b>13.1</b> プレゼンテーション資料の作成</a>
 <ul>
-<li class="chapter" data-level="17.1.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#output.yml"><i class="fa fa-check"></i><b>17.1.1</b> <code>_output.yml</code></a></li>
-<li class="chapter" data-level="17.1.2" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#bookdown.yml"><i class="fa fa-check"></i><b>17.1.2</b> <code>_bookdown.yml</code></a></li>
+<li class="chapter" data-level="13.1.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#主な設定"><i class="fa fa-check"></i><b>13.1.1</b> 主な設定</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#wip-卒業論文の作成"><i class="fa fa-check"></i><b>13.2</b> (WIP) 卒業論文の作成</a></li>
+<li class="chapter" data-level="13.3" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#wip-小説の執筆"><i class="fa fa-check"></i><b>13.3</b> (WIP) 小説の執筆</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html"><i class="fa fa-check"></i><b>14</b> 製本方法の詳細</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#ファイル構成"><i class="fa fa-check"></i><b>14.1</b> ファイル構成</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#output.yml"><i class="fa fa-check"></i><b>14.1.1</b> <code>_output.yml</code></a></li>
+<li class="chapter" data-level="14.1.2" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#bookdown.yml"><i class="fa fa-check"></i><b>14.1.2</b> <code>_bookdown.yml</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html"><i class="fa fa-check"></i><b>18</b> 出力形式による表現の限界</a>
+<li class="chapter" data-level="15" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html"><i class="fa fa-check"></i><b>15</b> 出力形式による表現の限界</a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#htmlとpdfで処理を場合分けする"><i class="fa fa-check"></i><b>18.1</b> HTMLとPDFで処理を場合分けする</a></li>
-<li class="chapter" data-level="18.2" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#絵文字の出力"><i class="fa fa-check"></i><b>18.2</b> 絵文字の出力</a></li>
-<li class="chapter" data-level="18.3" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#画像の保存形式"><i class="fa fa-check"></i><b>18.3</b> 画像の保存形式</a></li>
-<li class="chapter" data-level="18.4" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#デフォルトの保存形式"><i class="fa fa-check"></i><b>18.4</b> デフォルトの保存形式</a></li>
+<li class="chapter" data-level="15.1" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#htmlとpdfで処理を場合分けする"><i class="fa fa-check"></i><b>15.1</b> HTMLとPDFで処理を場合分けする</a></li>
+<li class="chapter" data-level="15.2" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#絵文字の出力"><i class="fa fa-check"></i><b>15.2</b> 絵文字の出力</a></li>
+<li class="chapter" data-level="15.3" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#画像の保存形式"><i class="fa fa-check"></i><b>15.3</b> 画像の保存形式</a></li>
+<li class="chapter" data-level="15.4" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#デフォルトの保存形式"><i class="fa fa-check"></i><b>15.4</b> デフォルトの保存形式</a></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html"><i class="fa fa-check"></i><b>19</b> 製本した文書を配布する</a>
+<li class="chapter" data-level="16" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html"><i class="fa fa-check"></i><b>16</b> 製本した文書を配布する</a>
 <ul>
-<li class="chapter" data-level="19.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#wepページのホスティング"><i class="fa fa-check"></i><b>19.1</b> Wepページのホスティング</a></li>
-<li class="chapter" data-level="19.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#todo-入稿するには"><i class="fa fa-check"></i><b>19.2</b> TODO: 入稿するには</a>
+<li class="chapter" data-level="16.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#wepページのホスティング"><i class="fa fa-check"></i><b>16.1</b> Wepページのホスティング</a></li>
+<li class="chapter" data-level="16.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#todo-入稿するには"><i class="fa fa-check"></i><b>16.2</b> TODO: 入稿するには</a>
 <ul>
-<li class="chapter" data-level="19.2.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#トンボの表示"><i class="fa fa-check"></i><b>19.2.1</b> トンボの表示</a></li>
-<li class="chapter" data-level="19.2.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#フォントの埋め込み"><i class="fa fa-check"></i><b>19.2.2</b> フォントの埋め込み</a></li>
+<li class="chapter" data-level="16.2.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#トンボの表示"><i class="fa fa-check"></i><b>16.2.1</b> トンボの表示</a></li>
+<li class="chapter" data-level="16.2.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#フォントの埋め込み"><i class="fa fa-check"></i><b>16.2.2</b> フォントの埋め込み</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>VI デバッグ</b></span></li>
 <li class="chapter" data-level="" data-path="このパートで説明すること.html"><a href="このパートで説明すること.html"><i class="fa fa-check"></i>このパートで説明すること</a></li>
-<li class="chapter" data-level="20" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html"><i class="fa fa-check"></i><b>20</b> 製本時のエラーへの対処</a>
+<li class="chapter" data-level="17" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html"><i class="fa fa-check"></i><b>17</b> 製本時のエラーへの対処</a>
 <ul>
-<li class="chapter" data-level="20.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>20.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
-<li class="chapter" data-level="20.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>20.2</b> YAML フロントマターを確認する</a></li>
-<li class="chapter" data-level="20.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-生成時のエラーを確認する"><i class="fa fa-check"></i><b>20.3</b> PDF 生成時のエラーを確認する</a></li>
+<li class="chapter" data-level="17.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>17.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
+<li class="chapter" data-level="17.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>17.2</b> YAML フロントマターを確認する</a></li>
+<li class="chapter" data-level="17.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-生成時のエラーを確認する"><i class="fa fa-check"></i><b>17.3</b> PDF 生成時のエラーを確認する</a></li>
 </ul></li>
 <li class="appendix"><span><b>補遺</b></span></li>
 <li class="chapter" data-level="A" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html"><i class="fa fa-check"></i><b>A</b> デフォルト値の自動調整</a>
@@ -311,15 +322,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="python" class="section level1" number="12">
 <h1><span class="header-section-number">12</span> Python スクリプトの埋め込み</h1>
 <p>Python スクリプトを埋め込むこともできる. 方法は2通りあり, 都度システムコマンドから呼び出す方法と, <code>reticulate</code> パッケージを使うものがある. <code>reticulate</code> 登場以前はチャンクごとに呼び出していたため複数のチャンクに分割して記述するのが難しかったが, 現在は <code>reticulate</code> パッケージを利用することでRと同じような感覚で, あるいは Jupyter のコードセルと同じような感覚で書ける.</p>
-<p><code>pyenv</code> を使用する場合, 共有ライブラリのインストールが必要なことに注意<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a>.</p>
+<p><code>pyenv</code> を使用する場合, 共有ライブラリのインストールが必要なことに注意<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a>.</p>
 <p>初めて使う場合は先に <code>reticulate</code> 単体でPythonが実行できるか検証してからの方が良い.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb53-1"><a href="python.html#cb53-1"></a><span class="kw">require</span>(reticulate)</span>
-<span id="cb53-2"><a href="python.html#cb53-2"></a><span class="co"># Python エンジンを認識しているか確認</span></span>
-<span id="cb53-3"><a href="python.html#cb53-3"></a><span class="kw">py_discover_config</span>()</span>
-<span id="cb53-4"><a href="python.html#cb53-4"></a><span class="kw">repl_python</span>()</span>
-<span id="cb53-5"><a href="python.html#cb53-5"></a></span>
-<span id="cb53-6"><a href="python.html#cb53-6"></a><span class="co"># 以下, Python コマンド実行, `exit` で抜ける</span></span></code></pre></div>
-<p>現在 (<code>knitr</code> 1.18以降) は R Markdown はデフォルトで <code>reticulate</code> を使う. システムコマンド経由にしたい場合はチャンクオプション <code>python.reticulate=F</code> を設定する, あるいは <code>reticulate::eng_python</code> に変わるエンジンを自作する<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a>.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb51-1"><a href="python.html#cb51-1"></a><span class="kw">require</span>(reticulate)</span>
+<span id="cb51-2"><a href="python.html#cb51-2"></a><span class="co"># Python エンジンを認識しているか確認</span></span>
+<span id="cb51-3"><a href="python.html#cb51-3"></a><span class="kw">py_discover_config</span>()</span>
+<span id="cb51-4"><a href="python.html#cb51-4"></a><span class="kw">repl_python</span>()</span>
+<span id="cb51-5"><a href="python.html#cb51-5"></a></span>
+<span id="cb51-6"><a href="python.html#cb51-6"></a><span class="co"># 以下, Python コマンド実行, `exit` で抜ける</span></span></code></pre></div>
+<p>現在 (<code>knitr</code> 1.18以降) は R Markdown はデフォルトで <code>reticulate</code> を使う. システムコマンド経由にしたい場合はチャンクオプション <code>python.reticulate=F</code> を設定する, あるいは <code>reticulate::eng_python</code> に変わるエンジンを自作する<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a>.</p>
 <p>あとはチャンクのエンジンに <code>r</code> ではなく <code>python</code> を指定することでPythonコードを埋め込める.</p>
 <p><code>matplotlib</code> エンジンで描いたグラフに日本語フォントを埋め込む場合, <code>matplotlib-japreset</code> を使えば必要な設定を一括で行う.</p>
 <div class="rmdwarning">
@@ -327,20 +338,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <code>matplotlib-japreset</code> は現在, Linux 以外での動作保証をしていない
 </p>
 </div>
-<div class="sourceCode" id="cb54"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb54-1"><a href="python.html#cb54-1"></a><span class="ex">pip</span> install -U git+https://github.com/Gedevan-Aleksizde/matplotlib-japreset.git@master</span></code></pre></div>
-<div class="sourceCode" id="cb55"><pre class="sourceCode numberSource python numberLines lineAnchors"><code class="sourceCode python"><span id="cb55-1"><a href="python.html#cb55-1"></a><span class="im">from</span> matplotlib_japreset <span class="im">import</span> mplj_cairo</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb52-1"><a href="python.html#cb52-1"></a><span class="ex">pip</span> install -U git+https://github.com/Gedevan-Aleksizde/matplotlib-japreset.git@master</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode numberSource python numberLines lineAnchors"><code class="sourceCode python"><span id="cb53-1"><a href="python.html#cb53-1"></a><span class="im">from</span> matplotlib_japreset <span class="im">import</span> mplj_cairo</span></code></pre></div>
 <pre><code>Noto Sans CJK JP not found
 matplotlib-japreset Cairo mode
 font: Noto Sans CJK JP</code></pre>
-<div class="sourceCode" id="cb57"><pre class="sourceCode numberSource python numberLines lineAnchors"><code class="sourceCode python"><span id="cb57-1"><a href="python.html#cb57-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> rcParams</span>
-<span id="cb57-2"><a href="python.html#cb57-2"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
-<span id="cb57-3"><a href="python.html#cb57-3"></a><span class="im">from</span> plotnine.data <span class="im">import</span> mtcars</span>
-<span id="cb57-4"><a href="python.html#cb57-4"></a>rcParams[<span class="st">&#39;font.family&#39;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode numberSource python numberLines lineAnchors"><code class="sourceCode python"><span id="cb55-1"><a href="python.html#cb55-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> rcParams</span>
+<span id="cb55-2"><a href="python.html#cb55-2"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb55-3"><a href="python.html#cb55-3"></a><span class="im">from</span> plotnine.data <span class="im">import</span> mtcars</span>
+<span id="cb55-4"><a href="python.html#cb55-4"></a>rcParams[<span class="st">&#39;font.family&#39;</span>]</span></code></pre></div>
 <pre><code>[&#39;Noto Sans CJK JP&#39;]</code></pre>
 <p><code>matplotlib-japreset</code> によって主要OSで標準インストールされている日本語フォントが自動的に選ばれる. 気に入らない場合は <code>rcParams['font.family']</code> に好きなフォント名を上書きする.</p>
 
-<div class="sourceCode" id="cb59"><pre class="sourceCode numberSource python numberLines lineAnchors"><code class="sourceCode python"><span id="cb59-1"><a href="python.html#cb59-1"></a>ggplot(mtcars, aes(<span class="st">&#39;wt&#39;</span>, <span class="st">&#39;mpg&#39;</span>, color<span class="op">=</span><span class="st">&#39;factor(gear)&#39;</span>)</span>
-<span id="cb59-2"><a href="python.html#cb59-2"></a>) <span class="op">+</span> geom_point() <span class="op">+</span> stat_smooth(method<span class="op">=</span><span class="st">&#39;lm&#39;</span>) <span class="op">+</span> facet_wrap(<span class="st">&#39;~gear&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode numberSource python numberLines lineAnchors"><code class="sourceCode python"><span id="cb57-1"><a href="python.html#cb57-1"></a>ggplot(mtcars, aes(<span class="st">&#39;wt&#39;</span>, <span class="st">&#39;mpg&#39;</span>, color<span class="op">=</span><span class="st">&#39;factor(gear)&#39;</span>)</span>
+<span id="cb57-2"><a href="python.html#cb57-2"></a>) <span class="op">+</span> geom_point() <span class="op">+</span> stat_smooth(method<span class="op">=</span><span class="st">&#39;lm&#39;</span>) <span class="op">+</span> facet_wrap(<span class="st">&#39;~gear&#39;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:py-plotnine-cap"></span>
 <img src="rmdja_files/figure-html/py-plotnine-cap-1.png" alt="Python の plotnine によるグラフ表示例" width="614" />
 <p class="caption">
@@ -348,17 +359,27 @@ font: Noto Sans CJK JP</code></pre>
 </p>
 </div>
 <p>現状ではmatplotlibの標準出力や警告も表示されてしまうため, チャンクオプション <code>results='hide', warning=F, message=F</code> で隠すと良い.</p>
-<p><code>plotly</code>, <code>bokeh</code> などの <code>matplotlib</code> に依存しないモジュールはPDFには対応していないため直接表示できない. 一旦画像を保存して, あらためて画像ファイルを埋め込む必要がある.</p>
+<div id="python-のグラフィックに関する制約" class="section level2" number="12.1">
+<h2><span class="header-section-number">12.1</span> Python のグラフィックに関する制約</h2>
+<p><code>matplotlib</code> ベースのグラフィックを出力したい場合, いくつかの制約がある.</p>
+<ul>
+<li><code>matplotlib</code> &gt; 3.2 では R がクラッシュするため, 3.2 を使用する必要</li>
+<li><code>axes</code> を使用した場合 (<code>subplot</code> などが依存), <code>matplotlib.pyplot.show</code> の呼び出しと, 次に別のグラフを呼び出す前の <code>matplotlib.pyplot.close()</code> が必要</li>
+<li><code>seaborn.FacetGrid</code> を Cairo デバイスで保存できない ( = フォントのサブセット化処理が複雑になる)</li>
+</ul>
+<p>よって, 現状では <code>matplotlib</code> エンジンでグラフィックを描くときはなるべく <code>plotnine</code> を使ったほうがトラブルが少ない.</p>
+<p>また <code>plotly</code>, <code>bokeh</code> などの <code>matplotlib</code> に依存しないモジュールはPDFには対応していないため直接表示できない. 一旦画像を保存して, あらためて画像ファイルを埋め込む必要がある.</p>
 
+</div>
 </div>
 
 
 
 <div class="footnotes">
 <hr />
-<ol start="14">
-<li id="fn14"><p>詳しくはこちらを参考に <a href="https://ill-identified.hatenablog.com/entry/2019/11/15/010746" class="uri">https://ill-identified.hatenablog.com/entry/2019/11/15/010746</a><a href="python.html#fnref14" class="footnote-back">↩︎</a></p></li>
-<li id="fn15"><p>参考: <a href="https://rstudio.github.io/reticulate/articles/r_markdown.html" class="uri">https://rstudio.github.io/reticulate/articles/r_markdown.html</a><a href="python.html#fnref15" class="footnote-back">↩︎</a></p></li>
+<ol start="17">
+<li id="fn17"><p>詳しくはこちらを参考に <a href="https://ill-identified.hatenablog.com/entry/2019/11/15/010746" class="uri">https://ill-identified.hatenablog.com/entry/2019/11/15/010746</a><a href="python.html#fnref17" class="footnote-back">↩︎</a></p></li>
+<li id="fn18"><p>参考: <a href="https://rstudio.github.io/reticulate/articles/r_markdown.html" class="uri">https://rstudio.github.io/reticulate/articles/r_markdown.html</a><a href="python.html#fnref18" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -367,7 +388,7 @@ font: Noto Sans CJK JP</code></pre>
         </div>
       </div>
 <a href="webapp.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="プレゼンテーション資料の作成.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="pdf-の文書クラス.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -409,7 +430,7 @@ gitbook.start({
 "link": "tree/rmdja/inst/resources/examples/bookdown/chapter/chapters/advanced.Rmd",
 "text": null
 },
-"download": ["rmdja.pdf", "rmdja.epub"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

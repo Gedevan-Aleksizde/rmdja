@@ -23,7 +23,6 @@ output:
     fig_crop: true
     fig_caption: true
     citation_package: biblatex
-    citation_options: numbers
     number_sections: false
     slide_level: 2
     incremental: false
@@ -534,7 +533,7 @@ kable(head(iris[, 1:3]),
   + R上で生成したTeXコードなら**直接出力可**(2枚後のスライド参照)
 
 ```{r tex-tab, echo=F, results="hide"}
-file.copy(file.path(file_loc, "examples/tab.tex"), "./")
+file.copy(file.path(file_loc, "latex/tab.tex"), "./")
 ```
 
 ## 表の挿入: .texで書かれた表を掲載

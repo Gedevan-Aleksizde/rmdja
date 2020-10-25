@@ -1,3 +1,13 @@
+# rmdja 0.4.2
+
+* 参考文献の出力は `biblatex` をデフォルトに, `jauthoryear.bbx` を想定した設計に
+* ドキュメントの整理
+  + `kableExtra`, `gt`, `huxtable` パッケージによる簡単な作表の例を追加
+
+# rmdja 0.4.1
+
+* ライセンスの明記
+
 # rmdja 0.4
 
 * パッケージ変更箇所追跡のため, `NEWS.md` ファイルを追加

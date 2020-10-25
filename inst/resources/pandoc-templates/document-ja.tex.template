@@ -289,7 +289,9 @@ $if(highlighting-macros)$
 $highlighting-macros$
 $endif$
 $if(tables)$
+% for compatible with kableExtra package functions.
 \usepackage{longtable,booktabs,dcolumn}
+%\usepackage{longtable,booktabs,dcolumn,array,multirow,wrapfig,float,colortbl,pdflscape,tabu,threeparttablethreeparttablex,makecell}
 $if(beamer)$
 \usepackage{caption}
 % Make caption package work with longtable

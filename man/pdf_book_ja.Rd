@@ -32,7 +32,7 @@ pdf_book_ja(
   keep_tex = TRUE,
   keep_md = TRUE,
   latex_engine = "xelatex",
-  citation_package = "natbib",
+  citation_package = "biblatex",
   citation_options = "default",
   includes = NULL,
   md_extensions = NULL,
@@ -72,11 +72,11 @@ prepended to the footer, and \code{quote_footer[2]} will be appended; if
 \item{highlight_bw}{Whether to convert colors for syntax highlighting to
 black-and-white (grayscale).}
 
-\item{code_rownumber}{デフォルト: TRUE. logical. コードセルに行番号を表示するかどうか.}
+\item{code_rownumber}{logical. コードセルに行番号を表示するかどうか.}
 
-\item{tombow}{logical. デフォルト: FALSE. 製本時に必要なトンボ (trim markers) を付けるかどうか. トンボは \code{gentombow.sty} で作成される.}
+\item{tombow}{logical. 製本時に必要なトンボ (trim markers) を付けるかどうか. トンボは \code{gentombow.sty} で作成される.}
 
-\item{add_folio}{logica. デフォルト: FALSE. 製本時に全ページにノンブルが必要な場合があるらしいので全ページに表示したい時に.}
+\item{add_folio}{logical. 製本時に全ページにノンブルが必要な場合があるらしいので全ページに表示したい時に.}
 
 \item{pandoc_args}{See
 \code{rmarkdown::\link{pdf_document}}, or the documentation of the
@@ -90,8 +90,15 @@ black-and-white (grayscale).}
 rmarkdown_output_format
 }
 \description{
-\code{rmarkdown} + \code{bookdown} で PDF文書をビルドする場合, 日本語を適切に表示するためにいろいろ必要だった調整を済ませたフォーマット. 基本的に YAML フロントマター (+ \verb{_ouput.yml}) や knitr チャンクオプションで設定できることをデフォルト値として埋め込んだだけ. \code{index.Rmd}
+bookdown::pdf_book wrapper format for Japanese typesetting with XeLaTeX or LuaLaTeX /\code{bookdown} で PDF文書をビルドする場合, 日本語を適切に表示するためにいろいろ必要だった調整を済ませたフォーマット.
 }
 \details{
-bookdown::pdf_book wrapper for Japanese typesetting with XeLaTeX/LuaLaTeX
+bookdown pdf format for Japanese typesetting with XeLaTeX/LuaLaTeX
+
+基本的に YAML フロントマター (+ \verb{_ouput.yml}) や knitr チャンクオプションで設定できることをデフォルト値として埋め込んだだけ. \code{index.Rmd}
 }
+\seealso{
+Other pdf formats: 
+\code{\link{beamer_presentation_ja}()}
+}
+\concept{pdf formats}

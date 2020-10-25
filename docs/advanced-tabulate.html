@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>9 表のデザイン | rmdja による多様な形式の日本語技術文書の作成</title>
+  <meta name="description" content="bookdown でまともな日本語文書を作る資料" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="9 表のデザイン | rmdja による多様な形式の日本語技術文書の作成" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://bookdown.org/john/awesome/" />
+  <meta property="og:image" content="https://bookdown.org/john/awesome/img/Johannes_Gutenberg.jpg" />
+  <meta property="og:description" content="bookdown でまともな日本語文書を作る資料" />
+  <meta name="github-repo" content="Gedevan-Aleksizde/rmdja" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="9 表のデザイン | rmdja による多様な形式の日本語技術文書の作成" />
+  
+  <meta name="twitter:description" content="bookdown でまともな日本語文書を作る資料" />
+  <meta name="twitter:image" content="https://bookdown.org/john/awesome/img/Johannes_Gutenberg.jpg" />
+
+<meta name="author" content="Katagiri, Satoshi (ill-identified)" />
+
+
+<meta name="date" content="2020-10-25" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="touch-icon.png" />
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<link rel="prev" href="advanced-graph.html"/>
+<link rel="next" href="文献引用.html"/>
+<script src="libs/header-attrs-2.4/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.6.1/grViz.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="rmdja_files/styles/css/style.css" type="text/css" />
+<link rel="stylesheet" href="rmdja_files/styles/css/toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="index.html">Top</a></li>
+<li class="divider"></li>
+<li class="part"><span><b>I イントロダクション</b></span></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>序文</a></li>
+<li class="chapter" data-level="" data-path="本稿の目的.html"><a href="本稿の目的.html"><i class="fa fa-check"></i>本稿の目的</a>
+<ul>
+<li class="chapter" data-level="" data-path="本稿の目的.html"><a href="本稿の目的.html#r-markdown-の現状と問題意識"><i class="fa fa-check"></i>R Markdown の現状と問題意識</a></li>
+<li><a href="本稿の目的.html#rmdja-の利点"><code>rmdja</code> の利点</a></li>
+<li class="chapter" data-level="" data-path="本稿の目的.html"><a href="本稿の目的.html#r使用経験のないユーザへ"><i class="fa fa-check"></i>R使用経験のないユーザへ</a></li>
+</ul></li>
+<li class="part"><span><b>II 最低限のチュートリアル</b></span></li>
+<li class="chapter" data-level="1" data-path="quick-start.html"><a href="quick-start.html"><i class="fa fa-check"></i><b>1</b> クイックスタート</a></li>
+<li class="chapter" data-level="2" data-path="下準備.html"><a href="下準備.html"><i class="fa fa-check"></i><b>2</b> 下準備</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="下準備.html"><a href="下準備.html#より丁寧なインストール解説"><i class="fa fa-check"></i><b>2.1</b> より丁寧なインストール解説</a></li>
+<li class="chapter" data-level="2.2" data-path="下準備.html"><a href="下準備.html#書籍形式のビルド操作"><i class="fa fa-check"></i><b>2.2</b> 書籍形式のビルド操作</a></li>
+</ul></li>
+<li class="part"><span><b>III R Markdown と Bookdown の基本機能</b></span></li>
+<li class="chapter" data-level="" data-path="このパートの概要.html"><a href="このパートの概要.html"><i class="fa fa-check"></i>このパートの概要</a></li>
+<li class="chapter" data-level="3" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html"><i class="fa fa-check"></i><b>3</b> 静的なコンテンツの作成</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#markdown-の基本構文"><i class="fa fa-check"></i><b>3.1</b> Markdown の基本構文</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#インラインでの書式変更"><i class="fa fa-check"></i><b>3.1.1</b> インラインでの書式変更</a></li>
+<li class="chapter" data-level="3.1.2" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#ブロック要素"><i class="fa fa-check"></i><b>3.1.2</b> ブロック要素</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#markdown-を使った図表の挿入"><i class="fa fa-check"></i><b>3.2</b> Markdown を使った図表の挿入</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#コメントアウト"><i class="fa fa-check"></i><b>3.2.1</b> コメントアウト</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#数式"><i class="fa fa-check"></i><b>3.3</b> 数式</a></li>
+<li class="chapter" data-level="3.4" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#カスタムブロック"><i class="fa fa-check"></i><b>3.4</b> カスタムブロック</a></li>
+<li class="chapter" data-level="3.5" data-path="静的なコンテンツの作成.html"><a href="静的なコンテンツの作成.html#脚注"><i class="fa fa-check"></i><b>3.5</b> 脚注</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="動的なコンテンツの作成.html"><a href="動的なコンテンツの作成.html"><i class="fa fa-check"></i><b>4</b> 動的なコンテンツの作成</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="動的なコンテンツの作成.html"><a href="動的なコンテンツの作成.html#プログラムチャンク"><i class="fa fa-check"></i><b>4.1</b> プログラムチャンク</a></li>
+<li class="chapter" data-level="4.2" data-path="動的なコンテンツの作成.html"><a href="動的なコンテンツの作成.html#プログラムで数式を生成する"><i class="fa fa-check"></i><b>4.2</b> プログラムで数式を生成する</a></li>
+<li class="chapter" data-level="4.3" data-path="動的なコンテンツの作成.html"><a href="動的なコンテンツの作成.html#プログラムを使った図の挿入"><i class="fa fa-check"></i><b>4.3</b> プログラムを使った図の挿入</a></li>
+<li class="chapter" data-level="4.4" data-path="動的なコンテンツの作成.html"><a href="動的なコンテンツの作成.html#todo-図のレイアウト設定"><i class="fa fa-check"></i><b>4.4</b> TODO: 図のレイアウト設定</a></li>
+<li class="chapter" data-level="4.5" data-path="動的なコンテンツの作成.html"><a href="動的なコンテンツの作成.html#r-プログラムを使った表の装飾"><i class="fa fa-check"></i><b>4.5</b> R プログラムを使った表の装飾</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="相互参照と引用.html"><a href="相互参照と引用.html"><i class="fa fa-check"></i><b>5</b> 相互参照と引用</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="相互参照と引用.html"><a href="相互参照と引用.html#crossref"><i class="fa fa-check"></i><b>5.1</b> 相互参照</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="相互参照と引用.html"><a href="相互参照と引用.html#図表や式へのアンカーリンク"><i class="fa fa-check"></i><b>5.1.1</b> 図表や式へのアンカーリンク</a></li>
+<li class="chapter" data-level="5.1.2" data-path="相互参照と引用.html"><a href="相互参照と引用.html#表への相互参照"><i class="fa fa-check"></i><b>5.1.2</b> 表への相互参照</a></li>
+<li class="chapter" data-level="5.1.3" data-path="相互参照と引用.html"><a href="相互参照と引用.html#章への相互参照"><i class="fa fa-check"></i><b>5.1.3</b> 章への相互参照</a></li>
+<li class="chapter" data-level="5.1.4" data-path="相互参照と引用.html"><a href="相互参照と引用.html#特殊な相互参照"><i class="fa fa-check"></i><b>5.1.4</b> 特殊な相互参照</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="相互参照と引用.html"><a href="相互参照と引用.html#bibliography"><i class="fa fa-check"></i><b>5.2</b> 文献引用</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="相互参照と引用.html"><a href="相互参照と引用.html#文献引用のフォーマット設定"><i class="fa fa-check"></i><b>5.2.1</b> 文献引用のフォーマット設定</a></li>
+<li class="chapter" data-level="5.2.2" data-path="相互参照と引用.html"><a href="相互参照と引用.html#todo-pandoc-citeproc-と-csl"><i class="fa fa-check"></i><b>5.2.2</b> (TODO) <code>pandoc-citeproc</code> と CSL</a></li>
+<li class="chapter" data-level="5.2.3" data-path="相互参照と引用.html"><a href="相互参照と引用.html#wip-biblatex"><i class="fa fa-check"></i><b>5.2.3</b> (WIP) BibLaTeX</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="wip-簡単なレイアウト変更.html"><a href="wip-簡単なレイアウト変更.html"><i class="fa fa-check"></i><b>6</b> (WIP) 簡単なレイアウト変更</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="wip-簡単なレイアウト変更.html"><a href="wip-簡単なレイアウト変更.html#html"><i class="fa fa-check"></i><b>6.1</b> HTML</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="wip-簡単なレイアウト変更.html"><a href="wip-簡単なレイアウト変更.html#フォント変更"><i class="fa fa-check"></i><b>6.1.1</b> フォント変更</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="wip-簡単なレイアウト変更.html"><a href="wip-簡単なレイアウト変更.html#pdf"><i class="fa fa-check"></i><b>6.2</b> PDF</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="wip-簡単なレイアウト変更.html"><a href="wip-簡単なレイアウト変更.html#フォント変更-1"><i class="fa fa-check"></i><b>6.2.1</b> フォント変更</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="wip-rmdja-による文書作成支援機能.html"><a href="wip-rmdja-による文書作成支援機能.html"><i class="fa fa-check"></i><b>7</b> (WIP) <code>rmdja</code> による文書作成支援機能</a>
+<ul>
+<li class="chapter" data-level="7.0.1" data-path="wip-rmdja-による文書作成支援機能.html"><a href="wip-rmdja-による文書作成支援機能.html#クリエイティブコモンズの表記"><i class="fa fa-check"></i><b>7.0.1</b> クリエイティブ・コモンズの表記</a></li>
+<li class="chapter" data-level="7.0.2" data-path="wip-rmdja-による文書作成支援機能.html"><a href="wip-rmdja-による文書作成支援機能.html#ルビ表記"><i class="fa fa-check"></i><b>7.0.2</b> ルビ表記</a></li>
+</ul></li>
+<li class="part"><span><b>IV 応用編</b></span></li>
+<li class="chapter" data-level="" data-path="このパートについて.html"><a href="このパートについて.html"><i class="fa fa-check"></i>このパートについて</a></li>
+<li class="chapter" data-level="8" data-path="advanced-graph.html"><a href="advanced-graph.html"><i class="fa fa-check"></i><b>8</b> 様々なグラフィックプログラムの埋め込み</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="advanced-graph.html"><a href="advanced-graph.html#tikz-を使う"><i class="fa fa-check"></i><b>8.1</b> <code>tikz</code> を使う</a></li>
+<li class="chapter" data-level="8.2" data-path="advanced-graph.html"><a href="advanced-graph.html#asymptote-を使う"><i class="fa fa-check"></i><b>8.2</b> Asymptote を使う</a></li>
+<li class="chapter" data-level="8.3" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他のプログラム"><i class="fa fa-check"></i><b>8.3</b> (TODO) その他のプログラム</a></li>
+<li class="chapter" data-level="8.4" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他の-r-プログラム"><i class="fa fa-check"></i><b>8.4</b> (TODO) その他の R プログラム</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html"><i class="fa fa-check"></i><b>9</b> 表のデザイン</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#kableextra-による表のスタイルのカスタマイズ"><i class="fa fa-check"></i><b>9.1</b> <code>kableExtra</code> による表のスタイルのカスタマイズ</a></li>
+<li class="chapter" data-level="9.2" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#formattable-パッケージとの併用"><i class="fa fa-check"></i><b>9.2</b> <code>formattable</code> パッケージとの併用</a></li>
+<li class="chapter" data-level="9.3" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#huxtable-パッケージによる作表"><i class="fa fa-check"></i><b>9.3</b> <code>huxtable</code> パッケージによる作表</a></li>
+<li class="chapter" data-level="9.4" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#texhtml-を出力する関数"><i class="fa fa-check"></i><b>9.4</b> TeX/HTML を出力する関数</a></li>
+<li class="chapter" data-level="9.5" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#その他の作表パッケージ"><i class="fa fa-check"></i><b>9.5</b> その他の作表パッケージ</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="文献引用.html"><a href="文献引用.html"><i class="fa fa-check"></i><b>10</b> 文献引用</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="文献引用.html"><a href="文献引用.html#を使う"><i class="fa fa-check"></i><b>10.1</b> (u)pBibTeX を使う</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="webapp.html"><a href="webapp.html"><i class="fa fa-check"></i><b>11</b> (TODO) Web アプレットの挿入</a>
+<ul>
+<li class="chapter" data-level="11.0.1" data-path="webapp.html"><a href="webapp.html#todo-plotly"><i class="fa fa-check"></i><b>11.0.1</b> TODO: plotly</a></li>
+<li class="chapter" data-level="11.0.2" data-path="webapp.html"><a href="webapp.html#todo-shiny"><i class="fa fa-check"></i><b>11.0.2</b> TODO: shiny</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="python.html"><a href="python.html"><i class="fa fa-check"></i><b>12</b> Python スクリプトの埋め込み</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="python.html"><a href="python.html#python-のグラフィックに関する制約"><i class="fa fa-check"></i><b>12.1</b> Python のグラフィックに関する制約</a></li>
+</ul></li>
+<li class="part"><span><b>V 製本と多様な形式への対応</b></span></li>
+<li class="chapter" data-level="13" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html"><i class="fa fa-check"></i><b>13</b> PDF の文書クラス</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#プレゼンテーション資料の作成"><i class="fa fa-check"></i><b>13.1</b> プレゼンテーション資料の作成</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#主な設定"><i class="fa fa-check"></i><b>13.1.1</b> 主な設定</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#wip-卒業論文の作成"><i class="fa fa-check"></i><b>13.2</b> (WIP) 卒業論文の作成</a></li>
+<li class="chapter" data-level="13.3" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#wip-小説の執筆"><i class="fa fa-check"></i><b>13.3</b> (WIP) 小説の執筆</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html"><i class="fa fa-check"></i><b>14</b> 製本方法の詳細</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#ファイル構成"><i class="fa fa-check"></i><b>14.1</b> ファイル構成</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#output.yml"><i class="fa fa-check"></i><b>14.1.1</b> <code>_output.yml</code></a></li>
+<li class="chapter" data-level="14.1.2" data-path="製本方法の詳細.html"><a href="製本方法の詳細.html#bookdown.yml"><i class="fa fa-check"></i><b>14.1.2</b> <code>_bookdown.yml</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html"><i class="fa fa-check"></i><b>15</b> 出力形式による表現の限界</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#htmlとpdfで処理を場合分けする"><i class="fa fa-check"></i><b>15.1</b> HTMLとPDFで処理を場合分けする</a></li>
+<li class="chapter" data-level="15.2" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#絵文字の出力"><i class="fa fa-check"></i><b>15.2</b> 絵文字の出力</a></li>
+<li class="chapter" data-level="15.3" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#画像の保存形式"><i class="fa fa-check"></i><b>15.3</b> 画像の保存形式</a></li>
+<li class="chapter" data-level="15.4" data-path="出力形式による表現の限界.html"><a href="出力形式による表現の限界.html#デフォルトの保存形式"><i class="fa fa-check"></i><b>15.4</b> デフォルトの保存形式</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html"><i class="fa fa-check"></i><b>16</b> 製本した文書を配布する</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#wepページのホスティング"><i class="fa fa-check"></i><b>16.1</b> Wepページのホスティング</a></li>
+<li class="chapter" data-level="16.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#todo-入稿するには"><i class="fa fa-check"></i><b>16.2</b> TODO: 入稿するには</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#トンボの表示"><i class="fa fa-check"></i><b>16.2.1</b> トンボの表示</a></li>
+<li class="chapter" data-level="16.2.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#フォントの埋め込み"><i class="fa fa-check"></i><b>16.2.2</b> フォントの埋め込み</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>VI デバッグ</b></span></li>
+<li class="chapter" data-level="" data-path="このパートで説明すること.html"><a href="このパートで説明すること.html"><i class="fa fa-check"></i>このパートで説明すること</a></li>
+<li class="chapter" data-level="17" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html"><i class="fa fa-check"></i><b>17</b> 製本時のエラーへの対処</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>17.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
+<li class="chapter" data-level="17.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>17.2</b> YAML フロントマターを確認する</a></li>
+<li class="chapter" data-level="17.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-生成時のエラーを確認する"><i class="fa fa-check"></i><b>17.3</b> PDF 生成時のエラーを確認する</a></li>
+</ul></li>
+<li class="appendix"><span><b>補遺</b></span></li>
+<li class="chapter" data-level="A" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html"><i class="fa fa-check"></i><b>A</b> デフォルト値の自動調整</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html#デフォルトのフォント"><i class="fa fa-check"></i><b>A.1</b> デフォルトのフォント</a></li>
+<li class="chapter" data-level="A.2" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html#チャンクのデフォルト設定"><i class="fa fa-check"></i><b>A.2</b> チャンクのデフォルト設定</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="pdf-の組版に関する細かい話.html"><a href="pdf-の組版に関する細かい話.html"><i class="fa fa-check"></i><b>B</b> PDF の組版に関する細かい話</a>
+<ul>
+<li class="chapter" data-level="B.1" data-path="pdf-の組版に関する細かい話.html"><a href="pdf-の組版に関する細かい話.html#画像の配置"><i class="fa fa-check"></i><b>B.1</b> 画像の配置</a></li>
+<li class="chapter" data-level="B.2" data-path="pdf-の組版に関する細かい話.html"><a href="pdf-の組版に関する細かい話.html#取り消し線"><i class="fa fa-check"></i><b>B.2</b> 取り消し線</a></li>
+<li class="chapter" data-level="B.3" data-path="pdf-の組版に関する細かい話.html"><a href="pdf-の組版に関する細かい話.html#todo-しかし英文で書きたい場合"><i class="fa fa-check"></i><b>B.3</b> TODO: しかし英文で書きたい場合</a></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="jecon-bst-の紹介.html"><a href="jecon-bst-の紹介.html"><i class="fa fa-check"></i><b>C</b> jecon.bst の紹介</a></li>
+<li class="chapter" data-level="D" data-path="fontregisterer-でグラフ用フォントを自動登録.html"><a href="fontregisterer-でグラフ用フォントを自動登録.html"><i class="fa fa-check"></i><b>D</b> <code>fontregisterer</code> でグラフ用フォントを自動登録</a></li>
+<li class="part"><span><b>VII 参考文献</b></span></li>
+<li class="chapter" data-level="" data-path="参考文献.html"><a href="参考文献.html"><i class="fa fa-check"></i>参考文献</a></li>
+<li class="divider"></li>
+<p style='text-align:center;display:block;margin: 0 auto;'><img src='https://i.creativecommons.org/l/by-nc/4.0/88x31.png'></p><li><a href='https://bookdown.org' target='_blank'>Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>rmdja</code> による多様な形式の日本語技術文書の作成</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="advanced-tabulate" class="section level1" number="9">
+<h1><span class="header-section-number">9</span> 表のデザイン</h1>
+<div id="kableextra-による表のスタイルのカスタマイズ" class="section level2" number="9.1">
+<h2><span class="header-section-number">9.1</span> <code>kableExtra</code> による表のスタイルのカスタマイズ</h2>
+<p><img src="img/kableExtra.svg" width="10%" style="display: block; margin: auto;" /></p>
+<p><code>kableExtra</code> パッケージは <code>knitr::kable</code> の拡張であり, 様々なスタイルの表を出力できる. そしてそれは HTML でも PDF でも有効である.</p>
+<p>まず, (これは <code>kable()</code> からある機能だが) <code>booktabs = T</code> を指定する. LaTeX のデフォルトの表は罫線が多すぎる. 罫線は牢獄の格子を暗示するため過剰な罫線にまみれた表を書いたり眺めたりしていると精神が抑圧され有害であると心理学的にも証明されている (<strong>嘘</strong>). しかし <code>booktabs = T</code> はこれだけで <code>booktabs.sty</code> に準拠した見やすいスタイルに変更してくれる. さらに <code>kableExtra</code> の機能として, 表 <a href="advanced-tabulate.html#tab:kableextra-color">9.1</a> にみられるように条件書式のような装飾が可能である<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a>.</p>
+
+<div class="sourceCode" id="cb46"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb46-1"><a href="advanced-tabulate.html#cb46-1"></a>colnames_mtcars_ja &lt;-<span class="st"> </span><span class="kw">c</span>(</span>
+<span id="cb46-2"><a href="advanced-tabulate.html#cb46-2"></a>  <span class="st">&quot;ガロン毎マイル&quot;</span>, <span class="st">&quot;シリンダ&quot;</span>, <span class="st">&quot;排気量&quot;</span>, <span class="st">&quot;総馬力&quot;</span>,</span>
+<span id="cb46-3"><a href="advanced-tabulate.html#cb46-3"></a>  <span class="st">&quot;ギア比&quot;</span>, <span class="st">&quot;重量&quot;</span>, <span class="st">&quot;加速性能&quot;</span>, <span class="st">&quot;トランスミッション&quot;</span>, <span class="st">&quot;ギア数&quot;</span>, <span class="st">&quot;キャブレター数&quot;</span></span>
+<span id="cb46-4"><a href="advanced-tabulate.html#cb46-4"></a>)</span>
+<span id="cb46-5"><a href="advanced-tabulate.html#cb46-5"></a>that_cell &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(F, <span class="dv">7</span>), T)</span>
+<span id="cb46-6"><a href="advanced-tabulate.html#cb46-6"></a>mtcars[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">8</span>] <span class="op">%&gt;%</span></span>
+<span id="cb46-7"><a href="advanced-tabulate.html#cb46-7"></a><span class="st">  </span><span class="kw">kbl</span>(</span>
+<span id="cb46-8"><a href="advanced-tabulate.html#cb46-8"></a>    <span class="dt">booktabs =</span> T, <span class="dt">linesep =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb46-9"><a href="advanced-tabulate.html#cb46-9"></a>    <span class="dt">format =</span> <span class="cf">if</span> (knitr<span class="op">::</span><span class="kw">is_latex_output</span>()) <span class="st">&quot;latex&quot;</span> <span class="cf">else</span> <span class="st">&quot;html&quot;</span>,</span>
+<span id="cb46-10"><a href="advanced-tabulate.html#cb46-10"></a>    <span class="dt">caption =</span> <span class="st">&quot;<code>kabeExtra</code> パッケージを利用した表の作成, 公式ドキュメントの用例より&quot;</span>,</span>
+<span id="cb46-11"><a href="advanced-tabulate.html#cb46-11"></a>    <span class="dt">col.names =</span> colnames_mtcars_ja[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>]</span>
+<span id="cb46-12"><a href="advanced-tabulate.html#cb46-12"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb46-13"><a href="advanced-tabulate.html#cb46-13"></a><span class="st">  </span><span class="kw">kable_paper</span>(<span class="dt">full_width =</span> F) <span class="op">%&gt;%</span></span>
+<span id="cb46-14"><a href="advanced-tabulate.html#cb46-14"></a><span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">latex_options =</span> <span class="st">&quot;scale_down&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb46-15"><a href="advanced-tabulate.html#cb46-15"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dv">2</span>,</span>
+<span id="cb46-16"><a href="advanced-tabulate.html#cb46-16"></a>    <span class="dt">color =</span> <span class="kw">spec_color</span>(mtcars<span class="op">$</span>mpg[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>]),</span>
+<span id="cb46-17"><a href="advanced-tabulate.html#cb46-17"></a>    <span class="dt">link =</span> <span class="st">&quot;https://haozhu233.github.io/kableExtra&quot;</span></span>
+<span id="cb46-18"><a href="advanced-tabulate.html#cb46-18"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb46-19"><a href="advanced-tabulate.html#cb46-19"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dv">6</span>,</span>
+<span id="cb46-20"><a href="advanced-tabulate.html#cb46-20"></a>    <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>,</span>
+<span id="cb46-21"><a href="advanced-tabulate.html#cb46-21"></a>    <span class="dt">background =</span> <span class="kw">spec_color</span>(mtcars<span class="op">$</span>drat[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>], <span class="dt">end =</span> <span class="fl">0.7</span>),</span>
+<span id="cb46-22"><a href="advanced-tabulate.html#cb46-22"></a>    <span class="dt">popover =</span> <span class="kw">paste</span>(<span class="st">&quot;am:&quot;</span>, mtcars<span class="op">$</span>am[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>])</span>
+<span id="cb46-23"><a href="advanced-tabulate.html#cb46-23"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb46-24"><a href="advanced-tabulate.html#cb46-24"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dv">9</span>,</span>
+<span id="cb46-25"><a href="advanced-tabulate.html#cb46-25"></a>    <span class="dt">strikeout =</span> that_cell, <span class="dt">bold =</span> that_cell,</span>
+<span id="cb46-26"><a href="advanced-tabulate.html#cb46-26"></a>    <span class="dt">color =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;black&quot;</span>, <span class="dv">7</span>), <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb46-27"><a href="advanced-tabulate.html#cb46-27"></a>  )</span></code></pre></div>
+<table class=" lightable-paper table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:kableextra-color">表 9.1: </span><code>kabeExtra</code> パッケージを利用した表の作成, 公式ドキュメントの用例より
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+ガロン毎マイル
+</th>
+<th style="text-align:right;">
+シリンダ
+</th>
+<th style="text-align:right;">
+排気量
+</th>
+<th style="text-align:right;">
+総馬力
+</th>
+<th style="text-align:right;">
+ギア比
+</th>
+<th style="text-align:right;">
+重量
+</th>
+<th style="text-align:right;">
+加速性能
+</th>
+<th style="text-align:right;">
+トランスミッション
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Mazda RX4
+</td>
+<td style="text-align:right;color: rgba(52, 182, 121, 1) !important;">
+<a href="https://haozhu233.github.io/kableExtra" style="color: rgba(52, 182, 121, 1) !important;"> 21.0 </a>
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+160.0
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;color: white !important;background-color: rgba(67, 191, 113, 1) !important;" data-toggle="popover" data-container="body" data-trigger="hover" data-placement="right" data-content="am: 1">
+3.90
+</td>
+<td style="text-align:right;">
+2.620
+</td>
+<td style="text-align:right;">
+16.46
+</td>
+<td style="text-align:right;color: black !important;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mazda RX4 Wag
+</td>
+<td style="text-align:right;color: rgba(52, 182, 121, 1) !important;">
+<a href="https://haozhu233.github.io/kableExtra" style="color: rgba(52, 182, 121, 1) !important;"> 21.0 </a>
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+160.0
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;color: white !important;background-color: rgba(67, 191, 113, 1) !important;" data-toggle="popover" data-container="body" data-trigger="hover" data-placement="right" data-content="am: 1">
+3.90
+</td>
+<td style="text-align:right;">
+2.875
+</td>
+<td style="text-align:right;">
+17.02
+</td>
+<td style="text-align:right;color: black !important;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Datsun 710
+</td>
+<td style="text-align:right;color: rgba(149, 216, 64, 1) !important;">
+<a href="https://haozhu233.github.io/kableExtra" style="color: rgba(149, 216, 64, 1) !important;"> 22.8 </a>
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+108.0
+</td>
+<td style="text-align:right;">
+93
+</td>
+<td style="text-align:right;color: white !important;background-color: rgba(55, 184, 120, 1) !important;" data-toggle="popover" data-container="body" data-trigger="hover" data-placement="right" data-content="am: 1">
+3.85
+</td>
+<td style="text-align:right;">
+2.320
+</td>
+<td style="text-align:right;">
+18.61
+</td>
+<td style="text-align:right;color: black !important;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hornet 4 Drive
+</td>
+<td style="text-align:right;color: rgba(68, 191, 112, 1) !important;">
+<a href="https://haozhu233.github.io/kableExtra" style="color: rgba(68, 191, 112, 1) !important;"> 21.4 </a>
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+258.0
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;color: white !important;background-color: rgba(65, 67, 135, 1) !important;" data-toggle="popover" data-container="body" data-trigger="hover" data-placement="right" data-content="am: 0">
+3.08
+</td>
+<td style="text-align:right;">
+3.215
+</td>
+<td style="text-align:right;">
+19.44
+</td>
+<td style="text-align:right;color: black !important;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hornet Sportabout
+</td>
+<td style="text-align:right;color: rgba(38, 129, 142, 1) !important;">
+<a href="https://haozhu233.github.io/kableExtra" style="color: rgba(38, 129, 142, 1) !important;"> 18.7 </a>
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+360.0
+</td>
+<td style="text-align:right;">
+175
+</td>
+<td style="text-align:right;color: white !important;background-color: rgba(60, 79, 138, 1) !important;" data-toggle="popover" data-container="body" data-trigger="hover" data-placement="right" data-content="am: 0">
+3.15
+</td>
+<td style="text-align:right;">
+3.440
+</td>
+<td style="text-align:right;">
+17.02
+</td>
+<td style="text-align:right;color: black !important;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Valiant
+</td>
+<td style="text-align:right;color: rgba(44, 114, 142, 1) !important;">
+<a href="https://haozhu233.github.io/kableExtra" style="color: rgba(44, 114, 142, 1) !important;"> 18.1 </a>
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+225.0
+</td>
+<td style="text-align:right;">
+105
+</td>
+<td style="text-align:right;color: white !important;background-color: rgba(68, 1, 84, 1) !important;" data-toggle="popover" data-container="body" data-trigger="hover" data-placement="right" data-content="am: 0">
+2.76
+</td>
+<td style="text-align:right;">
+3.460
+</td>
+<td style="text-align:right;">
+20.22
+</td>
+<td style="text-align:right;color: black !important;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Duster 360
+</td>
+<td style="text-align:right;color: rgba(68, 1, 84, 1) !important;">
+<a href="https://haozhu233.github.io/kableExtra" style="color: rgba(68, 1, 84, 1) !important;"> 14.3 </a>
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+360.0
+</td>
+<td style="text-align:right;">
+245
+</td>
+<td style="text-align:right;color: white !important;background-color: rgba(55, 90, 140, 1) !important;" data-toggle="popover" data-container="body" data-trigger="hover" data-placement="right" data-content="am: 0">
+3.21
+</td>
+<td style="text-align:right;">
+3.570
+</td>
+<td style="text-align:right;">
+15.84
+</td>
+<td style="text-align:right;color: black !important;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Merc 240D
+</td>
+<td style="text-align:right;color: rgba(253, 231, 37, 1) !important;">
+<a href="https://haozhu233.github.io/kableExtra" style="color: rgba(253, 231, 37, 1) !important;"> 24.4 </a>
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+146.7
+</td>
+<td style="text-align:right;">
+62
+</td>
+<td style="text-align:right;color: white !important;background-color: rgba(31, 161, 135, 1) !important;" data-toggle="popover" data-container="body" data-trigger="hover" data-placement="right" data-content="am: 0">
+3.69
+</td>
+<td style="text-align:right;">
+3.190
+</td>
+<td style="text-align:right;">
+20.00
+</td>
+<td style="text-align:right;font-weight: bold;text-decoration: line-through;color: red !important;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<p>上記の例で使われている, <code>kableExtra</code> の便利な機能をいくつか挙げる.</p>
+<ul>
+<li><code>kbl(col.names = )</code> で列ラベルを指定できる. これは列名の変更ではないので以降も同じ名前で変数を参照できるが, 表示されるのは列ラベルである. 現状, 日本語 (マルチバイト文字) を変数名に与えることを想定していないパッケージはまだ多いので, この機能が役に立つ.</li>
+<li><code>kable_styling(latex_options = "scale_down")</code> はPDF出力時に本文幅に合わせて自動で縮小するオプションである.</li>
+</ul>
+<p>グラフのインライン挿入も可能である (表 <a href="advanced-tabulate.html#tab:kableextra-plot">9.2</a>). しかしこのような細かいグラフの羅列は可読性に欠けることに注意する.</p>
+
+<div class="sourceCode" id="cb47"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb47-1"><a href="advanced-tabulate.html#cb47-1"></a>mpg_list &lt;-<span class="st"> </span><span class="kw">split</span>(mtcars<span class="op">$</span>mpg, mtcars<span class="op">$</span>cyl)</span>
+<span id="cb47-2"><a href="advanced-tabulate.html#cb47-2"></a>disp_list &lt;-<span class="st"> </span><span class="kw">split</span>(mtcars<span class="op">$</span>disp, mtcars<span class="op">$</span>cyl)</span>
+<span id="cb47-3"><a href="advanced-tabulate.html#cb47-3"></a>inline_plot &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</span>
+<span id="cb47-4"><a href="advanced-tabulate.html#cb47-4"></a>  <span class="dt">cyl =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>), <span class="dt">mpg_box =</span> <span class="st">&quot;&quot;</span>, <span class="dt">mpg_hist =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb47-5"><a href="advanced-tabulate.html#cb47-5"></a>  <span class="dt">mpg_line1 =</span> <span class="st">&quot;&quot;</span>, <span class="dt">mpg_line2 =</span> <span class="st">&quot;&quot;</span>, <span class="dt">mpg_points1 =</span> <span class="st">&quot;&quot;</span>, <span class="dt">mpg_points2 =</span> <span class="st">&quot;&quot;</span>, <span class="dt">mpg_poly =</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb47-6"><a href="advanced-tabulate.html#cb47-6"></a>)</span>
+<span id="cb47-7"><a href="advanced-tabulate.html#cb47-7"></a>inline_plot <span class="op">%&gt;%</span></span>
+<span id="cb47-8"><a href="advanced-tabulate.html#cb47-8"></a><span class="st">  </span><span class="kw">kbl</span>(</span>
+<span id="cb47-9"><a href="advanced-tabulate.html#cb47-9"></a>    <span class="dt">booktabs =</span> T, <span class="dt">format =</span> <span class="cf">if</span> (knitr<span class="op">::</span><span class="kw">is_latex_output</span>()) <span class="st">&quot;latex&quot;</span> <span class="cf">else</span> <span class="st">&quot;html&quot;</span>,</span>
+<span id="cb47-10"><a href="advanced-tabulate.html#cb47-10"></a>    <span class="dt">caption =</span> <span class="st">&quot;<code>kabeExtra</code> パッケージによる表内グラフ, 公式ドキュメントの用例より&quot;</span>,</span>
+<span id="cb47-11"><a href="advanced-tabulate.html#cb47-11"></a>    <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;シリンダ数&quot;</span>, <span class="st">&quot;ガロン毎マイル&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
+<span id="cb47-12"><a href="advanced-tabulate.html#cb47-12"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb47-13"><a href="advanced-tabulate.html#cb47-13"></a><span class="st">  </span><span class="kw">kable_paper</span>(<span class="dt">full_width =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span></span>
+<span id="cb47-14"><a href="advanced-tabulate.html#cb47-14"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dv">2</span>, <span class="dt">image =</span> <span class="kw">spec_boxplot</span>(mpg_list)) <span class="op">%&gt;%</span></span>
+<span id="cb47-15"><a href="advanced-tabulate.html#cb47-15"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dv">3</span>, <span class="dt">image =</span> <span class="kw">spec_hist</span>(mpg_list)) <span class="op">%&gt;%</span></span>
+<span id="cb47-16"><a href="advanced-tabulate.html#cb47-16"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dv">4</span>, <span class="dt">image =</span> <span class="kw">spec_plot</span>(mpg_list, <span class="dt">same_lim =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb47-17"><a href="advanced-tabulate.html#cb47-17"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dv">5</span>, <span class="dt">image =</span> <span class="kw">spec_plot</span>(mpg_list, <span class="dt">same_lim =</span> <span class="ot">FALSE</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb47-18"><a href="advanced-tabulate.html#cb47-18"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dv">6</span>, <span class="dt">image =</span> <span class="kw">spec_plot</span>(mpg_list, <span class="dt">type =</span> <span class="st">&quot;p&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb47-19"><a href="advanced-tabulate.html#cb47-19"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dv">7</span>, <span class="dt">image =</span> <span class="kw">spec_plot</span>(mpg_list, disp_list, <span class="dt">type =</span> <span class="st">&quot;p&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb47-20"><a href="advanced-tabulate.html#cb47-20"></a><span class="st">  </span><span class="kw">column_spec</span>(<span class="dv">8</span>, <span class="dt">image =</span> <span class="kw">spec_plot</span>(mpg_list, <span class="dt">polymin =</span> <span class="dv">5</span>))</span></code></pre></div>
+<table class=" lightable-paper" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:kableextra-plot">表 9.2: </span><code>kabeExtra</code> パッケージによる表内グラフ, 公式ドキュメントの用例より
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+シリンダ数
+</th>
+<th style="text-align:left;">
+ガロン毎マイル
+</th>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+<img src="file:////tmp/RtmpsJoBqB/boxplot_79ec22b07f46.svg" width="64" height="16">
+</td>
+<td style="text-align:left;">
+<img src="file:////tmp/RtmpsJoBqB/hist_79ec8ee511f.svg" width="64" height="16">
+</td>
+<td style="text-align:left;">
+<img src="file:////tmp/RtmpsJoBqB/plot_79ec6c93c635.svg" width="64" height="16">
+</td>
+<td style="text-align:left;">
+<img src="file:////tmp/RtmpsJoBqB/plot_79ec36583bac.svg" width="64" height="16">
+</td>
+<td style="text-align:left;">
+<img src="file:////tmp/RtmpsJoBqB/plot_79ec6e646eb2.svg" width="64" height="16">
+</td>
+<td style="text-align:left;">
+<img src="file:////tmp/RtmpsJoBqB/plot_79ec49341922.svg" width="64" height="16">
+</td>
+<td style="text-align:left;">
+<html>
+<body>
+<img src="file:////tmp/RtmpsJoBqB/plot_79ec70716020.svg" width="64" height="16">
+</body>
+</html>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+<img src="file:////tmp/RtmpsJoBqB/boxplot_79ec1033130f.svg" width="64" height="16">
+</td>
+<td style="text-align:left;">
+<img src="file:////tmp/RtmpsJoBqB/hist_79ec4eb5539.svg" width="64" height="16">
+</td>
+<td style="text-align:left;">
+<img src="file:////tmp/RtmpsJoBqB/plot_79ec7f5e37a5.svg" width="64" height="16">
+</td>
+<td style="text-align:left;">
+<img src="file:////tmp/RtmpsJoBqB/plot_79ec294971e.svg" width="64" height="16">
+</td>
+<td style="text-align:left;">
+<img src="file:////tmp/RtmpsJoBqB/plot_79ecd9d830e.svg" width="64" height="16">
+</td>
+<td style="text-align:left;">
+<img src="file:////tmp/RtmpsJoBqB/plot_79ec271540e4.svg" width="64" height="16">
+</td>
+<td style="text-align:left;">
+<html>
+<body>
+<img src="file:////tmp/RtmpsJoBqB/plot_79ec79e310f0.svg" width="64" height="16">
+</body>
+</html>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;">
+<img src="file:////tmp/RtmpsJoBqB/boxplot_79ec3892c2bf.svg" width="64" height="16">
+</td>
+<td style="text-align:left;">
+<img src="file:////tmp/RtmpsJoBqB/hist_79ec1c47b33.svg" width="64" height="16">
+</td>
+<td style="text-align:left;">
+<img src="file:////tmp/RtmpsJoBqB/plot_79ec689738d9.svg" width="64" height="16">
+</td>
+<td style="text-align:left;">
+<img src="file:////tmp/RtmpsJoBqB/plot_79ec3040b01e.svg" width="64" height="16">
+</td>
+<td style="text-align:left;">
+<img src="file:////tmp/RtmpsJoBqB/plot_79ec19524b9d.svg" width="64" height="16">
+</td>
+<td style="text-align:left;">
+<img src="file:////tmp/RtmpsJoBqB/plot_79ec25066888.svg" width="64" height="16">
+</td>
+<td style="text-align:left;">
+<html>
+<body>
+<img src="file:////tmp/RtmpsJoBqB/plot_79ec7b8e3bc4.svg" width="64" height="16">
+</body>
+</html>
+</td>
+</tr>
+</tbody>
+</table>
+<p>その他細かい使用上の注意をいくつか挙げる.</p>
+<ul>
+<li><code>kableExtra::</code> で参照するのではなく, 最初にパッケージをロードしたほうが不具合が起きにくい.</li>
+<li>PDF に出力する場合, 多くの LaTeX パッケージのロードが必要だが, <code>rmdja</code> のPDFフォーマットはいずれもテンプレートに組み込んでいるため手動設定は必要ない.</li>
+<li><code>knitr::kable()</code> または <code>kableExtra::kbl()</code> の <code>format</code> でHTML/texの出力を決める. 現在は判定が自動化されたとのことだが, まれに不具合があるという報告もみられる. よって, どちらも出力したい場合は上記のように <code>format = knitr::is_latex_output()</code> で条件分岐させるのが1つの手である.</li>
+<li>表のキャプションは図のようにチャンクオプションに指定するのではなく, <code>kbl()</code>/<code>kable()</code> の <code>caption</code> 引数に指定する</li>
+<li>キャプション内にMarkdown記法や相互参照など特殊な構文を含めたい場合は, <code>escape = F</code> を指定する.</li>
+<li>もし画像が大きすぎてPDFで余白からはみ出てしまうならば, <code>kable_styling(latex_options = "scale_down")</code> を追加することで自動縮小してくれる.</li>
+</ul>
+<p>その他, テキストの回り込み, 画像の挿入など様々なことが可能である. 詳細は公式の解説である “<a href="https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html">Create Awesome HTML Table with knitr::kable and kableExtra</a>” および <a href="http://haozhu233.github.io/kableExtra/awesome_table_in_pdf.pdf">PDF版</a> が役に立つ.</p>
+</div>
+<div id="formattable-パッケージとの併用" class="section level2" number="9.2">
+<h2><span class="header-section-number">9.2</span> <code>formattable</code> パッケージとの併用</h2>
+<p><code>formattable</code> パッケージは以前からある表を装飾するパッケージである. <code>kableExtra</code> との併用も可能だが, <strong>LaTeX に対応しておらず</strong>, HTMLタグをtexファイルに吐き出してしまうため動作しない. PDF にも同様に表示するには <a href="https://stackoverflow.com/questions/34983822/how-to-have-r-formattable-rendered-to-pdf-output-and-how-to-have-percents-in-the">StackOverflow</a>で提案されているように, <code>webshot</code> 使うなど工夫が必要である. そこまでしてこの装飾にこだわるメリットは薄いと私は考えるので現在この問題に対応する予定はない. かわりに後述する <code>huxtable</code> または <code>gt</code> を使うべきだと考える.</p>
+</div>
+<div id="huxtable-パッケージによる作表" class="section level2" number="9.3">
+<h2><span class="header-section-number">9.3</span> <code>huxtable</code> パッケージによる作表</h2>
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 120pt; margin-left: auto; margin-right: auto; height: 120pt; " id="tab:huxtable-logo">
+<caption style="caption-side: top; text-align: center;"><span id="tab:huxtable-logo">表 9.3: </span> </caption><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><tr style="height: 20pt;">
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: bold; font-family: DejaVu Sans;">h</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(255, 0, 0); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(255, 255, 255);">&nbsp;</span></td><td colspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(255, 255, 0); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(0, 0, 0);">&nbsp;</span></td></tr>
+<tr style="height: 20pt;">
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(255, 0, 0); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(255, 255, 255);">&nbsp;</span></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">u</td><td rowspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">x</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">t</td></tr>
+<tr style="height: 20pt;">
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(0, 0, 255); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(255, 255, 255);">&nbsp;</span></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(0, 0, 255); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(255, 255, 255);">&nbsp;</span></td></tr>
+<tr style="height: 20pt;">
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">a</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(255, 255, 0); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(0, 0, 0);">b</span></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td></tr>
+<tr style="height: 20pt;">
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td rowspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td rowspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">l</td><td colspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td></tr>
+<tr style="height: 20pt;">
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(0, 0, 255); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(255, 255, 255);">&nbsp;</span></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">e</td></tr>
+</table>
+
+<p><a href="https://hughjonesd.github.io/huxtable/"><code>huxtable</code></a> は HTML と LaTeX に対応した作表パッケージであり, 公式ドキュメントによると他の類似パッケージと比較して多機能であることを強調している. 全体的に <code>tidyverse</code> を意識した構文が用意され, <code>kableExtra</code> のようにパイプラインを使った記述が捗る. なお <code>huxtable</code> のロゴはランダムに生成される. さらに「1行ごとに背景色を変更」「<code>stargazer</code>風の表」などよく使われるスタイルを簡単に設定できるようになっていたり, はては <code>tidyr</code> のような表のロング・ワイド変形機能まで備えている. 例えば公式用例集を参考に, 条件書式を付けた表 <a href="advanced-tabulate.html#tab:huxtable-example">9.4</a> を作成する.</p>
+
+<div class="sourceCode" id="cb48"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb48-1"><a href="advanced-tabulate.html#cb48-1"></a><span class="kw">require</span>(huxtable)</span>
+<span id="cb48-2"><a href="advanced-tabulate.html#cb48-2"></a><span class="kw">head</span>(mtcars[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]) <span class="op">%&gt;%</span></span>
+<span id="cb48-3"><a href="advanced-tabulate.html#cb48-3"></a><span class="st">  </span><span class="kw">set_names</span>(colnames_mtcars_ja[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]) <span class="op">%&gt;%</span></span>
+<span id="cb48-4"><a href="advanced-tabulate.html#cb48-4"></a><span class="st">  </span><span class="kw">as_huxtable</span>(<span class="dt">add_rownames =</span> <span class="st">&quot;Model&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb48-5"><a href="advanced-tabulate.html#cb48-5"></a><span class="st">  </span><span class="kw">set_caption</span>(<span class="st">&quot;<code>huxtable</code> パッケージによる作表&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb48-6"><a href="advanced-tabulate.html#cb48-6"></a><span class="st">  </span><span class="kw">set_bold</span>(<span class="dv">1</span>, everywhere, T) <span class="op">%&gt;%</span></span>
+<span id="cb48-7"><a href="advanced-tabulate.html#cb48-7"></a><span class="st">  </span><span class="kw">theme_article</span>() <span class="op">%&gt;%</span></span>
+<span id="cb48-8"><a href="advanced-tabulate.html#cb48-8"></a><span class="st">  </span><span class="kw">map_text_color</span>(</span>
+<span id="cb48-9"><a href="advanced-tabulate.html#cb48-9"></a>    everywhere, <span class="st">&quot;ガロン毎マイル&quot;</span>, <span class="kw">by_colorspace</span>(<span class="st">&quot;navy&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;yellow&quot;</span>)</span>
+<span id="cb48-10"><a href="advanced-tabulate.html#cb48-10"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb48-11"><a href="advanced-tabulate.html#cb48-11"></a><span class="st">  </span><span class="kw">map_background_color</span>(</span>
+<span id="cb48-12"><a href="advanced-tabulate.html#cb48-12"></a>    everywhere, <span class="st">&quot;総馬力&quot;</span>, <span class="kw">by_quantiles</span>(<span class="fl">0.8</span>, <span class="kw">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;yellow&quot;</span>))</span>
+<span id="cb48-13"><a href="advanced-tabulate.html#cb48-13"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb48-14"><a href="advanced-tabulate.html#cb48-14"></a><span class="st">  </span><span class="kw">map_italic</span>(everywhere, <span class="st">&quot;Model&quot;</span>, <span class="kw">by_regex</span>(<span class="st">&quot;Merc.*&quot;</span> =<span class="st"> </span>T)) <span class="op">%&gt;%</span></span>
+<span id="cb48-15"><a href="advanced-tabulate.html#cb48-15"></a><span class="st">  </span><span class="kw">set_number_format</span>(<span class="dt">col =</span> <span class="st">&quot;ギア比&quot;</span>, <span class="dt">value =</span> <span class="kw">fmt_percent</span>(<span class="dt">digits =</span> <span class="dv">2</span>))</span></code></pre></div>
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:huxtable-example">
+<caption style="caption-side: top; text-align: center;"><span id="tab:huxtable-example">表 9.4: </span> <code>huxtable</code> パッケージによる作表</caption><col><col><col><col><col><col><tr>
+<th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: bold;">Model</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">ガロン毎マイル</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">シリンダ</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">排気量</th><th style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: bold;">総馬力</th><th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: bold;">ギア比</th></tr>
+<tr>
+<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Mazda RX4</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><span style="color: rgb(255, 104, 0);">21&nbsp;&nbsp;</span></td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">160</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(255, 255, 0); font-weight: normal;">110</td><td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">390.00%</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Mazda RX4 Wag</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><span style="color: rgb(255, 104, 0);">21&nbsp;&nbsp;</span></td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">160</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(255, 255, 0); font-weight: normal;">110</td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">390.00%</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Datsun 710</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><span style="color: rgb(255, 255, 0);">22.8</span></td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">4</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">108</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(255, 255, 255); font-weight: normal;">93</td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">385.00%</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Hornet 4 Drive</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><span style="color: rgb(255, 142, 0);">21.4</span></td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">258</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(255, 255, 0); font-weight: normal;">110</td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">308.00%</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Hornet Sportabout</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><span style="color: rgb(110, 0, 103);">18.7</span></td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">8</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">360</td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; background-color: rgb(255, 255, 0); font-weight: normal;">175</td><td style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 0pt 6pt 6pt; font-weight: normal;">315.00%</td></tr>
+<tr>
+<td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 0pt; font-weight: normal;">Valiant</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><span style="color: rgb(0, 0, 128);">18.1</span></td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">6</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">225</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; background-color: rgb(255, 255, 255); font-weight: normal;">105</td><td style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 0pt 6pt 6pt; font-weight: normal;">276.00%</td></tr>
+</table>
+
+<p>そのままでは罫線の設定が <code>set_top_border()</code>, <code>set_bottom_border()</code>, などしかなく, 複雑な条件を指定するのが大変だが, <code>ggplot2</code> のテーマ関数のようにスタイルのプリセットが <code>theme_*()</code> の名前でいくつか用意されている. 例えば上記では <code>theme_article()</code> という学術論文風テーマを適用し, 表の上下とヘッダにだけ罫線を引いている. 条件書式は <code>map_*()</code> 関数群で実行できる. また, フォーマットは <code>set_number_format()</code> に値を変換するフォーマット関数を与える形で適用できる. こちらはパーセンテージなども正しく表示できる.</p>
+<ul>
+<li>テーマ設定はグローバルオプションでも設定できる. 例えば <code>options('huxtable.knit_print_df_theme' = theme_article)</code>.</li>
+</ul>
+<p>なお, 動作させるにあたっていくつか注意が必要である.</p>
+<ul>
+<li><code>huxtable</code> は使用しているフォーマットを自動判別して相互参照用のラベルを生成しているが, <code>rmdja</code> で HTML を出力する際に正しく認識されないようである. <code>options(huxtable.bookdown = T)</code> Rmd の冒頭で実行して, <code>bookdown</code> としての処理を強制することで解決できる<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a>.</li>
+<li><code>huxtable</code> は <strong>EPUB 形式に対応していない</strong>. 警告が表示されるだけのこともあれば, knit処理がハングアップしてしまうこともある.</li>
+</ul>
+<p>また, <code>huxreg()</code> は名前の通り回帰分析の結果を表にするなど <code>stargazer</code> パッケージに似た機能を提供する. これも同じクラスなので同様にスタイル設定が可能である (表 <a href="advanced-tabulate.html#tab:huxreg-example">9.5</a>).</p>
+
+<div class="sourceCode" id="cb49"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb49-1"><a href="advanced-tabulate.html#cb49-1"></a>lm1 &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>cyl, mtcars)</span>
+<span id="cb49-2"><a href="advanced-tabulate.html#cb49-2"></a>lm2 &lt;-<span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>cyl <span class="op">+</span><span class="st"> </span>hp, mtcars)</span>
+<span id="cb49-3"><a href="advanced-tabulate.html#cb49-3"></a>glm1 &lt;-<span class="st"> </span><span class="kw">glm</span>(<span class="kw">I</span>(mpg <span class="op">&gt;</span><span class="st"> </span><span class="dv">20</span>) <span class="op">~</span><span class="st"> </span>cyl, mtcars,</span>
+<span id="cb49-4"><a href="advanced-tabulate.html#cb49-4"></a>  <span class="dt">family =</span> binomial</span>
+<span id="cb49-5"><a href="advanced-tabulate.html#cb49-5"></a>)</span>
+<span id="cb49-6"><a href="advanced-tabulate.html#cb49-6"></a><span class="kw">huxreg</span>(lm1, lm2, glm1) <span class="op">%&gt;%</span></span>
+<span id="cb49-7"><a href="advanced-tabulate.html#cb49-7"></a><span class="st">  </span><span class="kw">set_caption</span>(<span class="st">&quot;<code>huxtable::huxreg()</code> による出力&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb49-8"><a href="advanced-tabulate.html#cb49-8"></a><span class="st">  </span><span class="kw">set_text_color</span>(everywhere, <span class="st">&quot;model1&quot;</span>, <span class="st">&quot;green&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb49-9"><a href="advanced-tabulate.html#cb49-9"></a><span class="st">  </span><span class="kw">set_text_color</span>(everywhere, <span class="st">&quot;model2&quot;</span>, <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:huxreg-example">
+<caption style="caption-side: top; text-align: center;"><span id="tab:huxreg-example">表 9.5: </span> <code>huxtable::huxreg()</code> による出力</caption><col><col><col><col><tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><span style="color: rgb(0, 255, 0);">(1)</span></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><span style="color: rgb(0, 0, 255);">(2)</span></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(3)</th></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(Intercept)</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><span style="color: rgb(0, 255, 0);">37.885 ***</span></td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><span style="color: rgb(0, 0, 255);">36.908 ***</span></td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">64.400&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><span style="color: rgb(0, 255, 0);">(2.074)&nbsp;&nbsp;&nbsp;</span></td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><span style="color: rgb(0, 0, 255);">(2.191)&nbsp;&nbsp;&nbsp;</span></td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(17449.775)</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">cyl</th><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><span style="color: rgb(0, 255, 0);">-2.876 ***</span></td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><span style="color: rgb(0, 0, 255);">-2.265 ***</span></td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-10.781&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><span style="color: rgb(0, 255, 0);">(0.322)&nbsp;&nbsp;&nbsp;</span></td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><span style="color: rgb(0, 0, 255);">(0.576)&nbsp;&nbsp;&nbsp;</span></td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(2908.296)</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">hp</th><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><span style="color: rgb(0, 255, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><span style="color: rgb(0, 0, 255);">-0.019&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><span style="color: rgb(0, 255, 0);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><span style="color: rgb(0, 0, 255);">(0.015)&nbsp;&nbsp;&nbsp;</span></td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">N</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><span style="color: rgb(0, 255, 0);">32&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><span style="color: rgb(0, 0, 255);">32&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">32&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">R2</th><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><span style="color: rgb(0, 255, 0);">0.726&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><span style="color: rgb(0, 0, 255);">0.741&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">logLik</th><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><span style="color: rgb(0, 255, 0);">-81.653&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><span style="color: rgb(0, 0, 255);">-80.781&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td style="vertical-align: top; text-align: right; white-space: normal; padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-4.780&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">AIC</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><span style="color: rgb(0, 255, 0);">169.306&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"><span style="color: rgb(0, 0, 255);">169.562&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">13.561&nbsp;</td></tr>
+<tr>
+<th colspan="4" style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</th></tr>
+</table>
+
+<p>その他の作例は <a href="https://cran.r-project.org/web/packages/huxtable/vignettes/huxtable.html">CRANの 公式 vignettes</a> を参考にせよ.</p>
+</div>
+<div id="texhtml-を出力する関数" class="section level2" number="9.4">
+<h2><span class="header-section-number">9.4</span> TeX/HTML を出力する関数</h2>
+<p><code>stargazer</code> や <code>xtable</code> のように, HTML や LaTeX のソースコードとして表を出力してくれるパッケージがある. これらは <code>results='asis'</code> のチャンクオプションを指定することで関数の出力するテキストをそのまま埋め込むことができる. よって, あとは HTMLかLaTeX かといった出力形式の違いに気をつければ表示できる (図 <a href="advanced-tabulate.html#tab:stargazer-table">9.6</a>).</p>
+
+<div class="sourceCode" id="cb50"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb50-1"><a href="advanced-tabulate.html#cb50-1"></a><span class="kw">require</span>(stargazer)</span>
+<span id="cb50-2"><a href="advanced-tabulate.html#cb50-2"></a><span class="kw">stargazer</span>(mtcars,</span>
+<span id="cb50-3"><a href="advanced-tabulate.html#cb50-3"></a>  <span class="dt">header =</span> F,</span>
+<span id="cb50-4"><a href="advanced-tabulate.html#cb50-4"></a>  <span class="dt">type =</span> <span class="cf">if</span> (knitr<span class="op">::</span><span class="kw">is_latex_output</span>()) <span class="st">&quot;latex&quot;</span> <span class="cf">else</span> <span class="st">&quot;html&quot;</span>,</span>
+<span id="cb50-5"><a href="advanced-tabulate.html#cb50-5"></a>  <span class="dt">title =</span> <span class="st">&quot;<code>stargazer</code> による表の出力&quot;</span>,</span>
+<span id="cb50-6"><a href="advanced-tabulate.html#cb50-6"></a>  <span class="dt">label =</span> knitr<span class="op">::</span>opts_current<span class="op">$</span><span class="kw">get</span>(<span class="st">&quot;label&quot;</span>)</span>
+<span id="cb50-7"><a href="advanced-tabulate.html#cb50-7"></a>)</span></code></pre></div>
+<table style="text-align:center">
+<caption>
+<span id="tab:stargazer-table">表 9.6: </span><strong><code>stargazer</code> による表の出力</strong>
+</caption>
+<tr>
+<td colspan="8" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Statistic
+</td>
+<td>
+N
+</td>
+<td>
+Mean
+</td>
+<td>
+St. Dev.
+</td>
+<td>
+Min
+</td>
+<td>
+Pctl(25)
+</td>
+<td>
+Pctl(75)
+</td>
+<td>
+Max
+</td>
+</tr>
+<tr>
+<td colspan="8" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+mpg
+</td>
+<td>
+32
+</td>
+<td>
+20.091
+</td>
+<td>
+6.027
+</td>
+<td>
+10
+</td>
+<td>
+15.4
+</td>
+<td>
+22.8
+</td>
+<td>
+34
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+cyl
+</td>
+<td>
+32
+</td>
+<td>
+6.188
+</td>
+<td>
+1.786
+</td>
+<td>
+4
+</td>
+<td>
+4
+</td>
+<td>
+8
+</td>
+<td>
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+disp
+</td>
+<td>
+32
+</td>
+<td>
+230.722
+</td>
+<td>
+123.939
+</td>
+<td>
+71
+</td>
+<td>
+120.8
+</td>
+<td>
+326
+</td>
+<td>
+472
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+hp
+</td>
+<td>
+32
+</td>
+<td>
+146.688
+</td>
+<td>
+68.563
+</td>
+<td>
+52
+</td>
+<td>
+96.5
+</td>
+<td>
+180
+</td>
+<td>
+335
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+drat
+</td>
+<td>
+32
+</td>
+<td>
+3.597
+</td>
+<td>
+0.535
+</td>
+<td>
+2.760
+</td>
+<td>
+3.080
+</td>
+<td>
+3.920
+</td>
+<td>
+4.930
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+wt
+</td>
+<td>
+32
+</td>
+<td>
+3.217
+</td>
+<td>
+0.978
+</td>
+<td>
+1.513
+</td>
+<td>
+2.581
+</td>
+<td>
+3.610
+</td>
+<td>
+5.424
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+qsec
+</td>
+<td>
+32
+</td>
+<td>
+17.849
+</td>
+<td>
+1.787
+</td>
+<td>
+14.500
+</td>
+<td>
+16.892
+</td>
+<td>
+18.900
+</td>
+<td>
+22.900
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+vs
+</td>
+<td>
+32
+</td>
+<td>
+0.438
+</td>
+<td>
+0.504
+</td>
+<td>
+0
+</td>
+<td>
+0
+</td>
+<td>
+1
+</td>
+<td>
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+am
+</td>
+<td>
+32
+</td>
+<td>
+0.406
+</td>
+<td>
+0.499
+</td>
+<td>
+0
+</td>
+<td>
+0
+</td>
+<td>
+1
+</td>
+<td>
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+gear
+</td>
+<td>
+32
+</td>
+<td>
+3.688
+</td>
+<td>
+0.738
+</td>
+<td>
+3
+</td>
+<td>
+3
+</td>
+<td>
+4
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+carb
+</td>
+<td>
+32
+</td>
+<td>
+2.812
+</td>
+<td>
+1.615
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+<td>
+4
+</td>
+<td>
+8
+</td>
+</tr>
+<tr>
+<td colspan="8" style="border-bottom: 1px solid black">
+</td>
+</tr>
+</table>
+<p>ただし <code>stargazer</code> はここ数年更新されておらず, R Markdown に対応した機能追加なども行われていないため, 相互参照に対応していない. <code>bookdown</code> リポジトリの <a href="https://github.com/rstudio/bookdown/issues/175">issue #175</a> にあるように, PDFに限れば簡易的な方法で対処できるが, HTMLでも相互参照するには <a href="https://github.com/jiewpeng/stargazer_bookdown"><code>stargazer_bookdown</code></a> のインストールが必要になる.</p>
+<p>その他, <code>Hmisc::latex()</code>, <code>stats::xtable()</code> という古典的な関数がある. 後者は名前の通り LaTeX のソースをかなりの自由度で出力できるが, ここまでやるならもう最初から LaTeX で書いたほうがいいのでは, というレベルである. LaTeX に詳しくない場合, かえって難しいかも知れない. 既に紹介した <code>kableExtra</code>, <code>huxtable</code> などでできる範囲でやったほうが簡単だろう.</p>
+</div>
+<div id="その他の作表パッケージ" class="section level2" number="9.5">
+<h2><span class="header-section-number">9.5</span> その他の作表パッケージ</h2>
+<p><code>df_print</code> チャンクオプションで, デフォルトの表示方法を変更することもできる. ここまで <code>kable</code> での出力を前提としていたが, 長大な表を掲載したい場合, <code>paged</code> オプションがある.</p>
+<p>それ以外に有名なパッケージとして, <code>DT</code>, <code>flextable</code>, <code>gt</code> などがある. <code>DT</code> はインタラクティブな表ウィジェットを作成し, <code>flextable</code> は Word へのエクスポート機能をフィーチャーしているが, PDF に対しては画像として出力するなどくせがある. <code>gt</code> は RStudio 社が開発しているパッケージで, <code>huxtable</code> のように <code>tidyverse</code> 的なシンプルな構文が用意されている一方で, まだ R Markdown の相互参照機能に対応していない<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a>. 以上から, <code>kableExtra</code> や <code>huxtable</code> が <code>rmdja</code> の対応する出力媒体に適したパッケージであり, それ以外のパッケージの紹介は避ける.</p>
+<p>RCB <a href="https://bookdown.org/yihui/rmarkdown-cookbook/table-other.html">10.3 Other packages for creating tables</a> も参考にせよ.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="14">
+<li id="fn14"><p>ところで私は自動車の性能を表す用語に詳しくない. これは <code>mtcars</code> データセットの列名を日本語訳したのだが, した表記に誤りがあれば指摘してほしい.<a href="advanced-tabulate.html#fnref14" class="footnote-back">↩︎</a></p></li>
+<li id="fn15"><p>おそらくはこの辺の処理の問題だが, 未解決 <a href="https://github.com/hughjonesd/huxtable/blob/3eb96b62a5fde1000924daba39078f2e72839383/R/knitr.R" class="uri">https://github.com/hughjonesd/huxtable/blob/3eb96b62a5fde1000924daba39078f2e72839383/R/knitr.R</a><a href="advanced-tabulate.html#fnref15" class="footnote-back">↩︎</a></p></li>
+<li id="fn16"><p>Issue <a href="https://github.com/rstudio/gt/issues/115">#115</a> にあるように, 機能を追加したいという声はある. しかし現時点では <code>gt</code> のこの機能の開発を積極的に進める様子はない.<a href="advanced-tabulate.html#fnref16" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="advanced-graph.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="文献引用.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "edit/master/rmdja/inst/resources/examples/bookdown/chapter/chapters/advanced.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": "blob/master/rmdja/inst/resources/examples/bookdown/chapter/chapters/advanced.Rmd",
+"text": null
+},
+"view": {
+"link": "tree/rmdja/inst/resources/examples/bookdown/chapter/chapters/advanced.Rmd",
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
