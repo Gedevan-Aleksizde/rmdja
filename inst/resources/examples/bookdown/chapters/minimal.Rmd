@@ -52,7 +52,7 @@ knitr::include_graphics(file.path(img_dir, "rmd-templates.png"))
 remotes::install_github("Gedevan-Aleksizde/my_latex_template", repos = NULL, type = "source")
 ```
 
-3種類のテンプレートのうち, `pdf book in Japanese` のみ, 文書のビルドのための下準備が追加で必要になるため, その方法を解説する. それ以外は第 \@ref(#quick-start) 節で書いたように "knit" ボタンを押すだけで良い.
+3種類のテンプレートのうち, `pdf book in Japanese` のみ, 文書のビルドのための下準備が追加で必要になるため, その方法を解説する. それ以外は第 \@ref(quick-start) 節で書いたように "knit" ボタンを押すだけで良い.
 
 最低限のファイルやパッケージで動くほうのデモ用ディレクトリをコピーする. ただし, `tidyverse` と `kableExtra` のインストールも必要である.
 
