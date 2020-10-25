@@ -31,6 +31,7 @@ biblio-style: authoryear
 
 ```{r setup, include=FALSE}
 options(tinytex.latexmk.emulation = T)
+options(huxtable.bookdown = T)
 # アンダースコアを各自に回避するためコピーするしかない
 file.copy(system.file("resources/bibliography/rmdja.bib", package="rmdja"), "./")
 # 画像をコピー

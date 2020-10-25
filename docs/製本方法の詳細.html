@@ -24,7 +24,7 @@
 <meta name="author" content="Katagiri, Satoshi (ill-identified)" />
 
 
-<meta name="date" content="2020-10-24" />
+<meta name="date" content="2020-10-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -223,12 +223,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html"><i class="fa fa-check"></i><b>9</b> 表のデザイン</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#texhtml-を出力する関数"><i class="fa fa-check"></i><b>9.1</b> TeX/HTML を出力する関数</a></li>
-<li class="chapter" data-level="9.2" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#kableextra-による表のスタイルのカスタマイズ"><i class="fa fa-check"></i><b>9.2</b> <code>kableExtra</code> による表のスタイルのカスタマイズ</a></li>
-<li class="chapter" data-level="9.3" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#formattable-パッケージとの併用"><i class="fa fa-check"></i><b>9.3</b> <code>formattable</code> パッケージとの併用</a></li>
-<li class="chapter" data-level="9.4" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#huxtable-パッケージによる作表"><i class="fa fa-check"></i><b>9.4</b> <code>huxtable</code> パッケージによる作表</a></li>
-<li class="chapter" data-level="9.5" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#todo-gt-パッケージによる作表"><i class="fa fa-check"></i><b>9.5</b> (TODO) <code>gt</code> パッケージによる作表</a></li>
-<li class="chapter" data-level="9.6" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#その他の作表パッケージ"><i class="fa fa-check"></i><b>9.6</b> その他の作表パッケージ</a></li>
+<li class="chapter" data-level="9.1" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#kableextra-による表のスタイルのカスタマイズ"><i class="fa fa-check"></i><b>9.1</b> <code>kableExtra</code> による表のスタイルのカスタマイズ</a></li>
+<li class="chapter" data-level="9.2" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#formattable-パッケージとの併用"><i class="fa fa-check"></i><b>9.2</b> <code>formattable</code> パッケージとの併用</a></li>
+<li class="chapter" data-level="9.3" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#huxtable-パッケージによる作表"><i class="fa fa-check"></i><b>9.3</b> <code>huxtable</code> パッケージによる作表</a></li>
+<li class="chapter" data-level="9.4" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#texhtml-を出力する関数"><i class="fa fa-check"></i><b>9.4</b> TeX/HTML を出力する関数</a></li>
+<li class="chapter" data-level="9.5" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#その他の作表パッケージ"><i class="fa fa-check"></i><b>9.5</b> その他の作表パッケージ</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="文献引用.html"><a href="文献引用.html"><i class="fa fa-check"></i><b>10</b> 文献引用</a>
 <ul>
@@ -339,18 +338,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">14.1.1</span> <code>_output.yml</code></h3>
 <p>本来の YAML の <code>output:</code> 以下の記述をこの <code>_output.yml</code> ファイルに書くことができる.
 <code>output:</code> を複数書くと<code>rmarkdown::render_site()</code> やビルドツールでそれぞれの形式に一括作成してくれる.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb64-1"><a href="製本方法の詳細.html#cb64-1"></a><span class="fu">output</span><span class="kw">:</span></span>
-<span id="cb64-2"><a href="製本方法の詳細.html#cb64-2"></a><span class="at">  bookdown:</span><span class="fu">:gitbook</span><span class="kw">:</span></span>
-<span id="cb64-3"><a href="製本方法の詳細.html#cb64-3"></a><span class="at">    </span><span class="fu">lib_dir</span><span class="kw">:</span><span class="at"> assets</span></span>
-<span id="cb64-4"><a href="製本方法の詳細.html#cb64-4"></a><span class="at">    </span><span class="fu">split_by</span><span class="kw">:</span><span class="at"> section</span></span>
-<span id="cb64-5"><a href="製本方法の詳細.html#cb64-5"></a><span class="at">    </span><span class="fu">config</span><span class="kw">:</span></span>
-<span id="cb64-6"><a href="製本方法の詳細.html#cb64-6"></a><span class="at">      </span><span class="fu">toolbar</span><span class="kw">:</span></span>
-<span id="cb64-7"><a href="製本方法の詳細.html#cb64-7"></a><span class="at">        </span><span class="fu">position</span><span class="kw">:</span><span class="at"> static</span></span>
-<span id="cb64-8"><a href="製本方法の詳細.html#cb64-8"></a><span class="at">  bookdown:</span><span class="fu">:pdf_book</span><span class="kw">:</span></span>
-<span id="cb64-9"><a href="製本方法の詳細.html#cb64-9"></a><span class="at">    </span><span class="fu">keep_tex</span><span class="kw">:</span><span class="at"> </span><span class="ch">yes</span></span>
-<span id="cb64-10"><a href="製本方法の詳細.html#cb64-10"></a><span class="at">  bookdown:</span><span class="fu">:html_book</span><span class="kw">:</span></span>
-<span id="cb64-11"><a href="製本方法の詳細.html#cb64-11"></a><span class="at">    </span><span class="fu">css</span><span class="kw">:</span><span class="at"> toc.css</span></span>
-<span id="cb64-12"><a href="製本方法の詳細.html#cb64-12"></a><span class="fu">documentclass</span><span class="kw">:</span><span class="at"> book</span></span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb63-1"><a href="製本方法の詳細.html#cb63-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb63-2"><a href="製本方法の詳細.html#cb63-2"></a><span class="at">  bookdown:</span><span class="fu">:gitbook</span><span class="kw">:</span></span>
+<span id="cb63-3"><a href="製本方法の詳細.html#cb63-3"></a><span class="at">    </span><span class="fu">lib_dir</span><span class="kw">:</span><span class="at"> assets</span></span>
+<span id="cb63-4"><a href="製本方法の詳細.html#cb63-4"></a><span class="at">    </span><span class="fu">split_by</span><span class="kw">:</span><span class="at"> section</span></span>
+<span id="cb63-5"><a href="製本方法の詳細.html#cb63-5"></a><span class="at">    </span><span class="fu">config</span><span class="kw">:</span></span>
+<span id="cb63-6"><a href="製本方法の詳細.html#cb63-6"></a><span class="at">      </span><span class="fu">toolbar</span><span class="kw">:</span></span>
+<span id="cb63-7"><a href="製本方法の詳細.html#cb63-7"></a><span class="at">        </span><span class="fu">position</span><span class="kw">:</span><span class="at"> static</span></span>
+<span id="cb63-8"><a href="製本方法の詳細.html#cb63-8"></a><span class="at">  bookdown:</span><span class="fu">:pdf_book</span><span class="kw">:</span></span>
+<span id="cb63-9"><a href="製本方法の詳細.html#cb63-9"></a><span class="at">    </span><span class="fu">keep_tex</span><span class="kw">:</span><span class="at"> </span><span class="ch">yes</span></span>
+<span id="cb63-10"><a href="製本方法の詳細.html#cb63-10"></a><span class="at">  bookdown:</span><span class="fu">:html_book</span><span class="kw">:</span></span>
+<span id="cb63-11"><a href="製本方法の詳細.html#cb63-11"></a><span class="at">    </span><span class="fu">css</span><span class="kw">:</span><span class="at"> toc.css</span></span>
+<span id="cb63-12"><a href="製本方法の詳細.html#cb63-12"></a><span class="fu">documentclass</span><span class="kw">:</span><span class="at"> book</span></span></code></pre></div>
 <p>詳しくは BKD “<a href="https://bookdown.org/yihui/bookdown/output-formats.html">Ch. 3 Output Formats</a>” の章を.</p>
 </div>
 <div id="bookdown.yml" class="section level3" number="14.1.2">

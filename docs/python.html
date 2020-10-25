@@ -24,7 +24,7 @@
 <meta name="author" content="Katagiri, Satoshi (ill-identified)" />
 
 
-<meta name="date" content="2020-10-24" />
+<meta name="date" content="2020-10-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -223,12 +223,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html"><i class="fa fa-check"></i><b>9</b> 表のデザイン</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#texhtml-を出力する関数"><i class="fa fa-check"></i><b>9.1</b> TeX/HTML を出力する関数</a></li>
-<li class="chapter" data-level="9.2" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#kableextra-による表のスタイルのカスタマイズ"><i class="fa fa-check"></i><b>9.2</b> <code>kableExtra</code> による表のスタイルのカスタマイズ</a></li>
-<li class="chapter" data-level="9.3" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#formattable-パッケージとの併用"><i class="fa fa-check"></i><b>9.3</b> <code>formattable</code> パッケージとの併用</a></li>
-<li class="chapter" data-level="9.4" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#huxtable-パッケージによる作表"><i class="fa fa-check"></i><b>9.4</b> <code>huxtable</code> パッケージによる作表</a></li>
-<li class="chapter" data-level="9.5" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#todo-gt-パッケージによる作表"><i class="fa fa-check"></i><b>9.5</b> (TODO) <code>gt</code> パッケージによる作表</a></li>
-<li class="chapter" data-level="9.6" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#その他の作表パッケージ"><i class="fa fa-check"></i><b>9.6</b> その他の作表パッケージ</a></li>
+<li class="chapter" data-level="9.1" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#kableextra-による表のスタイルのカスタマイズ"><i class="fa fa-check"></i><b>9.1</b> <code>kableExtra</code> による表のスタイルのカスタマイズ</a></li>
+<li class="chapter" data-level="9.2" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#formattable-パッケージとの併用"><i class="fa fa-check"></i><b>9.2</b> <code>formattable</code> パッケージとの併用</a></li>
+<li class="chapter" data-level="9.3" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#huxtable-パッケージによる作表"><i class="fa fa-check"></i><b>9.3</b> <code>huxtable</code> パッケージによる作表</a></li>
+<li class="chapter" data-level="9.4" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#texhtml-を出力する関数"><i class="fa fa-check"></i><b>9.4</b> TeX/HTML を出力する関数</a></li>
+<li class="chapter" data-level="9.5" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html#その他の作表パッケージ"><i class="fa fa-check"></i><b>9.5</b> その他の作表パッケージ</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="文献引用.html"><a href="文献引用.html"><i class="fa fa-check"></i><b>10</b> 文献引用</a>
 <ul>
@@ -323,15 +322,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="python" class="section level1" number="12">
 <h1><span class="header-section-number">12</span> Python スクリプトの埋め込み</h1>
 <p>Python スクリプトを埋め込むこともできる. 方法は2通りあり, 都度システムコマンドから呼び出す方法と, <code>reticulate</code> パッケージを使うものがある. <code>reticulate</code> 登場以前はチャンクごとに呼び出していたため複数のチャンクに分割して記述するのが難しかったが, 現在は <code>reticulate</code> パッケージを利用することでRと同じような感覚で, あるいは Jupyter のコードセルと同じような感覚で書ける.</p>
-<p><code>pyenv</code> を使用する場合, 共有ライブラリのインストールが必要なことに注意<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a>.</p>
+<p><code>pyenv</code> を使用する場合, 共有ライブラリのインストールが必要なことに注意<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a>.</p>
 <p>初めて使う場合は先に <code>reticulate</code> 単体でPythonが実行できるか検証してからの方が良い.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb52-1"><a href="python.html#cb52-1"></a><span class="kw">require</span>(reticulate)</span>
-<span id="cb52-2"><a href="python.html#cb52-2"></a><span class="co"># Python エンジンを認識しているか確認</span></span>
-<span id="cb52-3"><a href="python.html#cb52-3"></a><span class="kw">py_discover_config</span>()</span>
-<span id="cb52-4"><a href="python.html#cb52-4"></a><span class="kw">repl_python</span>()</span>
-<span id="cb52-5"><a href="python.html#cb52-5"></a></span>
-<span id="cb52-6"><a href="python.html#cb52-6"></a><span class="co"># 以下, Python コマンド実行, `exit` で抜ける</span></span></code></pre></div>
-<p>現在 (<code>knitr</code> 1.18以降) は R Markdown はデフォルトで <code>reticulate</code> を使う. システムコマンド経由にしたい場合はチャンクオプション <code>python.reticulate=F</code> を設定する, あるいは <code>reticulate::eng_python</code> に変わるエンジンを自作する<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a>.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb51-1"><a href="python.html#cb51-1"></a><span class="kw">require</span>(reticulate)</span>
+<span id="cb51-2"><a href="python.html#cb51-2"></a><span class="co"># Python エンジンを認識しているか確認</span></span>
+<span id="cb51-3"><a href="python.html#cb51-3"></a><span class="kw">py_discover_config</span>()</span>
+<span id="cb51-4"><a href="python.html#cb51-4"></a><span class="kw">repl_python</span>()</span>
+<span id="cb51-5"><a href="python.html#cb51-5"></a></span>
+<span id="cb51-6"><a href="python.html#cb51-6"></a><span class="co"># 以下, Python コマンド実行, `exit` で抜ける</span></span></code></pre></div>
+<p>現在 (<code>knitr</code> 1.18以降) は R Markdown はデフォルトで <code>reticulate</code> を使う. システムコマンド経由にしたい場合はチャンクオプション <code>python.reticulate=F</code> を設定する, あるいは <code>reticulate::eng_python</code> に変わるエンジンを自作する<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a>.</p>
 <p>あとはチャンクのエンジンに <code>r</code> ではなく <code>python</code> を指定することでPythonコードを埋め込める.</p>
 <p><code>matplotlib</code> エンジンで描いたグラフに日本語フォントを埋め込む場合, <code>matplotlib-japreset</code> を使えば必要な設定を一括で行う.</p>
 <div class="rmdwarning">
@@ -339,20 +338,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <code>matplotlib-japreset</code> は現在, Linux 以外での動作保証をしていない
 </p>
 </div>
-<div class="sourceCode" id="cb53"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb53-1"><a href="python.html#cb53-1"></a><span class="ex">pip</span> install -U git+https://github.com/Gedevan-Aleksizde/matplotlib-japreset.git@master</span></code></pre></div>
-<div class="sourceCode" id="cb54"><pre class="sourceCode numberSource python numberLines lineAnchors"><code class="sourceCode python"><span id="cb54-1"><a href="python.html#cb54-1"></a><span class="im">from</span> matplotlib_japreset <span class="im">import</span> mplj_cairo</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb52-1"><a href="python.html#cb52-1"></a><span class="ex">pip</span> install -U git+https://github.com/Gedevan-Aleksizde/matplotlib-japreset.git@master</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode numberSource python numberLines lineAnchors"><code class="sourceCode python"><span id="cb53-1"><a href="python.html#cb53-1"></a><span class="im">from</span> matplotlib_japreset <span class="im">import</span> mplj_cairo</span></code></pre></div>
 <pre><code>Noto Sans CJK JP not found
 matplotlib-japreset Cairo mode
 font: Noto Sans CJK JP</code></pre>
-<div class="sourceCode" id="cb56"><pre class="sourceCode numberSource python numberLines lineAnchors"><code class="sourceCode python"><span id="cb56-1"><a href="python.html#cb56-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> rcParams</span>
-<span id="cb56-2"><a href="python.html#cb56-2"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
-<span id="cb56-3"><a href="python.html#cb56-3"></a><span class="im">from</span> plotnine.data <span class="im">import</span> mtcars</span>
-<span id="cb56-4"><a href="python.html#cb56-4"></a>rcParams[<span class="st">&#39;font.family&#39;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode numberSource python numberLines lineAnchors"><code class="sourceCode python"><span id="cb55-1"><a href="python.html#cb55-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> rcParams</span>
+<span id="cb55-2"><a href="python.html#cb55-2"></a><span class="im">from</span> plotnine <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb55-3"><a href="python.html#cb55-3"></a><span class="im">from</span> plotnine.data <span class="im">import</span> mtcars</span>
+<span id="cb55-4"><a href="python.html#cb55-4"></a>rcParams[<span class="st">&#39;font.family&#39;</span>]</span></code></pre></div>
 <pre><code>[&#39;Noto Sans CJK JP&#39;]</code></pre>
 <p><code>matplotlib-japreset</code> によって主要OSで標準インストールされている日本語フォントが自動的に選ばれる. 気に入らない場合は <code>rcParams['font.family']</code> に好きなフォント名を上書きする.</p>
 
-<div class="sourceCode" id="cb58"><pre class="sourceCode numberSource python numberLines lineAnchors"><code class="sourceCode python"><span id="cb58-1"><a href="python.html#cb58-1"></a>ggplot(mtcars, aes(<span class="st">&#39;wt&#39;</span>, <span class="st">&#39;mpg&#39;</span>, color<span class="op">=</span><span class="st">&#39;factor(gear)&#39;</span>)</span>
-<span id="cb58-2"><a href="python.html#cb58-2"></a>) <span class="op">+</span> geom_point() <span class="op">+</span> stat_smooth(method<span class="op">=</span><span class="st">&#39;lm&#39;</span>) <span class="op">+</span> facet_wrap(<span class="st">&#39;~gear&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode numberSource python numberLines lineAnchors"><code class="sourceCode python"><span id="cb57-1"><a href="python.html#cb57-1"></a>ggplot(mtcars, aes(<span class="st">&#39;wt&#39;</span>, <span class="st">&#39;mpg&#39;</span>, color<span class="op">=</span><span class="st">&#39;factor(gear)&#39;</span>)</span>
+<span id="cb57-2"><a href="python.html#cb57-2"></a>) <span class="op">+</span> geom_point() <span class="op">+</span> stat_smooth(method<span class="op">=</span><span class="st">&#39;lm&#39;</span>) <span class="op">+</span> facet_wrap(<span class="st">&#39;~gear&#39;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:py-plotnine-cap"></span>
 <img src="rmdja_files/figure-html/py-plotnine-cap-1.png" alt="Python の plotnine によるグラフ表示例" width="614" />
 <p class="caption">
@@ -378,9 +377,9 @@ font: Noto Sans CJK JP</code></pre>
 
 <div class="footnotes">
 <hr />
-<ol start="14">
-<li id="fn14"><p>詳しくはこちらを参考に <a href="https://ill-identified.hatenablog.com/entry/2019/11/15/010746" class="uri">https://ill-identified.hatenablog.com/entry/2019/11/15/010746</a><a href="python.html#fnref14" class="footnote-back">↩︎</a></p></li>
-<li id="fn15"><p>参考: <a href="https://rstudio.github.io/reticulate/articles/r_markdown.html" class="uri">https://rstudio.github.io/reticulate/articles/r_markdown.html</a><a href="python.html#fnref15" class="footnote-back">↩︎</a></p></li>
+<ol start="17">
+<li id="fn17"><p>詳しくはこちらを参考に <a href="https://ill-identified.hatenablog.com/entry/2019/11/15/010746" class="uri">https://ill-identified.hatenablog.com/entry/2019/11/15/010746</a><a href="python.html#fnref17" class="footnote-back">↩︎</a></p></li>
+<li id="fn18"><p>参考: <a href="https://rstudio.github.io/reticulate/articles/r_markdown.html" class="uri">https://rstudio.github.io/reticulate/articles/r_markdown.html</a><a href="python.html#fnref18" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

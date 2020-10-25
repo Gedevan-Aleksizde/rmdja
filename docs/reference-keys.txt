@@ -17,6 +17,7 @@ fig:asymptote-graph
 fig:diagrammer-graph
 tab:kableextra-color
 tab:kableextra-plot
+tab:stargazer-table
 fig:py-plotnine-cap
 fig:plot-grey-scale
 fig:tategaki
@@ -66,11 +67,10 @@ asymptote-を使う
 todo-その他のプログラム
 todo-その他の-r-プログラム
 advanced-tabulate
-texhtml-を出力する関数
 kableextra-による表のスタイルのカスタマイズ
 formattable-パッケージとの併用
 huxtable-パッケージによる作表
-todo-gt-パッケージによる作表
+texhtml-を出力する関数
 その他の作表パッケージ
 文献引用
 を使う
