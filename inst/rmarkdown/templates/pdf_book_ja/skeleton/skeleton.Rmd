@@ -7,12 +7,13 @@ output:
   rmdja::pdf_book_ja
   rmdja::gitbook_ja
 documentclass: bxjsbook
+bibliography: 
+  - packages.bib
 classoption: a4paper
 link-citations: true
 linkcolor: blue
 citecolor: blue
 urlcolor: magenta
-biblio-style: apalike
 ---
 
 ```{r setup, include=FALSE}

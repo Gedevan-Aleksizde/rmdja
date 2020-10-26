@@ -27,7 +27,6 @@ output:
     slide_level: 2
     incremental: false
 fontsize: 12pt
-biblio-title: "参考文献"
 bibliography: rmdja.bib
 linkcolor: blue
 citecolor: blue
@@ -42,8 +41,6 @@ header-includes:
 ```{r setup-document, include=F}
 # サンプル引用文献リストを取得する
 file.copy(system.file("resources/bibliography/rmdja.bib", package = "rmdja"), "./")
-# options(tinytex.latexmk.emulation = F)
-# 上記は日本語引用文献リストのために必要
 
 # サンプル画像等を参照するパス
 file_loc <- system.file("resources", package = "rmdja")

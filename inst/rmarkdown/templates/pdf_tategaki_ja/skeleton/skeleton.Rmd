@@ -7,12 +7,15 @@ output:
     latex_engine: lualatex
     toc: false
 documentclass: jlreq
+biblio-style: jauthoryear
+biblatexoptions:
+  - natbib=true
+bibliography:
+  - packages.bib
 link-citations: true
 linkcolor: blue
 citecolor: blue
 urlcolor: magenta
-bibliography: 
-  - packages.bib
 classoption:
   - tate
   - book

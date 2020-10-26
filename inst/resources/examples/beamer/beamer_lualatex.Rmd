@@ -27,12 +27,10 @@ output:
     slide_level: 2
     incremental: false
 fontsize: 12pt
-biblio-title: "参考文献"
 bibliography: rmdja.bib
 linkcolor: blue
 citecolor: blue
 urlcolor: magenta
-
 header-includes:
   - \makeatletter
   - \setlength{\metropolis@progressinheadfoot@linewidth}{2pt}

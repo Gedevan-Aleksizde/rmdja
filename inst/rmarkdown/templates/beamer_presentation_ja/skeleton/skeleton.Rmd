@@ -6,6 +6,10 @@ output:
   rmdja::beamer_presentation_ja:
     latex_engine: xelatex
     theme: metropolis
+link-citations: true
+linkcolor: blue
+citecolor: blue
+urlcolor: magenta
 fontsize: 12pt
 header-includes:
   - \makeatletter

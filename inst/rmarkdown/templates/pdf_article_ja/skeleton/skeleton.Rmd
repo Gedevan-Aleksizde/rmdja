@@ -14,12 +14,9 @@ classoption:
   - a4paper
   - 'number-of-lines=30'
   - 'textwidth=40zw'
-link-citations: true
-linkcolor: blue
-citecolor: blue
-urlcolor: magenta
 bibliography: 
   - packages.bib
+link-citations: false
 ---
 
 \newpage
