@@ -184,10 +184,12 @@ sudo apt install graphiviz
 
 # 謝辞
 
-* 以下に触発されて作りました
+* 以下の数々の資料に触発されて作りました
   + https://atusy.github.io/tokyor85-original-rmd-format
   + https://kazutan.github.io/HijiyamaR6/intoTheRmarkdown.html#/
   + https://github.com/atusy/tokyor85down
+* kazutan 氏による [`bookdown` 日本語対応テンプレ](https://github.com/kazutan/bookdown_ja_template)
+* および kenjimyzk 氏によるその[改良版](https://github.com/kenjimyzk/bookdown_ja_template)
 
 * r-wakalang で `rmarkdown` の不具合を指摘するや即座にプルリクエストを上げていただいた Atusy 氏
 * 奥村晴彦氏の主催する [TeX Forum](https://oku.edu.mie-u.ac.jp/tex/) で質問に答えて頂いた方々

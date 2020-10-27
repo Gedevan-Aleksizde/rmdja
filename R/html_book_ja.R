@@ -86,6 +86,7 @@ gitbook_ja <- function(
         args_extra <- c(args_extra, c("--css", css_file))
         }
     }
+    if(is.null(metadata[["biblio-title"]])) args_extra <- c(args_extra, "-Mbiblio-title=参考文献")
     return(args_extra)
   }
 
@@ -123,7 +124,9 @@ gitbook_ja <- function(
       list(pandoc = NULL,
            knitr = rmarkdown::knitr_options(
              opts_chunk = opts_chunk_default,
-             opts_hooks = list(echo = hook_display_block)),
+             opts_hooks = list(echo = hook_display_block),
+             opts_knit = list(global.par = T)
+             ),
            pre_processor = preproc_css,
            base_format = rmarkdown::html_document()
            )

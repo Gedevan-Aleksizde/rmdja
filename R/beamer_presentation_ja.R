@@ -183,6 +183,7 @@ beamer_presentation_ja <- function(
         copy_biblatexstyle(metadata, input_file, runtime, knit_meata, files_dir, output_dir)
       }
     }
+    if(is.null(metadata[["biblio-title"]])) bib_args <- c(bib_args, "-Mbiblio-title=参考文献")
     return(
       c(
         autodetect_and_set_jfont(metadata, input_file, runtime, knit_meta, files_dir, output_dir, latex_engine),
@@ -192,7 +193,10 @@ beamer_presentation_ja <- function(
   }
   out <- rmarkdown::output_format(
     pre_knit = adjust_fontsize,
-    knitr = do.call(rmarkdown::knitr_options, list(opts_chunk = args_opts_chunk)),
+    knitr = do.call(rmarkdown::knitr_options, list(
+      opts_chunk = args_opts_chunk,
+      opts_knit = list(global.par = T)
+      )),
     pandoc = do.call(rmarkdown::pandoc_options, args_pandoc_options),
     pre_processor = preproc,
     clean_supporting = !keep_tex,

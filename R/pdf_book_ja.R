@@ -129,8 +129,9 @@ pdf_book_ja <- function (
       opts_hooks = list(
         dev = hook_python_pdf_dev,
         echo = hook_display_block
-        )
-    )
+        ),
+      opts_knit = list(global.par = T)
+      )
   )
   
   preproc <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){

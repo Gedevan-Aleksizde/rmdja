@@ -1,5 +1,6 @@
 #' internal
 
+
 DUMMY_ENGINES <- function(){
   c("cat", "asis", "block", "block2",
     "theorem", "lemma", "corollary", "proposition", "conjecture", "definition",
@@ -11,6 +12,18 @@ ICON_FILES <- function(){
 
 CSS_FILES <- function(){
   c("style.css", "toc.css")
+}
+
+gen_opts_hook_par <- function(font_family){
+  f <- function(options){
+    if(options$global.par){
+      par(family = font_family)
+    } else {
+      par(family = font_family)
+    }
+    return(options)
+  }
+  return(f)
 }
 
 hook_display_block <- function(options){
