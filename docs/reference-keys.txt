@@ -11,13 +11,13 @@ tab:tab-md
 fig:caption
 fig:citr-image
 tab:biblio-comparison
-tab:biblatex-styles
 fig:tikz-venn
 fig:asymptote-graph
 fig:diagrammer-graph
 tab:kableextra-color
 tab:kableextra-plot
 tab:stargazer-table
+tab:biblatex-styles
 fig:py-plotnine-cap
 fig:plot-grey-scale
 fig:tategaki
@@ -41,6 +41,7 @@ markdown-を使った図表の挿入
 プログラムチャンク
 プログラムで数式を生成する
 プログラムを使った図の挿入
+wip-デフォルトフォントの設定
 todo-図のレイアウト設定
 r-プログラムを使った表の装飾
 相互参照と引用
@@ -50,9 +51,8 @@ crossref
 章への相互参照
 特殊な相互参照
 bibliography
-文献引用のフォーマット設定
-todo-pandoc-citeproc-と-csl
-wip-biblatex
+文献引用スタイルのカスタマイズ
+文献リスト生成エンジンの違いについて
 wip-簡単なレイアウト変更
 html
 フォント変更
@@ -72,8 +72,10 @@ formattable-パッケージとの併用
 huxtable-パッケージによる作表
 texhtml-を出力する関数
 その他の作表パッケージ
-文献引用
+biblio-advaneced
 を使う
+todo-pandoc-citeproc-と-csl-について
+wip-biblatex-について
 webapp
 todo-plotly
 todo-shiny
@@ -109,5 +111,5 @@ pdf-の組版に関する細かい話
 画像の配置
 取り消し線
 todo-しかし英文で書きたい場合
-jecon.bst-の紹介
+参考文献リストの書式にこだわる-jecon.bst
 fontregisterer-でグラフ用フォントを自動登録

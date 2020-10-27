@@ -1,7 +1,7 @@
 ---
 title: "`rmdja` による多様な形式の日本語技術文書の作成 "
 author: "Katagiri, Satoshi (ill-identified)"
-date: "2020-10-25"
+date: "2020-10-28"
 site: bookdown::bookdown_site                    # RStudio GUIでビルド操作したい場合に必要
 description: "bookdown でまともな日本語文書を作る資料"  # HTML <metadata> に出力されるサイト概要
 url: 'https\://bookdown.org/john/awesome/'       # URL
@@ -24,9 +24,7 @@ jmonofont: Ricty
 linkcolor: blue
 citecolor: blue
 urlcolor: magenta
-bibliography: rmdja.bib # 書誌情報ファイル
-biblio-style: authoryear
-# biblio-style: jecon
+bibliography: rmdja.bib
 ---
 
 
@@ -96,7 +94,7 @@ HTML出力に限らない R Markdown の全般的な情報は, 既に充実し�
 * "[_R Markdown Definiteive Guide_](https://bookdown.org/yihui/rmarkdown/)"
 * "[_R Markdown Cookbook_](https://bookdown.org/yihui/rmarkdown-cookbook)"[^rmd-cookbook-publish]
 
-[^major-docs]: 基本的なことがらの多くは上記を読めば分かるのでここでは基本機能をダイジェストで伝えた上で, これらの資料に書いてない応用技を紹介する. YAML のオプションの意味についてはソースコードにコメントを書いた. 以下, 単に, **BKD*  と書けば "_`bookdown`: Authoring Books and Technical Documents with R Markdown_" [@R-bookdown] を, RDG と書けば "_R Markdown: The Definitive GUide_" [@rmarkdown2018] を, RCB と書けば "_R Markdown Cookbook_" [@xie2020Markdown] を指すことにする.
+[^major-docs]: 基本的なことがらの多くは上記を読めば分かるのでここでは基本機能をダイジェストで伝えた上で, これらの資料に書いてない応用技を紹介する. YAML のオプションの意味についてはソースコードにコメントを書いた. 以下, 単に, **BKD**  と書けば "_`bookdown`: Authoring Books and Technical Documents with R Markdown_" [@R-bookdown] を, RDG と書けば "_R Markdown: The Definitive GUide_" [@rmarkdown2018] を, RCB と書けば "_R Markdown Cookbook_" [@xie2020Markdown] を指すことにする.
 
 しかしながらこれらを元に1からいろいろな調整を施すのはとても骨が折れるため, `rmdja` パッケージは日本語文書でHTMLやPDFを同時に生成する場合の定番の処理をフォーマットに内蔵することにした.
 
@@ -227,7 +225,7 @@ RStudio を起動し, 左上から新規作成を選び, "R Markdown" を選ぶ 
 
 
 
-3種類のテンプレートのうち, `pdf book in Japanese` のみ, 文書のビルドのための下準備が追加で必要になるため, その方法を解説する. それ以外は第 \@ref(#quick-start) 節で書いたように "knit" ボタンを押すだけで良い.
+3種類のテンプレートのうち, `pdf book in Japanese` のみ, 文書のビルドのための下準備が追加で必要になるため, その方法を解説する. それ以外は第 \@ref(quick-start) 節で書いたように "knit" ボタンを押すだけで良い.
 
 最低限のファイルやパッケージで動くほうのデモ用ディレクトリをコピーする. ただし, `tidyverse` と `kableExtra` のインストールも必要である.
 
@@ -767,6 +765,11 @@ ggplot(diamonds, aes(x=carat, y=price, color=clarity)) +
 
 `ggplot2` 以外のパッケージや言語, たとえば `tikz` や `asymptote`, DOT言語も使用できる. これらは \@ref(advanced-graph) 章で紹介する.
 
+## (WIP): デフォルトフォントの設定
+
+Windows や Mac では, デフォルトのフォントが日本語グリフを持たないので文字化けする. 現時点では最低限 `rmdja::set_graphics_font()` という関数を呼び出すことで設定しなければならない. 本文のフォントと異なり, 現時点 (ver. 0.4.2) では手動設定が必要になる. OSごとのフォント名を調べて指定するのが大変なら, 私が作成した `fontregisterer` パッケージを使うのも1つの手である.  その解説は『[おまえはもうRのグラフの日本語表示に悩まない (各OS対応)](https://ill-identified.hatenablog.com/entry/2020/10/03/200618)』に書いた通りである. `fontregisterer::get_standard_font()` で使用中のOSで標準インストールされているセリフ (明朝), サンセリフ (ゴシック) のフォントファミリ名を1つづつ取得するので, その値のどちらかを `rmdja::set_graphics_font()` に与えれば, `ggplot2` および標準グラフィックスのデフォルトのフォントが日本語対応フォントになる.
+
+
 ## TODO: 図のレイアウト設定
 
 PDF ならばフロート設定のため, 図が離れた位置に配置されることがある. そのため, 「図 \@ref(fig:plot-sample)」 のような相互参照を使うと良いだろう. フロートを使うかどうかは, 後のセクションで解説する TODO
@@ -1085,54 +1088,79 @@ knitr::include_graphics(file.path(img_dir, "citr.png"))
 <p class="caption">(\#fig:citr-image)(ref:citr-caption)</p>
 </div>
 
+一方で, この記述が文書においてどのようなスタイルで出力されるかは文献引用を処理するプログラムによって変化する. そのプログラムにはいくつか候補がある.
 
-一方で, この記述がどう反映されるかは文献引用を処理するプログラムによって変化する. さらに厄介なことに, それぞれ全く違うプログラムであるがゆえに, 設定に書き方も変わってくる.
+R Markdown の文献引用は pandoc を経由して処理され, pandoc は現時点では `pandoc-citeproc` (`default`), `\BibTeX`{=latex}`BibTeX`{=html} (`natbib`), BibLaTeX (`biblatex`) の選択をサポートしている. `pandoc-citeproc` 以外はもともと `\LaTeX`{=latex}`LaTeX`{=html} 用に作られたため, HTML では常に `pandoc-citeproc` で処理される. PDF ではそれに加えて `bibtex`, `biblatex` を指定することもできる. (`default` とは別なのでややこしいが) デフォルトでは `biblatex` を使用する. これはフォーマット引数の `citation_package` で変更できる.
 
+* `default`: `pandoc-citeproc` を使用する.
+* `biblatex`: BibLaTeX を使用する. デフォルト. スタイルはこちらが用意した `jauthoryear` というもの.
+* `natbib`: `\BibTeX`{=latex}`BibTeX`{=html} を使用し, 本文中の参照には `natbib.sty` が使われる[^natbib-contraint]. ただし, 日本語 (マルチバイト文字) の含まれる文献情報を出力する場合は**特殊な設定をしないと製本処理がハングアップする** (後述).
 
-R Markdown の文献引用は pandoc を経由して処理され, pandoc は現時点では `pandoc-citeproc`. `bibtex`, `biblatex` の選択をサポートしている. `pandoc-citeproc` 以外はもともと `\LaTeX`{=latex}`LaTeX`{=html} 用に作られたため, HTML では常に `pandoc-citeproc` で処理される. これはフォーマット引数の `citation_package` で指定できる.
+[natbib-contraint]: ただし `citeit`, `citep` など `natbib.sty` の提供していた多様な引用子オプションは使えない. これは pandoc の制約によるものである.
 
-* `default`: `pandoc-citeproc` を使用する
-* `biblatex`: biblatex を使用する
-* `natbib`: `\BibTeX`{=latex}`BibTeX`{=html} を使用し, 本文中の参照には `natbib.sty` を使う. ただし本来の `natbib` の引用子オプションは使えない
-  + `natbiboptions:` で `number`, `authoryear` などの `natbib.sty` のオプションを指定できる.
+### 文献引用スタイルのカスタマイズ
 
+`rmdja` では, 本文中の引用トークンのデフォルト設定を, 文書タイプでは「著者-年」形式に, スライドでは番号形式にしている. このカスタマイズについて簡単な解説をする. 従来の R Markdown ではカスタマイズに以下のようなYAMLフロントマター項目を使っていた.
 
-### 文献引用のフォーマット設定
+* `biblio-style`: PDF用スタイルファイル
+* `natbiboptions`/`biblatexoptions`: それぞれ `natbib` または `biblatex` を使う場合のスタイルに関するオプション 
+* `csl`: CSL用スタイルファイル
+, `biblio-title`: 「参考文献」タイトルの文字列
 
-これがややこしい. まず, `pandoc-citeproc`, `bibtex`, `biblatex` はそれぞれ引用文献リストの書式を記述するフォーマットがありそれぞれ拡張子は `.csl`, `.bst`, `.bbx`, である. 前者は MS Word のスタイルと同じもので, XMLで記述されている[^CSL-editor]. 一方で `.bst` は逆ポーランド記法の構文だったりかなりアレである. そして  `biblatex` はこのような専用の書式ファイルを使わず, 細かい書式設定はすべて `\LaTeX`{=latex}`LaTeX`{=html} のマクロで調整する想定で作られている. また, スタイルファイルを用意しなくとも指定できるスタイルがいくつか存在する.
+このうち `biblio-style`, `natbiboptions`, `biblatexoptions` はフォーマット関数で指定する. 例えば以下のように.
 
-bibtex および biblatex に関する設定は biblio-style だが, CSLファイルの設定は `csl` を使う.
+```yaml
+output:
+  rmdja::pdf_book_ja:
+    citation_package: biblatex
+    citation_options:
+      - style=jauthoryear
+      - natbib=true
+```
 
-さらに日本語文献引用が必要な場合の特有の事情として, (1)対応文字コードの問題 (2) 和文と欧文のスタイルが異なるという問題がある. まず前者について, `bibtex` は日本語など非ASCII文字に対応していない. よって従来 `\pBibTeX`{=latex}`pBibTeX`{=html} または `\JBibTeX`{=latex}`JBibTeX`{=html} が使用されていた. しかしこれもJIS規格の範囲までしか対応していないため, 一部の珍しい人名漢字などの表示ができなかった[^pbibtex-unicode]. そのためさらに `\upBibTeX`{=latex}`upBibTeX`{=html} というUnicode対応版プログラムが作成されている. しかし R Markdown (および pandoc) はそのような日本語特有の事情などしらないため, これらを使用することができない. よって**オプション選択の範囲では, `biblatex` か `pandoc-citeproc` でしか日本語文献を表示できない**. これはR Markdownで日本語技術文書を作る際の特にアレな障害の1つである.
+これは pandoc の記法を利用した従来のR Markdown で以下のように書いているのと同様であり, `citation_package: natbib` ならば `biblatexoptions` が `natbiboptions` に置き換わる.
 
-[^pbibtex-unicode]: `\pBibTeX`{=latex}`pBibTeX`{=html} のUNICODEモードは内部でSJISに変換しているだけなので, 全てのUnicodeに対応しているわけではない.
+```yaml
+output:
+  ....:
+    citation_package: natbib
+biblio-style: jauthoryear
+biblatexoptions:
+  - natbib=true
+```
 
-<table>
+2通りの記法が存在するのはやや混乱するかもしれないが, 後方互換性を考慮し `rmdja` ではこれらの2通りの記法どちらでも受け付けるようにしている.
+
+`biblatex` 以外のエンジンで出力したい, 例えば指定された `.bst` のスタイルで文献一覧を出力したい場合は, (u)`\pBibTeX`{=latex}`pBibTeX`{=html} が必要になる. その操作の詳細は \@ref(biblio-advaneced) 章を参照.
+
+### 文献リスト生成エンジンの違いについて
+
+`pandoc-citeproc`, `bibtex`, `biblatex` はそれぞれ引用文献リストのスタイルを記述するファイルがあり, それぞれ拡張子は `.csl`, `.bst`, `.bbx`/`.cbx`, である. `.csl` は MS Word のスタイルと同じもので, XMLで記述されている[^CSL-editor]. `.bst` は `\BibTeX`{=latex}`BibTeX`{=html} 用のフォーマットで, 自分で改造するには逆ポーランド記法の構文に慣れねばならない. そして BibLaTeX はスタイルを `\LaTeX`{=latex}`LaTeX`{=html} のマクロで記述でき, さらにそういった細かい記述のスタイルファイルを用意しなくとも指定できるオプションがいくつか存在する(ここまで, 表 \@ref(tab:biblio-comparison)).
+
+現バージョンでは `biblatex` がデフォルトである. 現在の日本語圏の `\LaTeX`{=latex}`LaTeX`{=html} 使用者にとっては `.bst` ファイルの種類が充実しているため `natbib` を使いたいところだが, R Markdown の場合エンジンが `\BibTeX`{=latex}`BibTeX`{=html} であるため**日本語が使えない**. (u)`\pBibTeX`{=latex}`pBibTeX`{=html} を使うにはやや複雑な手順が必要である. よって, デフォルトでそのような下準備をさせるべきでないと考えたので `rmdja` では `biblatex` をデフォルトとし, 日本語表示に最低限のスタイルだけを用意している.
+
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>(\#tab:biblio-comparison)引用プログラムごとの違い</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> item </th>
-   <th style="text-align:left;"> HTML対応 </th>
-   <th style="text-align:left;"> PDF対応 </th>
-   <th style="text-align:left;"> 日本語表示 </th>
+   <th style="text-align:left;"> HTML </th>
+   <th style="text-align:left;"> PDF </th>
+   <th style="text-align:left;"> 日本語 </th>
    <th style="text-align:left;"> 指定名 </th>
    <th style="text-align:left;"> 文献ファイル </th>
    <th style="text-align:left;"> 文献スタイル </th>
-   <th style="text-align:left;"> スタイル指定方法 </th>
-   <th style="text-align:left;"> スタイルのオプション </th>
   </tr>
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> `pandoc-citeproc` (default) </td>
+   <td style="text-align:left;"> `default` </td>
    <td style="text-align:left;"> TRUE </td>
    <td style="text-align:left;"> TRUE </td>
    <td style="text-align:left;"> TRUE </td>
    <td style="text-align:left;"> default </td>
    <td style="text-align:left;"> .json </td>
    <td style="text-align:left;"> .csl </td>
-   <td style="text-align:left;"> csl: </td>
-   <td style="text-align:left;">  </td>
   </tr>
   <tr>
    <td style="text-align:left;"> `biblatex` </td>
@@ -1140,94 +1168,20 @@ bibtex および biblatex に関する設定は biblio-style だが, CSLファ�
    <td style="text-align:left;"> TRUE </td>
    <td style="text-align:left;"> TRUE </td>
    <td style="text-align:left;"> biblatex </td>
-   <td style="text-align:left;"> .bib/.bibtex </td>
-   <td style="text-align:left;"> なし </td>
-   <td style="text-align:left;"> biblio-style: </td>
-   <td style="text-align:left;">  </td>
+   <td style="text-align:left;"> .bib </td>
+   <td style="text-align:left;"> .bbx/.cbx </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> `bibtex` </td>
+   <td style="text-align:left;"> `natbib` </td>
    <td style="text-align:left;"> FALSE </td>
    <td style="text-align:left;"> TRUE </td>
    <td style="text-align:left;"> FALSE </td>
    <td style="text-align:left;"> natbib </td>
-   <td style="text-align:left;"> .bib </td>
+   <td style="text-align:left;"> .bib/.bibtex </td>
    <td style="text-align:left;"> .bst </td>
-   <td style="text-align:left;"> biblio-style </td>
-   <td style="text-align:left;"> natbiboptions </td>
   </tr>
 </tbody>
 </table>
-
-
-
-### (TODO) `pandoc-citeproc` と CSL
-
-### (WIP) BibLaTeX
-
-BibLaTeX の全てのオプションに対応しているわけではないので詳しいことは [BibLaTeX のドキュメント](https://www.ctan.org/pkg/biblatex)を読んでいただきたい. 残念ながら, 日本語の情報は非常に乏しい. ここではよく使う `style` のことだけ言及する.
-
-フロントマターの `biblio-style:` で指定できるのは, インクルード時の `style=` に指定できるものに対応する(表 \@ref(tab:biblatex-styles)). つまり, 引用文献の見出しをどうするかである. これは引用リストと本文中の引用子のスタイル両方に影響する.
-
-<table>
-<caption>(\#tab:biblatex-styles)biblatex の `bilio-style` で指定できるもの一覧</caption>
- <thead>
-  <tr>
-   <th style="text-align:left;"> 名称 </th>
-   <th style="text-align:left;"> 概要 </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> `numeric` </td>
-   <td style="text-align:left;"> '[1]' のような番号 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> `alphabetic` </td>
-   <td style="text-align:left;"> 著者名の略称+出版年2桁 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> `authoryear` </td>
-   <td style="text-align:left;"> 著者-出版年形式, natbib の標準と同じ </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> `authortitle` </td>
-   <td style="text-align:left;"> 著者名のみ, リストでは出版年は後置され, 引用子では脚注になる </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> `verbose` </td>
-   <td style="text-align:left;"> authortitle と同じだが, 引用子にリスト同様の内容を出力する </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> `reading` </td>
-   <td style="text-align:left;"> 個人的なリーディングリスト向け. ファイルやメモ欄も出力する </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> `draft` </td>
-   <td style="text-align:left;"> .bib ファイルのIDで表示. 名前通り下書き </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> `debug` </td>
-   <td style="text-align:left;"> `.bib` の全フィールドを表示 </td>
-  </tr>
-</tbody>
-</table>
-
-その他 `apa`, `ieee` など特定の学会が使用するスタイルも用意されているが, これらは基本欧文しか想定していないし, アカデミックの事情に詳しい人しかこれらの使用にこだわらないだろうから詳しくは解説しない. これらを含めたそれぞれの出力例は https://www.overleaf.com/learn/latex/biblatex_bibliography_styles に一覧があるのでそちらを参考に.
-
-なお, もちろん引用リストのスタイルと引用子のスタイルを個別にすることはできるが, R Markdown および Pandoc にそのオプションを通す機能はない. (bibstyle/citestyleで分けられる,bbx/cbx)
-
-現時点では各分野の学会で日本語文献に対応した BibLaTeX フォーマットを配布しているという情報は見つけられなかった.  参考として私のブログで対応のヒントについて書いた[^biblatex-note].
-
-[^biblatex-note]: https://ill-identified.hatenablog.com/entry/2020/09/20/231335
-
-TODO: その他の非ラテン文字, キリル文字, アラビア文字 ヘブライ文字等は?
-
-TODO: upBibTeX や `bibtex` で動作しない `.bst` ファイルの扱い.
-
-なお, 普段文献管理ソフトを使っていないが, 数本程度の文献を引用リストに載せたい利用者は, `biblatex` の構文を利用して書くのがよいかもしれない. 例えばここに書いてあるように. その場合, デフォルトでは本文の引用は [1], [2] のような番号形式となる. `biblio-style: authoryear` とすることで, `natbib` のような 「著者 (出版年)」 スタイルとなる.
-
-https://teastat.blogspot.com/2019/01/bookdown.html
 
 [^CSL-editor]: 簡単なカスタマイズなら CSL editor というWebサービスでできる. しかしあくまでXMLなので, あまり複雑な処理はできないことに注意する.
 
@@ -1342,8 +1296,8 @@ DiagrammeR::grViz("digraph {
 ```
 
 <div class="figure" style="text-align: center">
-<!--html_preserve--><div id="htmlwidget-497601d5bfbac9cb5bf6" style="width:672px;height:500px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-497601d5bfbac9cb5bf6">{"x":{"diagram":"digraph {\n  graph [layout = dot, rankdir = TB]\n  \n  node [shape = rectangle]        \n  rec1 [label = \"Step 1. 起床する\"]\n  rec2 [label = \"Step 2. コードを書く\"]\n  rec3 [label =  \"Step 3. ???\"]\n  rec4 [label = \"Step 4. 給料をもらう\"]\n  \n  # edge definitions with the node IDs\n  rec1 -> rec2 -> rec3 -> rec4\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
+<!--html_preserve--><div id="htmlwidget-7d3687f8419b5e72b765" style="width:672px;height:500px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7d3687f8419b5e72b765">{"x":{"diagram":"digraph {\n  graph [layout = dot, rankdir = TB]\n  \n  node [shape = rectangle]        \n  rec1 [label = \"Step 1. 起床する\"]\n  rec2 [label = \"Step 2. コードを書く\"]\n  rec3 [label =  \"Step 3. ???\"]\n  rec4 [label = \"Step 4. 給料をもらう\"]\n  \n  # edge definitions with the node IDs\n  rec1 -> rec2 -> rec3 -> rec4\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
 <p class="caption">(\#fig:diagrammer-graph)(ref:diagrammer-cap)</p>
 </div>
 
@@ -1566,53 +1520,53 @@ inline_plot %>%
 <tbody>
   <tr>
    <td style="text-align:right;"> 4 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/RtmpsJoBqB/boxplot_79ec22b07f46.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/boxplot_4d1d20f5d0ee.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/RtmpsJoBqB/hist_79ec8ee511f.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/hist_4d1d12ea71ab.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/RtmpsJoBqB/plot_79ec6c93c635.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/plot_4d1d6ee286fd.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/RtmpsJoBqB/plot_79ec36583bac.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/plot_4d1d62cb6d21.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/RtmpsJoBqB/plot_79ec6e646eb2.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/plot_4d1d8a40ad3.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/RtmpsJoBqB/plot_79ec49341922.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/plot_4d1d1f4e872a.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <html><body><img src="file:////tmp/RtmpsJoBqB/plot_79ec70716020.svg" width="64" height="16"></body></html>
+   <td style="text-align:left;">  <html><body><img src="file:////tmp/Rtmp2yHqJx/plot_4d1d2ffee3d7.svg" width="64" height="16"></body></html>
 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 6 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/RtmpsJoBqB/boxplot_79ec1033130f.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/boxplot_4d1d34036211.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/RtmpsJoBqB/hist_79ec4eb5539.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/hist_4d1d2ba9a0d0.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/RtmpsJoBqB/plot_79ec7f5e37a5.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/plot_4d1d29046d53.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/RtmpsJoBqB/plot_79ec294971e.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/plot_4d1d8ce5679.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/RtmpsJoBqB/plot_79ecd9d830e.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/plot_4d1d5a9657fe.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/RtmpsJoBqB/plot_79ec271540e4.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/plot_4d1d6f40193.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <html><body><img src="file:////tmp/RtmpsJoBqB/plot_79ec79e310f0.svg" width="64" height="16"></body></html>
+   <td style="text-align:left;">  <html><body><img src="file:////tmp/Rtmp2yHqJx/plot_4d1d157f51c8.svg" width="64" height="16"></body></html>
 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 8 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/RtmpsJoBqB/boxplot_79ec3892c2bf.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/boxplot_4d1d198f699d.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/RtmpsJoBqB/hist_79ec1c47b33.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/hist_4d1d2cf281b3.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/RtmpsJoBqB/plot_79ec689738d9.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/plot_4d1d62791dd9.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/RtmpsJoBqB/plot_79ec3040b01e.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/plot_4d1d2d32bd65.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/RtmpsJoBqB/plot_79ec19524b9d.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/plot_4d1d86abe6b.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/RtmpsJoBqB/plot_79ec25066888.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/plot_4d1d58588adb.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <html><body><img src="file:////tmp/RtmpsJoBqB/plot_79ec7b8e3bc4.svg" width="64" height="16"></body></html>
+   <td style="text-align:left;">  <html><body><img src="file:////tmp/Rtmp2yHqJx/plot_4d1d12dcd415.svg" width="64" height="16"></body></html>
 </td>
   </tr>
 </tbody>
@@ -1639,17 +1593,17 @@ inline_plot %>%
 
 <!--html_preserve--><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 120pt; margin-left: auto; margin-right: auto; height: 120pt; " id="tab:huxtable-logo">
 <caption style="caption-side: top; text-align: center;">(#tab:huxtable-logo) </caption><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><tr style="height: 20pt;">
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: bold; font-family: DejaVu Sans;">h</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(255, 0, 0); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(255, 255, 255);">&nbsp;</span></td><td colspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(255, 255, 0); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(0, 0, 0);">&nbsp;</span></td></tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(255, 0, 0); font-weight: bold; font-family: DejaVu Sans;"><span style="color: rgb(255, 255, 255);">h</span></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td rowspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">u</td></tr>
 <tr style="height: 20pt;">
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(255, 0, 0); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(255, 255, 255);">&nbsp;</span></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">u</td><td rowspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">x</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">t</td></tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(255, 255, 0); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(0, 0, 0);">x</span></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(255, 0, 0); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(255, 255, 255);">&nbsp;</span></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td></tr>
 <tr style="height: 20pt;">
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(0, 0, 255); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(255, 255, 255);">&nbsp;</span></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(0, 0, 255); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(255, 255, 255);">&nbsp;</span></td></tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td rowspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(255, 255, 0); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(0, 0, 0);">&nbsp;</span></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">t</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td></tr>
 <tr style="height: 20pt;">
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">a</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(255, 255, 0); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(0, 0, 0);">b</span></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td></tr>
+<td colspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(255, 255, 0); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(0, 0, 0);">a</span></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td rowspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(0, 0, 255); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(255, 255, 255);">b</span></td></tr>
 <tr style="height: 20pt;">
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td rowspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td rowspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">l</td><td colspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td></tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">l</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td></tr>
 <tr style="height: 20pt;">
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(0, 0, 255); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(255, 255, 255);">&nbsp;</span></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">e</td></tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">e</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(255, 0, 0); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(255, 255, 255);">&nbsp;</span></td><td colspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td></tr>
 </table>
 <!--/html_preserve-->
 
@@ -1696,7 +1650,7 @@ head(mtcars[1:5]) %>%
 
 そのままでは罫線の設定が `set_top_border()`, `set_bottom_border()`, などしかなく, 複雑な条件を指定するのが大変だが, `ggplot2` のテーマ関数のようにスタイルのプリセットが `theme_*()` の名前でいくつか用意されている. 例えば上記では `theme_article()` という学術論文風テーマを適用し, 表の上下とヘッダにだけ罫線を引いている. 条件書式は `map_*()` 関数群で実行できる. また, フォーマットは `set_number_format()` に値を変換するフォーマット関数を与える形で適用できる. こちらはパーセンテージなども正しく表示できる.
 
-* テーマ設定はグローバルオプションでも設定できる. 例えば `options('huxtable.knit_print_df_theme' = theme_article)`.
+* テーマ設定はグローバルオプションでも設定できる. 例えば `options(huxtable.knit_print_df_theme = theme_article)`.
 
 なお, 動作させるにあたっていくつか注意が必要である.
 
@@ -1799,11 +1753,98 @@ RCB [10.3 Other packages for creating tables](https://bookdown.org/yihui/rmarkdo
 
 [^gt-crossref]: Issue [#115](https://github.com/rstudio/gt/issues/115) にあるように, 機能を追加したいという声はある. しかし現時点では `gt`  のこの機能の開発を積極的に進める様子はない. 
 
-# 文献引用 
+# 文献引用の詳細設定 {#biblio-advaneced}
 
 ## `(u)p\BibTeX`{=latex}`(u)pBibTeX`{=html} を使う
 
-日本語対応 `.bst` ファイルを使いたい場合は少しトリッキーな操作が必要になる. `rmarkdown` は `tinytex` というパッケージでインストールされたスタンドアローンな処理系で PDF を生成している. 冒頭のチャンクで `options(tinytex.latexmk.emulation = F)` を指定することで, 自分のマシンにインストールされている普段使っている処理系に処理させることができる. さらに `rmdja` では `natbib` を指定した場合に自動でカレントディレクトリに `.latexmkrc` をコピーするようにしている. しかしログが残らないなどデバッグしづらいところがあるため, このやり方はやや使いづらい.
+このセクションの説明の理解には多少の `\LaTeX`{=latex}`LaTeX`{=html} の知識を要する.  Ver. 0.4.3 以降では BibLaTeX 用の日本語スタイルとして最低限のクオリティだけは保った `jauthoryear` を用意しているため, どうしても文献リストのスタイルにこだわりたい以外はここで紹介される方法は使わないほうが良い. 
+
+`.bst` ファイルのスタイルを使いたい場合,  (u)`\pBibTeX`{=latex}`pBibTeX`{=html} が必要であり, そのためには現在の R Markdown および `rmdja` の仕様では, YAMLフロントマターとグローバルオプションを変更する必要がある. 例えば `jecon.bst` を使いたい参考文献リストを出力したい場合, YAMLフロントマターは以下のような記述となる.
+
+```yaml
+output:
+  rmdja::pdf_book_ja:
+    citation_package: natbib
+    citation_options: numbers
+biblio-style: jecon
+bibliogpraphy: citations.bib
+```
+
+BibLaTeX では `citation_options` にスタイルまで指定していたが, `natbib` を選択した場合 `biblio-style` で指定し, フォーマット関数の `citation_options` 引数は `natbib.sty` に対するオプションを指定する項目となる (フロントマターの `natbiboptions` でも可). 上記の例では `numbers` を指定しているため本文中の参照トークンは `[1]`, `[2, 3]` のような番号形式となる. デフォルトは `authoryear` である.
+
+次に, 最初のチャンク, またはコンソールでグローバルオプションを変更する.
+
+```r
+options(tinytex.latexmk.emulation = F)
+```
+
+この状態で knit または build すれば `.bst` ファイルのスタイルが適用される.
+
+このような操作が必要な理由を説明する. `rmarkdown` は `tinytex` というパッケージでインストールされたスタンドアローンな `\LaTeX`{=latex}`LaTeX`{=html} 処理系で PDF を生成している. しかしこれは (u)`\pBibTeX`{=latex}`pBibTeX`{=html} の使用が想定されていない.  (u)`\pBibTeX`{=latex}`pBibTeX`{=html} は日本語コミュニティで開発されたマルチバイト文字対応版 `\BibTeX`{=latex}`BibTeX`{=html} だから, `rmarkdown` 開発メンバーたちはこれらの存在に詳しくないのだろう (YiHui 氏は中国出身だが, 中国語圏では BibLaTeX を使うことが多いようだ). 冒頭のチャンクで `options(tinytex.latexmk.emulation = F)` を指定することで, 自分のマシンにインストールされた, おそらくあなたが普段使っているであろう `\LaTeX`{=latex}`LaTeX`{=html} 処理系に処理させることができる. この方法では `latexmk` コマンドを使用してPDFの生成が行われる, その場合[TeX Wiki](https://texwiki.texjp.org/?Latexmk)に記載のあるように, 日本語出力のため `.latexmkrc`  ファイルが必要となっている. `rmdja` では `natbib` を指定した場合に自動でカレントディレクトリに `.latexmkrc` をコピーするようにしている. しかしログが残らないなどデバッグしづらいところがあるため, このやり方はやや使いづらいため, `\LaTeX`{=latex}`LaTeX`{=html} に対するそれなりの知識を要する. たとえばこの説明を読んで初めて `latexmk` の存在を知った, そもそも `\LaTeX`{=latex}`LaTeX`{=html} をどうインストールしたか記憶がない, といった人は慣れるまで大変かもしれない.
+
+
+### (TODO) `pandoc-citeproc` と CSL について
+
+### (WIP) BibLaTeX について
+
+BibLaTeX の全てのオプションに対応しているわけではないので詳しいことは [BibLaTeX のドキュメント](https://www.ctan.org/pkg/biblatex)を読んでいただきたい. 残念ながら, 日本語の情報は非常に乏しい. ここではよく使う `style` のことだけ言及する.
+
+ `citation_packages`/`biblatexoptions` で指定できるのは, インクルード時の `style=` に指定できるものに対応する(表 \@ref(tab:biblatex-styles)). つまり, 引用文献の見出しや, 表示順といった設定である. これは引用リストと本文中の引用子のスタイル両方に影響する.
+
+<table>
+<caption>(\#tab:biblatex-styles)biblatex の `bilio-style` で指定できるもの一覧</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> 名称 </th>
+   <th style="text-align:left;"> 概要 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> `numeric` </td>
+   <td style="text-align:left;"> '[1]' のような番号 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> `alphabetic` </td>
+   <td style="text-align:left;"> 著者名の略称+出版年2桁 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> `authoryear` </td>
+   <td style="text-align:left;"> 著者-出版年形式, natbib の標準と同じ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> `authortitle` </td>
+   <td style="text-align:left;"> 著者名のみ, リストでは出版年は後置され, 引用子では脚注になる </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> `verbose` </td>
+   <td style="text-align:left;"> authortitle と同じだが, 引用子にリスト同様の内容を出力する </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> `reading` </td>
+   <td style="text-align:left;"> 個人的なリーディングリスト向け. ファイルやメモ欄も出力する </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> `draft` </td>
+   <td style="text-align:left;"> .bib ファイルのIDで表示. 名前通り下書き </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> `debug` </td>
+   <td style="text-align:left;"> `.bib` の全フィールドを表示 </td>
+  </tr>
+</tbody>
+</table>
+
+その他 `apa`, `ieee` など特定の学会が使用するスタイルも用意されているが, これらは基本欧文しか想定していないし, アカデミックの事情に詳しい人しかこれらの使用にこだわらないだろうから詳しくは解説しない. これらを含めたそれぞれの出力例は https://www.overleaf.com/learn/latex/biblatex_bibliography_styles に一覧があるのでそちらを参考に. なお, 引用リストのスタイルと引用子のスタイルを個別にすることはできる (`bibstyle`/`citestyle`)
+
+現時点では各分野の学会で日本語文献に対応した BibLaTeX フォーマットを配布しているという情報は見つけられなかった.  参考として私のブログで対応のヒントについて書いた[^biblatex-note].
+
+[^biblatex-note]: https://ill-identified.hatenablog.com/entry/2020/09/20/231335
+
+TODO: その他の非ラテン文字, キリル文字, アラビア文字 ヘブライ文字等は?
+
+なお, 普段文献管理ソフトを使っていないが, 数本程度の文献を引用リストに載せたい利用者は, `biblatex` の構文を利用して書くのがよいかもしれない.
+
 
 # (TODO) Web アプレットの挿入 {#webapp}
 
@@ -1812,6 +1853,10 @@ RCB [10.3 Other packages for creating tables](https://bookdown.org/yihui/rmarkdo
 ### TODO: shiny
 
 # Python スクリプトの埋め込み {#python}
+
+<div class="rmdcaution">
+<p>現時点では <code>reticulate</code> による Python 実行はグラフィック関係や環境設定でまだまだバギーなところが多い. つまり, エラーが発生した場合には原因が Python 側にあるのか RStudio や <code>reticulate</code> パッケージ側にあるのか判断しなければならない. よってあなたがどちらかに習熟していない場合, 作業が非効率になることが予想される.</p>
+</div>
 
 Python スクリプトを埋め込むこともできる. 方法は2通りあり, 都度システムコマンドから呼び出す方法と, `reticulate` パッケージを使うものがある. `reticulate` 登場以前はチャンクごとに呼び出していたため複数のチャンクに分割して記述するのが難しかったが, 現在は `reticulate` パッケージを利用することでRと同じような感覚で, あるいは Jupyter のコードセルと同じような感覚で書ける.
 
@@ -1928,12 +1973,13 @@ documentclass: bxjsreport
 
 通常の文書と違い, デザインを決めるのは主に `theme` である. デフォルトでは [`metropolis`](https://github.com/matze/mtheme)[^metropolis-warn] である. 日本語表示のために調整してあるものの, 日本語表示と直接関係ない部分はカスタマイズの余地としていじっていないが, テンプレートには私の好みが反映された調整 (プログレスバーの位置調整) がYAMLフロントマターに直接書き込まれている.
 
-また, 日本語表示と直接関係ないアレンジとして, 文献引用を行った場合の参考文献リストの表示が
+また, 日本語表示と直接関係ないアレンジとして,デフォルトの 文献引用のスタイルが変更される.
 
-1. 「参考文献」というセクションタイトルのみのスライドが冒頭に自動で挿入される
-2. 引用された文献の数に応じてフレームが自動分割される
-3. これらの参考文献フレームでは上部のタイトルが表示されない
-4. 文字サイズが脚注サイズに縮小
+1. 本文での引用スタイルは番号形式 (`biblatex` の場合は `citestyle=numeric`, `natbib` の場合は `numeric` オプション).
+2. 「参考文献」というセクションタイトルのみのスライドが冒頭に自動で挿入される
+3. 引用された文献の数に応じてフレームが自動分割される
+4. これらの参考文献フレームでは上部のタイトルが表示されない
+5. 文字サイズが脚注サイズに縮小
 
 という設定になっている. 通常のプレゼンテーションでは大量の参考文献を読み上げることは少ないという想定で, 紙面の限られたスライドに参考文献のみ羅列したスライドでページ数が増えないように考慮したためこうした. これは既に作成した  [`my_latex_templates`](https://github.com/Gedevan-Aleksizde/my_latex_templates) のテンプレートとほぼ同じである.
 
@@ -2034,7 +2080,10 @@ ggplot(
 <p>エディタは横書きのままである. また, 段落改行も Markdown のルールに則して1行空けによってなされる.</p>
 </div>
 
-小説家になろうとかに自動投稿する機能もいまのところない.
+<div class="rmdtip">
+<p>『小説家になろう』『カクヨム』とかに自動投稿する機能もいまのところ用意していない.</p>
+</div>
+
 
 [^luatex-ja-tate]: `luatex-ja` にも縦書き文書クラス `ltjt` シリーズが存在するが, 公式ドキュメントにすら詳しい解説がなかったため採用しなかった.
 
@@ -2386,9 +2435,9 @@ LaTeX の各パッケージのバージョンによっては, 和文に取り消
 
 TODO
 
-# jecon.bst の紹介
+# 参考文献リストの書式にこだわる: jecon.bst 
 
-和文と欧文を使い分けたスタイルファイルとして, `jecon.bst` がある. `jecon.bst` の公式ではなく, 私がカスタマイズしたバージョンでも良い. こちらは本来よりも電子媒体としての利用を重視して,
+0.4.3 以降の `rmdja` は `biblatex` がデフォルトであり, でいちおう和文献のリストが最低限のクオリティで表示できるようになっている. しかし自分で言うのもなんだが, だいぶ稚拙な出来栄えである. そこで和文と欧文を使い分けたスタイルファイルとして, [`jecon.bst`](https://github.com/ShiroTakeda/jecon-bst) を紹介する. `jecon.bst` の公式ではなく, 私がカスタマイズしたバージョンでも良い. こちらは本来よりも電子媒体としての利用を重視して,
 
 * 参照URLを表示せず, ハイパーリンクのみにする
 * ArXiv ID の表示とハイパーリンク追加
@@ -2400,6 +2449,8 @@ archivePrefix = {arXiv},
 eprint = {XXXX.YYYYY},
 ...
 ```
+
+このスタイルの使用には `\upBibTeX`{=latex}`upBibTeX`{=html} が必要である. 詳細は \@ref(biblio-advaneced) 章を参照されたい.
 
 TODO: 現在 jecon.bst の表示も少しおかしいので確認中.
 

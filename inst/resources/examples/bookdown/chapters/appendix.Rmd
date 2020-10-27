@@ -82,7 +82,7 @@ eprint = {XXXX.YYYYY},
 ...
 ```
 
-このスタイルの使用には `r rmdja::texlogo("upBibTeX")` が必要である. 詳細は \@ref(ubpbitex) 章を参照されたい.
+このスタイルの使用には `r rmdja::texlogo("upBibTeX")` が必要である. 詳細は \@ref(biblio-advaneced) 章を参照されたい.
 
 TODO: 現在 jecon.bst の表示も少しおかしいので確認中.
 
