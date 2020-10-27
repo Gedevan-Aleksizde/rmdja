@@ -52,7 +52,7 @@ adjust_fontsize <- function(input, ...) {
 
 # 指定がない場合にフォントを勝手に決める
 # call at pre_processor
-autodetect_and_set_jfont <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir, latex_engine){
+autodetect_jfont <- function(latex_engine, metadata = NULL){
   sysinfo <- Sys.info()
   if(is.null(sysinfo)){
     name <- .Platform$OS.type
@@ -121,7 +121,12 @@ autodetect_and_set_jfont <- function(metadata, input_file, runtime, knit_meta, f
       jfontpreset <- NULL
     }
     font <- c(font, jfontpreset = jfontpreset)
+    return(font)
   }
+}
+
+autodetect_and_set_jfont <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir, latex_engine){
+  font <- autodetect_jfont(latex_engine, metadata)
   return(paste0("-M", names(font), "=", font))
 }
 

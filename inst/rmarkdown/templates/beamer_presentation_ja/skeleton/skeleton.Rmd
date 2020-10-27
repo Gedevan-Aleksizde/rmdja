@@ -4,7 +4,6 @@ date: "`r Sys.Date()`"
 author: "RMDJA太郎"
 output:
   rmdja::beamer_presentation_ja:
-    latex_engine: xelatex
     theme: metropolis
 link-citations: true
 linkcolor: blue
@@ -26,8 +25,8 @@ options(tinytex.latexmk.emulation = F)
 file_loc <- system.file("resources", package = "rmdja")
 # サンプル引用文献リストを取得する
 file.copy(file.path(file_loc, "examples/examples.bib"), to = "./")
-
-knitr::opts_chunk$set(cache = T)
+# グラフの標準フォント設定
+rmdja::set_graphics_font(rmdja::get_default_font_family("xelatex")["sans"])
 ```
 
 ## 

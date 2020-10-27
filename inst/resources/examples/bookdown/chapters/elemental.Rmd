@@ -424,6 +424,11 @@ ggplot(diamonds, aes(x=carat, y=price, color=clarity)) +
 
 `ggplot2` 以外のパッケージや言語, たとえば `tikz` や `asymptote`, DOT言語も使用できる. これらは \@ref(advanced-graph) 章で紹介する.
 
+## (WIP): デフォルトフォントの設定
+
+Windows や Mac では, デフォルトのフォントが日本語グリフを持たないので文字化けする. 現時点では最低限 `rmdja::set_graphics_font()` という関数を呼び出すことで設定しなければならない. 本文のフォントと異なり, 現時点 (ver. 0.4.2) では手動設定が必要になる. OSごとのフォント名を調べて指定するのが大変なら, 私が作成した `fontregisterer` パッケージを使うのも1つの手である.  その解説は『[おまえはもうRのグラフの日本語表示に悩まない (各OS対応)](https://ill-identified.hatenablog.com/entry/2020/10/03/200618)』に書いた通りである. `fontregisterer::get_standard_font()` で使用中のOSで標準インストールされているセリフ (明朝), サンセリフ (ゴシック) のフォントファミリ名を1つづつ取得するので, その値のどちらかを `rmdja::set_graphics_font()` に与えれば, `ggplot2` および標準グラフィックスのデフォルトのフォントが日本語対応フォントになる.
+
+
 ## TODO: 図のレイアウト設定
 
 PDF ならばフロート設定のため, 図が離れた位置に配置されることがある. そのため, 「図 \@ref(fig:plot-sample)」 のような相互参照を使うと良いだろう. フロートを使うかどうかは, 後のセクションで解説する TODO
@@ -560,77 +565,69 @@ YAMLフロントマターの `biblography:` に文献管理ファイル (`.bib`,
 knitr::include_graphics(file.path(img_dir, "citr.png"))
 ```
 
+一方で, この記述が文書においてどのようなスタイルで出力されるかは文献引用を処理するプログラムによって変化する. そのプログラムにはいくつか候補がある.
 
-一方で, この記述がどう反映されるかは文献引用を処理するプログラムによって変化する. さらに厄介なことに, それぞれ全く違うプログラムであるがゆえに, 設定に書き方も変わってくる.
+R Markdown の文献引用は pandoc を経由して処理され, pandoc は現時点では `pandoc-citeproc` (`default`), `r rmdja::texlogo("BibTeX")` (`natbib`), `r rmdja::texlogo("BibLaTeX")` (`biblatex`) の選択をサポートしている. `pandoc-citeproc` 以外はもともと `r rmdja::texlogo("LaTeX")` 用に作られたため, HTML では常に `pandoc-citeproc` で処理される. PDF ではそれに加えて `bibtex`, `biblatex` を指定することもできる. (`default` とは別なのでややこしいが) デフォルトでは `biblatex` を使用する. これはフォーマット引数の `citation_package` で変更できる.
 
+* `default`: `pandoc-citeproc` を使用する.
+* `biblatex`: `r rmdja::texlogo("BibLaTeX")` を使用する. デフォルト. スタイルはこちらが用意した `jauthoryear` というもの.
+* `natbib`: `r rmdja::texlogo("BibTeX")` を使用し, 本文中の参照には `natbib.sty` が使われる[^natbib-contraint]. ただし, 日本語 (マルチバイト文字) の含まれる文献情報を出力する場合は**特殊な設定をしないと製本処理がハングアップする** (後述).
 
-R Markdown の文献引用は pandoc を経由して処理され, pandoc は現時点では `pandoc-citeproc`. `bibtex`, `biblatex` の選択をサポートしている. `pandoc-citeproc` 以外はもともと `r rmdja::texlogo("latex")` 用に作られたため, HTML では常に `pandoc-citeproc` で処理される. これはフォーマット引数の `citation_package` で指定できる.
+[natbib-contraint]: ただし `citeit`, `citep` など `natbib.sty` の提供していた多様な引用子オプションは使えない. これは pandoc の制約によるものである.
 
-* `default`: `pandoc-citeproc` を使用する
-* `biblatex`: `r rmdja::texlogo("biblatex")` を使用する
-* `natbib`: `r rmdja::texlogo("bibtex")` を使用し, 本文中の参照には `natbib.sty` を使う. ただし本来の `natbib` の引用子オプションは使えない
-  + `natbiboptions:` で `number`, `authoryear` などの `natbib.sty` のオプションを指定できる.
+### 文献引用スタイルのカスタマイズ
 
+`rmdja` では, 本文中の引用トークンのデフォルト設定を, 文書タイプでは「著者-年」形式に, スライドでは番号形式にしている. このカスタマイズについて簡単な解説をする. 従来の R Markdown ではカスタマイズに以下のようなYAMLフロントマター項目を使っていた.
 
-### 文献引用のフォーマット設定
+* `biblio-style`: PDF用スタイルファイル
+* `natbiboptions`/`biblatexoptions`: それぞれ `natbib` または `biblatex` を使う場合のスタイルに関するオプション 
+* `csl`: CSL用スタイルファイル
+, `biblio-title`: 「参考文献」タイトルの文字列
 
-これがややこしい. まず, `pandoc-citeproc`, `bibtex`, `biblatex` はそれぞれ引用文献リストの書式を記述するフォーマットがありそれぞれ拡張子は `.csl`, `.bst`, `.bbx`, である. 前者は MS Word のスタイルと同じもので, XMLで記述されている[^CSL-editor]. 一方で `.bst` は逆ポーランド記法の構文だったりかなりアレである. そして  `biblatex` はこのような専用の書式ファイルを使わず, 細かい書式設定はすべて `r rmdja::texlogo("latex")` のマクロで調整する想定で作られている. また, スタイルファイルを用意しなくとも指定できるスタイルがいくつか存在する.
+このうち `biblio-style`, `natbiboptions`, `biblatexoptions` はフォーマット関数で指定する. 例えば以下のように.
 
-bibtex および biblatex に関する設定は biblio-style だが, CSLファイルの設定は `csl` を使う.
+```yaml
+output:
+  rmdja::pdf_book_ja:
+    citation_package: biblatex
+    citation_options:
+      - style=jauthoryear
+      - natbib=true
+```
 
-さらに日本語文献引用が必要な場合の特有の事情として, (1)対応文字コードの問題 (2) 和文と欧文のスタイルが異なるという問題がある. まず前者について, `bibtex` は日本語など非ASCII文字に対応していない. よって従来 `r rmdja::texlogo("pbibtex")` または `r rmdja::texlogo("jbibtex")` が使用されていた. しかしこれもJIS規格の範囲までしか対応していないため, 一部の珍しい人名漢字などの表示ができなかった[^pbibtex-unicode]. そのためさらに `r rmdja::texlogo("upbibtex")` というUnicode対応版プログラムが作成されている. しかし R Markdown (および pandoc) はそのような日本語特有の事情などしらないため, これらを使用することができない. よって**オプション選択の範囲では, `biblatex` か `pandoc-citeproc` でしか日本語文献を表示できない**. これはR Markdownで日本語技術文書を作る際の特にアレな障害の1つである.
+これは pandoc の記法を利用した従来のR Markdown で以下のように書いているのと同様であり, `citation_package: natbib` ならば `biblatexoptions` が `natbiboptions` に置き換わる.
 
-[^pbibtex-unicode]: `r rmdja::texlogo("pbibtex")` のUNICODEモードは内部でSJISに変換しているだけなので, 全てのUnicodeに対応しているわけではない.
+```yaml
+output:
+  ....:
+    citation_package: natbib
+biblio-style: jauthoryear
+biblatexoptions:
+  - natbib=true
+```
+
+2通りの記法が存在するのはやや混乱するかもしれないが, 後方互換性を考慮し `rmdja` ではこれらの2通りの記法どちらでも受け付けるようにしている.
+
+`biblatex` 以外のエンジンで出力したい, 例えば指定された `.bst` のスタイルで文献一覧を出力したい場合は, (u)`r rmdja::texlogo("pBibTeX")` が必要になる. その操作の詳細は \@ref(biblio-advaneced) 章を参照.
+
+### 文献リスト生成エンジンの違いについて
+
+`pandoc-citeproc`, `bibtex`, `biblatex` はそれぞれ引用文献リストのスタイルを記述するファイルがあり, それぞれ拡張子は `.csl`, `.bst`, `.bbx`/`.cbx`, である. `.csl` は MS Word のスタイルと同じもので, XMLで記述されている[^CSL-editor]. `.bst` は `r rmdja::texlogo("BibTeX")` 用のフォーマットで, 自分で改造するには逆ポーランド記法の構文に慣れねばならない. そして `r rmdja::texlogo("BibLaTeX")` はスタイルを `r rmdja::texlogo("LaTeX")` のマクロで記述でき, さらにそういった細かい記述のスタイルファイルを用意しなくとも指定できるオプションがいくつか存在する(ここまで, 表 \@ref(tab:biblio-comparison)).
+
+現バージョンでは `biblatex` がデフォルトである. 現在の日本語圏の `r rmdja::texlogo("LaTeX")` 使用者にとっては `.bst` ファイルの種類が充実しているため `natbib` を使いたいところだが, R Markdown の場合エンジンが `r rmdja::texlogo("BibTeX")` であるため**日本語が使えない**. (u)`r rmdja::texlogo("pBibTeX")` を使うにはやや複雑な手順が必要である. よって, デフォルトでそのような下準備をさせるべきでないと考えたので `rmdja` では `biblatex` をデフォルトとし, 日本語表示に最低限のスタイルだけを用意している.
 
 ```{r biblio-comparison}
 tibble(
-  `item` = c("`pandoc-citeproc` (default)", "`biblatex`", "`bibtex`"),
-  `HTML対応` = c(T, F, F),
-  `PDF対応` = c(T, T, T),
-  `日本語表示` = c(T, T, F),
+  `item` = c("`default`", "`biblatex`", "`natbib`"),
+  `HTML` = c(T, F, F),
+  `PDF` = c(T, T, T),
+  `日本語` = c(T, T, F),
   `指定名` = c("default", "biblatex", "natbib"),
-  `文献ファイル` = c(".json", ".bib/.bibtex", ".bib"),
-  `文献スタイル` = c(".csl", "なし", ".bst"),
-  `スタイル指定方法` = c("csl:", "biblio-style:", "biblio-style"),
-  `スタイルのオプション` = c("", "", "natbiboptions")
-  ) %>% kable(caption = "引用プログラムごとの違い", booktabs = T)
+  `文献ファイル` = c(".json", ".bib", ".bib/.bibtex"),
+  `文献スタイル` = c(".csl", ".bbx/.cbx", ".bst")
+  ) %>% kable(caption = "引用プログラムごとの違い", booktabs = T, escape = F) %>%
+  kable_styling(full_width = F)
 ```
-
-
-
-### (TODO) `pandoc-citeproc` と CSL
-
-### (WIP) `r rmdja::texlogo("BibLaTeX")`
-
-`r rmdja::texlogo("BibLaTeX")` の全てのオプションに対応しているわけではないので詳しいことは [`r rmdja::texlogo("BibLaTeX")` のドキュメント](https://www.ctan.org/pkg/biblatex)を読んでいただきたい. 残念ながら, 日本語の情報は非常に乏しい. ここではよく使う `style` のことだけ言及する.
-
-フロントマターの `biblio-style:` で指定できるのは, インクルード時の `style=` に指定できるものに対応する(表 \@ref(tab:biblatex-styles)). つまり, 引用文献の見出しをどうするかである. これは引用リストと本文中の引用子のスタイル両方に影響する.
-
-```{r biblatex-styles}
-tibble(
-  item = c("`numeric`", "`alphabetic`", "`authoryear`", "`authortitle`", "`verbose`", "`reading`", "`draft`", "`debug`"),
-  description = c("'[1]' のような番号", "著者名の略称+出版年2桁", "著者-出版年形式, natbib の標準と同じ", "著者名のみ, リストでは出版年は後置され, 引用子では脚注になる", "authortitle と同じだが, 引用子にリスト同様の内容を出力する", "個人的なリーディングリスト向け. ファイルやメモ欄も出力する", ".bib ファイルのIDで表示. 名前通り下書き", "`.bib` の全フィールドを表示")
-) %>% kable(
-  booktabs = T,
-  caption = "biblatex の `bilio-style` で指定できるもの一覧",
-  col.names = c("名称", "概要"))
-```
-
-その他 `apa`, `ieee` など特定の学会が使用するスタイルも用意されているが, これらは基本欧文しか想定していないし, アカデミックの事情に詳しい人しかこれらの使用にこだわらないだろうから詳しくは解説しない. これらを含めたそれぞれの出力例は https://www.overleaf.com/learn/latex/biblatex_bibliography_styles に一覧があるのでそちらを参考に.
-
-なお, もちろん引用リストのスタイルと引用子のスタイルを個別にすることはできるが, R Markdown および Pandoc にそのオプションを通す機能はない. (bibstyle/citestyleで分けられる,bbx/cbx)
-
-現時点では各分野の学会で日本語文献に対応した `r rmdja::texlogo("BibLaTeX")` フォーマットを配布しているという情報は見つけられなかった.  参考として私のブログで対応のヒントについて書いた[^biblatex-note].
-
-[^biblatex-note]: https://ill-identified.hatenablog.com/entry/2020/09/20/231335
-
-TODO: その他の非ラテン文字, キリル文字, アラビア文字 ヘブライ文字等は?
-
-TODO: upBibTeX や `bibtex` で動作しない `.bst` ファイルの扱い.
-
-なお, 普段文献管理ソフトを使っていないが, 数本程度の文献を引用リストに載せたい利用者は, `biblatex` の構文を利用して書くのがよいかもしれない. 例えばここに書いてあるように. その場合, デフォルトでは本文の引用は [1], [2] のような番号形式となる. `biblio-style: authoryear` とすることで, `natbib` のような 「著者 (出版年)」 スタイルとなる.
-
-https://teastat.blogspot.com/2019/01/bookdown.html
 
 [^CSL-editor]: 簡単なカスタマイズなら CSL editor というWebサービスでできる. しかしあくまでXMLなので, あまり複雑な処理はできないことに注意する.
 

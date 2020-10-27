@@ -234,7 +234,7 @@ head(mtcars[1:5]) %>% set_names(colnames_mtcars_ja[1:5]) %>%
 
 そのままでは罫線の設定が `set_top_border()`, `set_bottom_border()`, などしかなく, 複雑な条件を指定するのが大変だが, `ggplot2` のテーマ関数のようにスタイルのプリセットが `theme_*()` の名前でいくつか用意されている. 例えば上記では `theme_article()` という学術論文風テーマを適用し, 表の上下とヘッダにだけ罫線を引いている. 条件書式は `map_*()` 関数群で実行できる. また, フォーマットは `set_number_format()` に値を変換するフォーマット関数を与える形で適用できる. こちらはパーセンテージなども正しく表示できる.
 
-* テーマ設定はグローバルオプションでも設定できる. 例えば `options('huxtable.knit_print_df_theme' = theme_article)`.
+* テーマ設定はグローバルオプションでも設定できる. 例えば `options(huxtable.knit_print_df_theme = theme_article)`.
 
 なお, 動作させるにあたっていくつか注意が必要である.
 
@@ -289,11 +289,64 @@ RCB [10.3 Other packages for creating tables](https://bookdown.org/yihui/rmarkdo
 
 [^gt-crossref]: Issue [#115](https://github.com/rstudio/gt/issues/115) にあるように, 機能を追加したいという声はある. しかし現時点では `gt`  のこの機能の開発を積極的に進める様子はない. 
 
-# 文献引用 
+# 文献引用の詳細設定 {#biblio-advaneced}
 
 ## `(u)p\BibTeX`{=latex}`(u)pBibTeX`{=html} を使う
 
-日本語対応 `.bst` ファイルを使いたい場合は少しトリッキーな操作が必要になる. `rmarkdown` は `tinytex` というパッケージでインストールされたスタンドアローンな処理系で PDF を生成している. 冒頭のチャンクで `options(tinytex.latexmk.emulation = F)` を指定することで, 自分のマシンにインストールされている普段使っている処理系に処理させることができる. さらに `rmdja` では `natbib` を指定した場合に自動でカレントディレクトリに `.latexmkrc` をコピーするようにしている. しかしログが残らないなどデバッグしづらいところがあるため, このやり方はやや使いづらい.
+このセクションの説明の理解には多少の `r rmdja::texlogo("LaTeX")` の知識を要する.  Ver. 0.4.3 以降では `r rmdja::texlogo("BibLaTeX")` 用の日本語スタイルとして最低限のクオリティだけは保った `jauthoryear` を用意しているため, どうしても文献リストのスタイルにこだわりたい以外はここで紹介される方法は使わないほうが良い. 
+
+`.bst` ファイルのスタイルを使いたい場合,  (u)`r rmdja::texlogo("pBibTeX")` が必要であり, そのためには現在の R Markdown および `rmdja` の仕様では, YAMLフロントマターとグローバルオプションを変更する必要がある. 例えば `jecon.bst` を使いたい参考文献リストを出力したい場合, YAMLフロントマターは以下のような記述となる.
+
+```yaml
+output:
+  rmdja::pdf_book_ja:
+    citation_package: natbib
+    citation_options: numbers
+biblio-style: jecon
+bibliogpraphy: citations.bib
+```
+
+`r rmdja::texlogo("BibLaTeX")` では `citation_options` にスタイルまで指定していたが, `natbib` を選択した場合 `biblio-style` で指定し, フォーマット関数の `citation_options` 引数は `natbib.sty` に対するオプションを指定する項目となる (フロントマターの `natbiboptions` でも可). 上記の例では `numbers` を指定しているため本文中の参照トークンは `[1]`, `[2, 3]` のような番号形式となる. デフォルトは `authoryear` である.
+
+次に, 最初のチャンク, またはコンソールでグローバルオプションを変更する.
+
+```r
+options(tinytex.latexmk.emulation = F)
+```
+
+この状態で knit または build すれば `.bst` ファイルのスタイルが適用される.
+
+このような操作が必要な理由を説明する. `rmarkdown` は `tinytex` というパッケージでインストールされたスタンドアローンな `r rmdja::texlogo("LaTeX")` 処理系で PDF を生成している. しかしこれは (u)`r rmdja::texlogo("pBibTeX")` の使用が想定されていない.  (u)`r rmdja::texlogo("pBibTeX")` は日本語コミュニティで開発されたマルチバイト文字対応版 `r rmdja::texlogo("BibTeX")` だから, `rmarkdown` 開発メンバーたちはこれらの存在に詳しくないのだろう (YiHui 氏は中国出身だが, 中国語圏では BibLaTeX を使うことが多いようだ). 冒頭のチャンクで `options(tinytex.latexmk.emulation = F)` を指定することで, 自分のマシンにインストールされた, おそらくあなたが普段使っているであろう `r rmdja::texlogo("LaTeX")` 処理系に処理させることができる. この方法では `latexmk` コマンドを使用してPDFの生成が行われる, その場合[TeX Wiki](https://texwiki.texjp.org/?Latexmk)に記載のあるように, 日本語出力のため `.latexmkrc`  ファイルが必要となっている. `rmdja` では `natbib` を指定した場合に自動でカレントディレクトリに `.latexmkrc` をコピーするようにしている. しかしログが残らないなどデバッグしづらいところがあるため, このやり方はやや使いづらいため, `r rmdja::texlogo("LaTeX")` に対するそれなりの知識を要する. たとえばこの説明を読んで初めて `latexmk` の存在を知った, そもそも `r rmdja::texlogo("LaTeX")` をどうインストールしたか記憶がない, といった人は慣れるまで大変かもしれない.
+
+
+### (TODO) `pandoc-citeproc` と CSL について
+
+### (WIP) `r rmdja::texlogo("BibLaTeX")` について
+
+`r rmdja::texlogo("BibLaTeX")` の全てのオプションに対応しているわけではないので詳しいことは [`r rmdja::texlogo("BibLaTeX")` のドキュメント](https://www.ctan.org/pkg/biblatex)を読んでいただきたい. 残念ながら, 日本語の情報は非常に乏しい. ここではよく使う `style` のことだけ言及する.
+
+ `citation_packages`/`biblatexoptions` で指定できるのは, インクルード時の `style=` に指定できるものに対応する(表 \@ref(tab:biblatex-styles)). つまり, 引用文献の見出しや, 表示順といった設定である. これは引用リストと本文中の引用子のスタイル両方に影響する.
+
+```{r biblatex-styles}
+tibble(
+  item = c("`numeric`", "`alphabetic`", "`authoryear`", "`authortitle`", "`verbose`", "`reading`", "`draft`", "`debug`"),
+  description = c("'[1]' のような番号", "著者名の略称+出版年2桁", "著者-出版年形式, natbib の標準と同じ", "著者名のみ, リストでは出版年は後置され, 引用子では脚注になる", "authortitle と同じだが, 引用子にリスト同様の内容を出力する", "個人的なリーディングリスト向け. ファイルやメモ欄も出力する", ".bib ファイルのIDで表示. 名前通り下書き", "`.bib` の全フィールドを表示")
+) %>% kable(
+  booktabs = T,
+  caption = "biblatex の `bilio-style` で指定できるもの一覧",
+  col.names = c("名称", "概要"))
+```
+
+その他 `apa`, `ieee` など特定の学会が使用するスタイルも用意されているが, これらは基本欧文しか想定していないし, アカデミックの事情に詳しい人しかこれらの使用にこだわらないだろうから詳しくは解説しない. これらを含めたそれぞれの出力例は https://www.overleaf.com/learn/latex/biblatex_bibliography_styles に一覧があるのでそちらを参考に. なお, 引用リストのスタイルと引用子のスタイルを個別にすることはできる (`bibstyle`/`citestyle`)
+
+現時点では各分野の学会で日本語文献に対応した `r rmdja::texlogo("BibLaTeX")` フォーマットを配布しているという情報は見つけられなかった.  参考として私のブログで対応のヒントについて書いた[^biblatex-note].
+
+[^biblatex-note]: https://ill-identified.hatenablog.com/entry/2020/09/20/231335
+
+TODO: その他の非ラテン文字, キリル文字, アラビア文字 ヘブライ文字等は?
+
+なお, 普段文献管理ソフトを使っていないが, 数本程度の文献を引用リストに載せたい利用者は, `biblatex` の構文を利用して書くのがよいかもしれない.
+
 
 # (TODO) Web アプレットの挿入 {#webapp}
 
@@ -302,6 +355,10 @@ RCB [10.3 Other packages for creating tables](https://bookdown.org/yihui/rmarkdo
 ### TODO: shiny
 
 # Python スクリプトの埋め込み {#python}
+
+```{block py-warning, type="rmdcaution"}
+現時点では `reticulate` による Python 実行はグラフィック関係や環境設定でまだまだバギーなところが多い. つまり, エラーが発生した場合には原因が Python 側にあるのか RStudio や `reticulate` パッケージ側にあるのか判断しなければならない. よってあなたがどちらかに習熟していない場合, 作業が非効率になることが予想される.
+```
 
 Python スクリプトを埋め込むこともできる. 方法は2通りあり, 都度システムコマンドから呼び出す方法と, `reticulate` パッケージを使うものがある. `reticulate` 登場以前はチャンクごとに呼び出していたため複数のチャンクに分割して記述するのが難しかったが, 現在は `reticulate` パッケージを利用することでRと同じような感覚で, あるいは Jupyter のコードセルと同じような感覚で書ける.
 

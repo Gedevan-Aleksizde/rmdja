@@ -19,4 +19,5 @@ Suggests:
   clipr
 BugReports: https://github.com/Gedevan-Aleksizde/rmdja/issues
 RoxygenNote: 7.1.1
+Additional_repositories: https://github.com/Gedevan-Aleksizde/fontregisterer
 Licence: BSD-3

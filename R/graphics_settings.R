@@ -18,3 +18,25 @@ set_graphics_font <- function(family){
     }
   }
 }
+
+#' @title get OS standard font family for ggplot2 and standard graphic device 
+#' @description 使用中のOSから標準仕様のフォントファミリ名を取得する
+#' @param character. LaTeX エンジンの標準フォントと合わせるため 
+#' @export
+get_default_font_family <- function(engine = "xelatex"){
+  fam <- autodetect_jfont(engine)["jfontpreset"]
+  if(grepl("^noto", fam)){
+    font <- c(serif = "Noto Serif CJK JP", sans = "Noto Sans CJK JP")
+  } else if(fam == "hiragino-pron") {
+    font <- c(serif = "Hiragino Mincho ProN", sans = "Hiragino Sans")
+  } else if(fam == "yu-osx") {
+    font <- c(serif = "YuMicho", sans = "YuGothic")
+  } else if(grepl("^yu-win", fam)) {
+    font <- c(serif = "Yu Mincho", sans = "Yu Gothic")
+  } else if(fam == "ms"){
+    font <- c(serif = "MS Mincho", sans = "MS Gothic")
+  } else {
+    font <- c(serif = "IPAExMincho", sans = "IPAExMincho")
+  }
+  return(font)
+}

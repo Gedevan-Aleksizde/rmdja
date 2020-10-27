@@ -2,6 +2,7 @@
 
 export(beamer_presentation_ja)
 export(get_CC)
+export(get_default_font_family)
 export(gitbook_ja)
 export(pdf_book_ja)
 export(ruby)

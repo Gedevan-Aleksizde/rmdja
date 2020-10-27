@@ -5,7 +5,6 @@ author: "RMDJA太郎"
 abstract: "`rmdja` パッケージは, `rmarkdown` および `bookdown` パッケージで自然なレイアウトの日本語文書を作成する際に必要な煩雑な設定を自動で行い, ユーザーの負担を軽減するために作成されたパッケージである."
 output:
   rmdja::pdf_book_ja:
-    latex_engine: xelatex
     toc: false
     pandoc_args:
       - '--top-level-division=section'
@@ -24,6 +23,8 @@ link-citations: false
 ```{r init, include=F}
 require(knitr)
 require(tidyverse)
+# グラフの標準フォント設定
+rmdja::set_graphic_font(get_default_font_family("xelatex")["serif"])
 ```
 
 # イントロダクション {#introduction}
@@ -56,7 +57,7 @@ require(tidyverse)
 ggplot(mutate(mtcars, cyl = factor(cyl)),
        aes(x = mpg, y = wt, color = cyl)) +
   geom_point() + labs(x = "マイル毎米ガロン", y = "重量 (1000ポンド)") +
-  theme_bw(base_family = "Noto Sans CJK JP") +
+  theme_bw(base_family = rmdja::get_default_font_family("xelatex")["serif"]) +
   scale_color_grey() + scale_fill_grey()
 ```
 

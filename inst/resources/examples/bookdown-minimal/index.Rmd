@@ -10,6 +10,9 @@ citecolor: blue
 urlcolor: magenta
 bibliography: rmdja.bib # 書誌情報ファイル
 biblio-title: "参考文献"
+biblio-style: jauthoryear
+biblatexoptions:
+  - natbib=true
 ---
 
 ```{r setup, include=FALSE}

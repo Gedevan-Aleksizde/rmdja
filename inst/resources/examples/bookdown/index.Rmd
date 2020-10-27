@@ -24,15 +24,12 @@ jmonofont: Ricty
 linkcolor: blue
 citecolor: blue
 urlcolor: magenta
-bibliography: rmdja.bib # 書誌情報ファイル
-biblio-style: authoryear
-# biblio-style: jecon
+bibliography: rmdja.bib
 ---
 
 ```{r setup, include=FALSE}
-options(tinytex.latexmk.emulation = T)
 options(huxtable.bookdown = T)
-# アンダースコアを各自に回避するためコピーするしかない
+# アンダースコアを確実に回避するためコピーするしかない
 file.copy(system.file("resources/bibliography/rmdja.bib", package="rmdja"), "./")
 # 画像をコピー
 img_dir <- "img/"
@@ -61,7 +58,8 @@ opts_chunk$set(
   # tidy.opts = list(width.cutoff = 20, wrap = T),
   tidy = "styler"
   )
-
+par(family = "Noto Serif CJK JP")
+rmdja::set_graphics_font("Noto Serif CJK JP")
 ```
 
 # (PART) イントロダクション {-}

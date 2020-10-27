@@ -10,7 +10,6 @@ rmdja::pdf_book_ja:
   tombow: true
   add_folio: true
   keep_tex: true
-  citation_package: biblatex
 
 bookdown::epub_book:
   fig_width: 5
