@@ -24,7 +24,7 @@ link-citations: false
 require(knitr)
 require(tidyverse)
 # グラフの標準フォント設定
-rmdja::set_graphic_font(get_default_font_family("xelatex")["serif"])
+rmdja::set_graphics_font(get_default_font_family("xelatex")["serif"])
 ```
 
 # イントロダクション {#introduction}
