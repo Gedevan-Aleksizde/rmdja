@@ -77,29 +77,16 @@ beamer_presentation_ja <- function(
   match.arg(latex_engine, c("xelatex", "lualatex"))
   
   # ----- reshape arguments -----
-
   pandoc_args_base <- c()
+  extra_metadata <- list()
 
   if(!identical(theme_options, "default")){
     if(!is.null(theme_options) && !identical(theme_options, "")){
-      pandoc_args_base <- c(pandoc_args_base, "-V", paste0('themeoptions:', paste0(theme_options, collapse = ","))) #FIXME: how to handle '=' contained values/what does mean the """list""" in Pandoc commandline arguments?  
+      pandoc_args_base <- c(pandoc_args_base, "-V", paste0('themeoptions:', paste0(theme_options, collapse = ","))) #FIXME: how to handle '=' contained values/what does mean the """list""" in Pandoc commandline arguments?
     }
   }
-  if(identical(citation_package, "natbib")){
-    if(identical(citation_options, "default")){
-      pandoc_args_base <- c(pandoc_args_base, rmarkdown::pandoc_variable_arg("natbiboptions", "numbers"))
-    } else {
-      if(!is.null(citation_options) && !identical(citation_options, "") && !is.na(citation_options)){
-        pandoc_args_base <- c(pandoc_args_base, rmarkdown::pandoc_variable_arg("natbiboptions", citation_options))
-      }
-    }
-  } else if(identical(citation_package, "biblatex")){
-    if(!identical(citation_options, "default")){
-      if(!is.null(citation_options) && !identical(citation_options, "") && !is.na(citation_options)){
-        pandoc_args_base <- c(pandoc_args_base, rmarkdown::pandoc_variable_arg("biblatexoptions", citation_options))
-      }
-    }
-  }
+  extra_metadata <- c(extra_metadata, merge_bibliography_args(citation_package, citation_options))
+  
   if(!missing(figurename) || !identical(figurename, "")){
     pandoc_args_base <- c(pandoc_args_base, rmarkdown::pandoc_variable_arg("figurename", figurename))
   } else {
@@ -176,10 +163,32 @@ beamer_presentation_ja <- function(
                               latex_engine = latex_engine)
   
   preproc <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
+    bib_args <- rmarkdown:::merge_lists(
+      metadata[c("biblio-style", "natbiboptions", "biblatexoptions")],
+      extra_metadata[c("biblio-style", "natbiboptions", "biblatexoptions")])
+    bib_args <- bib_args[!is.na(names(bib_args))]
     if(identical(citation_package, "natbib")){
+      if(is.null(bib_args[["natbiboptions"]])){
+        bib_args[["natbiboptions"]] <- "numbers"
+      }
       copy_latexmkrc(metadata, input_file, runtime, knit_meta, files_dir, output_dir)
+    } else if(identical(citation_package, "biblatex")){
+      if(is.null(bib_args[["biblio-style"]])){
+        bib_args[["biblio-style"]] <- "jauthoryear"
+      }
+      if(is.null(bib_args[["biblatexoptions"]])){
+        bib_args["biblatexoptions"] <- c("natbib=true,citestyle=numeric")
+      }
+      if(bib_args[["biblio-style"]] == "jauthoryear"){
+        copy_biblatexstyle(metadata, input_file, runtime, knit_meata, files_dir, output_dir)
+      }
     }
-    return(autodetect_and_set_jfont(metadata, input_file, runtime, knit_meta, files_dir, output_dir, latex_engine))
+    return(
+      c(
+        autodetect_and_set_jfont(metadata, input_file, runtime, knit_meta, files_dir, output_dir, latex_engine),
+        paste0("-M", names(bib_args), "=", bib_args)
+      )
+    )
   }
   out <- rmarkdown::output_format(
     pre_knit = adjust_fontsize,

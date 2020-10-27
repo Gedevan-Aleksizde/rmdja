@@ -57,20 +57,9 @@ pdf_book_ja <- function (
   match.arg(citation_package, c("default", "biblatex", "natbib"))
   
   top_level <- "chapter"
-  if(identical(citation_package, "natbib")){
-    if(!identical(citation_options, "default")){
-      if(!is.null(citation_options) && !identical(citation_options, "") && !is.na(citation_options)){
-        pandoc_args <- c(pandoc_args, rmarkdown::pandoc_variable_arg("natbiboptions", citation_options))
-      }
-    }
-  }
-  if(identical(citation_package, "biblatex")){
-    if(!identical(citation_options, "default")){
-      if(!is.null(citation_options) && !identical(citation_options, "") && !is.na(citation_options)){
-        pandoc_args <- c(pandoc_args, rmarkdown::pandoc_variable_arg("biblatexoptions", citation_options))
-      }
-    }
-  }
+  extra_metadata <- list()
+  extra_metadata <- c(extra_metadata, merge_bibliography_args(citation_package, citation_options))
+  
   if(missing(template) || identical(template, "") || identical(template, "default")){
     template <- system.file("resources/pandoc-templates/document-ja.tex.template", package = "rmdja")
   }
@@ -145,8 +134,29 @@ pdf_book_ja <- function (
   )
   
   preproc <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
-    if(identical(citation_package, "natbib")) copy_latexmkrc(metadata, input_file, runtime, knit_meta, files_dir, output_dir)
-    args_extra <- autodetect_and_set_jfont(metadata, input_file, runtime, knit_meta, files_dir, output_dir, latex_engine = latex_engine)
+    args_extra <- rmarkdown:::merge_lists(
+      metadata[c("biblio-style", "natbiboptions", "biblatexoptions")],
+      extra_metadata[c("biblio-style", "natbiboptions", "biblatexoptions")])
+    args_extra <- args_extra[!is.na(names(args_extra))]
+    if(identical(citation_package, "natbib")){
+      copy_latexmkrc(metadata, input_file, runtime, knit_meta, files_dir, output_dir)
+    } else if(identical(citation_package, "biblatex")){
+      if(is.null(args_extra[["biblio-style"]])){
+        args_extra[["biblio-style"]] <- "jauthoryear"
+      }
+      if(is.null(args_extra[["biblatexoptions"]])){
+        args_extra["biblatexoptions"] <- "natbib=true"
+      }
+      if(args_extra[["biblio-style"]] == "jauthoryear"){
+        copy_biblatexstyle(metadata, input_file, runtime, knit_meata, files_dir, output_dir)
+      }
+    }
+    args_extra <- paste0("-M", names(args_extra), "=", args_extra)
+    
+    args_extra <- c(
+      args_extra,
+      autodetect_and_set_jfont(metadata, input_file, runtime, knit_meta, files_dir, output_dir, latex_engine = latex_engine)
+      )
     icon_dir <- file.path(output_dir, "_latex/_img")
     if(!file.exists(icon_dir)) dir.create(path = icon_dir, recursive = T, showWarnings = T)
     file.copy(file.path(system.file("resources/styles/img", package = "rmdja"), ICON_FILES()), icon_dir)

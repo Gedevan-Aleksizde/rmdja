@@ -112,6 +112,27 @@ autodetect_and_set_jfont <- function(metadata, input_file, runtime, knit_meta, f
   return(paste0("-M", names(font), "=", font))
 }
 
+merge_bibliography_args <- function(citation_package, citation_options){
+  extra_metadata <- list()
+  if(identical(citation_package, "natbib")){
+    if(identical(citation_options, "default")){
+    } else {
+      if(!is.null(citation_options) && all(citation_options != "") && all(!is.na(citation_options))){
+        extra_metadata[["natbiboptions"]] <- paste(citation_options, collapse = ",")
+      }
+    }
+  } else if(identical(citation_package, "biblatex")){
+    if(identical(citation_options, "default")){
+    } else {
+      if(!is.null(citation_options) && all(citation_options != "") && all(!is.na(citation_options))){
+        extra_metadata[["biblio-style"]] <- sub("^style=", "", grep("^style=", citation_options, value = T))[1]
+        extra_metadata[["biblatexoptions"]] <- paste(citation_options, collapse = ",")
+      }
+    }
+  }
+  return(extra_metadata)
+}
+
 # tinytex が upbibtex 対応していないため
 # call at pre_processor
 copy_latexmkrc <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
@@ -119,4 +140,13 @@ copy_latexmkrc <- function(metadata, input_file, runtime, knit_meta, files_dir, 
     file.copy(file.path(system.file("resources/latexmk", package = "rmdja"), ".latexmkrc"), to = output_dir, overwrite = F)
   }
   return(NULL)
+}
+# TODO: bibilatex スタイルのインストールパッケージ
+copy_biblatexstyle <- function(metadata, input_fike, runtime, knit_meta, files_dir, output_dir){
+  if(!file.exists(file.path(output_dir, "jauthoryear.bbx"))){
+    file.copy(file.path(system.file("resources/latex", package = "rmdja"), "jauthoryear.bbx"), to = output_dir, overwrite = F)
+  }
+  if(!file.exists(file.path(output_dir, "jauthoryear.cbx"))){
+    file.copy(file.path(system.file("resources/latex", package = "rmdja"), "jauthoryear.cbx"), to = output_dir, overwrite = F)
+  }
 }
