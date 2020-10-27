@@ -17,6 +17,21 @@
 \DeclareFieldFormat{doi}{DOI: \href{https://doi.org/#1}{#1}}
 \DeclareFieldFormat{url}{URL: \href{#1}{here}} % TODO: オプションで切り替えられるように
 
+% "et al." 「他」を使い分け
+%\newcommand*{\mkandothers}{\mkbibemph}
+\renewbibmacro*{name:andothers}{%
+  \ifboolexpr{
+    test {\ifnumequal{\value{listcount}}{\value{liststop}}}
+    and
+    test \ifmorenames
+  }
+    {\ifnumgreater{\value{liststop}}{1}
+       {\finalandcomma}
+       {}%
+     \andothersdelim\iffieldequalstr{langid}{japanese}{他}{\bibstring{andothers}}}
+    {}
+}
+
 % NameFormat
 % langid で和文かどうかを場合分け
 % 現在のバージョンで和欧混合するにはこれが一番簡単?
@@ -27,8 +42,9 @@
 		\ifthenelse{\value{listcount}=1}
 		{\namepartfamily\ifdefvoid{\namepartgiven}{}{\addcomma\space\namepartgiven}} % 先頭は 「性, 名」
 		{\ifdefvoid{\namepartgiven}{}{\namepartgiven\space}\namepartfamily}% 2人目以降は 「名 性」
-	\ifthenelse{\value{listcount}<\value{liststop}}{\addcomma\space}{}}
+	}\ifthenelse{\value{listcount}<\value{liststop}}{\addcomma\space}{\andothersdelim\iffieldequalstr{langid}{japanese}{他}{\bibstring{andothers}}}
 }
+
 %\DeclareFieldFormat{journaltitle}{#1}
 \DeclareFieldFormat{volume}{#1}
 \DeclareFieldFormat{issue}{(#1)}
