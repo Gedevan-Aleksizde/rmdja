@@ -7,42 +7,35 @@
 
 
 %フィールドごとのスタイルは FieldFormat
-%しかし他の .bbx で書き換えられているかも知れないので元スタイルの記述は要確認
-%\DeclareFieldFormat{title}{\textrm{#1}}
+%しかし .def や他の .bbx で書き換えられているかも知れないので元スタイルの記述は要確認
 %複数の値が存在するものは ListFormat を使う
 
 \DeclareFieldFormat{year}{%
 (#1)
 }
+\DeclareFieldFormat{title}{%
+  \iffieldequalstr{langid}{japanese}{『#1』}{\textit{#1}}
+}
 \DeclareFieldFormat{doi}{DOI: \href{https://doi.org/#1}{#1}}
 \DeclareFieldFormat{url}{URL: \href{#1}{here}} % TODO: オプションで切り替えられるように
-
-% "et al." 「他」を使い分け
-%\newcommand*{\mkandothers}{\mkbibemph}
-\renewbibmacro*{name:andothers}{%
-  \ifboolexpr{
-    test {\ifnumequal{\value{listcount}}{\value{liststop}}}
-    and
-    test \ifmorenames
-  }
-    {\ifnumgreater{\value{liststop}}{1}
-       {\finalandcomma}
-       {}%
-     \andothersdelim\iffieldequalstr{langid}{japanese}{他}{\bibstring{andothers}}}
-    {}
-}
 
 % NameFormat
 % langid で和文かどうかを場合分け
 % 現在のバージョンで和欧混合するにはこれが一番簡単?
 \DeclareNameFormat{author}{%
 	\iffieldequalstr{langid}{japanese}{%
-	\namepartfamily\ifdefvoid{\namepartgiven}{}{\space\namepartgiven}\ifthenelse{\value{listcount}<\value{liststop}}{・}{}%
+	\namepartfamily\ifdefvoid{\namepartgiven}{}{\space\namepartgiven}%
+	  \ifthenelse{\value{listcount}<\value{liststop}}
+	    {・}
+	    {\ifmorenames{\andothersdelim 他}{}}%
 	}{%
 		\ifthenelse{\value{listcount}=1}
 		{\namepartfamily\ifdefvoid{\namepartgiven}{}{\addcomma\space\namepartgiven}} % 先頭は 「性, 名」
 		{\ifdefvoid{\namepartgiven}{}{\namepartgiven\space}\namepartfamily}% 2人目以降は 「名 性」
-	}\ifthenelse{\value{listcount}<\value{liststop}}{\addcomma\space}{\andothersdelim\iffieldequalstr{langid}{japanese}{他}{\bibstring{andothers}}}
+	\ifthenelse{\value{listcount}<\value{liststop}}
+	  {\addcomma\space}
+	  {\ifmorenames{\andothersdelim\bibstring{andothers}}{}}
+	}
 }
 
 %\DeclareFieldFormat{journaltitle}{#1}

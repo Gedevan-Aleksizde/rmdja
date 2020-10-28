@@ -3,4 +3,29 @@
 \RequireCitationStyle{authoryear}
 \ExecuteBibliographyOptions{singletitle,uniquename,uniquelist,autocite=inline}
 
+% TODO: なんか変なスペース入ってる気がする
+\renewcommand*{\multinamedelim}{%
+  \iffieldequalstr{langid}{japanese}{}{\addspace}
+}
+% and / ・ を使い分け
+\renewcommand*{\finalnamedelim}{%
+  \ifnumgreater{\value{liststop}}{2}{\finalandcomma}{}%
+  \iffieldequalstr{langid}{japanese}{・}{\addspace\bibstring{and}}%
+  \space
+  }
+
+% "et al." 「他」を使い分け
+\renewbibmacro*{name:andothers}{%
+  \ifboolexpr{
+    test {\ifnumequal{\value{listcount}}{\value{liststop}}}
+    and
+    test \ifmorenames
+  }
+    {\ifnumgreater{\value{liststop}}{1}
+       {\finalandcomma}
+       {}%
+     \andothersdelim\iffieldequalstr{langid}{japanese}{他}{\bibstring{andothers}}}
+    {}
+}
+
 \endinput
