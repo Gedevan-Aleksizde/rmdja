@@ -143,7 +143,9 @@ merge_bibliography_args <- function(citation_package, citation_options){
     if(identical(citation_options, "default")){
     } else {
       if(!is.null(citation_options) && all(citation_options != "") && all(!is.na(citation_options))){
-        extra_metadata[["biblio-style"]] <- sub("^style=", "", grep("^style=", citation_options, value = T))[1]
+        bstyle <- sub("^style=", "", grep("^style=", citation_options, value = T))[1]
+        if(length(bstyle) == 0 || is.na(bstyle)) bstyle <- "jauthoryear"
+        extra_metadata[["biblio-style"]] <- bstyle
         extra_metadata[["biblatexoptions"]] <- paste(citation_options, collapse = ",")
       }
     }

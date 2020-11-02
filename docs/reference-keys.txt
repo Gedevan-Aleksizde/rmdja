@@ -5,7 +5,9 @@ fig:build-pane1-2
 eq:binom
 fig:includegraphic-example
 fig:plot-sample
-tab:display-dataframe-kable
+tab:df-print-kable
+tab:df-print-ops
+tab:display-dataframe-kable-booktabs
 tab:display-dataframe-kable-2
 tab:tab-md
 fig:caption

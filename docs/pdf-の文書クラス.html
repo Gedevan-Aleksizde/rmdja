@@ -24,7 +24,7 @@
 <meta name="author" content="Katagiri, Satoshi (ill-identified)" />
 
 
-<meta name="date" content="2020-10-28" />
+<meta name="date" content="2020-11-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -327,7 +327,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">13</span> PDF の文書クラス</h1>
 <p>HTMLは利用者側が見え方をある程度カスタマイズできる. かつて存在した Evernote Clearly やカスタム CSS を使って. そのぶんPDFは作成者側がよりレイアウトに注意を払うことになるだろう. 本稿では文章の区切りを章立てにしている. しかし PDF 数十ページしかない文書を大きな文字サイズの見出しで区切るのは少しものものしい感じがする. YAML フロントマターを変更すれば, トップレベルの見出しを変更できる.</p>
 <p><code>pdf book in Japanese</code> は “book” ということで書籍の組版をデフォルト設定にしている. もう少し小規模な文書ならば, <strong>レポート</strong>や<strong>論文記事</strong>形式のほうが良いかもしれない. 例えば, 以下のように指定する.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb62-1"><a href="pdf-の文書クラス.html#cb62-1"></a><span class="fu">documentclass</span><span class="kw">:</span><span class="at"> bxjsreport</span></span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb66-1"><a href="pdf-の文書クラス.html#cb66-1"></a><span class="fu">documentclass</span><span class="kw">:</span><span class="at"> bxjsreport</span></span></code></pre></div>
 <p><code>documentclass</code> には LaTeX の文書クラスファイル (<code>.cls</code>) ならなんでも与えることができるが, または で日本語文書を作成することを想定しているため, 以下2種類の BXjscls の文書クラス<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a>の中から選ぶとよい. デフォルトは <code>bxjsbook</code> なので, これは明示的に指定する必要はない.</p>
 <ul>
 <li><code>bxjsbook</code></li>
@@ -358,8 +358,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>テーマは <code>metropolis</code> を使っているが, 昔ながらのテーマも可能である. 昔からあるテーマの比較には <a href="https://hartwork.org/beamer-theme-matrix/">Beamer Theme Matrix</a> というページが便利である. 他にも近年登場したテーマがいくつか存在するが, 日本語をうまく表示できなかったり <code>rmdja::texlogo("XeLaTeX")</code>/<code>rmdja::texlogo("LuaLaTeX")</code>に対応していなかったりするものも多い. 他に日本語に対応したテーマとして, <a href="https://github.com/pecorarista/sakuratheme"><code>sakuratheme</code></a> が存在する.</li>
 <li>beamer のアスペクト比はデフォルトで 4:3 であり, YAML フロントマターで指定できる. 例えば 16:9 に変更したい場合</li>
 </ul>
-<div class="sourceCode" id="cb63"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb63-1"><a href="pdf-の文書クラス.html#cb63-1"></a><span class="fu">classoption</span><span class="kw">:</span></span>
-<span id="cb63-2"><a href="pdf-の文書クラス.html#cb63-2"></a><span class="at">  </span><span class="kw">-</span><span class="at"> aspectratio=169</span></span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb67-1"><a href="pdf-の文書クラス.html#cb67-1"></a><span class="fu">classoption</span><span class="kw">:</span></span>
+<span id="cb67-2"><a href="pdf-の文書クラス.html#cb67-2"></a><span class="at">  </span><span class="kw">-</span><span class="at"> aspectratio=169</span></span></code></pre></div>
 <p>となる. 指定可能なのは <code>3:2</code>, <code>4:3</code>, <code>5:4</code>, <code>14:1</code> ,<code>14:9</code>, <code>16:9</code>, <code>16:10</code> で, 上記のようにコロンを抜いて数字のみで指定する. なお <code>classoption</code> は LaTeX でPDFを使う場合に有効になる.</p>
 <p>詳細は<a href="http://tug.ctan.org/macros/latex/contrib/beamer/doc/beameruserguide.pdf">beamer の公式ドキュメント</a>を参考に.</p>
 </div>
@@ -373,27 +373,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>余白が見開きを想定したものでなくなる</li>
 </ul>
 <p>など些細である. 実際のところ, 文書テンプレートの設定を少しいじっている程度のことしかしていない. テンプレートを開いて確認すればわかるように,</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb64-1"><a href="pdf-の文書クラス.html#cb64-1"></a><span class="fu">output</span><span class="kw">:</span></span>
-<span id="cb64-2"><a href="pdf-の文書クラス.html#cb64-2"></a><span class="at">  rmdja:</span><span class="fu">:pdf_book_ja</span><span class="kw">:</span></span>
-<span id="cb64-3"><a href="pdf-の文書クラス.html#cb64-3"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
-<span id="cb64-4"><a href="pdf-の文書クラス.html#cb64-4"></a><span class="at">    </span><span class="fu">pandoc_args</span><span class="kw">:</span></span>
-<span id="cb64-5"><a href="pdf-の文書クラス.html#cb64-5"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;--top-level-division=section&#39;</span></span>
-<span id="cb64-6"><a href="pdf-の文書クラス.html#cb64-6"></a><span class="fu">documentclass</span><span class="kw">:</span><span class="at"> bxjsarticle</span></span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb68-1"><a href="pdf-の文書クラス.html#cb68-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb68-2"><a href="pdf-の文書クラス.html#cb68-2"></a><span class="at">  rmdja:</span><span class="fu">:pdf_book_ja</span><span class="kw">:</span></span>
+<span id="cb68-3"><a href="pdf-の文書クラス.html#cb68-3"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb68-4"><a href="pdf-の文書クラス.html#cb68-4"></a><span class="at">    </span><span class="fu">pandoc_args</span><span class="kw">:</span></span>
+<span id="cb68-5"><a href="pdf-の文書クラス.html#cb68-5"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;--top-level-division=section&#39;</span></span>
+<span id="cb68-6"><a href="pdf-の文書クラス.html#cb68-6"></a><span class="fu">documentclass</span><span class="kw">:</span><span class="at"> bxjsarticle</span></span></code></pre></div>
 <p>という設定を追加しているだけである<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a>.</p>
 <p>大学によっては論文の体裁が細かく指定されている場合もあるかもしれない. 例えば1ページあたりの行数や, 1行あたりの文字数とか. 例えば1ページあたり50行, 1行あたり40字とする場合, 以下のような設定を追加する. ただし, 行数は図表の挿入などで変動するし, プロポーショナルフォントや字幅の異なる欧文を多用すれば1行あたりの文字数は多くなりうる.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb65-1"><a href="pdf-の文書クラス.html#cb65-1"></a><span class="fu">classoptions</span><span class="kw">:</span></span>
-<span id="cb65-2"><a href="pdf-の文書クラス.html#cb65-2"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;number-of-lines=50&#39;</span></span>
-<span id="cb65-3"><a href="pdf-の文書クラス.html#cb65-3"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;textwidth=40zw&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb69-1"><a href="pdf-の文書クラス.html#cb69-1"></a><span class="fu">classoptions</span><span class="kw">:</span></span>
+<span id="cb69-2"><a href="pdf-の文書クラス.html#cb69-2"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;number-of-lines=50&#39;</span></span>
+<span id="cb69-3"><a href="pdf-の文書クラス.html#cb69-3"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;textwidth=40zw&#39;</span></span></code></pre></div>
 <p>さらに, カラー印刷が許容されない場合もある. <code>ggplot2</code> は <code>scale_*_grey()</code> などでカラーパレットを簡単に変更できる (図 <a href="pdf-の文書クラス.html#fig:plot-grey-scale">13.1</a>).</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb66-1"><a href="pdf-の文書クラス.html#cb66-1"></a><span class="kw">ggplot</span>(</span>
-<span id="cb66-2"><a href="pdf-の文書クラス.html#cb66-2"></a>  <span class="kw">mutate</span>(mtcars, <span class="dt">cyl =</span> <span class="kw">factor</span>(cyl)),</span>
-<span id="cb66-3"><a href="pdf-の文書クラス.html#cb66-3"></a>  <span class="kw">aes</span>(<span class="dt">x =</span> mpg, <span class="dt">y =</span> wt, <span class="dt">color =</span> cyl)</span>
-<span id="cb66-4"><a href="pdf-の文書クラス.html#cb66-4"></a>) <span class="op">+</span></span>
-<span id="cb66-5"><a href="pdf-の文書クラス.html#cb66-5"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
-<span id="cb66-6"><a href="pdf-の文書クラス.html#cb66-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;マイル毎米ガロン&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;重量 (1000ポンド)&quot;</span>) <span class="op">+</span></span>
-<span id="cb66-7"><a href="pdf-の文書クラス.html#cb66-7"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
-<span id="cb66-8"><a href="pdf-の文書クラス.html#cb66-8"></a><span class="st">  </span><span class="kw">scale_color_grey</span>() <span class="op">+</span></span>
-<span id="cb66-9"><a href="pdf-の文書クラス.html#cb66-9"></a><span class="st">  </span><span class="kw">scale_fill_grey</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb70-1"><a href="pdf-の文書クラス.html#cb70-1"></a><span class="kw">ggplot</span>(</span>
+<span id="cb70-2"><a href="pdf-の文書クラス.html#cb70-2"></a>  <span class="kw">mutate</span>(mtcars, <span class="dt">cyl =</span> <span class="kw">factor</span>(cyl)),</span>
+<span id="cb70-3"><a href="pdf-の文書クラス.html#cb70-3"></a>  <span class="kw">aes</span>(<span class="dt">x =</span> mpg, <span class="dt">y =</span> wt, <span class="dt">color =</span> cyl)</span>
+<span id="cb70-4"><a href="pdf-の文書クラス.html#cb70-4"></a>) <span class="op">+</span></span>
+<span id="cb70-5"><a href="pdf-の文書クラス.html#cb70-5"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb70-6"><a href="pdf-の文書クラス.html#cb70-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;マイル毎米ガロン&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;重量 (1000ポンド)&quot;</span>) <span class="op">+</span></span>
+<span id="cb70-7"><a href="pdf-の文書クラス.html#cb70-7"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
+<span id="cb70-8"><a href="pdf-の文書クラス.html#cb70-8"></a><span class="st">  </span><span class="kw">scale_color_grey</span>() <span class="op">+</span></span>
+<span id="cb70-9"><a href="pdf-の文書クラス.html#cb70-9"></a><span class="st">  </span><span class="kw">scale_fill_grey</span>()</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:plot-grey-scale"></span>
 <img src="rmdja_files/figure-html/plot-grey-scale-1.png" alt="グレースケールでのプロット"  />
 <p class="caption">
@@ -486,7 +486,7 @@ gitbook.start({
 "link": "tree/rmdja/inst/resources/examples/bookdown/chapter/chapters/multi-media.Rmd",
 "text": null
 },
-"download": ["rmdja.pdf", "rmdja.epub"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

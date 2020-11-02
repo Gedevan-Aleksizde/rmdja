@@ -1,7 +1,7 @@
 ---
 title: "`rmdja` による多様な形式の日本語技術文書の作成 "
 author: "Katagiri, Satoshi (ill-identified)"
-date: "2020-10-28"
+date: "2020-11-02"
 site: bookdown::bookdown_site                    # RStudio GUIでビルド操作したい場合に必要
 description: "bookdown でまともな日本語文書を作る資料"  # HTML <metadata> に出力されるサイト概要
 url: 'https\://bookdown.org/john/awesome/'       # URL
@@ -767,7 +767,7 @@ ggplot(diamonds, aes(x=carat, y=price, color=clarity)) +
 
 ## (WIP): デフォルトフォントの設定
 
-Windows や Mac では, デフォルトのフォントが日本語グリフを持たないので文字化けする. 現時点では最低限 `rmdja::set_graphics_font()` という関数を呼び出すことで設定しなければならない. 本文のフォントと異なり, 現時点 (ver. 0.4.2) では手動設定が必要になる. OSごとのフォント名を調べて指定するのが大変なら, 私が作成した `fontregisterer` パッケージを使うのも1つの手である.  その解説は『[おまえはもうRのグラフの日本語表示に悩まない (各OS対応)](https://ill-identified.hatenablog.com/entry/2020/10/03/200618)』に書いた通りである. `fontregisterer::get_standard_font()` で使用中のOSで標準インストールされているセリフ (明朝), サンセリフ (ゴシック) のフォントファミリ名を1つづつ取得するので, その値のどちらかを `rmdja::set_graphics_font()` に与えれば, `ggplot2` および標準グラフィックスのデフォルトのフォントが日本語対応フォントになる.
+Windows や Mac では, デフォルトのフォントが日本語グリフを持たないのでグラフが文字化けする. 現時点では最低限 `rmdja::set_graphics_font()` という関数を呼び出す処理を手動で書き加えなければならない. 本文のフォントと異なり, 現時点 (ver. 0.4.2) では手動設定が必要になる. OSごとのフォント名を調べて指定するのが大変なら, 私が作成した `fontregisterer` パッケージを使うのも1つの手である.  その解説は『[おまえはもうRのグラフの日本語表示に悩まない (各OS対応)](https://ill-identified.hatenablog.com/entry/2020/10/03/200618)』に書いた通りである. `fontregisterer::get_standard_font()` で使用中のOSで標準インストールされているセリフ (明朝), サンセリフ (ゴシック) のフォントファミリ名を1つづつ取得するので, その値のどちらかを `rmdja::set_graphics_font()` に与えれば, `ggplot2` および標準グラフィックスのデフォルトのフォントが日本語対応フォントになる.
 
 
 ## TODO: 図のレイアウト設定
@@ -797,210 +797,578 @@ knitr::opts_chunk$set(
 
 ここで, `fig.width` と `out.width` の違いも述べておく. `out.width`/`out.height` は表示する画像サイズの違いで, `fig.width`/`fig.height` はプログラムが出力した画像の保存サイズである. よって `ggplot2` などを使わず画像ファイルを貼り付けるだけの場合は `fig.*` は意味をなさない.
 
-[^standard-graphics]: なお, Rユーザーならば標準グラフィック関数である `plot()` 関数をご存知だろうが, 本稿では**標準グラフィック関数の使用を推奨しない**. 標準グラフィック関数のデバイスはもともと日本語フォントを想定しておらず, OSごとに使用できるフォントも異なるためで, 品質維持のためには使用させない方針とした. 工夫すれば標準グラフィック関数でも日本語を適切に出力できるが, `ggplot2` を使用したほうが簡単であることが多いため, 標準グラフィック関数の解説書を作る以外では使うべきでない.
+[^standard-graphics]: なお, Rユーザーならば標準グラフィック関数である `plot()` 関数をご存知だろうが, 本稿では基本的により便利な `ggplot2` パッケージを使用してグラフを作成している.
 
 ## R プログラムを使った表の装飾
 
-Markdown 記法を使った表記は既に紹介した. しかしこれは表の数値を全て手動で書かなければならない. もちろんこれも R 内のデータを手書きなどせずとも表示できるし, テーブルのデザインもある程度自由に設定できる.
+Markdown 記法を使った表記は既に紹介した. しかしこれは表の数値を全て手動で書かなければならない. R はテーブル状のデータ処理に長けているため, このような煩雑さを省くことができないか, とあなたは思っていないだろうか. もちろん R Markdown では  R での作業中に使用しているデータをいちいち手書きなどせずとも表示できるし, テーブルのデザインもある程度自由に設定できる.
  
-R Markdown のデフォルトでは R のコンソールと同様にテキストとして出力されるが, bookdown では異なるデザインで表示されている. これは `knitr`, `kableExtra` パッケージなどで事後処理をかけることで見やすいデザインの表に変換しているからである.
-
-また, この方法はシンプルで使いやすいが数値を手作業で書く必要がある. R はテーブル状のデータ処理に長けているため, このような煩雑さを省くことができる.
-
-(ref:kable-cap) `knitr::kable()` で出力された (PDFではあまりかっこよくない) 表
+R Markdown のデフォルトでは R のコンソールと同様にテキストとして出力されるが, `rmdja` では異なるデザインで表示されている. これは `knitr`, `kableExtra` パッケージなどで事後処理をかけることで見やすいデザインの表に変換しているからである. R Markdown の基本ルールとして, チャンク内で最後に呼び出したオブジェクトが表示される. 例えば `mtcars` というRが用意する練習用データフレームを, チャンク内で上から10行までを呼び出してみると, 以下のように表示される.
 
 
 ```{.r .numberLines .lineAnchors}
-data(iris)
-kable(
-  head(iris, n = 10),
-  caption = "(ref:kable-cap)"
+data(mtcars)
+mtcars[1:10, ]
+```
+
+```
+                   mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag     21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710        22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive    21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout 18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+Valiant           18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+Duster 360        14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+Merc 240D         24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+Merc 230          22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+Merc 280          19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+```
+
+これはRのコンソール出力と同じで, プレーンテキストでの出力である. 表として出力する最も簡単な方法は, フォーマット関数に `df_print` を指定することである. たとえば `df_print: kable` を指定すると, 表 \@ref(tab:df-print-kable) のようになる.
+
+```yaml
+output: ...:
+  df_print: kable
+```
+
+(ref:print-kable-dummy) `df_print: kable` の場合
+
+
+```{.r .numberLines .lineAnchors}
+mtcars[1:10, ]
+```
+<table>
+<caption>(\#tab:df-print-kable)(ref:print-kable-dummy)</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> mpg </th>
+   <th style="text-align:right;"> cyl </th>
+   <th style="text-align:right;"> disp </th>
+   <th style="text-align:right;"> hp </th>
+   <th style="text-align:right;"> drat </th>
+   <th style="text-align:right;"> wt </th>
+   <th style="text-align:right;"> qsec </th>
+   <th style="text-align:right;"> vs </th>
+   <th style="text-align:right;"> am </th>
+   <th style="text-align:right;"> gear </th>
+   <th style="text-align:right;"> carb </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Mazda RX4 </td>
+   <td style="text-align:right;"> 21.0 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 160.0 </td>
+   <td style="text-align:right;"> 110 </td>
+   <td style="text-align:right;"> 3.90 </td>
+   <td style="text-align:right;"> 2.620 </td>
+   <td style="text-align:right;"> 16.46 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 4 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Mazda RX4 Wag </td>
+   <td style="text-align:right;"> 21.0 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 160.0 </td>
+   <td style="text-align:right;"> 110 </td>
+   <td style="text-align:right;"> 3.90 </td>
+   <td style="text-align:right;"> 2.875 </td>
+   <td style="text-align:right;"> 17.02 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 4 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Datsun 710 </td>
+   <td style="text-align:right;"> 22.8 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 108.0 </td>
+   <td style="text-align:right;"> 93 </td>
+   <td style="text-align:right;"> 3.85 </td>
+   <td style="text-align:right;"> 2.320 </td>
+   <td style="text-align:right;"> 18.61 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Hornet 4 Drive </td>
+   <td style="text-align:right;"> 21.4 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 258.0 </td>
+   <td style="text-align:right;"> 110 </td>
+   <td style="text-align:right;"> 3.08 </td>
+   <td style="text-align:right;"> 3.215 </td>
+   <td style="text-align:right;"> 19.44 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Hornet Sportabout </td>
+   <td style="text-align:right;"> 18.7 </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 360.0 </td>
+   <td style="text-align:right;"> 175 </td>
+   <td style="text-align:right;"> 3.15 </td>
+   <td style="text-align:right;"> 3.440 </td>
+   <td style="text-align:right;"> 17.02 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Valiant </td>
+   <td style="text-align:right;"> 18.1 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 225.0 </td>
+   <td style="text-align:right;"> 105 </td>
+   <td style="text-align:right;"> 2.76 </td>
+   <td style="text-align:right;"> 3.460 </td>
+   <td style="text-align:right;"> 20.22 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Duster 360 </td>
+   <td style="text-align:right;"> 14.3 </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 360.0 </td>
+   <td style="text-align:right;"> 245 </td>
+   <td style="text-align:right;"> 3.21 </td>
+   <td style="text-align:right;"> 3.570 </td>
+   <td style="text-align:right;"> 15.84 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 4 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Merc 240D </td>
+   <td style="text-align:right;"> 24.4 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 146.7 </td>
+   <td style="text-align:right;"> 62 </td>
+   <td style="text-align:right;"> 3.69 </td>
+   <td style="text-align:right;"> 3.190 </td>
+   <td style="text-align:right;"> 20.00 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Merc 230 </td>
+   <td style="text-align:right;"> 22.8 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 140.8 </td>
+   <td style="text-align:right;"> 95 </td>
+   <td style="text-align:right;"> 3.92 </td>
+   <td style="text-align:right;"> 3.150 </td>
+   <td style="text-align:right;"> 22.90 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Merc 280 </td>
+   <td style="text-align:right;"> 19.2 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 167.6 </td>
+   <td style="text-align:right;"> 123 </td>
+   <td style="text-align:right;"> 3.92 </td>
+   <td style="text-align:right;"> 3.440 </td>
+   <td style="text-align:right;"> 18.30 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 4 </td>
+  </tr>
+</tbody>
+</table>
+
+このオプションは R Markdown の処理中にデータフレームの呼び出しを検出し, `df_print` のオプションに対応したスタイルを変換する関数を適用している. 他のオプションとして, `tibble`, `paged` などがあるが現時点の `rmdja` では大差がないので詳細な説明を省略する (図 \@ref(tab:df-print-ops)).
+
+
+Table: (\#tab:df-print-ops) `df_print` のオプション一覧
+
+ オプション      効果
+-------------  -----------------------------------------------------------------------------------
+`default`      `print()`, コンソール出力と同じ
+`tibble`       `tibble` 対応版 `print()`
+`paged`        `rmarkdown::paged_table()` による表示, これもオプション引数を指定しなければ大差なし
+`kable`        `knitr::kable()` による表スタイル
+
+
+よって, これらの関数をチャンク内で呼び出すことで, 手動で表のスタイルを指定することも可能である. 表のスタイルにこだわりたい, **相互参照やキャプションを付けたい**, といった場合はこれらのうち `knitr::kable()` 関数を手動で使うのが1つの手である. 実は, 先ほどの `df_print` の例も, 実際にはこの関数を呼び出して出力している. キャプションは `kable()` 内で指定できる (現時点では, 図とは異なりチャンクオプションではキャプションを指定できない). デフォルトでは `caption =` の文字列はそのまま出力されるが, 太字強調など Markdown 記法を含めたい場合は上記のように `escape = F` を指定する. 加えて, HTML と PDF の出力を両立したい場合, \@ref(crossref) 章で紹介されている特殊な相互参照を使うことが必要になる.
+
+デフォルトでは `kable()` が PDF に出力する表のデザインはあまりよろしくない. 最も簡単なカスタマイズの1つは, `booktabs = T` を指定することである. `\LaTeX`{=latex}`LaTeX`{=html} を使ったことのある人は知っているかもしれないが, これは `booktabs.sty` を使った表のスタイルにするという効果がある (表 \@ref(tab:display-dataframe-kable-booktabs)).
+
+(ref:kable-booktabs-cap) `booktabs = T` は PDF にのみ影響する
+
+
+```{.r .numberLines .lineAnchors}
+kable(mtcars[1:10, ],
+  caption = "(ref:kable-booktabs-cap)",
+  escape = F,
+  booktabs = T
 )
 ```
 
 <table>
-<caption>(\#tab:display-dataframe-kable)(ref:kable-cap)</caption>
+<caption>(\#tab:display-dataframe-kable-booktabs)(ref:kable-booktabs-cap)</caption>
  <thead>
   <tr>
-   <th style="text-align:right;"> Sepal.Length </th>
-   <th style="text-align:right;"> Sepal.Width </th>
-   <th style="text-align:right;"> Petal.Length </th>
-   <th style="text-align:right;"> Petal.Width </th>
-   <th style="text-align:left;"> Species </th>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> mpg </th>
+   <th style="text-align:right;"> cyl </th>
+   <th style="text-align:right;"> disp </th>
+   <th style="text-align:right;"> hp </th>
+   <th style="text-align:right;"> drat </th>
+   <th style="text-align:right;"> wt </th>
+   <th style="text-align:right;"> qsec </th>
+   <th style="text-align:right;"> vs </th>
+   <th style="text-align:right;"> am </th>
+   <th style="text-align:right;"> gear </th>
+   <th style="text-align:right;"> carb </th>
   </tr>
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:right;"> 5.1 </td>
-   <td style="text-align:right;"> 3.5 </td>
-   <td style="text-align:right;"> 1.4 </td>
-   <td style="text-align:right;"> 0.2 </td>
-   <td style="text-align:left;"> setosa </td>
+   <td style="text-align:left;"> Mazda RX4 </td>
+   <td style="text-align:right;"> 21.0 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 160.0 </td>
+   <td style="text-align:right;"> 110 </td>
+   <td style="text-align:right;"> 3.90 </td>
+   <td style="text-align:right;"> 2.620 </td>
+   <td style="text-align:right;"> 16.46 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 4 </td>
   </tr>
   <tr>
-   <td style="text-align:right;"> 4.9 </td>
-   <td style="text-align:right;"> 3.0 </td>
-   <td style="text-align:right;"> 1.4 </td>
-   <td style="text-align:right;"> 0.2 </td>
-   <td style="text-align:left;"> setosa </td>
+   <td style="text-align:left;"> Mazda RX4 Wag </td>
+   <td style="text-align:right;"> 21.0 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 160.0 </td>
+   <td style="text-align:right;"> 110 </td>
+   <td style="text-align:right;"> 3.90 </td>
+   <td style="text-align:right;"> 2.875 </td>
+   <td style="text-align:right;"> 17.02 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 4 </td>
   </tr>
   <tr>
-   <td style="text-align:right;"> 4.7 </td>
-   <td style="text-align:right;"> 3.2 </td>
-   <td style="text-align:right;"> 1.3 </td>
-   <td style="text-align:right;"> 0.2 </td>
-   <td style="text-align:left;"> setosa </td>
+   <td style="text-align:left;"> Datsun 710 </td>
+   <td style="text-align:right;"> 22.8 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 108.0 </td>
+   <td style="text-align:right;"> 93 </td>
+   <td style="text-align:right;"> 3.85 </td>
+   <td style="text-align:right;"> 2.320 </td>
+   <td style="text-align:right;"> 18.61 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 1 </td>
   </tr>
   <tr>
-   <td style="text-align:right;"> 4.6 </td>
-   <td style="text-align:right;"> 3.1 </td>
-   <td style="text-align:right;"> 1.5 </td>
-   <td style="text-align:right;"> 0.2 </td>
-   <td style="text-align:left;"> setosa </td>
+   <td style="text-align:left;"> Hornet 4 Drive </td>
+   <td style="text-align:right;"> 21.4 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 258.0 </td>
+   <td style="text-align:right;"> 110 </td>
+   <td style="text-align:right;"> 3.08 </td>
+   <td style="text-align:right;"> 3.215 </td>
+   <td style="text-align:right;"> 19.44 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 1 </td>
   </tr>
   <tr>
-   <td style="text-align:right;"> 5.0 </td>
-   <td style="text-align:right;"> 3.6 </td>
-   <td style="text-align:right;"> 1.4 </td>
-   <td style="text-align:right;"> 0.2 </td>
-   <td style="text-align:left;"> setosa </td>
+   <td style="text-align:left;"> Hornet Sportabout </td>
+   <td style="text-align:right;"> 18.7 </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 360.0 </td>
+   <td style="text-align:right;"> 175 </td>
+   <td style="text-align:right;"> 3.15 </td>
+   <td style="text-align:right;"> 3.440 </td>
+   <td style="text-align:right;"> 17.02 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 2 </td>
   </tr>
   <tr>
-   <td style="text-align:right;"> 5.4 </td>
-   <td style="text-align:right;"> 3.9 </td>
-   <td style="text-align:right;"> 1.7 </td>
-   <td style="text-align:right;"> 0.4 </td>
-   <td style="text-align:left;"> setosa </td>
+   <td style="text-align:left;"> Valiant </td>
+   <td style="text-align:right;"> 18.1 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 225.0 </td>
+   <td style="text-align:right;"> 105 </td>
+   <td style="text-align:right;"> 2.76 </td>
+   <td style="text-align:right;"> 3.460 </td>
+   <td style="text-align:right;"> 20.22 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 1 </td>
   </tr>
   <tr>
-   <td style="text-align:right;"> 4.6 </td>
-   <td style="text-align:right;"> 3.4 </td>
-   <td style="text-align:right;"> 1.4 </td>
-   <td style="text-align:right;"> 0.3 </td>
-   <td style="text-align:left;"> setosa </td>
+   <td style="text-align:left;"> Duster 360 </td>
+   <td style="text-align:right;"> 14.3 </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 360.0 </td>
+   <td style="text-align:right;"> 245 </td>
+   <td style="text-align:right;"> 3.21 </td>
+   <td style="text-align:right;"> 3.570 </td>
+   <td style="text-align:right;"> 15.84 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 4 </td>
   </tr>
   <tr>
-   <td style="text-align:right;"> 5.0 </td>
-   <td style="text-align:right;"> 3.4 </td>
-   <td style="text-align:right;"> 1.5 </td>
-   <td style="text-align:right;"> 0.2 </td>
-   <td style="text-align:left;"> setosa </td>
+   <td style="text-align:left;"> Merc 240D </td>
+   <td style="text-align:right;"> 24.4 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 146.7 </td>
+   <td style="text-align:right;"> 62 </td>
+   <td style="text-align:right;"> 3.69 </td>
+   <td style="text-align:right;"> 3.190 </td>
+   <td style="text-align:right;"> 20.00 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 2 </td>
   </tr>
   <tr>
-   <td style="text-align:right;"> 4.4 </td>
-   <td style="text-align:right;"> 2.9 </td>
-   <td style="text-align:right;"> 1.4 </td>
-   <td style="text-align:right;"> 0.2 </td>
-   <td style="text-align:left;"> setosa </td>
+   <td style="text-align:left;"> Merc 230 </td>
+   <td style="text-align:right;"> 22.8 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 140.8 </td>
+   <td style="text-align:right;"> 95 </td>
+   <td style="text-align:right;"> 3.92 </td>
+   <td style="text-align:right;"> 3.150 </td>
+   <td style="text-align:right;"> 22.90 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 2 </td>
   </tr>
   <tr>
-   <td style="text-align:right;"> 4.9 </td>
-   <td style="text-align:right;"> 3.1 </td>
-   <td style="text-align:right;"> 1.5 </td>
-   <td style="text-align:right;"> 0.1 </td>
-   <td style="text-align:left;"> setosa </td>
+   <td style="text-align:left;"> Merc 280 </td>
+   <td style="text-align:right;"> 19.2 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 167.6 </td>
+   <td style="text-align:right;"> 123 </td>
+   <td style="text-align:right;"> 3.92 </td>
+   <td style="text-align:right;"> 3.440 </td>
+   <td style="text-align:right;"> 18.30 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 4 </td>
   </tr>
 </tbody>
 </table>
 
-こちらは関数内にキャプションを書く必要があり, チャンクオプションに指定する方法はない (表\@ref(tab:display-dataframe-kable)).
+`kable()` による表のスタイルは  `kableExtra` パッケージを使うことで様々にカスタマイズできる. 例えば `row_spec()` を使って偶数・奇数行を色分けすることができる (表 \@ref(tab:display-dataframe-kable-2), ただしHTML版を見ていれば分かるように, HTML ではデフォルトで奇数偶数の色分けがなされている).
+
+(ref: df-kable-cap) 奇数行を強調し, PDF では `booktabs` を利用
 
 
 ```{.r .numberLines .lineAnchors}
-data(iris)
 kable(
-  head(iris, n = 10),
+  mtcars[1:10, ],
   booktabs = T,
-  caption = "奇数行を強調し, PDF では booktabs を利用"
+  caption = "(ref: df-kable-cap)",
+  escape = F
 ) %>% row_spec(seq(1, 10, by = 2), background = "gray")
 ```
 
 <table>
-<caption>(\#tab:display-dataframe-kable-2)奇数行を強調し, PDF では booktabs を利用</caption>
+<caption>(\#tab:display-dataframe-kable-2)(ref: df-kable-cap)</caption>
  <thead>
   <tr>
-   <th style="text-align:right;"> Sepal.Length </th>
-   <th style="text-align:right;"> Sepal.Width </th>
-   <th style="text-align:right;"> Petal.Length </th>
-   <th style="text-align:right;"> Petal.Width </th>
-   <th style="text-align:left;"> Species </th>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> mpg </th>
+   <th style="text-align:right;"> cyl </th>
+   <th style="text-align:right;"> disp </th>
+   <th style="text-align:right;"> hp </th>
+   <th style="text-align:right;"> drat </th>
+   <th style="text-align:right;"> wt </th>
+   <th style="text-align:right;"> qsec </th>
+   <th style="text-align:right;"> vs </th>
+   <th style="text-align:right;"> am </th>
+   <th style="text-align:right;"> gear </th>
+   <th style="text-align:right;"> carb </th>
   </tr>
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:right;background-color: gray !important;"> 5.1 </td>
-   <td style="text-align:right;background-color: gray !important;"> 3.5 </td>
-   <td style="text-align:right;background-color: gray !important;"> 1.4 </td>
-   <td style="text-align:right;background-color: gray !important;"> 0.2 </td>
-   <td style="text-align:left;background-color: gray !important;"> setosa </td>
+   <td style="text-align:left;background-color: gray !important;"> Mazda RX4 </td>
+   <td style="text-align:right;background-color: gray !important;"> 21.0 </td>
+   <td style="text-align:right;background-color: gray !important;"> 6 </td>
+   <td style="text-align:right;background-color: gray !important;"> 160.0 </td>
+   <td style="text-align:right;background-color: gray !important;"> 110 </td>
+   <td style="text-align:right;background-color: gray !important;"> 3.90 </td>
+   <td style="text-align:right;background-color: gray !important;"> 2.620 </td>
+   <td style="text-align:right;background-color: gray !important;"> 16.46 </td>
+   <td style="text-align:right;background-color: gray !important;"> 0 </td>
+   <td style="text-align:right;background-color: gray !important;"> 1 </td>
+   <td style="text-align:right;background-color: gray !important;"> 4 </td>
+   <td style="text-align:right;background-color: gray !important;"> 4 </td>
   </tr>
   <tr>
-   <td style="text-align:right;"> 4.9 </td>
-   <td style="text-align:right;"> 3.0 </td>
-   <td style="text-align:right;"> 1.4 </td>
-   <td style="text-align:right;"> 0.2 </td>
-   <td style="text-align:left;"> setosa </td>
+   <td style="text-align:left;"> Mazda RX4 Wag </td>
+   <td style="text-align:right;"> 21.0 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 160.0 </td>
+   <td style="text-align:right;"> 110 </td>
+   <td style="text-align:right;"> 3.90 </td>
+   <td style="text-align:right;"> 2.875 </td>
+   <td style="text-align:right;"> 17.02 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 4 </td>
   </tr>
   <tr>
-   <td style="text-align:right;background-color: gray !important;"> 4.7 </td>
-   <td style="text-align:right;background-color: gray !important;"> 3.2 </td>
-   <td style="text-align:right;background-color: gray !important;"> 1.3 </td>
-   <td style="text-align:right;background-color: gray !important;"> 0.2 </td>
-   <td style="text-align:left;background-color: gray !important;"> setosa </td>
+   <td style="text-align:left;background-color: gray !important;"> Datsun 710 </td>
+   <td style="text-align:right;background-color: gray !important;"> 22.8 </td>
+   <td style="text-align:right;background-color: gray !important;"> 4 </td>
+   <td style="text-align:right;background-color: gray !important;"> 108.0 </td>
+   <td style="text-align:right;background-color: gray !important;"> 93 </td>
+   <td style="text-align:right;background-color: gray !important;"> 3.85 </td>
+   <td style="text-align:right;background-color: gray !important;"> 2.320 </td>
+   <td style="text-align:right;background-color: gray !important;"> 18.61 </td>
+   <td style="text-align:right;background-color: gray !important;"> 1 </td>
+   <td style="text-align:right;background-color: gray !important;"> 1 </td>
+   <td style="text-align:right;background-color: gray !important;"> 4 </td>
+   <td style="text-align:right;background-color: gray !important;"> 1 </td>
   </tr>
   <tr>
-   <td style="text-align:right;"> 4.6 </td>
-   <td style="text-align:right;"> 3.1 </td>
-   <td style="text-align:right;"> 1.5 </td>
-   <td style="text-align:right;"> 0.2 </td>
-   <td style="text-align:left;"> setosa </td>
+   <td style="text-align:left;"> Hornet 4 Drive </td>
+   <td style="text-align:right;"> 21.4 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 258.0 </td>
+   <td style="text-align:right;"> 110 </td>
+   <td style="text-align:right;"> 3.08 </td>
+   <td style="text-align:right;"> 3.215 </td>
+   <td style="text-align:right;"> 19.44 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 1 </td>
   </tr>
   <tr>
-   <td style="text-align:right;background-color: gray !important;"> 5.0 </td>
-   <td style="text-align:right;background-color: gray !important;"> 3.6 </td>
-   <td style="text-align:right;background-color: gray !important;"> 1.4 </td>
-   <td style="text-align:right;background-color: gray !important;"> 0.2 </td>
-   <td style="text-align:left;background-color: gray !important;"> setosa </td>
+   <td style="text-align:left;background-color: gray !important;"> Hornet Sportabout </td>
+   <td style="text-align:right;background-color: gray !important;"> 18.7 </td>
+   <td style="text-align:right;background-color: gray !important;"> 8 </td>
+   <td style="text-align:right;background-color: gray !important;"> 360.0 </td>
+   <td style="text-align:right;background-color: gray !important;"> 175 </td>
+   <td style="text-align:right;background-color: gray !important;"> 3.15 </td>
+   <td style="text-align:right;background-color: gray !important;"> 3.440 </td>
+   <td style="text-align:right;background-color: gray !important;"> 17.02 </td>
+   <td style="text-align:right;background-color: gray !important;"> 0 </td>
+   <td style="text-align:right;background-color: gray !important;"> 0 </td>
+   <td style="text-align:right;background-color: gray !important;"> 3 </td>
+   <td style="text-align:right;background-color: gray !important;"> 2 </td>
   </tr>
   <tr>
-   <td style="text-align:right;"> 5.4 </td>
-   <td style="text-align:right;"> 3.9 </td>
-   <td style="text-align:right;"> 1.7 </td>
-   <td style="text-align:right;"> 0.4 </td>
-   <td style="text-align:left;"> setosa </td>
+   <td style="text-align:left;"> Valiant </td>
+   <td style="text-align:right;"> 18.1 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 225.0 </td>
+   <td style="text-align:right;"> 105 </td>
+   <td style="text-align:right;"> 2.76 </td>
+   <td style="text-align:right;"> 3.460 </td>
+   <td style="text-align:right;"> 20.22 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 1 </td>
   </tr>
   <tr>
-   <td style="text-align:right;background-color: gray !important;"> 4.6 </td>
-   <td style="text-align:right;background-color: gray !important;"> 3.4 </td>
-   <td style="text-align:right;background-color: gray !important;"> 1.4 </td>
-   <td style="text-align:right;background-color: gray !important;"> 0.3 </td>
-   <td style="text-align:left;background-color: gray !important;"> setosa </td>
+   <td style="text-align:left;background-color: gray !important;"> Duster 360 </td>
+   <td style="text-align:right;background-color: gray !important;"> 14.3 </td>
+   <td style="text-align:right;background-color: gray !important;"> 8 </td>
+   <td style="text-align:right;background-color: gray !important;"> 360.0 </td>
+   <td style="text-align:right;background-color: gray !important;"> 245 </td>
+   <td style="text-align:right;background-color: gray !important;"> 3.21 </td>
+   <td style="text-align:right;background-color: gray !important;"> 3.570 </td>
+   <td style="text-align:right;background-color: gray !important;"> 15.84 </td>
+   <td style="text-align:right;background-color: gray !important;"> 0 </td>
+   <td style="text-align:right;background-color: gray !important;"> 0 </td>
+   <td style="text-align:right;background-color: gray !important;"> 3 </td>
+   <td style="text-align:right;background-color: gray !important;"> 4 </td>
   </tr>
   <tr>
-   <td style="text-align:right;"> 5.0 </td>
-   <td style="text-align:right;"> 3.4 </td>
-   <td style="text-align:right;"> 1.5 </td>
-   <td style="text-align:right;"> 0.2 </td>
-   <td style="text-align:left;"> setosa </td>
+   <td style="text-align:left;"> Merc 240D </td>
+   <td style="text-align:right;"> 24.4 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 146.7 </td>
+   <td style="text-align:right;"> 62 </td>
+   <td style="text-align:right;"> 3.69 </td>
+   <td style="text-align:right;"> 3.190 </td>
+   <td style="text-align:right;"> 20.00 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 2 </td>
   </tr>
   <tr>
-   <td style="text-align:right;background-color: gray !important;"> 4.4 </td>
-   <td style="text-align:right;background-color: gray !important;"> 2.9 </td>
-   <td style="text-align:right;background-color: gray !important;"> 1.4 </td>
-   <td style="text-align:right;background-color: gray !important;"> 0.2 </td>
-   <td style="text-align:left;background-color: gray !important;"> setosa </td>
+   <td style="text-align:left;background-color: gray !important;"> Merc 230 </td>
+   <td style="text-align:right;background-color: gray !important;"> 22.8 </td>
+   <td style="text-align:right;background-color: gray !important;"> 4 </td>
+   <td style="text-align:right;background-color: gray !important;"> 140.8 </td>
+   <td style="text-align:right;background-color: gray !important;"> 95 </td>
+   <td style="text-align:right;background-color: gray !important;"> 3.92 </td>
+   <td style="text-align:right;background-color: gray !important;"> 3.150 </td>
+   <td style="text-align:right;background-color: gray !important;"> 22.90 </td>
+   <td style="text-align:right;background-color: gray !important;"> 1 </td>
+   <td style="text-align:right;background-color: gray !important;"> 0 </td>
+   <td style="text-align:right;background-color: gray !important;"> 4 </td>
+   <td style="text-align:right;background-color: gray !important;"> 2 </td>
   </tr>
   <tr>
-   <td style="text-align:right;"> 4.9 </td>
-   <td style="text-align:right;"> 3.1 </td>
-   <td style="text-align:right;"> 1.5 </td>
-   <td style="text-align:right;"> 0.1 </td>
-   <td style="text-align:left;"> setosa </td>
+   <td style="text-align:left;"> Merc 280 </td>
+   <td style="text-align:right;"> 19.2 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 167.6 </td>
+   <td style="text-align:right;"> 123 </td>
+   <td style="text-align:right;"> 3.92 </td>
+   <td style="text-align:right;"> 3.440 </td>
+   <td style="text-align:right;"> 18.30 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 4 </td>
   </tr>
 </tbody>
 </table>
 
-`kable()` は R Markdown に必須な `knitr` パッケージに含まれる関数なので最初に紹介したが, 現在は `huxtable` や `gt` というより使いやすいパッケージが存在する. より発展的な表のスタイル指定方法については \@ref(#advanced-tabulate) 章で話す.
+このように, R Markdown ではまず表示したい表と同じ構造のデータフレームを作ることで, 簡単にスタイルの調整された表を掲載できる.
+
+他にもいくつか表のスタイルをカスタマイズするためのパッケージが存在する. より発展的な表のスタイル指定方法については \@ref(advanced-tabulate) 章で話す.
 
 # 相互参照と引用
 
@@ -1043,7 +1411,7 @@ Table: (\#tab:tab-md) Markdown 記法の表
 
 ### 章への相互参照
 
-章見出しへの相互参照も可能である. これはPandocの機能を利用しているため, 接頭辞は不要である. Pandocの仕様により欧文であればタイトルがそのまま参照IDとなるが, 非欧文の文字に対して適用されないため, 参照したい章の見出しにの後にスペースを入れて `{#参照ID}` と書く必要がある.
+章見出しへの相互参照も可能である. これはPandocの機能を利用しているため, 接頭辞は不要である. Pandocの仕様により欧文であればタイトルがそのまま参照IDとなるが, 非欧文の文字に対して適用されないため, 基本的に日本語文書の場合は参照したい章の見出しの後にスペースを入れて `{#参照ID}` と書く必要がある. そして本文中で参照する場合 `\@ref(参照ID)` と表記する.
 
 ### 特殊な相互参照
 
@@ -1296,8 +1664,8 @@ DiagrammeR::grViz("digraph {
 ```
 
 <div class="figure" style="text-align: center">
-<!--html_preserve--><div id="htmlwidget-7d3687f8419b5e72b765" style="width:672px;height:500px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7d3687f8419b5e72b765">{"x":{"diagram":"digraph {\n  graph [layout = dot, rankdir = TB]\n  \n  node [shape = rectangle]        \n  rec1 [label = \"Step 1. 起床する\"]\n  rec2 [label = \"Step 2. コードを書く\"]\n  rec3 [label =  \"Step 3. ???\"]\n  rec4 [label = \"Step 4. 給料をもらう\"]\n  \n  # edge definitions with the node IDs\n  rec1 -> rec2 -> rec3 -> rec4\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
+<!--html_preserve--><div id="htmlwidget-4d6a4b3c05096b0f5869" style="width:672px;height:500px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4d6a4b3c05096b0f5869">{"x":{"diagram":"digraph {\n  graph [layout = dot, rankdir = TB]\n  \n  node [shape = rectangle]        \n  rec1 [label = \"Step 1. 起床する\"]\n  rec2 [label = \"Step 2. コードを書く\"]\n  rec3 [label =  \"Step 3. ???\"]\n  rec4 [label = \"Step 4. 給料をもらう\"]\n  \n  # edge definitions with the node IDs\n  rec1 -> rec2 -> rec3 -> rec4\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
 <p class="caption">(\#fig:diagrammer-graph)(ref:diagrammer-cap)</p>
 </div>
 
@@ -1520,53 +1888,53 @@ inline_plot %>%
 <tbody>
   <tr>
    <td style="text-align:right;"> 4 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/boxplot_4d1d20f5d0ee.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/RtmpnHronH/boxplot_235c4f896412.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/hist_4d1d12ea71ab.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/RtmpnHronH/hist_235c7ab41413.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/plot_4d1d6ee286fd.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/RtmpnHronH/plot_235c68abe826.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/plot_4d1d62cb6d21.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/RtmpnHronH/plot_235c5df64701.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/plot_4d1d8a40ad3.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/RtmpnHronH/plot_235c750f34fc.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/plot_4d1d1f4e872a.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/RtmpnHronH/plot_235c48a3039b.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <html><body><img src="file:////tmp/Rtmp2yHqJx/plot_4d1d2ffee3d7.svg" width="64" height="16"></body></html>
+   <td style="text-align:left;">  <html><body><img src="file:////tmp/RtmpnHronH/plot_235c39a87d86.svg" width="64" height="16"></body></html>
 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 6 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/boxplot_4d1d34036211.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/RtmpnHronH/boxplot_235c78ad1223.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/hist_4d1d2ba9a0d0.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/RtmpnHronH/hist_235c13dcc4cf.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/plot_4d1d29046d53.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/RtmpnHronH/plot_235c5f3fcf05.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/plot_4d1d8ce5679.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/RtmpnHronH/plot_235c120695a5.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/plot_4d1d5a9657fe.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/RtmpnHronH/plot_235c3aa397b1.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/plot_4d1d6f40193.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/RtmpnHronH/plot_235c656827.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <html><body><img src="file:////tmp/Rtmp2yHqJx/plot_4d1d157f51c8.svg" width="64" height="16"></body></html>
+   <td style="text-align:left;">  <html><body><img src="file:////tmp/RtmpnHronH/plot_235c642849a7.svg" width="64" height="16"></body></html>
 </td>
   </tr>
   <tr>
    <td style="text-align:right;"> 8 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/boxplot_4d1d198f699d.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/RtmpnHronH/boxplot_235c7b7e5965.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/hist_4d1d2cf281b3.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/RtmpnHronH/hist_235c7fce1e5e.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/plot_4d1d62791dd9.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/RtmpnHronH/plot_235c6c49e55.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/plot_4d1d2d32bd65.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/RtmpnHronH/plot_235cd744202.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/plot_4d1d86abe6b.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/RtmpnHronH/plot_235c656b172.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <img src="file:////tmp/Rtmp2yHqJx/plot_4d1d58588adb.svg" width="64" height="16">
+   <td style="text-align:left;">  <img src="file:////tmp/RtmpnHronH/plot_235c2cb1479b.svg" width="64" height="16">
 </td>
-   <td style="text-align:left;">  <html><body><img src="file:////tmp/Rtmp2yHqJx/plot_4d1d12dcd415.svg" width="64" height="16"></body></html>
+   <td style="text-align:left;">  <html><body><img src="file:////tmp/RtmpnHronH/plot_235c6d941cee.svg" width="64" height="16"></body></html>
 </td>
   </tr>
 </tbody>
@@ -1593,17 +1961,17 @@ inline_plot %>%
 
 <!--html_preserve--><table class="huxtable" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; width: 120pt; margin-left: auto; margin-right: auto; height: 120pt; " id="tab:huxtable-logo">
 <caption style="caption-side: top; text-align: center;">(#tab:huxtable-logo) </caption><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><col style="width: 20pt"><tr style="height: 20pt;">
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(255, 0, 0); font-weight: bold; font-family: DejaVu Sans;"><span style="color: rgb(255, 255, 255);">h</span></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td rowspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">u</td></tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(255, 0, 0); font-weight: bold; font-family: DejaVu Sans;"><span style="color: rgb(255, 255, 255);">h</span></td></tr>
 <tr style="height: 20pt;">
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(255, 255, 0); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(0, 0, 0);">x</span></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(255, 0, 0); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(255, 255, 255);">&nbsp;</span></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td></tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(255, 255, 0); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(0, 0, 0);">&nbsp;</span></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(255, 255, 0); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(0, 0, 0);">&nbsp;</span></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(0, 0, 255); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(255, 255, 255);">&nbsp;</span></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(255, 255, 0); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(0, 0, 0);">u</span></td><td rowspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td rowspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">x</td></tr>
 <tr style="height: 20pt;">
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td rowspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(255, 255, 0); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(0, 0, 0);">&nbsp;</span></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">t</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td></tr>
+<td rowspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(255, 0, 0); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(255, 255, 255);">&nbsp;</span></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">t</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">a</td></tr>
 <tr style="height: 20pt;">
-<td colspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(255, 255, 0); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(0, 0, 0);">a</span></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td rowspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(0, 0, 255); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(255, 255, 255);">b</span></td></tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td></tr>
 <tr style="height: 20pt;">
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">l</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td></tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">b</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td colspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(255, 255, 0); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(0, 0, 0);">&nbsp;</span></td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(255, 255, 0); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(0, 0, 0);">&nbsp;</span></td></tr>
 <tr style="height: 20pt;">
-<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">e</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; background-color: rgb(255, 0, 0); font-weight: normal; font-family: DejaVu Sans;"><span style="color: rgb(255, 255, 255);">&nbsp;</span></td><td colspan="2" style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td></tr>
+<td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">l</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">e</td><td style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 2pt 2pt 2pt 2pt; border-top-color: rgb(0, 0, 0);  border-right-color: rgb(0, 0, 0);  border-bottom-color: rgb(0, 0, 0);  border-left-color: rgb(0, 0, 0); padding: 2pt 2pt 2pt 2pt; font-weight: normal; font-family: DejaVu Sans;">&nbsp;</td></tr>
 </table>
 <!--/html_preserve-->
 

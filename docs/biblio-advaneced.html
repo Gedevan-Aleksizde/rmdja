@@ -24,7 +24,7 @@
 <meta name="author" content="Katagiri, Satoshi (ill-identified)" />
 
 
-<meta name="date" content="2020-10-28" />
+<meta name="date" content="2020-11-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -329,15 +329,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">10.1</span> (u)pBibTeX を使う</h2>
 <p>このセクションの説明の理解には多少の LaTeX の知識を要する. Ver. 0.4.3 以降では BibLaTeX 用の日本語スタイルとして最低限のクオリティだけは保った <code>jauthoryear</code> を用意しているため, どうしても文献リストのスタイルにこだわりたい以外はここで紹介される方法は使わないほうが良い.</p>
 <p><code>.bst</code> ファイルのスタイルを使いたい場合, (u)pBibTeX が必要であり, そのためには現在の R Markdown および <code>rmdja</code> の仕様では, YAMLフロントマターとグローバルオプションを変更する必要がある. 例えば <code>jecon.bst</code> を使いたい参考文献リストを出力したい場合, YAMLフロントマターは以下のような記述となる.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb53-1"><a href="biblio-advaneced.html#cb53-1"></a><span class="fu">output</span><span class="kw">:</span></span>
-<span id="cb53-2"><a href="biblio-advaneced.html#cb53-2"></a><span class="at">  rmdja:</span><span class="fu">:pdf_book_ja</span><span class="kw">:</span></span>
-<span id="cb53-3"><a href="biblio-advaneced.html#cb53-3"></a><span class="at">    </span><span class="fu">citation_package</span><span class="kw">:</span><span class="at"> natbib</span></span>
-<span id="cb53-4"><a href="biblio-advaneced.html#cb53-4"></a><span class="at">    </span><span class="fu">citation_options</span><span class="kw">:</span><span class="at"> numbers</span></span>
-<span id="cb53-5"><a href="biblio-advaneced.html#cb53-5"></a><span class="fu">biblio-style</span><span class="kw">:</span><span class="at"> jecon</span></span>
-<span id="cb53-6"><a href="biblio-advaneced.html#cb53-6"></a><span class="fu">bibliogpraphy</span><span class="kw">:</span><span class="at"> citations.bib</span></span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb57-1"><a href="biblio-advaneced.html#cb57-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb57-2"><a href="biblio-advaneced.html#cb57-2"></a><span class="at">  rmdja:</span><span class="fu">:pdf_book_ja</span><span class="kw">:</span></span>
+<span id="cb57-3"><a href="biblio-advaneced.html#cb57-3"></a><span class="at">    </span><span class="fu">citation_package</span><span class="kw">:</span><span class="at"> natbib</span></span>
+<span id="cb57-4"><a href="biblio-advaneced.html#cb57-4"></a><span class="at">    </span><span class="fu">citation_options</span><span class="kw">:</span><span class="at"> numbers</span></span>
+<span id="cb57-5"><a href="biblio-advaneced.html#cb57-5"></a><span class="fu">biblio-style</span><span class="kw">:</span><span class="at"> jecon</span></span>
+<span id="cb57-6"><a href="biblio-advaneced.html#cb57-6"></a><span class="fu">bibliogpraphy</span><span class="kw">:</span><span class="at"> citations.bib</span></span></code></pre></div>
 <p>BibLaTeX では <code>citation_options</code> にスタイルまで指定していたが, <code>natbib</code> を選択した場合 <code>biblio-style</code> で指定し, フォーマット関数の <code>citation_options</code> 引数は <code>natbib.sty</code> に対するオプションを指定する項目となる (フロントマターの <code>natbiboptions</code> でも可). 上記の例では <code>numbers</code> を指定しているため本文中の参照トークンは <code>[1]</code>, <code>[2, 3]</code> のような番号形式となる. デフォルトは <code>authoryear</code> である.</p>
 <p>次に, 最初のチャンク, またはコンソールでグローバルオプションを変更する.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="biblio-advaneced.html#cb54-1"></a><span class="kw">options</span>(<span class="dt">tinytex.latexmk.emulation =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="biblio-advaneced.html#cb58-1"></a><span class="kw">options</span>(<span class="dt">tinytex.latexmk.emulation =</span> F)</span></code></pre></div>
 <p>この状態で knit または build すれば <code>.bst</code> ファイルのスタイルが適用される.</p>
 <p>このような操作が必要な理由を説明する. <code>rmarkdown</code> は <code>tinytex</code> というパッケージでインストールされたスタンドアローンな LaTeX 処理系で PDF を生成している. しかしこれは (u)pBibTeX の使用が想定されていない. (u)pBibTeX は日本語コミュニティで開発されたマルチバイト文字対応版 BibTeX だから, <code>rmarkdown</code> 開発メンバーたちはこれらの存在に詳しくないのだろう (YiHui 氏は中国出身だが, 中国語圏では BibLaTeX を使うことが多いようだ). 冒頭のチャンクで <code>options(tinytex.latexmk.emulation = F)</code> を指定することで, 自分のマシンにインストールされた, おそらくあなたが普段使っているであろう LaTeX 処理系に処理させることができる. この方法では <code>latexmk</code> コマンドを使用してPDFの生成が行われる, その場合<a href="https://texwiki.texjp.org/?Latexmk">TeX Wiki</a>に記載のあるように, 日本語出力のため <code>.latexmkrc</code> ファイルが必要となっている. <code>rmdja</code> では <code>natbib</code> を指定した場合に自動でカレントディレクトリに <code>.latexmkrc</code> をコピーするようにしている. しかしログが残らないなどデバッグしづらいところがあるため, このやり方はやや使いづらいため, LaTeX に対するそれなりの知識を要する. たとえばこの説明を読んで初めて <code>latexmk</code> の存在を知った, そもそも LaTeX をどうインストールしたか記憶がない, といった人は慣れるまで大変かもしれない.</p>
 <div id="todo-pandoc-citeproc-と-csl-について" class="section level3" number="10.1.1">
@@ -489,7 +489,7 @@ gitbook.start({
 "link": "tree/rmdja/inst/resources/examples/bookdown/chapter/chapters/advanced.Rmd",
 "text": null
 },
-"download": ["rmdja.pdf", "rmdja.epub"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

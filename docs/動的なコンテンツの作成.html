@@ -24,7 +24,7 @@
 <meta name="author" content="Katagiri, Satoshi (ill-identified)" />
 
 
-<meta name="date" content="2020-10-28" />
+<meta name="date" content="2020-11-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -453,7 +453,7 @@ ggplot(diamonds, aes(x=carat, y=price, color=clarity)) +
 </div>
 <div id="wip-デフォルトフォントの設定" class="section level2" number="4.4">
 <h2><span class="header-section-number">4.4</span> (WIP): デフォルトフォントの設定</h2>
-<p>Windows や Mac では, デフォルトのフォントが日本語グリフを持たないので文字化けする. 現時点では最低限 <code>rmdja::set_graphics_font()</code> という関数を呼び出すことで設定しなければならない. 本文のフォントと異なり, 現時点 (ver. 0.4.2) では手動設定が必要になる. OSごとのフォント名を調べて指定するのが大変なら, 私が作成した <code>fontregisterer</code> パッケージを使うのも1つの手である. その解説は『<a href="https://ill-identified.hatenablog.com/entry/2020/10/03/200618">おまえはもうRのグラフの日本語表示に悩まない (各OS対応)</a>』に書いた通りである. <code>fontregisterer::get_standard_font()</code> で使用中のOSで標準インストールされているセリフ (明朝), サンセリフ (ゴシック) のフォントファミリ名を1つづつ取得するので, その値のどちらかを <code>rmdja::set_graphics_font()</code> に与えれば, <code>ggplot2</code> および標準グラフィックスのデフォルトのフォントが日本語対応フォントになる.</p>
+<p>Windows や Mac では, デフォルトのフォントが日本語グリフを持たないのでグラフが文字化けする. 現時点では最低限 <code>rmdja::set_graphics_font()</code> という関数を呼び出す処理を手動で書き加えなければならない. 本文のフォントと異なり, 現時点 (ver. 0.4.2) では手動設定が必要になる. OSごとのフォント名を調べて指定するのが大変なら, 私が作成した <code>fontregisterer</code> パッケージを使うのも1つの手である. その解説は『<a href="https://ill-identified.hatenablog.com/entry/2020/10/03/200618">おまえはもうRのグラフの日本語表示に悩まない (各OS対応)</a>』に書いた通りである. <code>fontregisterer::get_standard_font()</code> で使用中のOSで標準インストールされているセリフ (明朝), サンセリフ (ゴシック) のフォントファミリ名を1つづつ取得するので, その値のどちらかを <code>rmdja::set_graphics_font()</code> に与えれば, <code>ggplot2</code> および標準グラフィックスのデフォルトのフォントが日本語対応フォントになる.</p>
 </div>
 <div id="todo-図のレイアウト設定" class="section level2" number="4.5">
 <h2><span class="header-section-number">4.5</span> TODO: 図のレイアウト設定</h2>
@@ -474,421 +474,1356 @@ ggplot(diamonds, aes(x=carat, y=price, color=clarity)) +
 </div>
 <div id="r-プログラムを使った表の装飾" class="section level2" number="4.6">
 <h2><span class="header-section-number">4.6</span> R プログラムを使った表の装飾</h2>
-<p>Markdown 記法を使った表記は既に紹介した. しかしこれは表の数値を全て手動で書かなければならない. もちろんこれも R 内のデータを手書きなどせずとも表示できるし, テーブルのデザインもある程度自由に設定できる.</p>
-<p>R Markdown のデフォルトでは R のコンソールと同様にテキストとして出力されるが, bookdown では異なるデザインで表示されている. これは <code>knitr</code>, <code>kableExtra</code> パッケージなどで事後処理をかけることで見やすいデザインの表に変換しているからである.</p>
-<p>また, この方法はシンプルで使いやすいが数値を手作業で書く必要がある. R はテーブル状のデータ処理に長けているため, このような煩雑さを省くことができる.</p>
+<p>Markdown 記法を使った表記は既に紹介した. しかしこれは表の数値を全て手動で書かなければならない. R はテーブル状のデータ処理に長けているため, このような煩雑さを省くことができないか, とあなたは思っていないだろうか. もちろん R Markdown では R での作業中に使用しているデータをいちいち手書きなどせずとも表示できるし, テーブルのデザインもある程度自由に設定できる.</p>
+<p>R Markdown のデフォルトでは R のコンソールと同様にテキストとして出力されるが, <code>rmdja</code> では異なるデザインで表示されている. これは <code>knitr</code>, <code>kableExtra</code> パッケージなどで事後処理をかけることで見やすいデザインの表に変換しているからである. R Markdown の基本ルールとして, チャンク内で最後に呼び出したオブジェクトが表示される. 例えば <code>mtcars</code> というRが用意する練習用データフレームを, チャンク内で上から10行までを呼び出してみると, 以下のように表示される.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb40-1"><a href="動的なコンテンツの作成.html#cb40-1"></a><span class="kw">data</span>(mtcars)</span>
+<span id="cb40-2"><a href="動的なコンテンツの作成.html#cb40-2"></a>mtcars[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, ]</span></code></pre></div>
+<pre><code>                   mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag     21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710        22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive    21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout 18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+Valiant           18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+Duster 360        14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+Merc 240D         24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+Merc 230          22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+Merc 280          19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4</code></pre>
+<p>これはRのコンソール出力と同じで, プレーンテキストでの出力である. 表として出力する最も簡単な方法は, フォーマット関数に <code>df_print</code> を指定することである. たとえば <code>df_print: kable</code> を指定すると, 表 <a href="動的なコンテンツの作成.html#tab:df-print-kable">4.1</a> のようになる.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb42-1"><a href="動的なコンテンツの作成.html#cb42-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> ...:</span></span>
+<span id="cb42-2"><a href="動的なコンテンツの作成.html#cb42-2"></a><span class="at">  </span><span class="fu">df_print</span><span class="kw">:</span><span class="at"> kable</span></span></code></pre></div>
 
-<div class="sourceCode" id="cb40"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb40-1"><a href="動的なコンテンツの作成.html#cb40-1"></a><span class="kw">data</span>(iris)</span>
-<span id="cb40-2"><a href="動的なコンテンツの作成.html#cb40-2"></a><span class="kw">kable</span>(</span>
-<span id="cb40-3"><a href="動的なコンテンツの作成.html#cb40-3"></a>  <span class="kw">head</span>(iris, <span class="dt">n =</span> <span class="dv">10</span>),</span>
-<span id="cb40-4"><a href="動的なコンテンツの作成.html#cb40-4"></a>  <span class="dt">caption =</span> <span class="st">&quot;<code>knitr::kable()</code> で出力された (PDFではあまりかっこよくない) 表&quot;</span></span>
-<span id="cb40-5"><a href="動的なコンテンツの作成.html#cb40-5"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb43-1"><a href="動的なコンテンツの作成.html#cb43-1"></a>mtcars[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, ]</span></code></pre></div>
 <table>
 <caption>
-<span id="tab:display-dataframe-kable">表 4.1: </span><code>knitr::kable()</code> で出力された (PDFではあまりかっこよくない) 表
+<span id="tab:df-print-kable">表 4.1: </span><code>df_print: kable</code> の場合
 </caption>
 <thead>
 <tr>
-<th style="text-align:right;">
-Sepal.Length
-</th>
-<th style="text-align:right;">
-Sepal.Width
-</th>
-<th style="text-align:right;">
-Petal.Length
-</th>
-<th style="text-align:right;">
-Petal.Width
-</th>
 <th style="text-align:left;">
-Species
+</th>
+<th style="text-align:right;">
+mpg
+</th>
+<th style="text-align:right;">
+cyl
+</th>
+<th style="text-align:right;">
+disp
+</th>
+<th style="text-align:right;">
+hp
+</th>
+<th style="text-align:right;">
+drat
+</th>
+<th style="text-align:right;">
+wt
+</th>
+<th style="text-align:right;">
+qsec
+</th>
+<th style="text-align:right;">
+vs
+</th>
+<th style="text-align:right;">
+am
+</th>
+<th style="text-align:right;">
+gear
+</th>
+<th style="text-align:right;">
+carb
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:right;">
-5.1
-</td>
-<td style="text-align:right;">
-3.5
-</td>
-<td style="text-align:right;">
-1.4
-</td>
-<td style="text-align:right;">
-0.2
-</td>
 <td style="text-align:left;">
-setosa
+Mazda RX4
+</td>
+<td style="text-align:right;">
+21.0
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+160.0
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;">
+3.90
+</td>
+<td style="text-align:right;">
+2.620
+</td>
+<td style="text-align:right;">
+16.46
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+4
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
-4.9
-</td>
-<td style="text-align:right;">
-3.0
-</td>
-<td style="text-align:right;">
-1.4
-</td>
-<td style="text-align:right;">
-0.2
-</td>
 <td style="text-align:left;">
-setosa
+Mazda RX4 Wag
+</td>
+<td style="text-align:right;">
+21.0
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+160.0
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;">
+3.90
+</td>
+<td style="text-align:right;">
+2.875
+</td>
+<td style="text-align:right;">
+17.02
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+4
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
-4.7
-</td>
-<td style="text-align:right;">
-3.2
-</td>
-<td style="text-align:right;">
-1.3
-</td>
-<td style="text-align:right;">
-0.2
-</td>
 <td style="text-align:left;">
-setosa
+Datsun 710
+</td>
+<td style="text-align:right;">
+22.8
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+108.0
+</td>
+<td style="text-align:right;">
+93
+</td>
+<td style="text-align:right;">
+3.85
+</td>
+<td style="text-align:right;">
+2.320
+</td>
+<td style="text-align:right;">
+18.61
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
-4.6
-</td>
-<td style="text-align:right;">
-3.1
-</td>
-<td style="text-align:right;">
-1.5
-</td>
-<td style="text-align:right;">
-0.2
-</td>
 <td style="text-align:left;">
-setosa
+Hornet 4 Drive
+</td>
+<td style="text-align:right;">
+21.4
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+258.0
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;">
+3.08
+</td>
+<td style="text-align:right;">
+3.215
+</td>
+<td style="text-align:right;">
+19.44
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
-5.0
-</td>
-<td style="text-align:right;">
-3.6
-</td>
-<td style="text-align:right;">
-1.4
-</td>
-<td style="text-align:right;">
-0.2
-</td>
 <td style="text-align:left;">
-setosa
+Hornet Sportabout
+</td>
+<td style="text-align:right;">
+18.7
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+360.0
+</td>
+<td style="text-align:right;">
+175
+</td>
+<td style="text-align:right;">
+3.15
+</td>
+<td style="text-align:right;">
+3.440
+</td>
+<td style="text-align:right;">
+17.02
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+2
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
-5.4
-</td>
-<td style="text-align:right;">
-3.9
-</td>
-<td style="text-align:right;">
-1.7
-</td>
-<td style="text-align:right;">
-0.4
-</td>
 <td style="text-align:left;">
-setosa
+Valiant
+</td>
+<td style="text-align:right;">
+18.1
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+225.0
+</td>
+<td style="text-align:right;">
+105
+</td>
+<td style="text-align:right;">
+2.76
+</td>
+<td style="text-align:right;">
+3.460
+</td>
+<td style="text-align:right;">
+20.22
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
-4.6
-</td>
-<td style="text-align:right;">
-3.4
-</td>
-<td style="text-align:right;">
-1.4
-</td>
-<td style="text-align:right;">
-0.3
-</td>
 <td style="text-align:left;">
-setosa
+Duster 360
+</td>
+<td style="text-align:right;">
+14.3
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+360.0
+</td>
+<td style="text-align:right;">
+245
+</td>
+<td style="text-align:right;">
+3.21
+</td>
+<td style="text-align:right;">
+3.570
+</td>
+<td style="text-align:right;">
+15.84
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+4
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
-5.0
-</td>
-<td style="text-align:right;">
-3.4
-</td>
-<td style="text-align:right;">
-1.5
-</td>
-<td style="text-align:right;">
-0.2
-</td>
 <td style="text-align:left;">
-setosa
+Merc 240D
+</td>
+<td style="text-align:right;">
+24.4
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+146.7
+</td>
+<td style="text-align:right;">
+62
+</td>
+<td style="text-align:right;">
+3.69
+</td>
+<td style="text-align:right;">
+3.190
+</td>
+<td style="text-align:right;">
+20.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+2
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
-4.4
-</td>
-<td style="text-align:right;">
-2.9
-</td>
-<td style="text-align:right;">
-1.4
-</td>
-<td style="text-align:right;">
-0.2
-</td>
 <td style="text-align:left;">
-setosa
+Merc 230
+</td>
+<td style="text-align:right;">
+22.8
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+140.8
+</td>
+<td style="text-align:right;">
+95
+</td>
+<td style="text-align:right;">
+3.92
+</td>
+<td style="text-align:right;">
+3.150
+</td>
+<td style="text-align:right;">
+22.90
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+2
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
-4.9
-</td>
-<td style="text-align:right;">
-3.1
-</td>
-<td style="text-align:right;">
-1.5
-</td>
-<td style="text-align:right;">
-0.1
-</td>
 <td style="text-align:left;">
-setosa
+Merc 280
+</td>
+<td style="text-align:right;">
+19.2
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+167.6
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+3.92
+</td>
+<td style="text-align:right;">
+3.440
+</td>
+<td style="text-align:right;">
+18.30
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+4
 </td>
 </tr>
 </tbody>
 </table>
-<p>こちらは関数内にキャプションを書く必要があり, チャンクオプションに指定する方法はない (表<a href="動的なコンテンツの作成.html#tab:display-dataframe-kable">4.1</a>).</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb41-1"><a href="動的なコンテンツの作成.html#cb41-1"></a><span class="kw">data</span>(iris)</span>
-<span id="cb41-2"><a href="動的なコンテンツの作成.html#cb41-2"></a><span class="kw">kable</span>(</span>
-<span id="cb41-3"><a href="動的なコンテンツの作成.html#cb41-3"></a>  <span class="kw">head</span>(iris, <span class="dt">n =</span> <span class="dv">10</span>),</span>
-<span id="cb41-4"><a href="動的なコンテンツの作成.html#cb41-4"></a>  <span class="dt">booktabs =</span> T,</span>
-<span id="cb41-5"><a href="動的なコンテンツの作成.html#cb41-5"></a>  <span class="dt">caption =</span> <span class="st">&quot;奇数行を強調し, PDF では booktabs を利用&quot;</span></span>
-<span id="cb41-6"><a href="動的なコンテンツの作成.html#cb41-6"></a>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">row_spec</span>(<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dt">by =</span> <span class="dv">2</span>), <span class="dt">background =</span> <span class="st">&quot;gray&quot;</span>)</span></code></pre></div>
+<p>このオプションは R Markdown の処理中にデータフレームの呼び出しを検出し, <code>df_print</code> のオプションに対応したスタイルを変換する関数を適用している. 他のオプションとして, <code>tibble</code>, <code>paged</code> などがあるが現時点の <code>rmdja</code> では大差がないので詳細な説明を省略する (図 <a href="動的なコンテンツの作成.html#tab:df-print-ops">4.2</a>).</p>
+<table>
+<caption><span id="tab:df-print-ops">表 4.2: </span> <code>df_print</code> のオプション一覧</caption>
+<thead>
+<tr class="header">
+<th align="center">オプション</th>
+<th align="center">効果</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><code>default</code></td>
+<td align="center"><code>print()</code>, コンソール出力と同じ</td>
+</tr>
+<tr class="even">
+<td align="center"><code>tibble</code></td>
+<td align="center"><code>tibble</code> 対応版 <code>print()</code></td>
+</tr>
+<tr class="odd">
+<td align="center"><code>paged</code></td>
+<td align="center"><code>rmarkdown::paged_table()</code> による表示, これもオプション引数を指定しなければ大差なし</td>
+</tr>
+<tr class="even">
+<td align="center"><code>kable</code></td>
+<td align="center"><code>knitr::kable()</code> による表スタイル</td>
+</tr>
+</tbody>
+</table>
+<p>よって, これらの関数をチャンク内で呼び出すことで, 手動で表のスタイルを指定することも可能である. 表のスタイルにこだわりたい, <strong>相互参照やキャプションを付けたい</strong>, といった場合はこれらのうち <code>knitr::kable()</code> 関数を手動で使うのが1つの手である. 実は, 先ほどの <code>df_print</code> の例も, 実際にはこの関数を呼び出して出力している. キャプションは <code>kable()</code> 内で指定できる (現時点では, 図とは異なりチャンクオプションではキャプションを指定できない). デフォルトでは <code>caption =</code> の文字列はそのまま出力されるが, 太字強調など Markdown 記法を含めたい場合は上記のように <code>escape = F</code> を指定する. 加えて, HTML と PDF の出力を両立したい場合, <a href="相互参照と引用.html#crossref">5.1</a> 章で紹介されている特殊な相互参照を使うことが必要になる.</p>
+<p>デフォルトでは <code>kable()</code> が PDF に出力する表のデザインはあまりよろしくない. 最も簡単なカスタマイズの1つは, <code>booktabs = T</code> を指定することである. LaTeX を使ったことのある人は知っているかもしれないが, これは <code>booktabs.sty</code> を使った表のスタイルにするという効果がある (表 <a href="動的なコンテンツの作成.html#tab:display-dataframe-kable-booktabs">4.3</a>).</p>
+
+<div class="sourceCode" id="cb44"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb44-1"><a href="動的なコンテンツの作成.html#cb44-1"></a><span class="kw">kable</span>(mtcars[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, ],</span>
+<span id="cb44-2"><a href="動的なコンテンツの作成.html#cb44-2"></a>  <span class="dt">caption =</span> <span class="st">&quot;<code>booktabs = T</code> は PDF にのみ影響する&quot;</span>,</span>
+<span id="cb44-3"><a href="動的なコンテンツの作成.html#cb44-3"></a>  <span class="dt">escape =</span> F,</span>
+<span id="cb44-4"><a href="動的なコンテンツの作成.html#cb44-4"></a>  <span class="dt">booktabs =</span> T</span>
+<span id="cb44-5"><a href="動的なコンテンツの作成.html#cb44-5"></a>)</span></code></pre></div>
 <table>
 <caption>
-<span id="tab:display-dataframe-kable-2">表 4.2: </span>奇数行を強調し, PDF では booktabs を利用
+<span id="tab:display-dataframe-kable-booktabs">表 4.3: </span><code>booktabs = T</code> は PDF にのみ影響する
 </caption>
 <thead>
 <tr>
-<th style="text-align:right;">
-Sepal.Length
-</th>
-<th style="text-align:right;">
-Sepal.Width
-</th>
-<th style="text-align:right;">
-Petal.Length
-</th>
-<th style="text-align:right;">
-Petal.Width
-</th>
 <th style="text-align:left;">
-Species
+</th>
+<th style="text-align:right;">
+mpg
+</th>
+<th style="text-align:right;">
+cyl
+</th>
+<th style="text-align:right;">
+disp
+</th>
+<th style="text-align:right;">
+hp
+</th>
+<th style="text-align:right;">
+drat
+</th>
+<th style="text-align:right;">
+wt
+</th>
+<th style="text-align:right;">
+qsec
+</th>
+<th style="text-align:right;">
+vs
+</th>
+<th style="text-align:right;">
+am
+</th>
+<th style="text-align:right;">
+gear
+</th>
+<th style="text-align:right;">
+carb
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:right;background-color: gray !important;">
-5.1
-</td>
-<td style="text-align:right;background-color: gray !important;">
-3.5
-</td>
-<td style="text-align:right;background-color: gray !important;">
-1.4
-</td>
-<td style="text-align:right;background-color: gray !important;">
-0.2
-</td>
-<td style="text-align:left;background-color: gray !important;">
-setosa
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-4.9
-</td>
-<td style="text-align:right;">
-3.0
-</td>
-<td style="text-align:right;">
-1.4
-</td>
-<td style="text-align:right;">
-0.2
-</td>
 <td style="text-align:left;">
-setosa
+Mazda RX4
+</td>
+<td style="text-align:right;">
+21.0
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+160.0
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;">
+3.90
+</td>
+<td style="text-align:right;">
+2.620
+</td>
+<td style="text-align:right;">
+16.46
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+4
 </td>
 </tr>
 <tr>
-<td style="text-align:right;background-color: gray !important;">
-4.7
-</td>
-<td style="text-align:right;background-color: gray !important;">
-3.2
-</td>
-<td style="text-align:right;background-color: gray !important;">
-1.3
-</td>
-<td style="text-align:right;background-color: gray !important;">
-0.2
-</td>
-<td style="text-align:left;background-color: gray !important;">
-setosa
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-4.6
-</td>
-<td style="text-align:right;">
-3.1
-</td>
-<td style="text-align:right;">
-1.5
-</td>
-<td style="text-align:right;">
-0.2
-</td>
 <td style="text-align:left;">
-setosa
+Mazda RX4 Wag
+</td>
+<td style="text-align:right;">
+21.0
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+160.0
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;">
+3.90
+</td>
+<td style="text-align:right;">
+2.875
+</td>
+<td style="text-align:right;">
+17.02
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+4
 </td>
 </tr>
 <tr>
-<td style="text-align:right;background-color: gray !important;">
-5.0
-</td>
-<td style="text-align:right;background-color: gray !important;">
-3.6
-</td>
-<td style="text-align:right;background-color: gray !important;">
-1.4
-</td>
-<td style="text-align:right;background-color: gray !important;">
-0.2
-</td>
-<td style="text-align:left;background-color: gray !important;">
-setosa
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-5.4
-</td>
-<td style="text-align:right;">
-3.9
-</td>
-<td style="text-align:right;">
-1.7
-</td>
-<td style="text-align:right;">
-0.4
-</td>
 <td style="text-align:left;">
-setosa
+Datsun 710
+</td>
+<td style="text-align:right;">
+22.8
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+108.0
+</td>
+<td style="text-align:right;">
+93
+</td>
+<td style="text-align:right;">
+3.85
+</td>
+<td style="text-align:right;">
+2.320
+</td>
+<td style="text-align:right;">
+18.61
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1
 </td>
 </tr>
 <tr>
-<td style="text-align:right;background-color: gray !important;">
-4.6
-</td>
-<td style="text-align:right;background-color: gray !important;">
-3.4
-</td>
-<td style="text-align:right;background-color: gray !important;">
-1.4
-</td>
-<td style="text-align:right;background-color: gray !important;">
-0.3
-</td>
-<td style="text-align:left;background-color: gray !important;">
-setosa
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-5.0
-</td>
-<td style="text-align:right;">
-3.4
-</td>
-<td style="text-align:right;">
-1.5
-</td>
-<td style="text-align:right;">
-0.2
-</td>
 <td style="text-align:left;">
-setosa
+Hornet 4 Drive
+</td>
+<td style="text-align:right;">
+21.4
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+258.0
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;">
+3.08
+</td>
+<td style="text-align:right;">
+3.215
+</td>
+<td style="text-align:right;">
+19.44
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
 </td>
 </tr>
 <tr>
-<td style="text-align:right;background-color: gray !important;">
-4.4
-</td>
-<td style="text-align:right;background-color: gray !important;">
-2.9
-</td>
-<td style="text-align:right;background-color: gray !important;">
-1.4
-</td>
-<td style="text-align:right;background-color: gray !important;">
-0.2
-</td>
-<td style="text-align:left;background-color: gray !important;">
-setosa
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-4.9
-</td>
-<td style="text-align:right;">
-3.1
-</td>
-<td style="text-align:right;">
-1.5
-</td>
-<td style="text-align:right;">
-0.1
-</td>
 <td style="text-align:left;">
-setosa
+Hornet Sportabout
+</td>
+<td style="text-align:right;">
+18.7
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+360.0
+</td>
+<td style="text-align:right;">
+175
+</td>
+<td style="text-align:right;">
+3.15
+</td>
+<td style="text-align:right;">
+3.440
+</td>
+<td style="text-align:right;">
+17.02
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Valiant
+</td>
+<td style="text-align:right;">
+18.1
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+225.0
+</td>
+<td style="text-align:right;">
+105
+</td>
+<td style="text-align:right;">
+2.76
+</td>
+<td style="text-align:right;">
+3.460
+</td>
+<td style="text-align:right;">
+20.22
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Duster 360
+</td>
+<td style="text-align:right;">
+14.3
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+360.0
+</td>
+<td style="text-align:right;">
+245
+</td>
+<td style="text-align:right;">
+3.21
+</td>
+<td style="text-align:right;">
+3.570
+</td>
+<td style="text-align:right;">
+15.84
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Merc 240D
+</td>
+<td style="text-align:right;">
+24.4
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+146.7
+</td>
+<td style="text-align:right;">
+62
+</td>
+<td style="text-align:right;">
+3.69
+</td>
+<td style="text-align:right;">
+3.190
+</td>
+<td style="text-align:right;">
+20.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Merc 230
+</td>
+<td style="text-align:right;">
+22.8
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+140.8
+</td>
+<td style="text-align:right;">
+95
+</td>
+<td style="text-align:right;">
+3.92
+</td>
+<td style="text-align:right;">
+3.150
+</td>
+<td style="text-align:right;">
+22.90
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Merc 280
+</td>
+<td style="text-align:right;">
+19.2
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+167.6
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+3.92
+</td>
+<td style="text-align:right;">
+3.440
+</td>
+<td style="text-align:right;">
+18.30
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+4
 </td>
 </tr>
 </tbody>
 </table>
-<p><code>kable()</code> は R Markdown に必須な <code>knitr</code> パッケージに含まれる関数なので最初に紹介したが, 現在は <code>huxtable</code> や <code>gt</code> というより使いやすいパッケージが存在する. より発展的な表のスタイル指定方法については @ref(#advanced-tabulate) 章で話す.</p>
+<p><code>kable()</code> による表のスタイルは <code>kableExtra</code> パッケージを使うことで様々にカスタマイズできる. 例えば <code>row_spec()</code> を使って偶数・奇数行を色分けすることができる (表 <a href="動的なコンテンツの作成.html#tab:display-dataframe-kable-2">4.4</a>, ただしHTML版を見ていれば分かるように, HTML ではデフォルトで奇数偶数の色分けがなされている).</p>
+<p>(ref: df-kable-cap) 奇数行を強調し, PDF では <code>booktabs</code> を利用</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb45-1"><a href="動的なコンテンツの作成.html#cb45-1"></a><span class="kw">kable</span>(</span>
+<span id="cb45-2"><a href="動的なコンテンツの作成.html#cb45-2"></a>  mtcars[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, ],</span>
+<span id="cb45-3"><a href="動的なコンテンツの作成.html#cb45-3"></a>  <span class="dt">booktabs =</span> T,</span>
+<span id="cb45-4"><a href="動的なコンテンツの作成.html#cb45-4"></a>  <span class="dt">caption =</span> <span class="st">&quot;(ref: df-kable-cap)&quot;</span>,</span>
+<span id="cb45-5"><a href="動的なコンテンツの作成.html#cb45-5"></a>  <span class="dt">escape =</span> F</span>
+<span id="cb45-6"><a href="動的なコンテンツの作成.html#cb45-6"></a>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">row_spec</span>(<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dt">by =</span> <span class="dv">2</span>), <span class="dt">background =</span> <span class="st">&quot;gray&quot;</span>)</span></code></pre></div>
+<table>
+<caption>
+<span id="tab:display-dataframe-kable-2">表 4.4: </span>(ref: df-kable-cap)
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+mpg
+</th>
+<th style="text-align:right;">
+cyl
+</th>
+<th style="text-align:right;">
+disp
+</th>
+<th style="text-align:right;">
+hp
+</th>
+<th style="text-align:right;">
+drat
+</th>
+<th style="text-align:right;">
+wt
+</th>
+<th style="text-align:right;">
+qsec
+</th>
+<th style="text-align:right;">
+vs
+</th>
+<th style="text-align:right;">
+am
+</th>
+<th style="text-align:right;">
+gear
+</th>
+<th style="text-align:right;">
+carb
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;background-color: gray !important;">
+Mazda RX4
+</td>
+<td style="text-align:right;background-color: gray !important;">
+21.0
+</td>
+<td style="text-align:right;background-color: gray !important;">
+6
+</td>
+<td style="text-align:right;background-color: gray !important;">
+160.0
+</td>
+<td style="text-align:right;background-color: gray !important;">
+110
+</td>
+<td style="text-align:right;background-color: gray !important;">
+3.90
+</td>
+<td style="text-align:right;background-color: gray !important;">
+2.620
+</td>
+<td style="text-align:right;background-color: gray !important;">
+16.46
+</td>
+<td style="text-align:right;background-color: gray !important;">
+0
+</td>
+<td style="text-align:right;background-color: gray !important;">
+1
+</td>
+<td style="text-align:right;background-color: gray !important;">
+4
+</td>
+<td style="text-align:right;background-color: gray !important;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mazda RX4 Wag
+</td>
+<td style="text-align:right;">
+21.0
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+160.0
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;">
+3.90
+</td>
+<td style="text-align:right;">
+2.875
+</td>
+<td style="text-align:right;">
+17.02
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: gray !important;">
+Datsun 710
+</td>
+<td style="text-align:right;background-color: gray !important;">
+22.8
+</td>
+<td style="text-align:right;background-color: gray !important;">
+4
+</td>
+<td style="text-align:right;background-color: gray !important;">
+108.0
+</td>
+<td style="text-align:right;background-color: gray !important;">
+93
+</td>
+<td style="text-align:right;background-color: gray !important;">
+3.85
+</td>
+<td style="text-align:right;background-color: gray !important;">
+2.320
+</td>
+<td style="text-align:right;background-color: gray !important;">
+18.61
+</td>
+<td style="text-align:right;background-color: gray !important;">
+1
+</td>
+<td style="text-align:right;background-color: gray !important;">
+1
+</td>
+<td style="text-align:right;background-color: gray !important;">
+4
+</td>
+<td style="text-align:right;background-color: gray !important;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hornet 4 Drive
+</td>
+<td style="text-align:right;">
+21.4
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+258.0
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;">
+3.08
+</td>
+<td style="text-align:right;">
+3.215
+</td>
+<td style="text-align:right;">
+19.44
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: gray !important;">
+Hornet Sportabout
+</td>
+<td style="text-align:right;background-color: gray !important;">
+18.7
+</td>
+<td style="text-align:right;background-color: gray !important;">
+8
+</td>
+<td style="text-align:right;background-color: gray !important;">
+360.0
+</td>
+<td style="text-align:right;background-color: gray !important;">
+175
+</td>
+<td style="text-align:right;background-color: gray !important;">
+3.15
+</td>
+<td style="text-align:right;background-color: gray !important;">
+3.440
+</td>
+<td style="text-align:right;background-color: gray !important;">
+17.02
+</td>
+<td style="text-align:right;background-color: gray !important;">
+0
+</td>
+<td style="text-align:right;background-color: gray !important;">
+0
+</td>
+<td style="text-align:right;background-color: gray !important;">
+3
+</td>
+<td style="text-align:right;background-color: gray !important;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Valiant
+</td>
+<td style="text-align:right;">
+18.1
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+225.0
+</td>
+<td style="text-align:right;">
+105
+</td>
+<td style="text-align:right;">
+2.76
+</td>
+<td style="text-align:right;">
+3.460
+</td>
+<td style="text-align:right;">
+20.22
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: gray !important;">
+Duster 360
+</td>
+<td style="text-align:right;background-color: gray !important;">
+14.3
+</td>
+<td style="text-align:right;background-color: gray !important;">
+8
+</td>
+<td style="text-align:right;background-color: gray !important;">
+360.0
+</td>
+<td style="text-align:right;background-color: gray !important;">
+245
+</td>
+<td style="text-align:right;background-color: gray !important;">
+3.21
+</td>
+<td style="text-align:right;background-color: gray !important;">
+3.570
+</td>
+<td style="text-align:right;background-color: gray !important;">
+15.84
+</td>
+<td style="text-align:right;background-color: gray !important;">
+0
+</td>
+<td style="text-align:right;background-color: gray !important;">
+0
+</td>
+<td style="text-align:right;background-color: gray !important;">
+3
+</td>
+<td style="text-align:right;background-color: gray !important;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Merc 240D
+</td>
+<td style="text-align:right;">
+24.4
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+146.7
+</td>
+<td style="text-align:right;">
+62
+</td>
+<td style="text-align:right;">
+3.69
+</td>
+<td style="text-align:right;">
+3.190
+</td>
+<td style="text-align:right;">
+20.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: gray !important;">
+Merc 230
+</td>
+<td style="text-align:right;background-color: gray !important;">
+22.8
+</td>
+<td style="text-align:right;background-color: gray !important;">
+4
+</td>
+<td style="text-align:right;background-color: gray !important;">
+140.8
+</td>
+<td style="text-align:right;background-color: gray !important;">
+95
+</td>
+<td style="text-align:right;background-color: gray !important;">
+3.92
+</td>
+<td style="text-align:right;background-color: gray !important;">
+3.150
+</td>
+<td style="text-align:right;background-color: gray !important;">
+22.90
+</td>
+<td style="text-align:right;background-color: gray !important;">
+1
+</td>
+<td style="text-align:right;background-color: gray !important;">
+0
+</td>
+<td style="text-align:right;background-color: gray !important;">
+4
+</td>
+<td style="text-align:right;background-color: gray !important;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Merc 280
+</td>
+<td style="text-align:right;">
+19.2
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+167.6
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+3.92
+</td>
+<td style="text-align:right;">
+3.440
+</td>
+<td style="text-align:right;">
+18.30
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+</tbody>
+</table>
+<p>このように, R Markdown ではまず表示したい表と同じ構造のデータフレームを作ることで, 簡単にスタイルの調整された表を掲載できる.</p>
+<p>他にもいくつか表のスタイルをカスタマイズするためのパッケージが存在する. より発展的な表のスタイル指定方法については <a href="advanced-tabulate.html#advanced-tabulate">9</a> 章で話す.</p>
 </div>
 </div>
 <div class="footnotes">
 <hr />
 <ol start="9">
-<li id="fn9"><p>なお, Rユーザーならば標準グラフィック関数である <code>plot()</code> 関数をご存知だろうが, 本稿では<strong>標準グラフィック関数の使用を推奨しない</strong>. 標準グラフィック関数のデバイスはもともと日本語フォントを想定しておらず, OSごとに使用できるフォントも異なるためで, 品質維持のためには使用させない方針とした. 工夫すれば標準グラフィック関数でも日本語を適切に出力できるが, <code>ggplot2</code> を使用したほうが簡単であることが多いため, 標準グラフィック関数の解説書を作る以外では使うべきでない.<a href="動的なコンテンツの作成.html#fnref9" class="footnote-back">↩︎</a></p></li>
+<li id="fn9"><p>なお, Rユーザーならば標準グラフィック関数である <code>plot()</code> 関数をご存知だろうが, 本稿では基本的により便利な <code>ggplot2</code> パッケージを使用してグラフを作成している.<a href="動的なコンテンツの作成.html#fnref9" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -939,7 +1874,7 @@ gitbook.start({
 "link": "tree/rmdja/inst/resources/examples/bookdown/chapter/chapters/elemental.Rmd",
 "text": null
 },
-"download": ["rmdja.pdf", "rmdja.epub"],
+"download": null,
 "toc": {
 "collapse": "none"
 }
