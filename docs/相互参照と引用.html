@@ -24,7 +24,7 @@
 <meta name="author" content="Katagiri, Satoshi (ill-identified)" />
 
 
-<meta name="date" content="2020-10-28" />
+<meta name="date" content="2020-11-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -335,16 +335,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="表への相互参照" class="section level3" number="5.1.2">
 <h3><span class="header-section-number">5.1.2</span> 表への相互参照</h3>
 <p>Markdown 記法で表を書く場合, 以下のように <code>Table:</code> の直後にラベルを記入する (表 <a href="相互参照と引用.html#tab:tab-md">5.1</a>).</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb42-1"><a href="相互参照と引用.html#cb42-1"></a><span class="an">Table:</span><span class="co"> (\#tab:tab-md) Markdown 記法の表</span></span>
-<span id="cb42-2"><a href="相互参照と引用.html#cb42-2"></a></span>
-<span id="cb42-3"><a href="相互参照と引用.html#cb42-3"></a> Sepal.Length   Sepal.Width   Petal.Length   Petal.Width</span>
-<span id="cb42-4"><a href="相互参照と引用.html#cb42-4"></a>-------------  ------------  -------------  ------------</span>
-<span id="cb42-5"><a href="相互参照と引用.html#cb42-5"></a><span class="in">          5.1           3.5            1.4           0.2</span></span>
-<span id="cb42-6"><a href="相互参照と引用.html#cb42-6"></a><span class="in">          4.9           3.0            1.4           0.2</span></span>
-<span id="cb42-7"><a href="相互参照と引用.html#cb42-7"></a><span class="in">          4.7           3.2            1.3           0.2</span></span>
-<span id="cb42-8"><a href="相互参照と引用.html#cb42-8"></a><span class="in">          4.6           3.1            1.5           0.2</span></span>
-<span id="cb42-9"><a href="相互参照と引用.html#cb42-9"></a><span class="in">          5.0           3.6            1.4           0.2</span></span>
-<span id="cb42-10"><a href="相互参照と引用.html#cb42-10"></a><span class="in">          5.4           3.9            1.7           0.4</span></span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb46-1"><a href="相互参照と引用.html#cb46-1"></a><span class="an">Table:</span><span class="co"> (\#tab:tab-md) Markdown 記法の表</span></span>
+<span id="cb46-2"><a href="相互参照と引用.html#cb46-2"></a></span>
+<span id="cb46-3"><a href="相互参照と引用.html#cb46-3"></a> Sepal.Length   Sepal.Width   Petal.Length   Petal.Width</span>
+<span id="cb46-4"><a href="相互参照と引用.html#cb46-4"></a>-------------  ------------  -------------  ------------</span>
+<span id="cb46-5"><a href="相互参照と引用.html#cb46-5"></a><span class="in">          5.1           3.5            1.4           0.2</span></span>
+<span id="cb46-6"><a href="相互参照と引用.html#cb46-6"></a><span class="in">          4.9           3.0            1.4           0.2</span></span>
+<span id="cb46-7"><a href="相互参照と引用.html#cb46-7"></a><span class="in">          4.7           3.2            1.3           0.2</span></span>
+<span id="cb46-8"><a href="相互参照と引用.html#cb46-8"></a><span class="in">          4.6           3.1            1.5           0.2</span></span>
+<span id="cb46-9"><a href="相互参照と引用.html#cb46-9"></a><span class="in">          5.0           3.6            1.4           0.2</span></span>
+<span id="cb46-10"><a href="相互参照と引用.html#cb46-10"></a><span class="in">          5.4           3.9            1.7           0.4</span></span></code></pre></div>
 <table>
 <caption><span id="tab:tab-md">表 5.1: </span> Markdown 記法の表</caption>
 <thead>
@@ -397,7 +397,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="章への相互参照" class="section level3" number="5.1.3">
 <h3><span class="header-section-number">5.1.3</span> 章への相互参照</h3>
-<p>章見出しへの相互参照も可能である. これはPandocの機能を利用しているため, 接頭辞は不要である. Pandocの仕様により欧文であればタイトルがそのまま参照IDとなるが, 非欧文の文字に対して適用されないため, 参照したい章の見出しにの後にスペースを入れて <code>{#参照ID}</code> と書く必要がある.</p>
+<p>章見出しへの相互参照も可能である. これはPandocの機能を利用しているため, 接頭辞は不要である. Pandocの仕様により欧文であればタイトルがそのまま参照IDとなるが, 非欧文の文字に対して適用されないため, 基本的に日本語文書の場合は参照したい章の見出しの後にスペースを入れて <code>{#参照ID}</code> と書く必要がある. そして本文中で参照する場合 <code>\@ref(参照ID)</code> と表記する.</p>
 </div>
 <div id="特殊な相互参照" class="section level3" number="5.1.4">
 <h3><span class="header-section-number">5.1.4</span> 特殊な相互参照</h3>
@@ -425,7 +425,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">5.2</span> 文献引用</h2>
 <p>YAMLフロントマターの <code>biblography:</code> に文献管理ファイル (<code>.bib</code>, <code>.json</code> 等) を指定することで, ファイルに含まれる文献への参照が可能になる. <code>@引用ID</code> で本文に引用を与えられ, 文書に引用した文献の一覧が自動で生成される. また, <code>citr</code> パッケージにより, RStudio Addins に文献に対応する引用IDを取り出して挿入する機能が追加される.</p>
 
-<div class="sourceCode" id="cb43"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb43-1"><a href="相互参照と引用.html#cb43-1"></a>knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="kw">file.path</span>(img_dir, <span class="st">&quot;citr.png&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb47-1"><a href="相互参照と引用.html#cb47-1"></a>knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="kw">file.path</span>(img_dir, <span class="st">&quot;citr.png&quot;</span>))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:citr-image"></span>
 <img src="img/citr.png" alt="citr パッケージの例" width="622" height="70%" />
 <p class="caption">
@@ -449,19 +449,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 , <code>biblio-title</code>: 「参考文献」タイトルの文字列</li>
 </ul>
 <p>このうち <code>biblio-style</code>, <code>natbiboptions</code>, <code>biblatexoptions</code> はフォーマット関数で指定する. 例えば以下のように.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb44-1"><a href="相互参照と引用.html#cb44-1"></a><span class="fu">output</span><span class="kw">:</span></span>
-<span id="cb44-2"><a href="相互参照と引用.html#cb44-2"></a><span class="at">  rmdja:</span><span class="fu">:pdf_book_ja</span><span class="kw">:</span></span>
-<span id="cb44-3"><a href="相互参照と引用.html#cb44-3"></a><span class="at">    </span><span class="fu">citation_package</span><span class="kw">:</span><span class="at"> biblatex</span></span>
-<span id="cb44-4"><a href="相互参照と引用.html#cb44-4"></a><span class="at">    </span><span class="fu">citation_options</span><span class="kw">:</span></span>
-<span id="cb44-5"><a href="相互参照と引用.html#cb44-5"></a><span class="at">      </span><span class="kw">-</span><span class="at"> style=jauthoryear</span></span>
-<span id="cb44-6"><a href="相互参照と引用.html#cb44-6"></a><span class="at">      </span><span class="kw">-</span><span class="at"> natbib=true</span></span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb48-1"><a href="相互参照と引用.html#cb48-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb48-2"><a href="相互参照と引用.html#cb48-2"></a><span class="at">  rmdja:</span><span class="fu">:pdf_book_ja</span><span class="kw">:</span></span>
+<span id="cb48-3"><a href="相互参照と引用.html#cb48-3"></a><span class="at">    </span><span class="fu">citation_package</span><span class="kw">:</span><span class="at"> biblatex</span></span>
+<span id="cb48-4"><a href="相互参照と引用.html#cb48-4"></a><span class="at">    </span><span class="fu">citation_options</span><span class="kw">:</span></span>
+<span id="cb48-5"><a href="相互参照と引用.html#cb48-5"></a><span class="at">      </span><span class="kw">-</span><span class="at"> style=jauthoryear</span></span>
+<span id="cb48-6"><a href="相互参照と引用.html#cb48-6"></a><span class="at">      </span><span class="kw">-</span><span class="at"> natbib=true</span></span></code></pre></div>
 <p>これは pandoc の記法を利用した従来のR Markdown で以下のように書いているのと同様であり, <code>citation_package: natbib</code> ならば <code>biblatexoptions</code> が <code>natbiboptions</code> に置き換わる.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb45-1"><a href="相互参照と引用.html#cb45-1"></a><span class="fu">output</span><span class="kw">:</span></span>
-<span id="cb45-2"><a href="相互参照と引用.html#cb45-2"></a><span class="at">  </span><span class="fu">....</span><span class="kw">:</span></span>
-<span id="cb45-3"><a href="相互参照と引用.html#cb45-3"></a><span class="at">    </span><span class="fu">citation_package</span><span class="kw">:</span><span class="at"> natbib</span></span>
-<span id="cb45-4"><a href="相互参照と引用.html#cb45-4"></a><span class="fu">biblio-style</span><span class="kw">:</span><span class="at"> jauthoryear</span></span>
-<span id="cb45-5"><a href="相互参照と引用.html#cb45-5"></a><span class="fu">biblatexoptions</span><span class="kw">:</span></span>
-<span id="cb45-6"><a href="相互参照と引用.html#cb45-6"></a><span class="at">  </span><span class="kw">-</span><span class="at"> natbib=true</span></span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb49-1"><a href="相互参照と引用.html#cb49-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb49-2"><a href="相互参照と引用.html#cb49-2"></a><span class="at">  </span><span class="fu">....</span><span class="kw">:</span></span>
+<span id="cb49-3"><a href="相互参照と引用.html#cb49-3"></a><span class="at">    </span><span class="fu">citation_package</span><span class="kw">:</span><span class="at"> natbib</span></span>
+<span id="cb49-4"><a href="相互参照と引用.html#cb49-4"></a><span class="fu">biblio-style</span><span class="kw">:</span><span class="at"> jauthoryear</span></span>
+<span id="cb49-5"><a href="相互参照と引用.html#cb49-5"></a><span class="fu">biblatexoptions</span><span class="kw">:</span></span>
+<span id="cb49-6"><a href="相互参照と引用.html#cb49-6"></a><span class="at">  </span><span class="kw">-</span><span class="at"> natbib=true</span></span></code></pre></div>
 <p>2通りの記法が存在するのはやや混乱するかもしれないが, 後方互換性を考慮し <code>rmdja</code> ではこれらの2通りの記法どちらでも受け付けるようにしている.</p>
 <p><code>biblatex</code> 以外のエンジンで出力したい, 例えば指定された <code>.bst</code> のスタイルで文献一覧を出力したい場合は, (u)pBibTeX が必要になる. その操作の詳細は <a href="biblio-advaneced.html#biblio-advaneced">10</a> 章を参照.</p>
 </div>
@@ -627,7 +627,7 @@ gitbook.start({
 "link": "tree/rmdja/inst/resources/examples/bookdown/chapter/chapters/elemental.Rmd",
 "text": null
 },
-"download": ["rmdja.pdf", "rmdja.epub"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

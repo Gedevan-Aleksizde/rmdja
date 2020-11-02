@@ -24,7 +24,7 @@
 <meta name="author" content="Katagiri, Satoshi (ill-identified)" />
 
 
-<meta name="date" content="2020-10-28" />
+<meta name="date" content="2020-11-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -342,18 +342,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">14.1.1</span> <code>_output.yml</code></h3>
 <p>本来の YAML の <code>output:</code> 以下の記述をこの <code>_output.yml</code> ファイルに書くことができる.
 <code>output:</code> を複数書くと<code>rmarkdown::render_site()</code> やビルドツールでそれぞれの形式に一括作成してくれる.</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb67-1"><a href="製本方法の詳細.html#cb67-1"></a><span class="fu">output</span><span class="kw">:</span></span>
-<span id="cb67-2"><a href="製本方法の詳細.html#cb67-2"></a><span class="at">  bookdown:</span><span class="fu">:gitbook</span><span class="kw">:</span></span>
-<span id="cb67-3"><a href="製本方法の詳細.html#cb67-3"></a><span class="at">    </span><span class="fu">lib_dir</span><span class="kw">:</span><span class="at"> assets</span></span>
-<span id="cb67-4"><a href="製本方法の詳細.html#cb67-4"></a><span class="at">    </span><span class="fu">split_by</span><span class="kw">:</span><span class="at"> section</span></span>
-<span id="cb67-5"><a href="製本方法の詳細.html#cb67-5"></a><span class="at">    </span><span class="fu">config</span><span class="kw">:</span></span>
-<span id="cb67-6"><a href="製本方法の詳細.html#cb67-6"></a><span class="at">      </span><span class="fu">toolbar</span><span class="kw">:</span></span>
-<span id="cb67-7"><a href="製本方法の詳細.html#cb67-7"></a><span class="at">        </span><span class="fu">position</span><span class="kw">:</span><span class="at"> static</span></span>
-<span id="cb67-8"><a href="製本方法の詳細.html#cb67-8"></a><span class="at">  bookdown:</span><span class="fu">:pdf_book</span><span class="kw">:</span></span>
-<span id="cb67-9"><a href="製本方法の詳細.html#cb67-9"></a><span class="at">    </span><span class="fu">keep_tex</span><span class="kw">:</span><span class="at"> </span><span class="ch">yes</span></span>
-<span id="cb67-10"><a href="製本方法の詳細.html#cb67-10"></a><span class="at">  bookdown:</span><span class="fu">:html_book</span><span class="kw">:</span></span>
-<span id="cb67-11"><a href="製本方法の詳細.html#cb67-11"></a><span class="at">    </span><span class="fu">css</span><span class="kw">:</span><span class="at"> toc.css</span></span>
-<span id="cb67-12"><a href="製本方法の詳細.html#cb67-12"></a><span class="fu">documentclass</span><span class="kw">:</span><span class="at"> book</span></span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb71-1"><a href="製本方法の詳細.html#cb71-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb71-2"><a href="製本方法の詳細.html#cb71-2"></a><span class="at">  bookdown:</span><span class="fu">:gitbook</span><span class="kw">:</span></span>
+<span id="cb71-3"><a href="製本方法の詳細.html#cb71-3"></a><span class="at">    </span><span class="fu">lib_dir</span><span class="kw">:</span><span class="at"> assets</span></span>
+<span id="cb71-4"><a href="製本方法の詳細.html#cb71-4"></a><span class="at">    </span><span class="fu">split_by</span><span class="kw">:</span><span class="at"> section</span></span>
+<span id="cb71-5"><a href="製本方法の詳細.html#cb71-5"></a><span class="at">    </span><span class="fu">config</span><span class="kw">:</span></span>
+<span id="cb71-6"><a href="製本方法の詳細.html#cb71-6"></a><span class="at">      </span><span class="fu">toolbar</span><span class="kw">:</span></span>
+<span id="cb71-7"><a href="製本方法の詳細.html#cb71-7"></a><span class="at">        </span><span class="fu">position</span><span class="kw">:</span><span class="at"> static</span></span>
+<span id="cb71-8"><a href="製本方法の詳細.html#cb71-8"></a><span class="at">  bookdown:</span><span class="fu">:pdf_book</span><span class="kw">:</span></span>
+<span id="cb71-9"><a href="製本方法の詳細.html#cb71-9"></a><span class="at">    </span><span class="fu">keep_tex</span><span class="kw">:</span><span class="at"> </span><span class="ch">yes</span></span>
+<span id="cb71-10"><a href="製本方法の詳細.html#cb71-10"></a><span class="at">  bookdown:</span><span class="fu">:html_book</span><span class="kw">:</span></span>
+<span id="cb71-11"><a href="製本方法の詳細.html#cb71-11"></a><span class="at">    </span><span class="fu">css</span><span class="kw">:</span><span class="at"> toc.css</span></span>
+<span id="cb71-12"><a href="製本方法の詳細.html#cb71-12"></a><span class="fu">documentclass</span><span class="kw">:</span><span class="at"> book</span></span></code></pre></div>
 <p>詳しくは BKD “<a href="https://bookdown.org/yihui/bookdown/output-formats.html">Ch. 3 Output Formats</a>” の章を.</p>
 </div>
 <div id="bookdown.yml" class="section level3" number="14.1.2">
@@ -426,7 +426,7 @@ gitbook.start({
 "link": "tree/rmdja/inst/resources/examples/bookdown/chapter/chapters/multi-media.Rmd",
 "text": null
 },
-"download": ["rmdja.pdf", "rmdja.epub"],
+"download": null,
 "toc": {
 "collapse": "none"
 }
