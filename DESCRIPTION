@@ -1,6 +1,6 @@
 Package: rmdja
 Title: R Markdown Formats for Japanese
-Version: 0.4.2
+Version: 0.4.3.dev
 Authors@R: person(role = c("aut", "cre"), email = "katagiri.stsh@gmail.com", given = "Satoshi", family = "Katagiri")
 Description: R Markdown end-user PDF templates with Japanese typesetting presets
 Encoding: UTF-8
@@ -10,7 +10,8 @@ Roxygen: list(markdown = TRUE)
 Depends: R (>= 3.6.2)
 Imports:
   rmarkdown (>= 2.4),
-  bookdown (>= 0.20.6)
+  bookdown (>= 0.20.6),
+  commonmark (>= 1.7)
 Suggests:
   tidyverse,
   ggthemes,
