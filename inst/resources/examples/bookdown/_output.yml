@@ -7,7 +7,7 @@ rmdja::gitbook_ja:
       after: "<p style='text-align:center;display:block;margin: 0 auto;'><img src='https://i.creativecommons.org/l/by-nc/4.0/88x31.png'></p><li><a href='https://bookdown.org' target='_blank'>Published with bookdown</a></li>"
 
 rmdja::pdf_book_ja:
-  tombow: true
+  tombow: false
   add_folio: true
   keep_tex: true
 
