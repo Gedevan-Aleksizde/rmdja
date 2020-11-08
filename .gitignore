@@ -2,6 +2,8 @@
 .Rhistory
 .RData
 .Ruserdata
+docs/index.md
+docs/index.tex
 inst/resources/examples/*/.latexmkrc
 inst/resources/examples/*/*_files
 inst/resources/examples/*/*_cache
@@ -9,4 +11,7 @@ inst/resources/examples/*/rmdja.bib
 inst/resources/examples/*/tab.tex
 inst/resources/examples/*/*.log
 inst/resources/examples/*/*.tex
+inst/resources/examples/*/*.png
+inst/resources/examples/*/img
+inst/resources/examples/*/_latex
 memo
