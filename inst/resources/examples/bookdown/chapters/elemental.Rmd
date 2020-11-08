@@ -475,13 +475,11 @@ output: ...:
   df_print: kable
 ```
 
-(ref:print-kable-dummy) `df_print: kable` の場合
-
 ```{r df-print-kable-dummy, echo=T, eval=F}
 mtcars[1:10, ]
 ```
 ```{r df-print-kable, echo=F, eval=T}
-kbl(mtcars[1:10, ], caption = "(ref:print-kable-dummy)", escape = F)
+kbl(mtcars[1:10, ], caption = "`df_print: kable` の場合", escape = F, format = "pandoc", booktabs = F)
 ```
 
 このオプションは R Markdown の処理中にデータフレームの呼び出しを検出し, `df_print` のオプションに対応したスタイルを変換する関数を適用している. 他のオプションとして, `tibble`, `paged` などがあるが現時点の `rmdja` では大差がないので詳細な説明を省略する (図 \@ref(tab:df-print-ops)).
@@ -497,29 +495,42 @@ Table: (\#tab:df-print-ops) `df_print` のオプション一覧
 `kable`        `knitr::kable()` による表スタイル
 
 
-よって, これらの関数をチャンク内で呼び出すことで, 手動で表のスタイルを指定することも可能である. 表のスタイルにこだわりたい, **相互参照やキャプションを付けたい**, といった場合はこれらのうち `knitr::kable()` 関数を手動で使うのが1つの手である. 実は, 先ほどの `df_print` の例も, 実際にはこの関数を呼び出して出力している. キャプションは `kable()` 内で指定できる (現時点では, 図とは異なりチャンクオプションではキャプションを指定できない). デフォルトでは `caption =` の文字列はそのまま出力されるが, 太字強調など Markdown 記法を含めたい場合は上記のように `escape = F` を指定する. 加えて, HTML と PDF の出力を両立したい場合, \@ref(crossref) 章で紹介されている特殊な相互参照を使うことが必要になる.
+よって, これらの関数をチャンク内で呼び出すことで, 手動で表のスタイルを指定することも可能である. 表のスタイルにこだわりたい, **相互参照やキャプションを付けたい**, といった場合はこれらのうち `knitr::kable()` 関数を手動で使うのが1つの手である. 実は, 先ほどの `df_print` の例も, 実際にはこの関数を呼び出して出力している. この場合, 表のキャプションは `kable()` 内で指定できる (現時点では, 図とは異なりチャンクオプションではキャプションを指定できない). デフォルトでは `caption =` の文字列はそのまま出力されるため, 太字強調など Markdown 記法も変換されずそのまま表示されてしまう. これには対処方法がいくつかある.
 
-デフォルトでは `kable()` が PDF に出力する表のデザインはあまりよろしくない. 最も簡単なカスタマイズの1つは, `booktabs = T` を指定することである. `r rmdja::texlogo("LaTeX")` を使ったことのある人は知っているかもしれないが, これは `booktabs.sty` を使った表のスタイルにするという効果がある (表 \@ref(tab:display-dataframe-kable-booktabs)).
-
-(ref:kable-booktabs-cap) `booktabs = T` は PDF にのみ影響する
+1. `rmdja` パッケージの提供する `knitr::kable()` または `kableExtra::kbl()` 関数のラッパを使用する  (表 \@ref(tab:display-dataframe-kable-booktabs))
+2. `escape = F` および `format = "pandoc"` を指定する
+3. (非推奨) HTML と PDF でそれぞれの構文で表を描く処理を自分で書く
 
 ```{r display-dataframe-kable-booktabs, echo=T}
-kable(mtcars[1:10, ],
-      caption = "(ref:kable-booktabs-cap)",
-      escape = F,
+rmdja::kable(mtcars[1:10, ],
+      caption = "`booktabs = T` は PDF にのみ影響する",
       booktabs = T
   )
 ```
 
+(1) の方法が現在最も簡単である. ただし, `r rmdja::texlogo("LaTeX")` LaTeX の構文が評価されなくなるため同時に使うことはできない. 例えば太字強調と数式を両方表示したい場合は, `knitr::is_latex_output()` PDF の場合は完全に `r rmdja::texlogo("LaTeX")` で, HTML の場合は Markdown で書く, という場合分けを自分で書いて `knitr::kable()` に与えなければならない(表 \@ref(tab:kable-caption-example)). 
+
+TODO: この仕様は使いづらいのでそのうちなんとかしたい.
+
+(2) についても, `kable()` 単体であれば問題ないが, 後に紹介する `kableExtra` パッケージを併用すると書式設定がうまく反映されなくなることがある. (3) は表 \@ref(tab:kable-caption-example) の記述をキャプションだけでなく, HTML ならば Markdown または HTML タグで, PDF ならば `r rmdja::texlogo("LaTeX")` で表全体を書き分ける, という方法である. 1つの表を描くのに多大な労力がかかるため推奨しない.
+
+```{r kable-caption-example, eval=T, echo=T}
+cap <- if(knitr::is_latex_output()) "数式 $a$ と \\textbf{太字}" else "数式 $a$ と **太字**"
+kable(
+  head(mtcars),
+  caption = cap,
+  booktabs = T
+)
+```
+
+さらに, デフォルトでは `kable()` が PDF に出力する表のデザインはあまりよろしくないが, `kable()` 関数は過剰な罫線のない表の出力も簡単である. `r rmdja::texlogo("LaTeX")` を使ったことのある人は知っているかもしれないが, これは `booktabs.sty` を使った表のスタイルになっている^[もし何らかの理由でこのスタイルにならない, あるいはあえてしたくない, と言う場合は `kable()` 関数で `booktabs = T` を指定せよ.].
+
 `kable()` による表のスタイルは  `kableExtra` パッケージを使うことで様々にカスタマイズできる. 例えば `row_spec()` を使って偶数・奇数行を色分けすることができる (表 \@ref(tab:display-dataframe-kable-2), ただしHTML版を見ていれば分かるように, HTML ではデフォルトで奇数偶数の色分けがなされている).
 
-(ref: df-kable-cap) 奇数行を強調し, PDF では `booktabs` を利用
-
 ```{r display-dataframe-kable-2, echo=T}
-kable(
+rmdja::kable(
   mtcars[1:10, ], booktabs = T,
-  caption = "(ref: df-kable-cap)",
-  escape = F
+  caption = "奇数行を強調し, PDF では `booktabs` を利用"
   ) %>% row_spec(seq(1, 10, by = 2), background = "gray")
 ```
 

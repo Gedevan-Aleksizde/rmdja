@@ -8,6 +8,7 @@ fig:plot-sample
 tab:df-print-kable
 tab:df-print-ops
 tab:display-dataframe-kable-booktabs
+tab:kable-caption-example
 tab:display-dataframe-kable-2
 tab:tab-md
 fig:caption

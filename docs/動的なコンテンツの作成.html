@@ -24,7 +24,7 @@
 <meta name="author" content="Katagiri, Satoshi (ill-identified)" />
 
 
-<meta name="date" content="2020-11-02" />
+<meta name="date" content="2020-11-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -492,431 +492,165 @@ Merc 280          19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4</code></pr
 <p>これはRのコンソール出力と同じで, プレーンテキストでの出力である. 表として出力する最も簡単な方法は, フォーマット関数に <code>df_print</code> を指定することである. たとえば <code>df_print: kable</code> を指定すると, 表 <a href="動的なコンテンツの作成.html#tab:df-print-kable">4.1</a> のようになる.</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb42-1"><a href="動的なコンテンツの作成.html#cb42-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> ...:</span></span>
 <span id="cb42-2"><a href="動的なコンテンツの作成.html#cb42-2"></a><span class="at">  </span><span class="fu">df_print</span><span class="kw">:</span><span class="at"> kable</span></span></code></pre></div>
-
 <div class="sourceCode" id="cb43"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb43-1"><a href="動的なコンテンツの作成.html#cb43-1"></a>mtcars[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, ]</span></code></pre></div>
 <table>
-<caption>
-<span id="tab:df-print-kable">表 4.1: </span><code>df_print: kable</code> の場合
-</caption>
+<caption><span id="tab:df-print-kable">表 4.1: </span><code>df_print: kable</code> の場合</caption>
 <thead>
-<tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:right;">
-mpg
-</th>
-<th style="text-align:right;">
-cyl
-</th>
-<th style="text-align:right;">
-disp
-</th>
-<th style="text-align:right;">
-hp
-</th>
-<th style="text-align:right;">
-drat
-</th>
-<th style="text-align:right;">
-wt
-</th>
-<th style="text-align:right;">
-qsec
-</th>
-<th style="text-align:right;">
-vs
-</th>
-<th style="text-align:right;">
-am
-</th>
-<th style="text-align:right;">
-gear
-</th>
-<th style="text-align:right;">
-carb
-</th>
+<tr class="header">
+<th></th>
+<th align="right">mpg</th>
+<th align="right">cyl</th>
+<th align="right">disp</th>
+<th align="right">hp</th>
+<th align="right">drat</th>
+<th align="right">wt</th>
+<th align="right">qsec</th>
+<th align="right">vs</th>
+<th align="right">am</th>
+<th align="right">gear</th>
+<th align="right">carb</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Mazda RX4
-</td>
-<td style="text-align:right;">
-21.0
-</td>
-<td style="text-align:right;">
-6
-</td>
-<td style="text-align:right;">
-160.0
-</td>
-<td style="text-align:right;">
-110
-</td>
-<td style="text-align:right;">
-3.90
-</td>
-<td style="text-align:right;">
-2.620
-</td>
-<td style="text-align:right;">
-16.46
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-4
-</td>
+<tr class="odd">
+<td>Mazda RX4</td>
+<td align="right">21.0</td>
+<td align="right">6</td>
+<td align="right">160.0</td>
+<td align="right">110</td>
+<td align="right">3.90</td>
+<td align="right">2.620</td>
+<td align="right">16.46</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">4</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Mazda RX4 Wag
-</td>
-<td style="text-align:right;">
-21.0
-</td>
-<td style="text-align:right;">
-6
-</td>
-<td style="text-align:right;">
-160.0
-</td>
-<td style="text-align:right;">
-110
-</td>
-<td style="text-align:right;">
-3.90
-</td>
-<td style="text-align:right;">
-2.875
-</td>
-<td style="text-align:right;">
-17.02
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-4
-</td>
+<tr class="even">
+<td>Mazda RX4 Wag</td>
+<td align="right">21.0</td>
+<td align="right">6</td>
+<td align="right">160.0</td>
+<td align="right">110</td>
+<td align="right">3.90</td>
+<td align="right">2.875</td>
+<td align="right">17.02</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">4</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Datsun 710
-</td>
-<td style="text-align:right;">
-22.8
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-108.0
-</td>
-<td style="text-align:right;">
-93
-</td>
-<td style="text-align:right;">
-3.85
-</td>
-<td style="text-align:right;">
-2.320
-</td>
-<td style="text-align:right;">
-18.61
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-1
-</td>
+<tr class="odd">
+<td>Datsun 710</td>
+<td align="right">22.8</td>
+<td align="right">4</td>
+<td align="right">108.0</td>
+<td align="right">93</td>
+<td align="right">3.85</td>
+<td align="right">2.320</td>
+<td align="right">18.61</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">1</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Hornet 4 Drive
-</td>
-<td style="text-align:right;">
-21.4
-</td>
-<td style="text-align:right;">
-6
-</td>
-<td style="text-align:right;">
-258.0
-</td>
-<td style="text-align:right;">
-110
-</td>
-<td style="text-align:right;">
-3.08
-</td>
-<td style="text-align:right;">
-3.215
-</td>
-<td style="text-align:right;">
-19.44
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-1
-</td>
+<tr class="even">
+<td>Hornet 4 Drive</td>
+<td align="right">21.4</td>
+<td align="right">6</td>
+<td align="right">258.0</td>
+<td align="right">110</td>
+<td align="right">3.08</td>
+<td align="right">3.215</td>
+<td align="right">19.44</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">1</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Hornet Sportabout
-</td>
-<td style="text-align:right;">
-18.7
-</td>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:right;">
-360.0
-</td>
-<td style="text-align:right;">
-175
-</td>
-<td style="text-align:right;">
-3.15
-</td>
-<td style="text-align:right;">
-3.440
-</td>
-<td style="text-align:right;">
-17.02
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-2
-</td>
+<tr class="odd">
+<td>Hornet Sportabout</td>
+<td align="right">18.7</td>
+<td align="right">8</td>
+<td align="right">360.0</td>
+<td align="right">175</td>
+<td align="right">3.15</td>
+<td align="right">3.440</td>
+<td align="right">17.02</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">2</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Valiant
-</td>
-<td style="text-align:right;">
-18.1
-</td>
-<td style="text-align:right;">
-6
-</td>
-<td style="text-align:right;">
-225.0
-</td>
-<td style="text-align:right;">
-105
-</td>
-<td style="text-align:right;">
-2.76
-</td>
-<td style="text-align:right;">
-3.460
-</td>
-<td style="text-align:right;">
-20.22
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-1
-</td>
+<tr class="even">
+<td>Valiant</td>
+<td align="right">18.1</td>
+<td align="right">6</td>
+<td align="right">225.0</td>
+<td align="right">105</td>
+<td align="right">2.76</td>
+<td align="right">3.460</td>
+<td align="right">20.22</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">1</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Duster 360
-</td>
-<td style="text-align:right;">
-14.3
-</td>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:right;">
-360.0
-</td>
-<td style="text-align:right;">
-245
-</td>
-<td style="text-align:right;">
-3.21
-</td>
-<td style="text-align:right;">
-3.570
-</td>
-<td style="text-align:right;">
-15.84
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-4
-</td>
+<tr class="odd">
+<td>Duster 360</td>
+<td align="right">14.3</td>
+<td align="right">8</td>
+<td align="right">360.0</td>
+<td align="right">245</td>
+<td align="right">3.21</td>
+<td align="right">3.570</td>
+<td align="right">15.84</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">4</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Merc 240D
-</td>
-<td style="text-align:right;">
-24.4
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-146.7
-</td>
-<td style="text-align:right;">
-62
-</td>
-<td style="text-align:right;">
-3.69
-</td>
-<td style="text-align:right;">
-3.190
-</td>
-<td style="text-align:right;">
-20.00
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-2
-</td>
+<tr class="even">
+<td>Merc 240D</td>
+<td align="right">24.4</td>
+<td align="right">4</td>
+<td align="right">146.7</td>
+<td align="right">62</td>
+<td align="right">3.69</td>
+<td align="right">3.190</td>
+<td align="right">20.00</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">4</td>
+<td align="right">2</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Merc 230
-</td>
-<td style="text-align:right;">
-22.8
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-140.8
-</td>
-<td style="text-align:right;">
-95
-</td>
-<td style="text-align:right;">
-3.92
-</td>
-<td style="text-align:right;">
-3.150
-</td>
-<td style="text-align:right;">
-22.90
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-2
-</td>
+<tr class="odd">
+<td>Merc 230</td>
+<td align="right">22.8</td>
+<td align="right">4</td>
+<td align="right">140.8</td>
+<td align="right">95</td>
+<td align="right">3.92</td>
+<td align="right">3.150</td>
+<td align="right">22.90</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">4</td>
+<td align="right">2</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Merc 280
-</td>
-<td style="text-align:right;">
-19.2
-</td>
-<td style="text-align:right;">
-6
-</td>
-<td style="text-align:right;">
-167.6
-</td>
-<td style="text-align:right;">
-123
-</td>
-<td style="text-align:right;">
-3.92
-</td>
-<td style="text-align:right;">
-3.440
-</td>
-<td style="text-align:right;">
-18.30
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-4
-</td>
+<tr class="even">
+<td>Merc 280</td>
+<td align="right">19.2</td>
+<td align="right">6</td>
+<td align="right">167.6</td>
+<td align="right">123</td>
+<td align="right">3.92</td>
+<td align="right">3.440</td>
+<td align="right">18.30</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">4</td>
+<td align="right">4</td>
 </tr>
 </tbody>
 </table>
@@ -948,14 +682,16 @@ Merc 280
 </tr>
 </tbody>
 </table>
-<p>よって, これらの関数をチャンク内で呼び出すことで, 手動で表のスタイルを指定することも可能である. 表のスタイルにこだわりたい, <strong>相互参照やキャプションを付けたい</strong>, といった場合はこれらのうち <code>knitr::kable()</code> 関数を手動で使うのが1つの手である. 実は, 先ほどの <code>df_print</code> の例も, 実際にはこの関数を呼び出して出力している. キャプションは <code>kable()</code> 内で指定できる (現時点では, 図とは異なりチャンクオプションではキャプションを指定できない). デフォルトでは <code>caption =</code> の文字列はそのまま出力されるが, 太字強調など Markdown 記法を含めたい場合は上記のように <code>escape = F</code> を指定する. 加えて, HTML と PDF の出力を両立したい場合, <a href="相互参照と引用.html#crossref">5.1</a> 章で紹介されている特殊な相互参照を使うことが必要になる.</p>
-<p>デフォルトでは <code>kable()</code> が PDF に出力する表のデザインはあまりよろしくない. 最も簡単なカスタマイズの1つは, <code>booktabs = T</code> を指定することである. LaTeX を使ったことのある人は知っているかもしれないが, これは <code>booktabs.sty</code> を使った表のスタイルにするという効果がある (表 <a href="動的なコンテンツの作成.html#tab:display-dataframe-kable-booktabs">4.3</a>).</p>
-
-<div class="sourceCode" id="cb44"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb44-1"><a href="動的なコンテンツの作成.html#cb44-1"></a><span class="kw">kable</span>(mtcars[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, ],</span>
-<span id="cb44-2"><a href="動的なコンテンツの作成.html#cb44-2"></a>  <span class="dt">caption =</span> <span class="st">&quot;<code>booktabs = T</code> は PDF にのみ影響する&quot;</span>,</span>
-<span id="cb44-3"><a href="動的なコンテンツの作成.html#cb44-3"></a>  <span class="dt">escape =</span> F,</span>
-<span id="cb44-4"><a href="動的なコンテンツの作成.html#cb44-4"></a>  <span class="dt">booktabs =</span> T</span>
-<span id="cb44-5"><a href="動的なコンテンツの作成.html#cb44-5"></a>)</span></code></pre></div>
+<p>よって, これらの関数をチャンク内で呼び出すことで, 手動で表のスタイルを指定することも可能である. 表のスタイルにこだわりたい, <strong>相互参照やキャプションを付けたい</strong>, といった場合はこれらのうち <code>knitr::kable()</code> 関数を手動で使うのが1つの手である. 実は, 先ほどの <code>df_print</code> の例も, 実際にはこの関数を呼び出して出力している. この場合, 表のキャプションは <code>kable()</code> 内で指定できる (現時点では, 図とは異なりチャンクオプションではキャプションを指定できない). デフォルトでは <code>caption =</code> の文字列はそのまま出力されるため, 太字強調など Markdown 記法も変換されずそのまま表示されてしまう. これには対処方法がいくつかある.</p>
+<ol style="list-style-type: decimal">
+<li><code>rmdja</code> パッケージの提供する <code>knitr::kable()</code> または <code>kableExtra::kbl()</code> 関数のラッパを使用する (表 <a href="動的なコンテンツの作成.html#tab:display-dataframe-kable-booktabs">4.3</a>)</li>
+<li><code>escape = F</code> および <code>format = "pandoc"</code> を指定する</li>
+<li>(非推奨) HTML と PDF でそれぞれの構文で表を描く処理を自分で書く</li>
+</ol>
+<div class="sourceCode" id="cb44"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb44-1"><a href="動的なコンテンツの作成.html#cb44-1"></a>rmdja<span class="op">::</span><span class="kw">kable</span>(mtcars[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, ],</span>
+<span id="cb44-2"><a href="動的なコンテンツの作成.html#cb44-2"></a>  <span class="dt">caption =</span> <span class="st">&quot;`booktabs = T` は PDF にのみ影響する&quot;</span>,</span>
+<span id="cb44-3"><a href="動的なコンテンツの作成.html#cb44-3"></a>  <span class="dt">booktabs =</span> T</span>
+<span id="cb44-4"><a href="動的なコンテンツの作成.html#cb44-4"></a>)</span></code></pre></div>
 <table>
 <caption>
 <span id="tab:display-dataframe-kable-booktabs">表 4.3: </span><code>booktabs = T</code> は PDF にのみ影響する
@@ -1382,17 +1118,303 @@ Merc 280
 </tr>
 </tbody>
 </table>
-<p><code>kable()</code> による表のスタイルは <code>kableExtra</code> パッケージを使うことで様々にカスタマイズできる. 例えば <code>row_spec()</code> を使って偶数・奇数行を色分けすることができる (表 <a href="動的なコンテンツの作成.html#tab:display-dataframe-kable-2">4.4</a>, ただしHTML版を見ていれば分かるように, HTML ではデフォルトで奇数偶数の色分けがなされている).</p>
-<p>(ref: df-kable-cap) 奇数行を強調し, PDF では <code>booktabs</code> を利用</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb45-1"><a href="動的なコンテンツの作成.html#cb45-1"></a><span class="kw">kable</span>(</span>
-<span id="cb45-2"><a href="動的なコンテンツの作成.html#cb45-2"></a>  mtcars[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, ],</span>
-<span id="cb45-3"><a href="動的なコンテンツの作成.html#cb45-3"></a>  <span class="dt">booktabs =</span> T,</span>
-<span id="cb45-4"><a href="動的なコンテンツの作成.html#cb45-4"></a>  <span class="dt">caption =</span> <span class="st">&quot;(ref: df-kable-cap)&quot;</span>,</span>
-<span id="cb45-5"><a href="動的なコンテンツの作成.html#cb45-5"></a>  <span class="dt">escape =</span> F</span>
-<span id="cb45-6"><a href="動的なコンテンツの作成.html#cb45-6"></a>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">row_spec</span>(<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dt">by =</span> <span class="dv">2</span>), <span class="dt">background =</span> <span class="st">&quot;gray&quot;</span>)</span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>の方法が現在最も簡単である. ただし, LaTeX LaTeX の構文が評価されなくなるため同時に使うことはできない. 例えば太字強調と数式を両方表示したい場合は, <code>knitr::is_latex_output()</code> PDF の場合は完全に LaTeX で, HTML の場合は Markdown で書く, という場合分けを自分で書いて <code>knitr::kable()</code> に与えなければならない(表 <a href="動的なコンテンツの作成.html#tab:kable-caption-example">4.4</a>).</li>
+</ol>
+<p>TODO: この仕様は使いづらいのでそのうちなんとかしたい.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>についても, <code>kable()</code> 単体であれば問題ないが, 後に紹介する <code>kableExtra</code> パッケージを併用すると書式設定がうまく反映されなくなることがある. (3) は表 <a href="動的なコンテンツの作成.html#tab:kable-caption-example">4.4</a> の記述をキャプションだけでなく, HTML ならば Markdown または HTML タグで, PDF ならば LaTeX で表全体を書き分ける, という方法である. 1つの表を描くのに多大な労力がかかるため推奨しない.</li>
+</ol>
+<div class="sourceCode" id="cb45"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb45-1"><a href="動的なコンテンツの作成.html#cb45-1"></a>cap &lt;-<span class="st"> </span><span class="cf">if</span> (knitr<span class="op">::</span><span class="kw">is_latex_output</span>()) <span class="st">&quot;数式 $a$ と </span><span class="ch">\\</span><span class="st">textbf{太字}&quot;</span> <span class="cf">else</span> <span class="st">&quot;数式 $a$ と **太字**&quot;</span></span>
+<span id="cb45-2"><a href="動的なコンテンツの作成.html#cb45-2"></a><span class="kw">kable</span>(</span>
+<span id="cb45-3"><a href="動的なコンテンツの作成.html#cb45-3"></a>  <span class="kw">head</span>(mtcars),</span>
+<span id="cb45-4"><a href="動的なコンテンツの作成.html#cb45-4"></a>  <span class="dt">caption =</span> cap,</span>
+<span id="cb45-5"><a href="動的なコンテンツの作成.html#cb45-5"></a>  <span class="dt">booktabs =</span> T</span>
+<span id="cb45-6"><a href="動的なコンテンツの作成.html#cb45-6"></a>)</span></code></pre></div>
 <table>
 <caption>
-<span id="tab:display-dataframe-kable-2">表 4.4: </span>(ref: df-kable-cap)
+<span id="tab:kable-caption-example">表 4.4: </span>数式 <span class="math inline">\(a\)</span> と <strong>太字</strong>
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+mpg
+</th>
+<th style="text-align:right;">
+cyl
+</th>
+<th style="text-align:right;">
+disp
+</th>
+<th style="text-align:right;">
+hp
+</th>
+<th style="text-align:right;">
+drat
+</th>
+<th style="text-align:right;">
+wt
+</th>
+<th style="text-align:right;">
+qsec
+</th>
+<th style="text-align:right;">
+vs
+</th>
+<th style="text-align:right;">
+am
+</th>
+<th style="text-align:right;">
+gear
+</th>
+<th style="text-align:right;">
+carb
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Mazda RX4
+</td>
+<td style="text-align:right;">
+21.0
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+160
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;">
+3.90
+</td>
+<td style="text-align:right;">
+2.620
+</td>
+<td style="text-align:right;">
+16.46
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mazda RX4 Wag
+</td>
+<td style="text-align:right;">
+21.0
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+160
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;">
+3.90
+</td>
+<td style="text-align:right;">
+2.875
+</td>
+<td style="text-align:right;">
+17.02
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Datsun 710
+</td>
+<td style="text-align:right;">
+22.8
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+108
+</td>
+<td style="text-align:right;">
+93
+</td>
+<td style="text-align:right;">
+3.85
+</td>
+<td style="text-align:right;">
+2.320
+</td>
+<td style="text-align:right;">
+18.61
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hornet 4 Drive
+</td>
+<td style="text-align:right;">
+21.4
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+258
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;">
+3.08
+</td>
+<td style="text-align:right;">
+3.215
+</td>
+<td style="text-align:right;">
+19.44
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hornet Sportabout
+</td>
+<td style="text-align:right;">
+18.7
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+360
+</td>
+<td style="text-align:right;">
+175
+</td>
+<td style="text-align:right;">
+3.15
+</td>
+<td style="text-align:right;">
+3.440
+</td>
+<td style="text-align:right;">
+17.02
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Valiant
+</td>
+<td style="text-align:right;">
+18.1
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+225
+</td>
+<td style="text-align:right;">
+105
+</td>
+<td style="text-align:right;">
+2.76
+</td>
+<td style="text-align:right;">
+3.460
+</td>
+<td style="text-align:right;">
+20.22
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<p>さらに, デフォルトでは <code>kable()</code> が PDF に出力する表のデザインはあまりよろしくないが, <code>kable()</code> 関数は過剰な罫線のない表の出力も簡単である. LaTeX を使ったことのある人は知っているかもしれないが, これは <code>booktabs.sty</code> を使った表のスタイルになっている<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a>.</p>
+<p><code>kable()</code> による表のスタイルは <code>kableExtra</code> パッケージを使うことで様々にカスタマイズできる. 例えば <code>row_spec()</code> を使って偶数・奇数行を色分けすることができる (表 <a href="動的なコンテンツの作成.html#tab:display-dataframe-kable-2">4.5</a>, ただしHTML版を見ていれば分かるように, HTML ではデフォルトで奇数偶数の色分けがなされている).</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb46-1"><a href="動的なコンテンツの作成.html#cb46-1"></a>rmdja<span class="op">::</span><span class="kw">kable</span>(</span>
+<span id="cb46-2"><a href="動的なコンテンツの作成.html#cb46-2"></a>  mtcars[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, ],</span>
+<span id="cb46-3"><a href="動的なコンテンツの作成.html#cb46-3"></a>  <span class="dt">booktabs =</span> T,</span>
+<span id="cb46-4"><a href="動的なコンテンツの作成.html#cb46-4"></a>  <span class="dt">caption =</span> <span class="st">&quot;奇数行を強調し, PDF では `booktabs` を利用&quot;</span></span>
+<span id="cb46-5"><a href="動的なコンテンツの作成.html#cb46-5"></a>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">row_spec</span>(<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dt">by =</span> <span class="dv">2</span>), <span class="dt">background =</span> <span class="st">&quot;gray&quot;</span>)</span></code></pre></div>
+<table>
+<caption>
+<span id="tab:display-dataframe-kable-2">表 4.5: </span>奇数行を強調し, PDF では <code>booktabs</code> を利用
 </caption>
 <thead>
 <tr>
@@ -1824,6 +1846,7 @@ Merc 280
 <hr />
 <ol start="9">
 <li id="fn9"><p>なお, Rユーザーならば標準グラフィック関数である <code>plot()</code> 関数をご存知だろうが, 本稿では基本的により便利な <code>ggplot2</code> パッケージを使用してグラフを作成している.<a href="動的なコンテンツの作成.html#fnref9" class="footnote-back">↩︎</a></p></li>
+<li id="fn10"><p>もし何らかの理由でこのスタイルにならない, あるいはあえてしたくない, と言う場合は <code>kable()</code> 関数で <code>booktabs = T</code> を指定せよ.<a href="動的なコンテンツの作成.html#fnref10" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -1874,7 +1897,7 @@ gitbook.start({
 "link": "tree/rmdja/inst/resources/examples/bookdown/chapter/chapters/elemental.Rmd",
 "text": null
 },
-"download": null,
+"download": ["rmdja.pdf"],
 "toc": {
 "collapse": "none"
 }

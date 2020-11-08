@@ -24,7 +24,7 @@
 <meta name="author" content="Katagiri, Satoshi (ill-identified)" />
 
 
-<meta name="date" content="2020-11-02" />
+<meta name="date" content="2020-11-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -332,18 +332,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>bookdown</code> には既に印刷された本の中身を書き換えるする機能はないが, 出力ごとに内容を変えることで, PDF にのみ更新履歴を表示することはできる.</p>
 <p><code>knitr::is_latex_output()</code>, <code>knitr::is_html_output()</code> などは, knit 時にどの媒体への変換処理なのかを判定するのに使える. <code>rmdja::ruby()</code> もこの機能を利用しているし, 本文中の LaTeX のロゴも HTML と PDF で使い分けている.</p>
 <p>また, <code>_bookdown.yml</code> の設定, <code>rmd_files</code> は, 媒体別に設定することができる.</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb72-1"><a href="出力形式による表現の限界.html#cb72-1"></a><span class="fu">rmd_files</span><span class="kw">:</span></span>
-<span id="cb72-2"><a href="出力形式による表現の限界.html#cb72-2"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
-<span id="cb72-3"><a href="出力形式による表現の限界.html#cb72-3"></a><span class="at">    </span><span class="kw">-</span><span class="at"> index.Rmd</span></span>
-<span id="cb72-4"><a href="出力形式による表現の限界.html#cb72-4"></a><span class="at">    </span><span class="kw">-</span><span class="at"> html-only.Rmd</span></span>
-<span id="cb72-5"><a href="出力形式による表現の限界.html#cb72-5"></a><span class="at">  </span><span class="fu">latex</span><span class="kw">:</span></span>
-<span id="cb72-6"><a href="出力形式による表現の限界.html#cb72-6"></a><span class="at">    </span><span class="kw">-</span><span class="at"> index.Rmd</span></span>
-<span id="cb72-7"><a href="出力形式による表現の限界.html#cb72-7"></a><span class="at">    </span><span class="kw">-</span><span class="at"> latex-only.Rmd</span></span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb73-1"><a href="出力形式による表現の限界.html#cb73-1"></a><span class="fu">rmd_files</span><span class="kw">:</span></span>
+<span id="cb73-2"><a href="出力形式による表現の限界.html#cb73-2"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
+<span id="cb73-3"><a href="出力形式による表現の限界.html#cb73-3"></a><span class="at">    </span><span class="kw">-</span><span class="at"> index.Rmd</span></span>
+<span id="cb73-4"><a href="出力形式による表現の限界.html#cb73-4"></a><span class="at">    </span><span class="kw">-</span><span class="at"> html-only.Rmd</span></span>
+<span id="cb73-5"><a href="出力形式による表現の限界.html#cb73-5"></a><span class="at">  </span><span class="fu">latex</span><span class="kw">:</span></span>
+<span id="cb73-6"><a href="出力形式による表現の限界.html#cb73-6"></a><span class="at">    </span><span class="kw">-</span><span class="at"> index.Rmd</span></span>
+<span id="cb73-7"><a href="出力形式による表現の限界.html#cb73-7"></a><span class="at">    </span><span class="kw">-</span><span class="at"> latex-only.Rmd</span></span></code></pre></div>
 </div>
 <div id="絵文字の出力" class="section level2" number="15.2">
 <h2><span class="header-section-number">15.2</span> 絵文字の出力</h2>
 <p>絵文字をHTMLでもPDFでも出力したい場合, <code>\coloremoji{⛄}</code> のように絵文字を囲む. ただし, RStudio のエディタは一部のマルチバイト文字の表示に対応していないので予期せぬ不具合に注意する.</p>
-<p>現在の主要Webブラウザでは, 特に設定せずとも Unicode 絵文字をカラー画像に置き換えて表示できるものが多い. しかし PDF 生成時には明示的にフォントを指定するか, 画像に置き換える記述が必要である. その実現のため <code>bxcoloremoji</code> という LaTeX パッケージ<a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a>を利用する. このパッケージは CTAN に登録されていないため, 別途インストールする必要がある.</p>
+<p>現在の主要Webブラウザでは, 特に設定せずとも Unicode 絵文字をカラー画像に置き換えて表示できるものが多い. しかし PDF 生成時には明示的にフォントを指定するか, 画像に置き換える記述が必要である. その実現のため <code>bxcoloremoji</code> という LaTeX パッケージ<a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a>を利用する. このパッケージは CTAN に登録されていないため, 別途インストールする必要がある.</p>
 </div>
 <div id="画像の保存形式" class="section level2" number="15.3">
 <h2><span class="header-section-number">15.3</span> 画像の保存形式</h2>
@@ -361,8 +361,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="footnotes">
 <hr />
-<ol start="23">
-<li id="fn23"><p><a href="https://github.com/zr-tex8r/BXcoloremoji" class="uri">https://github.com/zr-tex8r/BXcoloremoji</a><a href="出力形式による表現の限界.html#fnref23" class="footnote-back">↩︎</a></p></li>
+<ol start="24">
+<li id="fn24"><p><a href="https://github.com/zr-tex8r/BXcoloremoji" class="uri">https://github.com/zr-tex8r/BXcoloremoji</a><a href="出力形式による表現の限界.html#fnref24" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -413,7 +413,7 @@ gitbook.start({
 "link": "tree/rmdja/inst/resources/examples/bookdown/chapter/chapters/multi-media.Rmd",
 "text": null
 },
-"download": null,
+"download": ["rmdja.pdf"],
 "toc": {
 "collapse": "none"
 }

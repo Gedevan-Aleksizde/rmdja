@@ -24,7 +24,7 @@
 <meta name="author" content="Katagiri, Satoshi (ill-identified)" />
 
 
-<meta name="date" content="2020-11-02" />
+<meta name="date" content="2020-11-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -327,8 +327,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">13</span> PDF の文書クラス</h1>
 <p>HTMLは利用者側が見え方をある程度カスタマイズできる. かつて存在した Evernote Clearly やカスタム CSS を使って. そのぶんPDFは作成者側がよりレイアウトに注意を払うことになるだろう. 本稿では文章の区切りを章立てにしている. しかし PDF 数十ページしかない文書を大きな文字サイズの見出しで区切るのは少しものものしい感じがする. YAML フロントマターを変更すれば, トップレベルの見出しを変更できる.</p>
 <p><code>pdf book in Japanese</code> は “book” ということで書籍の組版をデフォルト設定にしている. もう少し小規模な文書ならば, <strong>レポート</strong>や<strong>論文記事</strong>形式のほうが良いかもしれない. 例えば, 以下のように指定する.</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb66-1"><a href="pdf-の文書クラス.html#cb66-1"></a><span class="fu">documentclass</span><span class="kw">:</span><span class="at"> bxjsreport</span></span></code></pre></div>
-<p><code>documentclass</code> には LaTeX の文書クラスファイル (<code>.cls</code>) ならなんでも与えることができるが, または で日本語文書を作成することを想定しているため, 以下2種類の BXjscls の文書クラス<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a>の中から選ぶとよい. デフォルトは <code>bxjsbook</code> なので, これは明示的に指定する必要はない.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb67-1"><a href="pdf-の文書クラス.html#cb67-1"></a><span class="fu">documentclass</span><span class="kw">:</span><span class="at"> bxjsreport</span></span></code></pre></div>
+<p><code>documentclass</code> には LaTeX の文書クラスファイル (<code>.cls</code>) ならなんでも与えることができるが, または で日本語文書を作成することを想定しているため, 以下2種類の BXjscls の文書クラス<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a>の中から選ぶとよい. デフォルトは <code>bxjsbook</code> なので, これは明示的に指定する必要はない.</p>
 <ul>
 <li><code>bxjsbook</code></li>
 <li><code>bxjsreport</code></li>
@@ -336,8 +336,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>このうち, <code>bxjsbook</code> が <code>pdf book in Japanese</code> のデフォルト設定となっている. <code>rmdja::texlogo("LaTeX")</code> の文書クラスは, 行間や見出しのレイアウトなどを日本語文書に準じたものにするが, それ以外の細かい調整は <code>_output.yml</code> や <code>_bookdown.yml</code> の設定を書き換えて調整する. それでも不十分な場合は, .tex ファイルやpandocテンプレートを直接編集したり, 追加のスタイルファイルを読み込んだりするしかない.</p>
 <div id="プレゼンテーション資料の作成" class="section level2" number="13.1">
 <h2><span class="header-section-number">13.1</span> プレゼンテーション資料の作成</h2>
-<p><code>beamer_presentation_ja</code> は <code>rmdja</code> の最初期からあったフォーマットで, そもそも当初はこれを作るのが目的だった. このフォーマットは Beamer を使用してプレゼンテーション用スライドをPDFファイルで作成する. Beamer は <code>rmdja::texlogo("LaTeX")</code> の文書クラスの1つで, <code>rmarkdown::beamer_presentation</code> はこれを利用しているが, 例によって日本語表示は想定されていないため, そのためのもろもろの調整込みのラッパーフォーマットである. ただしスライド資料なので組版の禁則処理のような細かい調整は用意していない. <code>rmdja</code>ではスライドはPDF以外の出力は不可能である<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a>.</p>
-<p>通常の文書と違い, デザインを決めるのは主に <code>theme</code> である. デフォルトでは <a href="https://github.com/matze/mtheme"><code>metropolis</code></a><a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a> である. 日本語表示のために調整してあるものの, 日本語表示と直接関係ない部分はカスタマイズの余地としていじっていないが, テンプレートには私の好みが反映された調整 (プログレスバーの位置調整) がYAMLフロントマターに直接書き込まれている.</p>
+<p><code>beamer_presentation_ja</code> は <code>rmdja</code> の最初期からあったフォーマットで, そもそも当初はこれを作るのが目的だった. このフォーマットは Beamer を使用してプレゼンテーション用スライドをPDFファイルで作成する. Beamer は <code>rmdja::texlogo("LaTeX")</code> の文書クラスの1つで, <code>rmarkdown::beamer_presentation</code> はこれを利用しているが, 例によって日本語表示は想定されていないため, そのためのもろもろの調整込みのラッパーフォーマットである. ただしスライド資料なので組版の禁則処理のような細かい調整は用意していない. <code>rmdja</code>ではスライドはPDF以外の出力は不可能である<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a>.</p>
+<p>通常の文書と違い, デザインを決めるのは主に <code>theme</code> である. デフォルトでは <a href="https://github.com/matze/mtheme"><code>metropolis</code></a><a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a> である. 日本語表示のために調整してあるものの, 日本語表示と直接関係ない部分はカスタマイズの余地としていじっていないが, テンプレートには私の好みが反映された調整 (プログレスバーの位置調整) がYAMLフロントマターに直接書き込まれている.</p>
 <p>また, 日本語表示と直接関係ないアレンジとして,デフォルトの 文献引用のスタイルが変更される.</p>
 <ol style="list-style-type: decimal">
 <li>本文での引用スタイルは番号形式 (<code>biblatex</code> の場合は <code>citestyle=numeric</code>, <code>natbib</code> の場合は <code>numeric</code> オプション).</li>
@@ -358,8 +358,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>テーマは <code>metropolis</code> を使っているが, 昔ながらのテーマも可能である. 昔からあるテーマの比較には <a href="https://hartwork.org/beamer-theme-matrix/">Beamer Theme Matrix</a> というページが便利である. 他にも近年登場したテーマがいくつか存在するが, 日本語をうまく表示できなかったり <code>rmdja::texlogo("XeLaTeX")</code>/<code>rmdja::texlogo("LuaLaTeX")</code>に対応していなかったりするものも多い. 他に日本語に対応したテーマとして, <a href="https://github.com/pecorarista/sakuratheme"><code>sakuratheme</code></a> が存在する.</li>
 <li>beamer のアスペクト比はデフォルトで 4:3 であり, YAML フロントマターで指定できる. 例えば 16:9 に変更したい場合</li>
 </ul>
-<div class="sourceCode" id="cb67"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb67-1"><a href="pdf-の文書クラス.html#cb67-1"></a><span class="fu">classoption</span><span class="kw">:</span></span>
-<span id="cb67-2"><a href="pdf-の文書クラス.html#cb67-2"></a><span class="at">  </span><span class="kw">-</span><span class="at"> aspectratio=169</span></span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb68-1"><a href="pdf-の文書クラス.html#cb68-1"></a><span class="fu">classoption</span><span class="kw">:</span></span>
+<span id="cb68-2"><a href="pdf-の文書クラス.html#cb68-2"></a><span class="at">  </span><span class="kw">-</span><span class="at"> aspectratio=169</span></span></code></pre></div>
 <p>となる. 指定可能なのは <code>3:2</code>, <code>4:3</code>, <code>5:4</code>, <code>14:1</code> ,<code>14:9</code>, <code>16:9</code>, <code>16:10</code> で, 上記のようにコロンを抜いて数字のみで指定する. なお <code>classoption</code> は LaTeX でPDFを使う場合に有効になる.</p>
 <p>詳細は<a href="http://tug.ctan.org/macros/latex/contrib/beamer/doc/beameruserguide.pdf">beamer の公式ドキュメント</a>を参考に.</p>
 </div>
@@ -373,27 +373,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>余白が見開きを想定したものでなくなる</li>
 </ul>
 <p>など些細である. 実際のところ, 文書テンプレートの設定を少しいじっている程度のことしかしていない. テンプレートを開いて確認すればわかるように,</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb68-1"><a href="pdf-の文書クラス.html#cb68-1"></a><span class="fu">output</span><span class="kw">:</span></span>
-<span id="cb68-2"><a href="pdf-の文書クラス.html#cb68-2"></a><span class="at">  rmdja:</span><span class="fu">:pdf_book_ja</span><span class="kw">:</span></span>
-<span id="cb68-3"><a href="pdf-の文書クラス.html#cb68-3"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
-<span id="cb68-4"><a href="pdf-の文書クラス.html#cb68-4"></a><span class="at">    </span><span class="fu">pandoc_args</span><span class="kw">:</span></span>
-<span id="cb68-5"><a href="pdf-の文書クラス.html#cb68-5"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;--top-level-division=section&#39;</span></span>
-<span id="cb68-6"><a href="pdf-の文書クラス.html#cb68-6"></a><span class="fu">documentclass</span><span class="kw">:</span><span class="at"> bxjsarticle</span></span></code></pre></div>
-<p>という設定を追加しているだけである<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a>.</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb69-1"><a href="pdf-の文書クラス.html#cb69-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb69-2"><a href="pdf-の文書クラス.html#cb69-2"></a><span class="at">  rmdja:</span><span class="fu">:pdf_book_ja</span><span class="kw">:</span></span>
+<span id="cb69-3"><a href="pdf-の文書クラス.html#cb69-3"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb69-4"><a href="pdf-の文書クラス.html#cb69-4"></a><span class="at">    </span><span class="fu">pandoc_args</span><span class="kw">:</span></span>
+<span id="cb69-5"><a href="pdf-の文書クラス.html#cb69-5"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;--top-level-division=section&#39;</span></span>
+<span id="cb69-6"><a href="pdf-の文書クラス.html#cb69-6"></a><span class="fu">documentclass</span><span class="kw">:</span><span class="at"> bxjsarticle</span></span></code></pre></div>
+<p>という設定を追加しているだけである<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a>.</p>
 <p>大学によっては論文の体裁が細かく指定されている場合もあるかもしれない. 例えば1ページあたりの行数や, 1行あたりの文字数とか. 例えば1ページあたり50行, 1行あたり40字とする場合, 以下のような設定を追加する. ただし, 行数は図表の挿入などで変動するし, プロポーショナルフォントや字幅の異なる欧文を多用すれば1行あたりの文字数は多くなりうる.</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb69-1"><a href="pdf-の文書クラス.html#cb69-1"></a><span class="fu">classoptions</span><span class="kw">:</span></span>
-<span id="cb69-2"><a href="pdf-の文書クラス.html#cb69-2"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;number-of-lines=50&#39;</span></span>
-<span id="cb69-3"><a href="pdf-の文書クラス.html#cb69-3"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;textwidth=40zw&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb70-1"><a href="pdf-の文書クラス.html#cb70-1"></a><span class="fu">classoptions</span><span class="kw">:</span></span>
+<span id="cb70-2"><a href="pdf-の文書クラス.html#cb70-2"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;number-of-lines=50&#39;</span></span>
+<span id="cb70-3"><a href="pdf-の文書クラス.html#cb70-3"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;textwidth=40zw&#39;</span></span></code></pre></div>
 <p>さらに, カラー印刷が許容されない場合もある. <code>ggplot2</code> は <code>scale_*_grey()</code> などでカラーパレットを簡単に変更できる (図 <a href="pdf-の文書クラス.html#fig:plot-grey-scale">13.1</a>).</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb70-1"><a href="pdf-の文書クラス.html#cb70-1"></a><span class="kw">ggplot</span>(</span>
-<span id="cb70-2"><a href="pdf-の文書クラス.html#cb70-2"></a>  <span class="kw">mutate</span>(mtcars, <span class="dt">cyl =</span> <span class="kw">factor</span>(cyl)),</span>
-<span id="cb70-3"><a href="pdf-の文書クラス.html#cb70-3"></a>  <span class="kw">aes</span>(<span class="dt">x =</span> mpg, <span class="dt">y =</span> wt, <span class="dt">color =</span> cyl)</span>
-<span id="cb70-4"><a href="pdf-の文書クラス.html#cb70-4"></a>) <span class="op">+</span></span>
-<span id="cb70-5"><a href="pdf-の文書クラス.html#cb70-5"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
-<span id="cb70-6"><a href="pdf-の文書クラス.html#cb70-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;マイル毎米ガロン&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;重量 (1000ポンド)&quot;</span>) <span class="op">+</span></span>
-<span id="cb70-7"><a href="pdf-の文書クラス.html#cb70-7"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
-<span id="cb70-8"><a href="pdf-の文書クラス.html#cb70-8"></a><span class="st">  </span><span class="kw">scale_color_grey</span>() <span class="op">+</span></span>
-<span id="cb70-9"><a href="pdf-の文書クラス.html#cb70-9"></a><span class="st">  </span><span class="kw">scale_fill_grey</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb71-1"><a href="pdf-の文書クラス.html#cb71-1"></a><span class="kw">ggplot</span>(</span>
+<span id="cb71-2"><a href="pdf-の文書クラス.html#cb71-2"></a>  <span class="kw">mutate</span>(mtcars, <span class="dt">cyl =</span> <span class="kw">factor</span>(cyl)),</span>
+<span id="cb71-3"><a href="pdf-の文書クラス.html#cb71-3"></a>  <span class="kw">aes</span>(<span class="dt">x =</span> mpg, <span class="dt">y =</span> wt, <span class="dt">color =</span> cyl)</span>
+<span id="cb71-4"><a href="pdf-の文書クラス.html#cb71-4"></a>) <span class="op">+</span></span>
+<span id="cb71-5"><a href="pdf-の文書クラス.html#cb71-5"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb71-6"><a href="pdf-の文書クラス.html#cb71-6"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;マイル毎米ガロン&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;重量 (1000ポンド)&quot;</span>) <span class="op">+</span></span>
+<span id="cb71-7"><a href="pdf-の文書クラス.html#cb71-7"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
+<span id="cb71-8"><a href="pdf-の文書クラス.html#cb71-8"></a><span class="st">  </span><span class="kw">scale_color_grey</span>() <span class="op">+</span></span>
+<span id="cb71-9"><a href="pdf-の文書クラス.html#cb71-9"></a><span class="st">  </span><span class="kw">scale_fill_grey</span>()</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:plot-grey-scale"></span>
 <img src="rmdja_files/figure-html/plot-grey-scale-1.png" alt="グレースケールでのプロット"  />
 <p class="caption">
@@ -404,7 +404,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="wip-小説の執筆" class="section level2" number="13.3">
 <h2><span class="header-section-number">13.3</span> (WIP) 小説の執筆</h2>
 <p>作家の京極夏彦は自分の作品を1ページごとに切り取っても作品として成立するようなレイアウトにこだわっているらしいが, すでに説明したように技術文書や学術論文では図表の配置や改行などにあまりこだわりがない. しかし, 不可能ではない. HTML では難しいが (不可能ではないがHTMLでやるメリットが感じられないので対応する気がない), PDF ではある程度のレイアウトの制御が可能である. ただし, 本当に厳格なJIS準拠の組版にこだわるなら, LaTeX を直接編集しなければならない.</p>
-<p><code>rmdja</code> で用意されている縦書き文書テンプレート <code>pdf vertical writing in Japanese</code> は, <code>jlreq</code> を利用して<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a>縦書き文書のPDFを作成する(図: <a href="pdf-の文書クラス.html#fig:tategaki">13.2</a>). <strong>HTML には未対応である</strong>.</p>
+<p><code>rmdja</code> で用意されている縦書き文書テンプレート <code>pdf vertical writing in Japanese</code> は, <code>jlreq</code> を利用して<a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a>縦書き文書のPDFを作成する(図: <a href="pdf-の文書クラス.html#fig:tategaki">13.2</a>). <strong>HTML には未対応である</strong>.</p>
 <div class="figure" style="text-align: center"><span id="fig:tategaki"></span>
 <img src="img/tategaki.png" alt="縦書き文書の出力例" width="780" />
 <p class="caption">
@@ -430,12 +430,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="footnotes">
 <hr />
-<ol start="18">
-<li id="fn18"><p>詳細はここにあるドキュメント参照: <a href="https://www.ctan.org/pkg/bxjscls" class="uri">https://www.ctan.org/pkg/bxjscls</a> 但し, スライド用クラスである <code>bxjsslide</code> の使用は想定していない. また, <code>bxjsarticle</code> を使う場合は後述の <code>pdf article in Japanese</code> テンプレートから作成したほうがよい. さらに <code>rmdja::texlogo("LuaLaTeX")</code> を使用するならば <code>luatex-ja</code> で提供される日本語文書クラスも指定することができるが, あまりつかったことがないためレイアウトに不備があるかもしれない. 以降はPDFファイルで出力できる各形式についてこまかく解説する.<a href="pdf-の文書クラス.html#fnref18" class="footnote-back">↩︎</a></p></li>
-<li id="fn19"><p>HTML形式のスライドはサポート対象外である. 日本語文書特有の処理はあまりないということ, 普段と違う環境で表示することの多いであろうスライド資料はなるべく環境に依存しない方法で表示すべきと考えているのが理由である. HTMLでスライドを作成したい場合, 次のページが参考になる: <a href="https://kazutan.github.io/SappoRoR6/rmd_slide.html#/" class="uri">https://kazutan.github.io/SappoRoR6/rmd_slide.html#/</a><a href="pdf-の文書クラス.html#fnref19" class="footnote-back">↩︎</a></p></li>
-<li id="fn20"><p>なお <code>metropolis</code> テーマ開発者は Fira Sans フォントの使用を想定しており, ビルド時にフォントがないという警告が出ることがあるが無視して良い. (参考: <a href="https://github.com/matze/mtheme/issues/280" class="uri">https://github.com/matze/mtheme/issues/280</a>)<a href="pdf-の文書クラス.html#fnref20" class="footnote-back">↩︎</a></p></li>
-<li id="fn21"><p>このテンプレートでは論文形式のフォーマットとして <code>bxjsarticle</code> を使用している. LuaLaTeX を使用するならば代わりに <code>ltjsarticle</code> クラスも使用可能なはずだが, 私は使ったことがないので説明を省く.<a href="pdf-の文書クラス.html#fnref21" class="footnote-back">↩︎</a></p></li>
-<li id="fn22"><p><code>luatex-ja</code> にも縦書き文書クラス <code>ltjt</code> シリーズが存在するが, 公式ドキュメントにすら詳しい解説がなかったため採用しなかった.<a href="pdf-の文書クラス.html#fnref22" class="footnote-back">↩︎</a></p></li>
+<ol start="19">
+<li id="fn19"><p>詳細はここにあるドキュメント参照: <a href="https://www.ctan.org/pkg/bxjscls" class="uri">https://www.ctan.org/pkg/bxjscls</a> 但し, スライド用クラスである <code>bxjsslide</code> の使用は想定していない. また, <code>bxjsarticle</code> を使う場合は後述の <code>pdf article in Japanese</code> テンプレートから作成したほうがよい. さらに <code>rmdja::texlogo("LuaLaTeX")</code> を使用するならば <code>luatex-ja</code> で提供される日本語文書クラスも指定することができるが, あまりつかったことがないためレイアウトに不備があるかもしれない. 以降はPDFファイルで出力できる各形式についてこまかく解説する.<a href="pdf-の文書クラス.html#fnref19" class="footnote-back">↩︎</a></p></li>
+<li id="fn20"><p>HTML形式のスライドはサポート対象外である. 日本語文書特有の処理はあまりないということ, 普段と違う環境で表示することの多いであろうスライド資料はなるべく環境に依存しない方法で表示すべきと考えているのが理由である. HTMLでスライドを作成したい場合, 次のページが参考になる: <a href="https://kazutan.github.io/SappoRoR6/rmd_slide.html#/" class="uri">https://kazutan.github.io/SappoRoR6/rmd_slide.html#/</a><a href="pdf-の文書クラス.html#fnref20" class="footnote-back">↩︎</a></p></li>
+<li id="fn21"><p>なお <code>metropolis</code> テーマ開発者は Fira Sans フォントの使用を想定しており, ビルド時にフォントがないという警告が出ることがあるが無視して良い. (参考: <a href="https://github.com/matze/mtheme/issues/280" class="uri">https://github.com/matze/mtheme/issues/280</a>)<a href="pdf-の文書クラス.html#fnref21" class="footnote-back">↩︎</a></p></li>
+<li id="fn22"><p>このテンプレートでは論文形式のフォーマットとして <code>bxjsarticle</code> を使用している. LuaLaTeX を使用するならば代わりに <code>ltjsarticle</code> クラスも使用可能なはずだが, 私は使ったことがないので説明を省く.<a href="pdf-の文書クラス.html#fnref22" class="footnote-back">↩︎</a></p></li>
+<li id="fn23"><p><code>luatex-ja</code> にも縦書き文書クラス <code>ltjt</code> シリーズが存在するが, 公式ドキュメントにすら詳しい解説がなかったため採用しなかった.<a href="pdf-の文書クラス.html#fnref23" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -486,7 +486,7 @@ gitbook.start({
 "link": "tree/rmdja/inst/resources/examples/bookdown/chapter/chapters/multi-media.Rmd",
 "text": null
 },
-"download": null,
+"download": ["rmdja.pdf"],
 "toc": {
 "collapse": "none"
 }
