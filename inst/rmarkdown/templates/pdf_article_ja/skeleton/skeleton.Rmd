@@ -53,7 +53,9 @@ rmdja::set_graphics_font(rmdja::get_default_font_family("xelatex")["serif"])
 
 図 \@ref(fig:plot) が結果である.
 
-```{r plot, fig.cap="データのプロット"}
+(ref:ggplot-example-article) `ggplot2` を使用したデータのプロット
+
+```{r plot, fig.cap="(ref:ggplot-example-article)"}
 ggplot(mutate(mtcars, cyl = factor(cyl)),
        aes(x = mpg, y = wt, color = cyl)) +
   geom_point() + labs(x = "マイル毎米ガロン", y = "重量 (1000ポンド)") +
