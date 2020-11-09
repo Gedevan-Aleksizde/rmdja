@@ -1,7 +1,7 @@
 book_filename: rmdja.Rmd                 # マージして作ったファイルの名前.
 output_dir: "../../../../docs"          # ビルドしたファイルの出力先.
 delete_merged_file: true                # 中間生成された Rmd をビルド後に消すかどうか
-clean: null                             # ビルド後に削除するファイル. ビルド中に作られたほとんどの中間ファイルは自動で消されるため, 気になった場合のみ使う.
+clean: true                             # ビルド後に中間ファイルを削除するかどうか
 before_chapter_scrip: null              # 章の開始ごとに挿入する処理, .R ファイル
 after_chapter_script: null              # 章の終了ごとに挿入する処理, .R ファイル
 new_session: false                      # "knit and merge," 各 Rmd で個別に knit してから連結. false なら 連結してから knit.
@@ -21,7 +21,7 @@ history: blob/master/rmdja/inst/resources/examples/bookdown/chapter/%s # 現在�
 edit: edit/master/rmdja/inst/resources/examples/bookdown/chapter/%s # 現在のページを編集するためのリンク, github pages でホスティングする前提
 repo: https://github.com/rstudio/bookdown/
 # ---- 用語の変更 ----
-language:                 
+language:
   label:
     fig: '図 '
     tab: '表 '
