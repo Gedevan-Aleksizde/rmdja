@@ -124,7 +124,9 @@ pdf_book_ja <- function (
         out.width = out_width,
         out.height = out_height,
         out.extra = out_extra,
-        attr.source = attr_source
+        attr.source = attr_source,
+        tidy = T,
+        tidy.opts = list(indent = getOption("formatR.indent", 2), width = 40)
       ),
       opts_hooks = list(
         dev = hook_python_pdf_dev,

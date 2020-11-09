@@ -138,23 +138,24 @@ beamer_presentation_ja <- function(
   )
   base <- do.call(rmarkdown::beamer_presentation, args_beamer)
 
-  args_opts_chunk <- list(
-    include = TRUE,
-    eval = TRUE,
-    echo = FALSE,
-    message = FALSE,
-    warning = TRUE,
-    error = TRUE,
+  opts_chunk_default <- list(
+    include = T,
+    eval = T,
+    echo = F,
+    message = F,
+    warning = T,
+    error = T,
     comment = NA,
-    tidy.opts = list(width.cutoff = 40),
-    tidy = F,
+    tidy = T,
+    tidy.opts = list(indent = getOption("formatR.indent", 2), width.cutoff = 40),
     fig.align = "center",
     out.extra = "keepaspectratio",
     out.width = out.width,
     out.height = out.height,
     dev = dev
     )
-  if(code_rownumber) args_opts_chunk$class.source <- "numberLines LineAnchors"
+  if(code_rownumber) opts_chunk_default$class.source <- "numberLines LineAnchors"
+  args_opts_chunk <- rmarkdown:::merge_lists(opts_chunk_default, opts_chunk)
   
   args_pandoc_options <- list(to = "beamer",
                               from = rmarkdown::from_rmarkdown(fig_caption, md_extensions),

@@ -72,6 +72,7 @@ gitbook_ja <- function(
   if(!missing(fig_align) || !is.null(fig_align)){
     opts_chunk_default <- c(opts_chunk_default, list(fig.align = fig_align))
   }
+  opts_chunk_default <- c(opts_chunk_default, list(tidy = T, tidy.opts = list(indent = getOption("formatR.indent", 2), width = 60)))
 
   preproc_css <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
     args_extra <- c()

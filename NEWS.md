@@ -1,3 +1,10 @@
+# rmdja 0.4.3
+
+* `texlogo()` の内部処理改善
+* `knitr::kable()` および `kableExtra::kbl()` の簡易ラッパー関数導入
+* コードブロックの自動整形のデフォルト設定を追加
+* ドキュメントの加筆と整理
+
 # rmdja 0.4.2
 
 * 参考文献の出力は `biblatex` をデフォルトに, `jauthoryear.bbx` を想定した設計に
