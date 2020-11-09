@@ -1,10 +1,11 @@
 #' PDF/HTML でロゴを出す
 #' @description PDF は `BXtexlogo.sty` でロゴを出す.
 #' @param logoname: character. BXtexlogo に対応したロゴを出す. 大文字小文字問わずマッチする.
+#' @param as_markdown: logical. `{=latex}`, `{=html}` の構文を使って出力するかどうか. 
 #' @details うろ覚えでもいいように大文字小文字問わない. https://github.com/zr-tex8r/BXtexlogo を参考に
 
 #' @export
-texlogo <- function(logoname, isrichtext = FALSE){
+texlogo <- function(logoname,  as_markdown = F){
   base <- switch(tolower(logoname),
     "tex"      = "TeX",
     "amslatex" = "AmSLaTeX",
@@ -66,7 +67,11 @@ texlogo <- function(logoname, isrichtext = FALSE){
   if(nchar(base) == 0){
     r <- logoname
   } else{
-    r <- paste0("`\\", base, "`{=latex}`", base, "`{=html}")
+    if(as_markdown){
+      r <- paste0("`\\", base, "`{=latex}`", base, "`{=html}")
+    } else {
+      r <- if(knitr::is_latex_output()) paste0("\\", base) else base
+    }
   }
   return(r)
 }

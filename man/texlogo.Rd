@@ -4,10 +4,12 @@
 \alias{texlogo}
 \title{PDF/HTML でロゴを出す}
 \usage{
-texlogo(logoname, isrichtext = FALSE)
+texlogo(logoname, as_markdown = F)
 }
 \arguments{
 \item{logoname:}{character. BXtexlogo に対応したロゴを出す. 大文字小文字問わずマッチする.}
+
+\item{as_markdown:}{logical. \verb{\{=latex\}}, \verb{\{=html\}} の構文を使って出力するかどうか.}
 }
 \description{
 PDF は \code{BXtexlogo.sty} でロゴを出す.
