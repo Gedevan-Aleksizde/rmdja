@@ -95,7 +95,7 @@ $if(linestretch)$
 \usepackage{setspace}
 $endif$
 \usepackage{amssymb,amsmath}
-\usepackage{ifxetex,ifluatex}
+\usepackage{ifxetex,ifluatex,ifthen}
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[$if(fontenc)$$fontenc$$else$T1$endif$]{fontenc}
   \usepackage[utf8]{inputenc}
@@ -355,7 +355,19 @@ $if(block-headings)$
 \fi
 $endif$
 $endif$
+
 $if(pagestyle)$
+\ifthenelse{\equal{$pagestyle$}{fancy}}{
+% TODO: ハードコードやめる
+  \usepackage{fancyhdr}
+  \fancyhead[CE]{\leftmark}
+  \fancyhead[CO]{\rightmark}
+  \fancyhead[LE,RO,RE,LO]{}
+  \fancyfoot[LO,RE]{\thepage}
+  \fancyfoot[CO,CE]{}
+}{
+ %
+}
 \pagestyle{$pagestyle$}
 $endif$
 $for(header-includes)$
