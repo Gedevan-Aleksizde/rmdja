@@ -8,6 +8,7 @@
 #' @details 基本的に YAML フロントマター (+ `_ouput.yml`) や knitr チャンクオプションで設定できることをデフォルト値として埋め込んだだけ. `index.Rmd` 
 #' @inheritParams bookdown::pdf_book
 #' @param code_rownumber logical. コードセルに行番号を表示するかどうか. 
+#' @param code_softwrap logical チャンク内のコードを自動折り返しするかどうか.
 #' @param tombow logical. 製本時に必要なトンボ (trim markers) を付けるかどうか. トンボは `gentombow.sty` で作成される. 
 #' @param add_folio logical. 製本時に全ページにノンブルが必要な場合があるらしいので全ページに表示したい時に.
 #' @return rmarkdown_output_format
@@ -35,6 +36,7 @@ pdf_book_ja <- function (
   highlight = "default",
   highlight_bw = FALSE,
   code_rownumber = TRUE,
+  code_softwrap = TRUE,
   tombow = FALSE,
   add_folio = FALSE,
   template = "default",
@@ -83,10 +85,19 @@ pdf_book_ja <- function (
     }
   } 
   if(identical(add_folio, T)){
+    latex_folio <- system.file("resources/styles/latex/folio.tex", package = "rmdja")
     if(is.null(includes)){
-      includes <- rmarkdown::includes(before_body = system.file("resources/styles/latex/folio.tex", package = "rmdja"))
+      includes <- rmarkdown::includes(before_body = latex_folio)
     } else {
-      includes$before_body <- c(includes$before_body, system.file("resources/styles/latex/folio.tex", package = "rmdja"))
+      includes$before_body <- c(includes$before_body, latex_folio)
+    }
+  }
+  if(identical(code_softwrap, T)){
+    latex_preamble_code_softwrap <- system.file("resources/styles/latex/code-softwrap.tex", package = "rmdja")
+    if(is.null(includes)){
+      includes <- rmarkdown::includes(in_header = latex_preamble_code_softwrap)
+    } else {
+      includes$in_header <- c(includes$in_header, latex_preamble_code_softwrap)
     }
   }
 
@@ -125,8 +136,7 @@ pdf_book_ja <- function (
         out.height = out_height,
         out.extra = out_extra,
         attr.source = attr_source,
-        tidy = T,
-        tidy.opts = list(indent = getOption("formatR.indent", 2), width = 40)
+        tidy = 'styler'
       ),
       opts_hooks = list(
         dev = hook_python_pdf_dev,

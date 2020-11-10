@@ -11,14 +11,14 @@ Depends: R (>= 3.6.2)
 Imports:
   rmarkdown (>= 2.4),
   bookdown (>= 0.20.6),
-  commonmark (>= 1.7)
+  commonmark (>= 1.7),
+  styler (>= 1.3.2)
 Suggests:
   tidyverse,
   ggthemes,
   kableExtra,
   citr,
   clipr,
-  styler,
   ymlthis
 BugReports: https://github.com/Gedevan-Aleksizde/rmdja/issues
 RoxygenNote: 7.1.1

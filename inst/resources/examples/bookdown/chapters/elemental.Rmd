@@ -13,7 +13,6 @@
 
 日本語で書かれた資料でごく基本的なことについて, 『[R Markdown入門](https://kazutan.github.io/kazutanR/Rmd_intro.html)』で一通り紹介されている. やや応用的なことも 『R Markdown ユーザーののための Pandoc's Markdown』に書かれている.
 
-
 ## Markdown の基本構文
 
 一応基本の Markdown の構文も挙げておく. 詳細は(ref:BKDB)"[Ch. 2.2 Markdown Syntax](https://bookdown.org/yihui/bookdown/markdown-syntax.html)" を参照.
@@ -149,7 +148,7 @@ Table:Markdown 記法の表
 ![Johannes Gutenberg](img/Johannes_Gutenberg.jpg){ width=50% }
 
 
-しかし, キャプションを付けたり, 表示位置やサイズを細かく調整したりするためには, 後述するように**Rプログラムを経由して出力**したほうが良い.
+しかし, キャプションを付けたり, 表示位置やサイズを細かく調整したり, 注釈を付けたりするためには, 後述するように**Rプログラムを経由して出力**したほうが良い.
 
 TODO: md 記法で画像貼り付けたときのサイズ統一
 
@@ -422,8 +421,10 @@ data("diamonds")
 diamonds <- diamonds[sample(1:NROW(diamonds), size =), ]
 ggplot(diamonds, aes(x=carat, y=price, color=clarity)) +
   geom_point() +
-  labs( x = "カラット数", y = "価格") + scale_color_pander(name = "クラリティ") +
-  theme_classic(base_family = "Noto Sans CJK JP") + theme(legend.position = "bottom")
+  labs( x = "カラット数", y = "価格") +
+  scale_color_pander(name = "クラリティ") +
+  theme_classic(base_family = "Noto Sans CJK JP") +
+  theme(legend.position = "bottom")
 ```
 
 `ggplot2` 以外のパッケージや言語, たとえば `tikz` や `asymptote`, DOT言語も使用できる. これらは \@ref(advanced-graph) 章で紹介する.
@@ -516,17 +517,14 @@ Table: (\#tab:df-print-ops) `df_print` のオプション一覧
 3. (非推奨) HTML と PDF でそれぞれの構文で表を描く処理を自分で書く
 
 ```{r display-dataframe-kable-booktabs, echo=T}
-rmdja::kable(mtcars[1:10, ],
-      caption = "`booktabs = T` は PDF にのみ影響する",
-      booktabs = T
-  )
+rmdja::kable(mtcars[1:10, ], caption = "`booktabs = T` は PDF にのみ影響する", booktabs = T)
 ```
 
-(1) の方法が現在最も簡単である. ただし, `r rmdja::texlogo("LaTeX")` LaTeX の構文が評価されなくなるため同時に使うことはできない. 例えば太字強調と数式を両方表示したい場合は, `knitr::is_latex_output()` PDF の場合は完全に `r rmdja::texlogo("LaTeX")` で, HTML の場合は Markdown で書く, という場合分けを自分で書いて `knitr::kable()` に与えなければならない(表 \@ref(tab:kable-caption-example)). また, キャプションではなく**表内の markdown 構文も評価されない**. 表内の markdown 構文を PDF でも反映するには, (2) の方法が必要である.
+ (1) の方法が現在最も簡単である. ただし, `r rmdja::texlogo("LaTeX")` の構文が評価されなくなるため同時に使うことはできない. 例えば太字強調と数式を両方表示したい場合は, `knitr::is_latex_output()` PDF の場合は完全に `r rmdja::texlogo("LaTeX")` で, HTML の場合は Markdown で書く, という場合分けを自分で書いて `knitr::kable()` に与えなければならない(表 \@ref(tab:kable-caption-example)). また, キャプションではなく**表内の markdown 構文も評価されない**. 表内の markdown 構文を PDF でも反映するには, (2) の方法が必要である.
 
 TODO: この仕様は使いづらいのでそのうちなんとかしたい.
 
-(2) についても, `kable()` 単体であれば問題ないが, 後に紹介する `kableExtra` パッケージを併用すると**書式設定がうまく反映されなくなる**ことがある. (3) は表 \@ref(tab:kable-caption-example) の記述をキャプションだけでなく, HTML ならば Markdown または HTML タグで, PDF ならば `r rmdja::texlogo("LaTeX")` で表全体を書き分ける, という方法である. 1つの表を描くのに多大な労力がかかるため推奨しない.
+ (2) についても, `kable()` 単体であれば問題ないが, 後に紹介する `kableExtra` パッケージを併用すると**書式設定がうまく反映されなくなる**ことがある. (3) は表 \@ref(tab:kable-caption-example) の記述をキャプションだけでなく, HTML ならば Markdown または HTML タグで, PDF ならば `r rmdja::texlogo("LaTeX")` で表全体を書き分ける, という方法である. 1つの表を描くのに多大な労力がかかるため推奨しない.
 
 ```{r kable-caption-example, eval=T, echo=T}
 cap <- if(knitr::is_latex_output()) "数式 $a$ と \\textbf{太字}" else "数式 $a$ と **太字**"
@@ -541,18 +539,23 @@ kable(
 
 また, `kable()` を使う利点として, 表の絡む名に好きな名前を与えられるというものがある. データフレームの列 (変数) 名は, 括弧などプログラミングで特別な意味を持つ文字を使うことができない. そこで, `kable()` の `col.names` 引数に表のカラム名を改めて与えることで, こういった文字も出力できる.
 
-`kable()` による表のスタイルは  `kableExtra` パッケージを使うことで様々にカスタマイズできる. 例えば `row_spec()` を使って偶数・奇数行を色分けすることができる (表 \@ref(tab:display-dataframe-kable-2), ただしHTML版を見ていれば分かるように, HTML ではデフォルトで奇数偶数の色分けがなされている).
+`kable()` による表のスタイルは  `kableExtra` パッケージを使うことで様々にカスタマイズできる. 例えば HTML 版ではデフォルトで奇数偶数行の背景色が異なるが, PDF ではそうなっていない. また, 図表の位置は常にフロートであり, 余白ができにくいように表示位置が前後する (これは技術文書や学術論文では普通のことだが). さらに, 表が本文の領域からはみ出しており見栄えが悪い. これらの設定をHTML版に近づけたい場合は `kableExtra::kable_styling()` を使って簡単にデザインを変えることができる (表 \@ref(tab:display-dataframe-kable-2)). 以下のように, `full_width` は表の幅を本文幅にそろえるオプションである. や十分に幅の小さい表に対しては逆に間延びして見づらいためデフォルトでは無効となっているが, このようにして表幅を調整するのに使える. さらに `latex_options` は PDF にのみ有効なオプションである. `"striped"` が奇数偶数の色分け[^tabu-error], `"hold_position"` が表示位置を「なるべく」固定するオプションである (それでも表示位置が大きくずれて気に入らない場合 `"HOLD_position"` を代わりに使うとよい). ただし HTML と違い PDF では改ページがあるためこのオプションを多様すると, 以下のように本文に無駄な余白が増えることに注意する.
 
 ```{r display-dataframe-kable-2, echo=T}
 rmdja::kable(
   mtcars[1:10, ], booktabs = T,
   caption = "奇数行を強調し, PDF では `booktabs` を利用"
-  ) %>% row_spec(seq(1, 10, by = 2), background = "gray")
+  ) %>%
+  kable_styling(
+    full_width = if(knitr::is_latex_output()) T else NULL,
+    latex_options = c("striped", "hold_position"))
 ```
 
 このように, R Markdown ではまず表示したい表と同じ構造のデータフレームを作ることで, 簡単にスタイルの調整された表を掲載できる.
 
 他にもいくつか表のスタイルをカスタマイズするためのパッケージが存在する. より発展的な表のスタイル指定方法については \@ref(advanced-tabulate) 章で話す.
+
+[^tabu-error]: ただし, `full_width = T` を指定した時, `striped`, あるいは他の色の指定の命令が反映されないことがある. これは 2019年時点での `tabu.sty` の不具合であるため, Issues [#1](https://github.com/tabu-issues-for-future-maintainer/tabu/issues/1#issuecomment-464369706)  で配布されている開発者によるパッチを適用しなければならない.また, それ以外にも表の幅を調整する方法がある. 詳細は \@ref(advanced-tabulate) 章を参考に.
 
 # 相互参照と引用
 
@@ -633,12 +636,10 @@ YAMLフロントマターの `biblography:` に文献管理ファイル (`.bib`,
 knitr::include_graphics(file.path(img_dir, "citr.png"))
 ```
 
-一方で, この記述が文書においてどのようなスタイルで出力されるかは文献引用を処理するプログラムによって変化する. そのプログラムにはいくつか候補がある.
-
-R Markdown の文献引用は pandoc を経由して処理され, pandoc は現時点では `pandoc-citeproc` (`default`), `r rmdja::texlogo("BibTeX")` (`natbib`), `r rmdja::texlogo("BibLaTeX")` (`biblatex`) の選択をサポートしている. `pandoc-citeproc` 以外はもともと `r rmdja::texlogo("LaTeX")` 用に作られたため, HTML では常に `pandoc-citeproc` で処理される. PDF ではそれに加えて `bibtex`, `biblatex` を指定することもできる. (`default` とは別なのでややこしいが) デフォルトでは `biblatex` を使用する. これはフォーマット引数の `citation_package` で変更できる.
+一方で, この記述が文書においてどのようなスタイルで出力されるかは文献引用を処理するプログラムによって変化する. そのプログラムには3つの候補がある. R Markdown の文献引用は pandoc を経由して処理され, 現時点では `pandoc-citeproc` (`default`), `r rmdja::texlogo("BibTeX")` (`natbib`), `r rmdja::texlogo("BibLaTeX")` (`biblatex`) の選択をサポートしている. `pandoc-citeproc` 以外はもともと `r rmdja::texlogo("LaTeX")` 用に作られたため, HTML では常に `pandoc-citeproc` で処理される. PDF ではそれに加えて `bibtex`, `biblatex` を指定することもできる. (`default` とは別なのでややこしいが) `rmdja` はデフォルトでは PDF 出力時に `biblatex` を使用する. これはフォーマット引数の `citation_package` で変更できる. 正確には以下の3つの値のどれかを指定する.
 
 * `default`: `pandoc-citeproc` を使用する.
-* `biblatex`: `r rmdja::texlogo("BibLaTeX")` を使用する. デフォルト. スタイルはこちらが用意した `jauthoryear` というもの.
+* `biblatex`: `r rmdja::texlogo("BibLaTeX")` を使用する. デフォルト. スタイルのデフォルトはこちらが用意した `jauthoryear` というもの.
 * `natbib`: `r rmdja::texlogo("BibTeX")` を使用し, 本文中の参照には `natbib.sty` が使われる[^natbib-contraint]. ただし, 日本語 (マルチバイト文字) の含まれる文献情報を出力する場合は**特殊な設定をしないと製本処理がハングアップする** (後述).
 
 [natbib-contraint]: ただし `citeit`, `citep` など `natbib.sty` の提供していた多様な引用子オプションは使えない. これは pandoc の制約によるものである.

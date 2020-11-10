@@ -102,28 +102,28 @@ D3.js なども使える
 
 ## (TODO) その他の R プログラム
 
-なお, DOT言語は `DiagrammeR` パッケージを経由して使うこともできる[^rcb-diagrammer](図: \@ref(fig:diagrammer-graph)). グラフィカルモデルの記述などはこちらのほうが簡単かもしれない.
+## DOT 言語とグラフィカルモデル
 
-(ref:diagrammer-cap) `DiagrammeR` によるグラフィカルモデル (RCB, Ch. 4.15 より)
+graphviz などで使用される DOT 言語を使用してグラフィカルモデルを描画することもできる. この場合, チャンクのエンジンを `dot` にするのではなく, エンジンは `r` のままで, `engine="dot"` を指定すると, コードブロックが DOT 言語として評価される. 図\@ref(fig:dot-example) がその結果である.
 
-```{r diagrammer-graph, echo=T, fig.cap="(ref:diagrammer-cap)"}
-DiagrammeR::grViz("digraph {
-  graph [layout = dot, rankdir = TB]
-  
-  node [shape = rectangle]        
-  rec1 [label = 'Step 1. 起床する']
-  rec2 [label = 'Step 2. コードを書く']
-  rec3 [label =  'Step 3. ???']
-  rec4 [label = 'Step 4. 給料をもらう']
-  
-  # edge definitions with the node IDs
-  rec1 -> rec2 -> rec3 -> rec4
-  }", 
-  height = 500)
+```{r dot-example, engine="dot", echo=T, out.height="40%", fig.cap="DOTの動作確認"}
+digraph test {
+  graph [layout = dot, rankdir = TB];
+  node [shape = rectangle];
+  rec1 [label = "Step 1. 起床する"];
+  rec2 [label = "Step 2. コードを書く"];
+  rec3 [label = "Step 3. ???", color=blue, style=filled];
+  rec4 [label = "Step 4. 給料をもらう", fontsize=20, fontcolor=red];
+  rec1 -> rec2 -> rec3 -> rec4;
+  }
 ```
 
-[^rcb-diagrammer]: https://bookdown.org/yihui/rmarkdown-cookbook/diagrams.html
 
+なお, RCB, Ch. 4.15 でも紹介されているように DOT 言語は `DiagrammeR` パッケージを経由して使うこともできる[^dot-lang-syntax]が, `grViz()` 関数の出力は HTML を前提としているため, PDF での出力時のサイズや解像度の調整がうまくいかないことが多い.
+
+一方で, `ggdag` パッケージは`ggplot2` ベースのパッケージなので, 一般的な R グラフィックスと同じ扱いでグラフィカルモデルを描画できる (つまり名前に反して DAG 以外のネットワーク図も記述可能である). `ggplot2` 風の構文で記述できるので習熟も容易である.
+
+[^dot-lang-syntax]: 私も詳しいことは知らないが, `DiagrammeR::grViz()` の構文は本来の DOT と少し異なるようだ, 本来はステートメントごとにセミコロンで区切ることが必要であり, 文字列もダブルクオーテーションで囲まなければならないが, `grViz()` ではそのような制約がない.
 
 # 表のデザイン {#advanced-tabulate}
 
@@ -136,6 +136,14 @@ include_graphics(if(is_latex_output()) "img/kableExtra.pdf" else "img/kableExtra
 `kableExtra` パッケージは `knitr::kable` の拡張であり, 様々なスタイルの表を出力できる. そしてそれは HTML でも PDF でも有効である.
 
 まず, `knitrExtra::kbl()` は既に紹介した `kable()` のラッパであり, 内部で呼び出すのは `kable()` のため `booktabs` といった従来の引数が使える上に, オプション設定の構文がより分かりやすくなっている. さらに `kableExtra` の独自機能として, 表 \@ref(tab:kableextra-color) にみられるように条件書式のような装飾が可能である[^mtcars-term].
+
+```{block kableextra-official, type="rmdnote"}
+`kableExtra` パッケージはヘルプドキュメントはもちろん, 公式の解説や用例も充実している.
+
+https://haozhu233.github.io/kableExtra/
+
+https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html
+```
 
 (ref:kableextra-color-cap) `kabeExtra` パッケージを利用した表の作成, 公式ドキュメントの用例より
 
@@ -163,8 +171,8 @@ mtcars[1:8, 1:8] %>%
 
 上記の例で使われている, `kableExtra` の便利な機能をいくつか挙げる.
 
-* `kbl(col.names = )` で列ラベルを指定できる. これは列名の変更ではないので以降も同じ名前で変数を参照できるが, 表示されるのは列ラベルである. 現状, 日本語 (マルチバイト文字) を変数名に与えることを想定していないパッケージはまだ多いので, この機能が役に立つ.
-* `kable_styling(latex_options = "scale_down")` はPDF出力時に本文幅に合わせて自動で縮小するオプションである.
+* `kbl(col.names = )` で列ラベルを指定できる (これは `kable()` でも使える). 列名の変更ではないので以降も同じ名前で変数を参照できるが, 表示されるのは列ラベルである. 現状, 日本語 (マルチバイト文字) を変数名に与えることを想定していないパッケージはまだ多く, またデータフレームの仕様として列名に `()` などを使えないためこの機能が役に立つ.
+* PDF 出力時の表の幅調整を簡単にするオプションがいくつか用意されている. `kable_styling()` の `latex_options = "scale_down"` や `full_width = T` である. 前者は本文領域に収まるように自動で表を縮小するもので, 後者は表内での改行を許容することで超過した表の幅を本文の幅に合わせるオプションである. もしより細かい調整が必要なら, `column_spec()` で列ごとに幅を指定することもできる.
 
 グラフのインライン挿入も可能である (表 \@ref(tab:kableextra-plot)). しかしこのような細かいグラフの羅列は可読性に欠けることに注意する.
 

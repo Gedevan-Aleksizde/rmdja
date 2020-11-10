@@ -22,6 +22,7 @@
 #' @param out.heigt character. `out.height` 参照. 
 #' @param highlight character. チャンク内のコードのシンタックスハイライトのデザイン. \code{\link[rmarkdown]{beamer_presentation}} 参照. 
 #' @param code_rownumber logical チャンクに行番号を付けるかどうか. 
+#' @param code_softwrap logical チャンク内のコードを自動折り返しするかどうか.
 #' @param citation_package character. 本文中の引用トークンに関するパッケージ. \code{"default"}, \code{"natbib"} or \code{"biblatex"}. \code{"default"} は pandoc-citeproc を, \code{"natbib"} は bibtex を使用する. よって \code{"natbib"} で日本語文献を引用する場合はオプション \code{options(tinytex.latexmk.emulation = F)} が必要. 詳細は \link[=https://gedevan-aleksizde.github.io/rmdja/%E6%96%87%E7%8C%AE%E5%BC%95%E7%94%A8.html#%E3%82%92%E4%BD%BF%E3%81%86]{rmdja の公式ドキュメント} を参照.
 #' @param citation_options character. `citation_package` のオプション. `"default"`, 空の文字列, \code{NULL} などを指定すると特に何もしない. \code{citation_package = "natbib"} を選んだ場合, \code{"default"} は \code{`numbers`} に書き換えられる. 
 #' @param figurename character. 図X の「図」の部分のテキスト.
@@ -57,6 +58,7 @@ beamer_presentation_ja <- function(
   out.height = "100%",
   highlight = "default",
   code_rownumber = FALSE,
+  code_softwrap = TRUE,
   citation_package = "biblatex",
   citation_options = "default",
   figurename = "図",
@@ -110,6 +112,14 @@ beamer_presentation_ja <- function(
     write(includes$preamble, file_in_header_extra, append = T)
     includes$in_header <- file_in_header_extra
   }
+  if(identical(code_softwrap, T)){
+    latex_preamble_code_softwrap <- system.file("resources/styles/latex/code-softwrap.tex", package = "rmdja")
+    if(is.null(includes)){
+      includes <- rmarkdown::includes(in_header = latex_preamble_code_softwrap)
+    } else {
+      includes$in_header <- c(includes$in_header, latex_preamble_code_softwrap)
+    }
+  }
   
   # ----- generate output format -----
   args_beamer <- list(
@@ -146,8 +156,7 @@ beamer_presentation_ja <- function(
     warning = T,
     error = T,
     comment = NA,
-    tidy = T,
-    tidy.opts = list(indent = getOption("formatR.indent", 2), width.cutoff = 40),
+    tidy = 'styler',
     fig.align = "center",
     out.extra = "keepaspectratio",
     out.width = out.width,
