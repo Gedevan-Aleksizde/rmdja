@@ -25,10 +25,8 @@ linkcolor: blue
 citecolor: blue
 urlcolor: magenta
 bibliography: rmdja.bib
-header-inclues:
-  - \usepackage{fancyhdr}
 pagestyle: fancy
-documentclass: bxjsreport
+documentclass: bxjsbook
 ---
 
 ```{r setup, include=FALSE}
@@ -51,6 +49,7 @@ file.copy(file.path(system.file("resources/style/img/", package = "rmdja"), c("c
 require(knitr)
 require(kableExtra)
 opts_chunk$set(
+  echo = F,
   comment = "",
   error = F,
   warning = F

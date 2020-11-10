@@ -24,7 +24,6 @@
 <meta name="author" content="Katagiri, Satoshi (ill-identified)" />
 
 
-<meta name="date" content="2020-11-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,7 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <link rel="prev" href="製本時のエラーへの対処.html"/>
 <link rel="next" href="pdf-の組版に関する細かい話.html"/>
-<script src="libs/header-attrs-2.4/header-attrs.js"></script>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -52,12 +51,10 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
-<script src="libs/viz-1.8.2/viz.js"></script>
-<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
-<script src="libs/grViz-binding-1.0.6.1/grViz.js"></script>
 
 
 <style type="text/css">
@@ -220,6 +217,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2" data-path="advanced-graph.html"><a href="advanced-graph.html#asymptote-を使う"><i class="fa fa-check"></i><b>8.2</b> Asymptote を使う</a></li>
 <li class="chapter" data-level="8.3" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他のプログラム"><i class="fa fa-check"></i><b>8.3</b> (TODO) その他のプログラム</a></li>
 <li class="chapter" data-level="8.4" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他の-r-プログラム"><i class="fa fa-check"></i><b>8.4</b> (TODO) その他の R プログラム</a></li>
+<li class="chapter" data-level="8.5" data-path="advanced-graph.html"><a href="advanced-graph.html#dot-言語とグラフィカルモデル"><i class="fa fa-check"></i><b>8.5</b> DOT 言語とグラフィカルモデル</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html"><i class="fa fa-check"></i><b>9</b> 表のデザイン</a>
 <ul>
@@ -249,10 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>V 製本と多様な形式への対応</b></span></li>
 <li class="chapter" data-level="13" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html"><i class="fa fa-check"></i><b>13</b> PDF の文書クラス</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#プレゼンテーション資料の作成"><i class="fa fa-check"></i><b>13.1</b> プレゼンテーション資料の作成</a>
-<ul>
-<li class="chapter" data-level="13.1.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#主な設定"><i class="fa fa-check"></i><b>13.1.1</b> 主な設定</a></li>
-</ul></li>
+<li class="chapter" data-level="13.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#プレゼンテーション資料の作成"><i class="fa fa-check"></i><b>13.1</b> プレゼンテーション資料の作成</a></li>
 <li class="chapter" data-level="13.2" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#wip-卒業論文の作成"><i class="fa fa-check"></i><b>13.2</b> (WIP) 卒業論文の作成</a></li>
 <li class="chapter" data-level="13.3" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#wip-小説の執筆"><i class="fa fa-check"></i><b>13.3</b> (WIP) 小説の執筆</a></li>
 </ul></li>
@@ -280,19 +275,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="16.2.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#フォントの埋め込み"><i class="fa fa-check"></i><b>16.2.2</b> フォントの埋め込み</a></li>
 </ul></li>
 </ul></li>
-<li class="part"><span><b>VI デバッグ</b></span></li>
+<li class="part"><span><b>VI デバッグとトラブルシュート</b></span></li>
 <li class="chapter" data-level="" data-path="このパートで説明すること.html"><a href="このパートで説明すること.html"><i class="fa fa-check"></i>このパートで説明すること</a></li>
 <li class="chapter" data-level="17" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html"><i class="fa fa-check"></i><b>17</b> 製本時のエラーへの対処</a>
 <ul>
 <li class="chapter" data-level="17.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>17.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
 <li class="chapter" data-level="17.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>17.2</b> YAML フロントマターを確認する</a></li>
 <li class="chapter" data-level="17.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-生成時のエラーを確認する"><i class="fa fa-check"></i><b>17.3</b> PDF 生成時のエラーを確認する</a></li>
+<li class="chapter" data-level="17.4" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#todo-windows-特有の問題"><i class="fa fa-check"></i><b>17.4</b> (TODO) Windows 特有の問題</a></li>
 </ul></li>
 <li class="appendix"><span><b>補遺</b></span></li>
 <li class="chapter" data-level="A" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html"><i class="fa fa-check"></i><b>A</b> デフォルト値の自動調整</a>
 <ul>
 <li class="chapter" data-level="A.1" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html#デフォルトのフォント"><i class="fa fa-check"></i><b>A.1</b> デフォルトのフォント</a></li>
-<li class="chapter" data-level="A.2" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html#チャンクのデフォルト設定"><i class="fa fa-check"></i><b>A.2</b> チャンクのデフォルト設定</a></li>
+<li class="chapter" data-level="A.2" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html#チャンクオプションのデフォルト設定"><i class="fa fa-check"></i><b>A.2</b> チャンクオプションのデフォルト設定</a></li>
+<li class="chapter" data-level="A.3" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html#コードブロックの整形と自動折り返し"><i class="fa fa-check"></i><b>A.3</b> コードブロックの整形と自動折り返し</a></li>
 </ul></li>
 <li class="chapter" data-level="B" data-path="pdf-の組版に関する細かい話.html"><a href="pdf-の組版に関する細かい話.html"><i class="fa fa-check"></i><b>B</b> PDF の組版に関する細かい話</a>
 <ul>
@@ -325,11 +322,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="デフォルト値の自動調整" class="section level1" number="18">
 <h1><span class="header-section-number">補遺A</span> デフォルト値の自動調整</h1>
-<p>R Markdown で日本語文書を作成する上での大きな障害の1つである, YAML フロントマターの設定を改善している. <code>rmdja</code> の文書フォーマットはYAMLフロントマターのデフォルト値などを日本語文書に適したものに変更している. さらに, ユーザーをOSごとのフォントの違いや煩雑で重複だらけの設定から解放するため, 内部処理でも動的に設定変更している. もちろんこれらは ユーザーによる YAML フロントマターやチャンクオプションの変更で上書きできる.</p>
+<p><code>rmdja</code> では R Markdown で日本語文書を作成する上での大きな障害の1つである, YAML フロントマターの設定を改善している. <code>rmdja</code> の文書フォーマットはYAMLフロントマターのデフォルト値などを日本語文書に適したものに変更している. さらに, ユーザーをOSごとのフォントの違いや煩雑で重複だらけの設定から解放するため, 内部処理でも動的に設定変更している. もちろんこれらは ユーザーによる YAML フロントマターやチャンクオプションの変更で上書きできる.</p>
 <div id="デフォルトのフォント" class="section level2" number="18.1">
 <h2><span class="header-section-number">A.1</span> デフォルトのフォント</h2>
 <p>PDF 出力時のデフォルトフォントは, 生成時に OS を判定して設定している. その設定は表 <a href="デフォルト値の自動調整.html#tab:font-default">A.1</a> のようなルールである.</p>
-<table>
+<table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:font-default">表 A.1: </span>OS/エンジン別のデフォルトフォント
 </caption>
@@ -392,11 +389,29 @@ MSフォント
 <p>これらは XeLaTeX ならば <code>zxjafont</code>, LuaLaTeX ならば <code>luatex-ja</code> で用意されているプリセットを使って設定している. 使用 OS の判定は R の基本関数による. なお, Noto フォントを選んだのは Ubuntu 18以降の日本語用フォントだからである. Ubuntu から派生したOSにはプリインストールされていることが多いようだが, Debian, Cent OS, Fedora 等にはおそらくプリインストールされていないので注意. 現時点ではフォントが<strong>実際にインストールされているかを確認する機能はない</strong>.</p>
 <p>フォントのプリセットを指定した場合, 個別設定は無効になる. さらに, 3種類の和文フォントを全て設定していない場合もデフォルトのプリセットから選ばれる.</p>
 </div>
-<div id="チャンクのデフォルト設定" class="section level2" number="18.2">
-<h2><span class="header-section-number">A.2</span> チャンクのデフォルト設定</h2>
-<p>デフォルトのグラフィックデバイスは, HTML では <code>PNG</code>, PDF では <code>cairo_pdf</code> としている. R でよく描画するような単純な図形はベクタ画像が適しているが, 件数のとても多いデータの散布図などはベクタ画像にするとファイルサイズが大きくなるため, そのような画像を適度に「劣化」させてファイルサイズを軽減してくれる <code>cairo_pdf</code> を標準としている. HTML に関しては, そもそもデフォルトの設定でPDFが表示できないWebブラウザが多いことから, PNG をデフォルトにした.</p>
-<p>また, <code>block</code>, <code>block2</code>, <code>asis</code> などのブロックを <code>echo=F</code> や <code>include=F</code> にするメリットはほぼないため, <code>knitr::opts_chunk$set(echo = F, include = F)</code> と一括設定してもこれらは <code>echo=T, include=T</code> のままである. 変更したい場合は, チャンクごとに設定することで有効になる.</p>
+<div id="チャンクオプションのデフォルト設定" class="section level2" number="18.2">
+<h2><span class="header-section-number">A.2</span> チャンクオプションのデフォルト設定</h2>
+<p>チャンクオプションのデフォルト設定も R Markdown から多少変更している.</p>
+<p><code>block</code>, <code>block2</code>, <code>asis</code> などのブロックを <code>echo=F</code> や <code>include=F</code> にするメリットはほぼないため, <code>knitr::opts_chunk$set(echo = F, include = F)</code> と一括設定してもこれらは <code>echo=T, include=T</code> のままである. 変更したい場合は, チャンクごとに設定することで有効になる.</p>
+<p>デフォルトの R グラフィックデバイスは, HTML では <code>"PNG"</code>, PDF では <code>"cairo_pdf"</code> としている. <code>"cairo_pdf"</code> を使う理由は (1) R でよく描画するような単純な図形はベクタ画像が適しているが, 件数のとても多いデータの散布図などはベクタ画像にするとファイルサイズが大きくなるため, そのような画像を適度に「劣化」させてファイルサイズを軽減してくれる, (2) 日本語フォントの表示と埋め込みの設定が最も簡単, というものである. そして HTML はそもそもデフォルトの設定で PDF が表示できない Web ブラウザが多いことから, <code>PNG</code> をデフォルトにした. もし HTML でもベクタ画像を表示したいのなら <code>"svglite"</code> を設定して SVG 形式にすると良いだろう.</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb82-1"><a href="デフォルト値の自動調整.html#cb82-1"></a>knitr<span class="op">::</span><span class="kw">opts_chunk</span>(<span class="dt">dev =</span> <span class="cf">if</span> (knir<span class="op">::</span><span class="kw">is_latex_output</span>()) <span class="st">&quot;cairo_pdf&quot;</span> <span class="cf">else</span> <span class="st">&quot;svglite&quot;</span>)</span></code></pre></div>
+<p>ただし, R 以外のプログラムで出力した画像には <code>cairo_pdf</code> は使えないため, 内部では <code>pdf</code> を使用している. これらの画像が日本語フォントを適切に埋め込めるかはそれぞれの設定に依存するため, R 側で制御するのは難しい.</p>
 </div>
+<div id="コードブロックの整形と自動折り返し" class="section level2" number="18.3">
+<h2><span class="header-section-number">A.3</span> コードブロックの整形と自動折り返し</h2>
+<p>HTML はともかく, PDF はコードの自動折り返しが難しい. 例えば <a href="https://bookdown.org/yihui/rmarkdown-cookbook/text-width.html">RCB Ch. 5.3</a> では, <code>listings.sty</code> を使う方法が書かれているが, この方法ではデフォルトのシンタックスハイライトが使えなくなり, R Markdown の大きなメリットの1つが損なわれてしまう. また, 同 <a href="https://bookdown.org/yihui/rmarkdown-cookbook/opts-tidy.html">Ch. 11.10</a> では <code>knitr</code> のチャンクオプションで <code>tidy</code> と <code>tidy.opts</code> を設定するという方法が紹介されている. この機能は <code>formatR::tidy_source()</code> 関数を利用したコード整形であり, この関数の <code>width.cutoff</code> というオプションで自動折り返しを始める位置を指定できる. (たまに勘違いしている人がいるが, ドキュメントをちゃんと読めば分かるように) このように<strong>コード整形機能は自動折り返しを目的としたものではない</strong>ため, 長すぎる関数名や文字列があると <code>width.cutoff</code> を超過することも十分ありえる. 同章では <code>styler</code> パッケージがより機能が豊富だと言及しているが, このパッケージも現時点では1行の上限を指定する機能はない<a href="#fn32" class="footnote-ref" id="fnref32"><sup>32</sup></a>. <code>rmdja</code> ではデフォルトで <code>styler</code> を使ったコード整形をするとともに, フォーマット <code>beamer_presentation_ja</code> と <code>pdf_book_ja</code> にコードブロックの自動折り返しを有効にする <code>code_softwarp</code> というオプションを用意した. 前者ではデフォルトで <code>false</code>, 後者では <code>true</code> である.</p>
+<p>しかし, これらを使っても「きれいな」コーディングになるとは限らない. 過剰な折り返しで行数が増えてしまう可能性もあるし, 折り返しや改行の位置がふぞろいになる可能性もある. よって現状では究極的には手動で調整する必要がある</p>
+<p>その際のアシストツールとして, RStudio の機能であるマージン位置の表示<a href="#fn33" class="footnote-ref" id="fnref33"><sup>33</sup></a> や, <a href="https://github.com/tjmahr/WrapRmd"><code>WrapRmd</code></a> パッケージを使うのが良いだろう.</p>
+<p>逆に自動コード整形が一切不要という場合, 最初のチャンクで以下のように設定する.</p>
+<p>PDF での自動コード整形に関する話題は R Markdown の Issues <a href="https://github.com/rstudio/rmarkdown/issues/646">#646</a> および Stack Overflow の質問 <a href="https://stackoverflow.com/questions/20788464/pandoc-doesnt-text-wrap-code-blocks-when-converting-to-pdf">“pandoc doesn’t text-wrap code blocks when converting to pdf”</a> と TeX Stack Exchange の質問 [“Break Lines in minted environment”])(<a href="https://tex.stackexchange.com/questions/200310/break-lines-in-minted-environment" class="uri">https://tex.stackexchange.com/questions/200310/break-lines-in-minted-environment</a>) が参考になるだろう.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="32">
+<li id="fn32"><p>参考: Issues <a href="https://github.com/r-lib/styler/issues/247">#247</a><a href="デフォルト値の自動調整.html#fnref32" class="footnote-back">↩︎</a></p></li>
+<li id="fn33"><p>参考: <a href="https://community.rstudio.com/t/vertical-line-in-the-source-editor/24950">Vertical Line in the source editor?</a><a href="デフォルト値の自動調整.html#fnref33" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
             </section>
 
@@ -446,7 +461,7 @@ gitbook.start({
 "link": "tree/rmdja/inst/resources/examples/bookdown/chapter/chapters/appendix.Rmd",
 "text": null
 },
-"download": ["rmdja.pdf"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

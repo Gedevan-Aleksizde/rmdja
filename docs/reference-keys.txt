@@ -14,9 +14,11 @@ tab:tab-md
 fig:caption
 fig:citr-image
 tab:biblio-comparison
+tab:japreset-default
+tab:japreset-list
 fig:tikz-venn
 fig:asymptote-graph
-fig:diagrammer-graph
+fig:dot-example
 tab:kableextra-color
 tab:kableextra-plot
 tab:stargazer-table
@@ -69,6 +71,7 @@ tikz-を使う
 asymptote-を使う
 todo-その他のプログラム
 todo-その他の-r-プログラム
+dot-言語とグラフィカルモデル
 advanced-tabulate
 kableextra-による表のスタイルのカスタマイズ
 formattable-パッケージとの併用
@@ -86,7 +89,6 @@ python
 python-のグラフィックに関する制約
 pdf-の文書クラス
 プレゼンテーション資料の作成
-主な設定
 wip-卒業論文の作成
 wip-小説の執筆
 製本方法の詳細
@@ -107,9 +109,11 @@ todo-入稿するには
 エラーがどのタイミングで発生したかを特定する
 yaml-フロントマターを確認する
 pdf-生成時のエラーを確認する
+todo-windows-特有の問題
 デフォルト値の自動調整
 デフォルトのフォント
-チャンクのデフォルト設定
+チャンクオプションのデフォルト設定
+コードブロックの整形と自動折り返し
 pdf-の組版に関する細かい話
 画像の配置
 取り消し線

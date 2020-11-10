@@ -24,7 +24,6 @@
 <meta name="author" content="Katagiri, Satoshi (ill-identified)" />
 
 
-<meta name="date" content="2020-11-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,7 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <link rel="prev" href="wip-簡単なレイアウト変更.html"/>
 <link rel="next" href="このパートについて.html"/>
-<script src="libs/header-attrs-2.4/header-attrs.js"></script>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -52,12 +51,10 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
-<script src="libs/viz-1.8.2/viz.js"></script>
-<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
-<script src="libs/grViz-binding-1.0.6.1/grViz.js"></script>
 
 
 <style type="text/css">
@@ -220,6 +217,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2" data-path="advanced-graph.html"><a href="advanced-graph.html#asymptote-を使う"><i class="fa fa-check"></i><b>8.2</b> Asymptote を使う</a></li>
 <li class="chapter" data-level="8.3" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他のプログラム"><i class="fa fa-check"></i><b>8.3</b> (TODO) その他のプログラム</a></li>
 <li class="chapter" data-level="8.4" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他の-r-プログラム"><i class="fa fa-check"></i><b>8.4</b> (TODO) その他の R プログラム</a></li>
+<li class="chapter" data-level="8.5" data-path="advanced-graph.html"><a href="advanced-graph.html#dot-言語とグラフィカルモデル"><i class="fa fa-check"></i><b>8.5</b> DOT 言語とグラフィカルモデル</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html"><i class="fa fa-check"></i><b>9</b> 表のデザイン</a>
 <ul>
@@ -249,10 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>V 製本と多様な形式への対応</b></span></li>
 <li class="chapter" data-level="13" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html"><i class="fa fa-check"></i><b>13</b> PDF の文書クラス</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#プレゼンテーション資料の作成"><i class="fa fa-check"></i><b>13.1</b> プレゼンテーション資料の作成</a>
-<ul>
-<li class="chapter" data-level="13.1.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#主な設定"><i class="fa fa-check"></i><b>13.1.1</b> 主な設定</a></li>
-</ul></li>
+<li class="chapter" data-level="13.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#プレゼンテーション資料の作成"><i class="fa fa-check"></i><b>13.1</b> プレゼンテーション資料の作成</a></li>
 <li class="chapter" data-level="13.2" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#wip-卒業論文の作成"><i class="fa fa-check"></i><b>13.2</b> (WIP) 卒業論文の作成</a></li>
 <li class="chapter" data-level="13.3" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#wip-小説の執筆"><i class="fa fa-check"></i><b>13.3</b> (WIP) 小説の執筆</a></li>
 </ul></li>
@@ -280,19 +275,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="16.2.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#フォントの埋め込み"><i class="fa fa-check"></i><b>16.2.2</b> フォントの埋め込み</a></li>
 </ul></li>
 </ul></li>
-<li class="part"><span><b>VI デバッグ</b></span></li>
+<li class="part"><span><b>VI デバッグとトラブルシュート</b></span></li>
 <li class="chapter" data-level="" data-path="このパートで説明すること.html"><a href="このパートで説明すること.html"><i class="fa fa-check"></i>このパートで説明すること</a></li>
 <li class="chapter" data-level="17" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html"><i class="fa fa-check"></i><b>17</b> 製本時のエラーへの対処</a>
 <ul>
 <li class="chapter" data-level="17.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>17.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
 <li class="chapter" data-level="17.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>17.2</b> YAML フロントマターを確認する</a></li>
 <li class="chapter" data-level="17.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-生成時のエラーを確認する"><i class="fa fa-check"></i><b>17.3</b> PDF 生成時のエラーを確認する</a></li>
+<li class="chapter" data-level="17.4" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#todo-windows-特有の問題"><i class="fa fa-check"></i><b>17.4</b> (TODO) Windows 特有の問題</a></li>
 </ul></li>
 <li class="appendix"><span><b>補遺</b></span></li>
 <li class="chapter" data-level="A" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html"><i class="fa fa-check"></i><b>A</b> デフォルト値の自動調整</a>
 <ul>
 <li class="chapter" data-level="A.1" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html#デフォルトのフォント"><i class="fa fa-check"></i><b>A.1</b> デフォルトのフォント</a></li>
-<li class="chapter" data-level="A.2" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html#チャンクのデフォルト設定"><i class="fa fa-check"></i><b>A.2</b> チャンクのデフォルト設定</a></li>
+<li class="chapter" data-level="A.2" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html#チャンクオプションのデフォルト設定"><i class="fa fa-check"></i><b>A.2</b> チャンクオプションのデフォルト設定</a></li>
+<li class="chapter" data-level="A.3" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html#コードブロックの整形と自動折り返し"><i class="fa fa-check"></i><b>A.3</b> コードブロックの整形と自動折り返し</a></li>
 </ul></li>
 <li class="chapter" data-level="B" data-path="pdf-の組版に関する細かい話.html"><a href="pdf-の組版に関する細かい話.html"><i class="fa fa-check"></i><b>B</b> PDF の組版に関する細かい話</a>
 <ul>
@@ -390,7 +387,7 @@ gitbook.start({
 "link": "tree/rmdja/inst/resources/examples/bookdown/chapter/chapters/elemental.Rmd",
 "text": null
 },
-"download": ["rmdja.pdf"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

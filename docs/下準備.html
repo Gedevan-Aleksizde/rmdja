@@ -24,7 +24,6 @@
 <meta name="author" content="Katagiri, Satoshi (ill-identified)" />
 
 
-<meta name="date" content="2020-11-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,7 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <link rel="prev" href="quick-start.html"/>
 <link rel="next" href="このパートの概要.html"/>
-<script src="libs/header-attrs-2.4/header-attrs.js"></script>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -52,12 +51,10 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
-<script src="libs/viz-1.8.2/viz.js"></script>
-<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
-<script src="libs/grViz-binding-1.0.6.1/grViz.js"></script>
 
 
 <style type="text/css">
@@ -220,6 +217,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2" data-path="advanced-graph.html"><a href="advanced-graph.html#asymptote-を使う"><i class="fa fa-check"></i><b>8.2</b> Asymptote を使う</a></li>
 <li class="chapter" data-level="8.3" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他のプログラム"><i class="fa fa-check"></i><b>8.3</b> (TODO) その他のプログラム</a></li>
 <li class="chapter" data-level="8.4" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他の-r-プログラム"><i class="fa fa-check"></i><b>8.4</b> (TODO) その他の R プログラム</a></li>
+<li class="chapter" data-level="8.5" data-path="advanced-graph.html"><a href="advanced-graph.html#dot-言語とグラフィカルモデル"><i class="fa fa-check"></i><b>8.5</b> DOT 言語とグラフィカルモデル</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html"><i class="fa fa-check"></i><b>9</b> 表のデザイン</a>
 <ul>
@@ -249,10 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>V 製本と多様な形式への対応</b></span></li>
 <li class="chapter" data-level="13" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html"><i class="fa fa-check"></i><b>13</b> PDF の文書クラス</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#プレゼンテーション資料の作成"><i class="fa fa-check"></i><b>13.1</b> プレゼンテーション資料の作成</a>
-<ul>
-<li class="chapter" data-level="13.1.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#主な設定"><i class="fa fa-check"></i><b>13.1.1</b> 主な設定</a></li>
-</ul></li>
+<li class="chapter" data-level="13.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#プレゼンテーション資料の作成"><i class="fa fa-check"></i><b>13.1</b> プレゼンテーション資料の作成</a></li>
 <li class="chapter" data-level="13.2" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#wip-卒業論文の作成"><i class="fa fa-check"></i><b>13.2</b> (WIP) 卒業論文の作成</a></li>
 <li class="chapter" data-level="13.3" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#wip-小説の執筆"><i class="fa fa-check"></i><b>13.3</b> (WIP) 小説の執筆</a></li>
 </ul></li>
@@ -280,19 +275,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="16.2.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#フォントの埋め込み"><i class="fa fa-check"></i><b>16.2.2</b> フォントの埋め込み</a></li>
 </ul></li>
 </ul></li>
-<li class="part"><span><b>VI デバッグ</b></span></li>
+<li class="part"><span><b>VI デバッグとトラブルシュート</b></span></li>
 <li class="chapter" data-level="" data-path="このパートで説明すること.html"><a href="このパートで説明すること.html"><i class="fa fa-check"></i>このパートで説明すること</a></li>
 <li class="chapter" data-level="17" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html"><i class="fa fa-check"></i><b>17</b> 製本時のエラーへの対処</a>
 <ul>
 <li class="chapter" data-level="17.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>17.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
 <li class="chapter" data-level="17.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>17.2</b> YAML フロントマターを確認する</a></li>
 <li class="chapter" data-level="17.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-生成時のエラーを確認する"><i class="fa fa-check"></i><b>17.3</b> PDF 生成時のエラーを確認する</a></li>
+<li class="chapter" data-level="17.4" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#todo-windows-特有の問題"><i class="fa fa-check"></i><b>17.4</b> (TODO) Windows 特有の問題</a></li>
 </ul></li>
 <li class="appendix"><span><b>補遺</b></span></li>
 <li class="chapter" data-level="A" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html"><i class="fa fa-check"></i><b>A</b> デフォルト値の自動調整</a>
 <ul>
 <li class="chapter" data-level="A.1" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html#デフォルトのフォント"><i class="fa fa-check"></i><b>A.1</b> デフォルトのフォント</a></li>
-<li class="chapter" data-level="A.2" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html#チャンクのデフォルト設定"><i class="fa fa-check"></i><b>A.2</b> チャンクのデフォルト設定</a></li>
+<li class="chapter" data-level="A.2" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html#チャンクオプションのデフォルト設定"><i class="fa fa-check"></i><b>A.2</b> チャンクオプションのデフォルト設定</a></li>
+<li class="chapter" data-level="A.3" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html#コードブロックの整形と自動折り返し"><i class="fa fa-check"></i><b>A.3</b> コードブロックの整形と自動折り返し</a></li>
 </ul></li>
 <li class="chapter" data-level="B" data-path="pdf-の組版に関する細かい話.html"><a href="pdf-の組版に関する細かい話.html"><i class="fa fa-check"></i><b>B</b> PDF の組版に関する細かい話</a>
 <ul>
@@ -332,16 +329,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>このドキュメントは <code>rmdja</code> パッケージに含まれている. よってまずはこれをダウンロードしてほしい.</p>
 <p>3種類のテンプレートのうち, <code>pdf book in Japanese</code> のみ, 文書のビルドのための下準備が追加で必要になるため, その方法を解説する. それ以外は第 <a href="quick-start.html#quick-start">1</a> 節で書いたように “knit” ボタンを押すだけで良い.</p>
 <p>最低限のファイルやパッケージで動くほうのデモ用ディレクトリをコピーする. ただし, <code>tidyverse</code> と <code>kableExtra</code> のインストールも必要である.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb6-1"><a href="下準備.html#cb6-1"></a><span class="kw">file.copy</span>(<span class="kw">system.file</span>(<span class="st">&quot;resources/examples/bookdown-minimal&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;rmdja&quot;</span>), <span class="st">&quot;./&quot;</span>, <span class="dt">recursive =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb6-1"><a href="下準備.html#cb6-1"></a><span class="kw">file.copy</span>(<span class="kw">system.file</span>(<span class="st">&quot;resources/examples/bookdown-minimal&quot;</span>, </span>
+<span id="cb6-2"><a href="下準備.html#cb6-2"></a>  <span class="dt">package =</span> <span class="st">&quot;rmdja&quot;</span>), <span class="st">&quot;./&quot;</span>, <span class="dt">recursive =</span> T)</span></code></pre></div>
 </div>
 <div id="書籍形式のビルド操作" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> 書籍形式のビルド操作</h2>
-<p>bookdown の文書生成は従来の R Markdown と違い, RStudio の <code>knit</code> ボタンでは<strong>できない</strong>. 代わりに, 以下の2通りの方法がある.</p>
+<p>書籍形式のテンプレートである <code>pdf book in Japanese</code> を選択した場合, 論文形式やスライド形式とは違いフォルダが作られ, その中に <code>_bookdown.yml</code>, <code>_output.yml</code> というファイルが作られる. これらは書籍の細かいフォーマットを設定するためのファイルである. 新規作成ファイルも同じフォルダに <code>index.Rmd</code> という名前で保存する. この名前は最初に読み込むファイル名のデフォルト名として決まっているため, 他の名前で保存すると正しく動作しないことがある. さらにbookdown の文書生成は従来の R Markdown と違い, RStudio の <code>knit</code> ボタンでは<strong>できない</strong>. 代わりに, 以下の2通りの方法がある.</p>
 <ol style="list-style-type: decimal">
 <li><code>bookdown::render_book('index.Rmd', format = "bookdown::gitbook")</code> などを呼び出す</li>
 <li>RStudio の Build ペーンを使う</li>
 </ol>
-<p>前者は, 以下のように実行する. 順にHTML, PDF, epub を出力している</p>
+<p>前者の場合は, Rmd ファイルのあるディレクトリに移動して以下の関数を実行する. 順にHTML, PDF, epub を出力している</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb7-1"><a href="下準備.html#cb7-1"></a>bookdown<span class="op">::</span><span class="kw">render_book</span>(<span class="st">&quot;index.Rmd&quot;</span>, <span class="st">&quot;rmdja::gitbook_ja&quot;</span>)</span>
 <span id="cb7-2"><a href="下準備.html#cb7-2"></a>bookdown<span class="op">::</span><span class="kw">render_book</span>(<span class="st">&quot;index.Rmd&quot;</span>, <span class="st">&quot;rmdja::pdf_book_ja&quot;</span>)</span>
 <span id="cb7-3"><a href="下準備.html#cb7-3"></a>bookdown<span class="op">::</span><span class="kw">render_book</span>(<span class="st">&quot;index.Rmd&quot;</span>, <span class="st">&quot;bookdown::epub_book&quot;</span>)</span></code></pre></div>
@@ -420,7 +418,7 @@ gitbook.start({
 "link": "tree/rmdja/inst/resources/examples/bookdown/chapter/chapters/minimal.Rmd",
 "text": null
 },
-"download": ["rmdja.pdf"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

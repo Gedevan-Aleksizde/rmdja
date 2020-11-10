@@ -24,7 +24,6 @@
 <meta name="author" content="Katagiri, Satoshi (ill-identified)" />
 
 
-<meta name="date" content="2020-11-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,7 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <link rel="prev" href="動的なコンテンツの作成.html"/>
 <link rel="next" href="wip-簡単なレイアウト変更.html"/>
-<script src="libs/header-attrs-2.4/header-attrs.js"></script>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -52,12 +51,10 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
-<script src="libs/viz-1.8.2/viz.js"></script>
-<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
-<script src="libs/grViz-binding-1.0.6.1/grViz.js"></script>
 
 
 <style type="text/css">
@@ -220,6 +217,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2" data-path="advanced-graph.html"><a href="advanced-graph.html#asymptote-を使う"><i class="fa fa-check"></i><b>8.2</b> Asymptote を使う</a></li>
 <li class="chapter" data-level="8.3" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他のプログラム"><i class="fa fa-check"></i><b>8.3</b> (TODO) その他のプログラム</a></li>
 <li class="chapter" data-level="8.4" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他の-r-プログラム"><i class="fa fa-check"></i><b>8.4</b> (TODO) その他の R プログラム</a></li>
+<li class="chapter" data-level="8.5" data-path="advanced-graph.html"><a href="advanced-graph.html#dot-言語とグラフィカルモデル"><i class="fa fa-check"></i><b>8.5</b> DOT 言語とグラフィカルモデル</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html"><i class="fa fa-check"></i><b>9</b> 表のデザイン</a>
 <ul>
@@ -249,10 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>V 製本と多様な形式への対応</b></span></li>
 <li class="chapter" data-level="13" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html"><i class="fa fa-check"></i><b>13</b> PDF の文書クラス</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#プレゼンテーション資料の作成"><i class="fa fa-check"></i><b>13.1</b> プレゼンテーション資料の作成</a>
-<ul>
-<li class="chapter" data-level="13.1.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#主な設定"><i class="fa fa-check"></i><b>13.1.1</b> 主な設定</a></li>
-</ul></li>
+<li class="chapter" data-level="13.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#プレゼンテーション資料の作成"><i class="fa fa-check"></i><b>13.1</b> プレゼンテーション資料の作成</a></li>
 <li class="chapter" data-level="13.2" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#wip-卒業論文の作成"><i class="fa fa-check"></i><b>13.2</b> (WIP) 卒業論文の作成</a></li>
 <li class="chapter" data-level="13.3" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#wip-小説の執筆"><i class="fa fa-check"></i><b>13.3</b> (WIP) 小説の執筆</a></li>
 </ul></li>
@@ -280,19 +275,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="16.2.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#フォントの埋め込み"><i class="fa fa-check"></i><b>16.2.2</b> フォントの埋め込み</a></li>
 </ul></li>
 </ul></li>
-<li class="part"><span><b>VI デバッグ</b></span></li>
+<li class="part"><span><b>VI デバッグとトラブルシュート</b></span></li>
 <li class="chapter" data-level="" data-path="このパートで説明すること.html"><a href="このパートで説明すること.html"><i class="fa fa-check"></i>このパートで説明すること</a></li>
 <li class="chapter" data-level="17" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html"><i class="fa fa-check"></i><b>17</b> 製本時のエラーへの対処</a>
 <ul>
 <li class="chapter" data-level="17.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>17.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
 <li class="chapter" data-level="17.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>17.2</b> YAML フロントマターを確認する</a></li>
 <li class="chapter" data-level="17.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-生成時のエラーを確認する"><i class="fa fa-check"></i><b>17.3</b> PDF 生成時のエラーを確認する</a></li>
+<li class="chapter" data-level="17.4" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#todo-windows-特有の問題"><i class="fa fa-check"></i><b>17.4</b> (TODO) Windows 特有の問題</a></li>
 </ul></li>
 <li class="appendix"><span><b>補遺</b></span></li>
 <li class="chapter" data-level="A" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html"><i class="fa fa-check"></i><b>A</b> デフォルト値の自動調整</a>
 <ul>
 <li class="chapter" data-level="A.1" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html#デフォルトのフォント"><i class="fa fa-check"></i><b>A.1</b> デフォルトのフォント</a></li>
-<li class="chapter" data-level="A.2" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html#チャンクのデフォルト設定"><i class="fa fa-check"></i><b>A.2</b> チャンクのデフォルト設定</a></li>
+<li class="chapter" data-level="A.2" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html#チャンクオプションのデフォルト設定"><i class="fa fa-check"></i><b>A.2</b> チャンクオプションのデフォルト設定</a></li>
+<li class="chapter" data-level="A.3" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html#コードブロックの整形と自動折り返し"><i class="fa fa-check"></i><b>A.3</b> コードブロックの整形と自動折り返し</a></li>
 </ul></li>
 <li class="chapter" data-level="B" data-path="pdf-の組版に関する細かい話.html"><a href="pdf-の組版に関する細かい話.html"><i class="fa fa-check"></i><b>B</b> PDF の組版に関する細かい話</a>
 <ul>
@@ -335,16 +332,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="表への相互参照" class="section level3" number="5.1.2">
 <h3><span class="header-section-number">5.1.2</span> 表への相互参照</h3>
 <p>Markdown 記法で表を書く場合, 以下のように <code>Table:</code> の直後にラベルを記入する (表 <a href="相互参照と引用.html#tab:tab-md">5.1</a>).</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb47-1"><a href="相互参照と引用.html#cb47-1"></a><span class="an">Table:</span><span class="co"> (\#tab:tab-md) Markdown 記法の表</span></span>
-<span id="cb47-2"><a href="相互参照と引用.html#cb47-2"></a></span>
-<span id="cb47-3"><a href="相互参照と引用.html#cb47-3"></a> Sepal.Length   Sepal.Width   Petal.Length   Petal.Width</span>
-<span id="cb47-4"><a href="相互参照と引用.html#cb47-4"></a>-------------  ------------  -------------  ------------</span>
-<span id="cb47-5"><a href="相互参照と引用.html#cb47-5"></a><span class="in">          5.1           3.5            1.4           0.2</span></span>
-<span id="cb47-6"><a href="相互参照と引用.html#cb47-6"></a><span class="in">          4.9           3.0            1.4           0.2</span></span>
-<span id="cb47-7"><a href="相互参照と引用.html#cb47-7"></a><span class="in">          4.7           3.2            1.3           0.2</span></span>
-<span id="cb47-8"><a href="相互参照と引用.html#cb47-8"></a><span class="in">          4.6           3.1            1.5           0.2</span></span>
-<span id="cb47-9"><a href="相互参照と引用.html#cb47-9"></a><span class="in">          5.0           3.6            1.4           0.2</span></span>
-<span id="cb47-10"><a href="相互参照と引用.html#cb47-10"></a><span class="in">          5.4           3.9            1.7           0.4</span></span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb48-1"><a href="相互参照と引用.html#cb48-1"></a><span class="an">Table:</span><span class="co"> (\#tab:tab-md) Markdown 記法の表</span></span>
+<span id="cb48-2"><a href="相互参照と引用.html#cb48-2"></a></span>
+<span id="cb48-3"><a href="相互参照と引用.html#cb48-3"></a> Sepal.Length   Sepal.Width   Petal.Length   Petal.Width</span>
+<span id="cb48-4"><a href="相互参照と引用.html#cb48-4"></a>-------------  ------------  -------------  ------------</span>
+<span id="cb48-5"><a href="相互参照と引用.html#cb48-5"></a><span class="in">          5.1           3.5            1.4           0.2</span></span>
+<span id="cb48-6"><a href="相互参照と引用.html#cb48-6"></a><span class="in">          4.9           3.0            1.4           0.2</span></span>
+<span id="cb48-7"><a href="相互参照と引用.html#cb48-7"></a><span class="in">          4.7           3.2            1.3           0.2</span></span>
+<span id="cb48-8"><a href="相互参照と引用.html#cb48-8"></a><span class="in">          4.6           3.1            1.5           0.2</span></span>
+<span id="cb48-9"><a href="相互参照と引用.html#cb48-9"></a><span class="in">          5.0           3.6            1.4           0.2</span></span>
+<span id="cb48-10"><a href="相互参照と引用.html#cb48-10"></a><span class="in">          5.4           3.9            1.7           0.4</span></span></code></pre></div>
 <table>
 <caption><span id="tab:tab-md">表 5.1: </span> Markdown 記法の表</caption>
 <thead>
@@ -425,18 +422,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">5.2</span> 文献引用</h2>
 <p>YAMLフロントマターの <code>biblography:</code> に文献管理ファイル (<code>.bib</code>, <code>.json</code> 等) を指定することで, ファイルに含まれる文献への参照が可能になる. <code>@引用ID</code> で本文に引用を与えられ, 文書に引用した文献の一覧が自動で生成される. また, <code>citr</code> パッケージにより, RStudio Addins に文献に対応する引用IDを取り出して挿入する機能が追加される.</p>
 
-<div class="sourceCode" id="cb48"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb48-1"><a href="相互参照と引用.html#cb48-1"></a>knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="kw">file.path</span>(img_dir, <span class="st">&quot;citr.png&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb49-1"><a href="相互参照と引用.html#cb49-1"></a>knitr<span class="op">::</span><span class="kw">include_graphics</span>(<span class="kw">file.path</span>(img_dir, <span class="st">&quot;citr.png&quot;</span>))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:citr-image"></span>
 <img src="img/citr.png" alt="citr パッケージの例" width="622" height="70%" />
 <p class="caption">
 図 5.2: <code>citr</code> パッケージの例
 </p>
 </div>
-<p>一方で, この記述が文書においてどのようなスタイルで出力されるかは文献引用を処理するプログラムによって変化する. そのプログラムにはいくつか候補がある.</p>
-<p>R Markdown の文献引用は pandoc を経由して処理され, pandoc は現時点では <code>pandoc-citeproc</code> (<code>default</code>), BibTeX (<code>natbib</code>), BibLaTeX (<code>biblatex</code>) の選択をサポートしている. <code>pandoc-citeproc</code> 以外はもともと LaTeX 用に作られたため, HTML では常に <code>pandoc-citeproc</code> で処理される. PDF ではそれに加えて <code>bibtex</code>, <code>biblatex</code> を指定することもできる. (<code>default</code> とは別なのでややこしいが) デフォルトでは <code>biblatex</code> を使用する. これはフォーマット引数の <code>citation_package</code> で変更できる.</p>
+<p>一方で, この記述が文書においてどのようなスタイルで出力されるかは文献引用を処理するプログラムによって変化する. そのプログラムには3つの候補がある. R Markdown の文献引用は pandoc を経由して処理され, 現時点では <code>pandoc-citeproc</code> (<code>default</code>), BibTeX (<code>natbib</code>), BibLaTeX (<code>biblatex</code>) の選択をサポートしている. <code>pandoc-citeproc</code> 以外はもともと LaTeX 用に作られたため, HTML では常に <code>pandoc-citeproc</code> で処理される. PDF ではそれに加えて <code>bibtex</code>, <code>biblatex</code> を指定することもできる. (<code>default</code> とは別なのでややこしいが) <code>rmdja</code> はデフォルトでは PDF 出力時に <code>biblatex</code> を使用する. これはフォーマット引数の <code>citation_package</code> で変更できる. 正確には以下の3つの値のどれかを指定する.</p>
 <ul>
 <li><code>default</code>: <code>pandoc-citeproc</code> を使用する.</li>
-<li><code>biblatex</code>: BibLaTeX を使用する. デフォルト. スタイルはこちらが用意した <code>jauthoryear</code> というもの.</li>
+<li><code>biblatex</code>: BibLaTeX を使用する. デフォルト. スタイルのデフォルトはこちらが用意した <code>jauthoryear</code> というもの.</li>
 <li><code>natbib</code>: BibTeX を使用し, 本文中の参照には <code>natbib.sty</code> が使われる[^natbib-contraint]. ただし, 日本語 (マルチバイト文字) の含まれる文献情報を出力する場合は<strong>特殊な設定をしないと製本処理がハングアップする</strong> (後述).</li>
 </ul>
 <div id="文献引用スタイルのカスタマイズ" class="section level3" number="5.2.1">
@@ -449,25 +445,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 , <code>biblio-title</code>: 「参考文献」タイトルの文字列</li>
 </ul>
 <p>このうち <code>biblio-style</code>, <code>natbiboptions</code>, <code>biblatexoptions</code> はフォーマット関数で指定する. 例えば以下のように.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb49-1"><a href="相互参照と引用.html#cb49-1"></a><span class="fu">output</span><span class="kw">:</span></span>
-<span id="cb49-2"><a href="相互参照と引用.html#cb49-2"></a><span class="at">  rmdja:</span><span class="fu">:pdf_book_ja</span><span class="kw">:</span></span>
-<span id="cb49-3"><a href="相互参照と引用.html#cb49-3"></a><span class="at">    </span><span class="fu">citation_package</span><span class="kw">:</span><span class="at"> biblatex</span></span>
-<span id="cb49-4"><a href="相互参照と引用.html#cb49-4"></a><span class="at">    </span><span class="fu">citation_options</span><span class="kw">:</span></span>
-<span id="cb49-5"><a href="相互参照と引用.html#cb49-5"></a><span class="at">      </span><span class="kw">-</span><span class="at"> style=jauthoryear</span></span>
-<span id="cb49-6"><a href="相互参照と引用.html#cb49-6"></a><span class="at">      </span><span class="kw">-</span><span class="at"> natbib=true</span></span></code></pre></div>
-<p>これは pandoc の記法を利用した従来のR Markdown で以下のように書いているのと同様であり, <code>citation_package: natbib</code> ならば <code>biblatexoptions</code> が <code>natbiboptions</code> に置き換わる.</p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb50-1"><a href="相互参照と引用.html#cb50-1"></a><span class="fu">output</span><span class="kw">:</span></span>
-<span id="cb50-2"><a href="相互参照と引用.html#cb50-2"></a><span class="at">  </span><span class="fu">....</span><span class="kw">:</span></span>
-<span id="cb50-3"><a href="相互参照と引用.html#cb50-3"></a><span class="at">    </span><span class="fu">citation_package</span><span class="kw">:</span><span class="at"> natbib</span></span>
-<span id="cb50-4"><a href="相互参照と引用.html#cb50-4"></a><span class="fu">biblio-style</span><span class="kw">:</span><span class="at"> jauthoryear</span></span>
-<span id="cb50-5"><a href="相互参照と引用.html#cb50-5"></a><span class="fu">biblatexoptions</span><span class="kw">:</span></span>
-<span id="cb50-6"><a href="相互参照と引用.html#cb50-6"></a><span class="at">  </span><span class="kw">-</span><span class="at"> natbib=true</span></span></code></pre></div>
+<span id="cb50-2"><a href="相互参照と引用.html#cb50-2"></a><span class="at">  rmdja:</span><span class="fu">:pdf_book_ja</span><span class="kw">:</span></span>
+<span id="cb50-3"><a href="相互参照と引用.html#cb50-3"></a><span class="at">    </span><span class="fu">citation_package</span><span class="kw">:</span><span class="at"> biblatex</span></span>
+<span id="cb50-4"><a href="相互参照と引用.html#cb50-4"></a><span class="at">    </span><span class="fu">citation_options</span><span class="kw">:</span></span>
+<span id="cb50-5"><a href="相互参照と引用.html#cb50-5"></a><span class="at">      </span><span class="kw">-</span><span class="at"> style=jauthoryear</span></span>
+<span id="cb50-6"><a href="相互参照と引用.html#cb50-6"></a><span class="at">      </span><span class="kw">-</span><span class="at"> natbib=true</span></span></code></pre></div>
+<p>これは pandoc の記法を利用した従来のR Markdown で以下のように書いているのと同様であり, <code>citation_package: natbib</code> ならば <code>biblatexoptions</code> が <code>natbiboptions</code> に置き換わる.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb51-1"><a href="相互参照と引用.html#cb51-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb51-2"><a href="相互参照と引用.html#cb51-2"></a><span class="at">  </span><span class="fu">....</span><span class="kw">:</span></span>
+<span id="cb51-3"><a href="相互参照と引用.html#cb51-3"></a><span class="at">    </span><span class="fu">citation_package</span><span class="kw">:</span><span class="at"> natbib</span></span>
+<span id="cb51-4"><a href="相互参照と引用.html#cb51-4"></a><span class="fu">biblio-style</span><span class="kw">:</span><span class="at"> jauthoryear</span></span>
+<span id="cb51-5"><a href="相互参照と引用.html#cb51-5"></a><span class="fu">biblatexoptions</span><span class="kw">:</span></span>
+<span id="cb51-6"><a href="相互参照と引用.html#cb51-6"></a><span class="at">  </span><span class="kw">-</span><span class="at"> natbib=true</span></span></code></pre></div>
 <p>2通りの記法が存在するのはやや混乱するかもしれないが, 後方互換性を考慮し <code>rmdja</code> ではこれらの2通りの記法どちらでも受け付けるようにしている.</p>
 <p><code>biblatex</code> 以外のエンジンで出力したい, 例えば指定された <code>.bst</code> のスタイルで文献一覧を出力したい場合は, (u)pBibTeX が必要になる. その操作の詳細は <a href="biblio-advaneced.html#biblio-advaneced">10</a> 章を参照.</p>
 </div>
 <div id="文献リスト生成エンジンの違いについて" class="section level3" number="5.2.2">
 <h3><span class="header-section-number">5.2.2</span> 文献リスト生成エンジンの違いについて</h3>
-<p><code>pandoc-citeproc</code>, <code>bibtex</code>, <code>biblatex</code> はそれぞれ引用文献リストのスタイルを記述するファイルがあり, それぞれ拡張子は <code>.csl</code>, <code>.bst</code>, <code>.bbx</code>/<code>.cbx</code>, である. <code>.csl</code> は MS Word のスタイルと同じもので, XMLで記述されている<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a>. <code>.bst</code> は BibTeX 用のフォーマットで, 自分で改造するには逆ポーランド記法の構文に慣れねばならない. そして BibLaTeX はスタイルを LaTeX のマクロで記述でき, さらにそういった細かい記述のスタイルファイルを用意しなくとも指定できるオプションがいくつか存在する(ここまで, 表 <a href="相互参照と引用.html#tab:biblio-comparison">5.2</a>).</p>
+<p><code>pandoc-citeproc</code>, <code>bibtex</code>, <code>biblatex</code> はそれぞれ引用文献リストのスタイルを記述するファイルがあり, それぞれ拡張子は <code>.csl</code>, <code>.bst</code>, <code>.bbx</code>/<code>.cbx</code>, である. <code>.csl</code> は MS Word のスタイルと同じもので, XMLで記述されている<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>. <code>.bst</code> は BibTeX 用のフォーマットで, 自分で改造するには逆ポーランド記法の構文に慣れねばならない. そして BibLaTeX はスタイルを LaTeX のマクロで記述でき, さらにそういった細かい記述のスタイルファイルを用意しなくとも指定できるオプションがいくつか存在する(ここまで, 表 <a href="相互参照と引用.html#tab:biblio-comparison">5.2</a>).</p>
 <p>現バージョンでは <code>biblatex</code> がデフォルトである. 現在の日本語圏の LaTeX 使用者にとっては <code>.bst</code> ファイルの種類が充実しているため <code>natbib</code> を使いたいところだが, R Markdown の場合エンジンが BibTeX であるため<strong>日本語が使えない</strong>. (u)pBibTeX を使うにはやや複雑な手順が必要である. よって, デフォルトでそのような下準備をさせるべきでないと考えたので <code>rmdja</code> では <code>biblatex</code> をデフォルトとし, 日本語表示に最低限のスタイルだけを用意している.</p>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
@@ -575,8 +571,8 @@ natbib
 </div>
 <div class="footnotes">
 <hr />
-<ol start="11">
-<li id="fn11"><p>簡単なカスタマイズなら CSL editor というWebサービスでできる. しかしあくまでXMLなので, あまり複雑な処理はできないことに注意する.<a href="相互参照と引用.html#fnref11" class="footnote-back">↩︎</a></p></li>
+<ol start="12">
+<li id="fn12"><p>簡単なカスタマイズなら CSL editor というWebサービスでできる. しかしあくまでXMLなので, あまり複雑な処理はできないことに注意する.<a href="相互参照と引用.html#fnref12" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -627,7 +623,7 @@ gitbook.start({
 "link": "tree/rmdja/inst/resources/examples/bookdown/chapter/chapters/elemental.Rmd",
 "text": null
 },
-"download": ["rmdja.pdf"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

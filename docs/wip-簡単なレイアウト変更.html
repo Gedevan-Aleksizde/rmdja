@@ -24,7 +24,6 @@
 <meta name="author" content="Katagiri, Satoshi (ill-identified)" />
 
 
-<meta name="date" content="2020-11-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,7 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <link rel="prev" href="相互参照と引用.html"/>
 <link rel="next" href="wip-rmdja-による文書作成支援機能.html"/>
-<script src="libs/header-attrs-2.4/header-attrs.js"></script>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -52,12 +51,10 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
-<script src="libs/viz-1.8.2/viz.js"></script>
-<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
-<script src="libs/grViz-binding-1.0.6.1/grViz.js"></script>
 
 
 <style type="text/css">
@@ -220,6 +217,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2" data-path="advanced-graph.html"><a href="advanced-graph.html#asymptote-を使う"><i class="fa fa-check"></i><b>8.2</b> Asymptote を使う</a></li>
 <li class="chapter" data-level="8.3" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他のプログラム"><i class="fa fa-check"></i><b>8.3</b> (TODO) その他のプログラム</a></li>
 <li class="chapter" data-level="8.4" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他の-r-プログラム"><i class="fa fa-check"></i><b>8.4</b> (TODO) その他の R プログラム</a></li>
+<li class="chapter" data-level="8.5" data-path="advanced-graph.html"><a href="advanced-graph.html#dot-言語とグラフィカルモデル"><i class="fa fa-check"></i><b>8.5</b> DOT 言語とグラフィカルモデル</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html"><i class="fa fa-check"></i><b>9</b> 表のデザイン</a>
 <ul>
@@ -249,10 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>V 製本と多様な形式への対応</b></span></li>
 <li class="chapter" data-level="13" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html"><i class="fa fa-check"></i><b>13</b> PDF の文書クラス</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#プレゼンテーション資料の作成"><i class="fa fa-check"></i><b>13.1</b> プレゼンテーション資料の作成</a>
-<ul>
-<li class="chapter" data-level="13.1.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#主な設定"><i class="fa fa-check"></i><b>13.1.1</b> 主な設定</a></li>
-</ul></li>
+<li class="chapter" data-level="13.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#プレゼンテーション資料の作成"><i class="fa fa-check"></i><b>13.1</b> プレゼンテーション資料の作成</a></li>
 <li class="chapter" data-level="13.2" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#wip-卒業論文の作成"><i class="fa fa-check"></i><b>13.2</b> (WIP) 卒業論文の作成</a></li>
 <li class="chapter" data-level="13.3" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#wip-小説の執筆"><i class="fa fa-check"></i><b>13.3</b> (WIP) 小説の執筆</a></li>
 </ul></li>
@@ -280,19 +275,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="16.2.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#フォントの埋め込み"><i class="fa fa-check"></i><b>16.2.2</b> フォントの埋め込み</a></li>
 </ul></li>
 </ul></li>
-<li class="part"><span><b>VI デバッグ</b></span></li>
+<li class="part"><span><b>VI デバッグとトラブルシュート</b></span></li>
 <li class="chapter" data-level="" data-path="このパートで説明すること.html"><a href="このパートで説明すること.html"><i class="fa fa-check"></i>このパートで説明すること</a></li>
 <li class="chapter" data-level="17" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html"><i class="fa fa-check"></i><b>17</b> 製本時のエラーへの対処</a>
 <ul>
 <li class="chapter" data-level="17.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>17.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
 <li class="chapter" data-level="17.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>17.2</b> YAML フロントマターを確認する</a></li>
 <li class="chapter" data-level="17.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-生成時のエラーを確認する"><i class="fa fa-check"></i><b>17.3</b> PDF 生成時のエラーを確認する</a></li>
+<li class="chapter" data-level="17.4" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#todo-windows-特有の問題"><i class="fa fa-check"></i><b>17.4</b> (TODO) Windows 特有の問題</a></li>
 </ul></li>
 <li class="appendix"><span><b>補遺</b></span></li>
 <li class="chapter" data-level="A" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html"><i class="fa fa-check"></i><b>A</b> デフォルト値の自動調整</a>
 <ul>
 <li class="chapter" data-level="A.1" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html#デフォルトのフォント"><i class="fa fa-check"></i><b>A.1</b> デフォルトのフォント</a></li>
-<li class="chapter" data-level="A.2" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html#チャンクのデフォルト設定"><i class="fa fa-check"></i><b>A.2</b> チャンクのデフォルト設定</a></li>
+<li class="chapter" data-level="A.2" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html#チャンクオプションのデフォルト設定"><i class="fa fa-check"></i><b>A.2</b> チャンクオプションのデフォルト設定</a></li>
+<li class="chapter" data-level="A.3" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html#コードブロックの整形と自動折り返し"><i class="fa fa-check"></i><b>A.3</b> コードブロックの整形と自動折り返し</a></li>
 </ul></li>
 <li class="chapter" data-level="B" data-path="pdf-の組版に関する細かい話.html"><a href="pdf-の組版に関する細かい話.html"><i class="fa fa-check"></i><b>B</b> PDF の組版に関する細かい話</a>
 <ul>
@@ -336,21 +333,195 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">6.2</span> PDF</h2>
 <div id="フォント変更-1" class="section level3" number="6.2.1">
 <h3><span class="header-section-number">6.2.1</span> フォント変更</h3>
-<p>PDF を生成する場合, ver 0.3 時点ではデフォルトのフォントを OS に応じて変えている. もし変更したい場合はYAMLフロントマターの以下の項目を変更する</p>
+<p>PDF を生成する場合, ver 0.3 以降ではデフォルトのフォントファミリを OS に応じて変えている. もし変更したい場合はYAMLフロントマターの以下の項目を変更する</p>
 <ul>
-<li><code>mainfont</code>: 欧文セリフフォント</li>
-<li><code>sansfont</code>: 欧文サンセリフフォント</li>
-<li><code>monofont</code>: 等幅フォント (コードの表示などに使用)</li>
-<li><code>jfontpreset</code>: 和文フォントのプリセット</li>
-<li><code>jmainfont</code>: 和文メインフォント (一般に明朝体を指定)</li>
-<li><code>jsansfont</code>: 和文セリフフォント (一般にゴシック体を指定)</li>
-<li><code>jmonofont</code>: 和文等幅フォント (コードの表示などに使用)</li>
+<li><code>mainfont</code>: 欧文セリフフォントファミリ</li>
+<li><code>sansfont</code>: 欧文サンセリフフォントファミリ</li>
+<li><code>monofont</code>: 等幅フォントファミリ (コードの表示などに使用)</li>
+<li><code>jfontpreset</code>: 和文フォントファミリのプリセット</li>
+<li><code>jmainfont</code>: 和文メインフォントファミリ (一般に明朝体を指定)</li>
+<li><code>jsansfont</code>: 和文セリフフォントファミリ (一般にゴシック体を指定)</li>
+<li><code>jmonofont</code>: 和文等幅フォントファミリ (コードの表示などに使用)</li>
 </ul>
-<p><code>jfontpreset</code> は <code>zxjafont</code> または <code>luatex-ja</code> によるプリセットで, 3種類のフォントを一括指定できる. 個別指定したフォントはこれを上書きする. 特にこだわりがないなら一括指定で良いが, ソースコードを多く掲載する場合は <code>M+</code> や <code>Ricty</code> などのフォントを用意すると良いだろう.</p>
-<p>さらに, それぞれの項目には <code>options</code> と接尾辞のついた項目が用意されている. フォントの相対サイズが合わず不格好な場合は</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb51-1"><a href="wip-簡単なレイアウト変更.html#cb51-1"></a><span class="fu">mainfont</span><span class="kw">:</span><span class="at"> Palatinno</span></span>
-<span id="cb51-2"><a href="wip-簡単なレイアウト変更.html#cb51-2"></a><span class="fu">mainfontoptions</span><span class="kw">:</span></span>
-<span id="cb51-3"><a href="wip-簡単なレイアウト変更.html#cb51-3"></a><span class="at">  </span><span class="kw">-</span><span class="at"> Scale=0.9</span></span></code></pre></div>
+<p><code>jfontpreset</code> は <code>zxjafont</code> または <code>luatex-ja</code> によるプリセットで, 3種類の和文フォントを一括指定できる. 個別指定したフォントはこれを上書きする. 特にこだわりがないなら一括指定で良いが, ソースコードを多く掲載する場合は <code>M+</code> や <code>Ricty</code> などのフォントを用意すると良いだろう. <code>rmdja</code> ではデフォルトで3種類の和文フォントファミリに対して, OSごとの標準日本語フォントが選択される (図 <a href="wip-簡単なレイアウト変更.html#tab:japreset-default">6.1</a>). いずれも各OSで標準でインストールされているはずであるが, 現時点ではフォントが実際にインストールされているか確認する機能はない.</p>
+<table>
+<caption><span id="tab:japreset-default">表 6.1: </span>デフォルトで使用される日本語フォントファミリ</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="left">Mac</th>
+<th align="left">Linux</th>
+<th align="left">Windows (8以降)</th>
+<th align="left">Windows (それ以前)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>XeLaTeX</td>
+<td align="left">游書体</td>
+<td align="left">Noto</td>
+<td align="left">游書体</td>
+<td align="left">MSフォント</td>
+</tr>
+<tr class="even">
+<td>LuaLaTeX</td>
+<td align="left">ヒラギノ ProN</td>
+<td align="left">Noto</td>
+<td align="left">游書体</td>
+<td align="left">MSフォント</td>
+</tr>
+</tbody>
+</table>
+<p>それ以外で使用可能な主なプリセット名は表 <a href="wip-簡単なレイアウト変更.html#tab:japreset-list">6.2</a> の通り. これらは XeLaTeX, LuaLaTeX でそれぞれ <code>zxjafont.sty</code>, <code>luatex-ja.sty</code> を利用してフォントが埋め込まれる. 両者の多くではプリセット名が共通しているが, 一部例外もあることに注意 (特に XeLaTeX は luatex-ja との互換性を考慮してエイリアスをいくつも用意している). また, より詳細な一覧やオプションの全貌については, ⼋登崇之氏の『<a href="http://zrbabbler.sp.land.to/pxchfon.html#sec-preset">PXchfon パッケージ</a>』および <a href="https://www.google.com/search?sxsrf=ALeKk02tvWl3yDLbG4j_6CTBvQRMiblBjA%3A1604856098096&amp;ei=IimoX_-tBcGsoAT3lInAAw&amp;q=ctan+zxjafont&amp;oq=ctan+zxjafont&amp;gs_lcp=CgZwc3ktYWIQAzoECCMQJzoGCAAQBxAeOgQIABAeOgcIIxCwAhAnOgYIABANEB5QqhRYkx9g7R9oAXAAeACAAVaIAfADkgEBNpgBAKABAaoBB2d3cy13aXrAAQE&amp;sclient=psy-ab&amp;ved=0ahUKEwj_xpHtuvPsAhVBFogKHXdKAjgQ4dUDCA0&amp;uact=5">zxjafont のマニュアル</a> と, 『<a href="https://ja.osdn.net/projects/luatex-ja/wiki/LuaTeX-ja%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9">luatex-ja の使い方</a>』を確認してほしい.</p>
+<table>
+<caption>
+<span id="tab:japreset-list">表 6.2: </span>主な指定可能なフォントプリセット名
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+フォント
+</th>
+<th style="text-align:left;">
+XeLaTeX
+</th>
+<th style="text-align:left;">
+LuaLaTeX
+</th>
+<th style="text-align:left;">
+備考
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+MS ゴシック/明朝
+</td>
+<td style="text-align:left;">
+<code>ms</code>
+</td>
+<td style="text-align:left;">
+<code>ms</code>
+</td>
+<td style="text-align:left;width: 10em; ">
+XeLaTeX のみ HGフォントと併用する <code>ms-hg</code> などのバリエーションあり
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+游書体
+</td>
+<td style="text-align:left;">
+<code>yu-win10</code>
+</td>
+<td style="text-align:left;">
+<code>yu-win10</code>
+</td>
+<td style="text-align:left;width: 10em; ">
+Windows 8 以前は <code>yu-win</code>, Mac では <code>yu-osx</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ヒラギノ系
+</td>
+<td style="text-align:left;">
+<code>hiragino-pro</code>
+</td>
+<td style="text-align:left;">
+<code>hiragino-pro</code>
+</td>
+<td style="text-align:left;width: 10em; ">
+<code>hiragino-pron</code> で ProN/StdN版を指定
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Noto フォント
+</td>
+<td style="text-align:left;">
+<code>noto</code>/<code>noto-jp</code>
+</td>
+<td style="text-align:left;">
+<code>noto-otf</code>/<code>noto-otc</code>
+</td>
+<td style="text-align:left;width: 10em; ">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+源ノ角ゴ/明朝
+</td>
+<td style="text-align:left;">
+<code>sourcechan-jp</code>
+</td>
+<td style="text-align:left;">
+<code>sourcehan-jp</code>
+</td>
+<td style="text-align:left;width: 10em; ">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+原ノ味フォント
+</td>
+<td style="text-align:left;">
+<code>haranoaji</code>
+</td>
+<td style="text-align:left;">
+<code>haranoaji</code>
+</td>
+<td style="text-align:left;width: 10em; ">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+梅フォント
+</td>
+<td style="text-align:left;">
+<code>ume</code>
+</td>
+<td style="text-align:left;">
+<code>ume</code>
+</td>
+<td style="text-align:left;width: 10em; ">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+小塚フォント
+</td>
+<td style="text-align:left;">
+<code>kozuka-pro</code>
+</td>
+<td style="text-align:left;">
+<code>kozuka-pro</code>
+</td>
+<td style="text-align:left;width: 10em; ">
+<code>-pr6</code> で ProVI版, <code>-pr6n</code> で Pro6N版を指定なども指定可能
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+IPA (Ex) フォント
+</td>
+<td style="text-align:left;">
+<code>ipa</code>/<code>ipaex</code>
+</td>
+<td style="text-align:left;">
+<code>ipa</code>/<code>ipaex</code>
+</td>
+<td style="text-align:left;width: 10em; ">
+XeLaTeX のみ <code>ipa-hg</code> などのバリエーションあり
+</td>
+</tr>
+</tbody>
+</table>
+<p>さらに, それぞれの項目に対してオプションを設定する場合, <code>options</code> と接尾辞のついた項目が用意されている. 欧文と和文フォントで全く異なるタイプのフォントを使ったために相対的なサイズが合わず不格好な場合は</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb52-1"><a href="wip-簡単なレイアウト変更.html#cb52-1"></a><span class="fu">mainfont</span><span class="kw">:</span><span class="at"> Palatinno</span></span>
+<span id="cb52-2"><a href="wip-簡単なレイアウト変更.html#cb52-2"></a><span class="fu">mainfontoptions</span><span class="kw">:</span></span>
+<span id="cb52-3"><a href="wip-簡単なレイアウト変更.html#cb52-3"></a><span class="at">  </span><span class="kw">-</span><span class="at"> Scale=0.9</span></span></code></pre></div>
 <p>などと書いて調整できる.</p>
 <p>インラインのフォント変更は TODO</p>
 </div>
@@ -404,7 +575,7 @@ gitbook.start({
 "link": "tree/rmdja/inst/resources/examples/bookdown/chapter/chapters/elemental.Rmd",
 "text": null
 },
-"download": ["rmdja.pdf"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

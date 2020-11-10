@@ -24,7 +24,6 @@
 <meta name="author" content="Katagiri, Satoshi (ill-identified)" />
 
 
-<meta name="date" content="2020-11-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,7 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <link rel="prev" href="このパートについて.html"/>
 <link rel="next" href="advanced-tabulate.html"/>
-<script src="libs/header-attrs-2.4/header-attrs.js"></script>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -52,12 +51,10 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
-<script src="libs/viz-1.8.2/viz.js"></script>
-<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
-<script src="libs/grViz-binding-1.0.6.1/grViz.js"></script>
 
 
 <style type="text/css">
@@ -220,6 +217,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2" data-path="advanced-graph.html"><a href="advanced-graph.html#asymptote-を使う"><i class="fa fa-check"></i><b>8.2</b> Asymptote を使う</a></li>
 <li class="chapter" data-level="8.3" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他のプログラム"><i class="fa fa-check"></i><b>8.3</b> (TODO) その他のプログラム</a></li>
 <li class="chapter" data-level="8.4" data-path="advanced-graph.html"><a href="advanced-graph.html#todo-その他の-r-プログラム"><i class="fa fa-check"></i><b>8.4</b> (TODO) その他の R プログラム</a></li>
+<li class="chapter" data-level="8.5" data-path="advanced-graph.html"><a href="advanced-graph.html#dot-言語とグラフィカルモデル"><i class="fa fa-check"></i><b>8.5</b> DOT 言語とグラフィカルモデル</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="advanced-tabulate.html"><a href="advanced-tabulate.html"><i class="fa fa-check"></i><b>9</b> 表のデザイン</a>
 <ul>
@@ -249,10 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="part"><span><b>V 製本と多様な形式への対応</b></span></li>
 <li class="chapter" data-level="13" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html"><i class="fa fa-check"></i><b>13</b> PDF の文書クラス</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#プレゼンテーション資料の作成"><i class="fa fa-check"></i><b>13.1</b> プレゼンテーション資料の作成</a>
-<ul>
-<li class="chapter" data-level="13.1.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#主な設定"><i class="fa fa-check"></i><b>13.1.1</b> 主な設定</a></li>
-</ul></li>
+<li class="chapter" data-level="13.1" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#プレゼンテーション資料の作成"><i class="fa fa-check"></i><b>13.1</b> プレゼンテーション資料の作成</a></li>
 <li class="chapter" data-level="13.2" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#wip-卒業論文の作成"><i class="fa fa-check"></i><b>13.2</b> (WIP) 卒業論文の作成</a></li>
 <li class="chapter" data-level="13.3" data-path="pdf-の文書クラス.html"><a href="pdf-の文書クラス.html#wip-小説の執筆"><i class="fa fa-check"></i><b>13.3</b> (WIP) 小説の執筆</a></li>
 </ul></li>
@@ -280,19 +275,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="16.2.2" data-path="製本した文書を配布する.html"><a href="製本した文書を配布する.html#フォントの埋め込み"><i class="fa fa-check"></i><b>16.2.2</b> フォントの埋め込み</a></li>
 </ul></li>
 </ul></li>
-<li class="part"><span><b>VI デバッグ</b></span></li>
+<li class="part"><span><b>VI デバッグとトラブルシュート</b></span></li>
 <li class="chapter" data-level="" data-path="このパートで説明すること.html"><a href="このパートで説明すること.html"><i class="fa fa-check"></i>このパートで説明すること</a></li>
 <li class="chapter" data-level="17" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html"><i class="fa fa-check"></i><b>17</b> 製本時のエラーへの対処</a>
 <ul>
 <li class="chapter" data-level="17.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>17.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
 <li class="chapter" data-level="17.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>17.2</b> YAML フロントマターを確認する</a></li>
 <li class="chapter" data-level="17.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-生成時のエラーを確認する"><i class="fa fa-check"></i><b>17.3</b> PDF 生成時のエラーを確認する</a></li>
+<li class="chapter" data-level="17.4" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#todo-windows-特有の問題"><i class="fa fa-check"></i><b>17.4</b> (TODO) Windows 特有の問題</a></li>
 </ul></li>
 <li class="appendix"><span><b>補遺</b></span></li>
 <li class="chapter" data-level="A" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html"><i class="fa fa-check"></i><b>A</b> デフォルト値の自動調整</a>
 <ul>
 <li class="chapter" data-level="A.1" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html#デフォルトのフォント"><i class="fa fa-check"></i><b>A.1</b> デフォルトのフォント</a></li>
-<li class="chapter" data-level="A.2" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html#チャンクのデフォルト設定"><i class="fa fa-check"></i><b>A.2</b> チャンクのデフォルト設定</a></li>
+<li class="chapter" data-level="A.2" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html#チャンクオプションのデフォルト設定"><i class="fa fa-check"></i><b>A.2</b> チャンクオプションのデフォルト設定</a></li>
+<li class="chapter" data-level="A.3" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html#コードブロックの整形と自動折り返し"><i class="fa fa-check"></i><b>A.3</b> コードブロックの整形と自動折り返し</a></li>
 </ul></li>
 <li class="chapter" data-level="B" data-path="pdf-の組版に関する細かい話.html"><a href="pdf-の組版に関する細かい話.html"><i class="fa fa-check"></i><b>B</b> PDF の組版に関する細かい話</a>
 <ul>
@@ -351,35 +348,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="todo-その他の-r-プログラム" class="section level2" number="8.4">
 <h2><span class="header-section-number">8.4</span> (TODO) その他の R プログラム</h2>
-<p>なお, DOT言語は <code>DiagrammeR</code> パッケージを経由して使うこともできる<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>(図: <a href="advanced-graph.html#fig:diagrammer-graph">8.3</a>). グラフィカルモデルの記述などはこちらのほうが簡単かもしれない.</p>
-
-<div class="sourceCode" id="cb52"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb52-1"><a href="advanced-graph.html#cb52-1"></a>DiagrammeR<span class="op">::</span><span class="kw">grViz</span>(<span class="st">&quot;digraph {</span></span>
-<span id="cb52-2"><a href="advanced-graph.html#cb52-2"></a><span class="st">  graph [layout = dot, rankdir = TB]</span></span>
-<span id="cb52-3"><a href="advanced-graph.html#cb52-3"></a><span class="st">  </span></span>
-<span id="cb52-4"><a href="advanced-graph.html#cb52-4"></a><span class="st">  node [shape = rectangle]        </span></span>
-<span id="cb52-5"><a href="advanced-graph.html#cb52-5"></a><span class="st">  rec1 [label = &#39;Step 1. 起床する&#39;]</span></span>
-<span id="cb52-6"><a href="advanced-graph.html#cb52-6"></a><span class="st">  rec2 [label = &#39;Step 2. コードを書く&#39;]</span></span>
-<span id="cb52-7"><a href="advanced-graph.html#cb52-7"></a><span class="st">  rec3 [label =  &#39;Step 3. ???&#39;]</span></span>
-<span id="cb52-8"><a href="advanced-graph.html#cb52-8"></a><span class="st">  rec4 [label = &#39;Step 4. 給料をもらう&#39;]</span></span>
-<span id="cb52-9"><a href="advanced-graph.html#cb52-9"></a><span class="st">  </span></span>
-<span id="cb52-10"><a href="advanced-graph.html#cb52-10"></a><span class="st">  # edge definitions with the node IDs</span></span>
-<span id="cb52-11"><a href="advanced-graph.html#cb52-11"></a><span class="st">  rec1 -&gt; rec2 -&gt; rec3 -&gt; rec4</span></span>
-<span id="cb52-12"><a href="advanced-graph.html#cb52-12"></a><span class="st">  }&quot;</span>,</span>
-<span id="cb52-13"><a href="advanced-graph.html#cb52-13"></a>  <span class="dt">height =</span> <span class="dv">500</span></span>
-<span id="cb52-14"><a href="advanced-graph.html#cb52-14"></a>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:diagrammer-graph"></span>
-<div id="htmlwidget-8053a55f9bbe494684b8" style="width:672px;height:500px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-8053a55f9bbe494684b8">{"x":{"diagram":"digraph {\n  graph [layout = dot, rankdir = TB]\n  \n  node [shape = rectangle]        \n  rec1 [label = \"Step 1. 起床する\"]\n  rec2 [label = \"Step 2. コードを書く\"]\n  rec3 [label =  \"Step 3. ???\"]\n  rec4 [label = \"Step 4. 給料をもらう\"]\n  \n  # edge definitions with the node IDs\n  rec1 -> rec2 -> rec3 -> rec4\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="dot-言語とグラフィカルモデル" class="section level2" number="8.5">
+<h2><span class="header-section-number">8.5</span> DOT 言語とグラフィカルモデル</h2>
+<p>graphviz などで使用される DOT 言語を使用してグラフィカルモデルを描画することもできる. この場合, チャンクのエンジンを <code>dot</code> にするのではなく, エンジンは <code>r</code> のままで, <code>engine="dot"</code> を指定すると, コードブロックが DOT 言語として評価される. 図<a href="advanced-graph.html#fig:dot-example">8.3</a> がその結果である.</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode numberSource dot numberLines lineAnchors"><code class="sourceCode dot"><span id="cb53-1"><a href="advanced-graph.html#cb53-1"></a><span class="kw">digraph</span> <span class="va">test</span> <span class="ot">{</span></span>
+<span id="cb53-2"><a href="advanced-graph.html#cb53-2"></a><span class="co">  </span><span class="va">graph</span><span class="co"> </span><span class="ot">[</span><span class="va">layout</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="va">dot</span><span class="co">, </span><span class="at">rankdir</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="va">TB</span><span class="ot">];</span></span>
+<span id="cb53-3"><a href="advanced-graph.html#cb53-3"></a><span class="co">  </span><span class="kw">node</span><span class="co"> </span><span class="ot">[</span><span class="at">shape</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="va">rectangle</span><span class="ot">];</span></span>
+<span id="cb53-4"><a href="advanced-graph.html#cb53-4"></a><span class="co">  </span><span class="va">rec1</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">&quot;Step 1. 起床する&quot;</span><span class="ot">];</span></span>
+<span id="cb53-5"><a href="advanced-graph.html#cb53-5"></a><span class="co">  </span><span class="va">rec2</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">&quot;Step 2. コードを書く&quot;</span><span class="ot">];</span></span>
+<span id="cb53-6"><a href="advanced-graph.html#cb53-6"></a><span class="co">  </span><span class="va">rec3</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">&quot;Step 3. ???&quot;</span><span class="co">, </span><span class="at">color</span><span class="ot">=</span><span class="va">blue</span><span class="co">, </span><span class="at">style</span><span class="ot">=</span><span class="va">filled</span><span class="ot">];</span></span>
+<span id="cb53-7"><a href="advanced-graph.html#cb53-7"></a><span class="co">  </span><span class="va">rec4</span><span class="co"> </span><span class="ot">[</span><span class="at">label</span><span class="co"> </span><span class="ot">=</span><span class="co"> </span><span class="st">&quot;Step 4. 給料をもらう&quot;</span><span class="co">, </span><span class="at">fontsize</span><span class="ot">=</span><span class="dv">20</span><span class="co">, </span><span class="at">fontcolor</span><span class="ot">=</span><span class="va">red</span><span class="ot">];</span></span>
+<span id="cb53-8"><a href="advanced-graph.html#cb53-8"></a><span class="co">  </span><span class="va">rec1</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="va">rec2</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="va">rec3</span><span class="co"> </span><span class="ot">-&gt;</span><span class="co"> </span><span class="va">rec4</span><span class="ot">;</span></span>
+<span id="cb53-9"><a href="advanced-graph.html#cb53-9"></a><span class="co">  </span><span class="ot">}</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:dot-example"></span>
+<img src="rmdja_files/figure-html/dot-example-1.png" alt="DOTの動作確認" height="40%" />
 <p class="caption">
-図 8.3: <code>DiagrammeR</code> によるグラフィカルモデル (RCB, Ch. 4.15 より)
+図 8.3: DOTの動作確認
 </p>
 </div>
+<p>なお, RCB, Ch. 4.15 でも紹介されているように DOT 言語は <code>DiagrammeR</code> パッケージを経由して使うこともできる<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a>が, <code>grViz()</code> 関数の出力は HTML を前提としているため, PDF での出力時のサイズや解像度の調整がうまくいかないことが多い.</p>
+<p>一方で, <code>ggdag</code> パッケージは<code>ggplot2</code> ベースのパッケージなので, 一般的な R グラフィックスと同じ扱いでグラフィカルモデルを描画できる (つまり名前に反して DAG 以外のネットワーク図も記述可能である). <code>ggplot2</code> 風の構文で記述できるので習熟も容易である.</p>
 </div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="12">
-<li id="fn12"><p><a href="https://bookdown.org/yihui/rmarkdown-cookbook/diagrams.html" class="uri">https://bookdown.org/yihui/rmarkdown-cookbook/diagrams.html</a><a href="advanced-graph.html#fnref12" class="footnote-back">↩︎</a></p></li>
+<ol start="13">
+<li id="fn13"><p>私も詳しいことは知らないが, <code>DiagrammeR::grViz()</code> の構文は本来の DOT と少し異なるようだ, 本来はステートメントごとにセミコロンで区切ることが必要であり, 文字列もダブルクオーテーションで囲まなければならないが, <code>grViz()</code> ではそのような制約がない.<a href="advanced-graph.html#fnref13" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -430,7 +425,7 @@ gitbook.start({
 "link": "tree/rmdja/inst/resources/examples/bookdown/chapter/chapters/advanced.Rmd",
 "text": null
 },
-"download": ["rmdja.pdf"],
+"download": null,
 "toc": {
 "collapse": "none"
 }
