@@ -20,6 +20,7 @@ beamer_presentation_ja(
   out.height = "100\%",
   highlight = "default",
   code_rownumber = FALSE,
+  code_softwrap = TRUE,
   citation_package = "biblatex",
   citation_options = "default",
   figurename = "図",
@@ -65,6 +66,8 @@ beamer_presentation_ja(
 \item{highlight}{character. チャンク内のコードのシンタックスハイライトのデザイン. \code{\link[rmarkdown]{beamer_presentation}} 参照.}
 
 \item{code_rownumber}{logical チャンクに行番号を付けるかどうか.}
+
+\item{code_softwrap}{logical チャンク内のコードを自動折り返しするかどうか.}
 
 \item{citation_package}{character. 本文中の引用トークンに関するパッケージ. \code{"default"}, \code{"natbib"} or \code{"biblatex"}. \code{"default"} は pandoc-citeproc を, \code{"natbib"} は bibtex を使用する. よって \code{"natbib"} で日本語文献を引用する場合はオプション \code{options(tinytex.latexmk.emulation = F)} が必要. 詳細は \link[=https://gedevan-aleksizde.github.io/rmdja/\%E6\%96\%87\%E7\%8C\%AE\%E5\%BC\%95\%E7\%94\%A8.html#\%E3\%82\%92\%E4\%BD\%BF\%E3\%81\%86]{rmdja の公式ドキュメント} を参照.}
 

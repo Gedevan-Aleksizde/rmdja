@@ -26,6 +26,7 @@ pdf_book_ja(
   highlight = "default",
   highlight_bw = FALSE,
   code_rownumber = TRUE,
+  code_softwrap = TRUE,
   tombow = FALSE,
   add_folio = FALSE,
   template = "default",
@@ -73,6 +74,8 @@ prepended to the footer, and \code{quote_footer[2]} will be appended; if
 black-and-white (grayscale).}
 
 \item{code_rownumber}{logical. コードセルに行番号を表示するかどうか.}
+
+\item{code_softwrap}{logical チャンク内のコードを自動折り返しするかどうか.}
 
 \item{tombow}{logical. 製本時に必要なトンボ (trim markers) を付けるかどうか. トンボは \code{gentombow.sty} で作成される.}
 
