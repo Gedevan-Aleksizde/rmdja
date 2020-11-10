@@ -3,17 +3,16 @@
 # このパートの概要 {-}
 
 ここではまず, R Markdown の基本的な機能を紹介する. つまり `bookdown` 特有のものではなく, R Markdown 全般で使用できる機能も含めて紹介する. これ以降は自己言及的な説明が多いため, この文書を生成しているソースコードと比較しながら確認することをおすすめする. ここで紹介する機能は BKD, RDG, RCB での記述に基づく.
-これら3つのドキュメントを読めば, ほとんどのことは可能になる --- `rmdja` を作る理由になった LaTeX テンプレートの修正以外は --- のだが, 本稿の重要な目的の1つは**複数のファイル形式を両立すること**であるので, それができない書き方には触れないし, 技術文書の作成にあまり使わないような機能の動作確認はおこなわず, 技術文書作成で頻繁に使われ, 便利と思える機能のみ紹介する.
+これら3つのドキュメントを読めば, ほとんどのことは可能になる --- `rmdja` を作る理由になった LaTeX テンプレートの修正以外は --- のだが, 本稿の重要な目的の1つは**複数のファイル形式をなるべく簡単に両立すること**であるので, それができない書き方には触れないし, 技術文書の作成にあまり使わないような機能の動作確認はおこなわず, 技術文書作成で頻繁に使われ, 便利と思える機能のみ紹介する.
 
 どちらにしろそのうちこれらを翻訳してくれる人が現れることだろう...たぶん.
 
 # 静的なコンテンツの作成
 
+まずは, 単なるマークアップ, つまりプログラミングの複雑な処理を考えなくても良いタイプの, 簡単な構文を紹介する. それらの多くは一般的な Markdown のものと同じである.
+
 日本語で書かれた資料でごく基本的なことについて, 『[R Markdown入門](https://kazutan.github.io/kazutanR/Rmd_intro.html)』で一通り紹介されている. やや応用的なことも 『R Markdown ユーザーののための Pandoc's Markdown』に書かれている.
 
-また, 既に作成している beamer の用例ファイルもどのようなことができるかの参考になるだろう. ただしこちらは PDF のみの出力を前提としているため, 一部の機能は HTML で使うことができない. 
-
-まずは, 単なるマークアップ, つまりプログラミングの複雑な処理を考えなくても良いタイプの構文を紹介する. それらの多くは単なる Markdown のものと同じである.
 
 ## Markdown の基本構文
 
@@ -293,7 +292,7 @@ ${E_1,E_2,\cdots}$をある確率空間の事象とする. これらの事象の
 
 以降は R で多くのユーザが頻繁に使うパッケージと, いくつかの技術文書作成に役に立つパッケージをインポートしている前提の説明とする. なお, `rmarkdown`, `bookdown` はチャンク内で特に読み込む必要がない.
 
-```{r base-packages, echo=T, results="hold"}
+```{r base-packages, echo=T}
 pkgs <- installed.packages()
 for(p in c("tidyverse", "ggthemes", "equatiomatic", "tufte", "kableExtra")){
   if(!p %in% pkgs) install.packages(p)
@@ -314,18 +313,23 @@ require(kableExtra)
 * `error`: プログラム実行結果のエラーを掲載するかどうか
 * `eval`: 文書作成時にプログラムを実行するかどうか
 * `include`: 文書作成時にプログラムを実行し, **かつ掲載しない**かどうか
-* `results`: 出力をいつもの R の出力風にするか (`markup`), 隠すか (`"hide"`), 出力を区切らずまとめるか (`"hold"`), テキストをそのまま出力するか (`"asis"`). 最後はソースコードを動的に生成したい場合などに使う (後述).
+* `results`: 出力をいつもの R の出力風にするか (`markup`), 隠すか (`"hide"`), 出力を区切らずまとめるか (`"hold"`), テキストをそのまま出力するか (`"asis"`). 最後は R Markdown のソースコードを動的に生成したい場合などに使う.
 
+
+```{block, type="rmdnote"}
 R の論理値は `TRUE`/`FALSE` または `T`/`F` と書く.
+```
 
-チャンクごとに個別に設定することも, デフォルト値を一括設定することもできる. 前者の場合, チャンクオプションは `{}` 内部にカンマ `,` で区切って書く. `r` は R で実行するという意味である.
+チャンクごとに個別に設定することも, デフォルト値を一括設定することもできる. 前者の場合, チャンクオプションは `{}` 内部にカンマ `,` で区切って書く. `r` は R で実行するという意味である. チャンクの一般的な記法は以下のようになる.
 
 ````
-`r ''````{r [<name>], [<options>]}
+`r ''````{r [<label>], [<options>]}
 data(cars)
 summary(cars)
 `r ''````
 ````
+
+`r` の直後の `<label>` は**ラベル**と呼ばれ, チャンクのIDとしての機能を持つ (省略された場合は自動で適当な名前がつけられる). ラベルは主に後述の図表の相互参照に使われる. ラベルは英数字とハイフンを使って重複しない範囲で自由に命名できる.
 
 一括設定の場合, 以下のようなプログラムでデフォルト値を上書きできる.
 
@@ -350,7 +354,7 @@ echo Hello, Bookdown
 
 これらのオプションがあるおかげでプログラムとその結果の再現を説明したい場合はソースコードも表示させたり, 回帰分析やシミュレーションの結果だけを掲載したい時は結果のみ表示したりできる. これが R Markdown のチャンクの強みである. 例えば Jupyter notebook/lab などは従来, コードセルと出力セルを自由に隠すことができなかった.
 
-チャンクに使用できる言語は R だけではない. **つまり Python なども使用できる**(詳細は \@ref(#python) 章を参照). 以下で対応しているエンジンの一覧を表示できる.
+チャンクに使用できる言語は R だけではない. **つまり Python なども使用できる**(詳細は \@ref(python) 章を参照). 以下で対応しているエンジンの一覧を表示できる.
 
 ```{r engine-list, echo=T}
 names(knitr::knit_engines$get())
@@ -369,8 +373,8 @@ R のプログラムと組み合わせることで**回帰分析の結果の数�
 まずは, 回帰係数を記号で表現するタイプ. LaTeX 数式をそのまま出力するため, チャンクオプションに `results="asis"` を付ける必要があることに注意する.
 
 ```{r regress-equation-1, echo=T, results="asis"}
-data(iris)
-fit <- lm(Sepal.Length ~., data = iris)
+data(mtcars)
+fit <- lm(mpg ~., data = mtcars)
 extract_eq(fit, wrap = T, ital_vars = T, align_env = "aligned")
 ```
 
@@ -426,7 +430,17 @@ ggplot(diamonds, aes(x=carat, y=price, color=clarity)) +
 
 ## (WIP): デフォルトフォントの設定
 
-Windows や Mac では, デフォルトのフォントが日本語グリフを持たないのでグラフが文字化けする. 現時点では最低限 `rmdja::set_graphics_font()` という関数を呼び出す処理を手動で書き加えなければならない. 本文のフォントと異なり, 現時点 (ver. 0.4.2) では手動設定が必要になる. OSごとのフォント名を調べて指定するのが大変なら, 私が作成した `fontregisterer` パッケージを使うのも1つの手である.  その解説は『[おまえはもうRのグラフの日本語表示に悩まない (各OS対応)](https://ill-identified.hatenablog.com/entry/2020/10/03/200618)』に書いた通りである. `fontregisterer::get_standard_font()` で使用中のOSで標準インストールされているセリフ (明朝), サンセリフ (ゴシック) のフォントファミリ名を1つづつ取得するので, その値のどちらかを `rmdja::set_graphics_font()` に与えれば, `ggplot2` および標準グラフィックスのデフォルトのフォントが日本語対応フォントになる.
+Windows や Mac では, デフォルトのフォントが日本語グリフを持たないのでグラフが文字化けする. 現時点では最低限 `rmdja::set_graphics_font()` という関数を呼び出す処理を手動で書き加えなければならない. 本文のフォントと異なり, 現時点 (ver. 0.4.2) では手動設定が必要になる. OSごとのフォント名を調べて指定するのが大変なら, 私が作成した `fontregisterer` パッケージを使うのも1つの手である.  その解説は『[おまえはもうRのグラフの日本語表示に悩まない (各OS対応)](https://ill-identified.hatenablog.com/entry/2020/10/03/200618)』に書いた通りである. `get_standard_font()` で使用中のOSで標準インストールされているセリフ (明朝), サンセリフ (ゴシック) のフォントファミリ名を1つづつ取得するので, その値のどちらかを `rmdja::set_graphics_font()` に与えれば, `ggplot2` および標準グラフィックスのデフォルトのフォントが日本語対応フォントになる. 
+
+しかしこの関数は `ggplot2` のデフォルトのテーマを更新するだけなので `ggthemes` パッケージなどが用意するテーマプリセットを使用したい場合はその都度設定が必要である.
+
+```{r theme-set, echo=T, eval=F}
+require(fontregisterer)
+theme_set(ggthemes::theme_pander(base_family = get_standard_font()$serif))
+
+ggplot(DATA, aes(...)) + geom_point() + ... +
+  theme_economist(base_family = get_standard_font()$sans)
+```
 
 
 ## TODO: 図のレイアウト設定
@@ -488,7 +502,7 @@ kbl(mtcars[1:10, ], caption = "`df_print: kable` の場合", escape = F, format 
 Table: (\#tab:df-print-ops) `df_print` のオプション一覧
 
  オプション      効果
--------------  -----------------------------------------------------------------------------------
+-------------  -------------------------------------------
 `default`      `print()`, コンソール出力と同じ
 `tibble`       `tibble` 対応版 `print()`
 `paged`        `rmarkdown::paged_table()` による表示, これもオプション引数を指定しなければ大差なし
@@ -508,11 +522,11 @@ rmdja::kable(mtcars[1:10, ],
   )
 ```
 
-(1) の方法が現在最も簡単である. ただし, `r rmdja::texlogo("LaTeX")` LaTeX の構文が評価されなくなるため同時に使うことはできない. 例えば太字強調と数式を両方表示したい場合は, `knitr::is_latex_output()` PDF の場合は完全に `r rmdja::texlogo("LaTeX")` で, HTML の場合は Markdown で書く, という場合分けを自分で書いて `knitr::kable()` に与えなければならない(表 \@ref(tab:kable-caption-example)). 
+(1) の方法が現在最も簡単である. ただし, `r rmdja::texlogo("LaTeX")` LaTeX の構文が評価されなくなるため同時に使うことはできない. 例えば太字強調と数式を両方表示したい場合は, `knitr::is_latex_output()` PDF の場合は完全に `r rmdja::texlogo("LaTeX")` で, HTML の場合は Markdown で書く, という場合分けを自分で書いて `knitr::kable()` に与えなければならない(表 \@ref(tab:kable-caption-example)). また, キャプションではなく**表内の markdown 構文も評価されない**. 表内の markdown 構文を PDF でも反映するには, (2) の方法が必要である.
 
 TODO: この仕様は使いづらいのでそのうちなんとかしたい.
 
-(2) についても, `kable()` 単体であれば問題ないが, 後に紹介する `kableExtra` パッケージを併用すると書式設定がうまく反映されなくなることがある. (3) は表 \@ref(tab:kable-caption-example) の記述をキャプションだけでなく, HTML ならば Markdown または HTML タグで, PDF ならば `r rmdja::texlogo("LaTeX")` で表全体を書き分ける, という方法である. 1つの表を描くのに多大な労力がかかるため推奨しない.
+(2) についても, `kable()` 単体であれば問題ないが, 後に紹介する `kableExtra` パッケージを併用すると**書式設定がうまく反映されなくなる**ことがある. (3) は表 \@ref(tab:kable-caption-example) の記述をキャプションだけでなく, HTML ならば Markdown または HTML タグで, PDF ならば `r rmdja::texlogo("LaTeX")` で表全体を書き分ける, という方法である. 1つの表を描くのに多大な労力がかかるため推奨しない.
 
 ```{r kable-caption-example, eval=T, echo=T}
 cap <- if(knitr::is_latex_output()) "数式 $a$ と \\textbf{太字}" else "数式 $a$ と **太字**"
@@ -524,6 +538,8 @@ kable(
 ```
 
 さらに, デフォルトでは `kable()` が PDF に出力する表のデザインはあまりよろしくないが, `kable()` 関数は過剰な罫線のない表の出力も簡単である. `r rmdja::texlogo("LaTeX")` を使ったことのある人は知っているかもしれないが, これは `booktabs.sty` を使った表のスタイルになっている^[もし何らかの理由でこのスタイルにならない, あるいはあえてしたくない, と言う場合は `kable()` 関数で `booktabs = T` を指定せよ.].
+
+また, `kable()` を使う利点として, 表の絡む名に好きな名前を与えられるというものがある. データフレームの列 (変数) 名は, 括弧などプログラミングで特別な意味を持つ文字を使うことができない. そこで, `kable()` の `col.names` 引数に表のカラム名を改めて与えることで, こういった文字も出力できる.
 
 `kable()` による表のスタイルは  `kableExtra` パッケージを使うことで様々にカスタマイズできる. 例えば `row_spec()` を使って偶数・奇数行を色分けすることができる (表 \@ref(tab:display-dataframe-kable-2), ただしHTML版を見ていれば分かるように, HTML ではデフォルトで奇数偶数の色分けがなされている).
 
@@ -695,19 +711,80 @@ HTML は文字通りHTMLで出力しているため, CSS の使い方次第で�
 
 ### フォント変更
 
-PDF を生成する場合, ver 0.3 時点ではデフォルトのフォントを OS に応じて変えている. もし変更したい場合はYAMLフロントマターの以下の項目を変更する
+PDF を生成する場合, ver 0.3 以降ではデフォルトのフォントファミリを OS に応じて変えている. もし変更したい場合はYAMLフロントマターの以下の項目を変更する
 
-* `mainfont`: 欧文セリフフォント
-* `sansfont`: 欧文サンセリフフォント
-* `monofont`: 等幅フォント (コードの表示などに使用)
-* `jfontpreset`: 和文フォントのプリセット
-* `jmainfont`: 和文メインフォント (一般に明朝体を指定)
-* `jsansfont`: 和文セリフフォント (一般にゴシック体を指定)
-* `jmonofont`: 和文等幅フォント (コードの表示などに使用)
+* `mainfont`: 欧文セリフフォントファミリ
+* `sansfont`: 欧文サンセリフフォントファミリ
+* `monofont`: 等幅フォントファミリ (コードの表示などに使用)
+* `jfontpreset`: 和文フォントファミリのプリセット
+* `jmainfont`: 和文メインフォントファミリ (一般に明朝体を指定)
+* `jsansfont`: 和文セリフフォントファミリ (一般にゴシック体を指定)
+* `jmonofont`: 和文等幅フォントファミリ (コードの表示などに使用)
 
-`jfontpreset` は `zxjafont` または `luatex-ja` によるプリセットで, 3種類のフォントを一括指定できる. 個別指定したフォントはこれを上書きする. 特にこだわりがないなら一括指定で良いが, ソースコードを多く掲載する場合は `M+` や `Ricty` などのフォントを用意すると良いだろう.
+`jfontpreset` は `zxjafont` または `luatex-ja` によるプリセットで, 3種類の和文フォントを一括指定できる. 個別指定したフォントはこれを上書きする. 特にこだわりがないなら一括指定で良いが, ソースコードを多く掲載する場合は `M+` や `Ricty` などのフォントを用意すると良いだろう. `rmdja` ではデフォルトで3種類の和文フォントファミリに対して, OSごとの標準日本語フォントが選択される (図 \@ref(tab:japreset-default)). いずれも各OSで標準でインストールされているはずであるが, 現時点ではフォントが実際にインストールされているか確認する機能はない.
 
-さらに, それぞれの項目には `options` と接尾辞のついた項目が用意されている. フォントの相対サイズが合わず不格好な場合は
+```{r japreset-default}
+data.frame(
+  Mac = c("游書体", "ヒラギノ ProN"),
+  Linux = rep("Noto", 2),
+  Windows8 = rep("游書体", 2),
+  Windows_old = rep("MSフォント", 2), row.names = c(rmdja::texlogo("XeLaTeX"), rmdja::texlogo("LuaLaTeX"))) %>%
+  kable(row.names = T,
+        col.names = c("Mac", "Linux", "Windows (8以降)", "Windows (それ以前)"),
+        caption = "デフォルトで使用される日本語フォントファミリ",
+        booktabs = T, escape = F, format = "pandoc")
+```
+
+それ以外で使用可能な主なプリセット名は表 \@ref(tab:japreset-list) の通り. これらは `r rmdja::texlogo("XeLaTeX")`, `r rmdja::texlogo("LuaLaTeX")` でそれぞれ `zxjafont.sty`, `luatex-ja.sty` を利用してフォントが埋め込まれる. 両者の多くではプリセット名が共通しているが, 一部例外もあることに注意 (特に `r rmdja::texlogo("XeLaTeX")` は luatex-ja との互換性を考慮してエイリアスをいくつも用意している). また, より詳細な一覧やオプションの全貌については, ⼋登崇之氏の『[PXchfon パッケージ](http://zrbabbler.sp.land.to/pxchfon.html#sec-preset)』および [zxjafont のマニュアル](https://www.google.com/search?sxsrf=ALeKk02tvWl3yDLbG4j_6CTBvQRMiblBjA%3A1604856098096&ei=IimoX_-tBcGsoAT3lInAAw&q=ctan+zxjafont&oq=ctan+zxjafont&gs_lcp=CgZwc3ktYWIQAzoECCMQJzoGCAAQBxAeOgQIABAeOgcIIxCwAhAnOgYIABANEB5QqhRYkx9g7R9oAXAAeACAAVaIAfADkgEBNpgBAKABAaoBB2d3cy13aXrAAQE&sclient=psy-ab&ved=0ahUKEwj_xpHtuvPsAhVBFogKHXdKAjgQ4dUDCA0&uact=5) と, 『[luatex-ja の使い方](https://ja.osdn.net/projects/luatex-ja/wiki/LuaTeX-ja%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9)』を確認してほしい.
+
+
+```{r japreset-list}
+parse_latex <- function(x){
+  if(is_latex_output()) commonmark::markdown_latex(x)
+  else x
+}
+tibble(
+  family = c("MS ゴシック/明朝", "游書体", "ヒラギノ系", "Noto フォント", "源ノ角ゴ/明朝", "原ノ味フォント", "梅フォント", "小塚フォント", "IPA (Ex) フォント"),
+  XeLaTeX = c("`ms`",
+              "`yu-win10`",
+              "`hiragino-pro`",
+              "`noto`/`noto-jp`",
+              "`sourcechan-jp`",
+              "`haranoaji`",
+              "`ume`",
+              "`kozuka-pro`",
+              "`ipa`/`ipaex`"),
+  LuaLaTeX = c("`ms`",
+               "`yu-win10`",
+               "`hiragino-pro`",
+               "`noto-otf`/`noto-otc`",
+               "`sourcehan-jp`",
+               "`haranoaji`",
+               "`ume`",
+               "`kozuka-pro`",
+               "`ipa`/`ipaex`"
+               ),
+  details = c(
+    paste(rmdja::texlogo("XeLaTeX"), "のみ HGフォントと併用する", if(is_latex_output()) "\\texttt{ms-hg}" else "`ms-hg`", "などのバリエーションあり"),
+    parse_latex("Windows 8 以前は `yu-win`, Mac では `yu-osx`"),
+    parse_latex("`hiragino-pron` で ProN/StdN版を指定"),
+    "",
+    "",
+    "",
+    "",
+    parse_latex("`-pr6` で ProVI版, `-pr6n` で Pro6N版を指定なども指定可能"),
+    paste(rmdja::texlogo("XeLaTeX"), "のみ", if(is_latex_output()) "\\texttt{ipa-hg}" else "`ipa-hg`", "などのバリエーションあり")
+    )
+  ) %>%
+  mutate(across(c(XeLaTeX, LuaLaTeX), ~if(is_latex_output()) map_chr(.x, commonmark::markdown_latex) else .x)) %>%
+  kbl(caption = "主な指定可能なフォントプリセット名",
+      booktabs = T, escape = F,
+      col.names = c("フォント", rmdja::texlogo("XeLaTeX"), rmdja::texlogo("LuaLaTeX"), "備考")
+      ) %>%
+  column_spec(4, width = "10em")
+```
+
+さらに, それぞれの項目に対してオプションを設定する場合, `options` と接尾辞のついた項目が用意されている. 欧文と和文フォントで全く異なるタイプのフォントを使ったために相対的なサイズが合わず不格好な場合は
 
 ```yaml
 mainfont: Palatinno

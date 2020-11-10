@@ -1,7 +1,7 @@
 ---
 title: "`rmdja` による多様な形式の日本語技術文書の作成 "
 author: "Katagiri, Satoshi (ill-identified)"
-date: "`r Sys.Date()`"
+date: "`2020/11/9"
 site: bookdown::bookdown_site                    # RStudio GUIでビルド操作したい場合に必要
 description: "bookdown でまともな日本語文書を作る資料"  # HTML <metadata> に出力されるサイト概要
 url: 'https\://bookdown.org/john/awesome/'       # URL
@@ -25,6 +25,10 @@ linkcolor: blue
 citecolor: blue
 urlcolor: magenta
 bibliography: rmdja.bib
+header-inclues:
+  - \usepackage{fancyhdr}
+pagestyle: fancy
+documentclass: bxjsreport
 ---
 
 ```{r setup, include=FALSE}
@@ -47,16 +51,9 @@ file.copy(file.path(system.file("resources/style/img/", package = "rmdja"), c("c
 require(knitr)
 require(kableExtra)
 opts_chunk$set(
-  echo = F,
   comment = "",
   error = F,
-  warning = F,
-  cache = F,
-  dev.args = list(family = if(knitr::is_html_output()) list() else list(family = "Noto Sans Serif CJK JP")),
-  # TODO: soft wrap がうまく行かない問題
-  # tidy = T,
-  # tidy.opts = list(width.cutoff = 20, wrap = T),
-  tidy = "styler"
+  warning = F
   )
 par(family = "Noto Serif CJK JP")
 rmdja::set_graphics_font("Noto Serif CJK JP")

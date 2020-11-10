@@ -135,7 +135,7 @@ include_graphics(if(is_latex_output()) "img/kableExtra.pdf" else "img/kableExtra
 
 `kableExtra` パッケージは `knitr::kable` の拡張であり, 様々なスタイルの表を出力できる. そしてそれは HTML でも PDF でも有効である.
 
-まず, (これは `kable()` からある機能だが) `booktabs = T` を指定する. `r rmdja::texlogo("LaTeX")` のデフォルトの表は罫線が多すぎる. 罫線は牢獄の格子を暗示するため過剰な罫線にまみれた表を書いたり眺めたりしていると精神が抑圧され有害であると心理学的にも証明されている (**嘘**). しかし `booktabs = T` はこれだけで `booktabs.sty` に準拠した見やすいスタイルに変更してくれる. さらに `kableExtra` の機能として, 表 \@ref(tab:kableextra-color) にみられるように条件書式のような装飾が可能である[^mtcars-term].
+まず, `knitrExtra::kbl()` は既に紹介した `kable()` のラッパであり, 内部で呼び出すのは `kable()` のため `booktabs` といった従来の引数が使える上に, オプション設定の構文がより分かりやすくなっている. さらに `kableExtra` の独自機能として, 表 \@ref(tab:kableextra-color) にみられるように条件書式のような装飾が可能である[^mtcars-term].
 
 (ref:kableextra-color-cap) `kabeExtra` パッケージを利用した表の作成, 公式ドキュメントの用例より
 
@@ -180,7 +180,8 @@ inline_plot %>%
       caption = "(ref:kableextra-plot-cap)",
       col.names = c("シリンダ数", "ガロン毎マイル", "", "", "", "", "", "")
       ) %>%
-kable_paper(full_width = FALSE) %>%
+  kable_paper(full_width = FALSE) %>%
+  kable_styling(latex_options = "scale_down") %>%
   column_spec(2, image = spec_boxplot(mpg_list)) %>%
   column_spec(3, image = spec_hist(mpg_list)) %>%
   column_spec(4, image = spec_plot(mpg_list, same_lim = TRUE)) %>%
@@ -205,15 +206,16 @@ kable_paper(full_width = FALSE) %>%
 
 ## `formattable` パッケージとの併用
 
-`formattable` パッケージは以前からある表を装飾するパッケージである. `kableExtra` との併用も可能だが, **`r rmdja::texlogo("LaTeX")`  に対応しておらず**, HTMLタグをtexファイルに吐き出してしまうため動作しない. PDF にも同様に表示するには [StackOverflow](https://stackoverflow.com/questions/34983822/how-to-have-r-formattable-rendered-to-pdf-output-and-how-to-have-percents-in-the)で提案されているように, `webshot` 使うなど工夫が必要である. そこまでしてこの装飾にこだわるメリットは薄いと私は考えるので現在この問題に対応する予定はない. かわりに後述する `huxtable` または `gt` を使うべきだと考える. 
+`formattable` パッケージは以前からある表を装飾するパッケージである. `kableExtra` との併用も可能だが, **`r rmdja::texlogo("LaTeX")`  に対応しておらず**, HTMLタグをtexファイルに吐き出してしまうため動作しない. PDF にも同様に表示するには [StackOverflow](https://stackoverflow.com/questions/34983822/how-to-have-r-formattable-rendered-to-pdf-output-and-how-to-have-percents-in-the)で提案されているように, `webshot` 使うなど工夫が必要である. そこまでしてこの装飾にこだわるメリットは薄いと私は考えるので現在この問題に対応する予定はない. `kableExtra` か後述する `huxtable` を使うべきだと考える. 
 
 ## `huxtable` パッケージによる作表
 
 ```{r huxtable-logo}
-huxtable::hux_logo(latex = is_latex_output(), html = is_html_output())
+huxtable::hux_logo(latex = is_latex_output(), html = is_html_output()) %>%
+  huxtable::set_caption("`huxtable` のロゴはランダムに生成される.")
 ```
 
-[`huxtable`](https://hughjonesd.github.io/huxtable/) は HTML と `r rmdja::texlogo("LaTeX")` に対応した作表パッケージであり, 公式ドキュメントによると他の類似パッケージと比較して多機能であることを強調している. 全体的に `tidyverse` を意識した構文が用意され, `kableExtra` のようにパイプラインを使った記述が捗る. なお `huxtable` のロゴはランダムに生成される. さらに「1行ごとに背景色を変更」「`stargazer`風の表」などよく使われるスタイルを簡単に設定できるようになっていたり, はては `tidyr` のような表のロング・ワイド変形機能まで備えている. 例えば公式用例集を参考に, 条件書式を付けた表 \@ref(tab:huxtable-example) を作成する.
+[`huxtable`](https://hughjonesd.github.io/huxtable/) は HTML と `r rmdja::texlogo("LaTeX")` に対応した作表パッケージであり, 公式ドキュメントによると他の類似パッケージと比較して多機能であることを強調している. 全体的に `tidyverse` を意識した構文が用意され, `kableExtra` のようにパイプラインを使った記述が捗る. さらに「1行ごとに背景色を変更」「`stargazer`風の表」などよく使われるスタイルを簡単に設定できるようになっていたり, はては `tidyr` のような表のロング・ワイド変形機能まで備えている. 例えば公式用例集を参考に, 条件書式を付けた表 \@ref(tab:huxtable-example) を作成する.
 
 (ref:huxtable-example-cap) `huxtable` パッケージによる作表
 
@@ -232,7 +234,7 @@ head(mtcars[1:5]) %>% set_names(colnames_mtcars_ja[1:5]) %>%
   set_number_format(col = "ギア比", value = fmt_percent(digits = 2))
 ```
 
-そのままでは罫線の設定が `set_top_border()`, `set_bottom_border()`, などしかなく, 複雑な条件を指定するのが大変だが, `ggplot2` のテーマ関数のようにスタイルのプリセットが `theme_*()` の名前でいくつか用意されている. 例えば上記では `theme_article()` という学術論文風テーマを適用し, 表の上下とヘッダにだけ罫線を引いている. 条件書式は `map_*()` 関数群で実行できる. また, フォーマットは `set_number_format()` に値を変換するフォーマット関数を与える形で適用できる. こちらはパーセンテージなども正しく表示できる.
+`huxtable` パッケージの関数の多くには `set_` という接頭辞がついているものとそうでないものがある. ついているものは上記のようにパイプラインでつなげて使うために用意された関数群で, ついていないものは R 組み込みの `colnames()` のように1行ごとに処理を書くスタイルに向いている. そのままでは罫線の設定が `set_top_border()`, `set_bottom_border()`, などしかなく, 複雑な条件を指定するのが大変だが, `ggplot2` のテーマ関数のようにスタイルのプリセットが `theme_*()` の名前でいくつか用意されている. 例えば上記では `theme_article()` という学術論文風テーマを適用し, 表の上下とヘッダにだけ罫線を引いている. 条件書式は `map_*()` 関数群で実行できる. また, フォーマットは `set_number_format()` に値を変換するフォーマット関数を与える形で適用できる. こちらはパーセンテージなども正しく表示できる.
 
 * テーマ設定はグローバルオプションでも設定できる. 例えば `options(huxtable.knit_print_df_theme = theme_article)`.
 
@@ -252,7 +254,7 @@ lm1 <- lm(mpg ~ cyl, mtcars)
 lm2 <- lm(mpg ~ cyl + hp, mtcars)
 glm1 <- glm(I(mpg > 20) ~ cyl, mtcars,
           family = binomial)
-huxreg(lm1, lm2, glm1) %>%
+huxreg(lm1, lm2, glm1, stars = NULL, error_pos = "below", note = "括弧内は標準誤差") %>%
   set_caption("(ref:huxreg-example-cap)") %>%
   set_text_color(everywhere, "model1", "green") %>%
   set_text_color(everywhere, "model2", "blue")
@@ -262,38 +264,38 @@ huxreg(lm1, lm2, glm1) %>%
 
 ## TeX/HTML を出力する関数
 
-`stargazer` や `xtable` のように, HTML や `\LaTeX`{=latex}`LaTeX`{=html} のソースコードとして表を出力してくれるパッケージがある. これらは `results='asis'` のチャンクオプションを指定することで関数の出力するテキストをそのまま埋め込むことができる. よって, あとは HTMLか`\LaTeX`{=latex}`LaTeX`{=html} かといった出力形式の違いに気をつければ表示できる (図 \@ref(tab:stargazer-table)).
+`stargazer` や `pander` のように表を出力するための HTML や `r rmdja::texlogo("LaTeX")` や Markdown のソースコードを出力してくれるパッケージがある. これらは `results='asis'` のチャンクオプションを指定することで関数の出力するテキストをそのまま埋め込むことができる. よって, あとは HTMLか`\LaTeX`{=latex}`LaTeX`{=html} かといった出力形式の違いに気をつければ表示できる. `stargazer` はオプションが豊富で, 例えば表 \@ref(tab:stargazer-table)では, `align = T` を指定することで, `dcolumn.sty` を使って 数字のアラインメントを小数点で揃えることができる. その他, 複数の回帰モデルの結果を並べて表示したり, その際の表示スタイルも比較的かんたんに調整できる. `stargazer` の詳しい使い方はむかし私が書いた『[R での分析結果を LaTeX 形式で出力するパッケージ比較 (後編)](https://ill-identified.hatenablog.com/entry/2014/01/28/214814)』を参考に.
 
-(ref:stargazer-title) `stargazer` による表の出力
+(ref:stargazer-title) `stargazer` による要約統計量の出力
 
 ```{r stargazer-table, echo=T, message=F, results='asis'}
 require(stargazer)
-stargazer(mtcars, header = F,
+stargazer(mtcars, header = F, align = T,
           type = if(knitr::is_latex_output()) 'latex' else 'html',
           title = "(ref:stargazer-title)",
           label = knitr::opts_current$get("label")
           )
 ```
 
-ただし `stargazer` はここ数年更新されておらず, R Markdown に対応した機能追加なども行われていないため, 相互参照に対応していない. `bookdown` リポジトリの [issue #175](https://github.com/rstudio/bookdown/issues/175) にあるように, PDFに限れば簡易的な方法で対処できるが, HTMLでも相互参照するには [`stargazer_bookdown`](https://github.com/jiewpeng/stargazer_bookdown) のインストールが必要になる.
+ただし `stargazer` はここ数年更新されておらず, R Markdown に対応した機能追加なども行われていないため, **相互参照に対応していない**. `bookdown` リポジトリの [issue #175](https://github.com/rstudio/bookdown/issues/175) にあるように, PDFに限れば簡易的な方法で対処できるが, HTMLでも相互参照するには [`stargazer_bookdown`](https://github.com/jiewpeng/stargazer_bookdown) のインストールが必要になる.
 
-その他, `Hmisc::latex()`, `stats::xtable()` という古典的な関数がある. 後者は名前の通り `r rmdja::texlogo("LaTeX")` のソースをかなりの自由度で出力できるが, ここまでやるならもう最初から `r rmdja::texlogo("LaTeX")` で書いたほうがいいのでは, というレベルである. `r rmdja::texlogo("LaTeX")` に詳しくない場合, かえって難しいかも知れない. 既に紹介した `kableExtra`, `huxtable` などでできる範囲でやったほうが簡単だろう.
+その他, `Hmisc::latex()`, `stats::xtable()` という古典的な関数がある. 後者は名前の通り `r rmdja::texlogo("LaTeX")` のソースをかなりの自由度で出力できるが, ここまでやるならもう最初から全部 `r rmdja::texlogo("LaTeX")` で書いたほうがいいのでは, という気もする. `r rmdja::texlogo("LaTeX")` に詳しくない場合, かえって難しいかも知れない. 既に紹介した `kableExtra`, `huxtable` などでできる範囲でやったほうが簡単だろう.
 
 ## その他の作表パッケージ
 
-`df_print` チャンクオプションで, デフォルトの表示方法を変更することもできる. ここまで `kable` での出力を前提としていたが, 長大な表を掲載したい場合, `paged` オプションがある.
-
-それ以外に有名なパッケージとして, `DT`, `flextable`, `gt` などがある. `DT` はインタラクティブな表ウィジェットを作成し, `flextable` は Word へのエクスポート機能をフィーチャーしているが, PDF に対しては画像として出力するなどくせがある. `gt` は RStudio 社が開発しているパッケージで, `huxtable` のように `tidyverse` 的なシンプルな構文が用意されている一方で, まだ R Markdown の相互参照機能に対応していない[^gt-crossref]. 以上から, `kableExtra` や `huxtable` が `rmdja` の対応する出力媒体に適したパッケージであり, それ以外のパッケージの紹介は避ける.
+そのほか有名なパッケージとして, `DT`, `flextable`, `gt` などがある. `DT` はインタラクティブな表ウィジェットを作成し, `flextable` は Word へのエクスポート機能をフィーチャーしているが, PDF に対しては画像として出力するなどくせがある. `gt` は RStudio 社が開発しているパッケージで, `huxtable` のように `tidyverse` 的なシンプルな構文が用意されている一方で, まだ R Markdown の相互参照機能に対応していない[^gt-crossref]. 以上からすでに紹介した `kableExtra` や `huxtable` がより `rmdja` の対応する出力媒体に適したパッケージであり, それ以外のパッケージの詳しい紹介は避ける.
 
 RCB [10.3 Other packages for creating tables](https://bookdown.org/yihui/rmarkdown-cookbook/table-other.html) も参考にせよ.
 
-[^gt-crossref]: Issue [#115](https://github.com/rstudio/gt/issues/115) にあるように, 機能を追加したいという声はある. しかし現時点では `gt`  のこの機能の開発を積極的に進める様子はない. 
+[^gt-crossref]: Issue [#115](https://github.com/rstudio/gt/issues/115) にあるように, 機能を追加したいという声はある. しかし現時点では `gt`  の R Markdown 対応作業の優先度は高くないようである.
 
 # 文献引用の詳細設定 {#biblio-advaneced}
 
 ## `(u)p\BibTeX`{=latex}`(u)pBibTeX`{=html} を使う
 
-このセクションの説明の理解には多少の `r rmdja::texlogo("LaTeX")` の知識を要する.  Ver. 0.4.3 以降では `r rmdja::texlogo("BibLaTeX")` 用の日本語スタイルとして最低限のクオリティだけは保った `jauthoryear` を用意しているため, どうしても文献リストのスタイルにこだわりたい以外はここで紹介される方法は使わないほうが良い. 
+```{block2 upbibtex-customize, type="rmdcaution"}
+このセクションの説明の理解には多少の `\LaTeX`{=latex}`LaTeX`{=html} の知識を要する.  Ver. 0.4.3 以降では BibLaTeX 用の日本語スタイルとして最低限のクオリティだけは保った `jauthoryear` を用意しているため, どうしても文献リストのスタイルにこだわりたい以外はここで紹介される方法は使わないほうが良い.
+```
 
 `.bst` ファイルのスタイルを使いたい場合,  (u)`r rmdja::texlogo("pBibTeX")` が必要であり, そのためには現在の R Markdown および `rmdja` の仕様では, YAMLフロントマターとグローバルオプションを変更する必要がある. 例えば `jecon.bst` を使いたい参考文献リストを出力したい場合, YAMLフロントマターは以下のような記述となる.
 
@@ -306,7 +308,7 @@ biblio-style: jecon
 bibliogpraphy: citations.bib
 ```
 
-`r rmdja::texlogo("BibLaTeX")` では `citation_options` にスタイルまで指定していたが, `natbib` を選択した場合 `biblio-style` で指定し, フォーマット関数の `citation_options` 引数は `natbib.sty` に対するオプションを指定する項目となる (フロントマターの `natbiboptions` でも可). 上記の例では `numbers` を指定しているため本文中の参照トークンは `[1]`, `[2, 3]` のような番号形式となる. デフォルトは `authoryear` である.
+`r rmdja::texlogo("BibLaTeX")` では `citation_options` にスタイルまで指定していたが, `natbib` を選択した場合 `biblio-style` に `.bst` ファイルを指定し, フォーマット関数の `citation_options` 引数は `natbib.sty` に対するオプションを指定する項目となる (トップレベルの `natbiboptions` でも可). 上記の例では `numbers` を指定しているため本文中の参照トークンは `[1]`, `[2, 3]` のような番号形式となる. デフォルトは `authoryear` , つまり「著者 - 出版年」形式である.
 
 次に, 最初のチャンク, またはコンソールでグローバルオプションを変更する.
 
@@ -316,10 +318,11 @@ options(tinytex.latexmk.emulation = F)
 
 この状態で knit または build すれば `.bst` ファイルのスタイルが適用される.
 
-このような操作が必要な理由を説明する. `rmarkdown` は `tinytex` というパッケージでインストールされたスタンドアローンな `r rmdja::texlogo("LaTeX")` 処理系で PDF を生成している. しかしこれは (u)`r rmdja::texlogo("pBibTeX")` の使用が想定されていない.  (u)`r rmdja::texlogo("pBibTeX")` は日本語コミュニティで開発されたマルチバイト文字対応版 `r rmdja::texlogo("BibTeX")` だから, `rmarkdown` 開発メンバーたちはこれらの存在に詳しくないのだろう (YiHui 氏は中国出身だが, 中国語圏では BibLaTeX を使うことが多いようだ). 冒頭のチャンクで `options(tinytex.latexmk.emulation = F)` を指定することで, 自分のマシンにインストールされた, おそらくあなたが普段使っているであろう `r rmdja::texlogo("LaTeX")` 処理系に処理させることができる. この方法では `latexmk` コマンドを使用してPDFの生成が行われる, その場合[TeX Wiki](https://texwiki.texjp.org/?Latexmk)に記載のあるように, 日本語出力のため `.latexmkrc`  ファイルが必要となっている. `rmdja` では `natbib` を指定した場合に自動でカレントディレクトリに `.latexmkrc` をコピーするようにしている. しかしログが残らないなどデバッグしづらいところがあるため, このやり方はやや使いづらいため, `r rmdja::texlogo("LaTeX")` に対するそれなりの知識を要する. たとえばこの説明を読んで初めて `latexmk` の存在を知った, そもそも `r rmdja::texlogo("LaTeX")` をどうインストールしたか記憶がない, といった人は慣れるまで大変かもしれない.
-
+このような操作が必要な理由を説明する. `rmarkdown` は `tinytex` というパッケージでインストールされたスタンドアローンな `r rmdja::texlogo("LaTeX")` 処理系で PDF を生成している. しかしこれは (u)`r rmdja::texlogo("pBibTeX")` の使用が想定されていない.  (u)`r rmdja::texlogo("pBibTeX")` は日本語コミュニティで開発されたマルチバイト文字対応版 `r rmdja::texlogo("BibTeX")` だから, `rmarkdown` 開発メンバーたちがこれらの存在に詳しくないのも仕方ないことだ (YiHui 氏は中国出身だが, 中国語圏では BibLaTeX を使うことが多いようだ). 冒頭のチャンクで `options(tinytex.latexmk.emulation = F)` を指定することで, 自分のマシンにインストールされた, おそらくあなたが普段使っているであろう `r rmdja::texlogo("LaTeX")` 処理系に処理させることができる. この方法では `latexmk` コマンドを使用してPDFの生成が行われる, その場合[TeX Wiki](https://texwiki.texjp.org/?Latexmk)に記載のあるように, 日本語出力のため `.latexmkrc`  ファイルが必要となっている. `rmdja` では `natbib` を指定した場合に自動でカレントディレクトリに `.latexmkrc` をコピーするようにしている. しかしログが残らないなどデバッグしづらいところがあるため, このやり方はやや使いづらく `r rmdja::texlogo("LaTeX")` に対するそれなりの知識を要する. たとえばこの説明を読んで初めて `latexmk` の存在を知った, そもそも `r rmdja::texlogo("LaTeX")` をどうインストールしたか記憶がない, といった人は慣れるまで大変かもしれない.
 
 ### (TODO) `pandoc-citeproc` と CSL について
+
+TODO: せめて日本語文献の姓名表示をなんとかしたスタイルを用意する
 
 ### (WIP) `r rmdja::texlogo("BibLaTeX")` について
 
@@ -357,7 +360,7 @@ TODO: その他の非ラテン文字, キリル文字, アラビア文字 ヘブ
 # Python スクリプトの埋め込み {#python}
 
 ```{block py-warning, type="rmdcaution"}
-現時点では `reticulate` による Python 実行はグラフィック関係や環境設定でまだまだバギーなところが多い. つまり, エラーが発生した場合には原因が Python 側にあるのか RStudio や `reticulate` パッケージ側にあるのか判断しなければならない. よってあなたがどちらかに習熟していない場合, 作業が非効率になることが予想される.
+現時点では `reticulate` による Python 実行はグラフィック関係や環境設定でまだまだバギーなところが多い. つまり, エラーが発生した場合には原因が Python 側にあるのか RStudio や `reticulate` パッケージ側にあるのか判断しなければならない. よってあなたがどちらかに習熟していなかったり, まだエラーメッセージを注意深く読む習慣がついていない初心者である場合, 作業が非効率になることが予想される.
 ```
 
 Python スクリプトを埋め込むこともできる. 方法は2通りあり, 都度システムコマンドから呼び出す方法と, `reticulate` パッケージを使うものがある. `reticulate` 登場以前はチャンクごとに呼び出していたため複数のチャンクに分割して記述するのが難しかったが, 現在は `reticulate` パッケージを利用することでRと同じような感覚で, あるいは Jupyter のコードセルと同じような感覚で書ける.

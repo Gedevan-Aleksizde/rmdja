@@ -8,7 +8,7 @@ rmdja::gitbook_ja:
 
 rmdja::pdf_book_ja:
   tombow: false
-  add_folio: true
+  # add_folio: true
   keep_tex: true
 
 bookdown::epub_book:

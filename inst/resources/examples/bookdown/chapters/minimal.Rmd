@@ -6,7 +6,9 @@
 
 ```{r install-guide, echo=T, eval=F}
 install.packages("remotes")
-remotes::install_github("Gedevan-Aleksizde/my_latex_template", repos = NULL, type = "source")
+remotes::install_github(
+  "Gedevan-Aleksizde/my_latex_template",
+  repos = NULL, type = "source")
 ```
 
 まだ RStudio を使っていないのなら, RStudio 上で作業することを強く推奨する. さらに, もしもRの操作自体にあまり慣れていないのなら, 森知晴 『[卒業論文のためのR入門](https://tomoecon.github.io/R_for_graduate_thesis/)』などを読むことを薦める. 
@@ -14,7 +16,9 @@ remotes::install_github("Gedevan-Aleksizde/my_latex_template", repos = NULL, typ
 加えて, 以下のパッケージが役に立つので気に入ったらインストールしていただきたい.
 
 ```{r install-suggets, echo=T, eval=F}
-install.packages(c("tidyverse", "ggthemes", "citr", "clipr", "kableExtra"))
+install.packages(
+  c("tidyverse", "ggthemes", "citr", "clipr", "kableExtra")
+  )
 ```
 
 RStudio を起動し, 左上から新規作成を選び, "R Markdown" を選ぶ (図 \@ref(fig:new-file)).
@@ -49,7 +53,9 @@ knitr::include_graphics(file.path(img_dir, "rmd-templates.png"))
 このドキュメントは `rmdja` パッケージに含まれている. よってまずはこれをダウンロードしてほしい.
 
 ```{r installation, eval=F}
-remotes::install_github("Gedevan-Aleksizde/my_latex_template", repos = NULL, type = "source")
+remotes::install_github(
+  "Gedevan-Aleksizde/my_latex_template",
+  repos = NULL, type = "source")
 ```
 
 3種類のテンプレートのうち, `pdf book in Japanese` のみ, 文書のビルドのための下準備が追加で必要になるため, その方法を解説する. それ以外は第 \@ref(quick-start) 節で書いたように "knit" ボタンを押すだけで良い.
@@ -57,17 +63,20 @@ remotes::install_github("Gedevan-Aleksizde/my_latex_template", repos = NULL, typ
 最低限のファイルやパッケージで動くほうのデモ用ディレクトリをコピーする. ただし, `tidyverse` と `kableExtra` のインストールも必要である.
 
 ```{r copy, echo=T, eval=F}
-file.copy(system.file("resources/examples/bookdown-minimal", package = "rmdja"), "./", recursive = T)
+file.copy(
+  system.file("resources/examples/bookdown-minimal",
+              package = "rmdja"),
+  "./", recursive = T)
 ```
 
 ## 書籍形式のビルド操作
 
-bookdown の文書生成は従来の R Markdown と違い, RStudio の `knit` ボタンでは**できない**. 代わりに, 以下の2通りの方法がある.
+書籍形式のテンプレートである `pdf book in Japanese` を選択した場合, 論文形式やスライド形式とは違いフォルダが作られ, その中に `_bookdown.yml`, `_output.yml` というファイルが作られる. これらは書籍の細かいフォーマットを設定するためのファイルである. 新規作成ファイルも同じフォルダに `index.Rmd` という名前で保存する. この名前は最初に読み込むファイル名のデフォルト名として決まっているため, 他の名前で保存すると正しく動作しないことがある. さらにbookdown の文書生成は従来の R Markdown と違い, RStudio の `knit` ボタンでは**できない**. 代わりに, 以下の2通りの方法がある.
 
 1. `bookdown::render_book('index.Rmd', format = "bookdown::gitbook")` などを呼び出す
 2. RStudio の Build ペーンを使う
 
-前者は, 以下のように実行する. 順にHTML, PDF, epub を出力している
+前者の場合は, Rmd ファイルのあるディレクトリに移動して以下の関数を実行する. 順にHTML, PDF, epub を出力している
 
 ```{r render-book, echo=T, eval=F}
 bookdown::render_book("index.Rmd", "rmdja::gitbook_ja")

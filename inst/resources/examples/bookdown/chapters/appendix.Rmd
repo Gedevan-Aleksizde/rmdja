@@ -1,10 +1,10 @@
 # (APPENDIX) 補遺 {-}
 
-ここでは `rmdja` の内部処理を解説する. `knitr` や `rmarkdown` の仕様に精通している, 自分で細かい設定をしたいユーザ向けの解説である.
+このパートでは, ユーザーが通常気にする必要のないような `rmdja` 内部での処理を解説する. `knitr` や `rmarkdown` の仕様に精通している, 自分で細かい設定をしたいユーザ向けの解説である. 既に R Markdown に慣れていて, かなりトリッキーな使い方をしていたらどうも `rmdja` の機能とは競合するようだ, という場合は参考にしてほしい. 
 
 # デフォルト値の自動調整
 
-R Markdown で日本語文書を作成する上での大きな障害の1つである, YAML フロントマターの設定を改善している. `rmdja` の文書フォーマットはYAMLフロントマターのデフォルト値などを日本語文書に適したものに変更している. さらに, ユーザーをOSごとのフォントの違いや煩雑で重複だらけの設定から解放するため, 内部処理でも動的に設定変更している. もちろんこれらは ユーザーによる YAML フロントマターやチャンクオプションの変更で上書きできる.
+`rmdja` では R Markdown で日本語文書を作成する上での大きな障害の1つである, YAML フロントマターの設定を改善している. `rmdja` の文書フォーマットはYAMLフロントマターのデフォルト値などを日本語文書に適したものに変更している. さらに, ユーザーをOSごとのフォントの違いや煩雑で重複だらけの設定から解放するため, 内部処理でも動的に設定変更している. もちろんこれらは ユーザーによる YAML フロントマターやチャンクオプションの変更で上書きできる.
 
 ## デフォルトのフォント
 
@@ -17,8 +17,12 @@ tibble(
   Mac = c("游書体", "ヒラギノ"),
   `Windows (>= 8)` = c("游書体", "游書体"),
   `Windows (それ以前)` = c("MSフォント", "MSフォント")
-) %>% kable(booktabs = T, caption = "OS/エンジン別のデフォルトフォント") %>%
-  column_spec(1, background = "gray")
+  ) %>% kable(
+  booktabs = T,
+  caption = "OS/エンジン別のデフォルトフォント"
+  ) %>%
+  column_spec(1, background = "gray") %>%
+  kable_styling(latex_options = "hold_position")
 ```
 
 これらは `\XeLaTeX`{=latex}`XeLaTeX`{=html} ならば `zxjafont`, `\LuaLaTeX`{=latex}`LuaLaTeX`{=html} ならば `luatex-ja` で用意されているプリセットを使って設定している. 使用 OS の判定は R の基本関数による. なお, Noto フォントを選んだのは Ubuntu 18以降の日本語用フォントだからである. Ubuntu から派生したOSにはプリインストールされていることが多いようだが, Debian, Cent OS, Fedora 等にはおそらくプリインストールされていないので注意. 現時点ではフォントが**実際にインストールされているかを確認する機能はない**.
@@ -26,15 +30,36 @@ tibble(
 フォントのプリセットを指定した場合, 個別設定は無効になる. さらに, 3種類の和文フォントを全て設定していない場合もデフォルトのプリセットから選ばれる.
 
 
-## チャンクのデフォルト設定
+## チャンクオプションのデフォルト設定
 
-デフォルトのグラフィックデバイスは, HTML では `PNG`, PDF では `cairo_pdf` としている. R でよく描画するような単純な図形はベクタ画像が適しているが, 件数のとても多いデータの散布図などはベクタ画像にするとファイルサイズが大きくなるため, そのような画像を適度に「劣化」させてファイルサイズを軽減してくれる `cairo_pdf` を標準としている. HTML に関しては, そもそもデフォルトの設定でPDFが表示できないWebブラウザが多いことから, PNG をデフォルトにした.
+チャンクオプションのデフォルト設定も R Markdown から多少変更している.
 
-また, `block`, `block2`, `asis` などのブロックを `echo=F` や `include=F` にするメリットはほぼないため, `knitr::opts_chunk$set(echo = F, include = F)` と一括設定してもこれらは `echo=T, include=T` のままである. 変更したい場合は, チャンクごとに設定することで有効になる.
+`block`, `block2`, `asis` などのブロックを `echo=F` や `include=F` にするメリットはほぼないため, `knitr::opts_chunk$set(echo = F, include = F)` と一括設定してもこれらは `echo=T, include=T` のままである. 変更したい場合は, チャンクごとに設定することで有効になる.
+
+デフォルトの R グラフィックデバイスは, HTML では `"PNG"`, PDF では `"cairo_pdf"` としている. `"cairo_pdf"` を使う理由は (1) R でよく描画するような単純な図形はベクタ画像が適しているが, 件数のとても多いデータの散布図などはベクタ画像にするとファイルサイズが大きくなるため, そのような画像を適度に「劣化」させてファイルサイズを軽減してくれる, (2) 日本語フォントの表示と埋め込みの設定が最も簡単, というものである. そして HTML はそもそもデフォルトの設定で PDF が表示できない Web ブラウザが多いことから, `PNG` をデフォルトにした. もし HTML でもベクタ画像を表示したいのなら `"svglite"` を設定して SVG 形式にすると良いだろう.
+
+```{r def-dev-svg, echo=T, eval=F}
+knitr::opts_chunk(
+  dev = if(knir::is_latex_output()) "cairo_pdf" else "svglite"
+  )
+```
+
+ただし, R 以外のプログラムで出力した画像には `cairo_pdf` は使えないため, 内部では `pdf` を使用している. これらの画像が日本語フォントを適切に埋め込めるかはそれぞれの設定に依存するため, R 側で制御するのは難しい.
+
+## コードブロックの整形と自動折り返し
+
+HTML はともかく, PDF はコードの自動折り返しが難しい. 例えば [RCB Ch. 5.3](https://bookdown.org/yihui/rmarkdown-cookbook/text-width.html) では, `listings.sty` を使う方法が書かれているが, この方法ではデフォルトのシンタックスハイライトが使えなくなり, R Markdown の大きなメリットの1つが損なわれてしまう. また, 同 [Ch. 11.10](https://bookdown.org/yihui/rmarkdown-cookbook/opts-tidy.html) では `knitr` のチャンクオプションで `tidy` と `tidy.opts` を設定するという方法が紹介されている. この機能は `formatR::tidy_source()` 関数を利用したコード整形であり, この関数の `width.cutoff` というオプションで自動折り返しを始める位置を指定できる. (たまに勘違いしている人がいるが) このように**コード整形機能は自動折り返しを目的としたものではない**ため, 長すぎる関数名や文字列があると `width.cutoff` を超過することも十分ありえる. 同章では `styler` パッケージがより機能が豊富だと言及しているが, このパッケージも現時点では1行の上限を指定する機能はない[^styler-width]. `rmdja` では `formatR::tidy_source()` のデフォルト設定から変更を加え, `width.cutoff = 40` と小さめにすることで多少は余白にはみ出しにくくなってはいるが完全ではないし, むしろ過剰な折り返しで行数が増えてしまう可能性もある (PDFの基本フォントサイズを変えるなどしても適切な幅は変わりうる). よって現状では究極的には手動で調整する必要があり, RStudio の機能であるマージン位置の表示[^rstudio-margin]などを使いおおよその幅を推測しながら書くしかない. 逆に自動コード整形が一切不要という場合, 最初のチャンクで以下のように設定する.
+
+```{r tidy-off, echo=T, eval=F}
+knitr::opts_chunk$set(tidy = F)
+```
+
+[^styler-width]: 参考: Issues [#247](https://github.com/r-lib/styler/issues/247)
+[^rstudio-margin]: 参考: [Vertical Line in the source editor?](https://community.rstudio.com/t/vertical-line-in-the-source-editor/24950)
 
 # PDF の組版に関する細かい話
 
-ここではpandocテンプレート等の設定を解説する.
+ここではpandocテンプレート等の設定を解説する. PDF の出力は pandoc に大きく依存している. pandoc は PDF を生成する際に, YAMLフロントマターの設定を pandoc のテンプレートに代入し, 本文を追加した .tex ファイルを作成してタイプセットしている. よってプリアンブル部分は完全に動的に生成されるわけではなく, ある程度の定型が存在する. これを pandoc テンプレートというが, `rmdja` では日本語表示にあたっていろいろなパッケージ間の競合が見られたこのテンプレートを多少いじっている.
 
 3種類の和文フォントを個別設定をした場合, `\XeLaTeX`{=latex}`XeLaTeX`{=html} はフォールバックフォントを有効にしている. `j****fontoptions` 以下に, `FallBack=...` というオプションでフォールバックフォントを指定すれば有効になる.
 
@@ -91,7 +116,8 @@ TODO: 現在 jecon.bst の表示も少しおかしいので確認中.
 Rで描いたグラフに日本語を表示する場合, Linux 系 OS ならばフォント名を適切に設定するだけで表示されるが, Windows や Mac ではフォントをグラフィックデバイスに登録する必要がある. しかし手動登録は面倒なので, インストールされているシステムフォントを全て自動登録するパッケージ, [`fontregisterer`](https://github.com/Gedevan-Aleksizde/fontregisterer) を用意している.
 
 ```{r fontregisterer-install, echo=T, eval=F}
-remotes::install_github("Gedevan-Aleksizde/fontregisterer", repos = NULL, type = "source")
+remotes::install_github("Gedevan-Aleksizde/fontregisterer",
+                        repos = NULL, type = "source")
 ```
 
 もちろんこれは R Markdown 以外でも使用できる. このパッケージは読み込まれた時点で登録処理を行うため,
