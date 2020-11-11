@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1 クイックスタート | rmdja による多様な形式の日本語技術文書の作成</title>
+  <title>18 その他のトラブルシュート | rmdja による多様な形式の日本語技術文書の作成</title>
   <meta name="description" content="bookdown でまともな日本語文書を作る資料" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1 クイックスタート | rmdja による多様な形式の日本語技術文書の作成" />
+  <meta property="og:title" content="18 その他のトラブルシュート | rmdja による多様な形式の日本語技術文書の作成" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://bookdown.org/john/awesome/" />
   <meta property="og:image" content="https://bookdown.org/john/awesome/img/Johannes_Gutenberg.jpg" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="Gedevan-Aleksizde/rmdja" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1 クイックスタート | rmdja による多様な形式の日本語技術文書の作成" />
+  <meta name="twitter:title" content="18 その他のトラブルシュート | rmdja による多様な形式の日本語技術文書の作成" />
   
   <meta name="twitter:description" content="bookdown でまともな日本語文書を作る資料" />
   <meta name="twitter:image" content="https://bookdown.org/john/awesome/img/Johannes_Gutenberg.jpg" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   <link rel="apple-touch-icon-precomposed" sizes="120x120" href="touch-icon.png" />
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-<link rel="prev" href="本稿の目的.html"/>
-<link rel="next" href="下準備.html"/>
+<link rel="prev" href="製本時のエラーへの対処.html"/>
+<link rel="next" href="default-property.html"/>
 <script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -324,46 +324,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="quick-start" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> クイックスタート</h1>
-<p><code>rmdja</code> パッケージをインストールする. 依存している <code>rmarkdown</code>, <code>bookdown</code>, <code>knitr</code> なども同時にインストールされる.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb4-1"><a href="quick-start.html#cb4-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</span>
-<span id="cb4-2"><a href="quick-start.html#cb4-2"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;Gedevan-Aleksizde/my_latex_template&quot;</span>, </span>
-<span id="cb4-3"><a href="quick-start.html#cb4-3"></a>  <span class="dt">repos =</span> <span class="ot">NULL</span>, <span class="dt">type =</span> <span class="st">&quot;source&quot;</span>)</span></code></pre></div>
-<p>まだ RStudio を使っていないのなら, RStudio 上で作業することを強く推奨する. さらに, もしもRの操作自体にあまり慣れていないのなら, 森知晴 『<a href="https://tomoecon.github.io/R_for_graduate_thesis/">卒業論文のためのR入門</a>』などを読むことを薦める.</p>
-<p>加えて, 以下のパッケージが役に立つので気に入ったらインストールしていただきたい.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb5-1"><a href="quick-start.html#cb5-1"></a><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;ggthemes&quot;</span>, <span class="st">&quot;citr&quot;</span>, <span class="st">&quot;clipr&quot;</span>, </span>
-<span id="cb5-2"><a href="quick-start.html#cb5-2"></a>  <span class="st">&quot;kableExtra&quot;</span>))</span></code></pre></div>
-<p>RStudio を起動し, 左上から新規作成を選び, “R Markdown” を選ぶ (図 <a href="quick-start.html#fig:new-file">1.1</a>).</p>
-<div class="figure" style="text-align: center"><span id="fig:new-file"></span>
-<img src="img/new-file.png" alt="新規作成" width="198" height="30%" />
-<p class="caption">
-図 1.1: 新規作成
-</p>
+<div id="その他のトラブルシュート" class="section level1" number="18">
+<h1><span class="header-section-number">18</span> その他のトラブルシュート</h1>
+<div id="コードブロックや出力テキストの折り返し改行位置がおかしい" class="section level2" number="18.1">
+<h2><span class="header-section-number">18.1</span> コードブロックや出力テキストの折り返し・改行位置がおかしい</h2>
+<p>折り返し位置を規定するグローバルオプション <code>getOptions(width)</code> を確認する. 通常は 80 かそれより大きい値が設定されていることが多いが, 何らかの理由で小さく設定されている可能性もある. 確実を期すなら, 冒頭のチャンクに <code>options(width = 140)</code> のように明示的に設定する.</p>
+<p>また, コードブロックの折り返しや改行位置がおかしい場合, それはコード自動整形の問題である可能性がある. <code>rmdja</code> はスライド用テンプレート以外でデフォルトでコードブロックの自動整形を適用しているが, <code>black</code> や <code>yapf</code> のある Python などと違い, R のコード自動整形ツールは機能やバリエーションがあまり多くない. コードの整形にこだわるなら, ある程度は手動でやる必要がある. コードの自動整形を無効にするなら, 冒頭のチャンクで以下を実行する.</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb80-1"><a href="その他のトラブルシュート.html#cb80-1"></a>knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">tidy =</span> F)</span></code></pre></div>
+<p>コードの自動整形の詳細については付録 <a href="default-property.html#autoformatter">A.3</a> を参照.</p>
 </div>
-<p>“From Template” からテンプレートを選択する (<a href="quick-start.html#fig:rmdja-templates">1.2</a>).</p>
-<div class="figure" style="text-align: center"><span id="fig:rmdja-templates"></span>
-<img src="img/rmd-templates.png" alt="R Markdown のテンプレート" width="532" />
-<p class="caption">
-図 1.2: R Markdown のテンプレート
-</p>
+<div id="todo-windows-特有の問題" class="section level2" number="18.2">
+<h2><span class="header-section-number">18.2</span> (TODO) Windows 特有の問題</h2>
+<p>日本ロケールの Windows OS で RStudio を動かす場合によくあるエラーについても対処法を書いておく. これは R-wakalang でもよく訊かれる質問である. これらは Windows の仕様が根本的にアレなことに起因するため, Linux 等の仮想環境上でRを動かせば一切発生しない問題ではあるが, おそらく初心者の多くがハマっているので仮想環境を使わない解決方法を書いておく.</p>
+<p>まず, チャンク等のエラーメッセージが文字化けして読めない. これはロケールの問題であることが多い. 残念ながら日本語版 Windows は未だに CP932 エンコードを使用しているため, CP932 を使うと R の表示で不整合が発生する. よって, CP932 を使用すれば解決できる.</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb81-1"><a href="その他のトラブルシュート.html#cb81-1"></a><span class="kw">Sys.setlocale</span>(<span class="dt">locale =</span> <span class="st">&quot;Japanese_Japan.932&quot;</span>)</span></code></pre></div>
+<p>しかし R の他の部分の多くは UTF-8 を前提として作られているので今度は, そちらでいろいろな対処が必要になってしまう. もしこのような「仕様」が気に入らないのなら結局のところ早く LINUX などの他の環境に移行してしまうのが確実である.</p>
+
 </div>
-<p>現在 (Ver. 0.4.3) 用意されているのは以下の4つである.</p>
-<ul>
-<li>プレゼンテーション用スライド形式のテンプレート - <code>Beamer in Japanese</code></li>
-<li>論文形式のテンプレート - <code>pdf article in Japanese</code></li>
-<li>書籍形式のテンプレート - <code>pdf book in Japanese</code></li>
-<li>縦書き文書のテンプレート - <code>pdf vertical writing in Japanese</code></li>
-</ul>
-<p>動作確認として, 今回はシンプルな論文形式を選ぶ. ファイルを開いたら, 適当な名称で保存し, “knit” ボタンを押すと PDF が作成される.</p>
 </div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="本稿の目的.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="下準備.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="製本時のエラーへの対処.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="default-property.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -394,15 +382,15 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "edit/master/rmdja/inst/resources/examples/bookdown/chapter/chapters/minimal.Rmd",
+"link": "edit/master/rmdja/inst/resources/examples/bookdown/chapter/chapters/multi-media.Rmd",
 "text": "Edit"
 },
 "history": {
-"link": "blob/master/rmdja/inst/resources/examples/bookdown/chapter/chapters/minimal.Rmd",
+"link": "blob/master/rmdja/inst/resources/examples/bookdown/chapter/chapters/multi-media.Rmd",
 "text": null
 },
 "view": {
-"link": "tree/rmdja/inst/resources/examples/bookdown/chapter/chapters/minimal.Rmd",
+"link": "tree/rmdja/inst/resources/examples/bookdown/chapter/chapters/multi-media.Rmd",
 "text": null
 },
 "download": null,

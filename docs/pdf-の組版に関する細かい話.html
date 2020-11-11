@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   <link rel="apple-touch-icon-precomposed" sizes="120x120" href="touch-icon.png" />
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-<link rel="prev" href="デフォルト値の自動調整.html"/>
+<link rel="prev" href="default-property.html"/>
 <link rel="next" href="参考文献リストの書式にこだわる-jecon-bst.html"/>
 <script src="libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -282,14 +282,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>17.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
 <li class="chapter" data-level="17.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>17.2</b> YAML フロントマターを確認する</a></li>
 <li class="chapter" data-level="17.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-生成時のエラーを確認する"><i class="fa fa-check"></i><b>17.3</b> PDF 生成時のエラーを確認する</a></li>
-<li class="chapter" data-level="17.4" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#todo-windows-特有の問題"><i class="fa fa-check"></i><b>17.4</b> (TODO) Windows 特有の問題</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="その他のトラブルシュート.html"><a href="その他のトラブルシュート.html"><i class="fa fa-check"></i><b>18</b> その他のトラブルシュート</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="その他のトラブルシュート.html"><a href="その他のトラブルシュート.html#コードブロックや出力テキストの折り返し改行位置がおかしい"><i class="fa fa-check"></i><b>18.1</b> コードブロックや出力テキストの折り返し・改行位置がおかしい</a></li>
+<li class="chapter" data-level="18.2" data-path="その他のトラブルシュート.html"><a href="その他のトラブルシュート.html#todo-windows-特有の問題"><i class="fa fa-check"></i><b>18.2</b> (TODO) Windows 特有の問題</a></li>
 </ul></li>
 <li class="appendix"><span><b>補遺</b></span></li>
-<li class="chapter" data-level="A" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html"><i class="fa fa-check"></i><b>A</b> デフォルト値の自動調整</a>
+<li class="chapter" data-level="A" data-path="default-property.html"><a href="default-property.html"><i class="fa fa-check"></i><b>A</b> デフォルト値の自動調整</a>
 <ul>
-<li class="chapter" data-level="A.1" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html#デフォルトのフォント"><i class="fa fa-check"></i><b>A.1</b> デフォルトのフォント</a></li>
-<li class="chapter" data-level="A.2" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html#チャンクオプションのデフォルト設定"><i class="fa fa-check"></i><b>A.2</b> チャンクオプションのデフォルト設定</a></li>
-<li class="chapter" data-level="A.3" data-path="デフォルト値の自動調整.html"><a href="デフォルト値の自動調整.html#コードブロックの整形と自動折り返し"><i class="fa fa-check"></i><b>A.3</b> コードブロックの整形と自動折り返し</a></li>
+<li class="chapter" data-level="A.1" data-path="default-property.html"><a href="default-property.html#デフォルトのフォント"><i class="fa fa-check"></i><b>A.1</b> デフォルトのフォント</a></li>
+<li class="chapter" data-level="A.2" data-path="default-property.html"><a href="default-property.html#チャンクオプションのデフォルト設定"><i class="fa fa-check"></i><b>A.2</b> チャンクオプションのデフォルト設定</a></li>
+<li class="chapter" data-level="A.3" data-path="default-property.html"><a href="default-property.html#autoformatter"><i class="fa fa-check"></i><b>A.3</b> コードブロックの整形と自動折り返し</a></li>
 </ul></li>
 <li class="chapter" data-level="B" data-path="pdf-の組版に関する細かい話.html"><a href="pdf-の組版に関する細かい話.html"><i class="fa fa-check"></i><b>B</b> PDF の組版に関する細かい話</a>
 <ul>
@@ -320,22 +324,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="pdf-の組版に関する細かい話" class="section level1" number="19">
+<div id="pdf-の組版に関する細かい話" class="section level1" number="20">
 <h1><span class="header-section-number">補遺B</span> PDF の組版に関する細かい話</h1>
 <p>ここではpandocテンプレート等の設定を解説する. PDF の出力は pandoc に大きく依存している. pandoc は PDF を生成する際に, YAMLフロントマターの設定を pandoc のテンプレートに代入し, 本文を追加した .tex ファイルを作成してタイプセットしている. よってプリアンブル部分は完全に動的に生成されるわけではなく, ある程度の定型が存在する. これを pandoc テンプレートというが, <code>rmdja</code> では日本語表示にあたっていろいろなパッケージ間の競合が見られたこのテンプレートを多少いじっている.</p>
 <p>3種類の和文フォントを個別設定をした場合, XeLaTeX はフォールバックフォントを有効にしている. <code>j****fontoptions</code> 以下に, <code>FallBack=...</code> というオプションでフォールバックフォントを指定すれば有効になる.</p>
 <p>用紙サイズは, デフォルトは <code>a4paper</code>, B5 がよいなら <code>b5paper</code> オプションを <code>classoptions:</code> に指定する.</p>
 <p>PDF を印刷所に持ち込んだことがないため詳しいことはわからないが, 『<a href="https://teastat.blogspot.com/2019/01/bookdown.html">Bookdownによる技術系同人誌執筆</a>』で指摘されているようなトンボやノンブルは出力されるように作ってある (そしてここで紹介されているようなLaTeXのコマンドの多くは <code>rmdja</code> では書く必要がなくなった).</p>
 <p>TODO: PART の扉ページにはまだノンブルが表示されない</p>
-<div id="画像の配置" class="section level2" number="19.1">
+<div id="画像の配置" class="section level2" number="20.1">
 <h2><span class="header-section-number">B.1</span> 画像の配置</h2>
 <p>現在, PDFで画像の配置を固定する方法について何も特別なものを用意していない. 単純に自分は必要だとおもったことがないため. 固定したい場合は R Markdown や Bookdown のドキュメントを参考にしてほしい. ただし, 通常は章や部をまたいで表示されることはない (はず).</p>
 </div>
-<div id="取り消し線" class="section level2" number="19.2">
+<div id="取り消し線" class="section level2" number="20.2">
 <h2><span class="header-section-number">B.2</span> 取り消し線</h2>
 <p>LaTeX の各パッケージのバージョンによっては, 和文に取り消し線 (<code>\sout</code>) を与えるとタイプセット時にエラーが出ることがある. もともと<code>ulem.sty</code>は欧文を前提にしたものなので適当に妥協してほしい.</p>
 </div>
-<div id="todo-しかし英文で書きたい場合" class="section level2" number="19.3">
+<div id="todo-しかし英文で書きたい場合" class="section level2" number="20.3">
 <h2><span class="header-section-number">B.3</span> TODO: しかし英文で書きたい場合</h2>
 <p><code>rmdja</code> の機能を使いたいが, 執筆は英語でしたいと言う場合は最低限以下のような設定変更が必要である. デフォルトは日本語用文書クラスのため,</p>
 <p><code>documentclass: book / report / article</code></p>
@@ -350,7 +354,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="デフォルト値の自動調整.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="default-property.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="参考文献リストの書式にこだわる-jecon-bst.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
