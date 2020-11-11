@@ -135,6 +135,7 @@ $else$
   \setmathfont[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
 $endif$
 $endif$
+\fi
 
 % japanese font setting
 $if(jfontpreset)$
@@ -145,8 +146,9 @@ $if(jfontpreset)$
   \usepackage{xeCJKfntef}
 \fi
 \ifluatex
+  \usepackage{luatexja}
   \usepackage[$for(jfontpresetoptions)$$jfontpresetoptions$$sep$,$endfor$,$jfontpreset$]{luatexja-preset}
-  \renewcommand{\kanjifamilydefault}{\gtdefault}
+  %\renewcommand{\kanjifamilydefault}{\gtdefault}
 \fi
 $else$
 % if fonts are set by each family

@@ -89,7 +89,7 @@ pdf_book_ja <- function (
     if(is.null(includes)){
       includes <- rmarkdown::includes(before_body = latex_folio)
     } else {
-      includes$before_body <- c(includes$before_body, latex_folio)
+      includes$before_body <- c(latex_folio, includes$before_body)
     }
   }
   if(identical(code_softwrap, T)){
@@ -97,7 +97,7 @@ pdf_book_ja <- function (
     if(is.null(includes)){
       includes <- rmarkdown::includes(in_header = latex_preamble_code_softwrap)
     } else {
-      includes$in_header <- c(includes$in_header, latex_preamble_code_softwrap)
+      includes$in_header <- c(latex_preamble_code_softwrap, includes$in_header)
     }
   }
 

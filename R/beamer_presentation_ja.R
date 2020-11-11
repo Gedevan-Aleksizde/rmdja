@@ -117,7 +117,7 @@ beamer_presentation_ja <- function(
     if(is.null(includes)){
       includes <- rmarkdown::includes(in_header = latex_preamble_code_softwrap)
     } else {
-      includes$in_header <- c(includes$in_header, latex_preamble_code_softwrap)
+      includes$in_header <- c(latex_preamble_code_softwrap, includes$in_header)
     }
   }
   
