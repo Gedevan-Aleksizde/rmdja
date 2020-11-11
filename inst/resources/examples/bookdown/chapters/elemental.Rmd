@@ -520,11 +520,11 @@ Table: (\#tab:df-print-ops) `df_print` のオプション一覧
 rmdja::kable(mtcars[1:10, ], caption = "`booktabs = T` は PDF にのみ影響する", booktabs = T)
 ```
 
- (1) の方法が現在最も簡単である. ただし, `r rmdja::texlogo("LaTeX")` の構文が評価されなくなるため同時に使うことはできない. 例えば太字強調と数式を両方表示したい場合は, `knitr::is_latex_output()` PDF の場合は完全に `r rmdja::texlogo("LaTeX")` で, HTML の場合は Markdown で書く, という場合分けを自分で書いて `knitr::kable()` に与えなければならない(表 \@ref(tab:kable-caption-example)). また, キャプションではなく**表内の markdown 構文も評価されない**. 表内の markdown 構文を PDF でも反映するには, (2) の方法が必要である.
+  (1) の方法が現在最も簡単である. ただし, `r rmdja::texlogo("LaTeX")` の構文が評価されなくなるため同時に使うことはできない. 例えば太字強調と数式を両方表示したい場合は, `knitr::is_latex_output()` PDF の場合は完全に `r rmdja::texlogo("LaTeX")` で, HTML の場合は Markdown で書く, という場合分けを自分で書いて `knitr::kable()` に与えなければならない(表 \@ref(tab:kable-caption-example)). また, キャプションではなく**表内の markdown 構文も評価されない**. 表内の markdown 構文を PDF でも反映するには, (2) の方法が必要である.
 
 TODO: この仕様は使いづらいのでそのうちなんとかしたい.
 
- (2) についても, `kable()` 単体であれば問題ないが, 後に紹介する `kableExtra` パッケージを併用すると**書式設定がうまく反映されなくなる**ことがある. (3) は表 \@ref(tab:kable-caption-example) の記述をキャプションだけでなく, HTML ならば Markdown または HTML タグで, PDF ならば `r rmdja::texlogo("LaTeX")` で表全体を書き分ける, という方法である. 1つの表を描くのに多大な労力がかかるため推奨しない.
+  (2) についても, `kable()` 単体であれば問題ないが, 後に紹介する `kableExtra` パッケージを併用すると**書式設定がうまく反映されなくなる**ことがある. (3) は表 \@ref(tab:kable-caption-example) の記述をキャプションだけでなく, HTML ならば Markdown または HTML タグで, PDF ならば `r rmdja::texlogo("LaTeX")` で表全体を書き分ける, という方法である. 1つの表を描くのに多大な労力がかかるため推奨しない.
 
 ```{r kable-caption-example, eval=T, echo=T}
 cap <- if(knitr::is_latex_output()) "数式 $a$ と \\textbf{太字}" else "数式 $a$ と **太字**"
@@ -687,11 +687,11 @@ biblatexoptions:
 
 ```{r biblio-comparison}
 tibble(
-  `item` = c("`default`", "`biblatex`", "`natbib`"),
+  `item` = as.character(lapply(c("`pandoc-citeproc`", "`biblatex`", "`bibtex`"), function(x) if(is_latex_output()) commonmark::markdown_latex(x) else x )),
   `HTML` = c(T, F, F),
   `PDF` = c(T, T, T),
   `日本語` = c(T, T, F),
-  `指定名` = c("default", "biblatex", "natbib"),
+  `指定名` = as.character(lapply(c("`default`", "`biblatex`", "`natbib`"), function(x) if(is_latex_output()) commonmark::markdown_latex(x) else x)),
   `文献ファイル` = c(".json", ".bib", ".bib/.bibtex"),
   `文献スタイル` = c(".csl", ".bbx/.cbx", ".bst")
   ) %>% kable(caption = "引用プログラムごとの違い", booktabs = T, escape = F) %>%

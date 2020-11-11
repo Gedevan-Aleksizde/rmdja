@@ -322,6 +322,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="デフォルト値の自動調整" class="section level1" number="18">
 <h1><span class="header-section-number">補遺A</span> デフォルト値の自動調整</h1>
+<p>これはユーザーが通常気にする必要のないような <code>rmdja</code> 内部での処理を解説する. <code>knitr</code> や <code>rmarkdown</code> の仕様に精通している, 自分で細かい設定をしたいユーザ向けの解説である. 既に R Markdown に慣れていて, かなりトリッキーな使い方をしていたらどうも <code>rmdja</code> の機能とは競合するようだ, という場合は参考にしてほしい.</p>
 <p><code>rmdja</code> では R Markdown で日本語文書を作成する上での大きな障害の1つである, YAML フロントマターの設定を改善している. <code>rmdja</code> の文書フォーマットはYAMLフロントマターのデフォルト値などを日本語文書に適したものに変更している. さらに, ユーザーをOSごとのフォントの違いや煩雑で重複だらけの設定から解放するため, 内部処理でも動的に設定変更している. もちろんこれらは ユーザーによる YAML フロントマターやチャンクオプションの変更で上書きできる.</p>
 <div id="デフォルトのフォント" class="section level2" number="18.1">
 <h2><span class="header-section-number">A.1</span> デフォルトのフォント</h2>
@@ -394,7 +395,7 @@ MSフォント
 <p>チャンクオプションのデフォルト設定も R Markdown から多少変更している.</p>
 <p><code>block</code>, <code>block2</code>, <code>asis</code> などのブロックを <code>echo=F</code> や <code>include=F</code> にするメリットはほぼないため, <code>knitr::opts_chunk$set(echo = F, include = F)</code> と一括設定してもこれらは <code>echo=T, include=T</code> のままである. 変更したい場合は, チャンクごとに設定することで有効になる.</p>
 <p>デフォルトの R グラフィックデバイスは, HTML では <code>"PNG"</code>, PDF では <code>"cairo_pdf"</code> としている. <code>"cairo_pdf"</code> を使う理由は (1) R でよく描画するような単純な図形はベクタ画像が適しているが, 件数のとても多いデータの散布図などはベクタ画像にするとファイルサイズが大きくなるため, そのような画像を適度に「劣化」させてファイルサイズを軽減してくれる, (2) 日本語フォントの表示と埋め込みの設定が最も簡単, というものである. そして HTML はそもそもデフォルトの設定で PDF が表示できない Web ブラウザが多いことから, <code>PNG</code> をデフォルトにした. もし HTML でもベクタ画像を表示したいのなら <code>"svglite"</code> を設定して SVG 形式にすると良いだろう.</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb82-1"><a href="デフォルト値の自動調整.html#cb82-1"></a>knitr<span class="op">::</span><span class="kw">opts_chunk</span>(<span class="dt">dev =</span> <span class="cf">if</span> (knir<span class="op">::</span><span class="kw">is_latex_output</span>()) <span class="st">&quot;cairo_pdf&quot;</span> <span class="cf">else</span> <span class="st">&quot;svglite&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb81-1"><a href="デフォルト値の自動調整.html#cb81-1"></a>knitr<span class="op">::</span><span class="kw">opts_chunk</span>(<span class="dt">dev =</span> <span class="cf">if</span> (knir<span class="op">::</span><span class="kw">is_latex_output</span>()) <span class="st">&quot;cairo_pdf&quot;</span> <span class="cf">else</span> <span class="st">&quot;svglite&quot;</span>)</span></code></pre></div>
 <p>ただし, R 以外のプログラムで出力した画像には <code>cairo_pdf</code> は使えないため, 内部では <code>pdf</code> を使用している. これらの画像が日本語フォントを適切に埋め込めるかはそれぞれの設定に依存するため, R 側で制御するのは難しい.</p>
 </div>
 <div id="コードブロックの整形と自動折り返し" class="section level2" number="18.3">

@@ -376,16 +376,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="todo-windows-特有の問題" class="section level2" number="17.4">
 <h2><span class="header-section-number">17.4</span> (TODO) Windows 特有の問題</h2>
 <p>ビルド時のエラーとは直接関係ないが, 日本ロケールの Windows OS で RStudio を動かす場合によくあるエラーについても対処法を書いておく. これは R-wakalang でもよく訊かれる質問である. これらは Windows の仕様が根本的にアレなことに起因するため, Linux 等の仮想環境上でRを動かせば一切発生しない問題ではあるが, おそらく初心者の多くがハマっているので仮想環境を使わない解決方法を書いておく.</p>
-<p>まず, チャンク等のエラーメッセージが文字化けして読めない. これはロケールの問題である.</p>
-<pre><code>[1] &quot;ja_JP.UTF-8&quot;</code></pre>
-<pre><code>[1] &quot;ja_JP.UTF-8&quot;</code></pre>
+<p>まず, チャンク等のエラーメッセージが文字化けして読めない. これはロケールの問題であることが多い. 残念ながら日本語版 Windows は未だに CP932 エンコードを使用しているため, CP932 を使うと R の表示で不整合が発生する. よって, CP932 を使用すれば解決できる.</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb80-1"><a href="製本時のエラーへの対処.html#cb80-1"></a><span class="kw">Sys.setlocale</span>(<span class="dt">locale =</span> <span class="st">&quot;Japanese_Japan.932&quot;</span>)</span></code></pre></div>
+<p>しかし R の他の部分の多くは UTF-8 を前提として作られているので今度は, そちらでいろいろな対処が必要になってしまう. もしこのような「仕様」が気に入らないのなら結局のところ早く LINUX などの他の環境に移行してしまうのが確実である.</p>
 
 </div>
 </div>
 
 
 
-</div>
             </section>
 
           </div>

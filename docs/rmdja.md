@@ -1,7 +1,7 @@
 ---
 title: "`rmdja` による多様な形式の日本語技術文書の作成 "
 author: "Katagiri, Satoshi (ill-identified)"
-date: "2020-11-09"
+date: "`2020/11/9"
 site: bookdown::bookdown_site                    # RStudio GUIでビルド操作したい場合に必要
 description: "bookdown でまともな日本語文書を作る資料"  # HTML <metadata> に出力されるサイト概要
 url: 'https\://bookdown.org/john/awesome/'       # URL
@@ -25,6 +25,8 @@ linkcolor: blue
 citecolor: blue
 urlcolor: magenta
 bibliography: rmdja.bib
+pagestyle: fancy
+documentclass: bxjsbook
 ---
 
 
@@ -82,7 +84,7 @@ classoption:
   - jafont=noto
 ```
 
-このままでも, とりあえず文字化けすることなく日本語を表示できる. しかし実際に作ってみると, いろいろな障害が立ちはだかり, 文書として整ったものにするのは難しい. このままでは参考文献リストの表示も不自然なままである. だがこれ以上のカスタマイズは Atusy 氏がやっているようにテンプレートを修正でしか対処できず,  `\LaTeX`{=latex}`LaTeX`{=html} に対するそれなりの知識が必要となる.
+このままでも, とりあえず文字化けすることなく日本語を表示できる. しかし実際に作ってみると, いろいろな障害が立ちはだかり, 文書として整ったものにするのは難しい. このままでは参考文献リストの表示も不自然なままである. だがこれ以上のカスタマイズは Atusy 氏がやっているようにテンプレートを修正でしか対処できず,  \LaTeX に対するそれなりの知識が必要となる.
 
 さらに, 同じソースファイルから HTML と PDF を同時に生成すると, また別種の問題が発生する. HTML と PDF は根本的に規格が違うため, 様々な場合分け処理が必要であり, それは pandoc だけでは対応しきれない.
 
@@ -113,7 +115,7 @@ Wordユーザにとっては, 以下のような利点がある[^word-out-of-dat
 
 `jupyter` は Python のコードチャンクとその結果を簡単に表示できる文書作成ツールである. 出力オプションの少なさ (たとえば長大なコードもそのまま掲載されてしまう) や,  IDE として見ても機能が少ないことからあまり使い勝手がよくなかったが, `rmdja` では **Python スクリプトの埋め込みにもある程度対応**している.
 
-`\LaTeX`{=latex}`LaTeX`{=html} のユーザー (シンプルなテキストエディタで書いているユーザも, Overleaf や LyX といった強力なエディタを使用しているユーザー) にとっては, `\LaTeX`{=latex}`LaTeX`{=html} とほぼ同じ構文で数式を入力でき, かつ操作を大きく簡略化でき, 実験結果などをソースに埋め込むことができ, 外部プログラムからいちいちコピペする必要がなくなる. ただし, なるべく選択肢は広げておきたいが, なんでもありではかえって余計なことをしがちである. よって既に作成した beamer フォーマットと同様に, `\XeLaTeX`{=latex}`XeLaTeX`{=html} および `\LuaLaTeX`{=latex}`LuaLaTeX`{=html} のみの対応を想定している. `\pLaTeX`{=latex}`pLaTeX`{=html} や `\upLaTeX`{=latex}`upLaTeX`{=html} には対応していない.
+\LaTeX のユーザー (シンプルなテキストエディタで書いているユーザも, Overleaf や LyX といった強力なエディタを使用しているユーザー) にとっては, \LaTeX とほぼ同じ構文で数式を入力でき, かつ操作を大きく簡略化でき, 実験結果などをソースに埋め込むことができ, 外部プログラムからいちいちコピペする必要がなくなる. ただし, なるべく選択肢は広げておきたいが, なんでもありではかえって余計なことをしがちである. よって既に作成した beamer フォーマットと同様に, \XeLaTeX および \LuaLaTeX のみの対応を想定している. \pLaTeX や \upLaTeX には対応していない.
 
 これまでも R Markdown を使用してきたユーザにとっては, YAML フロントマターに数十行に渡っていた書いていた日本語表示のための設定の多くがフォーマットのデフォルト値になったため, かなり楽になると思われる.
 
@@ -156,7 +158,7 @@ rmdja::pdf_book_ja:
 
 ## R使用経験のないユーザへ {-}
 
-Rを使わない, あるいはそもそもプログラミングに詳しくない, という人間にもある使用機会がある. たとえばR を普段使わない人間でも `bookdown` で同人技術書を執筆したという事例がある[^bookdown-example]. この事例は主に数式と画像の貼付けのみだから, 数式出力に必要な `\LaTeX`{=latex}`LaTeX`{=html} の知識があればほとんどのことはできてしまう. そして `rmdja` ではこの事例で言及されている `\LaTeX`{=latex}`LaTeX`{=html} の設定の多くは自動で制御される. また, 小説などはほぼテキストであり, 最低限のレイアウトさえ用意すれば数式も, あるいは画像の挿入すらいらないことが多い. `rmdja` では縦書き文書をPDFで出力する方法も用意している.
+Rを使わない, あるいはそもそもプログラミングに詳しくない, という人間にもある使用機会がある. たとえばR を普段使わない人間でも `bookdown` で同人技術書を執筆したという事例がある[^bookdown-example]. この事例は主に数式と画像の貼付けのみだから, 数式出力に必要な \LaTeX の知識があればほとんどのことはできてしまう. そして `rmdja` ではこの事例で言及されている \LaTeX の設定の多くは自動で制御される. また, 小説などはほぼテキストであり, 最低限のレイアウトさえ用意すれば数式も, あるいは画像の挿入すらいらないことが多い. `rmdja` では縦書き文書をPDFで出力する方法も用意している.
 
 \begin{rmdimportant}
 印刷用フォーマットおよび縦書き文書フォーマットは現在実験的な導入段階であり,
@@ -179,7 +181,10 @@ Rを使わない, あるいはそもそもプログラミングに詳しくな�
 
 ```{.r .numberLines .lineAnchors}
 install.packages("remotes")
-remotes::install_github("Gedevan-Aleksizde/my_latex_template", repos = NULL, type = "source")
+remotes::install_github(
+  "Gedevan-Aleksizde/my_latex_template",
+  repos = NULL, type = "source"
+)
 ```
 
 まだ RStudio を使っていないのなら, RStudio 上で作業することを強く推奨する. さらに, もしもRの操作自体にあまり慣れていないのなら, 森知晴 『[卒業論文のためのR入門](https://tomoecon.github.io/R_for_graduate_thesis/)』などを読むことを薦める. 
@@ -188,7 +193,9 @@ remotes::install_github("Gedevan-Aleksizde/my_latex_template", repos = NULL, typ
 
 
 ```{.r .numberLines .lineAnchors}
-install.packages(c("tidyverse", "ggthemes", "citr", "clipr", "kableExtra"))
+install.packages(
+  c("tidyverse", "ggthemes", "citr", "clipr", "kableExtra")
+)
 ```
 
 RStudio を起動し, 左上から新規作成を選び, "R Markdown" を選ぶ (図 \@ref(fig:new-file)).
@@ -213,7 +220,7 @@ RStudio を起動し, 左上から新規作成を選び, "R Markdown" を選ぶ 
 \caption{R Markdown のテンプレート}(\#fig:rmdja-templates)
 \end{figure}
 
-現在 (Ver. 0.4.2) 用意されているのは以下の4つである.
+現在 (Ver. 0.4.3) 用意されているのは以下の4つである.
 
 * プレゼンテーション用スライド形式のテンプレート - `Beamer in Japanese`
 * 論文形式のテンプレート - `pdf article in Japanese`
@@ -240,17 +247,23 @@ RStudio を起動し, 左上から新規作成を選び, "R Markdown" を選ぶ 
 
 
 ```{.r .numberLines .lineAnchors}
-file.copy(system.file("resources/examples/bookdown-minimal", package = "rmdja"), "./", recursive = T)
+file.copy(
+  system.file("resources/examples/bookdown-minimal",
+    package = "rmdja"
+  ),
+  "./",
+  recursive = T
+)
 ```
 
 ## 書籍形式のビルド操作
 
-bookdown の文書生成は従来の R Markdown と違い, RStudio の `knit` ボタンでは**できない**. 代わりに, 以下の2通りの方法がある.
+書籍形式のテンプレートである `pdf book in Japanese` を選択した場合, 論文形式やスライド形式とは違いフォルダが作られ, その中に `_bookdown.yml`, `_output.yml` というファイルが作られる. これらは書籍の細かいフォーマットを設定するためのファイルである. 新規作成ファイルも同じフォルダに `index.Rmd` という名前で保存する. この名前は最初に読み込むファイル名のデフォルト名として決まっているため, 他の名前で保存すると正しく動作しないことがある. さらにbookdown の文書生成は従来の R Markdown と違い, RStudio の `knit` ボタンでは**できない**. 代わりに, 以下の2通りの方法がある.
 
 1. `bookdown::render_book('index.Rmd', format = "bookdown::gitbook")` などを呼び出す
 2. RStudio の Build ペーンを使う
 
-前者は, 以下のように実行する. 順にHTML, PDF, epub を出力している
+前者の場合は, Rmd ファイルのあるディレクトリに移動して以下の関数を実行する. 順にHTML, PDF, epub を出力している
 
 
 ```{.r .numberLines .lineAnchors}
@@ -296,17 +309,15 @@ Build ペーンの "Build Book" の三角形を押すと, 使用できるフォ�
 # このパートの概要 {-}
 
 ここではまず, R Markdown の基本的な機能を紹介する. つまり `bookdown` 特有のものではなく, R Markdown 全般で使用できる機能も含めて紹介する. これ以降は自己言及的な説明が多いため, この文書を生成しているソースコードと比較しながら確認することをおすすめする. ここで紹介する機能は BKD, RDG, RCB での記述に基づく.
-これら3つのドキュメントを読めば, ほとんどのことは可能になる --- `rmdja` を作る理由になった LaTeX テンプレートの修正以外は --- のだが, 本稿の重要な目的の1つは**複数のファイル形式を両立すること**であるので, それができない書き方には触れないし, 技術文書の作成にあまり使わないような機能の動作確認はおこなわず, 技術文書作成で頻繁に使われ, 便利と思える機能のみ紹介する.
+これら3つのドキュメントを読めば, ほとんどのことは可能になる --- `rmdja` を作る理由になった LaTeX テンプレートの修正以外は --- のだが, 本稿の重要な目的の1つは**複数のファイル形式をなるべく簡単に両立すること**であるので, それができない書き方には触れないし, 技術文書の作成にあまり使わないような機能の動作確認はおこなわず, 技術文書作成で頻繁に使われ, 便利と思える機能のみ紹介する.
 
 どちらにしろそのうちこれらを翻訳してくれる人が現れることだろう...たぶん.
 
 # 静的なコンテンツの作成
 
+まずは, 単なるマークアップ, つまりプログラミングの複雑な処理を考えなくても良いタイプの, 簡単な構文を紹介する. それらの多くは一般的な Markdown のものと同じである.
+
 日本語で書かれた資料でごく基本的なことについて, 『[R Markdown入門](https://kazutan.github.io/kazutanR/Rmd_intro.html)』で一通り紹介されている. やや応用的なことも 『R Markdown ユーザーののための Pandoc's Markdown』に書かれている.
-
-また, 既に作成している beamer の用例ファイルもどのようなことができるかの参考になるだろう. ただしこちらは PDF のみの出力を前提としているため, 一部の機能は HTML で使うことができない. 
-
-まずは, 単なるマークアップ, つまりプログラミングの複雑な処理を考えなくても良いタイプの構文を紹介する. それらの多くは単なる Markdown のものと同じである.
 
 ## Markdown の基本構文
 
@@ -443,7 +454,7 @@ Table:Markdown 記法の表
 ![Johannes Gutenberg](img/Johannes_Gutenberg.jpg){ width=50% }
 
 
-しかし, キャプションを付けたり, 表示位置やサイズを細かく調整したりするためには, 後述するように**Rプログラムを経由して出力**したほうが良い.
+しかし, キャプションを付けたり, 表示位置やサイズを細かく調整したり, 注釈を付けたりするためには, 後述するように**Rプログラムを経由して出力**したほうが良い.
 
 TODO: md 記法で画像貼り付けたときのサイズ統一
 
@@ -647,18 +658,24 @@ require(kableExtra)
 * `error`: プログラム実行結果のエラーを掲載するかどうか
 * `eval`: 文書作成時にプログラムを実行するかどうか
 * `include`: 文書作成時にプログラムを実行し, **かつ掲載しない**かどうか
-* `results`: 出力をいつもの R の出力風にするか (`markup`), 隠すか (`"hide"`), 出力を区切らずまとめるか (`"hold"`), テキストをそのまま出力するか (`"asis"`). 最後はソースコードを動的に生成したい場合などに使う (後述).
+* `results`: 出力をいつもの R の出力風にするか (`markup`), 隠すか (`"hide"`), 出力を区切らずまとめるか (`"hold"`), テキストをそのまま出力するか (`"asis"`). 最後は R Markdown のソースコードを動的に生成したい場合などに使う.
 
-R の論理値は `TRUE`/`FALSE` または `T`/`F` と書く.
 
-チャンクごとに個別に設定することも, デフォルト値を一括設定することもできる. 前者の場合, チャンクオプションは `{}` 内部にカンマ `,` で区切って書く. `r` は R で実行するという意味である.
+\begin{rmdnote}
+R の論理値は \texttt{TRUE}/\texttt{FALSE} または \texttt{T}/\texttt{F}
+と書く.
+\end{rmdnote}
+
+チャンクごとに個別に設定することも, デフォルト値を一括設定することもできる. 前者の場合, チャンクオプションは `{}` 内部にカンマ `,` で区切って書く. `r` は R で実行するという意味である. チャンクの一般的な記法は以下のようになる.
 
 ````
-```{r [<name>], [<options>]}
+```{r [<label>], [<options>]}
 data(cars)
 summary(cars)
 ```
 ````
+
+`r` の直後の `<label>` は**ラベル**と呼ばれ, チャンクのIDとしての機能を持つ (省略された場合は自動で適当な名前がつけられる). ラベルは主に後述の図表の相互参照に使われる. ラベルは英数字とハイフンを使って重複しない範囲で自由に命名できる.
 
 一括設定の場合, 以下のようなプログラムでデフォルト値を上書きできる.
 
@@ -684,7 +701,7 @@ echo Hello, Bookdown
 
 これらのオプションがあるおかげでプログラムとその結果の再現を説明したい場合はソースコードも表示させたり, 回帰分析やシミュレーションの結果だけを掲載したい時は結果のみ表示したりできる. これが R Markdown のチャンクの強みである. 例えば Jupyter notebook/lab などは従来, コードセルと出力セルを自由に隠すことができなかった.
 
-チャンクに使用できる言語は R だけではない. **つまり Python なども使用できる**(詳細は \@ref(#python) 章を参照). 以下で対応しているエンジンの一覧を表示できる.
+チャンクに使用できる言語は R だけではない. **つまり Python なども使用できる**(詳細は \@ref(python) 章を参照). 以下で対応しているエンジンの一覧を表示できる.
 
 
 ```{.r .numberLines .lineAnchors}
@@ -719,15 +736,16 @@ R のプログラムと組み合わせることで**回帰分析の結果の数�
 
 
 ```{.r .numberLines .lineAnchors}
-data(iris)
-fit <- lm(Sepal.Length ~ ., data = iris)
+data(mtcars)
+fit <- lm(mpg ~ ., data = mtcars)
 extract_eq(fit, wrap = T, ital_vars = T, align_env = "aligned")
 ```
 
 $$
 \begin{aligned}
-Sepal.Length &= \alpha + \beta_{1}(Sepal.Width) + \beta_{2}(Petal.Length) + \beta_{3}(Petal.Width)\ + \\
-&\quad \beta_{4}(Species_{versicolor}) + \beta_{5}(Species_{virginica}) + \epsilon
+mpg &= \alpha + \beta_{1}(cyl) + \beta_{2}(disp) + \beta_{3}(hp)\ + \\
+&\quad \beta_{4}(drat) + \beta_{5}(wt) + \beta_{6}(qsec) + \beta_{7}(vs)\ + \\
+&\quad \beta_{8}(am) + \beta_{9}(gear) + \beta_{10}(carb) + \epsilon
 \end{aligned}
 $$
 
@@ -740,8 +758,9 @@ extract_eq(fit, wrap = T, ital_vars = T, use_coef = T, align_env = "aligned")
 
 $$
 \begin{aligned}
-Sepal.Length &= 2.17 + 0.5(Sepal.Width) + 0.83(Petal.Length) - 0.32(Petal.Width)\ - \\
-&\quad 0.72(Species_{versicolor}) - 1.02(Species_{virginica}) + \epsilon
+mpg &= 12.3 - 0.11(cyl) + 0.01(disp) - 0.02(hp)\ + \\
+&\quad 0.79(drat) - 3.72(wt) + 0.82(qsec) + 0.32(vs)\ + \\
+&\quad 2.52(am) + 0.66(gear) - 0.2(carb) + \epsilon
 \end{aligned}
 $$
 
@@ -801,7 +820,20 @@ ggplot(diamonds, aes(x=carat, y=price, color=clarity)) +
 
 ## (WIP): デフォルトフォントの設定
 
-Windows や Mac では, デフォルトのフォントが日本語グリフを持たないのでグラフが文字化けする. 現時点では最低限 `rmdja::set_graphics_font()` という関数を呼び出す処理を手動で書き加えなければならない. 本文のフォントと異なり, 現時点 (ver. 0.4.2) では手動設定が必要になる. OSごとのフォント名を調べて指定するのが大変なら, 私が作成した `fontregisterer` パッケージを使うのも1つの手である.  その解説は『[おまえはもうRのグラフの日本語表示に悩まない (各OS対応)](https://ill-identified.hatenablog.com/entry/2020/10/03/200618)』に書いた通りである. `fontregisterer::get_standard_font()` で使用中のOSで標準インストールされているセリフ (明朝), サンセリフ (ゴシック) のフォントファミリ名を1つづつ取得するので, その値のどちらかを `rmdja::set_graphics_font()` に与えれば, `ggplot2` および標準グラフィックスのデフォルトのフォントが日本語対応フォントになる.
+Windows や Mac では, デフォルトのフォントが日本語グリフを持たないのでグラフが文字化けする. 現時点では最低限 `rmdja::set_graphics_font()` という関数を呼び出す処理を手動で書き加えなければならない. 本文のフォントと異なり, 現時点 (ver. 0.4.2) では手動設定が必要になる. OSごとのフォント名を調べて指定するのが大変なら, 私が作成した `fontregisterer` パッケージを使うのも1つの手である.  その解説は『[おまえはもうRのグラフの日本語表示に悩まない (各OS対応)](https://ill-identified.hatenablog.com/entry/2020/10/03/200618)』に書いた通りである. `get_standard_font()` で使用中のOSで標準インストールされているセリフ (明朝), サンセリフ (ゴシック) のフォントファミリ名を1つづつ取得するので, その値のどちらかを `rmdja::set_graphics_font()` に与えれば, `ggplot2` および標準グラフィックスのデフォルトのフォントが日本語対応フォントになる. 
+
+しかしこの関数は `ggplot2` のデフォルトのテーマを更新するだけなので `ggthemes` パッケージなどが用意するテーマプリセットを使用したい場合はその都度設定が必要である.
+
+
+```{.r .numberLines .lineAnchors}
+require(fontregisterer)
+theme_set(ggthemes::theme_pander(base_family = get_standard_font()$serif))
+
+ggplot(DATA, aes(...)) +
+  geom_point() +
+  ... +
+  theme_economist(base_family = get_standard_font()$sans)
+```
 
 
 ## TODO: 図のレイアウト設定
@@ -892,7 +924,7 @@ Merc 280             19.2     6   167.6   123   3.92   3.440   18.30    1    0  
 Table: (\#tab:df-print-ops) `df_print` のオプション一覧
 
  オプション      効果
--------------  -----------------------------------------------------------------------------------
+-------------  -------------------------------------------
 `default`      `print()`, コンソール出力と同じ
 `tibble`       `tibble` 対応版 `print()`
 `paged`        `rmarkdown::paged_table()` による表示, これもオプション引数を指定しなければ大差なし
@@ -907,10 +939,7 @@ Table: (\#tab:df-print-ops) `df_print` のオプション一覧
 
 
 ```{.r .numberLines .lineAnchors}
-rmdja::kable(mtcars[1:10, ],
-  caption = "`booktabs = T` は PDF にのみ影響する",
-  booktabs = T
-)
+rmdja::kable(mtcars[1:10, ], caption = "`booktabs = T` は PDF にのみ影響する", booktabs = T)
 ```
 
 \begin{table}
@@ -937,11 +966,11 @@ Merc 280 & 19.2 & 6 & 167.6 & 123 & 3.92 & 3.440 & 18.30 & 1 & 0 & 4 & 4\\
 \end{tabular}
 \end{table}
 
-(1) の方法が現在最も簡単である. ただし, `\LaTeX`{=latex}`LaTeX`{=html} LaTeX の構文が評価されなくなるため同時に使うことはできない. 例えば太字強調と数式を両方表示したい場合は, `knitr::is_latex_output()` PDF の場合は完全に `\LaTeX`{=latex}`LaTeX`{=html} で, HTML の場合は Markdown で書く, という場合分けを自分で書いて `knitr::kable()` に与えなければならない(表 \@ref(tab:kable-caption-example)). 
+  (1) の方法が現在最も簡単である. ただし, \LaTeX の構文が評価されなくなるため同時に使うことはできない. 例えば太字強調と数式を両方表示したい場合は, `knitr::is_latex_output()` PDF の場合は完全に \LaTeX で, HTML の場合は Markdown で書く, という場合分けを自分で書いて `knitr::kable()` に与えなければならない(表 \@ref(tab:kable-caption-example)). また, キャプションではなく**表内の markdown 構文も評価されない**. 表内の markdown 構文を PDF でも反映するには, (2) の方法が必要である.
 
 TODO: この仕様は使いづらいのでそのうちなんとかしたい.
 
-(2) についても, `kable()` 単体であれば問題ないが, 後に紹介する `kableExtra` パッケージを併用すると書式設定がうまく反映されなくなることがある. (3) は表 \@ref(tab:kable-caption-example) の記述をキャプションだけでなく, HTML ならば Markdown または HTML タグで, PDF ならば `\LaTeX`{=latex}`LaTeX`{=html} で表全体を書き分ける, という方法である. 1つの表を描くのに多大な労力がかかるため推奨しない.
+  (2) についても, `kable()` 単体であれば問題ないが, 後に紹介する `kableExtra` パッケージを併用すると**書式設定がうまく反映されなくなる**ことがある. (3) は表 \@ref(tab:kable-caption-example) の記述をキャプションだけでなく, HTML ならば Markdown または HTML タグで, PDF ならば \LaTeX で表全体を書き分ける, という方法である. 1つの表を描くのに多大な労力がかかるため推奨しない.
 
 
 ```{.r .numberLines .lineAnchors}
@@ -972,9 +1001,11 @@ Valiant & 18.1 & 6 & 225 & 105 & 2.76 & 3.460 & 20.22 & 1 & 0 & 3 & 1\\
 \end{tabular}
 \end{table}
 
-さらに, デフォルトでは `kable()` が PDF に出力する表のデザインはあまりよろしくないが, `kable()` 関数は過剰な罫線のない表の出力も簡単である. `\LaTeX`{=latex}`LaTeX`{=html} を使ったことのある人は知っているかもしれないが, これは `booktabs.sty` を使った表のスタイルになっている^[もし何らかの理由でこのスタイルにならない, あるいはあえてしたくない, と言う場合は `kable()` 関数で `booktabs = T` を指定せよ.].
+さらに, デフォルトでは `kable()` が PDF に出力する表のデザインはあまりよろしくないが, `kable()` 関数は過剰な罫線のない表の出力も簡単である. \LaTeX を使ったことのある人は知っているかもしれないが, これは `booktabs.sty` を使った表のスタイルになっている^[もし何らかの理由でこのスタイルにならない, あるいはあえてしたくない, と言う場合は `kable()` 関数で `booktabs = T` を指定せよ.].
 
-`kable()` による表のスタイルは  `kableExtra` パッケージを使うことで様々にカスタマイズできる. 例えば `row_spec()` を使って偶数・奇数行を色分けすることができる (表 \@ref(tab:display-dataframe-kable-2), ただしHTML版を見ていれば分かるように, HTML ではデフォルトで奇数偶数の色分けがなされている).
+また, `kable()` を使う利点として, 表の絡む名に好きな名前を与えられるというものがある. データフレームの列 (変数) 名は, 括弧などプログラミングで特別な意味を持つ文字を使うことができない. そこで, `kable()` の `col.names` 引数に表のカラム名を改めて与えることで, こういった文字も出力できる.
+
+`kable()` による表のスタイルは  `kableExtra` パッケージを使うことで様々にカスタマイズできる. 例えば HTML 版ではデフォルトで奇数偶数行の背景色が異なるが, PDF ではそうなっていない. また, 図表の位置は常にフロートであり, 余白ができにくいように表示位置が前後する (これは技術文書や学術論文では普通のことだが). さらに, 表が本文の領域からはみ出しており見栄えが悪い. これらの設定をHTML版に近づけたい場合は `kableExtra::kable_styling()` を使って簡単にデザインを変えることができる (表 \@ref(tab:display-dataframe-kable-2)). 以下のように, `full_width` は表の幅を本文幅にそろえるオプションである. や十分に幅の小さい表に対しては逆に間延びして見づらいためデフォルトでは無効となっているが, このようにして表幅を調整するのに使える. さらに `latex_options` は PDF にのみ有効なオプションである. `"striped"` が奇数偶数の色分け[^tabu-error], `"hold_position"` が表示位置を「なるべく」固定するオプションである (それでも表示位置が大きくずれて気に入らない場合 `"HOLD_position"` を代わりに使うとよい). ただし HTML と違い PDF では改ページがあるためこのオプションを多様すると, 以下のように本文に無駄な余白が増えることに注意する.
 
 
 ```{.r .numberLines .lineAnchors}
@@ -982,36 +1013,42 @@ rmdja::kable(
   mtcars[1:10, ],
   booktabs = T,
   caption = "奇数行を強調し, PDF では `booktabs` を利用"
-) %>% row_spec(seq(1, 10, by = 2), background = "gray")
+) %>%
+  kable_styling(
+    full_width = if (knitr::is_latex_output()) T else NULL,
+    latex_options = c("striped", "hold_position")
+  )
 ```
 
-\begin{table}
+\begin{table}[!h]
 
 \caption{(\#tab:display-dataframe-kable-2)奇数行を強調し, PDF では \texttt{booktabs} を利用
 }
 \centering
-\begin{tabular}[t]{lrrrrrrrrrrr}
+\begin{tabu} to \linewidth {>{\raggedright}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X}
 \toprule
   & mpg & cyl & disp & hp & drat & wt & qsec & vs & am & gear & carb\\
 \midrule
-\cellcolor{gray}{Mazda RX4} & \cellcolor{gray}{21.0} & \cellcolor{gray}{6} & \cellcolor{gray}{160.0} & \cellcolor{gray}{110} & \cellcolor{gray}{3.90} & \cellcolor{gray}{2.620} & \cellcolor{gray}{16.46} & \cellcolor{gray}{0} & \cellcolor{gray}{1} & \cellcolor{gray}{4} & \cellcolor{gray}{4}\\
+\cellcolor{gray!6}{Mazda RX4} & \cellcolor{gray!6}{21.0} & \cellcolor{gray!6}{6} & \cellcolor{gray!6}{160.0} & \cellcolor{gray!6}{110} & \cellcolor{gray!6}{3.90} & \cellcolor{gray!6}{2.620} & \cellcolor{gray!6}{16.46} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{1} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{4}\\
 Mazda RX4 Wag & 21.0 & 6 & 160.0 & 110 & 3.90 & 2.875 & 17.02 & 0 & 1 & 4 & 4\\
-\cellcolor{gray}{Datsun 710} & \cellcolor{gray}{22.8} & \cellcolor{gray}{4} & \cellcolor{gray}{108.0} & \cellcolor{gray}{93} & \cellcolor{gray}{3.85} & \cellcolor{gray}{2.320} & \cellcolor{gray}{18.61} & \cellcolor{gray}{1} & \cellcolor{gray}{1} & \cellcolor{gray}{4} & \cellcolor{gray}{1}\\
+\cellcolor{gray!6}{Datsun 710} & \cellcolor{gray!6}{22.8} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{108.0} & \cellcolor{gray!6}{93} & \cellcolor{gray!6}{3.85} & \cellcolor{gray!6}{2.320} & \cellcolor{gray!6}{18.61} & \cellcolor{gray!6}{1} & \cellcolor{gray!6}{1} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{1}\\
 Hornet 4 Drive & 21.4 & 6 & 258.0 & 110 & 3.08 & 3.215 & 19.44 & 1 & 0 & 3 & 1\\
-\cellcolor{gray}{Hornet Sportabout} & \cellcolor{gray}{18.7} & \cellcolor{gray}{8} & \cellcolor{gray}{360.0} & \cellcolor{gray}{175} & \cellcolor{gray}{3.15} & \cellcolor{gray}{3.440} & \cellcolor{gray}{17.02} & \cellcolor{gray}{0} & \cellcolor{gray}{0} & \cellcolor{gray}{3} & \cellcolor{gray}{2}\\
+\cellcolor{gray!6}{Hornet Sportabout} & \cellcolor{gray!6}{18.7} & \cellcolor{gray!6}{8} & \cellcolor{gray!6}{360.0} & \cellcolor{gray!6}{175} & \cellcolor{gray!6}{3.15} & \cellcolor{gray!6}{3.440} & \cellcolor{gray!6}{17.02} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{3} & \cellcolor{gray!6}{2}\\
 \addlinespace
 Valiant & 18.1 & 6 & 225.0 & 105 & 2.76 & 3.460 & 20.22 & 1 & 0 & 3 & 1\\
-\cellcolor{gray}{Duster 360} & \cellcolor{gray}{14.3} & \cellcolor{gray}{8} & \cellcolor{gray}{360.0} & \cellcolor{gray}{245} & \cellcolor{gray}{3.21} & \cellcolor{gray}{3.570} & \cellcolor{gray}{15.84} & \cellcolor{gray}{0} & \cellcolor{gray}{0} & \cellcolor{gray}{3} & \cellcolor{gray}{4}\\
+\cellcolor{gray!6}{Duster 360} & \cellcolor{gray!6}{14.3} & \cellcolor{gray!6}{8} & \cellcolor{gray!6}{360.0} & \cellcolor{gray!6}{245} & \cellcolor{gray!6}{3.21} & \cellcolor{gray!6}{3.570} & \cellcolor{gray!6}{15.84} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{3} & \cellcolor{gray!6}{4}\\
 Merc 240D & 24.4 & 4 & 146.7 & 62 & 3.69 & 3.190 & 20.00 & 1 & 0 & 4 & 2\\
-\cellcolor{gray}{Merc 230} & \cellcolor{gray}{22.8} & \cellcolor{gray}{4} & \cellcolor{gray}{140.8} & \cellcolor{gray}{95} & \cellcolor{gray}{3.92} & \cellcolor{gray}{3.150} & \cellcolor{gray}{22.90} & \cellcolor{gray}{1} & \cellcolor{gray}{0} & \cellcolor{gray}{4} & \cellcolor{gray}{2}\\
+\cellcolor{gray!6}{Merc 230} & \cellcolor{gray!6}{22.8} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{140.8} & \cellcolor{gray!6}{95} & \cellcolor{gray!6}{3.92} & \cellcolor{gray!6}{3.150} & \cellcolor{gray!6}{22.90} & \cellcolor{gray!6}{1} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{4} & \cellcolor{gray!6}{2}\\
 Merc 280 & 19.2 & 6 & 167.6 & 123 & 3.92 & 3.440 & 18.30 & 1 & 0 & 4 & 4\\
 \bottomrule
-\end{tabular}
+\end{tabu}
 \end{table}
 
 このように, R Markdown ではまず表示したい表と同じ構造のデータフレームを作ることで, 簡単にスタイルの調整された表を掲載できる.
 
 他にもいくつか表のスタイルをカスタマイズするためのパッケージが存在する. より発展的な表のスタイル指定方法については \@ref(advanced-tabulate) 章で話す.
+
+[^tabu-error]: ただし, `full_width = T` を指定した時, `striped`, あるいは他の色の指定の命令が反映されないことがある. これは 2019年時点での `tabu.sty` の不具合であるため, Issues [#1](https://github.com/tabu-issues-for-future-maintainer/tabu/issues/1#issuecomment-464369706)  で配布されている開発者によるパッチを適用しなければならない.また, それ以外にも表の幅を調整する方法がある. 詳細は \@ref(advanced-tabulate) 章を参考に.
 
 # 相互参照と引用
 
@@ -1107,13 +1144,11 @@ knitr::include_graphics(file.path(img_dir, "citr.png"))
 \caption{(ref:citr-caption)}(\#fig:citr-image)
 \end{figure}
 
-一方で, この記述が文書においてどのようなスタイルで出力されるかは文献引用を処理するプログラムによって変化する. そのプログラムにはいくつか候補がある.
-
-R Markdown の文献引用は pandoc を経由して処理され, pandoc は現時点では `pandoc-citeproc` (`default`), `\BibTeX`{=latex}`BibTeX`{=html} (`natbib`), BibLaTeX (`biblatex`) の選択をサポートしている. `pandoc-citeproc` 以外はもともと `\LaTeX`{=latex}`LaTeX`{=html} 用に作られたため, HTML では常に `pandoc-citeproc` で処理される. PDF ではそれに加えて `bibtex`, `biblatex` を指定することもできる. (`default` とは別なのでややこしいが) デフォルトでは `biblatex` を使用する. これはフォーマット引数の `citation_package` で変更できる.
+一方で, この記述が文書においてどのようなスタイルで出力されるかは文献引用を処理するプログラムによって変化する. そのプログラムには3つの候補がある. R Markdown の文献引用は pandoc を経由して処理され, 現時点では `pandoc-citeproc` (`default`), \BibTeX (`natbib`), BibLaTeX (`biblatex`) の選択をサポートしている. `pandoc-citeproc` 以外はもともと \LaTeX 用に作られたため, HTML では常に `pandoc-citeproc` で処理される. PDF ではそれに加えて `bibtex`, `biblatex` を指定することもできる. (`default` とは別なのでややこしいが) `rmdja` はデフォルトでは PDF 出力時に `biblatex` を使用する. これはフォーマット引数の `citation_package` で変更できる. 正確には以下の3つの値のどれかを指定する.
 
 * `default`: `pandoc-citeproc` を使用する.
-* `biblatex`: BibLaTeX を使用する. デフォルト. スタイルはこちらが用意した `jauthoryear` というもの.
-* `natbib`: `\BibTeX`{=latex}`BibTeX`{=html} を使用し, 本文中の参照には `natbib.sty` が使われる[^natbib-contraint]. ただし, 日本語 (マルチバイト文字) の含まれる文献情報を出力する場合は**特殊な設定をしないと製本処理がハングアップする** (後述).
+* `biblatex`: BibLaTeX を使用する. デフォルト. スタイルのデフォルトはこちらが用意した `jauthoryear` というもの.
+* `natbib`: \BibTeX を使用し, 本文中の参照には `natbib.sty` が使われる[^natbib-contraint]. ただし, 日本語 (マルチバイト文字) の含まれる文献情報を出力する場合は**特殊な設定をしないと製本処理がハングアップする** (後述).
 
 [natbib-contraint]: ただし `citeit`, `citep` など `natbib.sty` の提供していた多様な引用子オプションは使えない. これは pandoc の制約によるものである.
 
@@ -1150,13 +1185,13 @@ biblatexoptions:
 
 2通りの記法が存在するのはやや混乱するかもしれないが, 後方互換性を考慮し `rmdja` ではこれらの2通りの記法どちらでも受け付けるようにしている.
 
-`biblatex` 以外のエンジンで出力したい, 例えば指定された `.bst` のスタイルで文献一覧を出力したい場合は, (u)`\pBibTeX`{=latex}`pBibTeX`{=html} が必要になる. その操作の詳細は \@ref(biblio-advaneced) 章を参照.
+`biblatex` 以外のエンジンで出力したい, 例えば指定された `.bst` のスタイルで文献一覧を出力したい場合は, (u)\pBibTeX が必要になる. その操作の詳細は \@ref(biblio-advaneced) 章を参照.
 
 ### 文献リスト生成エンジンの違いについて
 
-`pandoc-citeproc`, `bibtex`, `biblatex` はそれぞれ引用文献リストのスタイルを記述するファイルがあり, それぞれ拡張子は `.csl`, `.bst`, `.bbx`/`.cbx`, である. `.csl` は MS Word のスタイルと同じもので, XMLで記述されている[^CSL-editor]. `.bst` は `\BibTeX`{=latex}`BibTeX`{=html} 用のフォーマットで, 自分で改造するには逆ポーランド記法の構文に慣れねばならない. そして BibLaTeX はスタイルを `\LaTeX`{=latex}`LaTeX`{=html} のマクロで記述でき, さらにそういった細かい記述のスタイルファイルを用意しなくとも指定できるオプションがいくつか存在する(ここまで, 表 \@ref(tab:biblio-comparison)).
+`pandoc-citeproc`, `bibtex`, `biblatex` はそれぞれ引用文献リストのスタイルを記述するファイルがあり, それぞれ拡張子は `.csl`, `.bst`, `.bbx`/`.cbx`, である. `.csl` は MS Word のスタイルと同じもので, XMLで記述されている[^CSL-editor]. `.bst` は \BibTeX 用のフォーマットで, 自分で改造するには逆ポーランド記法の構文に慣れねばならない. そして BibLaTeX はスタイルを \LaTeX のマクロで記述でき, さらにそういった細かい記述のスタイルファイルを用意しなくとも指定できるオプションがいくつか存在する(ここまで, 表 \@ref(tab:biblio-comparison)).
 
-現バージョンでは `biblatex` がデフォルトである. 現在の日本語圏の `\LaTeX`{=latex}`LaTeX`{=html} 使用者にとっては `.bst` ファイルの種類が充実しているため `natbib` を使いたいところだが, R Markdown の場合エンジンが `\BibTeX`{=latex}`BibTeX`{=html} であるため**日本語が使えない**. (u)`\pBibTeX`{=latex}`pBibTeX`{=html} を使うにはやや複雑な手順が必要である. よって, デフォルトでそのような下準備をさせるべきでないと考えたので `rmdja` では `biblatex` をデフォルトとし, 日本語表示に最低限のスタイルだけを用意している.
+現バージョンでは `biblatex` がデフォルトである. 現在の日本語圏の \LaTeX 使用者にとっては `.bst` ファイルの種類が充実しているため `natbib` を使いたいところだが, R Markdown の場合エンジンが \BibTeX であるため**日本語が使えない**. (u)\pBibTeX を使うにはやや複雑な手順が必要である. よって, デフォルトでそのような下準備をさせるべきでないと考えたので `rmdja` では `biblatex` をデフォルトとし, 日本語表示に最低限のスタイルだけを用意している.
 
 \begin{table}
 
@@ -1166,9 +1201,9 @@ biblatexoptions:
 \toprule
 item & HTML & PDF & 日本語 & 指定名 & 文献ファイル & 文献スタイル\\
 \midrule
-`default` & TRUE & TRUE & TRUE & default & .json & .csl\\
-`biblatex` & FALSE & TRUE & TRUE & biblatex & .bib & .bbx/.cbx\\
-`natbib` & FALSE & TRUE & FALSE & natbib & .bib/.bibtex & .bst\\
+\texttt{pandoc-citeproc} & TRUE & TRUE & TRUE & \texttt{default} & .json & .csl\\
+\texttt{biblatex} & FALSE & TRUE & TRUE & \texttt{biblatex} & .bib & .bbx/.cbx\\
+\texttt{bibtex} & FALSE & TRUE & FALSE & \texttt{natbib} & .bib/.bibtex & .bst\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1187,19 +1222,52 @@ HTML は文字通りHTMLで出力しているため, CSS の使い方次第で�
 
 ### フォント変更
 
-PDF を生成する場合, ver 0.3 時点ではデフォルトのフォントを OS に応じて変えている. もし変更したい場合はYAMLフロントマターの以下の項目を変更する
+PDF を生成する場合, ver 0.3 以降ではデフォルトのフォントファミリを OS に応じて変えている. もし変更したい場合はYAMLフロントマターの以下の項目を変更する
 
-* `mainfont`: 欧文セリフフォント
-* `sansfont`: 欧文サンセリフフォント
-* `monofont`: 等幅フォント (コードの表示などに使用)
-* `jfontpreset`: 和文フォントのプリセット
-* `jmainfont`: 和文メインフォント (一般に明朝体を指定)
-* `jsansfont`: 和文セリフフォント (一般にゴシック体を指定)
-* `jmonofont`: 和文等幅フォント (コードの表示などに使用)
+* `mainfont`: 欧文セリフフォントファミリ
+* `sansfont`: 欧文サンセリフフォントファミリ
+* `monofont`: 等幅フォントファミリ (コードの表示などに使用)
+* `jfontpreset`: 和文フォントファミリのプリセット
+* `jmainfont`: 和文メインフォントファミリ (一般に明朝体を指定)
+* `jsansfont`: 和文セリフフォントファミリ (一般にゴシック体を指定)
+* `jmonofont`: 和文等幅フォントファミリ (コードの表示などに使用)
 
-`jfontpreset` は `zxjafont` または `luatex-ja` によるプリセットで, 3種類のフォントを一括指定できる. 個別指定したフォントはこれを上書きする. 特にこだわりがないなら一括指定で良いが, ソースコードを多く掲載する場合は `M+` や `Ricty` などのフォントを用意すると良いだろう.
+`jfontpreset` は `zxjafont` または `luatex-ja` によるプリセットで, 3種類の和文フォントを一括指定できる. 個別指定したフォントはこれを上書きする. 特にこだわりがないなら一括指定で良いが, ソースコードを多く掲載する場合は `M+` や `Ricty` などのフォントを用意すると良いだろう. `rmdja` ではデフォルトで3種類の和文フォントファミリに対して, OSごとの標準日本語フォントが選択される (図 \@ref(tab:japreset-default)). いずれも各OSで標準でインストールされているはずであるが, 現時点ではフォントが実際にインストールされているか確認する機能はない.
 
-さらに, それぞれの項目には `options` と接尾辞のついた項目が用意されている. フォントの相対サイズが合わず不格好な場合は
+
+Table: (\#tab:japreset-default)デフォルトで使用される日本語フォントファミリ
+
+            Mac             Linux   Windows (8以降)   Windows (それ以前) 
+----------  --------------  ------  ----------------  -------------------
+\XeLaTeX    游書体          Noto    游書体            MSフォント         
+\LuaLaTeX   ヒラギノ ProN   Noto    游書体            MSフォント         
+
+それ以外で使用可能な主なプリセット名は表 \@ref(tab:japreset-list) の通り. これらは \XeLaTeX, \LuaLaTeX でそれぞれ `zxjafont.sty`, `luatex-ja.sty` を利用してフォントが埋め込まれる. 両者の多くではプリセット名が共通しているが, 一部例外もあることに注意 (特に \XeLaTeX は luatex-ja との互換性を考慮してエイリアスをいくつも用意している). また, より詳細な一覧やオプションの全貌については, ⼋登崇之氏の『[PXchfon パッケージ](http://zrbabbler.sp.land.to/pxchfon.html#sec-preset)』および [zxjafont のマニュアル](https://www.google.com/search?sxsrf=ALeKk02tvWl3yDLbG4j_6CTBvQRMiblBjA%3A1604856098096&ei=IimoX_-tBcGsoAT3lInAAw&q=ctan+zxjafont&oq=ctan+zxjafont&gs_lcp=CgZwc3ktYWIQAzoECCMQJzoGCAAQBxAeOgQIABAeOgcIIxCwAhAnOgYIABANEB5QqhRYkx9g7R9oAXAAeACAAVaIAfADkgEBNpgBAKABAaoBB2d3cy13aXrAAQE&sclient=psy-ab&ved=0ahUKEwj_xpHtuvPsAhVBFogKHXdKAjgQ4dUDCA0&uact=5) と, 『[luatex-ja の使い方](https://ja.osdn.net/projects/luatex-ja/wiki/LuaTeX-ja%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9)』を確認してほしい.
+
+
+\begin{table}
+
+\caption{(\#tab:japreset-list)主な指定可能なフォントプリセット名}
+\centering
+\begin{tabular}[t]{lll>{\raggedright\arraybackslash}p{10em}}
+\toprule
+フォント & \XeLaTeX & \LuaLaTeX & 備考\\
+\midrule
+MS ゴシック/明朝 & \texttt{ms} & \texttt{ms} & \XeLaTeX のみ HGフォントと併用する \texttt{ms-hg} などのバリエーションあり\\
+游書体 & \texttt{yu-win10} & \texttt{yu-win10} & Windows 8 以前は \texttt{yu-win}, Mac では \texttt{yu-osx}\\
+ヒラギノ系 & \texttt{hiragino-pro} & \texttt{hiragino-pro} & \texttt{hiragino-pron} で ProN/StdN版を指定\\
+Noto フォント & \texttt{noto}/\texttt{noto-jp} & \texttt{noto-otf}/\texttt{noto-otc} & \\
+源ノ角ゴ/明朝 & \texttt{sourcechan-jp} & \texttt{sourcehan-jp} & \\
+\addlinespace
+原ノ味フォント & \texttt{haranoaji} & \texttt{haranoaji} & \\
+梅フォント & \texttt{ume} & \texttt{ume} & \\
+小塚フォント & \texttt{kozuka-pro} & \texttt{kozuka-pro} & \texttt{-pr6} で ProVI版, \texttt{-pr6n} で Pro6N版を指定なども指定可能\\
+IPA (Ex) フォント & \texttt{ipa}/\texttt{ipaex} & \texttt{ipa}/\texttt{ipaex} & \XeLaTeX のみ \texttt{ipa-hg} などのバリエーションあり\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+さらに, それぞれの項目に対してオプションを設定する場合, `options` と接尾辞のついた項目が用意されている. 欧文と和文フォントで全く異なるタイプのフォントを使ったために相対的なサイズが合わず不格好な場合は
 
 ```yaml
 mainfont: Palatinno
@@ -1241,7 +1309,7 @@ TODO: それ以外にも便利機能を少しづつ増やしていく予定
 
 ## `tikz` を使う
 
-`\LaTeX`{=latex}`LaTeX`{=html} で使われる `tikzdevice` を利用して, 直接  `tikz` の記述による画像を埋め込むことができる. チャンクのエンジンを `tikz` とすることで使用でき, 相互参照やキャプション, 画像サイズの指定といったチャンクオプションも使える. 図 \@ref(fig:tikz-venn) は `tikz` で生成した図である. これはHTMLでも表示できる. TODO: しかし現状ではpdflatex以外のエンジンに変更できないため, 日本語表示が難しい.
+\LaTeX で使われる `tikzdevice` を利用して, 直接  `tikz` の記述による画像を埋め込むことができる. チャンクのエンジンを `tikz` とすることで使用でき, 相互参照やキャプション, 画像サイズの指定といったチャンクオプションも使える. 図 \@ref(fig:tikz-venn) は `tikz` で生成した図である. これはHTMLでも表示できる. TODO: しかし現状ではpdflatex以外のエンジンに変更できないため, 日本語表示が難しい.
 
 \begin{figure}
 
@@ -1271,39 +1339,39 @@ D3.js なども使える
 
 ## (TODO) その他の R プログラム
 
-なお, DOT言語は `DiagrammeR` パッケージを経由して使うこともできる[^rcb-diagrammer](図: \@ref(fig:diagrammer-graph)). グラフィカルモデルの記述などはこちらのほうが簡単かもしれない.
+## DOT 言語とグラフィカルモデル
 
-(ref:diagrammer-cap) `DiagrammeR` によるグラフィカルモデル (RCB, Ch. 4.15 より)
+graphviz などで使用される DOT 言語を使用してグラフィカルモデルを描画することもできる. この場合, チャンクのエンジンを `dot` にするのではなく, エンジンは `r` のままで, `engine="dot"` を指定すると, コードブロックが DOT 言語として評価される. 図\@ref(fig:dot-example) がその結果である.
 
 
-```{.r .numberLines .lineAnchors}
-DiagrammeR::grViz("digraph {
-  graph [layout = dot, rankdir = TB]
-  
-  node [shape = rectangle]        
-  rec1 [label = 'Step 1. 起床する']
-  rec2 [label = 'Step 2. コードを書く']
-  rec3 [label =  'Step 3. ???']
-  rec4 [label = 'Step 4. 給料をもらう']
-  
-  # edge definitions with the node IDs
-  rec1 -> rec2 -> rec3 -> rec4
-  }",
-  height = 500
-)
+```{.dot .numberLines .lineAnchors}
+digraph test {
+  graph [layout = dot, rankdir = TB];
+  node [shape = rectangle];
+  rec1 [label = "Step 1. 起床する"];
+  rec2 [label = "Step 2. コードを書く"];
+  rec3 [label = "Step 3. ???", color=blue, style=filled];
+  rec4 [label = "Step 4. 給料をもらう", fontsize=20, fontcolor=red];
+  rec1 -> rec2 -> rec3 -> rec4;
+  }
 ```
+
 
 \begin{figure}
 
-{\centering \includegraphics[width=1\linewidth,height=1\textheight,keepaspectratio]{rmdja_files/figure-latex/diagrammer-graph-1} 
+{\centering \includegraphics[width=1\linewidth,height=0.4\textheight,keepaspectratio]{rmdja_files/figure-latex/dot-example-1} 
 
 }
 
-\caption{(ref:diagrammer-cap)}(\#fig:diagrammer-graph)
+\caption{DOTの動作確認}(\#fig:dot-example)
 \end{figure}
 
-[^rcb-diagrammer]: https://bookdown.org/yihui/rmarkdown-cookbook/diagrams.html
 
+なお, RCB, Ch. 4.15 でも紹介されているように DOT 言語は `DiagrammeR` パッケージを経由して使うこともできる[^dot-lang-syntax]が, `grViz()` 関数の出力は HTML を前提としているため, PDF での出力時のサイズや解像度の調整がうまくいかないことが多い.
+
+一方で, `ggdag` パッケージは`ggplot2` ベースのパッケージなので, 一般的な R グラフィックスと同じ扱いでグラフィカルモデルを描画できる (つまり名前に反して DAG 以外のネットワーク図も記述可能である). `ggplot2` 風の構文で記述できるので習熟も容易である.
+
+[^dot-lang-syntax]: 私も詳しいことは知らないが, `DiagrammeR::grViz()` の構文は本来の DOT と少し異なるようだ, 本来はステートメントごとにセミコロンで区切ることが必要であり, 文字列もダブルクオーテーションで囲まなければならないが, `grViz()` ではそのような制約がない.
 
 # 表のデザイン {#advanced-tabulate}
 
@@ -1314,7 +1382,16 @@ DiagrammeR::grViz("digraph {
 
 `kableExtra` パッケージは `knitr::kable` の拡張であり, 様々なスタイルの表を出力できる. そしてそれは HTML でも PDF でも有効である.
 
-まず, (これは `kable()` からある機能だが) `booktabs = T` を指定する. `\LaTeX`{=latex}`LaTeX`{=html} のデフォルトの表は罫線が多すぎる. 罫線は牢獄の格子を暗示するため過剰な罫線にまみれた表を書いたり眺めたりしていると精神が抑圧され有害であると心理学的にも証明されている (**嘘**). しかし `booktabs = T` はこれだけで `booktabs.sty` に準拠した見やすいスタイルに変更してくれる. さらに `kableExtra` の機能として, 表 \@ref(tab:kableextra-color) にみられるように条件書式のような装飾が可能である[^mtcars-term].
+まず, `knitrExtra::kbl()` は既に紹介した `kable()` のラッパであり, 内部で呼び出すのは `kable()` のため `booktabs` といった従来の引数が使える上に, オプション設定の構文がより分かりやすくなっている. さらに `kableExtra` の独自機能として, 表 \@ref(tab:kableextra-color) にみられるように条件書式のような装飾が可能である[^mtcars-term].
+
+\begin{rmdnote}
+\texttt{kableExtra} パッケージはヘルプドキュメントはもちろん,
+公式の解説や用例も充実している.
+
+\url{https://haozhu233.github.io/kableExtra/}
+
+\url{https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html}
+\end{rmdnote}
 
 (ref:kableextra-color-cap) `kabeExtra` パッケージを利用した表の作成, 公式ドキュメントの用例より
 
@@ -1372,8 +1449,8 @@ Merc 240D & \href{https://haozhu233.github.io/kableExtra}{\textcolor[HTML]{FDE72
 
 上記の例で使われている, `kableExtra` の便利な機能をいくつか挙げる.
 
-* `kbl(col.names = )` で列ラベルを指定できる. これは列名の変更ではないので以降も同じ名前で変数を参照できるが, 表示されるのは列ラベルである. 現状, 日本語 (マルチバイト文字) を変数名に与えることを想定していないパッケージはまだ多いので, この機能が役に立つ.
-* `kable_styling(latex_options = "scale_down")` はPDF出力時に本文幅に合わせて自動で縮小するオプションである.
+* `kbl(col.names = )` で列ラベルを指定できる (これは `kable()` でも使える). 列名の変更ではないので以降も同じ名前で変数を参照できるが, 表示されるのは列ラベルである. 現状, 日本語 (マルチバイト文字) を変数名に与えることを想定していないパッケージはまだ多く, またデータフレームの仕様として列名に `()` などを使えないためこの機能が役に立つ.
+* PDF 出力時の表の幅調整を簡単にするオプションがいくつか用意されている. `kable_styling()` の `latex_options = "scale_down"` や `full_width = T` である. 前者は本文領域に収まるように自動で表を縮小するもので, 後者は表内での改行を許容することで超過した表の幅を本文の幅に合わせるオプションである. もしより細かい調整が必要なら, `column_spec()` で列ごとに幅を指定することもできる.
 
 グラフのインライン挿入も可能である (表 \@ref(tab:kableextra-plot)). しかしこのような細かいグラフの羅列は可読性に欠けることに注意する.
 
@@ -1394,6 +1471,7 @@ inline_plot %>%
     col.names = c("シリンダ数", "ガロン毎マイル", "", "", "", "", "", "")
   ) %>%
   kable_paper(full_width = FALSE) %>%
+  kable_styling(latex_options = "scale_down") %>%
   column_spec(2, image = spec_boxplot(mpg_list)) %>%
   column_spec(3, image = spec_hist(mpg_list)) %>%
   column_spec(4, image = spec_plot(mpg_list, same_lim = TRUE)) %>%
@@ -1407,21 +1485,22 @@ inline_plot %>%
 
 \caption{(\#tab:kableextra-plot)(ref:kableextra-plot-cap)}
 \centering
+\resizebox{\linewidth}{!}{
 \begin{tabular}[t]{r>{}l>{}l>{}l>{}l>{}l>{}l>{}l}
 \toprule
 シリンダ数 & ガロン毎マイル &  &  &  &  &  & \\
 \midrule
-4 & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//boxplot_1c3f7bb53807.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//hist_1c3f27102446.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_1c3f57cd4d2b.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_1c3f72cd07fb.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_1c3f3d8d11b1.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_1c3f59803afa.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_1c3f41bd25c9.pdf}\\
-6 & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//boxplot_1c3f61d1c52c.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//hist_1c3fd5a407.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_1c3f402d1a40.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_1c3f1b175269.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_1c3f6e59046.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_1c3f7f3ceb8b.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_1c3f5f317dc0.pdf}\\
-8 & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//boxplot_1c3f58f68d37.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//hist_1c3f7e29f8c0.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_1c3fcb366c7.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_1c3f4da9a260.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_1c3f971ee4e.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_1c3f738ebae9.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_1c3fce9ddc8.pdf}\\
+4 & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//boxplot_2f11ba49ad4.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//hist_2f176e3bddf.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_2f152d85e9c.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_2f1b2009ce.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_2f1456fe5cd.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_2f13fbc46f9.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_2f14081a6b0.pdf}\\
+6 & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//boxplot_2f122c5c9a0.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//hist_2f120c4cf15.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_2f111f564f9.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_2f1731f129f.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_2f1417e65de.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_2f178ebbcd4.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_2f17f4fd241.pdf}\\
+8 & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//boxplot_2f14ad2e3e8.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//hist_2f1320015b6.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_2f12acf15b8.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_2f11aab173b.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_2f148f639ba.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_2f17eacd033.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_2f17d9efdda.pdf}\\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{table}
 
 その他細かい使用上の注意をいくつか挙げる.
 
 * `kableExtra::` で参照するのではなく, 最初にパッケージをロードしたほうが不具合が起きにくい.
-* PDF に出力する場合, 多くの `\LaTeX`{=latex}`LaTeX`{=html} パッケージのロードが必要だが, `rmdja` のPDFフォーマットはいずれもテンプレートに組み込んでいるため手動設定は必要ない.
+* PDF に出力する場合, 多くの \LaTeX パッケージのロードが必要だが, `rmdja` のPDFフォーマットはいずれもテンプレートに組み込んでいるため手動設定は必要ない.
 * `knitr::kable()` または `kableExtra::kbl()` の `format` でHTML/texの出力を決める. 現在は判定が自動化されたとのことだが, まれに不具合があるという報告もみられる. よって, どちらも出力したい場合は上記のように `format = knitr::is_latex_output()` で条件分岐させるのが1つの手である.
 * 表のキャプションは図のようにチャンクオプションに指定するのではなく, `kbl()`/`kable()` の `caption` 引数に指定する
 * キャプション内にMarkdown記法や相互参照など特殊な構文を含めたい場合は, `escape = F` を指定する.
@@ -1433,7 +1512,7 @@ inline_plot %>%
 
 ## `formattable` パッケージとの併用
 
-`formattable` パッケージは以前からある表を装飾するパッケージである. `kableExtra` との併用も可能だが, **`\LaTeX`{=latex}`LaTeX`{=html}  に対応しておらず**, HTMLタグをtexファイルに吐き出してしまうため動作しない. PDF にも同様に表示するには [StackOverflow](https://stackoverflow.com/questions/34983822/how-to-have-r-formattable-rendered-to-pdf-output-and-how-to-have-percents-in-the)で提案されているように, `webshot` 使うなど工夫が必要である. そこまでしてこの装飾にこだわるメリットは薄いと私は考えるので現在この問題に対応する予定はない. かわりに後述する `huxtable` または `gt` を使うべきだと考える. 
+`formattable` パッケージは以前からある表を装飾するパッケージである. `kableExtra` との併用も可能だが, **\LaTeX  に対応しておらず**, HTMLタグをtexファイルに吐き出してしまうため動作しない. PDF にも同様に表示するには [StackOverflow](https://stackoverflow.com/questions/34983822/how-to-have-r-formattable-rendered-to-pdf-output-and-how-to-have-percents-in-the)で提案されているように, `webshot` 使うなど工夫が必要である. そこまでしてこの装飾にこだわるメリットは薄いと私は考えるので現在この問題に対応する予定はない. `kableExtra` か後述する `huxtable` を使うべきだと考える. 
 
 ## `huxtable` パッケージによる作表
 
@@ -1449,7 +1528,7 @@ inline_plot %>%
 \begin{centerbox}
 \begin{threeparttable}
 \captionsetup{justification=centering,singlelinecheck=off}
-\caption{(\#tab:huxtable-logo) }
+\caption{(\#tab:huxtable-logo) `huxtable` のロゴはランダムに生成される.}
  \setlength{\tabcolsep}{0pt}
 \begin{tabular}{l l l l l l}
 
@@ -1457,10 +1536,10 @@ inline_plot %>%
 \hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textbf{h}} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 255, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{0, 0, 0}{u}} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 0, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
 
@@ -1468,55 +1547,54 @@ inline_plot %>%
 \hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{} &
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 0, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textbf{\textcolor[RGB]{255, 255, 255}{h}}} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{0, 0, 255}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{255, 255, 255}{1.2}}->{\huxb{0, 0, 0}{1.2}}|>{\huxb{0, 0, 0}{1.2}}->{\huxb{255, 255, 255}{1.2}}->{\huxb{0, 0, 0}{1.2}}|>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
+\hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{255, 255, 255}{1.2}}->{\huxb{0, 0, 0}{1.2}}|>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\multirow[t]{-2}{*}[0ex]{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont x} \hspace{0pt}\huxbpad{0pt}}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 0, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 255, 0}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{0, 0, 255}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\multirow[t]{-2}{*}[0ex]{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{0, 0, 255}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont u} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{1.2}}|>{\huxb{255, 255, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}|>{\huxb{255, 255, 255}{1.2}}->{\huxb{0, 0, 0}{1.2}}|>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\multirow[t]{-2}{*}[0ex]{\cellcolor[RGB]{255, 255, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{0, 0, 0}{~}} \hspace{0pt}\huxbpad{0pt}}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\multirow[t]{-2}{*}[0ex]{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
-
-
-\hhline{>{\huxb{0, 0, 0}{1.2}}|>{\huxb{255, 255, 255}{1.2}}->{\huxb{0, 0, 0}{1.2}}|>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
-\arrayrulecolor{black}
-
-\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\multirow[t]{-2}{*}[0ex]{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont t} \hspace{0pt}\huxbpad{0pt}}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 255, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{0, 0, 0}{~}} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{0, 0, 255}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont a} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont x} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 0, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{255, 255, 255}{t}} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont a} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont b} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont l} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
+\multicolumn{2}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
 \arrayrulecolor{black}
 
-\multicolumn{2}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont l} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{2}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 255, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{0, 0, 0}{~}} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{0, 0, 255}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{255, 255, 255}{e}} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 255, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{0, 0, 0}{e}} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
@@ -1528,7 +1606,7 @@ inline_plot %>%
  
 ```
 
-[`huxtable`](https://hughjonesd.github.io/huxtable/) は HTML と `\LaTeX`{=latex}`LaTeX`{=html} に対応した作表パッケージであり, 公式ドキュメントによると他の類似パッケージと比較して多機能であることを強調している. 全体的に `tidyverse` を意識した構文が用意され, `kableExtra` のようにパイプラインを使った記述が捗る. なお `huxtable` のロゴはランダムに生成される. さらに「1行ごとに背景色を変更」「`stargazer`風の表」などよく使われるスタイルを簡単に設定できるようになっていたり, はては `tidyr` のような表のロング・ワイド変形機能まで備えている. 例えば公式用例集を参考に, 条件書式を付けた表 \@ref(tab:huxtable-example) を作成する.
+[`huxtable`](https://hughjonesd.github.io/huxtable/) は HTML と \LaTeX に対応した作表パッケージであり, 公式ドキュメントによると他の類似パッケージと比較して多機能であることを強調している. 全体的に `tidyverse` を意識した構文が用意され, `kableExtra` のようにパイプラインを使った記述が捗る. さらに「1行ごとに背景色を変更」「`stargazer`風の表」などよく使われるスタイルを簡単に設定できるようになっていたり, はては `tidyr` のような表のロング・ワイド変形機能まで備えている. 例えば公式用例集を参考に, 条件書式を付けた表 \@ref(tab:huxtable-example) を作成する.
 
 (ref:huxtable-example-cap) `huxtable` パッケージによる作表
 
@@ -1653,7 +1731,7 @@ head(mtcars[1:5]) %>%
  
 ```
 
-そのままでは罫線の設定が `set_top_border()`, `set_bottom_border()`, などしかなく, 複雑な条件を指定するのが大変だが, `ggplot2` のテーマ関数のようにスタイルのプリセットが `theme_*()` の名前でいくつか用意されている. 例えば上記では `theme_article()` という学術論文風テーマを適用し, 表の上下とヘッダにだけ罫線を引いている. 条件書式は `map_*()` 関数群で実行できる. また, フォーマットは `set_number_format()` に値を変換するフォーマット関数を与える形で適用できる. こちらはパーセンテージなども正しく表示できる.
+`huxtable` パッケージの関数の多くには `set_` という接頭辞がついているものとそうでないものがある. ついているものは上記のようにパイプラインでつなげて使うために用意された関数群で, ついていないものは R 組み込みの `colnames()` のように1行ごとに処理を書くスタイルに向いている. そのままでは罫線の設定が `set_top_border()`, `set_bottom_border()`, などしかなく, 複雑な条件を指定するのが大変だが, `ggplot2` のテーマ関数のようにスタイルのプリセットが `theme_*()` の名前でいくつか用意されている. 例えば上記では `theme_article()` という学術論文風テーマを適用し, 表の上下とヘッダにだけ罫線を引いている. 条件書式は `map_*()` 関数群で実行できる. また, フォーマットは `set_number_format()` に値を変換するフォーマット関数を与える形で適用できる. こちらはパーセンテージなども正しく表示できる.
 
 * テーマ設定はグローバルオプションでも設定できる. 例えば `options(huxtable.knit_print_df_theme = theme_article)`.
 
@@ -1675,7 +1753,7 @@ lm2 <- lm(mpg ~ cyl + hp, mtcars)
 glm1 <- glm(I(mpg > 20) ~ cyl, mtcars,
   family = binomial
 )
-huxreg(lm1, lm2, glm1) %>%
+huxreg(lm1, lm2, glm1, stars = NULL, error_pos = "below", note = "括弧内は標準誤差") %>%
   set_caption("(ref:huxreg-example-cap)") %>%
   set_text_color(everywhere, "model1", "green") %>%
   set_text_color(everywhere, "model2", "blue")
@@ -1710,8 +1788,8 @@ huxreg(lm1, lm2, glm1) %>%
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} (Intercept) \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{37.885 ***} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{36.908 ***} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{37.885~} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{36.908~} \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 64.400~ \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
@@ -1719,8 +1797,8 @@ huxreg(lm1, lm2, glm1) %>%
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt}  \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{(2.074)~~~} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{(2.191)~~~} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{(2.074)} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{(2.191)} \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (17449.775) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
@@ -1728,8 +1806,8 @@ huxreg(lm1, lm2, glm1) %>%
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} cyl \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{-2.876 ***} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{-2.265 ***} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{-2.876~} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{-2.265~} \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} -10.781~ \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
@@ -1737,8 +1815,8 @@ huxreg(lm1, lm2, glm1) %>%
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt}  \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{(0.322)~~~} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{(0.576)~~~} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{(0.322)} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{(0.576)} \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} (2908.296) \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
@@ -1746,8 +1824,8 @@ huxreg(lm1, lm2, glm1) %>%
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} hp \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{~~~~~~~~} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{-0.019~~~~} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{~~~~~} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{-0.019~} \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} ~~~~~ \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
@@ -1755,8 +1833,8 @@ huxreg(lm1, lm2, glm1) %>%
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt}  \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{~~~~~~~~} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{(0.015)~~~} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{~~~~~} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{(0.015)} \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} ~~~~~ \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
@@ -1764,8 +1842,8 @@ huxreg(lm1, lm2, glm1) %>%
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} N \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{32~~~~~~~~} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{32~~~~~~~~} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{32~~~~~} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{32~~~~~} \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 32~~~~~ \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
@@ -1773,8 +1851,8 @@ huxreg(lm1, lm2, glm1) %>%
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} R2 \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{0.726~~~~} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{0.741~~~~} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{0.726~} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{0.741~} \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} ~~~~~ \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
@@ -1782,8 +1860,8 @@ huxreg(lm1, lm2, glm1) %>%
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} logLik \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{-81.653~~~~} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{-80.781~~~~} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{-81.653~} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{-80.781~} \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} -4.780~ \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
@@ -1791,15 +1869,15 @@ huxreg(lm1, lm2, glm1) %>%
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} AIC \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{169.306~~~~} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{169.562~~~~} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{169.306~} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{169.562~} \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 13.561~ \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{>{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}-}
 \arrayrulecolor{black}
 
-\multicolumn{4}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt}  *** p $<$ 0.001;  ** p $<$ 0.01;  * p $<$ 0.05. \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+\multicolumn{4}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} 括弧内は標準誤差 \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{}
@@ -1815,15 +1893,15 @@ huxreg(lm1, lm2, glm1) %>%
 
 ## TeX/HTML を出力する関数
 
-`stargazer` や `xtable` のように, HTML や `\LaTeX`{=latex}`LaTeX`{=html} のソースコードとして表を出力してくれるパッケージがある. これらは `results='asis'` のチャンクオプションを指定することで関数の出力するテキストをそのまま埋め込むことができる. よって, あとは HTMLか`\LaTeX`{=latex}`LaTeX`{=html} かといった出力形式の違いに気をつければ表示できる (図 \@ref(tab:stargazer-table)).
+`stargazer` や `pander` のように表を出力するための HTML や \LaTeX や Markdown のソースコードを出力してくれるパッケージがある. これらは `results='asis'` のチャンクオプションを指定することで関数の出力するテキストをそのまま埋め込むことができる. よって, あとは HTMLか`\LaTeX`{=latex}`LaTeX`{=html} かといった出力形式の違いに気をつければ表示できる. `stargazer` はオプションが豊富で, 例えば表 \@ref(tab:stargazer-table)では, `align = T` を指定することで, `dcolumn.sty` を使って 数字のアラインメントを小数点で揃えることができる. その他, 複数の回帰モデルの結果を並べて表示したり, その際の表示スタイルも比較的かんたんに調整できる. `stargazer` の詳しい使い方はむかし私が書いた『[R での分析結果を LaTeX 形式で出力するパッケージ比較 (後編)](https://ill-identified.hatenablog.com/entry/2014/01/28/214814)』を参考に.
 
-(ref:stargazer-title) `stargazer` による表の出力
+(ref:stargazer-title) `stargazer` による要約統計量の出力
 
 
 ```{.r .numberLines .lineAnchors}
 require(stargazer)
 stargazer(mtcars,
-  header = F,
+  header = F, align = T,
   type = if (knitr::is_latex_output()) "latex" else "html",
   title = "(ref:stargazer-title)",
   label = knitr::opts_current$get("label")
@@ -1834,7 +1912,7 @@ stargazer(mtcars,
 \begin{table}[!htbp] \centering 
   \caption{(ref:stargazer-title)} 
   \label{tab:stargazer-table} 
-\begin{tabular}{@{\extracolsep{5pt}}lccccccc} 
+\begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} } 
 \\[-1.8ex]\hline 
 \hline \\[-1.8ex] 
 Statistic & \multicolumn{1}{c}{N} & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{St. Dev.} & \multicolumn{1}{c}{Min} & \multicolumn{1}{c}{Pctl(25)} & \multicolumn{1}{c}{Pctl(75)} & \multicolumn{1}{c}{Max} \\ 
@@ -1854,27 +1932,27 @@ carb & 32 & 2.812 & 1.615 & 1 & 2 & 4 & 8 \\
 \end{tabular} 
 \end{table} 
 
-ただし `stargazer` はここ数年更新されておらず, R Markdown に対応した機能追加なども行われていないため, 相互参照に対応していない. `bookdown` リポジトリの [issue #175](https://github.com/rstudio/bookdown/issues/175) にあるように, PDFに限れば簡易的な方法で対処できるが, HTMLでも相互参照するには [`stargazer_bookdown`](https://github.com/jiewpeng/stargazer_bookdown) のインストールが必要になる.
+ただし `stargazer` はここ数年更新されておらず, R Markdown に対応した機能追加なども行われていないため, **相互参照に対応していない**. `bookdown` リポジトリの [issue #175](https://github.com/rstudio/bookdown/issues/175) にあるように, PDFに限れば簡易的な方法で対処できるが, HTMLでも相互参照するには [`stargazer_bookdown`](https://github.com/jiewpeng/stargazer_bookdown) のインストールが必要になる.
 
-その他, `Hmisc::latex()`, `stats::xtable()` という古典的な関数がある. 後者は名前の通り `\LaTeX`{=latex}`LaTeX`{=html} のソースをかなりの自由度で出力できるが, ここまでやるならもう最初から `\LaTeX`{=latex}`LaTeX`{=html} で書いたほうがいいのでは, というレベルである. `\LaTeX`{=latex}`LaTeX`{=html} に詳しくない場合, かえって難しいかも知れない. 既に紹介した `kableExtra`, `huxtable` などでできる範囲でやったほうが簡単だろう.
+その他, `Hmisc::latex()`, `stats::xtable()` という古典的な関数がある. 後者は名前の通り \LaTeX のソースをかなりの自由度で出力できるが, ここまでやるならもう最初から全部 \LaTeX で書いたほうがいいのでは, という気もする. \LaTeX に詳しくない場合, かえって難しいかも知れない. 既に紹介した `kableExtra`, `huxtable` などでできる範囲でやったほうが簡単だろう.
 
 ## その他の作表パッケージ
 
-`df_print` チャンクオプションで, デフォルトの表示方法を変更することもできる. ここまで `kable` での出力を前提としていたが, 長大な表を掲載したい場合, `paged` オプションがある.
-
-それ以外に有名なパッケージとして, `DT`, `flextable`, `gt` などがある. `DT` はインタラクティブな表ウィジェットを作成し, `flextable` は Word へのエクスポート機能をフィーチャーしているが, PDF に対しては画像として出力するなどくせがある. `gt` は RStudio 社が開発しているパッケージで, `huxtable` のように `tidyverse` 的なシンプルな構文が用意されている一方で, まだ R Markdown の相互参照機能に対応していない[^gt-crossref]. 以上から, `kableExtra` や `huxtable` が `rmdja` の対応する出力媒体に適したパッケージであり, それ以外のパッケージの紹介は避ける.
+そのほか有名なパッケージとして, `DT`, `flextable`, `gt` などがある. `DT` はインタラクティブな表ウィジェットを作成し, `flextable` は Word へのエクスポート機能をフィーチャーしているが, PDF に対しては画像として出力するなどくせがある. `gt` は RStudio 社が開発しているパッケージで, `huxtable` のように `tidyverse` 的なシンプルな構文が用意されている一方で, まだ R Markdown の相互参照機能に対応していない[^gt-crossref]. 以上からすでに紹介した `kableExtra` や `huxtable` がより `rmdja` の対応する出力媒体に適したパッケージであり, それ以外のパッケージの詳しい紹介は避ける.
 
 RCB [10.3 Other packages for creating tables](https://bookdown.org/yihui/rmarkdown-cookbook/table-other.html) も参考にせよ.
 
-[^gt-crossref]: Issue [#115](https://github.com/rstudio/gt/issues/115) にあるように, 機能を追加したいという声はある. しかし現時点では `gt`  のこの機能の開発を積極的に進める様子はない. 
+[^gt-crossref]: Issue [#115](https://github.com/rstudio/gt/issues/115) にあるように, 機能を追加したいという声はある. しかし現時点では `gt`  の R Markdown 対応作業の優先度は高くないようである.
 
 # 文献引用の詳細設定 {#biblio-advaneced}
 
 ## `(u)p\BibTeX`{=latex}`(u)pBibTeX`{=html} を使う
 
-このセクションの説明の理解には多少の `\LaTeX`{=latex}`LaTeX`{=html} の知識を要する.  Ver. 0.4.3 以降では BibLaTeX 用の日本語スタイルとして最低限のクオリティだけは保った `jauthoryear` を用意しているため, どうしても文献リストのスタイルにこだわりたい以外はここで紹介される方法は使わないほうが良い. 
+\BeginKnitrBlock{rmdcaution}
+このセクションの説明の理解には多少の `\LaTeX`{=latex}`LaTeX`{=html} の知識を要する.  Ver. 0.4.3 以降では BibLaTeX 用の日本語スタイルとして最低限のクオリティだけは保った `jauthoryear` を用意しているため, どうしても文献リストのスタイルにこだわりたい以外はここで紹介される方法は使わないほうが良い.
+\EndKnitrBlock{rmdcaution}
 
-`.bst` ファイルのスタイルを使いたい場合,  (u)`\pBibTeX`{=latex}`pBibTeX`{=html} が必要であり, そのためには現在の R Markdown および `rmdja` の仕様では, YAMLフロントマターとグローバルオプションを変更する必要がある. 例えば `jecon.bst` を使いたい参考文献リストを出力したい場合, YAMLフロントマターは以下のような記述となる.
+`.bst` ファイルのスタイルを使いたい場合,  (u)\pBibTeX が必要であり, そのためには現在の R Markdown および `rmdja` の仕様では, YAMLフロントマターとグローバルオプションを変更する必要がある. 例えば `jecon.bst` を使いたい参考文献リストを出力したい場合, YAMLフロントマターは以下のような記述となる.
 
 ```yaml
 output:
@@ -1885,7 +1963,7 @@ biblio-style: jecon
 bibliogpraphy: citations.bib
 ```
 
-BibLaTeX では `citation_options` にスタイルまで指定していたが, `natbib` を選択した場合 `biblio-style` で指定し, フォーマット関数の `citation_options` 引数は `natbib.sty` に対するオプションを指定する項目となる (フロントマターの `natbiboptions` でも可). 上記の例では `numbers` を指定しているため本文中の参照トークンは `[1]`, `[2, 3]` のような番号形式となる. デフォルトは `authoryear` である.
+BibLaTeX では `citation_options` にスタイルまで指定していたが, `natbib` を選択した場合 `biblio-style` に `.bst` ファイルを指定し, フォーマット関数の `citation_options` 引数は `natbib.sty` に対するオプションを指定する項目となる (トップレベルの `natbiboptions` でも可). 上記の例では `numbers` を指定しているため本文中の参照トークンは `[1]`, `[2, 3]` のような番号形式となる. デフォルトは `authoryear` , つまり「著者 - 出版年」形式である.
 
 次に, 最初のチャンク, またはコンソールでグローバルオプションを変更する.
 
@@ -1895,10 +1973,11 @@ options(tinytex.latexmk.emulation = F)
 
 この状態で knit または build すれば `.bst` ファイルのスタイルが適用される.
 
-このような操作が必要な理由を説明する. `rmarkdown` は `tinytex` というパッケージでインストールされたスタンドアローンな `\LaTeX`{=latex}`LaTeX`{=html} 処理系で PDF を生成している. しかしこれは (u)`\pBibTeX`{=latex}`pBibTeX`{=html} の使用が想定されていない.  (u)`\pBibTeX`{=latex}`pBibTeX`{=html} は日本語コミュニティで開発されたマルチバイト文字対応版 `\BibTeX`{=latex}`BibTeX`{=html} だから, `rmarkdown` 開発メンバーたちはこれらの存在に詳しくないのだろう (YiHui 氏は中国出身だが, 中国語圏では BibLaTeX を使うことが多いようだ). 冒頭のチャンクで `options(tinytex.latexmk.emulation = F)` を指定することで, 自分のマシンにインストールされた, おそらくあなたが普段使っているであろう `\LaTeX`{=latex}`LaTeX`{=html} 処理系に処理させることができる. この方法では `latexmk` コマンドを使用してPDFの生成が行われる, その場合[TeX Wiki](https://texwiki.texjp.org/?Latexmk)に記載のあるように, 日本語出力のため `.latexmkrc`  ファイルが必要となっている. `rmdja` では `natbib` を指定した場合に自動でカレントディレクトリに `.latexmkrc` をコピーするようにしている. しかしログが残らないなどデバッグしづらいところがあるため, このやり方はやや使いづらいため, `\LaTeX`{=latex}`LaTeX`{=html} に対するそれなりの知識を要する. たとえばこの説明を読んで初めて `latexmk` の存在を知った, そもそも `\LaTeX`{=latex}`LaTeX`{=html} をどうインストールしたか記憶がない, といった人は慣れるまで大変かもしれない.
-
+このような操作が必要な理由を説明する. `rmarkdown` は `tinytex` というパッケージでインストールされたスタンドアローンな \LaTeX 処理系で PDF を生成している. しかしこれは (u)\pBibTeX の使用が想定されていない.  (u)\pBibTeX は日本語コミュニティで開発されたマルチバイト文字対応版 \BibTeX だから, `rmarkdown` 開発メンバーたちがこれらの存在に詳しくないのも仕方ないことだ (YiHui 氏は中国出身だが, 中国語圏では BibLaTeX を使うことが多いようだ). 冒頭のチャンクで `options(tinytex.latexmk.emulation = F)` を指定することで, 自分のマシンにインストールされた, おそらくあなたが普段使っているであろう \LaTeX 処理系に処理させることができる. この方法では `latexmk` コマンドを使用してPDFの生成が行われる, その場合[TeX Wiki](https://texwiki.texjp.org/?Latexmk)に記載のあるように, 日本語出力のため `.latexmkrc`  ファイルが必要となっている. `rmdja` では `natbib` を指定した場合に自動でカレントディレクトリに `.latexmkrc` をコピーするようにしている. しかしログが残らないなどデバッグしづらいところがあるため, このやり方はやや使いづらく \LaTeX に対するそれなりの知識を要する. たとえばこの説明を読んで初めて `latexmk` の存在を知った, そもそも \LaTeX をどうインストールしたか記憶がない, といった人は慣れるまで大変かもしれない.
 
 ### (TODO) `pandoc-citeproc` と CSL について
+
+TODO: せめて日本語文献の姓名表示をなんとかしたスタイルを用意する
 
 ### (WIP) BibLaTeX について
 
@@ -1951,7 +2030,8 @@ TODO: その他の非ラテン文字, キリル文字, アラビア文字 ヘブ
 実行はグラフィック関係や環境設定でまだまだバギーなところが多い. つまり,
 エラーが発生した場合には原因が Python 側にあるのか RStudio や
 \texttt{reticulate} パッケージ側にあるのか判断しなければならない.
-よってあなたがどちらかに習熟していない場合,
+よってあなたがどちらかに習熟していなかったり,
+まだエラーメッセージを注意深く読む習慣がついていない初心者である場合,
 作業が非効率になることが予想される.
 \end{rmdcaution}
 
@@ -2065,8 +2145,10 @@ documentclass: bxjsreport
 
 このうち, `bxjsbook` が `pdf book in Japanese` のデフォルト設定となっている. `rmdja::texlogo("LaTeX")` の文書クラスは, 行間や見出しのレイアウトなどを日本語文書に準じたものにするが, それ以外の細かい調整は `_output.yml` や `_bookdown.yml` の設定を書き換えて調整する. それでも不十分な場合は, .tex ファイルやpandocテンプレートを直接編集したり, 追加のスタイルファイルを読み込んだりするしかない.
 
+しかし, おそらくはこういった細かい調整が必要になることはすくないだろう. 以降では, `rmdja` が用意しているプレゼンテーションや論文形式のテンプレートを紹介する.
 
-[^bxjscls]: 詳細はここにあるドキュメント参照: https://www.ctan.org/pkg/bxjscls 但し, スライド用クラスである `bxjsslide` の使用は想定していない. また, `bxjsarticle` を使う場合は後述の `pdf article in Japanese` テンプレートから作成したほうがよい. さらに `rmdja::texlogo("LuaLaTeX")` を使用するならば `luatex-ja` で提供される日本語文書クラスも指定することができるが, あまりつかったことがないためレイアウトに不備があるかもしれない. 以降はPDFファイルで出力できる各形式についてこまかく解説する.
+
+[^bxjscls]: 詳細はここにあるドキュメント参照: https://www.ctan.org/pkg/bxjscls 但し, スライド用クラスである `bxjsslide` の使用は想定していない. また, `bxjsarticle` を使う場合は後述の `pdf article in Japanese` テンプレートから作成したほうがよい. さらに \LuaLaTeX を使用するならば `luatex-ja` で提供される日本語文書クラスも指定することができるが, あまりつかったことがないためレイアウトに不備があるかもしれない. 以降はPDFファイルで出力できる各形式についてこまかく解説する.
 
 ## プレゼンテーション資料の作成
 
@@ -2084,11 +2166,7 @@ documentclass: bxjsreport
 
 という設定になっている. 通常のプレゼンテーションでは大量の参考文献を読み上げることは少ないという想定で, 紙面の限られたスライドに参考文献のみ羅列したスライドでページ数が増えないように考慮したためこうした. これは既に作成した  [`my_latex_templates`](https://github.com/Gedevan-Aleksizde/my_latex_templates) のテンプレートとほぼ同じである.
 
-実際の表示例は `examples` にある.
-
-### 主な設定
-
-フォーマット関数が用意する設定について, Beamer 特有の設定をいくつか紹介する.
+さらに, Beamer テンプレート特有の設定をいくつか紹介する.
 
 * プログラムはデフォルトで非表示 (`echo=F`)
 * 出力する画像の大きさ `fig_width`, `fig_height` は beamer のデフォルトの大きさに連動している. そして `out_width`, `out_height` はいずれも `"100%"` にしているため, 概ね beamer の画面と同じ大きさになる.
@@ -2101,13 +2179,14 @@ classoption:
   - aspectratio=169
 ```
 
-となる. 指定可能なのは `3:2`, `4:3`, `5:4`, `14:1` ,`14:9`, `16:9`, `16:10` で, 上記のようにコロンを抜いて数字のみで指定する. なお `classoption` は `\LaTeX`{=latex}`LaTeX`{=html} でPDFを使う場合に有効になる.
+となる. 指定可能なのは `3:2`, `4:3`, `5:4`, `14:1` ,`14:9`, `16:9`, `16:10` で, 上記のようにコロンを抜いて数字のみで指定する. この `classoption` は \LaTeX の文書スタイルに対するオプション全般を与えるためにあるため, (beamer スタイル以外にも) 他にもいろいろ存在する.
 
 詳細は[beamer の公式ドキュメント](http://tug.ctan.org/macros/latex/contrib/beamer/doc/beameruserguide.pdf)を参考に.
 
+`rmdja` の Beamer 用テンプレートの実際の表示例は `examples` にある.
+
 [^slide-html]: HTML形式のスライドはサポート対象外である. 日本語文書特有の処理はあまりないということ, 普段と違う環境で表示することの多いであろうスライド資料はなるべく環境に依存しない方法で表示すべきと考えているのが理由である. HTMLでスライドを作成したい場合, 次のページが参考になる: https://kazutan.github.io/SappoRoR6/rmd_slide.html#/ 
 [^metropolis-warn]: なお `metropolis` テーマ開発者は Fira Sans フォントの使用を想定しており, ビルド時にフォントがないという警告が出ることがあるが無視して良い. (参考: https://github.com/matze/mtheme/issues/280)
-
 
 
 ## (WIP) 卒業論文の作成
@@ -2117,7 +2196,7 @@ classoption:
 書籍形式との違いは,
 
 * 文書の見出しが 「X章」ではなく「1. YYYY」のようになる (したがって, `Rmd` ファイルで `#` で記述した見出しは, PDFではセクションタイトルとなる)
-* 余白が見開きを想定したものでなくなる
+* 余白のとり方が書籍のように見開きを想定したものでなくなる
 
 など些細である. 実際のところ, 文書テンプレートの設定を少しいじっている程度のことしかしていない. テンプレートを開いて確認すればわかるように,
 
@@ -2164,11 +2243,11 @@ ggplot(
 \caption{グレースケールでのプロット}(\#fig:plot-grey-scale)
 \end{figure}
 
-[^ltjsarticle]: このテンプレートでは論文形式のフォーマットとして `bxjsarticle` を使用している. `\LuaLaTeX`{=latex}`LuaLaTeX`{=html} を使用するならば代わりに `ltjsarticle` クラスも使用可能なはずだが, 私は使ったことがないので説明を省く.
+[^ltjsarticle]: このテンプレートでは論文形式のフォーマットとして `bxjsarticle` を使用している. \LuaLaTeX を使用するならば代わりに `ltjsarticle` クラスも使用可能なはずだが, 私は使ったことがないので説明を省く.
 
 ## (WIP) 小説の執筆
 
-作家の京極夏彦は自分の作品を1ページごとに切り取っても作品として成立するようなレイアウトにこだわっているらしいが, すでに説明したように技術文書や学術論文では図表の配置や改行などにあまりこだわりがない. しかし, 不可能ではない. HTML では難しいが (不可能ではないがHTMLでやるメリットが感じられないので対応する気がない), PDF ではある程度のレイアウトの制御が可能である. ただし, 本当に厳格なJIS準拠の組版にこだわるなら, LaTeX を直接編集しなければならない.
+作家の京極夏彦氏は自分の作品を1ページごとに切り取っても作品として成立するようなレイアウトにこだわっているらしいが, すでに説明したように技術文書や学術論文では図表の配置や改行などにこだわることがあまりない. しかし, 不可能ではない. HTML では難しいが (不可能ではないがHTMLでやるメリットが感じられないので対応する気がない), PDF ではある程度のレイアウトの制御が可能である. ただし, 本当に厳格なJIS準拠の組版にこだわるなら, おそらく tex ソースを直接編集しなければならない.
 
 `rmdja` で用意されている縦書き文書テンプレート `pdf vertical writing in Japanese` は, `jlreq` を利用して[^luatex-ja-tate]縦書き文書のPDFを作成する(図: \@ref(fig:tategaki)). **HTML には未対応である**.
 
@@ -2327,24 +2406,23 @@ HTML ファイルは様々な配布方法がある. もちろん自分でサー�
 1. github pages を利用する
 2. bookdown.org に投稿する
 
-(1) の詳細は github.com の[公式ドキュメント](https://docs.github.com/ja/github/working-with-github-pages/about-github-pages)を見るのが一番良いだろう.
+(1) の詳細は github.com の[公式ドキュメント](https://docs.github.com/ja/github/working-with-github-pages/about-github-pages)を見るのが一番良いだろう. `rmdja` では, `bookdown` の機能である `_bookdown.yml` に文書ファイルの出力場所を指定するオプションをそのまま使えるため, `docs` ディレクトリに出力するよう設定すればあとはリモートリポジトリにプッシュし, pages を公開するよう設定するだけである.
 
-既にbookdownで作成した文書を公開している例は多数ある. 例えば既に何度も言及した公式解説サイトはそれじたいが `bookdown` で作られているし, "R for Data Science" [@wickham2016Data] [^r4ds-source]は, 内容の良さも含め一見に値する. また, "Hands-On Data Visualization: Interactive Storytelling from Spreadsheets to Code" [@doughertyforthcomingHandsOn] という本[^handon-source]が来年出るらしい. そして面白いことにこれは R Google スプレッドシートとか R 以外のWeb上のサービスの利用法を紹介する文書である.
+既にbookdownで作成した文書を公開している例は多数ある. 例えば既に何度も言及した公式解説サイトはそれじたいが `bookdown` で作られているし, "R for Data Science" [@wickham2016Data] [^r4ds-source]は, 内容の良さも含め一見に値する. また, "Hands-On Data Visualization: Interactive Storytelling from Spreadsheets to Code" [@doughertyforthcomingHandsOn] という本[^handon-source]が来年出るらしい. そして面白いことにこれは R の本ではなく Google スプレッドシートとかの Web 上のサービスの利用法を紹介する文書である.
 
 これらはいずれもソースコードまで公開されている. もちろんここでいうソースコードとは, 本文中のプログラムだけでなく文書を生成する `Rmd` ファイルなども含める.
 
-それ以外にも有名無名の多くのドキュメントが公開されているが, 一方で日本語はまだまだ少ない. 内容が豊富で, かつソースコードまで公開されている例として以下が見つかった.
+それ以外にも有名無名の多くのドキュメントが公開されているが, 一方で日本語はまだまだ少ない. 内容が豊富で, かつ `Rmd` のソースコードまで公開されている例として以下が見つかった.
 
 * 『[Rで計量政治学入門](https://shohei-doi.github.io/quant_polisci/)[^poli-source]』
 * 『[AIレベルの倫理学](https://mtoyokura.github.io/Ethics-for-A-Level-Japanese/)[^ethics-source]』
 
-bookdown の機能や見た目を確認することができる. さらに以下2つは私が作成したものである.
+さらに以下2つは私が作成したものである.
 
 * 『[三國志で学ぶデータ分析 (Japan.R 2019)](https://gedevan-aleksizde.github.io/Japan.R2019/)』[^sangokushi-source] (Japan.R 2019 の資料)
 * 『[経済学と反事実分析 接触篇 Economics and Counterfactual Analysis: A Contact](https://gedevan-aleksizde.github.io/20190125_tokyor/)』[^structural-source] (Tokyo.R 第83回の資料)
 
-特に私の2作品は PDF のレイアウトにも注意を払っているが,  当時は kazutan 氏作の [`bookdown_ja_template`](https://github.com/kazutan/bookdown_ja_template) をさらに改良した [kenjimyzk 氏のテンプレート](https://github.com/kenjimyzk/bookdown_ja_template) を元にワンオフで作成したフォーマットを使用し, `rmdja` を使用していないため, あまりスマートでない書き方が見られる.
-
+特に私の2作品は PDF のレイアウトにも注意を払っているが,  当時はまだ `rmdja` を作成しておらず kazutan 氏作の [`bookdown_ja_template`](https://github.com/kazutan/bookdown_ja_template) をさらに改良した [kenjimyzk 氏のテンプレート](https://github.com/kenjimyzk/bookdown_ja_template) を元にワンオフで作成したフォーマットを使用しているためあまりスマートでない書き方が見られる.
 
 また, HTML 形式の文書には PDF など他のファイル形式のダウンロードリンクを設置することができる. これは `_bookdown.yml` で表示を指定できる.
 
@@ -2366,11 +2444,11 @@ rmdja::pdf_book_ja:
 
 ### フォントの埋め込み
 
-少なくとも PDF ではフォントを埋め込みそこなったり, Type 3 フォントが設定されないようにしている. ただし Python 等を利用して描いたPDFは個別に設定が必要な場合があり, 保証できない.
+少なくとも PDF ではフォントを埋め込みそこなったり, Type 3 フォントが設定されないようにしている. ただし Python 等を利用して描いたグラフを埋め込む場合, 個別に設定が必要な場合もあり, 完全な保証はできない.
 
 TODO: https://teastat.blogspot.com/2019/01/bookdown.html の記述のうち, まだ対応してないものがある.
 
-# (PART) デバッグ {-}
+# (PART) デバッグとトラブルシュート {-}
 
 # このパートで説明すること {-}
 
@@ -2380,13 +2458,13 @@ TODO: https://teastat.blogspot.com/2019/01/bookdown.html の記述のうち, ま
 
 ## エラーがどのタイミングで発生したかを特定する
 
-R Markdown はさまざまな外部プログラムを利用して, 数段階のプロセスを経てソースファイルを変換して文書を作成する複雑なプログラムである. 逆に言えば, `Rmd` ファイルを `md` ファイルに変換 (`knitr`による処理) するときにエラーが出たのか, `md` を各ファイルに変換 `pandoc` する際に起こったのかをまず特定するのが重要である. そのためには
+R Markdown はさまざまな外部プログラムを利用して, 数段階のプロセスを経てソースファイルを変換して文書を作成する複雑なプログラムである. 逆に言えば, `Rmd` ファイルを `md` ファイルに変換 (`knitr`による処理) するときにエラーが出たのか (= R のプログラムにミスがある可能性が大), `md` を各ファイルに変換 `pandoc` する際に起こったのか (= 経験上ほとんどは tex ファイルのコンパイルエラーによるもの) をまず特定するのが重要である. そのためには
 
-1. `keep_md: true` を設定する
+1. `keep_md: true` / `keep_tex: true` を設定する
 2. うまくいかないときはキャッシュを削除してから再実行する
 
 
-という対処法がある. (1) は文字通り中間出力ファイルである `.md` を残すことを意味する. これが生成されないなら `knitr` でのエラーだと分かるし, 中身を見て不自然な内容になっているのなら Rmd の書き方が `knitr` に正しく評価されていないことがわかる.
+という対処法がある. (1) は文字通り中間出力ファイルである `.md` および `.tex` を残すことを意味する (tex ファイルの保全はデフォルトで `true` 設定になっている). これが生成されないなら `knitr` でのエラーだと分かるし, 中身を見て不自然な内容になっているのなら Rmd の書き方が `knitr` に正しく評価されていないことがわかる.
 
 キャッシュも私の経験上よくエラーの原因となっている. 以前に実行していたチャンクの結果が更新されていないせいで, `knitr` の処理の不整合を起こすことがある. `*_files` には出力に必要な画像ファイルが, `*_cache` にはチャンク実行結果のキャッシュが残っている. 後者は `knitr::opts_chunk$set(cache = T)` などでキャッシュを残す設定にできるので, `F` に設定した上でこれらのファイルを削除する.
 
@@ -2427,7 +2505,7 @@ output:
 
 インデントしないトップレベルの引数は, 基本的に `pandoc` に与える引数である. これ意味のない引数を与えてもエラーを返さないことが多いので, タイプミスに注意する.
 
-しかし, フォーマット関数に `pandoc_args` という構文をサポートしていることや, フォーマット関数で `pandoc` の同名の引数を上書きする仕様のフォーマットもあるため, 上記は絶対ではない. これが原因で, 「`output:` 以下に書くべきものを間違えてトップレベルに書いたが, 意図したとおりに機能した」あるいはその逆が発生することがある. また, **`pandoc` の構文ではキーワードにハイフンを使うことができる**が, フォーマットはRの関数でもあるため, ハイフンを使えず, アンダースコアで置き換えられる. この違いも書き間違えの原因になる.
+しかし, フォーマット関数に `pandoc_args` という構文をサポートしていることや, フォーマット関数で `pandoc` の同名の引数を上書きする仕様のフォーマットもあるため, 上記は絶対ではない. これが原因で, 「`output:` 以下に書くべきものを**間違えてトップレベルに書いたが, 意図したとおりに機能した**」あるいはその逆が発生することがある. また, **`pandoc` の構文ではキーワードにハイフンを使うことができる**が, フォーマットは R の関数でもあるためハイフンを使えず, アンダースコアで置き換えられる. この違いも書き間違えの原因になる.
 
 
 ## PDF 生成時のエラーを確認する
@@ -2454,7 +2532,20 @@ Error: LaTeX failed to XXXX
 
 これは `keep_md` と同様に, 中間ファイルである `.tex` を残すことを意味する.
 
-それでも解決しない場合, 改めてこのファイルを手動でタイプセットするのも1つの方法だ. もしうまくいったり, 異なるエラーが出るのなら, 環境の違いが問題かもしれない. そして `\upBibTeX`{=latex}`upBibTeX`{=html} を使うのなら, 後者が唯一のデバッグ方法だ.
+それでも解決しない場合, 改めてこのファイルを手動でタイプセットするのも1つの方法だ. もしうまくいったり, 異なるエラーが出るのなら, 環境の違いが問題かもしれない. そして \upBibTeX を使うのなら, 後者が唯一のデバッグ方法だ.
+
+## (TODO) Windows 特有の問題
+
+ビルド時のエラーとは直接関係ないが, 日本ロケールの Windows OS で RStudio を動かす場合によくあるエラーについても対処法を書いておく. これは R-wakalang でもよく訊かれる質問である. これらは Windows の仕様が根本的にアレなことに起因するため, Linux 等の仮想環境上でRを動かせば一切発生しない問題ではあるが, おそらく初心者の多くがハマっているので仮想環境を使わない解決方法を書いておく.
+
+まず, チャンク等のエラーメッセージが文字化けして読めない. これはロケールの問題であることが多い. 残念ながら日本語版 Windows は未だに CP932 エンコードを使用しているため, CP932 を使うと R の表示で不整合が発生する. よって,  CP932 を使用すれば解決できる.
+
+
+```{.r .numberLines .lineAnchors}
+Sys.setlocale(locale = "Japanese_Japan.932")
+```
+
+しかし R の他の部分の多くは UTF-8 を前提として作られているので今度は, そちらでいろいろな対処が必要になってしまう. もしこのような「仕様」が気に入らないのなら結局のところ早く LINUX などの他の環境に移行してしまうのが確実である.
 
 
 [^r4ds-source]: https://github.com/hadley/r4ds
@@ -2469,17 +2560,17 @@ Error: LaTeX failed to XXXX
 
 # (APPENDIX) 補遺 {-}
 
-ここでは `rmdja` の内部処理を解説する. `knitr` や `rmarkdown` の仕様に精通している, 自分で細かい設定をしたいユーザ向けの解説である.
-
 # デフォルト値の自動調整
 
-R Markdown で日本語文書を作成する上での大きな障害の1つである, YAML フロントマターの設定を改善している. `rmdja` の文書フォーマットはYAMLフロントマターのデフォルト値などを日本語文書に適したものに変更している. さらに, ユーザーをOSごとのフォントの違いや煩雑で重複だらけの設定から解放するため, 内部処理でも動的に設定変更している. もちろんこれらは ユーザーによる YAML フロントマターやチャンクオプションの変更で上書きできる.
+これはユーザーが通常気にする必要のないような `rmdja` 内部での処理を解説する. `knitr` や `rmarkdown` の仕様に精通している, 自分で細かい設定をしたいユーザ向けの解説である. 既に R Markdown に慣れていて, かなりトリッキーな使い方をしていたらどうも `rmdja` の機能とは競合するようだ, という場合は参考にしてほしい. 
+
+`rmdja` では R Markdown で日本語文書を作成する上での大きな障害の1つである, YAML フロントマターの設定を改善している. `rmdja` の文書フォーマットはYAMLフロントマターのデフォルト値などを日本語文書に適したものに変更している. さらに, ユーザーをOSごとのフォントの違いや煩雑で重複だらけの設定から解放するため, 内部処理でも動的に設定変更している. もちろんこれらは ユーザーによる YAML フロントマターやチャンクオプションの変更で上書きできる.
 
 ## デフォルトのフォント
 
 PDF 出力時のデフォルトフォントは, 生成時に OS を判定して設定している. その設定は表 \@ref(tab:font-default) のようなルールである.
 
-\begin{table}
+\begin{table}[!h]
 
 \caption{(\#tab:font-default)OS/エンジン別のデフォルトフォント}
 \centering
@@ -2498,19 +2589,49 @@ engine & Linux & Mac & Windows (>= 8) & Windows (それ以前)\\
 フォントのプリセットを指定した場合, 個別設定は無効になる. さらに, 3種類の和文フォントを全て設定していない場合もデフォルトのプリセットから選ばれる.
 
 
-## チャンクのデフォルト設定
+## チャンクオプションのデフォルト設定
 
-デフォルトのグラフィックデバイスは, HTML では `PNG`, PDF では `cairo_pdf` としている. R でよく描画するような単純な図形はベクタ画像が適しているが, 件数のとても多いデータの散布図などはベクタ画像にするとファイルサイズが大きくなるため, そのような画像を適度に「劣化」させてファイルサイズを軽減してくれる `cairo_pdf` を標準としている. HTML に関しては, そもそもデフォルトの設定でPDFが表示できないWebブラウザが多いことから, PNG をデフォルトにした.
+チャンクオプションのデフォルト設定も R Markdown から多少変更している.
 
-また, `block`, `block2`, `asis` などのブロックを `echo=F` や `include=F` にするメリットはほぼないため, `knitr::opts_chunk$set(echo = F, include = F)` と一括設定してもこれらは `echo=T, include=T` のままである. 変更したい場合は, チャンクごとに設定することで有効になる.
+`block`, `block2`, `asis` などのブロックを `echo=F` や `include=F` にするメリットはほぼないため, `knitr::opts_chunk$set(echo = F, include = F)` と一括設定してもこれらは `echo=T, include=T` のままである. 変更したい場合は, チャンクごとに設定することで有効になる.
+
+デフォルトの R グラフィックデバイスは, HTML では `"PNG"`, PDF では `"cairo_pdf"` としている. `"cairo_pdf"` を使う理由は (1) R でよく描画するような単純な図形はベクタ画像が適しているが, 件数のとても多いデータの散布図などはベクタ画像にするとファイルサイズが大きくなるため, そのような画像を適度に「劣化」させてファイルサイズを軽減してくれる, (2) 日本語フォントの表示と埋め込みの設定が最も簡単, というものである. そして HTML はそもそもデフォルトの設定で PDF が表示できない Web ブラウザが多いことから, `PNG` をデフォルトにした. もし HTML でもベクタ画像を表示したいのなら `"svglite"` を設定して SVG 形式にすると良いだろう.
+
+
+```{.r .numberLines .lineAnchors}
+knitr::opts_chunk(
+  dev = if (knir::is_latex_output()) "cairo_pdf" else "svglite"
+)
+```
+
+ただし, R 以外のプログラムで出力した画像には `cairo_pdf` は使えないため, 内部では `pdf` を使用している. これらの画像が日本語フォントを適切に埋め込めるかはそれぞれの設定に依存するため, R 側で制御するのは難しい.
+
+## コードブロックの整形と自動折り返し
+
+HTML はともかく, PDF はコードの自動折り返しが難しい. 例えば [RCB Ch. 5.3](https://bookdown.org/yihui/rmarkdown-cookbook/text-width.html) では, `listings.sty` を使う方法が書かれているが, この方法ではデフォルトのシンタックスハイライトが使えなくなり, R Markdown の大きなメリットの1つが損なわれてしまう. また, 同 [Ch. 11.10](https://bookdown.org/yihui/rmarkdown-cookbook/opts-tidy.html) では `knitr` のチャンクオプションで `tidy` と `tidy.opts` を設定するという方法が紹介されている. この機能は `formatR::tidy_source()` 関数を利用したコード整形であり, この関数の `width.cutoff` というオプションで自動折り返しを始める位置を指定できる. (たまに勘違いしている人がいるが, ドキュメントをちゃんと読めば分かるように) このように**コード整形機能は自動折り返しを目的としたものではない**ため, 長すぎる関数名や文字列があると `width.cutoff` を超過することも十分ありえる. 同章では `styler` パッケージがより機能が豊富だと言及しているが, このパッケージも現時点では1行の上限を指定する機能はない[^styler-width]. `rmdja` ではデフォルトで `styler` を使ったコード整形をするとともに, フォーマット `beamer_presentation_ja` と `pdf_book_ja` にコードブロックの自動折り返しを有効にする `code_softwarp` というオプションを用意した. 前者ではデフォルトで `false`, 後者では `true` である.
+
+しかし, これらを使っても「きれいな」コーディングになるとは限らない. 過剰な折り返しで行数が増えてしまう可能性もあるし, 折り返しや改行の位置がふぞろいになる可能性もある. よって現状では究極的には手動で調整する必要がある
+
+その際のアシストツールとして, RStudio の機能であるマージン位置の表示[^rstudio-margin] や, [`WrapRmd`](https://github.com/tjmahr/WrapRmd) パッケージを使うのが良いだろう.
+
+逆に自動コード整形が一切不要という場合, 最初のチャンクで以下のように設定する.
+
+
+
+PDF での自動コード整形に関する話題は R Markdown の Issues [#646](https://github.com/rstudio/rmarkdown/issues/646) および Stack Overflow の質問 ["pandoc doesn't text-wrap code blocks when converting to pdf
+"](https://stackoverflow.com/questions/20788464/pandoc-doesnt-text-wrap-code-blocks-when-converting-to-pdf) と TeX Stack Exchange の質問 ["Break Lines in minted environment
+"])(https://tex.stackexchange.com/questions/200310/break-lines-in-minted-environment) が参考になるだろう.
+
+[^styler-width]: 参考: Issues [#247](https://github.com/r-lib/styler/issues/247)
+[^rstudio-margin]: 参考: [Vertical Line in the source editor?](https://community.rstudio.com/t/vertical-line-in-the-source-editor/24950)
 
 # PDF の組版に関する細かい話
 
-ここではpandocテンプレート等の設定を解説する.
+ここではpandocテンプレート等の設定を解説する. PDF の出力は pandoc に大きく依存している. pandoc は PDF を生成する際に, YAMLフロントマターの設定を pandoc のテンプレートに代入し, 本文を追加した .tex ファイルを作成してタイプセットしている. よってプリアンブル部分は完全に動的に生成されるわけではなく, ある程度の定型が存在する. これを pandoc テンプレートというが, `rmdja` では日本語表示にあたっていろいろなパッケージ間の競合が見られたこのテンプレートを多少いじっている.
 
 3種類の和文フォントを個別設定をした場合, `\XeLaTeX`{=latex}`XeLaTeX`{=html} はフォールバックフォントを有効にしている. `j****fontoptions` 以下に, `FallBack=...` というオプションでフォールバックフォントを指定すれば有効になる.
 
-用紙サイズは, デフォルトは `a4paper`, B5がよいなら `b5paper` オプションを `classoptions:` に指定する.
+用紙サイズは, デフォルトは `a4paper`, B5 がよいなら `b5paper` オプションを `classoptions:` に指定する.
 
 PDF を印刷所に持ち込んだことがないため詳しいことはわからないが, 『[Bookdownによる技術系同人誌執筆](https://teastat.blogspot.com/2019/01/bookdown.html)』で指摘されているようなトンボやノンブルは出力されるように作ってある (そしてここで紹介されているようなLaTeXのコマンドの多くは `rmdja` では書く必要がなくなった).
 
@@ -2554,7 +2675,7 @@ eprint = {XXXX.YYYYY},
 ...
 ```
 
-このスタイルの使用には `\upBibTeX`{=latex}`upBibTeX`{=html} が必要である. 詳細は \@ref(biblio-advaneced) 章を参照されたい.
+このスタイルの使用には \upBibTeX が必要である. 詳細は \@ref(biblio-advaneced) 章を参照されたい.
 
 TODO: 現在 jecon.bst の表示も少しおかしいので確認中.
 
@@ -2564,7 +2685,8 @@ Rで描いたグラフに日本語を表示する場合, Linux 系 OS ならば�
 
 
 ```{.r .numberLines .lineAnchors}
-remotes::install_github("Gedevan-Aleksizde/fontregisterer", repos = NULL, type = "source")
+remotes::install_github("Gedevan-Aleksizde/fontregisterer",
+                        repos = NULL, type = "source")
 ```
 
 もちろんこれは R Markdown 以外でも使用できる. このパッケージは読み込まれた時点で登録処理を行うため,
