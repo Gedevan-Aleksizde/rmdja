@@ -16,26 +16,31 @@ https://gedevan-aleksizde.github.io/rmdja/
 
 # 最低限必要なもの
 
-* R >= 3.6
-* R Studio >= 1.3.1056
+* R (>= 3.6.2)
+* R Studio (>= 1.3.1056)
 * `rmarkdown` (>= 2.4)
 * `bookdown` (>= 0.20.6)
+* `commonmark` (>= 1.7)
+* `styler` (>= 1.3.2)
 
 # インストールから使用まで
 
 1. 後述の必要なパッケージや外部プログラムをインストールする
 2. このパッケージをインストールする (`remotes` パッケージを使うのが簡単です)
 ```
-remotes::install_github('Gedevan-Aleksizde/rmdja', repos = NULL, type = "source")
+remotes::install_github('Gedevan-Aleksizde/rmdja', repos = NULL)
 ```
 特定のバージョンをインストールする場合は, 以下のようにして指定できます.
 ```
-remotes::install_github('Gedevan-Aleksizde/rmdja', ref="v0.4", repos = NULL, type = "source")
+remotes::install_github('Gedevan-Aleksizde/rmdja', ref="v0.4", repos = NULL)
 ```
 または以下のような記法も可能です
 ```
-remotes::install_github('Gedevan-Aleksizde/rmdja@v0.4', repos = NULL, type = "source")
+remotes::install_github('Gedevan-Aleksizde/rmdja@v0.4', repos = NULL)
 ```
+
+Windows OS では Rtools をインストールしていない場合, 上記 `remotes::install_github()` では依存パッケージを自動インストールしてくれないことがあります.
+
 リリース一覧からダウンロードしたアーカイブファイルからインストールすることもできます.
 
 3. 新規作成時に [R Markdown] -> [From Template] -> `{rmdja}` のテンプレートのいずれかを選択します  
