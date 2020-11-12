@@ -194,7 +194,6 @@ beamer_presentation_ja <- function(
       }
     }
     if(is.null(metadata[["biblio-title"]])) bib_args <- c(bib_args, "-Mbiblio-title=参考文献")
-    print("aaaaaa")
     return(
       c(
         autodetect_and_set_jfont(metadata, input_file, runtime, knit_meta, files_dir, output_dir, latex_engine),
