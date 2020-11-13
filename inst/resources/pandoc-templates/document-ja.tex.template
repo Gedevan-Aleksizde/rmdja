@@ -623,8 +623,11 @@ $body$
 $if(has-frontmatter)$
 \backmatter
 $endif$
-$if(natbib)$
+
 $if(bibliography)$
+% --- bibliography settings ---
+$if(natbib)$
+% bibtex (natbib) mode
 $if(biblio-title)$
 $if(has-chapters)$
 \renewcommand\bibname{$biblio-title$}
@@ -641,18 +644,22 @@ $endif$
 $if(beamer)$
 \end{frame}
 $endif$
+$endif$
 
-$endif$
-$endif$
 $if(biblatex)$
+% biblatex mode
 $if(beamer)$
-\begin{frame}[allowframebreaks]{$biblio-title$}
-  \bibliographytrue
-  \printbibliography[heading=none]
+\section*{$biblio-title$}
+\begin{frame}[allowframebreaks]
+\bibliographytrue
+\printbibliography[heading=none]
 \end{frame}
 $else$
 \printbibliography$if(biblio-title)$[title=$biblio-title$,heading=bibintoc]$endif$
 $endif$
+% --- bibliography settings ends ---
+$endif$
+
 
 $endif$
 $for(include-after)$

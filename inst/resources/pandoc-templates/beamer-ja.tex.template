@@ -289,6 +289,8 @@ $endif$
 $if(highlighting-macros)$
 $highlighting-macros$
 $endif$
+% TODO: ????
+\usepackage{longtable,booktabs,dcolumn}
 $if(tables)$
 \usepackage{longtable,booktabs,dcolumn}
 $if(beamer)$
@@ -523,39 +525,44 @@ $-- References part
 $if(has-frontmatter)$
 \backmatter
 $endif$
+
+$if(bibliography)$
+% --- bibliography settings ---
 $if(natbib)$
-  % if natbib
-  $if(bibliography)$
-    $if(biblio-title)$
-      $if(has-chapters)$
+% bibtex (natbib) mode
+$if(biblio-title)$
+$if(has-chapters)$
 \renewcommand\bibname{$biblio-title$}
-      $else$
+$else$
 \renewcommand\refname{$biblio-title$}
+$if(beamer)$
 \section*{$biblio-title$}
-    $endif$
-  $endif$
-  $if(beamer)$
-  % if beamer
+$endif$
+$endif$
+$endif$
+$if(beamer)$
+% if beamer
 \begin{frame}[allowframebreaks]
   \bibliographytrue
-  $endif$
+$endif$
   \bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
-  $if(beamer)$
+$if(beamer)$
 \end{frame}
-  $endif$
 $endif$
 $endif$
 
 $if(biblatex)$
-% if biblatex
-  $if(beamer)$
+% biblatex mode
+$if(beamer)$
 \section*{$biblio-title$}
 \begin{frame}[allowframebreaks]
-  \bibliographytrue
-  \printbibliography[heading=none]
+\bibliographytrue
+\printbibliography[heading=none]
 \end{frame}
-  $else$
+$else$
 \printbibliography$if(biblio-title)$[title=$biblio-title$,heading=bibintoc]$endif$
+$endif$
+% bibliography settings ends---
 $endif$
 
 
