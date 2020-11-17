@@ -88,7 +88,8 @@ beamer_presentation_ja <- function(
     }
   }
   extra_metadata <- c(extra_metadata, merge_bibliography_args(citation_package, citation_options))
-  
+  print("ahoshine")
+  print(extra_metadata)
   if(!missing(figurename) || !identical(figurename, "")){
     pandoc_args_base <- c(pandoc_args_base, rmarkdown::pandoc_variable_arg("figurename", figurename))
   } else {
@@ -122,7 +123,7 @@ beamer_presentation_ja <- function(
   }
   
   # ----- generate output format -----
-  args_beamer <- list(
+  args_beamer_base <- list(
     toc = toc,
     slide_level = slide_level,
     number_sections = number_sections,
@@ -146,7 +147,7 @@ beamer_presentation_ja <- function(
     md_extensions = md_extensions,
     pandoc_args = c(pandoc_args_base, pandoc_args)
   )
-  base <- do.call(rmarkdown::beamer_presentation, args_beamer)
+  base <- do.call(rmarkdown::beamer_presentation, args_beamer_base)
 
   opts_chunk_default <- list(
     include = T,
@@ -193,7 +194,9 @@ beamer_presentation_ja <- function(
         copy_biblatexstyle(metadata, input_file, runtime, knit_meata, files_dir, output_dir)
       }
     }
-    if(is.null(metadata[["biblio-title"]])) bib_args <- c(bib_args, "-Mbiblio-title=参考文献")
+    if(is.null(metadata[["biblio-title"]])) bib_args <- c(bib_args, list(`biblio-title`="参考文献"))
+    print("ahoshine")
+    print(bib_args)
     return(
       c(
         autodetect_and_set_jfont(metadata, input_file, runtime, knit_meta, files_dir, output_dir, latex_engine),

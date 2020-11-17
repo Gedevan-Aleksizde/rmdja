@@ -519,9 +519,6 @@ $if(has-frontmatter)$
 $endif$
 $body$
 
-$-- References part
-% Refrences Part
-
 $if(has-frontmatter)$
 \backmatter
 $endif$
@@ -540,8 +537,9 @@ $if(beamer)$
 $endif$
 $endif$
 $endif$
+
 $if(beamer)$
-% if beamer
+% beamer reference frame
 \begin{frame}[allowframebreaks]
   \bibliographytrue
 $endif$
@@ -549,6 +547,7 @@ $endif$
 $if(beamer)$
 \end{frame}
 $endif$
+% bibtex (natbib) mode ends
 $endif$
 
 $if(biblatex)$
@@ -567,7 +566,7 @@ $endif$
 
 
 $endif$
-$-- after body
+% -- after body
 
 $for(include-after)$
 $include-after$
