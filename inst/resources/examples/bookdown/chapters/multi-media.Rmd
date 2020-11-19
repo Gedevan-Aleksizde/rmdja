@@ -254,7 +254,7 @@ HTML ファイルは様々な配布方法がある. もちろん自分でサー�
 それ以外にも有名無名の多くのドキュメントが公開されているが, 一方で日本語はまだまだ少ない. 内容が豊富で, かつ `Rmd` のソースコードまで公開されている例として以下が見つかった.
 
 * 『[Rで計量政治学入門](https://shohei-doi.github.io/quant_polisci/)[^poli-source]』
-* 『[AIレベルの倫理学](https://mtoyokura.github.io/Ethics-for-A-Level-Japanese/)[^ethics-source]』
+* 『[Aレベルの倫理学](https://mtoyokura.github.io/Ethics-for-A-Level-Japanese/)[^ethics-source]』
 
 さらに以下2つは私が作成したものである.
 
