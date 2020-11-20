@@ -50,7 +50,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
@@ -282,6 +281,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>17.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
 <li class="chapter" data-level="17.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>17.2</b> YAML フロントマターを確認する</a></li>
 <li class="chapter" data-level="17.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-生成時のエラーを確認する"><i class="fa fa-check"></i><b>17.3</b> PDF 生成時のエラーを確認する</a></li>
+<li class="chapter" data-level="17.4" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#よくあるエラーメッセージ"><i class="fa fa-check"></i><b>17.4</b> よくあるエラーメッセージ</a>
+<ul>
+<li class="chapter" data-level="17.4.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#the-file-xxx.rmd-exists."><i class="fa fa-check"></i><b>17.4.1</b> <code>The File XXX.Rmd Exists.</code></a></li>
+<li class="chapter" data-level="17.4.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#no-site-generator-found."><i class="fa fa-check"></i><b>17.4.2</b> <code>No Site Generator Found.</code></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="その他のトラブルシュート.html"><a href="その他のトラブルシュート.html"><i class="fa fa-check"></i><b>18</b> その他のトラブルシュート</a>
 <ul>
@@ -330,14 +334,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">18.1</span> コードブロックや出力テキストの折り返し・改行位置がおかしい</h2>
 <p>折り返し位置を規定するグローバルオプション <code>getOptions(width)</code> を確認する. 通常は 80 かそれより大きい値が設定されていることが多いが, 何らかの理由で小さく設定されている可能性もある. 確実を期すなら, 冒頭のチャンクに <code>options(width = 140)</code> のように明示的に設定する.</p>
 <p>また, コードブロックの折り返しや改行位置がおかしい場合, それはコード自動整形の問題である可能性がある. <code>rmdja</code> はスライド用テンプレート以外でデフォルトでコードブロックの自動整形を適用しているが, <code>black</code> や <code>yapf</code> のある Python などと違い, R のコード自動整形ツールは機能やバリエーションがあまり多くない. コードの整形にこだわるなら, ある程度は手動でやる必要がある. コードの自動整形を無効にするなら, 冒頭のチャンクで以下を実行する.</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb80-1"><a href="その他のトラブルシュート.html#cb80-1"></a>knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">tidy =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb81-1"><a href="その他のトラブルシュート.html#cb81-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">tidy =</span> F)</span></code></pre></div>
 <p>コードの自動整形の詳細については付録 <a href="default-property.html#autoformatter">A.3</a> を参照.</p>
 </div>
 <div id="todo-windows-特有の問題" class="section level2" number="18.2">
 <h2><span class="header-section-number">18.2</span> (TODO) Windows 特有の問題</h2>
 <p>日本ロケールの Windows OS で RStudio を動かす場合によくあるエラーについても対処法を書いておく. これは R-wakalang でもよく訊かれる質問である. これらは Windows の仕様が根本的にアレなことに起因するため, Linux 等の仮想環境上でRを動かせば一切発生しない問題ではあるが, おそらく初心者の多くがハマっているので仮想環境を使わない解決方法を書いておく.</p>
 <p>まず, チャンク等のエラーメッセージが文字化けして読めない. これはロケールの問題であることが多い. 残念ながら日本語版 Windows は未だに CP932 エンコードを使用しているため, CP932 を使うと R の表示で不整合が発生する. よって, CP932 を使用すれば解決できる.</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb81-1"><a href="その他のトラブルシュート.html#cb81-1"></a><span class="kw">Sys.setlocale</span>(<span class="dt">locale =</span> <span class="st">&quot;Japanese_Japan.932&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb82-1"><a href="その他のトラブルシュート.html#cb82-1"></a><span class="fu">Sys.setlocale</span>(<span class="at">locale =</span> <span class="st">&quot;Japanese_Japan.932&quot;</span>)</span></code></pre></div>
 <p>しかし R の他の部分の多くは UTF-8 を前提として作られているので今度は, そちらでいろいろな対処が必要になってしまう. もしこのような「仕様」が気に入らないのなら結局のところ早く LINUX などの他の環境に移行してしまうのが確実である.</p>
 
 </div>
@@ -396,7 +400,8 @@ gitbook.start({
 "download": null,
 "toc": {
 "collapse": "none"
-}
+},
+"family": "serif"
 });
 });
 </script>

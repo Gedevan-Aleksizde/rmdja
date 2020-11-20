@@ -50,7 +50,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
@@ -282,6 +281,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>17.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
 <li class="chapter" data-level="17.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>17.2</b> YAML フロントマターを確認する</a></li>
 <li class="chapter" data-level="17.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-生成時のエラーを確認する"><i class="fa fa-check"></i><b>17.3</b> PDF 生成時のエラーを確認する</a></li>
+<li class="chapter" data-level="17.4" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#よくあるエラーメッセージ"><i class="fa fa-check"></i><b>17.4</b> よくあるエラーメッセージ</a>
+<ul>
+<li class="chapter" data-level="17.4.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#the-file-xxx.rmd-exists."><i class="fa fa-check"></i><b>17.4.1</b> <code>The File XXX.Rmd Exists.</code></a></li>
+<li class="chapter" data-level="17.4.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#no-site-generator-found."><i class="fa fa-check"></i><b>17.4.2</b> <code>No Site Generator Found.</code></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="その他のトラブルシュート.html"><a href="その他のトラブルシュート.html"><i class="fa fa-check"></i><b>18</b> その他のトラブルシュート</a>
 <ul>
@@ -333,8 +337,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>このドキュメントは <code>rmdja</code> パッケージに含まれている. よってまずはこれをダウンロードしてほしい.</p>
 <p>3種類のテンプレートのうち, <code>pdf book in Japanese</code> のみ, 文書のビルドのための下準備が追加で必要になるため, その方法を解説する. それ以外は第 <a href="quick-start.html#quick-start">1</a> 節で書いたように “knit” ボタンを押すだけで良い.</p>
 <p>最低限のファイルやパッケージで動くほうのデモ用ディレクトリをコピーする. ただし, <code>tidyverse</code> と <code>kableExtra</code> のインストールも必要である.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb6-1"><a href="下準備.html#cb6-1"></a><span class="kw">file.copy</span>(<span class="kw">system.file</span>(<span class="st">&quot;resources/examples/bookdown-minimal&quot;</span>, </span>
-<span id="cb6-2"><a href="下準備.html#cb6-2"></a>  <span class="dt">package =</span> <span class="st">&quot;rmdja&quot;</span>), <span class="st">&quot;./&quot;</span>, <span class="dt">recursive =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb6-1"><a href="下準備.html#cb6-1"></a><span class="fu">file.copy</span>(<span class="fu">system.file</span>(<span class="st">&quot;resources/examples/bookdown-minimal&quot;</span>, </span>
+<span id="cb6-2"><a href="下準備.html#cb6-2"></a>  <span class="at">package =</span> <span class="st">&quot;rmdja&quot;</span>), <span class="st">&quot;./&quot;</span>, <span class="at">recursive =</span> T)</span></code></pre></div>
 </div>
 <div id="書籍形式のビルド操作" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> 書籍形式のビルド操作</h2>
@@ -344,9 +348,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>RStudio の Build ペーンを使う</li>
 </ol>
 <p>前者の場合は, Rmd ファイルのあるディレクトリに移動して以下の関数を実行する. 順にHTML, PDF, epub を出力している</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb7-1"><a href="下準備.html#cb7-1"></a>bookdown<span class="op">::</span><span class="kw">render_book</span>(<span class="st">&quot;index.Rmd&quot;</span>, <span class="st">&quot;rmdja::gitbook_ja&quot;</span>)</span>
-<span id="cb7-2"><a href="下準備.html#cb7-2"></a>bookdown<span class="op">::</span><span class="kw">render_book</span>(<span class="st">&quot;index.Rmd&quot;</span>, <span class="st">&quot;rmdja::pdf_book_ja&quot;</span>)</span>
-<span id="cb7-3"><a href="下準備.html#cb7-3"></a>bookdown<span class="op">::</span><span class="kw">render_book</span>(<span class="st">&quot;index.Rmd&quot;</span>, <span class="st">&quot;bookdown::epub_book&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb7-1"><a href="下準備.html#cb7-1"></a>bookdown<span class="sc">::</span><span class="fu">render_book</span>(<span class="st">&quot;index.Rmd&quot;</span>, <span class="st">&quot;rmdja::gitbook_ja&quot;</span>)</span>
+<span id="cb7-2"><a href="下準備.html#cb7-2"></a>bookdown<span class="sc">::</span><span class="fu">render_book</span>(<span class="st">&quot;index.Rmd&quot;</span>, <span class="st">&quot;rmdja::pdf_book_ja&quot;</span>)</span>
+<span id="cb7-3"><a href="下準備.html#cb7-3"></a>bookdown<span class="sc">::</span><span class="fu">render_book</span>(<span class="st">&quot;index.Rmd&quot;</span>, <span class="st">&quot;bookdown::epub_book&quot;</span>)</span></code></pre></div>
 <p>コピーしたディレクトリ <code>bookdown-minimal</code> を設定する (図 <a href="下準備.html#fig:build-pane1-1">2.1</a>, <a href="下準備.html#fig:build-pane1-2">2.2</a>).</p>
 <p>Build ペーンの “Build Book” の三角形を押すと, 使用できるフォーマット一覧が表示される. これはスライド, 縦書き文書, 書籍などといった文書の種類と1対1で対応しているわけではなく, フォーマット関数に対応している.</p>
 <ul>
@@ -425,7 +429,8 @@ gitbook.start({
 "download": null,
 "toc": {
 "collapse": "none"
-}
+},
+"family": "serif"
 });
 });
 </script>

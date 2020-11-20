@@ -50,7 +50,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
@@ -282,6 +281,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>17.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
 <li class="chapter" data-level="17.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>17.2</b> YAML フロントマターを確認する</a></li>
 <li class="chapter" data-level="17.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-生成時のエラーを確認する"><i class="fa fa-check"></i><b>17.3</b> PDF 生成時のエラーを確認する</a></li>
+<li class="chapter" data-level="17.4" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#よくあるエラーメッセージ"><i class="fa fa-check"></i><b>17.4</b> よくあるエラーメッセージ</a>
+<ul>
+<li class="chapter" data-level="17.4.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#the-file-xxx.rmd-exists."><i class="fa fa-check"></i><b>17.4.1</b> <code>The File XXX.Rmd Exists.</code></a></li>
+<li class="chapter" data-level="17.4.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#no-site-generator-found."><i class="fa fa-check"></i><b>17.4.2</b> <code>No Site Generator Found.</code></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="その他のトラブルシュート.html"><a href="その他のトラブルシュート.html"><i class="fa fa-check"></i><b>18</b> その他のトラブルシュート</a>
 <ul>
@@ -332,9 +336,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>ArXiv ID の表示とハイパーリンク追加</li>
 </ul>
 <p>といった変更をしている. 後者は, BibTeX エントリに以下のように <code>archivePrefix</code> に <code>arxiv</code> と言う値が入っていると, <code>eprint</code> の値が ArXiv ID として表示される. これは ArXiv から直接 <code>.bib</code> ファイルを取得したり, Zotero などでインポートすれば必ず入力される項目である.</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode bibtex"><code class="sourceCode bibtex"><span id="cb84-1"><a href="参考文献リストの書式にこだわる-jecon-bst.html#cb84-1"></a><span class="co">archivePrefix = {arXiv},</span></span>
-<span id="cb84-2"><a href="参考文献リストの書式にこだわる-jecon-bst.html#cb84-2"></a><span class="co">eprint = {XXXX.YYYYY},</span></span>
-<span id="cb84-3"><a href="参考文献リストの書式にこだわる-jecon-bst.html#cb84-3"></a><span class="co">...</span></span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode bibtex"><code class="sourceCode bibtex"><span id="cb85-1"><a href="参考文献リストの書式にこだわる-jecon-bst.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co">archivePrefix = {arXiv},</span></span>
+<span id="cb85-2"><a href="参考文献リストの書式にこだわる-jecon-bst.html#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="co">eprint = {XXXX.YYYYY},</span></span>
+<span id="cb85-3"><a href="参考文献リストの書式にこだわる-jecon-bst.html#cb85-3" aria-hidden="true" tabindex="-1"></a><span class="co">...</span></span></code></pre></div>
 <p>このスタイルの使用には upBibTeX が必要である. 詳細は <a href="biblio-advaneced.html#biblio-advaneced">10</a> 章を参照されたい.</p>
 <p>TODO: 現在 jecon.bst の表示も少しおかしいので確認中.</p>
 </div>
@@ -389,7 +393,8 @@ gitbook.start({
 "download": null,
 "toc": {
 "collapse": "none"
-}
+},
+"family": "serif"
 });
 });
 </script>

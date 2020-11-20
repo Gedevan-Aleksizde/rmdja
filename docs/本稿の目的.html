@@ -50,7 +50,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
@@ -282,6 +281,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>17.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
 <li class="chapter" data-level="17.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>17.2</b> YAML フロントマターを確認する</a></li>
 <li class="chapter" data-level="17.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-生成時のエラーを確認する"><i class="fa fa-check"></i><b>17.3</b> PDF 生成時のエラーを確認する</a></li>
+<li class="chapter" data-level="17.4" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#よくあるエラーメッセージ"><i class="fa fa-check"></i><b>17.4</b> よくあるエラーメッセージ</a>
+<ul>
+<li class="chapter" data-level="17.4.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#the-file-xxx.rmd-exists."><i class="fa fa-check"></i><b>17.4.1</b> <code>The File XXX.Rmd Exists.</code></a></li>
+<li class="chapter" data-level="17.4.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#no-site-generator-found."><i class="fa fa-check"></i><b>17.4.2</b> <code>No Site Generator Found.</code></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="その他のトラブルシュート.html"><a href="その他のトラブルシュート.html"><i class="fa fa-check"></i><b>18</b> その他のトラブルシュート</a>
 <ul>
@@ -324,9 +328,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="本稿の目的" class="section level1 unnumbered" number="">
+<div id="本稿の目的" class="section level1 unnumbered">
 <h1>本稿の目的</h1>
-<div id="r-markdown-の現状と問題意識" class="section level2 unnumbered" number="">
+<div id="r-markdown-の現状と問題意識" class="section level2 unnumbered">
 <h2>R Markdown の現状と問題意識</h2>
 <p>R Markdown を利用した文書作成方法について, すでにそれなりの数と質の日本語資料が存在する. R Markdown でHTMLファイルのみを作成する場合, 日本語であるか欧文であるかはあまり気にする必要はない. HTMLであれば既存の資料でも十分に役に立つ.</p>
 <ul>
@@ -335,13 +339,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>しかし, PDF を出力する, あるいは HTML と PDF を同時に出力したい, となると, 組版に関して細かな設定が必要になるため難易度は一気に上昇する.</p>
 <p>実のところPDFでも日本語を表示する最低限の設定は, YAML フロントマターだけで行える. 例えば Atusy氏が『<a href="https://blog.atusy.net/2019/05/14/rmd2pdf-any-font/">R Markdown + XeLaTeX で日本語含め好きなフォントを使って PDF を出力する</a>』で紹介しているが, よりシンプルな書き方もできる.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="本稿の目的.html#cb1-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> pdf_document:</span></span>
-<span id="cb1-2"><a href="本稿の目的.html#cb1-2"></a><span class="at">    </span><span class="fu">latex_engine</span><span class="kw">:</span><span class="at"> xelatex</span></span>
-<span id="cb1-3"><a href="本稿の目的.html#cb1-3"></a><span class="fu">documentclass</span><span class="kw">:</span><span class="at"> bxjsarticle</span></span>
-<span id="cb1-4"><a href="本稿の目的.html#cb1-4"></a><span class="fu">classoption</span><span class="kw">:</span></span>
-<span id="cb1-5"><a href="本稿の目的.html#cb1-5"></a><span class="at">  </span><span class="kw">-</span><span class="at"> xelatex</span></span>
-<span id="cb1-6"><a href="本稿の目的.html#cb1-6"></a><span class="at">  </span><span class="kw">-</span><span class="at"> ja=standard</span></span>
-<span id="cb1-7"><a href="本稿の目的.html#cb1-7"></a><span class="at">  </span><span class="kw">-</span><span class="at"> jafont=noto</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="本稿の目的.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> pdf_document:</span></span>
+<span id="cb1-2"><a href="本稿の目的.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">latex_engine</span><span class="kw">:</span><span class="at"> xelatex</span></span>
+<span id="cb1-3"><a href="本稿の目的.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">documentclass</span><span class="kw">:</span><span class="at"> bxjsarticle</span></span>
+<span id="cb1-4"><a href="本稿の目的.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">classoption</span><span class="kw">:</span></span>
+<span id="cb1-5"><a href="本稿の目的.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> xelatex</span></span>
+<span id="cb1-6"><a href="本稿の目的.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> ja=standard</span></span>
+<span id="cb1-7"><a href="本稿の目的.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> jafont=noto</span></span></code></pre></div>
 <p>このままでも, とりあえず文字化けすることなく日本語を表示できる. しかし実際に作ってみると, いろいろな障害が立ちはだかり, 文書として整ったものにするのは難しい. このままでは参考文献リストの表示も不自然なままである. だがこれ以上のカスタマイズは Atusy 氏がやっているようにテンプレートを修正でしか対処できず, LaTeX に対するそれなりの知識が必要となる.</p>
 <p>さらに, 同じソースファイルから HTML と PDF を同時に生成すると, また別種の問題が発生する. HTML と PDF は根本的に規格が違うため, 様々な場合分け処理が必要であり, それは pandoc だけでは対応しきれない.</p>
 <p>HTML出力に限らない R Markdown の全般的な情報は, 既に充実した英語の (公式) ドキュメントが多く存在する<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
@@ -354,7 +358,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>しかしながらこれらを元に1からいろいろな調整を施すのはとても骨が折れるため, <code>rmdja</code> パッケージは日本語文書でHTMLやPDFを同時に生成する場合の定番の処理をフォーマットに内蔵することにした.</p>
 </div>
-<div id="rmdja-の利点" class="section level2 unnumbered" number="">
+<div id="rmdja-の利点" class="section level2 unnumbered">
 <h2><code>rmdja</code> の利点</h2>
 <p>従来LaTeXやWord, あるいは他の媒体で文書を作成していたユーザにとっても, 文書の内容から面倒な設定を分離するため, 効率的に執筆できる.</p>
 <p>Wordユーザにとっては, 以下のような利点がある<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
@@ -369,33 +373,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>LaTeX のユーザー (シンプルなテキストエディタで書いているユーザも, Overleaf や LyX といった強力なエディタを使用しているユーザー) にとっては, LaTeX とほぼ同じ構文で数式を入力でき, かつ操作を大きく簡略化でき, 実験結果などをソースに埋め込むことができ, 外部プログラムからいちいちコピペする必要がなくなる. ただし, なるべく選択肢は広げておきたいが, なんでもありではかえって余計なことをしがちである. よって既に作成した beamer フォーマットと同様に, XeLaTeX および LuaLaTeX のみの対応を想定している. pLaTeX や upLaTeX には対応していない.</p>
 <p>これまでも R Markdown を使用してきたユーザにとっては, YAML フロントマターに数十行に渡っていた書いていた日本語表示のための設定の多くがフォーマットのデフォルト値になったため, かなり楽になると思われる.</p>
 <p>たとえば,</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="本稿の目的.html#cb2-1"></a><span class="at">bookdown:</span><span class="fu">:pdf_book</span><span class="kw">:</span></span>
-<span id="cb2-2"><a href="本稿の目的.html#cb2-2"></a><span class="at">  </span><span class="fu">toc_depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
-<span id="cb2-3"><a href="本稿の目的.html#cb2-3"></a><span class="at">  </span><span class="fu">toc_appendix</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb2-4"><a href="本稿の目的.html#cb2-4"></a><span class="at">  </span><span class="fu">toc_bib</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb2-5"><a href="本稿の目的.html#cb2-5"></a><span class="at">  </span><span class="fu">latex_engine</span><span class="kw">:</span><span class="at"> xelatex</span></span>
-<span id="cb2-6"><a href="本稿の目的.html#cb2-6"></a><span class="at">  </span><span class="fu">keep_tex</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb2-7"><a href="本稿の目的.html#cb2-7"></a><span class="at">  </span><span class="fu">keep_md</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb2-8"><a href="本稿の目的.html#cb2-8"></a><span class="at">  </span><span class="fu">citation_package</span><span class="kw">:</span><span class="at"> natbib</span></span>
-<span id="cb2-9"><a href="本稿の目的.html#cb2-9"></a><span class="at">  </span><span class="fu">pandoc_args</span><span class="kw">:</span></span>
-<span id="cb2-10"><a href="本稿の目的.html#cb2-10"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;--top-level-division=chapter&#39;</span></span>
-<span id="cb2-11"><a href="本稿の目的.html#cb2-11"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;--extract-media&#39;</span></span>
-<span id="cb2-12"><a href="本稿の目的.html#cb2-12"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;.&#39;</span></span>
-<span id="cb2-13"><a href="本稿の目的.html#cb2-13"></a><span class="at">  </span><span class="fu">template</span><span class="kw">:</span><span class="at"> XXXXX.tex.template&#39;</span></span>
-<span id="cb2-14"><a href="本稿の目的.html#cb2-14"></a><span class="at">  </span><span class="fu">dev</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;cairo_pdf&quot;</span></span>
-<span id="cb2-15"><a href="本稿の目的.html#cb2-15"></a><span class="at">  </span><span class="fu">out_width</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;100%&quot;</span></span>
-<span id="cb2-16"><a href="本稿の目的.html#cb2-16"></a><span class="at">  </span><span class="fu">out_height</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;100%&quot;</span></span>
-<span id="cb2-17"><a href="本稿の目的.html#cb2-17"></a><span class="at">  </span><span class="fu">quote_footer</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;</span><span class="sc">\\</span><span class="st">VA{&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;}{}&quot;</span><span class="kw">]</span></span>
-<span id="cb2-18"><a href="本稿の目的.html#cb2-18"></a><span class="at">  </span><span class="fu">extra_dependencies</span><span class="kw">:</span><span class="at"> gentombow</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="本稿の目的.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="at">bookdown:</span><span class="fu">:pdf_book</span><span class="kw">:</span></span>
+<span id="cb2-2"><a href="本稿の目的.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">toc_depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
+<span id="cb2-3"><a href="本稿の目的.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">toc_appendix</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb2-4"><a href="本稿の目的.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">toc_bib</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb2-5"><a href="本稿の目的.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">latex_engine</span><span class="kw">:</span><span class="at"> xelatex</span></span>
+<span id="cb2-6"><a href="本稿の目的.html#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">keep_tex</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb2-7"><a href="本稿の目的.html#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">keep_md</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb2-8"><a href="本稿の目的.html#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">citation_package</span><span class="kw">:</span><span class="at"> natbib</span></span>
+<span id="cb2-9"><a href="本稿の目的.html#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pandoc_args</span><span class="kw">:</span></span>
+<span id="cb2-10"><a href="本稿の目的.html#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;--top-level-division=chapter&#39;</span></span>
+<span id="cb2-11"><a href="本稿の目的.html#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;--extract-media&#39;</span></span>
+<span id="cb2-12"><a href="本稿の目的.html#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="st">&#39;.&#39;</span></span>
+<span id="cb2-13"><a href="本稿の目的.html#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">template</span><span class="kw">:</span><span class="at"> XXXXX.tex.template&#39;</span></span>
+<span id="cb2-14"><a href="本稿の目的.html#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">dev</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;cairo_pdf&quot;</span></span>
+<span id="cb2-15"><a href="本稿の目的.html#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">out_width</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;100%&quot;</span></span>
+<span id="cb2-16"><a href="本稿の目的.html#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">out_height</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;100%&quot;</span></span>
+<span id="cb2-17"><a href="本稿の目的.html#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">quote_footer</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;</span><span class="sc">\\</span><span class="st">VA{&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;}{}&quot;</span><span class="kw">]</span></span>
+<span id="cb2-18"><a href="本稿の目的.html#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">extra_dependencies</span><span class="kw">:</span><span class="at"> gentombow</span></span></code></pre></div>
 <p>のように書いていたものがこうなる.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="本稿の目的.html#cb3-1"></a><span class="at">rmdja:</span><span class="fu">:pdf_book_ja</span><span class="kw">:</span></span>
-<span id="cb3-2"><a href="本稿の目的.html#cb3-2"></a><span class="at">  </span><span class="fu">keep_tex</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb3-3"><a href="本稿の目的.html#cb3-3"></a><span class="at">  </span><span class="fu">keep_md</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb3-4"><a href="本稿の目的.html#cb3-4"></a><span class="at">  </span><span class="fu">tombow</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="本稿の目的.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="at">rmdja:</span><span class="fu">:pdf_book_ja</span><span class="kw">:</span></span>
+<span id="cb3-2"><a href="本稿の目的.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">keep_tex</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb3-3"><a href="本稿の目的.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">keep_md</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb3-4"><a href="本稿の目的.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">tombow</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
 <p>さらにチャンクオプションを書いたり場合によっては .tex ファイルのテンプレートすら調整する必要もあった. それらも <code>rmdja</code> 内で調整している.</p>
 <p>さらに, 作成した文書は PDF 形式で出力することはもちろん, HTML 形式で様々なサイトで掲載でき<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>たり, 電子書籍ファイルとしても出力可能である. このような多様な出力形式への対応しているソフトウェアはあまり例を見ない.</p>
 </div>
-<div id="r使用経験のないユーザへ" class="section level2 unnumbered" number="">
+<div id="r使用経験のないユーザへ" class="section level2 unnumbered">
 <h2>R使用経験のないユーザへ</h2>
 <p>Rを使わない, あるいはそもそもプログラミングに詳しくない, という人間にもある使用機会がある. たとえばR を普段使わない人間でも <code>bookdown</code> で同人技術書を執筆したという事例がある<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>. この事例は主に数式と画像の貼付けのみだから, 数式出力に必要な LaTeX の知識があればほとんどのことはできてしまう. そして <code>rmdja</code> ではこの事例で言及されている LaTeX の設定の多くは自動で制御される. また, 小説などはほぼテキストであり, 最低限のレイアウトさえ用意すれば数式も, あるいは画像の挿入すらいらないことが多い. <code>rmdja</code> では縦書き文書をPDFで出力する方法も用意している.</p>
 <div class="rmdimportant">
@@ -412,7 +416,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="footnotes">
 <hr />
 <ol start="1">
-<li id="fn1"><p>基本的なことがらの多くは上記を読めば分かるのでここでは基本機能をダイジェストで伝えた上で, これらの資料に書いてない応用技を紹介する. YAML のオプションの意味についてはソースコードにコメントを書いた. 以下, 単に, <strong>BKD</strong> と書けば “<em><code>bookdown</code>: Authoring Books and Technical Documents with R Markdown</em>” <span class="citation">(Xie <a href="#ref-R-bookdown" role="doc-biblioref">2020</a>)</span> を, RDG と書けば “<em>R Markdown: The Definitive GUide</em>” <span class="citation">(Xie, Allaire, and Grolemund <a href="#ref-rmarkdown2018" role="doc-biblioref">2018</a>)</span> を, RCB と書けば “<em>R Markdown Cookbook</em>” <span class="citation">(Xie, Dervieux, and Riederer <a href="#ref-xie2020Markdown" role="doc-biblioref">2020</a>)</span> を指すことにする.<a href="本稿の目的.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p>基本的なことがらの多くは上記を読めば分かるのでここでは基本機能をダイジェストで伝えた上で, これらの資料に書いてない応用技を紹介する. YAML のオプションの意味についてはソースコードにコメントを書いた. 以下, 単に, <strong>BKD</strong> と書けば “<em><code>bookdown</code>: Authoring Books and Technical Documents with R Markdown</em>” <span class="citation">(<a href="参考文献.html#ref-R-bookdown" role="doc-biblioref">Xie 2020</a>)</span> を, RDG と書けば “<em>R Markdown: The Definitive GUide</em>” <span class="citation">(<a href="参考文献.html#ref-rmarkdown2018" role="doc-biblioref">Xie, Allaire, and Grolemund 2018</a>)</span> を, RCB と書けば “<em>R Markdown Cookbook</em>” <span class="citation">(<a href="参考文献.html#ref-xie2020Markdown" role="doc-biblioref">Xie, Dervieux, and Riederer 2020</a>)</span> を指すことにする.<a href="本稿の目的.html#fnref1" class="footnote-back">↩︎</a></p></li>
 <li id="fn2"><p>2020/10/19 に書籍としても発売されるらしい.<a href="本稿の目的.html#fnref2" class="footnote-back">↩︎</a></p></li>
 <li id="fn3"><p>ただし筆者は数年来 Word を使っていないため, これらのいくつかは既に改善されているかもしれない.<a href="本稿の目的.html#fnref3" class="footnote-back">↩︎</a></p></li>
 <li id="fn4"><p><code>bookdown</code> 同様に R Markdown で作成した文書をブログ風のフォーマットで出力する <code>blogdown</code> パッケージというものも存在する.<a href="本稿の目的.html#fnref4" class="footnote-back">↩︎</a></p></li>
@@ -470,7 +474,8 @@ gitbook.start({
 "download": null,
 "toc": {
 "collapse": "none"
-}
+},
+"family": "serif"
 });
 });
 </script>

@@ -50,7 +50,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
@@ -282,6 +281,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>17.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
 <li class="chapter" data-level="17.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>17.2</b> YAML フロントマターを確認する</a></li>
 <li class="chapter" data-level="17.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-生成時のエラーを確認する"><i class="fa fa-check"></i><b>17.3</b> PDF 生成時のエラーを確認する</a></li>
+<li class="chapter" data-level="17.4" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#よくあるエラーメッセージ"><i class="fa fa-check"></i><b>17.4</b> よくあるエラーメッセージ</a>
+<ul>
+<li class="chapter" data-level="17.4.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#the-file-xxx.rmd-exists."><i class="fa fa-check"></i><b>17.4.1</b> <code>The File XXX.Rmd Exists.</code></a></li>
+<li class="chapter" data-level="17.4.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#no-site-generator-found."><i class="fa fa-check"></i><b>17.4.2</b> <code>No Site Generator Found.</code></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="その他のトラブルシュート.html"><a href="その他のトラブルシュート.html"><i class="fa fa-check"></i><b>18</b> その他のトラブルシュート</a>
 <ul>
@@ -326,13 +330,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="quick-start" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> クイックスタート</h1>
-<p><code>rmdja</code> パッケージをインストールする. 依存している <code>rmarkdown</code>, <code>bookdown</code>, <code>knitr</code> なども同時にインストールされる.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb4-1"><a href="quick-start.html#cb4-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</span>
-<span id="cb4-2"><a href="quick-start.html#cb4-2"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;Gedevan-Aleksizde/my_latex_template&quot;</span>, </span>
-<span id="cb4-3"><a href="quick-start.html#cb4-3"></a>  <span class="dt">repos =</span> <span class="ot">NULL</span>, <span class="dt">type =</span> <span class="st">&quot;source&quot;</span>)</span></code></pre></div>
+<p><code>rmdja</code> パッケージをインストールする. github からインストールするため, <code>remotes</code> パッケージが必要になる. 依存している <code>rmarkdown</code>, <code>bookdown</code>, <code>knitr</code> なども同時にインストールされる<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb4-1"><a href="quick-start.html#cb4-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</span>
+<span id="cb4-2"><a href="quick-start.html#cb4-2"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;Gedevan-Aleksizde/rmdja&quot;</span>, <span class="at">repos =</span> <span class="cn">NULL</span>)</span></code></pre></div>
 <p>まだ RStudio を使っていないのなら, RStudio 上で作業することを強く推奨する. さらに, もしもRの操作自体にあまり慣れていないのなら, 森知晴 『<a href="https://tomoecon.github.io/R_for_graduate_thesis/">卒業論文のためのR入門</a>』などを読むことを薦める.</p>
 <p>加えて, 以下のパッケージが役に立つので気に入ったらインストールしていただきたい.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb5-1"><a href="quick-start.html#cb5-1"></a><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;ggthemes&quot;</span>, <span class="st">&quot;citr&quot;</span>, <span class="st">&quot;clipr&quot;</span>, </span>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb5-1"><a href="quick-start.html#cb5-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;ggthemes&quot;</span>, <span class="st">&quot;citr&quot;</span>, <span class="st">&quot;clipr&quot;</span>, </span>
 <span id="cb5-2"><a href="quick-start.html#cb5-2"></a>  <span class="st">&quot;kableExtra&quot;</span>))</span></code></pre></div>
 <p>RStudio を起動し, 左上から新規作成を選び, “R Markdown” を選ぶ (図 <a href="quick-start.html#fig:new-file">1.1</a>).</p>
 <div class="figure" style="text-align: center"><span id="fig:new-file"></span>
@@ -356,6 +359,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>縦書き文書のテンプレート - <code>pdf vertical writing in Japanese</code></li>
 </ul>
 <p>動作確認として, 今回はシンプルな論文形式を選ぶ. ファイルを開いたら, 適当な名称で保存し, “knit” ボタンを押すと PDF が作成される.</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="6">
+<li id="fn6"><p>Windows の場合, Rtools をインストールしていないと依存パッケージがインストールされないことがある. Rtools をインストールするか, 依存パッケージを手動でインストールしてほしい<a href="quick-start.html#fnref6" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
             </section>
 
@@ -408,7 +417,8 @@ gitbook.start({
 "download": null,
 "toc": {
 "collapse": "none"
-}
+},
+"family": "serif"
 });
 });
 </script>

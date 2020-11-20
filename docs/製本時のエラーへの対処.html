@@ -50,7 +50,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
@@ -282,6 +281,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>17.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
 <li class="chapter" data-level="17.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>17.2</b> YAML フロントマターを確認する</a></li>
 <li class="chapter" data-level="17.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-生成時のエラーを確認する"><i class="fa fa-check"></i><b>17.3</b> PDF 生成時のエラーを確認する</a></li>
+<li class="chapter" data-level="17.4" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#よくあるエラーメッセージ"><i class="fa fa-check"></i><b>17.4</b> よくあるエラーメッセージ</a>
+<ul>
+<li class="chapter" data-level="17.4.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#the-file-xxx.rmd-exists."><i class="fa fa-check"></i><b>17.4.1</b> <code>The File XXX.Rmd Exists.</code></a></li>
+<li class="chapter" data-level="17.4.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#no-site-generator-found."><i class="fa fa-check"></i><b>17.4.2</b> <code>No Site Generator Found.</code></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="その他のトラブルシュート.html"><a href="その他のトラブルシュート.html"><i class="fa fa-check"></i><b>18</b> その他のトラブルシュート</a>
 <ul>
@@ -350,14 +354,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p><code>output:</code> には bookdown::gitbook など, <code>bookdown</code> で提供されているフォーマット関数を指定しており, その配下に記入するのはフォーマット関数に与える引数である. よって, 関数ヘルプを確認すれば有効な引数を知ることができる. しかし一方で, <code>...</code> が引数になっていることがあるので, タイプミスしてもエラーが出ないことがある.</p>
 <p>また, YAMLの構文でサポートされている配列は誤評価を引き起こすことがある.</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb76-1"><a href="製本時のエラーへの対処.html#cb76-1"></a><span class="fu">output</span><span class="kw">:</span></span>
-<span id="cb76-2"><a href="製本時のエラーへの対処.html#cb76-2"></a><span class="at">  bookdown:</span><span class="fu">:gitbook</span><span class="kw">:</span></span>
-<span id="cb76-3"><a href="製本時のエラーへの対処.html#cb76-3"></a><span class="at">    </span><span class="fu">toc_depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
-<span id="cb76-4"><a href="製本時のエラーへの対処.html#cb76-4"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
-<div class="sourceCode" id="cb77"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb77-1"><a href="製本時のエラーへの対処.html#cb77-1"></a><span class="fu">output</span><span class="kw">:</span></span>
-<span id="cb77-2"><a href="製本時のエラーへの対処.html#cb77-2"></a><span class="at">  bookdown:</span><span class="fu">:gitbook</span><span class="kw">:</span></span>
-<span id="cb77-3"><a href="製本時のエラーへの対処.html#cb77-3"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">toc_depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
-<span id="cb77-4"><a href="製本時のエラーへの対処.html#cb77-4"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb76-1"><a href="製本時のエラーへの対処.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb76-2"><a href="製本時のエラーへの対処.html#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="at">  bookdown:</span><span class="fu">:gitbook</span><span class="kw">:</span></span>
+<span id="cb76-3"><a href="製本時のエラーへの対処.html#cb76-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc_depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
+<span id="cb76-4"><a href="製本時のエラーへの対処.html#cb76-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb77-1"><a href="製本時のエラーへの対処.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb77-2"><a href="製本時のエラーへの対処.html#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="at">  bookdown:</span><span class="fu">:gitbook</span><span class="kw">:</span></span>
+<span id="cb77-3"><a href="製本時のエラーへの対処.html#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">toc_depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
+<span id="cb77-4"><a href="製本時のエラーへの対処.html#cb77-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
 <p>上の例は正しい記法である. 一方でハイフン <code>-</code> は YAML では配列を記述するために用意されている. 下記の場合, キーワード引数ではなく位置引数のような扱いになるため, <code>toc</code> に対して <code>3</code> を代入することになり, エラーが発生する. 逆に言えば, <code>-</code> を使う場合, キーワードを書かずに値だけを正しい順番で書けば機能する.</p>
 <p>インデントしないトップレベルの引数は, 基本的に <code>pandoc</code> に与える引数である. これ意味のない引数を与えてもエラーを返さないことが多いので, タイプミスに注意する.</p>
 <p>しかし, フォーマット関数に <code>pandoc_args</code> という構文をサポートしていることや, フォーマット関数で <code>pandoc</code> の同名の引数を上書きする仕様のフォーマットもあるため, 上記は絶対ではない. これが原因で, 「<code>output:</code> 以下に書くべきものを<strong>間違えてトップレベルに書いたが, 意図したとおりに機能した</strong>」あるいはその逆が発生することがある. また, <strong><code>pandoc</code> の構文ではキーワードにハイフンを使うことができる</strong>が, フォーマットは R の関数でもあるためハイフンを使えず, アンダースコアで置き換えられる. この違いも書き間違えの原因になる.</p>
@@ -376,6 +380,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>これは <code>keep_md</code> と同様に, 中間ファイルである <code>.tex</code> を残すことを意味する.</p>
 <p>それでも解決しない場合, 改めてこのファイルを手動でタイプセットするのも1つの方法だ. もしうまくいったり, 異なるエラーが出るのなら, 環境の違いが問題かもしれない. そして upBibTeX を使うのなら, 後者が唯一のデバッグ方法だ.</p>
+</div>
+<div id="よくあるエラーメッセージ" class="section level2" number="17.4">
+<h2><span class="header-section-number">17.4</span> よくあるエラーメッセージ</h2>
+<div id="the-file-xxx.rmd-exists." class="section level3" number="17.4.1">
+<h3><span class="header-section-number">17.4.1</span> <code>The File XXX.Rmd Exists.</code></h3>
+<pre><code>The file _main.Rmd exists. Please delete it if it was automatically generated. If you are sure it can be safely overwritten or deleted, please set the option &#39;delete_merged_file&#39; to true in _bookdown.yml.</code></pre>
+<p>多くの場合はファイル名が <code>_main.Rmd</code> となるだろう. つまり最終的に出力する PDF と同じ名前である. これは <code>_bookdown.yml</code> の <code>book_filename</code> で変更することができる. このエラーは文字通り <code>_main.Rmd</code> ファイルが既に存在するから処理を続行できない, というものである. 製本時に <code>index.Rmd</code> と同じフォルダに, 中間生成物である <code>_main.Rmd</code> が作られるが, 前回の製本処理が何らかの理由でエラーが発生し中断しているとこのファイルが残ることがある. よってこのファイルを削除すれば解決する.</p>
+</div>
+<div id="no-site-generator-found." class="section level3" number="17.4.2">
+<h3><span class="header-section-number">17.4.2</span> <code>No Site Generator Found.</code></h3>
+<p>製本処理にあたって, 基準となるフォルダの設定が見つけられない際に発生する. <code>index.Rmd</code> に <code>site: bookdown::bookdown_site</code> が記述されていないか, ビルドペーンでの設定でフォルダを正しく設定できておらず, <code>index.Rmd</code> の存在しないフォルダを参照していることがよくある原因である.</p>
+</div>
 </div>
 </div>
             </section>
@@ -429,7 +445,8 @@ gitbook.start({
 "download": null,
 "toc": {
 "collapse": "none"
-}
+},
+"family": "serif"
 });
 });
 </script>

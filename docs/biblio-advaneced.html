@@ -50,7 +50,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
@@ -282,6 +281,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>17.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
 <li class="chapter" data-level="17.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>17.2</b> YAML フロントマターを確認する</a></li>
 <li class="chapter" data-level="17.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-生成時のエラーを確認する"><i class="fa fa-check"></i><b>17.3</b> PDF 生成時のエラーを確認する</a></li>
+<li class="chapter" data-level="17.4" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#よくあるエラーメッセージ"><i class="fa fa-check"></i><b>17.4</b> よくあるエラーメッセージ</a>
+<ul>
+<li class="chapter" data-level="17.4.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#the-file-xxx.rmd-exists."><i class="fa fa-check"></i><b>17.4.1</b> <code>The File XXX.Rmd Exists.</code></a></li>
+<li class="chapter" data-level="17.4.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#no-site-generator-found."><i class="fa fa-check"></i><b>17.4.2</b> <code>No Site Generator Found.</code></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="その他のトラブルシュート.html"><a href="その他のトラブルシュート.html"><i class="fa fa-check"></i><b>18</b> その他のトラブルシュート</a>
 <ul>
@@ -333,15 +337,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 このセクションの説明の理解には多少の LaTeX の知識を要する. Ver. 0.4.3 以降では BibLaTeX 用の日本語スタイルとして最低限のクオリティだけは保った <code>jauthoryear</code> を用意しているため, どうしても文献リストのスタイルにこだわりたい以外はここで紹介される方法は使わないほうが良い.
 </div>
 <p><code>.bst</code> ファイルのスタイルを使いたい場合, (u)pBibTeX が必要であり, そのためには現在の R Markdown および <code>rmdja</code> の仕様では, YAMLフロントマターとグローバルオプションを変更する必要がある. 例えば <code>jecon.bst</code> を使いたい参考文献リストを出力したい場合, YAMLフロントマターは以下のような記述となる.</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb59-1"><a href="biblio-advaneced.html#cb59-1"></a><span class="fu">output</span><span class="kw">:</span></span>
-<span id="cb59-2"><a href="biblio-advaneced.html#cb59-2"></a><span class="at">  rmdja:</span><span class="fu">:pdf_book_ja</span><span class="kw">:</span></span>
-<span id="cb59-3"><a href="biblio-advaneced.html#cb59-3"></a><span class="at">    </span><span class="fu">citation_package</span><span class="kw">:</span><span class="at"> natbib</span></span>
-<span id="cb59-4"><a href="biblio-advaneced.html#cb59-4"></a><span class="at">    </span><span class="fu">citation_options</span><span class="kw">:</span><span class="at"> numbers</span></span>
-<span id="cb59-5"><a href="biblio-advaneced.html#cb59-5"></a><span class="fu">biblio-style</span><span class="kw">:</span><span class="at"> jecon</span></span>
-<span id="cb59-6"><a href="biblio-advaneced.html#cb59-6"></a><span class="fu">bibliogpraphy</span><span class="kw">:</span><span class="at"> citations.bib</span></span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb59-1"><a href="biblio-advaneced.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb59-2"><a href="biblio-advaneced.html#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="at">  rmdja:</span><span class="fu">:pdf_book_ja</span><span class="kw">:</span></span>
+<span id="cb59-3"><a href="biblio-advaneced.html#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">citation_package</span><span class="kw">:</span><span class="at"> natbib</span></span>
+<span id="cb59-4"><a href="biblio-advaneced.html#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">citation_options</span><span class="kw">:</span><span class="at"> numbers</span></span>
+<span id="cb59-5"><a href="biblio-advaneced.html#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="fu">biblio-style</span><span class="kw">:</span><span class="at"> jecon</span></span>
+<span id="cb59-6"><a href="biblio-advaneced.html#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliogpraphy</span><span class="kw">:</span><span class="at"> citations.bib</span></span></code></pre></div>
 <p>BibLaTeX では <code>citation_options</code> にスタイルまで指定していたが, <code>natbib</code> を選択した場合 <code>biblio-style</code> に <code>.bst</code> ファイルを指定し, フォーマット関数の <code>citation_options</code> 引数は <code>natbib.sty</code> に対するオプションを指定する項目となる (トップレベルの <code>natbiboptions</code> でも可). 上記の例では <code>numbers</code> を指定しているため本文中の参照トークンは <code>[1]</code>, <code>[2, 3]</code> のような番号形式となる. デフォルトは <code>authoryear</code> , つまり「著者 - 出版年」形式である.</p>
 <p>次に, 最初のチャンク, またはコンソールでグローバルオプションを変更する.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="biblio-advaneced.html#cb60-1"></a><span class="kw">options</span>(<span class="dt">tinytex.latexmk.emulation =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="biblio-advaneced.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">tinytex.latexmk.emulation =</span> F)</span></code></pre></div>
 <p>この状態で knit または build すれば <code>.bst</code> ファイルのスタイルが適用される.</p>
 <p>このような操作が必要な理由を説明する. <code>rmarkdown</code> は <code>tinytex</code> というパッケージでインストールされたスタンドアローンな LaTeX 処理系で PDF を生成している. しかしこれは (u)pBibTeX の使用が想定されていない. (u)pBibTeX は日本語コミュニティで開発されたマルチバイト文字対応版 BibTeX だから, <code>rmarkdown</code> 開発メンバーたちがこれらの存在に詳しくないのも仕方ないことだ (YiHui 氏は中国出身だが, 中国語圏では BibLaTeX を使うことが多いようだ). 冒頭のチャンクで <code>options(tinytex.latexmk.emulation = F)</code> を指定することで, 自分のマシンにインストールされた, おそらくあなたが普段使っているであろう LaTeX 処理系に処理させることができる. この方法では <code>latexmk</code> コマンドを使用してPDFの生成が行われる, その場合<a href="https://texwiki.texjp.org/?Latexmk">TeX Wiki</a>に記載のあるように, 日本語出力のため <code>.latexmkrc</code> ファイルが必要となっている. <code>rmdja</code> では <code>natbib</code> を指定した場合に自動でカレントディレクトリに <code>.latexmkrc</code> をコピーするようにしている. しかしログが残らないなどデバッグしづらいところがあるため, このやり方はやや使いづらく LaTeX に対するそれなりの知識を要する. たとえばこの説明を読んで初めて <code>latexmk</code> の存在を知った, そもそも LaTeX をどうインストールしたか記憶がない, といった人は慣れるまで大変かもしれない.</p>
 <div id="todo-pandoc-citeproc-と-csl-について" class="section level3" number="10.1.1">
@@ -434,7 +438,7 @@ authortitle と同じだが, 引用子にリスト同様の内容を出力する
 </tbody>
 </table>
 <p>その他 <code>apa</code>, <code>ieee</code> など特定の学会が使用するスタイルも用意されているが, これらは基本欧文しか想定していないし, アカデミックの事情に詳しい人しかこれらの使用にこだわらないだろうから詳しくは解説しない. これらを含めたそれぞれの出力例は <a href="https://www.overleaf.com/learn/latex/biblatex_bibliography_styles" class="uri">https://www.overleaf.com/learn/latex/biblatex_bibliography_styles</a> に一覧があるのでそちらを参考に. なお, 引用リストのスタイルと引用子のスタイルを個別にすることはできる (<code>bibstyle</code>/<code>citestyle</code>)</p>
-<p>現時点では各分野の学会で日本語文献に対応した BibLaTeX フォーマットを配布しているという情報は見つけられなかった. 参考として私のブログで対応のヒントについて書いた<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a>.</p>
+<p>現時点では各分野の学会で日本語文献に対応した BibLaTeX フォーマットを配布しているという情報は見つけられなかった. 参考として私のブログで対応のヒントについて書いた<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a>.</p>
 <p>TODO: その他の非ラテン文字, キリル文字, アラビア文字 ヘブライ文字等は?</p>
 <p>なお, 普段文献管理ソフトを使っていないが, 数本程度の文献を引用リストに載せたい利用者は, <code>biblatex</code> の構文を利用して書くのがよいかもしれない.</p>
 </div>
@@ -442,8 +446,8 @@ authortitle と同じだが, 引用子にリスト同様の内容を出力する
 </div>
 <div class="footnotes">
 <hr />
-<ol start="17">
-<li id="fn17"><p><a href="https://ill-identified.hatenablog.com/entry/2020/09/20/231335" class="uri">https://ill-identified.hatenablog.com/entry/2020/09/20/231335</a><a href="biblio-advaneced.html#fnref17" class="footnote-back">↩︎</a></p></li>
+<ol start="18">
+<li id="fn18"><p><a href="https://ill-identified.hatenablog.com/entry/2020/09/20/231335" class="uri">https://ill-identified.hatenablog.com/entry/2020/09/20/231335</a><a href="biblio-advaneced.html#fnref18" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -497,7 +501,8 @@ gitbook.start({
 "download": null,
 "toc": {
 "collapse": "none"
-}
+},
+"family": "serif"
 });
 });
 </script>

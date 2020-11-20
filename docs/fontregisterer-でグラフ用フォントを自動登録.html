@@ -50,7 +50,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
@@ -282,6 +281,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>17.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
 <li class="chapter" data-level="17.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>17.2</b> YAML フロントマターを確認する</a></li>
 <li class="chapter" data-level="17.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-生成時のエラーを確認する"><i class="fa fa-check"></i><b>17.3</b> PDF 生成時のエラーを確認する</a></li>
+<li class="chapter" data-level="17.4" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#よくあるエラーメッセージ"><i class="fa fa-check"></i><b>17.4</b> よくあるエラーメッセージ</a>
+<ul>
+<li class="chapter" data-level="17.4.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#the-file-xxx.rmd-exists."><i class="fa fa-check"></i><b>17.4.1</b> <code>The File XXX.Rmd Exists.</code></a></li>
+<li class="chapter" data-level="17.4.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#no-site-generator-found."><i class="fa fa-check"></i><b>17.4.2</b> <code>No Site Generator Found.</code></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="その他のトラブルシュート.html"><a href="その他のトラブルシュート.html"><i class="fa fa-check"></i><b>18</b> その他のトラブルシュート</a>
 <ul>
@@ -327,10 +331,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="fontregisterer-でグラフ用フォントを自動登録" class="section level1" number="22">
 <h1><span class="header-section-number">補遺D</span> <code>fontregisterer</code> でグラフ用フォントを自動登録</h1>
 <p>Rで描いたグラフに日本語を表示する場合, Linux 系 OS ならばフォント名を適切に設定するだけで表示されるが, Windows や Mac ではフォントをグラフィックデバイスに登録する必要がある. しかし手動登録は面倒なので, インストールされているシステムフォントを全て自動登録するパッケージ, <a href="https://github.com/Gedevan-Aleksizde/fontregisterer"><code>fontregisterer</code></a> を用意している.</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb85-1"><a href="fontregisterer-でグラフ用フォントを自動登録.html#cb85-1"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;Gedevan-Aleksizde/fontregisterer&quot;</span>,</span>
-<span id="cb85-2"><a href="fontregisterer-でグラフ用フォントを自動登録.html#cb85-2"></a>                        <span class="dt">repos =</span> <span class="ot">NULL</span>, <span class="dt">type =</span> <span class="st">&quot;source&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb86-1"><a href="fontregisterer-でグラフ用フォントを自動登録.html#cb86-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(</span>
+<span id="cb86-2"><a href="fontregisterer-でグラフ用フォントを自動登録.html#cb86-2"></a>  <span class="st">&quot;Gedevan-Aleksizde/fontregisterer&quot;</span>, <span class="at">repos =</span> <span class="cn">NULL</span>)</span></code></pre></div>
 <p>もちろんこれは R Markdown 以外でも使用できる. このパッケージは読み込まれた時点で登録処理を行うため,</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb86-1"><a href="fontregisterer-でグラフ用フォントを自動登録.html#cb86-1"></a><span class="kw">require</span>(fontregisterer)</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb87-1"><a href="fontregisterer-でグラフ用フォントを自動登録.html#cb87-1"></a><span class="fu">require</span>(fontregisterer)</span></code></pre></div>
 <p>を最初に実行するだけで良い. 詳しい仕組みの解説は『<a href="https://ill-identified.hatenablog.com/entry/2020/10/03/200618">おまえはもうRのグラフの日本語表示に悩まない (各OS対応)</a>』に書いている.</p>
 
 </div>
@@ -388,7 +392,8 @@ gitbook.start({
 "download": null,
 "toc": {
 "collapse": "none"
-}
+},
+"family": "serif"
 });
 });
 </script>

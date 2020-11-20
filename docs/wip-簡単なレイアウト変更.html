@@ -50,7 +50,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
@@ -282,6 +281,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>17.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
 <li class="chapter" data-level="17.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>17.2</b> YAML フロントマターを確認する</a></li>
 <li class="chapter" data-level="17.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-生成時のエラーを確認する"><i class="fa fa-check"></i><b>17.3</b> PDF 生成時のエラーを確認する</a></li>
+<li class="chapter" data-level="17.4" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#よくあるエラーメッセージ"><i class="fa fa-check"></i><b>17.4</b> よくあるエラーメッセージ</a>
+<ul>
+<li class="chapter" data-level="17.4.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#the-file-xxx.rmd-exists."><i class="fa fa-check"></i><b>17.4.1</b> <code>The File XXX.Rmd Exists.</code></a></li>
+<li class="chapter" data-level="17.4.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#no-site-generator-found."><i class="fa fa-check"></i><b>17.4.2</b> <code>No Site Generator Found.</code></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="その他のトラブルシュート.html"><a href="その他のトラブルシュート.html"><i class="fa fa-check"></i><b>18</b> その他のトラブルシュート</a>
 <ul>
@@ -523,9 +527,9 @@ XeLaTeX のみ <code>ipa-hg</code> などのバリエーションあり
 </tbody>
 </table>
 <p>さらに, それぞれの項目に対してオプションを設定する場合, <code>options</code> と接尾辞のついた項目が用意されている. 欧文と和文フォントで全く異なるタイプのフォントを使ったために相対的なサイズが合わず不格好な場合は</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb52-1"><a href="wip-簡単なレイアウト変更.html#cb52-1"></a><span class="fu">mainfont</span><span class="kw">:</span><span class="at"> Palatinno</span></span>
-<span id="cb52-2"><a href="wip-簡単なレイアウト変更.html#cb52-2"></a><span class="fu">mainfontoptions</span><span class="kw">:</span></span>
-<span id="cb52-3"><a href="wip-簡単なレイアウト変更.html#cb52-3"></a><span class="at">  </span><span class="kw">-</span><span class="at"> Scale=0.9</span></span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb52-1"><a href="wip-簡単なレイアウト変更.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mainfont</span><span class="kw">:</span><span class="at"> Palatinno</span></span>
+<span id="cb52-2"><a href="wip-簡単なレイアウト変更.html#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mainfontoptions</span><span class="kw">:</span></span>
+<span id="cb52-3"><a href="wip-簡単なレイアウト変更.html#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> Scale=0.9</span></span></code></pre></div>
 <p>などと書いて調整できる.</p>
 <p>インラインのフォント変更は TODO</p>
 </div>
@@ -582,7 +586,8 @@ gitbook.start({
 "download": null,
 "toc": {
 "collapse": "none"
-}
+},
+"family": "serif"
 });
 });
 </script>

@@ -50,7 +50,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
@@ -282,6 +281,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="17.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#エラーがどのタイミングで発生したかを特定する"><i class="fa fa-check"></i><b>17.1</b> エラーがどのタイミングで発生したかを特定する</a></li>
 <li class="chapter" data-level="17.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#yaml-フロントマターを確認する"><i class="fa fa-check"></i><b>17.2</b> YAML フロントマターを確認する</a></li>
 <li class="chapter" data-level="17.3" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#pdf-生成時のエラーを確認する"><i class="fa fa-check"></i><b>17.3</b> PDF 生成時のエラーを確認する</a></li>
+<li class="chapter" data-level="17.4" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#よくあるエラーメッセージ"><i class="fa fa-check"></i><b>17.4</b> よくあるエラーメッセージ</a>
+<ul>
+<li class="chapter" data-level="17.4.1" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#the-file-xxx.rmd-exists."><i class="fa fa-check"></i><b>17.4.1</b> <code>The File XXX.Rmd Exists.</code></a></li>
+<li class="chapter" data-level="17.4.2" data-path="製本時のエラーへの対処.html"><a href="製本時のエラーへの対処.html#no-site-generator-found."><i class="fa fa-check"></i><b>17.4.2</b> <code>No Site Generator Found.</code></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="その他のトラブルシュート.html"><a href="その他のトラブルシュート.html"><i class="fa fa-check"></i><b>18</b> その他のトラブルシュート</a>
 <ul>
@@ -371,14 +375,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 図 8.3: DOTの動作確認
 </p>
 </div>
-<p>なお, RCB, Ch. 4.15 でも紹介されているように DOT 言語は <code>DiagrammeR</code> パッケージを経由して使うこともできる<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a>が, <code>grViz()</code> 関数の出力は HTML を前提としているため, PDF での出力時のサイズや解像度の調整がうまくいかないことが多い.</p>
+<p>なお, RCB, Ch. 4.15 でも紹介されているように DOT 言語は <code>DiagrammeR</code> パッケージを経由して使うこともできる<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a>が, <code>grViz()</code> 関数の出力は HTML を前提としているため, PDF での出力時のサイズや解像度の調整がうまくいかないことが多い.</p>
 <p>一方で, <code>ggdag</code> パッケージは<code>ggplot2</code> ベースのパッケージなので, 一般的な R グラフィックスと同じ扱いでグラフィカルモデルを描画できる (つまり名前に反して DAG 以外のネットワーク図も記述可能である). <code>ggplot2</code> 風の構文で記述できるので習熟も容易である.</p>
 </div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="13">
-<li id="fn13"><p>私も詳しいことは知らないが, <code>DiagrammeR::grViz()</code> の構文は本来の DOT と少し異なるようだ, 本来はステートメントごとにセミコロンで区切ることが必要であり, 文字列もダブルクオーテーションで囲まなければならないが, <code>grViz()</code> ではそのような制約がない.<a href="advanced-graph.html#fnref13" class="footnote-back">↩︎</a></p></li>
+<ol start="14">
+<li id="fn14"><p>私も詳しいことは知らないが, <code>DiagrammeR::grViz()</code> の構文は本来の DOT と少し異なるようだ, 本来はステートメントごとにセミコロンで区切ることが必要であり, 文字列もダブルクオーテーションで囲まなければならないが, <code>grViz()</code> ではそのような制約がない.<a href="advanced-graph.html#fnref14" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -432,7 +436,8 @@ gitbook.start({
 "download": null,
 "toc": {
 "collapse": "none"
-}
+},
+"family": "serif"
 });
 });
 </script>
