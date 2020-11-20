@@ -373,6 +373,26 @@ Error: LaTeX failed to XXXX
 
 それでも解決しない場合, 改めてこのファイルを手動でタイプセットするのも1つの方法だ. もしうまくいったり, 異なるエラーが出るのなら, 環境の違いが問題かもしれない. そして `r rmdja::texlogo("upBibTeX")` を使うのなら, 後者が唯一のデバッグ方法だ.
 
+## よくあるエラーメッセージ
+
+### `The File XXX.Rmd Exists.`
+
+```
+The file _main.Rmd exists. Please delete it if it was automatically generated. If you are sure it can be safely overwritten or deleted, please set the option 'delete_merged_file' to true in _bookdown.yml.
+```
+
+多くの場合はファイル名が `_main.Rmd` となるだろう. つまり最終的に出力する PDF と同じ名前である. これは `_bookdown.yml` の `book_filename` で変更することができる. このエラーは文字通り `_main.Rmd` ファイルが既に存在するから処理を続行できない, というものである. 製本時に `index.Rmd` と同じフォルダに, 中間生成物である `_main.Rmd` が作られるが, 前回の製本処理が何らかの理由でエラーが発生し中断しているとこのファイルが残ることがある. よってこのファイルを削除すれば解決する.
+
+### `No Site Generator Found.`
+
+```{cat}
+No site generator found.
+```
+
+製本処理にあたって, 基準となるフォルダの設定が見つけられない際に発生する. `index.Rmd` に `site: bookdown::bookdown_site` が記述されていないか,  ビルドペーンでの設定でフォルダを正しく設定できておらず, `index.Rmd` の存在しないフォルダを参照していることがよくある原因である.
+
+
+
 # その他のトラブルシュート
 
 ## コードブロックや出力テキストの折り返し・改行位置がおかしい

@@ -2,13 +2,11 @@
 
 # クイックスタート {#quick-start}
 
-`rmdja` パッケージをインストールする. 依存している `rmarkdown`, `bookdown`, `knitr` なども同時にインストールされる.
+`rmdja` パッケージをインストールする. github からインストールするため, `remotes` パッケージが必要になる. 依存している `rmarkdown`, `bookdown`, `knitr` なども同時にインストールされる^[Windows の場合, Rtools をインストールしていないと依存パッケージがインストールされないことがある. Rtools をインストールするか, 依存パッケージを手動でインストールしてほしい].
 
 ```{r install-guide, echo=T, eval=F}
 install.packages("remotes")
-remotes::install_github(
-  "Gedevan-Aleksizde/my_latex_template",
-  repos = NULL, type = "source")
+remotes::install_github("Gedevan-Aleksizde/rmdja", repos = NULL)
 ```
 
 まだ RStudio を使っていないのなら, RStudio 上で作業することを強く推奨する. さらに, もしもRの操作自体にあまり慣れていないのなら, 森知晴 『[卒業論文のためのR入門](https://tomoecon.github.io/R_for_graduate_thesis/)』などを読むことを薦める. 
@@ -16,9 +14,7 @@ remotes::install_github(
 加えて, 以下のパッケージが役に立つので気に入ったらインストールしていただきたい.
 
 ```{r install-suggets, echo=T, eval=F}
-install.packages(
-  c("tidyverse", "ggthemes", "citr", "clipr", "kableExtra")
-  )
+install.packages(c("tidyverse", "ggthemes", "citr", "clipr", "kableExtra"))
 ```
 
 RStudio を起動し, 左上から新規作成を選び, "R Markdown" を選ぶ (図 \@ref(fig:new-file)).

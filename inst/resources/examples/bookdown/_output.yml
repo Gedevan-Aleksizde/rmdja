@@ -5,6 +5,7 @@ rmdja::gitbook_ja:
       collapse: none
       before: '<li><a href="index.html">Top</a></li>'
       after: "<p style='text-align:center;display:block;margin: 0 auto;'><img src='https://i.creativecommons.org/l/by-nc/4.0/88x31.png'></p><li><a href='https://bookdown.org' target='_blank'>Published with bookdown</a></li>"
+    family: serif
 
 rmdja::pdf_book_ja:
   tombow: false
