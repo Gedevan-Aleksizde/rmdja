@@ -1485,9 +1485,9 @@ inline_plot %>%
 \toprule
 シリンダ数 & ガロン毎マイル &  &  &  &  &  & \\
 \midrule
-4 & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//boxplot_33926c519d6e.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//hist_33922e218670.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_339251d1ad7e.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_339231a544be.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_339214c16319.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_3392e1aceba.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_339265f9e7ab.pdf}\\
-6 & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//boxplot_33923e58a7d0.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//hist_339229a3f17f.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_3392540a8c4f.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_339279bf5221.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_33925724cf60.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_33921153ff24.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_339235dc1206.pdf}\\
-8 & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//boxplot_339248aa7fb0.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//hist_339220744e72.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_339272cc37a4.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_3392455b32a8.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_339225db303b.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_339279ad104d.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_33924dc5f9f7.pdf}\\
+4 & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//boxplot_7235ded11dc.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//hist_7235407e2f33.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_72357b3fae38.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_7235695d4539.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_7235594fc42a.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_72352d4fd5a6.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_7235651f974.pdf}\\
+6 & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//boxplot_723520b46bce.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//hist_72354afd9f21.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_72353f7aed45.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_7235609bb5af.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_72355ece83d4.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_7235434b9aaf.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_7235352308ea.pdf}\\
+8 & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//boxplot_72351a105564.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//hist_72354571b27.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_723565581536.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_7235491a924b.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_7235751093ea.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_7235337bae7f.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_7235159d7e4a.pdf}\\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -1531,63 +1531,63 @@ inline_plot %>%
 \hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textbf{h}} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{2}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{} \tabularnewline[-0.5pt]
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 0, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textbf{h}} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{255, 255, 255}{1.2}}->{\huxb{0, 0, 0}{1.2}}|>{\huxb{255, 255, 255}{1.2}}->{\huxb{0, 0, 0}{1.2}}|}
+\hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{255, 255, 255}{1.2}}->{\huxb{0, 0, 0}{1.2}}|>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont u} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\multirow[t]{-2}{*}[0ex]{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\multirow[t]{-2}{*}[0ex]{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}}} \tabularnewline[-0.5pt]
-
-
-\hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
-\arrayrulecolor{black}
-
-\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont x} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{0, 0, 255}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{255, 255, 255}{t}} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 0, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont x} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{0, 0, 255}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{255, 255, 255}{a}} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont a} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{0, 0, 255}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 255, 0}} \tabularnewline[-0.5pt]
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
 
 
-\hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{255, 255, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}|}
+\hhline{>{\huxb{0, 0, 0}{1.2}}|>{\huxb{255, 255, 255}{1.2}}->{\huxb{0, 0, 0}{1.2}}|>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 255}{1.2}}->{\huxb{0, 0, 0}{1.2}}|>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
 \arrayrulecolor{black}
 
-\multicolumn{2}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont b} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont l} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\multirow[t]{-2}{*}[0ex]{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont t} \hspace{0pt}\huxbpad{0pt}}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\multirow[t]{-2}{*}[0ex]{\cellcolor[RGB]{255, 255, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{0, 0, 0}{~}} \hspace{0pt}\huxbpad{0pt}}} \tabularnewline[-0.5pt]
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont b} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\multirow[t]{-2}{*}[0ex]{\cellcolor[RGB]{0, 0, 255}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 255, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{0, 0, 0}{~}} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 0, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{255, 255, 255}{e}} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{0, 0, 255}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 0, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{2}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 0, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{255, 255, 255}{l}} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{2}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 0, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 0, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont e} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
 
