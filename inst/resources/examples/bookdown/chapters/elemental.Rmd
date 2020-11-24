@@ -706,17 +706,28 @@ tibble(
 
 [^CSL-editor]: 簡単なカスタマイズなら CSL editor というWebサービスでできる. しかしあくまでXMLなので, あまり複雑な処理はできないことに注意する.
 
-# (WIP) 簡単なレイアウト変更
+# (WIP) 簡単なレイアウト・スタイル変更
 
-## HTML
+前章では文書の内容に関する構文を紹介した. ここでは, 文書全体のデザインやスタイルの設定方法のうち, `rmdja` が用意している簡単なものを紹介する.
 
-### フォント変更
+## フォント変更
 
-HTML は文字通りHTMLで出力しているため, CSS の使い方次第でいくらでもデザインを変えることができる.
+フォント変更の方法は HTML と PDF で大きく違う. まずは HTMLについて. `_output.yml` にはデフォルトのフォントを設定できるが, 選択肢は `sans` と `serif` しかない.
 
-## PDF
+```yaml
+output: rmdja::gitbook_ja:
+  config:
+    fontsettings:
+      family: serif
+```
 
-### フォント変更
+しかし HTML は文字通りHTMLで出力しているため, CSS の使い方次第でいくらでもデザインを変えることができる. 例えば自作した CSS ファイルを以下のように指定できる.
+
+```
+output:
+  output: rmdja::gitbook_ja:
+    css: ABC.css
+```
 
 PDF を生成する場合, ver 0.3 以降ではデフォルトのフォントファミリを OS に応じて変えている. もし変更したい場合はYAMLフロントマターの以下の項目を変更する
 
@@ -801,7 +812,130 @@ mainfontoptions:
 
 などと書いて調整できる.
 
-インラインのフォント変更は TODO
+
+## YAML フロントマターの設定によるスタイル変更
+
+RMD ファイルの冒頭に書かれているYAMLフロントマターは様々なことが設定できる. これらのオプションは Pandoc のものに対応している. HTML はスタイルのほとんどが 規格化された CSS で操作できるため, 主に PDF に関するものである. また, 本章はあくまで簡易的な機能解説であるため, より詳細な解説は後の章で再度取り上げる.
+
+### ハイパーリンクの配色変更
+
+たとえば PDF では, 以下のようにしてハイパーリンクの色を変更できる.
+
+```yaml
+link-citations: true
+linkcolor: blue
+citecolor: blue
+urlcolor: magenta
+```
+
+まず, ハイパーリンクを有効にする, `link-citations:true` が必要である. 次に, リンクの種類ごとに色を指定できる. `linkcolor` は文書**内**のハイパーリンクの色, `citecolor` は巻末の参考文献リストへのリンクの色, そして `urlcolor` は文書外の URL へのリンクの色である.
+
+また, ページのヘッダ・フッタは `pagestyle` で指定できる. 
+
+```yaml
+pagestyle: headings
+```
+
+文書クラスによっても多少変わるが, プリセットが4種類用意されている. 
+
+1. `empty`: 何も表示しない
+2. `plain`: ページ数のみ表示
+3. `headings`: ヘッダに罫線を引き, ページ数だけでなく章のタイトルも表示する
+4. `fancy`: ユーザによるカスタマイズ (WIP)
+
+(3) が一般的な書籍のものに近いスタイルである. (1-3) は, タイトルページや調整のための白紙ページなどはかならずしも変更されない. そういった根本的な変更がしたい場合のため, (4) が用意されている. しかし, 現時点では `fancyhdr.sty` の使い方を知る必要がある.
+
+### `r rmdja::texlogo("LaTeX")` エンジンの変更
+
+PDF の出力は `r `rmdja::texlogo("LaTeX")` を使用する. その処理プログラムにはいくつかバリエーションがあり, `rmdja` では `r rmdja::texlogo("XeLaTeX")` と `rmdja::texlogo("LuaLaTeX")` の使用を想定している (R Markdown では `r rmdja::texlogo("pdfLaTeX")` もサポートしているが, これは日本語表示が難しいため `rmdja` では採用していない).
+
+両者は多少の違いがある (正確には, 両者それぞれに対応した和文組版パッケージの違いにも由来する).
+
+1. 組版の違い. `r rmdja::texlogo("XeLaTeX")` で和文組版を制御する `zxjatype.sty` にはいくつか改善の余地が残っている.
+2. 速度の違い. 年々改善されているようだが, それでも `r rmdja::texlogo("LuaLaTeX")` は処理の遅さが目立つ^[ただし R Markdown に限って言えば R コードの処理時間のほうが問題となることもある. また, `r rmdja::texlogo("XeLaTeX")` であっても文献処理や索引処理など関連プログラムを多く使用すればそれなりに遅くなる.].
+2. フォントレンダの違い. 一概に言うのは難しいが, デフォルト設定では文字のウェイトや和文・欧文の相対的なバランスが微妙に異なる.
+3. 和文・欧文を同時に扱う際の挙動の違い. `r rmdja::texlogo("LuaLaTeX")` は和文と欧文の処理ルールが競合する時, 和文の処理を優先する傾向がある. 一方で `r `rmdja::texlogo("XeLaTeX")` (および `zxjatype.sty`) はなるべく両者を共存できるように作られている.
+
+もし和文組版の厳格さを優先したいのなら `r `rmdja::texlogo("LuaLaTeX")` を使うべきである. しかし処理速度があまりに遅いとか, 欧文の扱いが気に入らないとかの場合は `r `rmdja::texlogo("XeLaTeX")` を使うと良い. 特に書籍形式でなくプレゼンテーション資料であれば, 組版ルールの厳格さはあまり気にならないことだろう. 
+
+
+### 文書クラスのカスタマイズ
+
+デフォルトでは `bxjsbook` という文書クラスを使用している. この他 `rmdja` では `bxjsreport`, `ltjsbook`, `ltjsreport`, `ljreq` という文書クラスに対応している. ただし `ljreq` は `r rmdja::texlogo("LuaLaTeX")` でのみ動作する.
+
+### LaTeX のカスタマイズ
+
+PDF のデザインを微調整したい場合, 自分で `r rmdja::texlogo("LaTeX")` のソースに変更を加える必要がある. よってこの機能は `r rmdja::texlogo("LaTeX")` の使用に慣れたユーザのみが使用してほしい.
+
+`r rmdja::texlogo("LaTeX")` のソースに変更を加える方法は2つ. 1つは `header-includes` を使うことである.
+
+```yaml
+header-includes:
+  - ...
+  - ...
+```
+
+これでリスト風にプリアンブルを書くことができる. ただし, `%` を使った改行エスケープは使用できない. もう1つは, 出力フォーマットの `includes` に設定する方法で, 以下のように命令文ではなく TEX ファイルを指定する.
+
+```yaml
+output: rmdja::pdf_book_ja:
+  includes:
+    in_header: i.tex
+    before_body: b.tex
+    after_body: a.tex
+```
+
+それぞれ, プリアンブル, 本文冒頭 (`document` 環境, 表紙や目次等の直後), 本文後に挿入される. しかし, TEX ファイルの大枠は Pandoc のテンプレートファイルで決まっているため競合することもある. よってテンプレートを確認しながら作る必要がある. テンプレートファイルは Pandoc 独自の簡易なマクロが挿入されている以外は通常の `r rmdja::texlogo("LaTeX")` ソースと同じである^[現時点では日本語版ユーザーガイドでも未翻訳のパート. しかし if, for 文など簡単な制御構文しかないため, 結局 `r rmdja::texlogo("LaTeX")` のマクロを使うことが多いだろう. https://pandoc-doc-ja.readthedocs.io/ja/latest/users-guide.html#templates, https://pandoc.org/MANUAL.html#templates].
+
+テンプレートファイルは R で以下を実行して得られるディレクトリにある. `beamer-ja.tex.template` は beamer 用, `document-ja.tex.template` はそれ以外の文書用である.
+
+```{r rmdja-template-dir, echo=T, eval=F}
+system.file("resources/pandoc-templates", package = "rmdja")
+```
+
+テンプレートを修正しなければ意図した変更ができない場合, 以下のようにして別のテンプレートファイルを指定できる.
+
+```yaml
+output: rmdja::pdf_book_ja:
+  template: new-file
+```
+
+## チャンク/コードおよび出力ブロックのスタイルの一括変更
+
+すでに書いたように, コードブロックのシンタックスハイライトはいくつかのプリセットを適用できる. また, チャンクオプションにはいろいろなものがあり, それらは全て, `knitr::opts_chunk::set()` で以降のチャンクに対して一括して適用できる. 詳細は https://yihui.org/knitr/options/#code-decoration などを見てもらうとして, いくつかを抜粋する. YAMLフォーマットと違い, チャンクオプションは全て R のコードとして評価されるため, 論理値は `TRUE`/`FALSE` または `T`/`F`と表記すること.
+ 
+* `highlight`: シンタックスハイライトを適用するかどうか.
+* `background`: コードブロックの背景色. デフォルトは `#F7F7F7` つまり灰色である.
+* `tidy`, `tidy.opts`: コードの自動整形を適用するかどうかと, そのオプション. `rmdja` のデフォルト設定では `styler` パッケージを使用している. 詳しくは付録 \ref(autoformatter) を参照.
+* `prompt`: コードブロックにプロンプト記号 `>` を表示するかどうか
+* `comment`: 出力ブロックの行頭に表示する記号. デフォルトは `##`
+* `size`: 出力ブロックのフォントサイズ
+* `indent`: 出力ブロックのインデント
+
+### 行番号の表示
+
+行番号の表示は `attr.source = c(".numberLines", .lineAnchors")` を指定する.
+
+`rmdja` で提供するフォーマットでは, `YAML フロントマターで一括して行番号を表示することを指定できる.
+
+```yaml
+output: rmdja::pdf_document_ja:
+  add_rownumber: true
+```
+
+このオプションは上記のチャンクオプションのデフォルト値を変更するものである. よって, これを設定した状態で任意のコードブロックの行番号を非表示としたい場合は逆にチャンクオプション `attr.source = NULL` を指定する.
+
+### コードブロックのページまたぎ禁止
+
+長いソースコードを掲載するとページまたぎが発生する. 現時点では, `rmdja` の機能としてコードブロックに個別にページまたぎを許可・禁止を指定する機能はない (Pandoc の基本機能の範囲でサポートされていないため) が, 一括で指定することはできる. 例えば
+
+```yaml
+header-includes:
+  - \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},breaklines,breakanywhere,samepage=true}
+```
+
+と書く. ただし直接関係あるのは `samepage=true` だけである. これはテンプレートの記述を上書きするという乱暴な方法なので, 他のデフォルトオプションも混在している. `commandchars=\\\{\}` はシンタックスハイライトに関する設定で, 基本的に消すべきでない. `breaklines` は行途中の折り返しを許可するもの, `breakanywhere` はどこでも行の折り返しを許可するというもので, いずれもデフォルトのコード自動整形と関係がある.
+
 
 # (WIP) `rmdja` による文書作成支援機能
 
