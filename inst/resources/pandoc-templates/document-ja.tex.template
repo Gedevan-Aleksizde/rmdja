@@ -360,16 +360,8 @@ $endif$
 
 $if(pagestyle)$
 \ifthenelse{\equal{$pagestyle$}{fancy}}{
-% TODO: ハードコードやめる
   \usepackage{fancyhdr}
-  \fancyhead[CE]{\leftmark}
-  \fancyhead[CO]{\rightmark}
-  \fancyhead[LE,RO,RE,LO]{}
-  \fancyfoot[LO,RE]{\thepage}
-  \fancyfoot[CO,CE]{}
-}{
- %
-}
+}{}
 \pagestyle{$pagestyle$}
 $endif$
 $for(header-includes)$
