@@ -19,18 +19,33 @@ urlcolor: magenta
 classoption:
   - tate
   - book
+  - twoside
   - twocolumn
   - jafontsize=10pt
+  - gutter=20mm
+pagestyle: headings
+header-includes:
+  - \ModifyPageStyle{headings}{nombre_position=top-left}
 ---
-
-\newpage
-
 ```{r init, include=F}
 require(knitr)
 require(tidyverse)
 # グラフの標準フォント設定
 rmdja::set_graphics_font(rmdja::get_default_font_family("lualatex")["serif"])
 ```
+
+\frontmatter
+
+\tableofcontents
+<!-- コメントはこのように HTMLの記法を使う. tex の % は使えない -->
+<!-- ここに目次が挿入される -->
+\newpage
+
+\chapter*{まえがき}
+
+ここに前書き
+
+\mainmatter
 
 # 初めに {#introduction}
 
@@ -64,10 +79,10 @@ rmdja::set_graphics_font(rmdja::get_default_font_family("lualatex")["serif"])
 
 中谷宇吉郎『[雪の話](https://www.aozora.gr.jp/cards/001569/files/57467_61230.html)』より抜粋
 
-# 既知の問題
+# 既知の問題・その他の注意
 
-luatex-ja のドキュメントには縦書きクラスのことが全く書いてないので解決するのが大変。
-
+* `ltjscls` には縦書きクラスは用意されているもののドキュメントに使い方が全く書いてないのでよくわからなかったため [`jlreq`](https://www.tug.org/texlive//Contents/live/texmf-dist/doc/latex/jlreq/jlreq-ja.html) を採用。
+* 二段組の場合, `\newpage` は改頁ではなく「改段」になる。頁を改めたい場合は `\clearpage`。章の始めのように奇数頁始めにしたい (改丁) 場合は `\cleardoublepage`。
 * 画像も90度回転してしまう (図 \@ref(fig:plot))。チャンクオプション `out.extra="angle=90,keepaspectratio"` を追加することで解決する。しかし図表は横書き文書を想定していることが多いのでこの図のように付番などが不自然になる。
 
 ```{r plot, echo=F, fig.cap="データのプロット", out.extra="angle=90,keepaspectratio"}
@@ -77,10 +92,15 @@ ggplot(mutate(mtcars, cyl = factor(cyl)),
 ```
 
 <!-- 参考文献 -->
-<!-- コメントはこのように HTMLの記法を使う. tex の % は使えない -->
 
 ```{r citations, include=F}
 # ファイルの上書きに注意
 # 本文中で引用があれば参考文献セクションが末尾に自動で生成される.
 knitr::write_bib(c(.packages(), c("rmarkdown", "citr", "clipr", "bookdown")), file = 'packages.bib')
 ```
+
+\backmatter
+
+\chapter*{あとがき}
+
+ここは参考文献や索引の**前**に表示される
