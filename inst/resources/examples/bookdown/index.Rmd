@@ -10,7 +10,6 @@ cover-image: "img/Johannes_Gutenberg.jpg"        # 表紙画像. epub でのみ�
 apple-touch-icon: "touch-icon.png"               # iOS でホームスクリーンに登録した際に見えるもの
 apple-touch-icon-size: 120                       # そのサイズ
 favicon: "favicon.ico"                           # そのまんまファビコン.
-link-citations: true                             # 引用に参考文献リストへのハイパーリンクをつける
 mainfont: 'DejaVu Serif'
 seriffont: 'DejaVu Sans'
 monofont: Ricty
@@ -21,12 +20,13 @@ sansfontoptions:
 jmainfont: 'Noto Serif CJK JP'
 jseriffont: 'Noto Sans CJK JP'
 jmonofont: Ricty
+link-citations: true                             # 引用に参考文献リストへのハイパーリンクをつける
 linkcolor: blue
 citecolor: blue
 urlcolor: magenta
 bibliography: rmdja.bib
-pagestyle: fancy
 documentclass: bxjsbook
+pagestyle: headings
 ---
 
 ```{r setup, include=FALSE}

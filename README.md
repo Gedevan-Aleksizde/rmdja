@@ -39,14 +39,17 @@ remotes::install_github('Gedevan-Aleksizde/rmdja', ref="v0.4", repos = NULL)
 remotes::install_github('Gedevan-Aleksizde/rmdja@v0.4', repos = NULL)
 ```
 
-`@development` は開発中のバージョンです ソースコードを理解して適宜修正できる自信のある方のみ使用してください.
+`@development` は開発中のバージョンです. 新機能が追加されてる場合もありますがバグも多いです. ソースコードを理解して適宜修正できる自信のある方のみ使用してください.
 
 ```
 remotes::install_github('Gedevan-Aleksizde/rmdja@development', repos = NULL)
 ```
 
-
 Windows OS では [Rtools](https://cran.r-project.org/bin/windows/Rtools/) をインストールしていない場合, 上記 `remotes::install_github()` では依存パッケージを自動インストールしてくれないことがあります. Rtools をインストールするか, 依存パッケージを手動でインストールしてください. 必要なパッケージは [`DESCRIPTION`](DESCRIPTION) の `Imports` の項目に書かれています. 
+
+```
+install.packages(c("rmarkdown", "bookdown", "commonmark", "styler"))
+```
 
 リリース一覧からダウンロードしたアーカイブファイルからインストールすることもできます.
 

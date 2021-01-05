@@ -73,8 +73,9 @@ pdf_book_ja <- function (
   if(!any(grepl("^--top-level-division", pandoc_args))){
     pandoc_args <- c(pandoc_args, paste0('--top-level-division=', top_level))
   }
-  if(!any(grepl("^--extract-media", pandoc_args)))
-  pandoc_args <- c(pandoc_args, "--extract-media", '.')
+  if(!any(grepl("^--extract-media", pandoc_args))){
+    pandoc_args <- c(pandoc_args, "--extract-media", '.')
+  }
   if(identical(extra_dependencies, NULL)){
     if(identical(tombow, T)){
       extra_dependencies <- list(gentombow = "pdfbox")

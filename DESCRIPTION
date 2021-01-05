@@ -19,7 +19,8 @@ Suggests:
   kableExtra,
   citr,
   clipr,
-  ymlthis
+  ymlthis,
+  tufte
 BugReports: https://github.com/Gedevan-Aleksizde/rmdja/issues
 RoxygenNote: 7.1.1
 Additional_repositories: https://github.com/Gedevan-Aleksizde/fontregisterer

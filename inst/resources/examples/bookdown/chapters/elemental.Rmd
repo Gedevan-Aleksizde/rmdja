@@ -931,11 +931,11 @@ output: rmdja::pdf_document_ja:
 
 ```yaml
 header-includes:
+  - \@ifpackageloaded{fvextra}{}{\usepackage{fvextra}}
   - \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},breaklines,breakanywhere,samepage=true}
 ```
 
-と書く. ただし直接関係あるのは `samepage=true` だけである. これはテンプレートの記述を上書きするという乱暴な方法なので, 他のデフォルトオプションも混在している. `commandchars=\\\{\}` はシンタックスハイライトに関する設定で, 基本的に消すべきでない. `breaklines` は行途中の折り返しを許可するもの, `breakanywhere` はどこでも行の折り返しを許可するというもので, いずれもデフォルトのコード自動整形と関係がある.
-
+と書く. ただし直接関係あるのは `samepage=true` だけである. これはテンプレートの記述を上書きするという乱暴な方法なので, 他のデフォルトオプションも混在している. `commandchars=\\\{\}` はシンタックスハイライトに関する設定で, 基本的に消すべきでない. `breaklines` は行途中の折り返しを許可するもの, `breakanywhere` はどこでも行の折り返しを許可するというもので, いずれもデフォルトのコード自動整形と関係がある. ちなみに TEX ファイルを開いて `highliting` 環境に個別に `samepage=true` オプションを指定すれば個別に折り返しを禁止できる.
 
 # (WIP) `rmdja` による文書作成支援機能
 
