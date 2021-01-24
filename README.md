@@ -12,8 +12,7 @@ Customized R Markdown/Bookdown format functions for Japanese users
 
 以下は `rmdja` 自身で作成したドキュメントです. HTML/PDF/EPUB を用意しています.
 
-https://gedevan-aleksizde.github.io/rmdja/
-
+* 『rmdja による多様な形式の日本語技術文書の作成』: https://gedevan-aleksizde.github.io/rmdja/
 * Yihui 氏による knitr のドキュメントの日本語訳: https://gedevan-aleksizde.github.io/knitr-doc-ja/index.html
 * "R Markdown Cookbook" の日本語訳 (作業中) https://github.com/Gedevan-Aleksizde/rmarkdown-cookbook/tree/work
 
