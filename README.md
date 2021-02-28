@@ -238,3 +238,37 @@ sudo apt install graphiviz
 * (0.0.5) LuaLaTeX/XeLaTeX 両方に対応できるように, 再度の名前変更
 * (0.1.0) win/ubuntu/macで対応, XeLaTeX/LuaLaTeX で動作確認したのでmasterにマージ.
 * (0.1.1) レイアウト微修正
+
+# その他開発メモ
+
+## 優先度高めの修正
+
+あるいは簡単にできるのですぐできる
+
+1. pdf 系で pandocオプションの `--extract-media` がきかない?
+1. Beamer も bookdown 準拠にして相互参照できるように
+1. biblatex のスタイル整備
+1. TexLive なしでの動作確認
+1. knitr で latex emulation を自動的に切るオプション. 毎回チャンクに書くのはアレ
+1. rmd cookbook ではリンクをLatexの場合に全部注釈にするマクロがどっかに書かれている? これを取り入れる?
+1. latex で今風なリッチテキストスタイルをデフォルトに, あるいはオプションで簡単に有効化
+
+## TODO: ロードマップ, すこし難しいが追加したい機能
+
+将来やってみたいこと. 詳細なスケジュール未定.
+
+* チャンク出力ブロックの PDF での soft wrap をデフォルトにする
+* 同様にコード整形も適切な折返しできないか?
+  * 現時点では規格自体が存在しないので難しい
+* mainfont に連動してグラフで使うフォントも変更したい
+  * fontregisterer や ragg との連携も検討
+* バージョン管理: 特に PDF 版にバージョン履歴自動生成したい
+  + html 版は github の対応ページにリンク貼れたりするが pdf はどうする?
+* internationalization and localization
+  + bookdown のエンドユーザー向け機能の範囲では無理.
+* はてなブログ他ブログサービスに直接送れるようにする
+* 縦書き文書の生成
+  * PDF のみ
+* vivliostyle への対応?
+* epub の出力調整
+* 追加ファイルはカレントに書き込む以外にないのか
