@@ -3,7 +3,7 @@
 #' @inheritParams rmarkdown::beamer_presentation
 #' @family pdf formats
 #' @title R Markdown 上で XeLaTeX を使い日本語 beamer スライドを作成するフォーマット
-#' @description rmarkdown::beamer_presentation wrapper format for Japanese typesetting with XeLaTeX or LuaLaTeX / XeLaTeX または LuaLaTeX で `beamer_presentation` で日本語タイプセットをするためのラッパフォーマット.
+#' @description bookdown::beamer_presentation2 wrapper format for Japanese typesetting with XeLaTeX or LuaLaTeX / XeLaTeX または LuaLaTeX で `bookdown::beamer_presentation2` で日本語タイプセットをするためのラッパフォーマット.
 #' @details rmarkdownで \LaTeX を使う場合, 日本語を適切に表示するためにいろいろ必要だった調整を済ませたフォーマット
 #' 基本的なオプションだけに限定することで簡単にポンチ絵スライドになってしまうことを回避する画期的な機能もあります.
 #' 
@@ -88,8 +88,6 @@ beamer_presentation_ja <- function(
     }
   }
   extra_metadata <- c(extra_metadata, merge_bibliography_args(citation_package, citation_options))
-  print("ahoshine")
-  print(extra_metadata)
   if(!missing(figurename) || !identical(figurename, "")){
     pandoc_args_base <- c(pandoc_args_base, rmarkdown::pandoc_variable_arg("figurename", figurename))
   } else {
@@ -147,7 +145,7 @@ beamer_presentation_ja <- function(
     md_extensions = md_extensions,
     pandoc_args = c(pandoc_args_base, pandoc_args)
   )
-  base <- do.call(rmarkdown::beamer_presentation, args_beamer_base)
+  base <- do.call(bookdown::beamer_presentation2, args_beamer_base)
 
   opts_chunk_default <- list(
     include = T,
@@ -195,8 +193,6 @@ beamer_presentation_ja <- function(
       }
     }
     if(is.null(metadata[["biblio-title"]])) bib_args <- c(bib_args, list(`biblio-title`="参考文献"))
-    print("ahoshine")
-    print(bib_args)
     return(
       c(
         autodetect_and_set_jfont(metadata, input_file, runtime, knit_meta, files_dir, output_dir, latex_engine),

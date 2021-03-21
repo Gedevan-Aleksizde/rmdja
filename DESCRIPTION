@@ -22,6 +22,7 @@ Suggests:
   ymlthis,
   tufte
 BugReports: https://github.com/Gedevan-Aleksizde/rmdja/issues
+Remotes: 
+    github::Gedevan-Aleksizde/fontregisterer
 RoxygenNote: 7.1.1
-Additional_repositories: https://github.com/Gedevan-Aleksizde/fontregisterer
 Licence: BSD-3
