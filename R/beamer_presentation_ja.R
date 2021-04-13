@@ -39,6 +39,7 @@
 #' @param md_extensions. named_list. pandoc 変換の際にmdフォーマットに付けるオプション. 詳細は \code{\link[rmarkdown]{rmarkdown_format}} 参照.
 #' @param pandoc_args. named list. pandoc に渡す引数. yamlヘッダのトップレベルに概ね対応する. 詳細は \code{\link[rmarkdown]{pdf_document}}, \code{\link[rmarkdown]{rmd_metadata}} や pandoc の公式ドキュメント参照.
 #' @param opts_chunk named list. Rmdファイルのチャンク内で `knitr::opts_chunk$set(...)` で記入するものと同じ. 画像サイズなどチャンク出力の設定がbeamer向けになるようデフォルト値を変更している 多くの場合は次のように設定される: \code{list(message = FALSE, echo = FALSE, comment = NA, fig.align = "center")}
+#' @param latexmk_emulation logical. パッケージオプション `tinytex.latexmk.emulation` に連動する. デフォルトでは, 文献引用エンジンを natbib にしたときのみ `FALSE`, それ以外は `TRUE`. これは `tinytex` が (u)pBibTeX に対応していないため. どうしても BibTeX を使いたい場合以外は操作する必要のない不要なオプションですが, 日本語を含む文書を作成する限りそのような場面はないと思われます. 
 #' @return \code{rmarkdown_output_format} class
 
 #' @export
@@ -61,7 +62,7 @@ beamer_presentation_ja <- function(
   code_softwrap = TRUE,
   citation_package = "biblatex",
   citation_options = "default",
-  latexmk = citation_package == "natbib",
+  latexmk_emulation = citation_package == "natbib",
   figurename = "図",
   tablename = "表",
   number_sections = FALSE,
@@ -78,8 +79,10 @@ beamer_presentation_ja <- function(
 ){
   # ----- check arguments class & value -----
   latex_engine <- latex_engine[1]
-  match.arg(latex_engine, c("xelatex", "lualatex", "tectonic"))
-  
+  match.arg(latex_engine, c("xelatex", "lualatex", "tectonic", "pdflatex"))
+  if(latex_engine == "pdflatex"){
+    message("You selected `pdflatex` engine. It is not good choice for Japanese documents. Maybe `xelatex` or `lualatex` is better.")
+  }
   # ----- reshape arguments -----
   pandoc_args_base <- c()
   extra_metadata <- list()

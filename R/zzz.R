@@ -97,7 +97,7 @@ autodetect_jfont <- function(latex_engine, metadata = NULL){
   )
   if(no_jafontset){
     if(osinfo$name == "linux"){
-      if(identical(latex_engine, "xelatex")){
+      if(identical(latex_engine, "xelatex") || identical(latex_engine, "tectonic")){
         jfontpreset <- "noto"
       }
       else if(identical(latex_engine, "lualatex")){
@@ -108,7 +108,7 @@ autodetect_jfont <- function(latex_engine, metadata = NULL){
       if(identical(latex_engine, "lualatex")) {
         jfontpreset <- "hiragino-pron"
       }
-      else if(identical(latex_engine, "xelatex")){
+      else if(identical(latex_engine, "xelatex") || identical(latex_engine, "tectonic")){
         jfontpreset <- "yu-osx"
       }
     }
