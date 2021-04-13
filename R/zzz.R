@@ -14,6 +14,13 @@ CSS_FILES <- function(){
   c("style.css", "toc.css")
 }
 
+add_pandoc_arg <- function(args, key, val){
+  if(!any(grepl(paste0("^", key), args))){
+    args <- c(args, c(key, val))
+  }
+  return(args)
+}
+
 gen_opts_hook_par <- function(font_family){
   f <- function(options){
     if(options$global.par){

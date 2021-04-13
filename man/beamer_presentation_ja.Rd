@@ -112,7 +112,7 @@ additional details.}
 \code{rmarkdown_output_format} class
 }
 \description{
-rmarkdown::beamer_presentation wrapper format for Japanese typesetting with XeLaTeX or LuaLaTeX / XeLaTeX または LuaLaTeX で \code{beamer_presentation} で日本語タイプセットをするためのラッパフォーマット.
+bookdown::beamer_presentation2 wrapper format for Japanese typesetting with XeLaTeX or LuaLaTeX / XeLaTeX または LuaLaTeX で \code{bookdown::beamer_presentation2} で日本語タイプセットをするためのラッパフォーマット.
 }
 \details{
 beamer presentation format for Japanese typesetting with XeLaTeX or LuaLaTeX

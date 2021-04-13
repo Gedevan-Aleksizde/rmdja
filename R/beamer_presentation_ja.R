@@ -61,6 +61,7 @@ beamer_presentation_ja <- function(
   code_softwrap = TRUE,
   citation_package = "biblatex",
   citation_options = "default",
+  latexmk = citation_package == "natbib",
   figurename = "図",
   tablename = "表",
   number_sections = FALSE,
@@ -68,7 +69,7 @@ beamer_presentation_ja <- function(
   incremental = FALSE,
   self_contained = TRUE,
   includes = NULL,
-  latex_engine = c("lualatex", "xelatex"),
+  latex_engine = c("xelatex", "lualatex", "tectonic"),
   dev = "cairo_pdf",
   template = "default",
   md_extensions = NULL,
@@ -76,7 +77,8 @@ beamer_presentation_ja <- function(
   opts_chunk = NULL
 ){
   # ----- check arguments class & value -----
-  match.arg(latex_engine, c("xelatex", "lualatex"))
+  latex_engine <- latex_engine[1]
+  match.arg(latex_engine, c("xelatex", "lualatex", "tectonic"))
   
   # ----- reshape arguments -----
   pandoc_args_base <- c()
@@ -84,7 +86,7 @@ beamer_presentation_ja <- function(
 
   if(!identical(theme_options, "default")){
     if(!is.null(theme_options) && !identical(theme_options, "")){
-      pandoc_args_base <- c(pandoc_args_base, "-V", paste0('themeoptions:', paste0(theme_options, collapse = ","))) #FIXME: how to handle '=' contained values/what does mean the """list""" in Pandoc commandline arguments?
+      pandoc_args_base <- c(pandoc_args_base, "-V", paste0('themeoptions:', paste0(theme_options, collapse = ","))) #FIXME: how to handle '=' contained values/what does mean the """list""" in Pandoc command line arguments?
     }
   }
   extra_metadata <- c(extra_metadata, merge_bibliography_args(citation_package, citation_options))
@@ -98,6 +100,9 @@ beamer_presentation_ja <- function(
   } else {
     pandoc_args_base <- c(pandoc_args_base, rmarkdown::pandoc_variable_arg("tablename", "図"))
   }
+  pandoc_args <- c(pandoc_args_base, pandoc_args)
+  pandoc_args <- add_pandoc_arg(pandoc_args, "--extract-media", ".")
+  
   if(missing(template) || identical(template, "") || identical(template, "default")){
     template <- system.file("resources/pandoc-templates/beamer-ja.tex.template", package = "rmdja")
   }
@@ -143,7 +148,7 @@ beamer_presentation_ja <- function(
     self_contained = self_contained,
     includes = includes,
     md_extensions = md_extensions,
-    pandoc_args = c(pandoc_args_base, pandoc_args)
+    pandoc_args = pandoc_args
   )
   base <- do.call(bookdown::beamer_presentation2, args_beamer_base)
 
