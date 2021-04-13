@@ -42,7 +42,7 @@ pdf_book_ja <- function (
   template = "default",
   keep_tex = TRUE,
   keep_md = TRUE,
-  latex_engine = "xelatex",
+  latex_engine = c("xelatex", "lualatex", "tectonic")
   citation_package = "biblatex",
   citation_options = "default",
   includes = NULL,
@@ -55,7 +55,8 @@ pdf_book_ja <- function (
   )
 {
   # --- check values ---
-  match.arg(latex_engine, c("xelatex", "lualatex"))
+  latex_engine <- latex_engine[1]
+  match.arg(latex_engine, c("xelatex", "lualatex", "tectonic"))
   match.arg(citation_package, c("default", "biblatex", "natbib"))
   
   top_level <- "chapter"
@@ -70,12 +71,15 @@ pdf_book_ja <- function (
   } else {
     attr_source <- NULL
   }
-  if(!any(grepl("^--top-level-division", pandoc_args))){
-    pandoc_args <- c(pandoc_args, paste0('--top-level-division=', top_level))
-  }
-  if(!any(grepl("^--extract-media", pandoc_args))){
-    pandoc_args <- c(pandoc_args, "--extract-media", '.')
-  }
+  #if(!any(grepl("^--top-level-division", pandoc_args))){
+  #  pandoc_args <- c(pandoc_args, paste0('--top-level-division=', top_level))
+  #}
+  #if(!any(grepl("^--extract-media", pandoc_args))){
+  #  pandoc_args <- c(pandoc_args, "--extract-media", '.')
+  #}
+  pandoc_args <- add_pandoc_arg(pandoc_args, "--top-level-division", top_level)
+  pandoc_args <- add_pandoc_arg(pandoc_args, "--extract-media", ".")
+  
   if(identical(extra_dependencies, NULL)){
     if(identical(tombow, T)){
       extra_dependencies <- list(gentombow = "pdfbox")
@@ -101,7 +105,6 @@ pdf_book_ja <- function (
       includes$in_header <- c(latex_preamble_code_softwrap, includes$in_header)
     }
   }
-
   args <- list(
     base = list(
       toc = toc,
@@ -189,16 +192,20 @@ pdf_book_ja <- function (
     knitr_options <- do.call(rmarkdown::knitr_options, args$knitr)
     out <- rmarkdown::output_format(
       pre_knit = adjust_fontsize,
-      knitr = args$knitr,
+      knitr = knitr_options,
       pre_processor = preproc,
-      pandoc = NULL,
+      pandoc = rmarkdown::pandoc_options(
+        to = "latex", args = args$pandoc_args,
+        keep_tex = keep_tex, latex_engine = latex_engine
+      ),
       keep_md = keep_md,
       clean_supporting = NULL,
       base_format = base_format_
     )
     return(out)
   }
-  out <- do.call(what = bookdown::pdf_book, args = list(base_format = base_))
+  out <- do.call(what = bookdown::pdf_book, args = list(base_format = base_, pandoc_args = pandoc_args))
+  
   return(out)
 }
 
