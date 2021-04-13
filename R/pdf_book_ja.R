@@ -12,6 +12,7 @@
 #' @param tombow logical. 製本時に必要なトンボ (trim markers) を付けるかどうか. トンボは `gentombow.sty` で作成される. 
 #' @param add_folio logical. 製本時に全ページにノンブルが必要な場合があるらしいので全ページに表示したい時に.
 #' @param latexmk_emulation logical. パッケージオプション `tinytex.latexmk.emulation` に連動する. デフォルトでは, 文献引用エンジンを natbib にしたときのみ `FALSE`, それ以外は `TRUE`. これは `tinytex` が (u)pBibTeX に対応していないため. どうしても BibTeX を使いたい場合以外は操作する必要のない不要なオプションですが, 日本語を含む文書を作成する限りそのような場面はないと思われます. 
+#' @citation_options character. \code{citation_package} のオプション.
 #' @return rmarkdown_output_format
 #'
 #' @export
@@ -162,6 +163,9 @@ pdf_book_ja <- function (
     args_extra <- args_extra[!is.na(names(args_extra))]
     if(identical(citation_package, "natbib")){
       copy_latexmkrc(metadata, input_file, runtime, knit_meta, files_dir, output_dir)
+      if(latexmk_emulation == T){
+        options(tinytex.latexmk.emulation = F)
+      }
     } else if(identical(citation_package, "biblatex")){
       if(is.null(args_extra[["biblio-style"]])){
         args_extra[["biblio-style"]] <- "jauthoryear"

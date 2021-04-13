@@ -189,6 +189,9 @@ beamer_presentation_ja <- function(
         bib_args[["natbiboptions"]] <- "numbers"
       }
       copy_latexmkrc(metadata, input_file, runtime, knit_meta, files_dir, output_dir)
+      if(latexmk_emulation == T){
+        options(tinytex.latexmk.emulation = F)
+      }
     } else if(identical(citation_package, "biblatex")){
       if(is.null(bib_args[["biblio-style"]])){
         bib_args[["biblio-style"]] <- "jauthoryear"
