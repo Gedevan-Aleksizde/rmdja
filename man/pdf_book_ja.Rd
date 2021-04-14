@@ -32,9 +32,10 @@ pdf_book_ja(
   template = "default",
   keep_tex = TRUE,
   keep_md = TRUE,
-  latex_engine = "xelatex",
+  latex_engine = c("xelatex", "lualatex", "tectonic"),
   citation_package = "biblatex",
   citation_options = "default",
+  latexmk_emulation = !citation_package == "natbib",
   includes = NULL,
   md_extensions = NULL,
   output_extensions = NULL,
@@ -80,6 +81,10 @@ black-and-white (grayscale).}
 \item{tombow}{logical. 製本時に必要なトンボ (trim markers) を付けるかどうか. トンボは \code{gentombow.sty} で作成される.}
 
 \item{add_folio}{logical. 製本時に全ページにノンブルが必要な場合があるらしいので全ページに表示したい時に.}
+
+\item{citation_options}{character. \code{citation_package} のオプション.}
+
+\item{latexmk_emulation}{logical. パッケージオプション \code{tinytex.latexmk.emulation} に連動する. デフォルトでは, 文献引用エンジンを natbib にしたときのみ \code{FALSE}, それ以外は \code{TRUE}. これは \code{tinytex} が (u)pBibTeX に対応していないため. どうしても BibTeX を使いたい場合以外は操作する必要のない不要なオプションですが, 日本語を含む文書を作成する限りそのような場面はないと思われます.}
 
 \item{pandoc_args}{See
 \code{rmarkdown::\link{pdf_document}}, or the documentation of the

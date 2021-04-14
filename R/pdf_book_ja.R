@@ -12,7 +12,7 @@
 #' @param tombow logical. 製本時に必要なトンボ (trim markers) を付けるかどうか. トンボは `gentombow.sty` で作成される. 
 #' @param add_folio logical. 製本時に全ページにノンブルが必要な場合があるらしいので全ページに表示したい時に.
 #' @param latexmk_emulation logical. パッケージオプション `tinytex.latexmk.emulation` に連動する. デフォルトでは, 文献引用エンジンを natbib にしたときのみ `FALSE`, それ以外は `TRUE`. これは `tinytex` が (u)pBibTeX に対応していないため. どうしても BibTeX を使いたい場合以外は操作する必要のない不要なオプションですが, 日本語を含む文書を作成する限りそのような場面はないと思われます. 
-#' @citation_options character. \code{citation_package} のオプション.
+#' @param citation_options character. `citation_package` のオプション.
 #' @return rmarkdown_output_format
 #'
 #' @export
@@ -47,7 +47,7 @@ pdf_book_ja <- function (
   latex_engine = c("xelatex", "lualatex", "tectonic"),
   citation_package = "biblatex",
   citation_options = "default",
-  latexmk_emulation = citation_package == "natbib",
+  latexmk_emulation = !citation_package == "natbib",
   includes = NULL,
   md_extensions = NULL,
   output_extensions = NULL,
@@ -111,6 +111,8 @@ pdf_book_ja <- function (
       includes$in_header <- c(latex_preamble_code_softwrap, includes$in_header)
     }
   }
+  tinytex_latexmk_default <- getOption("tinytex.latexmk.emulation")
+
   args <- list(
     base = list(
       toc = toc,
@@ -163,8 +165,9 @@ pdf_book_ja <- function (
     args_extra <- args_extra[!is.na(names(args_extra))]
     if(identical(citation_package, "natbib")){
       copy_latexmkrc(metadata, input_file, runtime, knit_meta, files_dir, output_dir)
-      if(latexmk_emulation == T){
+      if(latexmk_emulation == F){
         options(tinytex.latexmk.emulation = F)
+        message("Preprocessing: latexmk emulation is temporarily diabled.")
       }
     } else if(identical(citation_package, "biblatex")){
       if(is.null(args_extra[["biblio-style"]])){
@@ -209,7 +212,8 @@ pdf_book_ja <- function (
       ),
       keep_md = keep_md,
       clean_supporting = NULL,
-      base_format = base_format_
+      base_format = base_format_,
+      on_exit = function(x){options(tinytex.latexmk.emulation = tinytex_latexmk_default)}
     )
     return(out)
   }

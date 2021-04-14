@@ -23,6 +23,7 @@ beamer_presentation_ja(
   code_softwrap = TRUE,
   citation_package = "biblatex",
   citation_options = "default",
+  latexmk_emulation = !citation_package == "natbib",
   figurename = "図",
   tablename = "表",
   number_sections = FALSE,
@@ -30,7 +31,7 @@ beamer_presentation_ja(
   incremental = FALSE,
   self_contained = TRUE,
   includes = NULL,
-  latex_engine = c("lualatex", "xelatex"),
+  latex_engine = c("xelatex", "lualatex", "pdflatex", "tectonic"),
   dev = "cairo_pdf",
   template = "default",
   md_extensions = NULL,
@@ -72,6 +73,8 @@ beamer_presentation_ja(
 \item{citation_package}{character. 本文中の引用トークンに関するパッケージ. \code{"default"}, \code{"natbib"} or \code{"biblatex"}. \code{"default"} は pandoc-citeproc を, \code{"natbib"} は bibtex を使用する. よって \code{"natbib"} で日本語文献を引用する場合はオプション \code{options(tinytex.latexmk.emulation = F)} が必要. 詳細は \link[=https://gedevan-aleksizde.github.io/rmdja/\%E6\%96\%87\%E7\%8C\%AE\%E5\%BC\%95\%E7\%94\%A8.html#\%E3\%82\%92\%E4\%BD\%BF\%E3\%81\%86]{rmdja の公式ドキュメント} を参照.}
 
 \item{citation_options}{character. \code{citation_package} のオプション. \code{"default"}, 空の文字列, \code{NULL} などを指定すると特に何もしない. \code{citation_package = "natbib"} を選んだ場合, \code{"default"} は \code{`numbers`} に書き換えられる.}
+
+\item{latexmk_emulation}{logical. パッケージオプション \code{tinytex.latexmk.emulation} に連動する. デフォルトでは, 文献引用エンジンを natbib にしたときのみ \code{FALSE}, それ以外は \code{TRUE}. これは \code{tinytex} が (u)pBibTeX に対応していないため. どうしても BibTeX を使いたい場合以外は操作する必要のない不要なオプションですが, 日本語を含む文書を作成する限りそのような場面はないと思われます.}
 
 \item{figurename}{character. 図X の「図」の部分のテキスト.}
 

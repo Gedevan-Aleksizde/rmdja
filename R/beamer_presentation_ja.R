@@ -62,7 +62,7 @@ beamer_presentation_ja <- function(
   code_softwrap = TRUE,
   citation_package = "biblatex",
   citation_options = "default",
-  latexmk_emulation = citation_package == "natbib",
+  latexmk_emulation = !citation_package == "natbib",
   figurename = "図",
   tablename = "表",
   number_sections = FALSE,
@@ -70,7 +70,7 @@ beamer_presentation_ja <- function(
   incremental = FALSE,
   self_contained = TRUE,
   includes = NULL,
-  latex_engine = c("xelatex", "lualatex", "tectonic"),
+  latex_engine = c("xelatex", "lualatex", "pdflatex", "tectonic"),
   dev = "cairo_pdf",
   template = "default",
   md_extensions = NULL,
@@ -127,6 +127,7 @@ beamer_presentation_ja <- function(
       includes$in_header <- c(latex_preamble_code_softwrap, includes$in_header)
     }
   }
+  tinytex_latexmk_default <- getOption("tinytex.latexmk.emulation")
   
   # ----- generate output format -----
   args_beamer_base <- list(
@@ -189,8 +190,9 @@ beamer_presentation_ja <- function(
         bib_args[["natbiboptions"]] <- "numbers"
       }
       copy_latexmkrc(metadata, input_file, runtime, knit_meta, files_dir, output_dir)
-      if(latexmk_emulation == T){
+      if(latexmk_emulation == F){
         options(tinytex.latexmk.emulation = F)
+        message("Preprocessing: latexmk emulation is temporarily disabled.")
       }
     } else if(identical(citation_package, "biblatex")){
       if(is.null(bib_args[["biblio-style"]])){
@@ -221,7 +223,8 @@ beamer_presentation_ja <- function(
     pre_processor = preproc,
     clean_supporting = !keep_tex,
     keep_md = keep_md,
-    base_format = base
+    base_format = base,
+    on_exit = function(x){options(tinytex.latexmk.emulation = tinytex_latexmk_default)}
     )
   return(out)
 }
