@@ -2,7 +2,8 @@
 #'  
 #' @inheritParams bookdown::gitbook
 #' @param split_by character. デフォルト: 'chapter'. 'chapter', 'chapter+number', 'section', 'section+number', 'rmd', 'none' から選ぶ. ページを区切る単位.
-#' @param config: list. デフォルト: 実際に出力して確認したほうが早い. 詳しくは bookdown のマニュアル. 
+#' @param config: list. デフォルト: 実際に出力して確認したほうが早い. 詳しくは bookdown のマニュアル.
+#' @param dev: character. デフォルト: `png` しかし将来 `ragg_png` にするかもしれない.
 #' @param code_rownumber: logical. デフォルト: TRUE. 行番号を表示するかどうか
 #' @export
 gitbook_ja <- function(

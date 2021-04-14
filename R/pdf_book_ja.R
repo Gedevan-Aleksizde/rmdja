@@ -167,7 +167,7 @@ pdf_book_ja <- function (
       copy_latexmkrc(metadata, input_file, runtime, knit_meta, files_dir, output_dir)
       if(latexmk_emulation == F){
         options(tinytex.latexmk.emulation = F)
-        message("Preprocessing: latexmk emulation is temporarily diabled.")
+        message("Preprocessing: latexmk emulation is temporarily diabled to use (u)pBibTeX.")
       }
     } else if(identical(citation_package, "biblatex")){
       if(is.null(args_extra[["biblio-style"]])){
