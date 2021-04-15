@@ -81,7 +81,7 @@ beamer_presentation_ja <- function(
   latex_engine <- latex_engine[1]
   match.arg(latex_engine, c("xelatex", "lualatex", "tectonic", "pdflatex"))
   if(latex_engine == "pdflatex"){
-    message("You selected `pdflatex` engine. It is not good choice for Japanese documents. Maybe `xelatex` or `lualatex` is better.")
+    message("You selected `pdflatex` engine. It is not good choice for Japanese documents. Possibly `xelatex` or `lualatex` is better.")
   }
   # ----- reshape arguments -----
   pandoc_args_base <- c()
@@ -192,7 +192,8 @@ beamer_presentation_ja <- function(
       copy_latexmkrc(metadata, input_file, runtime, knit_meta, files_dir, output_dir)
       if(latexmk_emulation == F){
         options(tinytex.latexmk.emulation = F)
-        message("Preprocessing: latexmk emulation is temporarily disabled to use (u)pBibTeX.")
+        message(gettext("Preprocessing"), ": ",
+                gettext("latexmk emulation is temporarily disabled to use (u)pBibTeX."))
       }
     } else if(identical(citation_package, "biblatex")){
       if(is.null(bib_args[["biblio-style"]])){

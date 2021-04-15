@@ -61,7 +61,7 @@ pdf_book_ja <- function (
   latex_engine <- latex_engine[1]
   match.arg(latex_engine, c("xelatex", "lualatex", "tectonic", "pdflatex"))
   if(latex_engine == "pdflatex"){
-    message("You selected `pdflatex` engine. It is not good choice for Japanese documents. Maybe `xelatex` or `lualatex` is better.")
+    message("You selected `pdflatex` engine. It is not good choice for Japanese documents. Possibly `xelatex` or `lualatex` is better.")
   }
   match.arg(citation_package, c("default", "biblatex", "natbib"))
   
@@ -77,12 +77,6 @@ pdf_book_ja <- function (
   } else {
     attr_source <- NULL
   }
-  #if(!any(grepl("^--top-level-division", pandoc_args))){
-  #  pandoc_args <- c(pandoc_args, paste0('--top-level-division=', top_level))
-  #}
-  #if(!any(grepl("^--extract-media", pandoc_args))){
-  #  pandoc_args <- c(pandoc_args, "--extract-media", '.')
-  #}
   pandoc_args <- add_pandoc_arg(pandoc_args, "--top-level-division", top_level)
   pandoc_args <- add_pandoc_arg(pandoc_args, "--extract-media", ".")
   
@@ -167,7 +161,8 @@ pdf_book_ja <- function (
       copy_latexmkrc(metadata, input_file, runtime, knit_meta, files_dir, output_dir)
       if(latexmk_emulation == F){
         options(tinytex.latexmk.emulation = F)
-        message("Preprocessing: latexmk emulation is temporarily diabled to use (u)pBibTeX.")
+        message(gettext("Preprocessing"), ": ",
+                gettext("latexmk emulation is temporarily disabled to use (u)pBibTeX."))
       }
     } else if(identical(citation_package, "biblatex")){
       if(is.null(args_extra[["biblio-style"]])){
