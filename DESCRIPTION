@@ -1,6 +1,6 @@
 Package: rmdja
 Title: R Markdown Formats for Japanese
-Version: 0.4.3
+Version: 0.4.5
 Authors@R: person(role = c("aut", "cre"), email = "katagiri.stsh@gmail.com", given = "Satoshi", family = "Katagiri")
 Description: R Markdown end-user PDF templates with Japanese typesetting presets
 Encoding: UTF-8
@@ -9,20 +9,24 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 Depends: R (>= 3.6.2)
 Imports:
-  rmarkdown (>= 2.4),
-  bookdown (>= 0.20.6),
+  rmarkdown (>= 2.6),
+  bookdown (>= 0.21),
   commonmark (>= 1.7),
   styler (>= 1.3.2)
 Suggests:
   tidyverse,
   ggthemes,
+  xaringan,
   kableExtra,
+  huxtable,
   citr,
   clipr,
   ymlthis,
-  tufte
+  ragg,
+  svglite,
+  fontregisterer
 BugReports: https://github.com/Gedevan-Aleksizde/rmdja/issues
 Remotes: 
     github::Gedevan-Aleksizde/fontregisterer
 RoxygenNote: 7.1.1
-Licence: BSD-3
+License: BSD-3
