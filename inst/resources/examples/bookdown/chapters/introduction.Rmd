@@ -112,7 +112,7 @@ rmdja::pdf_book_ja:
 
 さらに, 作成した文書は PDF 形式で出力することはもちろん, HTML 形式で様々なサイトで掲載でき[^blogdown]たり, 電子書籍ファイルとしても出力可能である. このような多様な出力形式への対応しているソフトウェアはあまり例を見ない.
 
-```{block review-info, type="rmdwarning"}
+```{block review-info, type="warning"}
 ただし, 現時点では出版に堪えうる組版規格を満たす文書を生成するのは大変である. 紙媒体の書籍を作りたい, かつ R や  `\LaTeX`{=latex}`Latex`{=html} を未習得であり, これらを習得することに興味がない場合は [Re:View](https://reviewml.org/ja/) の使用を検討してほしい.
 ```
 
@@ -120,7 +120,7 @@ rmdja::pdf_book_ja:
 
 Rを使わない, あるいはそもそもプログラミングに詳しくない, という人間にもある使用機会がある. たとえばR を普段使わない人間でも `bookdown` で同人技術書を執筆したという事例がある[^bookdown-example]. この事例は主に数式と画像の貼付けのみだから, 数式出力に必要な `r rmdja::texlogo("LaTeX")` の知識があればほとんどのことはできてしまう. そして `rmdja` ではこの事例で言及されている `r rmdja::texlogo("LaTeX")` の設定の多くは自動で制御される. また, 小説などはほぼテキストであり, 最低限のレイアウトさえ用意すれば数式も, あるいは画像の挿入すらいらないことが多い. `rmdja` では縦書き文書をPDFで出力する方法も用意している.
 
-```{block experimental-features, type="rmdimportant"}
+```{block experimental-features, type="important"}
 印刷用フォーマットおよび縦書き文書フォーマットは現在実験的な導入段階であり, 表示の一部に不具合が存在する.
 ```
 

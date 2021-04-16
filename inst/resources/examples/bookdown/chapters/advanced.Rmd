@@ -137,7 +137,7 @@ include_graphics(if(is_latex_output()) "img/kableExtra.pdf" else "img/kableExtra
 
 まず, `knitrExtra::kbl()` は既に紹介した `kable()` のラッパであり, 内部で呼び出すのは `kable()` のため `booktabs` といった従来の引数が使える上に, オプション設定の構文がより分かりやすくなっている. さらに `kableExtra` の独自機能として, 表 \@ref(tab:kableextra-color) にみられるように条件書式のような装飾が可能である[^mtcars-term].
 
-```{block kableextra-official, type="rmdnote"}
+```{block kableextra-official, type="memo"}
 `kableExtra` パッケージはヘルプドキュメントはもちろん, 公式の解説や用例も充実している.
 
 https://haozhu233.github.io/kableExtra/
@@ -301,7 +301,7 @@ RCB [10.3 Other packages for creating tables](https://bookdown.org/yihui/rmarkdo
 
 ## `(u)p\BibTeX`{=latex}`(u)pBibTeX`{=html} を使う
 
-```{block2 upbibtex-customize, type="rmdcaution"}
+```{block2 upbibtex-customize, type="caution"}
 このセクションの説明の理解には多少の `\LaTeX`{=latex}`LaTeX`{=html} の知識を要する.  Ver. 0.4.3 以降では BibLaTeX 用の日本語スタイルとして最低限のクオリティだけは保った `jauthoryear` を用意しているため, どうしても文献リストのスタイルにこだわりたい以外はここで紹介される方法は使わないほうが良い.
 ```
 
@@ -367,7 +367,7 @@ TODO: その他の非ラテン文字, キリル文字, アラビア文字 ヘブ
 
 # Python スクリプトの埋め込み {#python}
 
-```{block py-warning, type="rmdcaution"}
+```{block py-warning, type="caution"}
 現時点では `reticulate` による Python 実行はグラフィック関係や環境設定でまだまだバギーなところが多い. つまり, エラーが発生した場合には原因が Python 側にあるのか RStudio や `reticulate` パッケージ側にあるのか判断しなければならない. よってあなたがどちらかに習熟していなかったり, まだエラーメッセージを注意深く読む習慣がついていない初心者である場合, 作業が非効率になることが予想される.
 ```
 
@@ -396,7 +396,7 @@ repl_python()
 
 `matplotlib` エンジンで描いたグラフに日本語フォントを埋め込む場合, `matplotlib-japreset` を使えば必要な設定を一括で行う.
 
-```{block type="rmdwarning"}
+```{block type="warning"}
 `matplotlib-japreset` は現在, Linux 以外での動作保証をしていない
 ```
 

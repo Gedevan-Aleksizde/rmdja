@@ -219,33 +219,33 @@ ${E_1,E_2,\cdots}$をある確率空間の事象とする. これらの事象の
 
 数式のセクションの定理ブロックの応用で, 独自のブロックセクションを定義することができる. `rmdja` では BKD [Ch. 2.7 Custom blocks](https://bookdown.org/yihui/bookdown/custom-blocks.html) で紹介されている例を予め使えるようにしている. それらは `type="..."` で指定できて, 以下の5種類がある.
 
-* `rmdcaution`
-* `rmdimportant`
-* `rmdnote`
-* `rmdtip`
-* `rmdwarning`
+* `caution`
+* `important`
+* `memo`
+* `tip`
+* `warning`
 
 
 である.
 
-```{block block-example-caution, type="rmdcaution"}
-技術書によくある注意を喚起するブロック (`rmdcaution`).
+```{block block-example-caution, type="caution"}
+技術書によくある注意を喚起するブロック (`caution`).
 ```
 
-```{block block-example-important, type="rmdimportant"}
-技術書によくある注意を喚起するブロック (`rmdimportant`).
+```{block block-example-important, type="important"}
+技術書によくある注意を喚起するブロック (`important`).
 ```
 
-```{block block-example-note, type="rmdnote"}
-技術書によくある注意を喚起するブロック (`rmdcnote`).
+```{block block-example-note, type="memo"}
+技術書によくある注意を喚起するブロック (`memo`).
 ```
 
-```{block block-example-tip, type="rmdtip"}
-技術書によくある注意を喚起するブロック (`rmdtip`).
+```{block block-example-tip, type="tip"}
+技術書によくある注意を喚起するブロック (`tip`).
 ```
 
-```{block boloc-example-warning, type="rmdwarning"}
-技術書によくある注意を喚起するブロック (`rmdwarning`).
+```{block boloc-example-warning, type="warning"}
+技術書によくある注意を喚起するブロック (`warning`).
 ```
 
 このブロック内では Markdown の基本構文しか使えず, 引用や相互参照などは使えない. これらをブロック内で使いたい場合は `block` の代わりに `block2`  と書く. ただしこちらは pandoc の機能のハックであるため, 将来使えなくなる可能性もある.
@@ -321,7 +321,7 @@ require(kableExtra)
 * `include`: 文書作成時にプログラムを実行し, **かつ掲載しない**かどうか
 * `results`: 出力をいつもの R の出力風にするか (`markup`), 隠すか (`"hide"`), 出力を区切らずまとめるか (`"hold"`), テキストをそのまま出力するか (`"asis"`). 最後は R Markdown のソースコードを動的に生成したい場合などに使う.
 
-```{block, type="rmdnote"}
+```{block, type="memo"}
 R の論理値は `TRUE`/`FALSE` または `T`/`F` と書く.
 ```
 

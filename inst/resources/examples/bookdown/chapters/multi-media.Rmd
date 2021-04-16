@@ -113,15 +113,15 @@ ggplot(mutate(mtcars, cyl = factor(cyl)),
 knitr::include_graphics(file.path(img_dir, "tategaki.png"))
 ```
 
-```{block, type="rmdwarning"}
+```{block, type="warning"}
 現在, 縦書き文書では図のようにゴシック体になってしまうことがある.
 ```
 
-```{block, type="rmdtip"}
+```{block, type="tip"}
 エディタは横書きのままである. また, 段落改行も Markdown のルールに則して1行空けによってなされる.
 ```
 
-```{block, type="rmdtip"}
+```{block, type="tip"}
 『小説家になろう』『カクヨム』とかに自動投稿する機能もいまのところ用意していない.
 ```
 

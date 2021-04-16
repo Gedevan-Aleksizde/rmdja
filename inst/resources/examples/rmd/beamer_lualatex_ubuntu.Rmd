@@ -58,9 +58,6 @@ biblio-title: "参考文献"
 ---
 
 ```{r setup-document, include=F}
-options(tinytex.latexmk.emulation = F)
-# 上記は日本語引用文献リストのために必要
-
 # サンプル画像等を参照するパス
 file_loc <- system.file("resources", package = "rmdja")
 # サンプル引用文献リストを取得する
