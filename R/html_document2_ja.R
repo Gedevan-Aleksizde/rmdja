@@ -1,12 +1,10 @@
-#' bookdown::gitbook wrapper for Japanese
+#' bookdown::html_document2 wrapper for Japanese
 #'  
 #' @inheritParams bookdown::gitbook
-#' @param split_by character. デフォルト: 'chapter'. 'chapter', 'chapter+number', 'section', 'section+number', 'rmd', 'none' から選ぶ. ページを区切る単位.
-#' @param config: list. デフォルト: 実際に出力して確認したほうが早い. 詳しくは bookdown のマニュアル.
 #' @param dev: character. デフォルト: `png` しかし将来 `ragg_png` にするかもしれない.
 #' @param code_rownumber: logical. デフォルト: TRUE. 行番号を表示するかどうか
 #' @export
-gitbook_ja <- function(
+html_document2_ja <- function(
   fig_caption = TRUE,
   fig_align = "center",
   fig_width = 7,
@@ -15,10 +13,7 @@ gitbook_ja <- function(
   table_css = TRUE,
   toc_depth = 3,
   number_sections = TRUE,
-  section_divs = TRUE,
-  split_by = c("chapter", "chapter+number", "section", "section+number", "rmd", "none"),
   self_contained = FALSE,
-  split_bib = TRUE,
   code_folding = c("none", "show", "hide"),
   code_download = FALSE,
   code_rownumber = TRUE,
@@ -28,7 +23,6 @@ gitbook_ja <- function(
   df_print = "default",
   mathjax = "default",
   template = "default",
-  config = list(),
   extra_dependencies = NULL,
   css = NULL,
   includes = NULL,
@@ -39,35 +33,8 @@ gitbook_ja <- function(
   ...){
   
   code_folding <- code_folding[1]
-  split_by <- split_by[1]
   match.arg(code_folding, c("none", "show", "hide"))
-  match.arg(split_by, c('chapter', 'chapter+number', 'section', 'section+number', 'rmd', 'none'))
-  
-  if(missing(config) || is.null(config) || length(config) <= 0){
-    config <- list(
-      toc = list(
-        collapse = "none",
-        before = '<li><a href="index.html">Top</a></li>',
-        after = '<li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>'
-        ),
-      toolbar = list(position = "fixed"),
-      edit = NULL,
-      download = c("pdf", "epub", "mobi"),
-      search = TRUE,
-      fontsettings = list(
-        theme = "white",
-        family = "serif",
-        size = 2
-      ),
-      info = TRUE,
-      sharing = list(
-        github = TRUE,
-        twitter = TRUE,
-        facebook = TRUE,
-        all = c('linkedin', 'vk', 'weibo', 'instapaper')
-      )
-    )
-  }
+
   opts_chunk_default <- list()
   if(code_rownumber) {
     opts_chunk_default <- c(opts_chunk_default, list(attr.source = c(".numberLines .lineAnchors")))
@@ -105,7 +72,6 @@ gitbook_ja <- function(
     fig_width = fig_width,
     fig_height = fig_height,
     fig_retina = fig_retina,
-    section_divs = section_divs,
     code_folding = code_folding,
     code_download = code_download,
     highlight = highlight,
@@ -119,25 +85,19 @@ gitbook_ja <- function(
     keep_md = keep_md,
     md_extensions = md_extensions,
     template = template,
-    split_by = split_by,
-    split_bib = split_bib,
-    config = config,
-    table_css = table_css,
-    base_format = do.call(
-      rmarkdown::output_format,
-      list(pandoc = NULL,
-           knitr = rmarkdown::knitr_options(
-             opts_chunk = opts_chunk_default,
-             opts_hooks = list(echo = hook_display_block),
-             opts_knit = list(global.par = T)
-             ),
-           pre_processor = preproc_css,
-           base_format = rmarkdown::html_document()
-           )
-      ),
     ...
   )
-  out <- do.call(bookdown::gitbook, args)
+  out <- rmarkdown::output_format(
+    knitr = rmarkdown::knitr_options(
+      opts_chunk = opts_chunk_default,
+      opts_hooks = list(echo = hook_display_block),
+      opts_knit = list(global.par = T)
+    ),
+    pandoc = NULL,
+    keep_md = keep_md,
+    pre_processor = preproc_css,
+    base_format = do.call(bookdown::html_document2, args)
+  )
   # TODO refactoring
   preproc_base <- out$pre_processor
   out$pre_processor <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
