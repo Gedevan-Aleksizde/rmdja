@@ -43,6 +43,9 @@ $endif$
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }
 \setbeamercolor{caption name}{fg=normal text.fg}
+$if(biblatex)$
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+$endif$
 \beamertemplatenavigationsymbols$if(navigation)$$navigation$$else$empty$endif$
 $for(beameroption)$
 \setbeameroption{$beameroption$}
