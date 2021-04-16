@@ -20,7 +20,8 @@ beamer_presentation_ja(
   out.height = "100\%",
   highlight = "default",
   code_rownumber = FALSE,
-  code_softwrap = TRUE,
+  code_softwrapped = TRUE,
+  block_style = c("default", "kframe", "tcolorbox"),
   citation_package = "biblatex",
   citation_options = "default",
   latexmk_emulation = !citation_package == "natbib",
@@ -68,7 +69,7 @@ beamer_presentation_ja(
 
 \item{code_rownumber}{logical チャンクに行番号を付けるかどうか.}
 
-\item{code_softwrap}{logical チャンク内のコードを自動折り返しするかどうか.}
+\item{code_softwrapped}{logical チャンク内のコードを自動折り返しするかどうか. YAML メタデータ \code{code-softwrapped} でも可.}
 
 \item{citation_package}{character. 本文中の引用トークンに関するパッケージ. \code{"default"}, \code{"natbib"} or \code{"biblatex"}. \code{"default"} は pandoc-citeproc を, \code{"natbib"} は bibtex を使用する. よって \code{"natbib"} で日本語文献を引用する場合はオプション \code{options(tinytex.latexmk.emulation = F)} が必要. 詳細は \link[=https://gedevan-aleksizde.github.io/rmdja/\%E6\%96\%87\%E7\%8C\%AE\%E5\%BC\%95\%E7\%94\%A8.html#\%E3\%82\%92\%E4\%BD\%BF\%E3\%81\%86]{rmdja の公式ドキュメント} を参照.}
 
@@ -125,6 +126,7 @@ rmarkdownで \LaTeX を使う場合, 日本語を適切に表示するために�
 }
 \seealso{
 Other pdf formats: 
-\code{\link{pdf_book_ja}()}
+\code{\link{pdf_book_ja}()},
+\code{\link{pdf_document2_ja}()}
 }
 \concept{pdf formats}

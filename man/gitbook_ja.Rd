@@ -83,6 +83,8 @@ Arguments to be passed to \code{rmarkdown::\link{html_document}()}
 
 \item{config:}{list. デフォルト: 実際に出力して確認したほうが早い. 詳しくは bookdown のマニュアル.}
 
+\item{dev:}{character. デフォルト: \code{png} しかし将来 \code{ragg_png} にするかもしれない.}
+
 \item{code_rownumber:}{logical. デフォルト: TRUE. 行番号を表示するかどうか}
 }
 \description{
