@@ -1,5 +1,4 @@
-#' internal
-
+# internal
 
 DUMMY_ENGINES <- function(){
   c("cat", "asis", "block", "block2",
@@ -14,6 +13,13 @@ CSS_FILES <- function(){
   c("style.css", "toc.css")
 }
 
+LATEX_ENGINES <- c("xelatex", "lualatex", "tectonic", "pdflatex")
+
+BIBLIO_ENGINES <- c("default", "natbib", "biblatex")
+
+BLOCK_STYLES <- c("kframe", "tcolorbox", "awesomebox")
+
+# common functions
 add_pandoc_arg <- function(args, key, val){
   if(!any(grepl(paste0("^", key), args))){
     args <- c(args, c(key, val))

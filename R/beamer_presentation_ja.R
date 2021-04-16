@@ -22,7 +22,7 @@
 #' @param out.heigt character. `out.height` 参照. 
 #' @param highlight character. チャンク内のコードのシンタックスハイライトのデザイン. \code{\link[rmarkdown]{beamer_presentation}} 参照. 
 #' @param code_rownumber logical チャンクに行番号を付けるかどうか. 
-#' @param code_softwrap logical チャンク内のコードを自動折り返しするかどうか.
+#' @param code_softwrapped logical チャンク内のコードを自動折り返しするかどうか. YAML メタデータ `code-softwrapped` でも可.
 #' @param citation_package character. 本文中の引用トークンに関するパッケージ. \code{"default"}, \code{"natbib"} or \code{"biblatex"}. \code{"default"} は pandoc-citeproc を, \code{"natbib"} は bibtex を使用する. よって \code{"natbib"} で日本語文献を引用する場合はオプション \code{options(tinytex.latexmk.emulation = F)} が必要. 詳細は \link[=https://gedevan-aleksizde.github.io/rmdja/%E6%96%87%E7%8C%AE%E5%BC%95%E7%94%A8.html#%E3%82%92%E4%BD%BF%E3%81%86]{rmdja の公式ドキュメント} を参照.
 #' @param citation_options character. `citation_package` のオプション. `"default"`, 空の文字列, \code{NULL} などを指定すると特に何もしない. \code{citation_package = "natbib"} を選んだ場合, \code{"default"} は \code{`numbers`} に書き換えられる. 
 #' @param figurename character. 図X の「図」の部分のテキスト.
@@ -59,7 +59,8 @@ beamer_presentation_ja <- function(
   out.height = "100%",
   highlight = "default",
   code_rownumber = FALSE,
-  code_softwrap = TRUE,
+  code_softwrapped = TRUE,
+  block_style = c("default", "kframe", "tcolorbox"),
   citation_package = "biblatex",
   citation_options = "default",
   latexmk_emulation = !citation_package == "natbib",
@@ -79,10 +80,12 @@ beamer_presentation_ja <- function(
 ){
   # ----- check arguments class & value -----
   latex_engine <- latex_engine[1]
-  match.arg(latex_engine, c("xelatex", "lualatex", "tectonic", "pdflatex"))
+  match.arg(latex_engine, LATEX_ENGINES)
   if(latex_engine == "pdflatex"){
     message("You selected `pdflatex` engine. It is not good choice for Japanese documents. Possibly `xelatex` or `lualatex` is better.")
   }
+  block_style <- block_style[1]
+  match.arg(block_style, c("default", BLOCK_STYLES))
   # ----- reshape arguments -----
   pandoc_args_base <- c()
   extra_metadata <- list()
@@ -108,24 +111,6 @@ beamer_presentation_ja <- function(
   
   if(missing(template) || identical(template, "") || identical(template, "default")){
     template <- system.file("resources/pandoc-templates/beamer-ja.tex.template", package = "rmdja")
-  }
-  
-  if("preamble" %in% names(includes)){
-    file_in_header_extra <- tempfile(fileext = ".tex")
-    if(!is.null(includes$in_header)){
-      txt_in_header <- readLines(includes$in_header)
-      write(txt_in_header, file_in_header_extra)
-    }
-    write(includes$preamble, file_in_header_extra, append = T)
-    includes$in_header <- file_in_header_extra
-  }
-  if(identical(code_softwrap, T)){
-    latex_preamble_code_softwrap <- system.file("resources/styles/latex/code-softwrap.tex", package = "rmdja")
-    if(is.null(includes)){
-      includes <- rmarkdown::includes(in_header = latex_preamble_code_softwrap)
-    } else {
-      includes$in_header <- c(latex_preamble_code_softwrap, includes$in_header)
-    }
   }
   tinytex_latexmk_default <- getOption("tinytex.latexmk.emulation")
   
@@ -181,13 +166,16 @@ beamer_presentation_ja <- function(
                               latex_engine = latex_engine)
   
   preproc <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
-    bib_args <- rmarkdown:::merge_lists(
+    args_extra <- rmarkdown:::merge_lists(
       metadata[c("biblio-style", "natbiboptions", "biblatexoptions")],
       extra_metadata[c("biblio-style", "natbiboptions", "biblatexoptions")])
-    bib_args <- bib_args[!is.na(names(bib_args))]
+    args_extra <- args_extra[!is.na(names(args_extra))]
+    if(identical(code_softwrapped, T)){
+      args_extra[["code-softwrapped"]] <- T
+    }
     if(identical(citation_package, "natbib")){
-      if(is.null(bib_args[["natbiboptions"]])){
-        bib_args[["natbiboptions"]] <- "numbers"
+      if(is.null(args_extra[["natbiboptions"]])){
+        args_extra[["natbiboptions"]] <- "numbers"
       }
       copy_latexmkrc(metadata, input_file, runtime, knit_meta, files_dir, output_dir)
       if(latexmk_emulation == F){
@@ -196,21 +184,37 @@ beamer_presentation_ja <- function(
                 gettext("latexmk emulation is temporarily disabled to use (u)pBibTeX."))
       }
     } else if(identical(citation_package, "biblatex")){
-      if(is.null(bib_args[["biblio-style"]])){
-        bib_args[["biblio-style"]] <- "jauthoryear"
+      if(is.null(args_extra[["biblio-style"]])){
+        args_extra[["biblio-style"]] <- "jauthoryear"
       }
-      if(is.null(bib_args[["biblatexoptions"]])){
-        bib_args["biblatexoptions"] <- c("natbib=true,citestyle=numeric")
+      if(is.null(args_extra[["biblatexoptions"]])){
+        args_extra["biblatexoptions"] <- c("natbib=true,citestyle=numeric")
       }
-      if(bib_args[["biblio-style"]] == "jauthoryear"){
+      if(args_extra[["biblio-style"]] == "jauthoryear"){
         copy_biblatexstyle(metadata, input_file, runtime, knit_meata, files_dir, output_dir)
       }
     }
-    if(is.null(metadata[["biblio-title"]])) bib_args <- c(bib_args, list(`biblio-title`="参考文献"))
+    if(is.null(metadata[["biblio-title"]])) args_extra <- c(args_extra, list(`biblio-title`="参考文献"))
+    if(block_style == "default"){
+      if(any(!is.null(args_extra[["block-style"]]), F) && args_extra[["block-style"]] %in% BLOCK_STYLES){
+        args_extra[[args_extra[["block-style"]]]] <- T
+      } else if(any(unlist(args_extra[BLOCK_STYLES]))){
+        for(s in BLOCK_STYLES){
+          args_extra[[s]] <- T
+        }
+      } else {
+        args_extra[["kframe"]] <- T
+      }
+    } else {
+      args_extra[[block_style]] <- T
+      for(s in BLOCK_STYLES){
+        if(s != block_style) args_extra[[s]] <- NULL
+      }
+    }
     return(
       c(
         autodetect_and_set_jfont(metadata, input_file, runtime, knit_meta, files_dir, output_dir, latex_engine),
-        paste0("-M", names(bib_args), "=", bib_args)
+        paste0("-M", names(args_extra), "=", args_extra)
       )
     )
   }
