@@ -42,7 +42,6 @@ header-includes:
 # サンプル引用文献リストを取得する
 dir.create("img")
 file.copy(system.file("resources/bibliography/rmdja.bib", package = "rmdja"), to = "./")
-# options(tinytex.latexmk.emulation = F)
 # 上記は日本語引用文献リストのために必要
 
 
