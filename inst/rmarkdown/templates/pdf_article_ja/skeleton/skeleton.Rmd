@@ -4,15 +4,14 @@ date: "`r Sys.Date()`"
 author: "RMDJA太郎"
 abstract: "`rmdja` パッケージは, `rmarkdown` および `bookdown` パッケージで自然なレイアウトの日本語文書を作成する際に必要な煩雑な設定を自動で行い, ユーザーの負担を軽減するために作成されたパッケージである."
 output:
-  rmdja::pdf_book_ja:
+  rmdja::pdf_document2_ja:
+    latex_engine: lualatex
     toc: false
-    pandoc_args:
-      - '--top-level-division=section'
-documentclass: bxjsarticle
+documentclass: ltjsarticle
 classoption:
   - a4paper
-  - 'number-of-lines=30'
-  - 'textwidth=40zw'
+  - 'number-of-lines=30'  # 1頁30行, ただし見出しは別
+  - 'textwidth=40zw'      # 1行全角40字, ただしプロポーショナルフォントなので絶対ではない
 bibliography: 
   - packages.bib
 link-citations: false
