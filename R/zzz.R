@@ -6,7 +6,7 @@ DUMMY_ENGINES <- function(){
     "example", "exercise", "proof", "remark", "solution")
 }
 ICON_FILES <- function(){
-  c("caution.png", "tip.png", "important.png", "note.png", "warning.png")
+  c("caution.png", "tip.png", "important.png", "memo.png", "warning.png")
 }
 
 CSS_FILES <- function(){
