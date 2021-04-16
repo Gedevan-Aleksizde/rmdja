@@ -13,6 +13,7 @@ rmdja::pdf_book_ja:
   tombow: false
   # add_folio: true
   keep_tex: true
+  block_style: tcolorbox
 
 bookdown::epub_book:
   fig_width: 5

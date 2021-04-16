@@ -236,7 +236,7 @@ ${E_1,E_2,\cdots}$をある確率空間の事象とする. これらの事象の
 技術書によくある注意を喚起するブロック (`important`).
 ```
 
-```{block block-example-note, type="memo"}
+```{block block-example-memo, type="memo"}
 技術書によくある注意を喚起するブロック (`memo`).
 ```
 
@@ -244,12 +244,25 @@ ${E_1,E_2,\cdots}$をある確率空間の事象とする. これらの事象の
 技術書によくある注意を喚起するブロック (`tip`).
 ```
 
-```{block boloc-example-warning, type="warning"}
+```{block block-example-warning, type="warning"}
 技術書によくある注意を喚起するブロック (`warning`).
 ```
 
 このブロック内では Markdown の基本構文しか使えず, 引用や相互参照などは使えない. これらをブロック内で使いたい場合は `block` の代わりに `block2`  と書く. ただしこちらは pandoc の機能のハックであるため, 将来使えなくなる可能性もある.
 
+やや煩雑になるが, Pandoc の fenced Div を利用した書き方は, より安全である.
+
+```
+:::{.infobox .important data-latex="{warning}"}
+fenced Div によるブロック
+:::
+```
+
+:::{.infobox .important data-latex="{warning}"}
+fenced Div によるブロック
+:::
+
+この構文の意味の解説は『R Markdown クックブック』などを参考に.
 
 ## 脚注
 
