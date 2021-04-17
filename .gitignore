@@ -15,3 +15,4 @@ inst/resources/examples/*/*.png
 inst/resources/examples/*/img
 inst/resources/examples/*/_latex
 /dev
+po/R-rmdja.pot
