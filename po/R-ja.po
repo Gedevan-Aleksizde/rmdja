@@ -1,0 +1,32 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: rmdja 0.1\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2021-04-15 01:27\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Katagiri, Satoshi <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid ""
+"You selected `pdflatex` engine. It is not good choice for Japanese "
+"documents. Possibly `xelatex` or `lualatex` is better."
+msgstr ""
+"あなたは `pdflatex` エンジンを選択してます. 日本語文書には適していません. "
+"`xelatex` または `lualatex` がより適している可能性があります."
+
+msgid "Preprocessing"
+msgstr ""
+
+msgid ":"
+msgstr ""
+
+msgid "latexmk emulation is temporarily disabled to use (u)pBibTeX."
+msgstr ""
+"(u)pBibTeX 使用のため, 一時的に latexmk エミュレーションを無効化します."
+
+msgid "package `kableExtra` not found."
+msgstr "パッケージ `kableExtra` が見つかりません."
