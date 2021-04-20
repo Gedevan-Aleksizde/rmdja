@@ -28,7 +28,9 @@ Customized R Markdown/Bookdown format functions for Japanese users
 -   R Studio (&gt;= 1.3.1056)
     -   Windows かつ **reticulate** で Python
         を使用する場合は注意してください
--   依存パッケージ (通常はインストール時に合わせてインストールされます)
+-   依存パッケージ
+    (通常はインストール時に合わせてインストールされるため,
+    手作業でなにかする必要はありません)
     -   rmarkdown (&gt;= 2.6),
     -   bookdown (&gt;= 0.21),
     -   commonmark (&gt;= 1.7),
