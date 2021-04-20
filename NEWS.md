@@ -1,4 +1,11 @@
 
+# rmdja 0.4.6
+
+-   `pdf_document2_ja`, `pdf_book_ja` それぞれで LaTeX
+    エンジンに対応したデフォルトの文書クラスを自動設定するように
+    -   document2\_ja -&gt; `*jsarticle`, book\_ja -&gt; `*jsbook`
+    -   `xelatex` -&gt; `bx*`, `lualatex` -&gt; `lt*`
+
 # rmdja 0.4.5
 
 -   (u)pBibTeX (`citation_package = natbib`)

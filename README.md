@@ -13,10 +13,14 @@ Customized R Markdown/Bookdown format functions for Japanese users
     -   それぞれ `zxjatype`, `luatex-ja`, を利用して和文表示をしています
 -   私的LaTeXテンプレ集である[my\_latex\_templates](https://github.com/Gedevan-Aleksizde/my_latex_templates/)からパッケージとして独立しました
 
-以下は `rmdja` 自身で作成したドキュメントです. HTML/PDF/EPUB
-を用意しています.
+以下は rmdja 自身で作成したドキュメントです. HTML/PDF も用意しています.
 
-<https://gedevan-aleksizde.github.io/rmdja/>
+-   『rmdja による多様な形式の日本語技術文書の作成』:
+    <https://gedevan-aleksizde.github.io/rmdja/>
+-   Yihui 氏による knitr のドキュメントの日本語訳:
+    <https://gedevan-aleksizde.github.io/knitr-doc-ja/index.html>
+-   “R Markdown Cookbook” の日本語訳
+    <https://gedevan-aleksizde.github.io/rmarkdown-cookbook/>
 
 # 最低限必要なもの
 
@@ -24,10 +28,11 @@ Customized R Markdown/Bookdown format functions for Japanese users
 -   R Studio (&gt;= 1.3.1056)
     -   Windows かつ **reticulate** で Python
         を使用する場合は注意してください
--   `rmarkdown` (&gt;= 2.6)
--   `bookdown` (&gt;= 0.21)
--   `commonmark` (&gt;= 1.7)
--   `styler` (&gt;= 1.3.2)
+-   依存パッケージ (通常はインストール時に合わせてインストールされます)
+    -   rmarkdown (&gt;= 2.6),
+    -   bookdown (&gt;= 0.21),
+    -   commonmark (&gt;= 1.7),
+    -   styler (&gt;= 1.3.2)
 
 # インストールから使用まで
 
