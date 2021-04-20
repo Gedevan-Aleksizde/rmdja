@@ -64,6 +64,11 @@ pdf_book_ja <- function (
   if(latex_engine == "pdflatex"){
     message("You selected `pdflatex` engine. It is not good choice for Japanese documents. Possibly `xelatex` or `lualatex` is better.")
   }
+  if(latex_engine %in% c("xelatex", "tectonic")){
+    doc_class_default <- "bxjsbook"
+  } else {
+    doc_class_default <- "ltjsbook"
+  }
   block_style <- block_style[1]
   match.arg(block_style, c("default", BLOCK_STYLES))
   
@@ -203,7 +208,7 @@ pdf_book_ja <- function (
     args_extra <- c(args_extra,
                     if(!identical(metadata$fontsize, "10pt") & tombow) "-Mclassoption=nomag" else NULL
                     )
-    if(is.null(metadata$documentclass)) args_extra <- c(args_extra, "-Mdocumentclass=bxjsbook")
+    if(is.null(metadata$documentclass)) args_extra <- c(args_extra, sprintf("-Mdocumentclass=%s", doc_class_default))
     if(is.null(metadata[["biblio-title"]])) args_extra <- c(args_extra, "-Mbiblio-title=参考文献")
     return(args_extra)
   }
