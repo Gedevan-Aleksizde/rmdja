@@ -36,7 +36,7 @@ get_default_font_family <- function(engine = "xelatex"){
   } else if(fam == "ms"){
     font <- c(serif = "MS Mincho", sans = "MS Gothic")
   } else {
-    font <- c(serif = "IPAExMincho", sans = "IPAExMincho")
+    font <- c(serif = "Harano Aji Mincho", sans = "Harano Aji Gothic")
   }
   return(font)
 }

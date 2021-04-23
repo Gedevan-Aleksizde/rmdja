@@ -13,7 +13,6 @@ Customized R Markdown/Bookdown format functions for Japanese users
     -   それぞれ `zxjatype`, `luatex-ja`, を利用して和文表示をしています
 -   私的LaTeXテンプレ集である[my\_latex\_templates](https://github.com/Gedevan-Aleksizde/my_latex_templates/)からパッケージとして独立しました
 
-
 以下は rmdja 自身で作成したドキュメントです. HTML/PDF も用意しています.
 
 -   『rmdja による多様な形式の日本語技術文書の作成』:
@@ -32,10 +31,18 @@ Customized R Markdown/Bookdown format functions for Japanese users
 -   依存パッケージ
     (通常はインストール時に合わせてインストールされるため,
     手作業でなにかする必要はありません)
-    -   rmarkdown (&gt;= 2.6),
-    -   bookdown (&gt;= 0.21),
-    -   commonmark (&gt;= 1.7),
-    -   styler (&gt;= 1.3.2)
+    -   **rmarkdown** (&gt;=2.6)
+    -   **bookdown** (&gt;=0.21)
+    -   **commonmark** (&gt;=1.7)
+    -   **styler** (&gt;=1.3.2)
+-   PDF を出力したい
+    (おそらくこのパッケージに関心を持った方はほとんど当てはまると思います)
+    場合は以下の要件も必要です
+    -   TeX Live 2020 以降相当の TeX 環境,
+        特に原ノ味フォントをインストールしていること[1]
+    -   もしくは TeX を完全に**アンインストール**した状態
+        -   この場合は **tinytex** パッケージで TeX 環境を再構築します
+            (後述).
 
 # インストールから使用まで
 
@@ -65,11 +72,18 @@ Customized R Markdown/Bookdown format functions for Japanese users
     依存パッケージを手動でインストールしてください. 必要なパッケージは
     [`DESCRIPTION`](DESCRIPTION) の `Imports` の項目に書かれています.
 
-        install.packages(c("rmarkdown", "bookdown", "commonmark", "styler"))
+    ``` r
+    install.packages(c("rmarkdown", "bookdown", "commonmark", "styler"))
+    ```
 
     リリース一覧からダウンロードしたアーカイブファイルからインストールすることもできます.
 
-3.  新規作成時に \[R Markdown\] -&gt; \[From Template\] -&gt; `{rmdja}`
+3.  TeX 環境を未インストールなら, ここでインストールします
+    これはそれなりに時間がかかります. また,
+    初回のコンパイルにも追加ダウンロードで時間がかかるかもしれません.
+    `r     tinytex::install_tinytex()`
+
+4.  新規作成時に \[R Markdown\] -&gt; \[From Template\] -&gt; `{rmdja}`
     のテンプレートのいずれかを選択します ![template
     selection](inst/resources/img/readme-selection.png)
 
@@ -81,7 +95,7 @@ Customized R Markdown/Bookdown format functions for Japanese users
     -   (上記どちらでもないなら)
         `Rmd`ファイルに`output::rmdja::beamer_presentation_ja` を指定
 
-4.  フォントの指定 (オプション)
+5.  フォントの指定 (オプション)
 
     -   OSごとの違いはほぼデフォルトのフォントだけです.
         もしフォントが表示されない/気に入らない場合は手動で指定してください.
@@ -97,6 +111,12 @@ Customized R Markdown/Bookdown format functions for Japanese users
     <!-- -->
 
         jfontpreset: noto
+
+    -   Noto が入ってない, または Ubuntu 以外の Linux なら
+
+    <!-- -->
+
+        jfontpreset: haranoaji
 
     -   macなら
 
@@ -159,16 +179,18 @@ Customized R Markdown/Bookdown format functions for Japanese users
 OSを判別して以下のようにデフォルトフォントを決めています. これらは
 (Linux 以外) OS標準インストールフォントのはずです.
 
-|          |          Mac | Linux | windows (8以降) | windows(それ以前) |
-|:---------|-------------:|------:|----------------:|------------------:|
-| XeLaTeX  |       游書体 |  Noto |          游書体 |        MSフォント |
-| LuaLaTeX | ヒラギノProN |  Noto |          游書体 |        MSフォント |
+|          |          Mac | Ubuntu | windows (8以降) | windows(それ以前) | それ以外 |
+|:---------|-------------:|-------:|----------------:|------------------:|---------:|
+| XeLaTeX  |       游書体 |   Noto |          游書体 |        MSフォント |   原ノ味 |
+| LuaLaTeX | ヒラギノProN |   Noto |          游書体 |        MSフォント |   原ノ味 |
 
-Linux は Ubuntu 18 以降の設定に準拠して Noto をデフォルトにしています.
-Debian とか Cent OS とかは手動で変えるか Noto
-をインストールしてください.
+Ubuntu 18 以降の設定に準拠して Noto-CJK をデフォルトにしています. 他の
+Linux 系 OS ならば, TeX Live 2020 以降で同梱されている原ノ味フォント
+(`haranoaji`) がデフォルトになるようにしています.
 
-Debian:
+なお, Noto フォントのインストール方法は以下のようにします
+
+Ubuntu/Debian:
 
 ``` sh
 sudo apt install fonts-noto-cjk-extra -t stretch-backports
@@ -327,3 +349,7 @@ Ubuntu:
     -   PDF のみ
 -   vivliostyle への対応?
 -   epub の出力調整
+
+[1] 2019以前をお使いで,
+これから更新する場合は追加の手続きが必要らしいです. 参考:
+<https://text.baldanders.info/remark/2020/04/haranoaji-fonts-with-texlive-2020/>

@@ -64,6 +64,7 @@ adjust_fontsize <- function(input, ...) {
 }
 
 # 指定がない場合にフォントを勝手に決める
+# return font option name depening on the output format settings
 # call at pre_processor
 autodetect_jfont <- function(latex_engine, metadata = NULL){
   sysinfo <- Sys.info()
@@ -131,7 +132,7 @@ autodetect_jfont <- function(latex_engine, metadata = NULL){
         }
       }
     } else {
-      jfontpreset <- NULL
+      jfontpreset <- "haranoaji"
     }
     font <- c(font, jfontpreset = jfontpreset)
     return(font)
