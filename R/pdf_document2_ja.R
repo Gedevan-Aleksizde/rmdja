@@ -17,7 +17,7 @@
 #'
 #' @export
 pdf_document2_ja <- function (
-  toc = TRUE,
+  toc = FALSE,
   toc_unnumbered = TRUE,
   toc_depth = 3,
   toc_bib = FALSE,
