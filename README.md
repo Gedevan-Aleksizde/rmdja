@@ -7,8 +7,12 @@ Customized R Markdown/Bookdown format functions for Japanese users
 
 -   R Markdown で
     日本語文書を作るためのフォーマットを梱包したパッケージです
--   現時点では Beamer スライド (`rmarkdown::beamer_presentation`),
-    `bookdown` に対応しています.
+-   現時点では以下のようなテンプレートがあります.
+    -   Beamer スライド (`Beamer in Japanese`)
+    -   PDF 文書 (`pdf article in Japanese`)
+    -   縦書きPDF文書 (`pdf vartical writing in Japanese`)
+    -   書籍形式 (`pdf book in Japanese`, PDF および gitbook
+        テンプレートに沿った HTML
 -   XeLaTeXまたはLuaLaTeXでのタイプセットを前提にしています
     -   それぞれ `zxjatype`, `luatex-ja`, を利用して和文表示をしています
 -   私的LaTeXテンプレ集である[my\_latex\_templates](https://github.com/Gedevan-Aleksizde/my_latex_templates/)からパッケージとして独立しました
@@ -26,8 +30,8 @@ Customized R Markdown/Bookdown format functions for Japanese users
 
 -   R (&gt;= 3.6.2)
 -   R Studio (&gt;= 1.3.1056)
-    -   Windows かつ **reticulate** で Python
-        を使用する場合は注意してください
+    -   Windows かつ **reticulate** で Python を使用する場合は [v1.4
+        台での不具合](https://ill-identified.hatenablog.com/entry/2021/02/22/233326)に注意してください
 -   依存パッケージ
     (通常はインストール時に合わせてインストールされるため,
     手作業でなにかする必要はありません)
@@ -40,9 +44,29 @@ Customized R Markdown/Bookdown format functions for Japanese users
     場合は以下の要件も必要です
     -   TeX Live 2020 以降相当の TeX 環境,
         特に原ノ味フォントをインストールしていること[1]
+
     -   もしくは TeX を完全に**アンインストール**した状態
+
         -   この場合は **tinytex** パッケージで TeX 環境を再構築します
             (後述).
+
+    -   `cairo_pdf()` が動作する環境 Linux や Mac では必要な X11 や
+        cairo がインストールされていない可能性があります.
+        以下で確認できます.
+
+        ``` r
+        capabilities()[c("cairo", "X11")]
+        ```
+
+        もし `FALSE` があるならば, たとえば Mac
+        なら以下のようにしてインストールします (homebrew が必要です).
+
+        ``` bash
+        # Cairo
+        brew install cairo
+        # X11
+        brew cask install xquartz
+        ```
 
 # インストールから使用まで
 
@@ -50,19 +74,19 @@ Customized R Markdown/Bookdown format functions for Japanese users
 
 2.  このパッケージをインストールする (`remotes`
     パッケージを使うのが簡単です)
-    `remotes::install_github('Gedevan-Aleksizde/rmdja')`
+    `remotes::install_github('Gedevan-Aleksizde/rmdja', upgrade = "never")`
 
     特定のバージョンをインストールする場合は,
     以下のようにして指定できます.
-    `remotes::install_github('Gedevan-Aleksizde/rmdja', ref="v0.4", repos = NULL)`
+    `remotes::install_github('Gedevan-Aleksizde/rmdja', ref="v0.4", upgrade = "never")`
     または以下のような記法も可能です
-    `remotes::install_github('Gedevan-Aleksizde/rmdja@v0.4', repos = NULL)`
+    `remotes::install_github('Gedevan-Aleksizde/rmdja@v0.4', upgrade = "never")`
 
     `@development` は開発中のバージョンです.
     新機能が追加されてる場合もありますがバグも多いです.
     ソースコードを理解して適宜修正できる自信のある方のみ使用してください.
 
-        remotes::install_github('Gedevan-Aleksizde/rmdja@development', repos = NULL)
+        remotes::install_github('Gedevan-Aleksizde/rmdja@development', upgrade = "never")
 
     Windows OS では
     [Rtools](https://cran.r-project.org/bin/windows/Rtools/)
@@ -81,19 +105,18 @@ Customized R Markdown/Bookdown format functions for Japanese users
 3.  TeX 環境を未インストールなら, ここでインストールします
     これはそれなりに時間がかかります. また,
     初回のコンパイルにも追加ダウンロードで時間がかかるかもしれません.
-    `r     tinytex::install_tinytex()`
+
+    ``` r
+    tinytex::install_tinytex()
+    ```
 
 4.  新規作成時に \[R Markdown\] -&gt; \[From Template\] -&gt; `{rmdja}`
     のテンプレートのいずれかを選択します ![template
     selection](inst/resources/img/readme-selection.png)
 
     -   または最初は
-        [`examples/beamer`](inst/resources/examples/beamer/) の
-        `beamer_blank.Rmd` か
-        `examples/beamer_xelatex_{使用しているOS名}.Rmd`
-        をコピーして使ってみてください
-    -   (上記どちらでもないなら)
-        `Rmd`ファイルに`output::rmdja::beamer_presentation_ja` を指定
+        [`resources/examples/beamer`](inst/resources/examples/)
+        にもいくつか使用例があります.
 
 5.  フォントの指定 (オプション)
 

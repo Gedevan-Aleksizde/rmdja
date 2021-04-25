@@ -1,10 +1,15 @@
 
+# rmdja 0.4.7
+
+-   主要OS以外を検知した場合のデフォルトフォントを原ノ味フォントに変更
+
 # rmdja 0.4.6
 
 -   `pdf_document2_ja`, `pdf_book_ja` それぞれで LaTeX
     エンジンに対応したデフォルトの文書クラスを自動設定するように
     -   document2\_ja -&gt; `*jsarticle`, book\_ja -&gt; `*jsbook`
     -   `xelatex` -&gt; `bx*`, `lualatex` -&gt; `lt*`
+-   BibLaTeX のデフォルト引用スタイルのエラー修正
 
 # rmdja 0.4.5
 
