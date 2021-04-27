@@ -64,8 +64,10 @@ Customized R Markdown/Bookdown format functions for Japanese users
         # Cairo
         brew install cairo
         # X11
-        brew cask install xquartz
+        brew install --cask xquartz
         ```
+        
+        **注意**: xquartz に関しては, 公式 https://www.xquartz.org/ からインストールしたほうが良いかもしれません.
         
 
 
