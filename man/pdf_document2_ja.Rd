@@ -5,7 +5,7 @@
 \title{\code{rmarkdown} + \code{bookdown} で簡単に日本語文書を作るためのプリセットフォーマット, document 版}
 \usage{
 pdf_document2_ja(
-  toc = TRUE,
+  toc = FALSE,
   toc_unnumbered = TRUE,
   toc_depth = 3,
   toc_bib = FALSE,
