@@ -92,6 +92,12 @@ ggplot(mutate(mtcars, cyl = factor(cyl)),
   geom_point() + labs(x = "マイル毎米ガロン", y = "重量 (1000ポンド)")
 ```
 
+このファイルの出力例は以下のコマンドでコピーすることができます.
+
+```{r, echo=T, eval=F}
+file.copy(system.file("resources/examples/templates/pdf_tategaki_ja/", package = "rmdja"), "./", recursive = T)
+```
+
 <!-- 参考文献 -->
 
 ```{r citations, include=F}

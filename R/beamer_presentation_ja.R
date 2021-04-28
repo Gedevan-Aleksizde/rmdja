@@ -191,7 +191,7 @@ beamer_presentation_ja <- function(
         args_extra["biblatexoptions"] <- c("natbib=true,citestyle=numeric")
       }
       if(args_extra[["biblio-style"]] == "jauthoryear"){
-        copy_biblatexstyle(metadata, input_file, runtime, knit_meata, files_dir, output_dir)
+        copy_biblatexstyle(metadata, input_file, runtime, knit_meta, files_dir, output_dir)
       }
     }
     if(is.null(metadata[["biblio-title"]])) args_extra <- c(args_extra, list(`biblio-title`="参考文献"))

@@ -46,3 +46,12 @@ rmdja::set_graphics_font(rmdja::get_default_font_family("xelatex")["sans"])
   + [ここ](https://kazutan.github.io/SappoRoR6/rmd_slide.html#/)や[ここ](https://kazutan.github.io/fukuokaR11/intro_rmarkdown_d.html)を見よ
 * もともとは自分用に作ったテンプレだったものを万人向けに修正
 * OS ごとの詳細な事例は `examples` を参考に
+
+
+##
+
+このファイルの出力例は以下のコマンドでコピーすることができます.
+
+```{r, echo=T, eval=F}
+file.copy(system.file("resources/examples/templates/beamer_presentation_ja/", package = "rmdja"), "./", recursive = T)
+```

@@ -45,6 +45,13 @@ ggplot(mutate(mtcars, cyl = factor(cyl)),
 
 表 \@ref(tab:example-table) を見よ
 
-```{r tab, include=F}
+```{r example-table, include=F}
 knitr::kable(head(mtcars[, 1:4]), caption = "表の例", booktabs = T)
+```
+
+
+このファイルの出力例は以下のコマンドでコピーすることができます.
+
+```{r, echo=T, eval=F}
+file.copy(system.file("resources/examples/templates/pdf_book_ja/", package = "rmdja"), "./", recursive = T)
 ```

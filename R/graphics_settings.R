@@ -25,7 +25,7 @@ set_graphics_font <- function(family){
 #' @export
 get_default_font_family <- function(engine = "xelatex"){
   match.arg(engine, c("xelatex", "lualatex", "pdflatex", "tectonic"))
-  if(engine == %in% c("tectonic", "pdflatex")){
+  if(engine %in% c("tectonic", "pdflatex")){
     warning(gettextf("Currentry rmdja package not support `%s` engine completely.", engine))
   }
   fam <- autodetect_jfont(engine)["jfontpreset"]

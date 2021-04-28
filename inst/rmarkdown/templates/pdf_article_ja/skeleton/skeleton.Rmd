@@ -65,7 +65,17 @@ ggplot(mutate(mtcars, cyl = factor(cyl)),
 
 # 結論 {#conclusions}
 
-ここに結論
+表\@ref(tab:table-example)を見よ.
+
+```{r table-example}
+knitr::kable(head(mtcars[, 1:4]), booktabs = T, caption = "表の例", format = "pipe")
+```
+
+このファイルの出力例は以下のコマンドでコピーすることができます.
+
+```{r, echo=T, eval=F}
+file.copy(system.file("resources/examples/templates/pdf_article_ja/", package = "rmdja"), "./", recursive = T)
+```
 
 <!-- 参考文献 -->
 <!-- コメントはこのように HTMLの記法を使う. tex の % は使えない -->
