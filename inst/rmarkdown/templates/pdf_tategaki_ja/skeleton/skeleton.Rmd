@@ -26,6 +26,7 @@ classoption:
 pagestyle: headings
 header-includes:
   - \ModifyPageStyle{headings}{nombre_position=top-left}
+graphics: yes
 ---
 ```{r init, include=F}
 require(knitr)
@@ -49,7 +50,7 @@ rmdja::set_graphics_font(rmdja::get_default_font_family("lualatex")["serif"])
 
 # 初めに {#introduction}
 
-文書の作成には `rmarkdown` および `bookdown` パッケージ [@R-rmarkdown;@R-bookdown] が必要である. `citr`， `clipr` [@R-citr;@R-clipr] も執筆に役立つパッケージである。 最も充実したドキュメントは開発メンバーの謝益輝 (Yihui) 氏らによる以下の3つである.
+文書の作成には `rmarkdown` および `bookdown` パッケージ [@R-rmarkdown;@R-bookdown] が必要である. **citr**， **clipr** も執筆に役立つパッケージである。 最も充実したドキュメントは開発メンバーの謝益輝 (Yihui) 氏らによる以下の3つである.
 
 * "[R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
 * "[`bookdown`: Authoring Books and Technical Documents with R Markdown](https://bookdown.org/yihui/bookdown/)"
@@ -96,7 +97,7 @@ ggplot(mutate(mtcars, cyl = factor(cyl)),
 ```{r citations, include=F}
 # ファイルの上書きに注意
 # 本文中で引用があれば参考文献セクションが末尾に自動で生成される.
-knitr::write_bib(c(.packages(), c("rmarkdown", "citr", "clipr", "bookdown")), file = 'packages.bib')
+knitr::write_bib(c("rmarkdown", "tidyverse", "knitr", "bookdown"), file = 'packages.bib')
 ```
 
 \backmatter

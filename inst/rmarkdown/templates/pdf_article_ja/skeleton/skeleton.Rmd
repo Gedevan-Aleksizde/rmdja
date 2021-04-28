@@ -7,7 +7,7 @@ output:
   rmdja::pdf_document2_ja:
     latex_engine: lualatex
     toc: false
-documentclass: ltjsarticle
+documentclass: bxjsarticle
 classoption:
   - a4paper
   - 'number-of-lines=30'  # 1頁30行, ただし見出しは別
@@ -15,6 +15,7 @@ classoption:
 bibliography: 
   - packages.bib
 link-citations: false
+graphics: yes
 ---
 
 \newpage
@@ -23,12 +24,12 @@ link-citations: false
 require(knitr)
 require(tidyverse)
 # グラフの標準フォント設定
-rmdja::set_graphics_font(rmdja::get_default_font_family("xelatex")["serif"])
+rmdja::set_graphics_font(rmdja::get_default_font_family("lualatex")["serif"])
 ```
 
 # イントロダクション {#introduction}
 
-文書の作成には `rmarkdown` および `bookdown` パッケージ [@R-rmarkdown;@R-bookdown] が必要である. `citr`, `clipr` [@R-citr;@R-clipr] も執筆に役立つパッケージである.
+文書の作成には `rmarkdown` および `bookdown` パッケージ [@R-rmarkdown;@R-bookdown] が必要である. `citr`, `clipr` も執筆に役立つパッケージである.
 
 第 \@ref(related-works) 節は先行研究のサーベイである.
 第 \@ref(methodology) 節は今回提起する問題とその解決方法である.
@@ -58,7 +59,7 @@ rmdja::set_graphics_font(rmdja::get_default_font_family("xelatex")["serif"])
 ggplot(mutate(mtcars, cyl = factor(cyl)),
        aes(x = mpg, y = wt, color = cyl)) +
   geom_point() + labs(x = "マイル毎米ガロン", y = "重量 (1000ポンド)") +
-  theme_bw(base_family = rmdja::get_default_font_family("xelatex")["serif"]) +
+  theme_bw(base_family = rmdja::get_default_font_family("lualatex")["serif"]) +
   scale_color_grey() + scale_fill_grey()
 ```
 
@@ -72,5 +73,5 @@ ggplot(mutate(mtcars, cyl = factor(cyl)),
 ```{r citations, include=F}
 # ファイルの上書きに注意
 # 本文中で引用があれば参考文献セクションが末尾に自動で生成される.
-knitr::write_bib(c(.packages(), c("rmarkdown", "citr", "clipr", "bookdown")), file = 'packages.bib')
+knitr::write_bib(c("rmarkdown", "knitr", "tidyverse", "bookdown"), file = 'packages.bib')
 ```
