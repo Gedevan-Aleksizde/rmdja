@@ -20,6 +20,10 @@ BIBLIO_ENGINES <- c("default", "natbib", "biblatex")
 BLOCK_STYLES <- c("kframe", "tcolorbox", "awesomebox")
 
 # common functions
+is_not_specified <- function(x = NULL){
+  is.null(x) || is.na(x) || identical(x, "default") || identical(x, "")
+}
+
 add_pandoc_arg <- function(args, key, val){
   if(!any(grepl(paste0("^", key), args))){
     args <- c(args, c(key, val))

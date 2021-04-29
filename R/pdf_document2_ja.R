@@ -76,7 +76,7 @@ pdf_document2_ja <- function (
   extra_metadata <- list()
   extra_metadata <- c(extra_metadata, merge_bibliography_args(citation_package, citation_options))
   
-  if(missing(template) || identical(template, "") || identical(template, "default")){
+  if(is_not_specified(template)){
     template <- system.file("resources/pandoc-templates/document-ja.tex.template", package = "rmdja")
   }
   if(identical(code_rownumber, T)){
@@ -214,10 +214,13 @@ pdf_document2_ja <- function (
   knitr_options$opts_hooks <- args$knitr$opts_hooks
   knitr_options$opts_knit <- list(global.par = T)
   
+  print(out$post_processor)
   out <- rmarkdown::output_format(
     knitr = knitr_options,
     pandoc = rmarkdown::pandoc_options(
-      to = "latex", args = args$pandoc_args,
+      to = "latex",
+      ext = ".tex",
+      args = args$pandoc_args,
       keep_tex = keep_tex, latex_engine = latex_engine
     ),
     pre_knit = adjust_fontsize,
@@ -227,7 +230,7 @@ pdf_document2_ja <- function (
     base_format = out,
     on_exit = function(x){options(tinytex.latexmk.emulation = tinytex_latexmk_default)}
   )
-  out$bookdown_output_format <- "bookdown"
+  out$bookdown_output_format <- "latex"
   
   return(out)
 }

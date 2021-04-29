@@ -223,7 +223,9 @@ pdf_book_ja <- function (
       knitr = knitr_options,
       pre_processor = preproc,
       pandoc = rmarkdown::pandoc_options(
-        to = "latex", args = args$pandoc_args,
+        to = "latex",
+        ext = ".tex",
+        args = args$pandoc_args,
         keep_tex = keep_tex, latex_engine = latex_engine
       ),
       keep_md = keep_md,
