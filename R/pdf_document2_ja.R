@@ -209,20 +209,26 @@ pdf_document2_ja <- function (
     return(args_extra)
   }
 
-  knitr_options <- do.call(rmarkdown::knitr_options, args$knitr)
+  out <- do.call(bookdown::pdf_document2, args$base)
+  knitr_options <- out$knitr
+  knitr_options$opts_hooks <- args$knitr$opts_hooks
+  knitr_options$opts_knit <- list(global.par = T)
+  
   out <- rmarkdown::output_format(
-    pre_knit = adjust_fontsize,
     knitr = knitr_options,
-    pre_processor = preproc,
     pandoc = rmarkdown::pandoc_options(
       to = "latex", args = args$pandoc_args,
       keep_tex = keep_tex, latex_engine = latex_engine
     ),
+    pre_knit = adjust_fontsize,
+    pre_processor = preproc,
     keep_md = keep_md,
-    clean_supporting = NULL,
-    base_format = do.call(bookdown::pdf_document2, args = args$base),
+    clean_supporting = TRUE,
+    base_format = out,
     on_exit = function(x){options(tinytex.latexmk.emulation = tinytex_latexmk_default)}
   )
+  out$bookdown_output_format <- "bookdown"
+  
   return(out)
 }
 
