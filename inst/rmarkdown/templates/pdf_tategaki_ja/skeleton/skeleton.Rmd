@@ -32,6 +32,7 @@ graphics: yes
 require(knitr)
 require(tidyverse)
 # グラフの標準フォント設定
+# うまく行かない場合は手動で設定してください
 rmdja::set_graphics_font(rmdja::get_default_font_family("lualatex")["serif"])
 ```
 

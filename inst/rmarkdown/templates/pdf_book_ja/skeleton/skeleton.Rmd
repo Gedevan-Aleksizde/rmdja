@@ -21,6 +21,7 @@ graphics: yes
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = F)
 # グラフの標準フォント設定
+# うまく行かない場合は手動で設定してください
 rmdja::set_graphics_font(rmdja::get_default_font_family("xelatex")["serif"])
 ```
 
