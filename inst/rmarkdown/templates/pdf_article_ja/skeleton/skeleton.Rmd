@@ -6,7 +6,6 @@ abstract: "`rmdja` パッケージは, `rmarkdown` および `bookdown` パッ�
 output:
   rmdja::pdf_document2_ja:
     latex_engine: lualatex
-    toc: false
 documentclass: bxjsarticle
 classoption:
   - a4paper
@@ -15,7 +14,6 @@ classoption:
 bibliography: 
   - packages.bib
 link-citations: false
-graphics: yes
 ---
 
 \newpage

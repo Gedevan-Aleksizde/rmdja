@@ -26,7 +26,6 @@ classoption:
 pagestyle: headings
 header-includes:
   - \ModifyPageStyle{headings}{nombre_position=top-left}
-graphics: yes
 ---
 ```{r init, include=F}
 require(knitr)

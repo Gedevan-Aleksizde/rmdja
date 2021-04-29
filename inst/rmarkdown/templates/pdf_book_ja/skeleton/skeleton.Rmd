@@ -15,7 +15,6 @@ linkcolor: blue
 citecolor: blue
 urlcolor: magenta
 pagestyle: fancy
-graphics: yes
 ---
 
 ```{r setup, include=FALSE}
