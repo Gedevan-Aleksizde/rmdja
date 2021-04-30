@@ -80,6 +80,7 @@ pdf_document2_ja <- function (
   
   if(is_not_specified(template)){
     template <- system.file("resources/pandoc-templates/document-ja.tex.template", package = "rmdja")
+    pandoc_args <- c(pandoc_args, "--variable", "graphics=yes")
   }
   if(identical(code_rownumber, T)){
     attr_source <- c(".numberLines .lineAnchors")
@@ -109,23 +110,6 @@ pdf_document2_ja <- function (
   }
   tinytex_latexmk_default <- getOption("tinytex.latexmk.emulation")
   
-  knitr_options <- rmarkdown::knitr_options_pdf(fig_width, fig_height, fig_crop, dev = dev)
-  knitr_options$opts_chunk <- list(
-    dev = dev,
-    dev.args = dev_args,
-    fig.align = fig_align,
-    out.width = out_width,
-    out.height = out_height,
-    out.extra = out_extra,
-    attr.source = attr_source,
-    tidy = 'styler'
-  )
-  knitr_options$opts_hooks <- list(
-    dev = hook_python_pdf_dev,
-    echo = hook_display_block
-  )
-  knitr_options$opts_knit <- list(global.par = T)
-  
   args <- list(
     base = list(
       toc = toc,
@@ -153,8 +137,27 @@ pdf_document2_ja <- function (
       pandoc_args = pandoc_args,
       ...
     ),
-    knitr = knitr_options
+    knitr = list(
+      opts_chunk = list(
+        dev = dev,
+        dev.args = dev_args,
+        fig.align = fig_align,
+        out.width = out_width,
+        out.height = out_height,
+        out.extra = out_extra,
+        attr.source = attr_source,
+        tidy = 'styler'
+      ),
+      opts_hooks = list(
+        dev = hook_python_pdf_dev,
+        echo = hook_display_block
+      ),
+      opts_knit = list(global.par = T)
+    )
   )
+  args$knitr <- merge_lists(knitr_options <- rmarkdown::knitr_options_pdf(fig_width, fig_height, fig_crop, dev = dev),
+                           args$knitr, ignore_null_overlay = T)
+
   
   preproc <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
     args_extra <- merge_lists(
@@ -218,7 +221,7 @@ pdf_document2_ja <- function (
   out <- do.call(bookdown::pdf_document2, args$base)
 
   out <- rmarkdown::output_format(
-    knitr = NULL,
+    knitr = args$knitr,
     pandoc = rmarkdown::pandoc_options(
       to = "latex",
       ext = ".tex",

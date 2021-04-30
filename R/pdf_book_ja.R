@@ -80,8 +80,9 @@ pdf_book_ja <- function (
   extra_metadata <- list()
   extra_metadata <- c(extra_metadata, merge_bibliography_args(citation_package, citation_options))
   
-  if(missing(template) || identical(template, "") || identical(template, "default")){
+  if(is_not_specified(template)){
     template <- system.file("resources/pandoc-templates/document-ja.tex.template", package = "rmdja")
+    pandoc_args <- c(pandoc_args, "--variable", "graphics=yes")
   }
   if(identical(code_rownumber, T)){
     attr_source <- c(".numberLines .lineAnchors")
