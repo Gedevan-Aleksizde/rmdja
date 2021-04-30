@@ -21,10 +21,10 @@ BLOCK_STYLES <- c("kframe", "tcolorbox", "awesomebox")
 
 #### common functions ####
 
-#####  merge rmd parameter lists #####
-# copy from rmarkdown package v2.7
+#####  to merge rmd parameter lists #####
+# based on rmarkdown package v2.7
 # https://github.com/rstudio/rmarkdown/blob/master/R/util.R#L226
-merge_lists <- function (base_list, overlay_list, recursive = TRUE) 
+merge_lists <- function (base_list, overlay_list, recursive = TRUE, ignore_null_overlay = FALSE) 
 {
   if (length(base_list) == 0) 
     overlay_list
@@ -36,11 +36,12 @@ merge_lists <- function (base_list, overlay_list, recursive = TRUE)
       base <- base_list[[name]]
       overlay <- overlay_list[[name]]
       if (is.list(base) && is.list(overlay) && recursive) 
-        merged_list[[name]] <- merge_lists(base, overlay)
+        merged_list[[name]] <- merge_lists(base, overlay, ignore_null = ignore_null_overlay)
       else {
-        merged_list[[name]] <- NULL
-        merged_list <- append(merged_list, overlay_list[which(names(overlay_list) %in% 
-                                                                name)])
+        if(!ignore_null_overlay || !any(sapply(overlay_list[which(names(overlay_list) %in% name)], is.null))){
+          merged_list[[name]] <- NULL
+          merged_list <- append(merged_list, overlay_list[which(names(overlay_list) %in% name)])
+        }
       }
     }
     merged_list
