@@ -37,6 +37,7 @@ pdf_document2_ja(
   citation_package = "biblatex",
   citation_options = "default",
   latexmk_emulation = !citation_package == "natbib",
+  extract_media = FALSE,
   includes = NULL,
   md_extensions = NULL,
   output_extensions = NULL,
@@ -86,6 +87,8 @@ black-and-white (grayscale).}
 
 \item{latexmk_emulation}{logical. パッケージオプション \code{tinytex.latexmk.emulation} に連動する. デフォルトでは, 文献引用エンジンを natbib にしたときのみ \code{FALSE}, それ以外は \code{TRUE}. これは \code{tinytex} が (u)pBibTeX に対応していないため. どうしても BibTeX を使いたい場合以外は操作する必要のない不要なオプションですが, 日本語を含む文書を作成する限りそのような場面はないと思われます.}
 
+\item{extract_media}{logical. markdown 構文の画像貼り付けに URL が使用されていた場合, ダウンロードするかどうか. Pandoc の \verb{--extract-media .} に対応. TODO: 現時点では　TRUE にすると余計な画像ファイルが生成される副作用があります. これは rmarkdown にもある不具合です.}
+
 \item{pandoc_args}{See
 \code{rmarkdown::\link{pdf_document}}, or the documentation of the
 \code{base_format} function.}
@@ -108,6 +111,7 @@ bookdown packages's pdf_document2 format for Japanese typesetting with XeLaTeX/L
 \seealso{
 Other pdf formats: 
 \code{\link{beamer_presentation_ja}()},
+\code{\link{pdf_book_ja_r}()},
 \code{\link{pdf_book_ja}()}
 }
 \concept{pdf formats}
