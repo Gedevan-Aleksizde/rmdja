@@ -106,6 +106,6 @@ html_document2_ja <- function(
     return(c(a1, a2))
   }
   out$knitr$opts_hooks <- list(echo = hook_display_block)
-  if(code_rownumber) out$knitr$opts_chunk <- rmarkdown:::merge_lists(out$knitr$opts_chunk, opts_chunk_default)
+  if(code_rownumber) out$knitr$opts_chunk <- merge_lists(out$knitr$opts_chunk, opts_chunk_default)
   return(out)
 }

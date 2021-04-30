@@ -19,11 +19,40 @@ BIBLIO_ENGINES <- c("default", "natbib", "biblatex")
 
 BLOCK_STYLES <- c("kframe", "tcolorbox", "awesomebox")
 
-# common functions
+#### common functions ####
+
+#####  merge rmd parameter lists #####
+# copy from rmarkdown package v2.7
+# https://github.com/rstudio/rmarkdown/blob/master/R/util.R#L226
+merge_lists <- function (base_list, overlay_list, recursive = TRUE) 
+{
+  if (length(base_list) == 0) 
+    overlay_list
+  else if (length(overlay_list) == 0) 
+    base_list
+  else {
+    merged_list <- base_list
+    for (name in names(overlay_list)) {
+      base <- base_list[[name]]
+      overlay <- overlay_list[[name]]
+      if (is.list(base) && is.list(overlay) && recursive) 
+        merged_list[[name]] <- merge_lists(base, overlay)
+      else {
+        merged_list[[name]] <- NULL
+        merged_list <- append(merged_list, overlay_list[which(names(overlay_list) %in% 
+                                                                name)])
+      }
+    }
+    merged_list
+  }
+}
+
+#####  to simplify checking if a parameter is default value #####
 is_not_specified <- function(x = NULL){
   is.null(x) || is.na(x) || identical(x, "default") || identical(x, "")
 }
 
+##### to add PANDOC additional paramters #####
 add_pandoc_arg <- function(args, key, val){
   if(!any(grepl(paste0("^", key), args))){
     args <- c(args, c(key, val))
@@ -31,6 +60,7 @@ add_pandoc_arg <- function(args, key, val){
   return(args)
 }
 
+##### TODO: set default font #####
 gen_opts_hook_par <- function(font_family){
   f <- function(options){
     if(options$global.par){
@@ -43,23 +73,26 @@ gen_opts_hook_par <- function(font_family){
   return(f)
 }
 
+##### to check if chunk engine is asis/text-like #####
 hook_display_block <- function(options){
     if(options$engine %in% DUMMY_ENGINES()) options$echo <- T
     return(options)
 }
 
+##### change graphic device if using Python engine #####
 hook_python_pdf_dev <- function(options){
   if(options$engine == "python") options$dev <- "pdf"
   return(options)
 }
 
+##### to remote unit symbols #####
 fontsize_as_integer <- function(fontsize = "12pt"){
   if(is.null(fontsize)) fontsize = "12pt"
   ps <- as.integer(regmatches(fontsize, regexpr("^[0-9]+", fontsize)))
   return(ps)
 }
 
-# equalize frontmatter fontsize and graph pointsize
+##### to equalize frontmatter fontsize and graph pointsize  #####
 # call at pre_knit
 adjust_fontsize <- function(input, ...) {
   font_pt <- fontsize_as_integer(rmarkdown::metadata$fontsize)
@@ -67,6 +100,7 @@ adjust_fontsize <- function(input, ...) {
   return(input)
 }
 
+##### return Japanese font if not specified #####
 # 指定がない場合にフォントを勝手に決める
 # return font option name depening on the output format settings
 # call at pre_processor
@@ -171,6 +205,7 @@ merge_bibliography_args <- function(citation_package, citation_options){
   return(extra_metadata)
 }
 
+##### copy .latexmkrc for Japaese general usage #####
 # tinytex が upbibtex 対応していないため
 # call at pre_processor
 copy_latexmkrc <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
@@ -179,6 +214,7 @@ copy_latexmkrc <- function(metadata, input_file, runtime, knit_meta, files_dir, 
   }
   return(NULL)
 }
+
 # TODO: bibilatex スタイルのインストールパッケージ
 copy_biblatexstyle <- function(metadata, input_fike, runtime, knit_meta, files_dir, output_dir){
   if(!file.exists(file.path(output_dir, "jauthoryear.bbx"))){

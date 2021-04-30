@@ -13,6 +13,7 @@
 #' @param add_folio logical. 製本時に全ページにノンブルが必要な場合があるらしいので全ページに表示したい時に.
 #' @param latexmk_emulation logical. パッケージオプション `tinytex.latexmk.emulation` に連動する. デフォルトでは, 文献引用エンジンを natbib にしたときのみ `FALSE`, それ以外は `TRUE`. これは `tinytex` が (u)pBibTeX に対応していないため. どうしても BibTeX を使いたい場合以外は操作する必要のない不要なオプションですが, 日本語を含む文書を作成する限りそのような場面はないと思われます. 
 #' @param citation_options character. `citation_package` のオプション.
+#' @param extract_media logical. markdown 構文の画像貼り付けに URL が使用されていた場合, ダウンロードするかどうか. Pandoc の `--extract-media .` に対応. TODO: 現時点では　TRUE にすると余計な画像ファイルが生成される副作用があります. これは rmarkdown にもある不具合です. 
 #' @return rmarkdown_output_format
 #'
 #' @export
@@ -49,6 +50,7 @@ pdf_book_ja <- function (
   citation_package = "biblatex",
   citation_options = "default",
   latexmk_emulation = !citation_package == "natbib",
+  extract_media = FALSE,
   includes = NULL,
   md_extensions = NULL,
   output_extensions = NULL,
@@ -87,7 +89,7 @@ pdf_book_ja <- function (
     attr_source <- NULL
   }
   pandoc_args <- add_pandoc_arg(pandoc_args, "--top-level-division", top_level)
-  pandoc_args <- add_pandoc_arg(pandoc_args, "--extract-media", ".")
+  if(extract_media) pandoc_args <- add_pandoc_arg(pandoc_args, "--extract-media", ".")
   
   if(identical(extra_dependencies, NULL)){
     if(identical(tombow, T)){
@@ -154,7 +156,7 @@ pdf_book_ja <- function (
   )
   
   preproc <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
-    args_extra <- rmarkdown:::merge_lists(
+    args_extra <- merge_lists(
       metadata[c("biblio-style", "natbiboptions", "biblatexoptions")],
       extra_metadata[c("biblio-style", "natbiboptions", "biblatexoptions")])
     args_extra <- args_extra[!is.na(names(args_extra))]

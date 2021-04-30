@@ -126,6 +126,7 @@ rmarkdownで \LaTeX を使う場合, 日本語を適切に表示するために�
 }
 \seealso{
 Other pdf formats: 
+\code{\link{pdf_book_ja_r}()},
 \code{\link{pdf_book_ja}()},
 \code{\link{pdf_document2_ja}()}
 }

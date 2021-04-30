@@ -157,7 +157,7 @@ beamer_presentation_ja <- function(
     dev = dev
     )
   if(code_rownumber) opts_chunk_default$class.source <- "numberLines LineAnchors"
-  args_opts_chunk <- rmarkdown:::merge_lists(opts_chunk_default, opts_chunk)
+  args_opts_chunk <- merge_lists(opts_chunk_default, opts_chunk)
   
   args_pandoc_options <- list(to = "beamer",
                               from = rmarkdown::from_rmarkdown(fig_caption, md_extensions),
@@ -166,7 +166,7 @@ beamer_presentation_ja <- function(
                               latex_engine = latex_engine)
   
   preproc <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
-    args_extra <- rmarkdown:::merge_lists(
+    args_extra <- merge_lists(
       metadata[c("biblio-style", "natbiboptions", "biblatexoptions")],
       extra_metadata[c("biblio-style", "natbiboptions", "biblatexoptions")])
     args_extra <- args_extra[!is.na(names(args_extra))]
