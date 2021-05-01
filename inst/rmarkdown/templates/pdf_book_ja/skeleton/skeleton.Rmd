@@ -1,6 +1,6 @@
 ---
 title: "無題"
-date: "`r Sys.Date()`"
+date: "`r format(Sys.Date(), '%Y/%m/%d')`"
 site: bookdown::bookdown_site
 description: ""
 output:

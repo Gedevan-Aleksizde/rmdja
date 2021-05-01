@@ -1,6 +1,6 @@
 ---
 title: "無題の縦書き文書"
-date: "`r Sys.Date()`"
+date: "`r format(Sys.Date(), '%Y/%m/%d')`"
 author: "RMDJA太郎"
 output:
   rmdja::pdf_book_ja:

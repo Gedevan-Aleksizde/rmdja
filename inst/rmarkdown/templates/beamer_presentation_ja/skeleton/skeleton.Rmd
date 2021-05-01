@@ -1,6 +1,6 @@
 ---
 title: "無題"
-date: "`r Sys.Date()`"
+date: "`r format(Sys.Date(), '%Y/%m/%d')`"
 author: "RMDJA太郎"
 output:
   rmdja::beamer_presentation_ja:

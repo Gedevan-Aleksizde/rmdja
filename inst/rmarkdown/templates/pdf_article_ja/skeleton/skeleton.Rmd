@@ -1,6 +1,6 @@
 ---
 title: "無題の論文"
-date: "`r Sys.Date()`"
+date: "`r format(Sys.Date(), '%Y/%m/%d')`"
 author: "RMDJA太郎"
 abstract: "`rmdja` パッケージは, `rmarkdown` および `bookdown` パッケージで自然なレイアウトの日本語文書を作成する際に必要な煩雑な設定を自動で行い, ユーザーの負担を軽減するために作成されたパッケージである."
 output:
