@@ -34,10 +34,10 @@ beamer_presentation_ja(
   includes = NULL,
   latex_engine = c("xelatex", "lualatex", "pdflatex", "tectonic"),
   dev = "cairo_pdf",
+  df_print = "default",
   template = "default",
   md_extensions = NULL,
-  pandoc_args = NULL,
-  opts_chunk = NULL
+  pandoc_args = NULL
 )
 }
 \arguments{
@@ -96,6 +96,20 @@ beamer_presentation_ja(
 
 \item{dev}{character. グラフィックデバイス. 日本語を使う限りデフォルト値から変更する利点はほぼない. ただし Mac のみ \code{"quartz"} の選択も考慮する余地がある.}
 
+\item{df_print}{Method to be used for printing data frames. Valid values
+include "default", "kable", "tibble", and "paged". The "default" method
+uses a corresponding S3 method of \code{print}, typically
+\code{print.data.frame}. The "kable" method uses the
+\code{\link[knitr:kable]{knitr::kable}} function. The "tibble" method uses
+the \pkg{tibble} package to print a summary of the data frame. The "paged"
+method creates a paginated HTML table (note that this method is only valid
+for formats that produce HTML). In addition to the named methods you can
+also pass an arbitrary function to be used for printing data frames. You
+can disable the \code{df_print} behavior entirely by setting the option
+\code{rmarkdown.df_print} to \code{FALSE}. See
+\href{https://bookdown.org/yihui/rmarkdown/html-document.html#data-frame-printing}{Data
+frame printing section} in bookdown book for examples.}
+
 \item{template}{character. ユーザー定義のpandocテンプレートを使いたい場合はパスを指定する.}
 
 \item{md_extensions}{Markdown extensions to be added or removed from the
@@ -103,8 +117,6 @@ default definition or R Markdown. See the \code{\link[rmarkdown]{rmarkdown_forma
 additional details.}
 
 \item{pandoc_args}{Additional command line options to pass to pandoc}
-
-\item{opts_chunk}{named list. Rmdファイルのチャンク内で \code{knitr::opts_chunk$set(...)} で記入するものと同じ. 画像サイズなどチャンク出力の設定がbeamer向けになるようデフォルト値を変更している 多くの場合は次のように設定される: \code{list(message = FALSE, echo = FALSE, comment = NA, fig.align = "center")}}
 
 \item{out.heigt}{character. \code{out.height} 参照.}
 
@@ -126,7 +138,6 @@ rmarkdownで \LaTeX を使う場合, 日本語を適切に表示するために�
 }
 \seealso{
 Other pdf formats: 
-\code{\link{pdf_book_ja_r}()},
 \code{\link{pdf_book_ja}()},
 \code{\link{pdf_document2_ja}()}
 }

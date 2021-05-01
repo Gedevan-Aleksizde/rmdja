@@ -43,7 +43,6 @@ pdf_book_ja(
   output_extensions = NULL,
   pandoc_args = NULL,
   extra_dependencies = NULL,
-  base_format = rmarkdown::pdf_document,
   ...
 )
 }
@@ -96,8 +95,6 @@ black-and-white (grayscale).}
 \code{rmarkdown::\link{pdf_document}}, or the documentation of the
 \code{base_format} function.}
 
-\item{base_format}{An output format function to be used as the base format.}
-
 \item{...}{Other arguments to be passed to \code{base_format}.}
 }
 \value{
@@ -114,7 +111,6 @@ bookdown pdf format for Japanese typesetting with XeLaTeX/LuaLaTeX
 \seealso{
 Other pdf formats: 
 \code{\link{beamer_presentation_ja}()},
-\code{\link{pdf_book_ja_r}()},
 \code{\link{pdf_document2_ja}()}
 }
 \concept{pdf formats}

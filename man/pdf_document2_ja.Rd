@@ -111,7 +111,6 @@ bookdown packages's pdf_document2 format for Japanese typesetting with XeLaTeX/L
 \seealso{
 Other pdf formats: 
 \code{\link{beamer_presentation_ja}()},
-\code{\link{pdf_book_ja_r}()},
 \code{\link{pdf_book_ja}()}
 }
 \concept{pdf formats}

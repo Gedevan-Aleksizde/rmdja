@@ -56,9 +56,8 @@ pdf_book_ja <- function (
   output_extensions = NULL,
   pandoc_args = NULL,
   extra_dependencies = NULL,
-  base_format = rmarkdown::pdf_document,
   ...
-  )
+)
 {
   # --- check values ---
   latex_engine <- latex_engine[1]
@@ -75,6 +74,8 @@ pdf_book_ja <- function (
   match.arg(block_style, c("default", BLOCK_STYLES))
   
   match.arg(citation_package, BIBLIO_ENGINES)
+  
+  base_format <- rmarkdown::pdf_document
   
   top_level <- "chapter"
   extra_metadata <- list()
@@ -109,8 +110,29 @@ pdf_book_ja <- function (
       includes$before_body <- c(latex_folio, includes$before_body)
     }
   }
+  
   tinytex_latexmk_default <- getOption("tinytex.latexmk.emulation")
-
+  knitr_options <- merge_lists(
+    rmarkdown::knitr_options_pdf(fig_width, fig_height, fig_crop, dev),
+    list(
+      opts_chunk = list(
+        dev = dev,
+        dev.args = dev_args,
+        fig.align = fig_align,
+        out.width = out_width,
+        out.height = out_height,
+        out.extra = out_extra,
+        attr.source = attr_source,
+        tidy = 'styler'
+      ),
+      opts_hooks = list(
+        dev = hook_python_pdf_dev,
+        echo = hook_display_block
+      ),
+      opts_knit = list(global.par = T)
+    ),
+    ignore_null_overlay = T
+  )
   args <- list(
     base = list(
       toc = toc,
@@ -136,26 +158,16 @@ pdf_book_ja <- function (
       quote_footer = quote_footer,
       pandoc_args = pandoc_args,
       ...
-      ),
-    knitr = list(
-      opts_chunk = list(
-        dev = dev,
-        dev.args = dev_args,
-        fig.align = fig_align,
-        out.width = out_width,
-        out.height = out_height,
-        out.extra = out_extra,
-        attr.source = attr_source,
-        tidy = 'styler'
-      ),
-      opts_hooks = list(
-        dev = hook_python_pdf_dev,
-        echo = hook_display_block
-        ),
-      opts_knit = list(global.par = T)
-      )
+    ),
+    knitr = knitr_options,
+    pandoc = rmarkdown::pandoc_options(
+      to = "latex",
+      ext = ".tex",
+      args = pandoc_args,
+      keep_tex = keep_tex,
+      latex_engine = latex_engine
+    )
   )
-  
   preproc <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
     args_extra <- merge_lists(
       metadata[c("biblio-style", "natbiboptions", "biblatexoptions")],
@@ -176,7 +188,7 @@ pdf_book_ja <- function (
         args_extra[["biblio-style"]] <- "jauthoryear"
       }
       if(is.null(args_extra[["biblatexoptions"]])){
-        args_extra["biblatexoptions"] <- "natbib=true"
+        args_extra["biblatexoptions"] <- list("natbib=true")
       }
       if(args_extra[["biblio-style"]] == "jauthoryear"){
         copy_biblatexstyle(metadata, input_file, runtime, knit_meata, files_dir, output_dir)
@@ -204,42 +216,37 @@ pdf_book_ja <- function (
     args_extra <- c(
       args_extra,
       autodetect_and_set_jfont(metadata, input_file, runtime, knit_meta, files_dir, output_dir, latex_engine = latex_engine)
-      )
+    )
     icon_dir <- file.path(output_dir, "_latex/_img")
     if(!file.exists(icon_dir)) dir.create(path = icon_dir, recursive = T, showWarnings = T)
     file.copy(file.path(system.file("resources/styles/img", package = "rmdja"), ICON_FILES()), icon_dir)
     args_extra <- c(args_extra,
                     if(!identical(metadata$fontsize, "10pt") & tombow) "-Mclassoption=nomag" else NULL
-                    )
+    )
     if(is.null(metadata$documentclass)) args_extra <- c(args_extra, sprintf("-Mdocumentclass=%s", doc_class_default))
     if(is.null(metadata[["biblio-title"]])) args_extra <- c(args_extra, "-Mbiblio-title=参考文献")
     return(args_extra)
   }
-  base_format_ <- do.call(
+  out_ <- do.call(
     what = base_format,
     args = if("..." %in% formalArgs(base_format)) args$base else args$base[names(args$base) %in% formalArgs(base_format)]
-    )
-  base_ <- function(){
-    knitr_options <- do.call(rmarkdown::knitr_options, args$knitr)
-    out <- rmarkdown::output_format(
-      pre_knit = adjust_fontsize,
-      knitr = knitr_options,
-      pre_processor = preproc,
-      pandoc = rmarkdown::pandoc_options(
-        to = "latex",
-        ext = ".tex",
-        args = args$pandoc_args,
-        keep_tex = keep_tex, latex_engine = latex_engine
-      ),
-      keep_md = keep_md,
-      clean_supporting = NULL,
-      base_format = base_format_,
-      on_exit = function(x){options(tinytex.latexmk.emulation = tinytex_latexmk_default)}
-    )
-    return(out)
-  }
-  out <- do.call(what = bookdown::pdf_book, args = list(base_format = base_, pandoc_args = pandoc_args))
-  
+  )
+  base_ <- function() rmarkdown::output_format(
+    knitr = args$knitr,
+    pandoc = args$pandoc, 
+    keep_md = keep_md,
+    clean_supporting = TRUE,
+    df_print = df_print,
+    pre_knit = adjust_fontsize,
+    post_knit = NULL,
+    pre_processor = preproc,
+    intermediates_generator = NULL,
+    post_processor = NULL,
+    on_exit = function(x){options(tinytex.latexmk.emulation = tinytex_latexmk_default)},
+    file_scope = NULL,
+    base_format = out_
+  )
+  out <- do.call(what = bookdown::pdf_book, args = list(base_format = base_, pandoc_args = args$pandoc))
   return(out)
 }
 

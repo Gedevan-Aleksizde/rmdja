@@ -150,43 +150,6 @@ beamer_presentation_ja <- function(
     ignore_null_overlay = T
     )
   
-  # ----- generate output format -----
-  args <- list(
-    base = list(
-      toc = toc,
-      slide_level = slide_level,
-      number_sections = number_sections,
-      incremental = incremental,
-      fig_width = fig_width,
-      fig_height = fig_height,
-      fig_crop = fig_crop,
-      fig_caption = fig_caption,
-      dev = dev,
-      theme = theme,
-      colortheme = colortheme,
-      fonttheme = fonttheme,
-      highlight = highlight,
-      template = template,
-      keep_tex = keep_tex,
-      keep_md = keep_md,
-      latex_engine = latex_engine,
-      citation_package = citation_package,
-      self_contained = self_contained,
-      includes = includes,
-      md_extensions = md_extensions,
-      pandoc_args = pandoc_args
-    ),
-    knitr = knitr_options,
-    pandoc = list(
-      to = "beamer",
-      from = rmarkdown::from_rmarkdown(fig_caption, md_extensions),
-      args = NULL,
-      ext = ".tex",
-      keep_tex = keep_tex,
-      latex_engine = latex_engine
-      )
-  )
-  
   preproc <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
     args_extra <- merge_lists(
       metadata[c("biblio-style", "natbiboptions", "biblatexoptions")],
@@ -241,6 +204,43 @@ beamer_presentation_ja <- function(
     )
   }
   
+  # ----- generate output format -----
+  args <- list(
+    base = list(
+      toc = toc,
+      slide_level = slide_level,
+      number_sections = number_sections,
+      incremental = incremental,
+      fig_width = fig_width,
+      fig_height = fig_height,
+      fig_crop = fig_crop,
+      fig_caption = fig_caption,
+      dev = dev,
+      theme = theme,
+      colortheme = colortheme,
+      fonttheme = fonttheme,
+      highlight = highlight,
+      template = template,
+      keep_tex = keep_tex,
+      keep_md = keep_md,
+      latex_engine = latex_engine,
+      citation_package = citation_package,
+      self_contained = self_contained,
+      includes = includes,
+      md_extensions = md_extensions,
+      pandoc_args = pandoc_args
+    ),
+    knitr = knitr_options,
+    pandoc = list(
+      to = "beamer",
+      from = rmarkdown::from_rmarkdown(fig_caption, md_extensions),
+      args = NULL,
+      ext = ".tex",
+      keep_tex = keep_tex,
+      latex_engine = latex_engine
+      )
+  )
+  
   
   base <- do.call(bookdown::beamer_presentation2, args$base)
   out <- rmarkdown::output_format(
@@ -258,5 +258,6 @@ beamer_presentation_ja <- function(
     file_scope = NULL,
     base_format = base
     )
+  out$bookdown_output_format <- "latex"
   return(out)
 }

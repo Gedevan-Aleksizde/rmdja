@@ -160,7 +160,13 @@ pdf_document2_ja <- function (
       pandoc_args = pandoc_args,
       ...
     ),
-    knitr = knitr_options
+    knitr = knitr_options,
+    pandoc = rmarkdown::pandoc_options(
+      to = "latex",
+      ext = ".tex",
+      args = args$pandoc_args,
+      keep_tex = keep_tex, latex_engine = latex_engine
+    )
   )
   
   preproc <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
@@ -226,12 +232,7 @@ pdf_document2_ja <- function (
 
   out <- rmarkdown::output_format(
     knitr = args$knitr,
-    pandoc = rmarkdown::pandoc_options(
-      to = "latex",
-      ext = ".tex",
-      args = args$pandoc_args,
-      keep_tex = keep_tex, latex_engine = latex_engine
-    ),
+    pandoc = args$pandoc,
     pre_knit = adjust_fontsize,
     pre_processor = preproc,
     keep_md = keep_md,
