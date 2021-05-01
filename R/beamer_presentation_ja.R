@@ -38,7 +38,6 @@
 #' @param dev character. グラフィックデバイス. 日本語を使う限りデフォルト値から変更する利点はほぼない. ただし Mac のみ `"quartz"` の選択も考慮する余地がある.
 #' @param md_extensions. named_list. pandoc 変換の際にmdフォーマットに付けるオプション. 詳細は \code{\link[rmarkdown]{rmarkdown_format}} 参照.
 #' @param pandoc_args. named list. pandoc に渡す引数. yamlヘッダのトップレベルに概ね対応する. 詳細は \code{\link[rmarkdown]{pdf_document}}, \code{\link[rmarkdown]{rmd_metadata}} や pandoc の公式ドキュメント参照.
-#' @param opts_chunk named list. Rmdファイルのチャンク内で `knitr::opts_chunk$set(...)` で記入するものと同じ. 画像サイズなどチャンク出力の設定がbeamer向けになるようデフォルト値を変更している 多くの場合は次のように設定される: \code{list(message = FALSE, echo = FALSE, comment = NA, fig.align = "center")}
 #' @param latexmk_emulation logical. パッケージオプション `tinytex.latexmk.emulation` に連動する. デフォルトでは, 文献引用エンジンを natbib にしたときのみ `FALSE`, それ以外は `TRUE`. これは `tinytex` が (u)pBibTeX に対応していないため. どうしても BibTeX を使いたい場合以外は操作する必要のない不要なオプションですが, 日本語を含む文書を作成する限りそのような場面はないと思われます. 
 #' @return \code{rmarkdown_output_format} class
 
@@ -73,10 +72,10 @@ beamer_presentation_ja <- function(
   includes = NULL,
   latex_engine = c("xelatex", "lualatex", "pdflatex", "tectonic"),
   dev = "cairo_pdf",
+  df_print = "default",
   template = "default",
   md_extensions = NULL,
-  pandoc_args = NULL,
-  opts_chunk = NULL
+  pandoc_args = NULL
 ){
   # ----- check arguments class & value -----
   latex_engine <- latex_engine[1]
@@ -96,74 +95,97 @@ beamer_presentation_ja <- function(
     }
   }
   extra_metadata <- c(extra_metadata, merge_bibliography_args(citation_package, citation_options))
-  if(!missing(figurename) || !identical(figurename, "")){
+  if(!is_not_specified(figurename)){
     pandoc_args_base <- c(pandoc_args_base, rmarkdown::pandoc_variable_arg("figurename", figurename))
   } else {
     pandoc_args_base <- c(pandoc_args_base, rmarkdown::pandoc_variable_arg("figurename", "図"))
   }
-  if(!missing(tablename) || !identical(tablename, "")){
+  if(!is_not_specified(tablename)){
     pandoc_args_base <- c(pandoc_args_base, rmarkdown::pandoc_variable_arg("tablename", tablename))
   } else {
-    pandoc_args_base <- c(pandoc_args_base, rmarkdown::pandoc_variable_arg("tablename", "図"))
+    pandoc_args_base <- c(pandoc_args_base, rmarkdown::pandoc_variable_arg("tablename", "表"))
   }
   pandoc_args <- c(pandoc_args_base, pandoc_args)
   pandoc_args <- add_pandoc_arg(pandoc_args, "--extract-media", ".")
   
-  if(missing(template) || identical(template, "") || identical(template, "default")){
+  if(is_not_specified(template)){
     template <- system.file("resources/pandoc-templates/beamer-ja.tex.template", package = "rmdja")
+  }
+  if(code_rownumber){
+    class.source <- "numberLines LineAnchors"
+  } else {
+    class.source <- NULL
+  }
+  if(is_not_specified(df_print)){
+    df_print <- NULL
   }
   tinytex_latexmk_default <- getOption("tinytex.latexmk.emulation")
   
-  # ----- generate output format -----
-  args_beamer_base <- list(
-    toc = toc,
-    slide_level = slide_level,
-    number_sections = number_sections,
-    incremental = incremental,
-    fig_width = fig_width,
-    fig_height = fig_height,
-    fig_crop = fig_crop,
-    fig_caption = fig_caption,
-    dev = dev,
-    theme = theme,
-    colortheme = colortheme,
-    fonttheme = fonttheme,
-    highlight = highlight,
-    template = template,
-    keep_tex = keep_tex,
-    keep_md = keep_md,
-    latex_engine = latex_engine,
-    citation_package = citation_package,
-    self_contained = self_contained,
-    includes = includes,
-    md_extensions = md_extensions,
-    pandoc_args = pandoc_args
-  )
-  base <- do.call(bookdown::beamer_presentation2, args_beamer_base)
-
-  opts_chunk_default <- list(
-    include = T,
-    eval = T,
-    echo = F,
-    message = F,
-    warning = T,
-    error = T,
-    comment = NA,
-    tidy = 'styler',
-    fig.align = "center",
-    out.extra = "keepaspectratio",
-    out.width = out.width,
-    out.height = out.height,
-    dev = dev
+  knitr_options <- args_opts_chunk <- merge_lists(
+    rmarkdown::knitr_options_pdf(fig_width, fig_height, fig_crop, dev = dev),
+    list(
+      opts_chunk = list(
+        include = T,
+        eval = T,
+        echo = F,
+        message = F,
+        warning = T,
+        error = T,
+        comment = NA,
+        tidy = 'styler',
+        fig.align = "center",
+        out.extra = "keepaspectratio",
+        out.width = out.width,
+        out.height = out.height,
+        dev = dev,
+        class.source = class.source,
+        tidy = "tidy"
+        ),
+      opts_hooks = list(
+        dev = hook_python_pdf_dev,
+        echo = hook_display_block
+      ),
+      opts_knit = list(global.par = T)
+      ),
+    ignore_null_overlay = T
     )
-  if(code_rownumber) opts_chunk_default$class.source <- "numberLines LineAnchors"
-  args_opts_chunk <- merge_lists(opts_chunk_default, opts_chunk)
   
-  args_pandoc_options <- list(to = "beamer",
-                              from = rmarkdown::from_rmarkdown(fig_caption, md_extensions),
-                              args = NULL,
-                              keep_tex = keep_tex,
-                              latex_engine = latex_engine)
+  # ----- generate output format -----
+  args <- list(
+    base = list(
+      toc = toc,
+      slide_level = slide_level,
+      number_sections = number_sections,
+      incremental = incremental,
+      fig_width = fig_width,
+      fig_height = fig_height,
+      fig_crop = fig_crop,
+      fig_caption = fig_caption,
+      dev = dev,
+      theme = theme,
+      colortheme = colortheme,
+      fonttheme = fonttheme,
+      highlight = highlight,
+      template = template,
+      keep_tex = keep_tex,
+      keep_md = keep_md,
+      latex_engine = latex_engine,
+      citation_package = citation_package,
+      self_contained = self_contained,
+      includes = includes,
+      md_extensions = md_extensions,
+      pandoc_args = pandoc_args
+    ),
+    knitr = knitr_options,
+    pandoc = list(
+      to = "beamer",
+      from = rmarkdown::from_rmarkdown(fig_caption, md_extensions),
+      args = NULL,
+      ext = ".tex",
+      keep_tex = keep_tex,
+      latex_engine = latex_engine
+      )
+  )
   
   preproc <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
     args_extra <- merge_lists(
@@ -218,18 +240,23 @@ beamer_presentation_ja <- function(
       )
     )
   }
+  
+  
+  base <- do.call(bookdown::beamer_presentation2, args$base)
   out <- rmarkdown::output_format(
-    pre_knit = adjust_fontsize,
-    knitr = do.call(rmarkdown::knitr_options, list(
-      opts_chunk = args_opts_chunk,
-      opts_knit = list(global.par = T))
-      ),
-    pandoc = do.call(rmarkdown::pandoc_options, args_pandoc_options),
-    pre_processor = preproc,
-    clean_supporting = !keep_tex,
+    knitr = args$knitr,
+    pandoc = args$pandoc,
     keep_md = keep_md,
-    base_format = base,
-    on_exit = function(x){options(tinytex.latexmk.emulation = tinytex_latexmk_default)}
+    clean_supporting = !keep_tex,
+    df_print = df_print, 
+    pre_knit = adjust_fontsize,
+    post_knit = NULL,
+    pre_processor = preproc,
+    intermediates_generator = NULL,
+    post_processor = NULL,
+    on_exit = function(x){options(tinytex.latexmk.emulation = tinytex_latexmk_default)},
+    file_scope = NULL,
+    base_format = base
     )
   return(out)
 }
