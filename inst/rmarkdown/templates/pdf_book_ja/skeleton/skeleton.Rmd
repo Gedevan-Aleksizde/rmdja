@@ -3,9 +3,6 @@ title: "無題"
 date: "`r format(Sys.Date(), '%Y/%m/%d')`"
 site: bookdown::bookdown_site
 description: ""
-output:
-  rmdja::pdf_book_ja: default
-  rmdja::gitbook_ja: default
 documentclass: bxjsbook
 bibliography: 
   - packages.bib
@@ -44,7 +41,7 @@ with(mtcars, plot(mpg, wt, col = factor(cyl),
 
 表 \@ref(tab:example-table) を見よ
 
-```{r example-table, include=F}
+```{r example-table, echo=T}
 knitr::kable(head(mtcars[, 1:4]), caption = "表の例", booktabs = T)
 ```
 
@@ -53,4 +50,9 @@ knitr::kable(head(mtcars[, 1:4]), caption = "表の例", booktabs = T)
 
 ```{r, echo=T, eval=F}
 file.copy(system.file("resources/examples/templates/pdf_book_ja/", package = "rmdja"), "./", recursive = T)
+```
+
+
+```{r, include=F}
+knitr::write_bib(c("rmarkdown", "bookdown"), file = "packages.bib")
 ```
