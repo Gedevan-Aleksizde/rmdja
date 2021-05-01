@@ -3,11 +3,33 @@
 #' @inheritParams rmarkdown::beamer_presentation
 #' @family pdf formats
 #' @title R Markdown 上で XeLaTeX を使い日本語 beamer スライドを作成するフォーマット
-#' @description bookdown::beamer_presentation2 wrapper format for Japanese typesetting with XeLaTeX or LuaLaTeX / XeLaTeX または LuaLaTeX で `bookdown::beamer_presentation2` で日本語タイプセットをするためのラッパフォーマット.
+#' @description \code{bookdown::\link{beamer_presentation2}} wrapper format for Japanese typesetting with XeLaTeX or LuaLaTeX
+#' 
+#' XeLaTeX または LuaLaTeX で `bookdown::beamer_presentation2` で日本語タイプセットをするためのラッパフォーマット.
 #' @details rmarkdownで \LaTeX を使う場合, 日本語を適切に表示するためにいろいろ必要だった調整を済ませたフォーマット
 #' 基本的なオプションだけに限定することで簡単にポンチ絵スライドになってしまうことを回避する画期的な機能もあります.
 #' 
-#' @param keep_tex logical. 出力時に .tex ファイルを残すかどうか. 経験的にknit時エラーのほとんどは生成された.texファイルに問題があるためデバッグ用に **\code{TRUE}を推奨する**. 
+#' テンプレートファイルも変更しているため, 厳密に同じではないですが, 既存のパッケージで表現するならデフォルトは概ねこうなります:
+#' 
+#' 
+#' ```
+#' output:
+#'   bookdown::beamer_presentation2:
+#'     latex_engine: xelatex
+#'     theme: default
+#'     citation_package: biblatex
+#'     dev: cairo_pdf
+#'     keep_tex: yes
+#' classoption: aspectratio=43
+#' mainfont: ...
+#' sansfont: ...
+#' monofont: ...
+#' biblatexoption:
+#'   - style=jauthoryear
+#'   - citestyle=numeric
+#' ```
+#' 
+#' @param keep_tex logical. 出力時に .tex ファイルを残すかどうか. 経験的にknit時エラーのほとんどは生成された .texファイルに問題が発生したときのデバッグ用に **\code{TRUE}を推奨する**. 
 #' @param keep_md logical. 出力時に .md ファイルを残すかどうか. 
 #' @param theme chracter. beamer テーマ. 
 #' @param theme_options character. テーマオプション. デフォルトはフレームタイトルの下にプログレスバーをつけて, ブロックの背景色を描画するというもの
@@ -149,6 +171,19 @@ beamer_presentation_ja <- function(
       ),
     ignore_null_overlay = T
     )
+  pandoc_args <- merge_lists(
+    pandoc_args,
+    list(
+      to = "beamer",
+      from = rmarkdown::from_rmarkdown(fig_caption, md_extensions),
+      args = NULL,
+      ext = ".tex",
+      keep_tex = keep_tex,
+      latex_engine = latex_engine
+    ),
+    ignore_null_overlay = T
+  )
+    
   
   preproc <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
     args_extra <- merge_lists(
@@ -231,14 +266,7 @@ beamer_presentation_ja <- function(
       pandoc_args = pandoc_args
     ),
     knitr = knitr_options,
-    pandoc = list(
-      to = "beamer",
-      from = rmarkdown::from_rmarkdown(fig_caption, md_extensions),
-      args = NULL,
-      ext = ".tex",
-      keep_tex = keep_tex,
-      latex_engine = latex_engine
-      )
+    pandoc = pandoc_args
   )
   
   
