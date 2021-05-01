@@ -22,6 +22,7 @@ knitr::opts_chunk$set(echo = F)
 # グラフの標準フォント設定
 # うまく行かない場合は手動で設定してください
 rmdja::set_graphics_font(rmdja::get_default_font_family("xelatex")["serif"])
+FONT <- setNames(rmdja::get_default_font_family("lualatex")["serif"], "") 
 ```
 
 # `rmdja` パッケージテンプレートの使い方
@@ -33,14 +34,12 @@ rmdja::set_graphics_font(rmdja::get_default_font_family("xelatex")["serif"])
 
 図 \@ref(fig:plot) を見よ.
 
-(ref:ggplot-example-article) **ggplot2** を使用したデータのプロット
+(ref:ggplot-example-article) これは **ggplot2** で描くこともできる
 
 ```{r plot, fig.cap="(ref:ggplot-example-article)"}
-ggplot(mutate(mtcars, cyl = factor(cyl)),
-       aes(x = mpg, y = wt, color = cyl)) +
-  geom_point() + labs(x = "マイル毎米ガロン", y = "重量 (1000ポンド)") +
-  theme_bw(base_family = rmdja::get_default_font_family("lualatex")["serif"]) +
-  scale_color_grey() + scale_fill_grey()
+par(family = FONT)
+with(mtcars, plot(mpg, wt, col = factor(cyl),
+                  xlab = "ガロン毎マイル", ylab = "重量 (1000ポンド)"))
 ```
 
 表 \@ref(tab:example-table) を見よ
@@ -50,7 +49,7 @@ knitr::kable(head(mtcars[, 1:4]), caption = "表の例", booktabs = T)
 ```
 
 
-このファイルの出力例は以下のコマンドでコピーすることができます.
+このファイルの出力例は以下のコマンドでコピーすることができる.
 
 ```{r, echo=T, eval=F}
 file.copy(system.file("resources/examples/templates/pdf_book_ja/", package = "rmdja"), "./", recursive = T)

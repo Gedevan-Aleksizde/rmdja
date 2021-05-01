@@ -20,15 +20,15 @@ link-citations: false
 
 ```{r init, include=F}
 require(knitr)
-require(tidyverse)
 # グラフの標準フォント設定
 # うまく行かない場合は手動で設定してください
 rmdja::set_graphics_font(rmdja::get_default_font_family("lualatex")["serif"])
+FONT <- setNames(rmdja::get_default_font_family("lualatex")["serif"], "") 
 ```
 
 # イントロダクション {#introduction}
 
-文書の作成には `rmarkdown` および `bookdown` パッケージ [@R-rmarkdown;@R-bookdown] が必要である. `citr`, `clipr` も執筆に役立つパッケージである.
+文書の作成には `rmarkdown` および `bookdown` パッケージ [@R-rmarkdown;@R-bookdown] が必要である.
 
 第 \@ref(related-works) 節は先行研究のサーベイである.
 第 \@ref(methodology) 節は今回提起する問題とその解決方法である.
@@ -52,14 +52,12 @@ rmdja::set_graphics_font(rmdja::get_default_font_family("lualatex")["serif"])
 
 図 \@ref(fig:plot) が結果である.
 
-(ref:ggplot-example-article) `ggplot2` を使用したデータのプロット
+(ref:ggplot-example-article) これは **ggplot2** で描くこともできる
 
 ```{r plot, fig.cap="(ref:ggplot-example-article)"}
-ggplot(mutate(mtcars, cyl = factor(cyl)),
-       aes(x = mpg, y = wt, color = cyl)) +
-  geom_point() + labs(x = "マイル毎米ガロン", y = "重量 (1000ポンド)") +
-  theme_bw(base_family = rmdja::get_default_font_family("lualatex")["serif"]) +
-  scale_color_grey() + scale_fill_grey()
+par(family = FONT)
+with(mtcars, plot(mpg, wt, col = factor(cyl),
+                  xlab = "ガロン毎マイル", ylab = "重量 (1000ポンド)"))
 ```
 
 # 結論 {#conclusions}
@@ -67,10 +65,10 @@ ggplot(mutate(mtcars, cyl = factor(cyl)),
 表\@ref(tab:table-example)を見よ.
 
 ```{r table-example}
-knitr::kable(head(mtcars[, 1:4]), booktabs = T, caption = "表の例", format = "pipe")
+knitr::kable(head(mtcars[, 1:4]), booktabs = T, caption = "表の例")
 ```
 
-このファイルの出力例は以下のコマンドでコピーすることができます.
+このファイルの出力例は以下のコマンドでコピーすることができる.
 
 ```{r, echo=T, eval=F}
 file.copy(system.file("resources/examples/templates/pdf_article_ja/", package = "rmdja"), "./", recursive = T)

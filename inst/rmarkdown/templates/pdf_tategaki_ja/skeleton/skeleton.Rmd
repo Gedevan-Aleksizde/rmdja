@@ -29,10 +29,10 @@ header-includes:
 ---
 ```{r init, include=F}
 require(knitr)
-require(tidyverse)
 # グラフの標準フォント設定
 # うまく行かない場合は手動で設定してください
 rmdja::set_graphics_font(rmdja::get_default_font_family("lualatex")["serif"])
+FONT <- setNames(rmdja::get_default_font_family("lualatex")["serif"], "") 
 ```
 
 \frontmatter
@@ -87,9 +87,9 @@ rmdja::set_graphics_font(rmdja::get_default_font_family("lualatex")["serif"])
 * 画像も90度回転してしまう (図 \@ref(fig:plot))。チャンクオプション `out.extra="angle=90,keepaspectratio"` を追加することで解決する。しかし図表は横書き文書を想定していることが多いのでこの図のように付番などが不自然になる。
 
 ```{r plot, echo=F, fig.cap="データのプロット", out.extra="angle=90,keepaspectratio"}
-ggplot(mutate(mtcars, cyl = factor(cyl)),
-       aes(x = mpg, y = wt, color = cyl)) +
-  geom_point() + labs(x = "マイル毎米ガロン", y = "重量 (1000ポンド)")
+par(family = FONT)
+with(mtcars, plot(mpg, wt, col = factor(cyl),
+                  xlab = "ガロン毎マイル", ylab = "重量 (1000ポンド)"))
 ```
 
 このファイルの出力例は以下のコマンドでコピーすることができます.

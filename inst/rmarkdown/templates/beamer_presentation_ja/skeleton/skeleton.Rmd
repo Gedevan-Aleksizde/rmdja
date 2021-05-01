@@ -16,16 +16,14 @@ header-includes:
   - \setlength{\metropolis@progressinheadfoot@linewidth}{2pt}
   - \patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip0.5em}{}{}
   - \makeatother
+bibliography: packages.bib
 ---
 
 ```{r setup-document, include=F}
-# サンプル画像等を参照するパス
-file_loc <- system.file("resources", package = "rmdja")
-# サンプル引用文献リストを取得する
-file.copy(file.path(file_loc, "examples/examples.bib"), to = "./")
 # グラフの標準フォント設定
 # うまく行かない場合は手動で設定してください
 rmdja::set_graphics_font(rmdja::get_default_font_family("xelatex")["sans"])
+FONT <- setNames(rmdja::get_default_font_family("xelatex")["sans"], "") 
 ```
 
 ## 
@@ -46,17 +44,43 @@ rmdja::set_graphics_font(rmdja::get_default_font_family("xelatex")["sans"])
 # イントロダクション
 
 ## このスライドは何?
+
 * あまり情報が流れていない, R Markdownと`beamer`で日本語を含むスライドを作るためのテンプレート兼用例集
 * `reveal.js`などHTML媒体は他の資料を参照
-  + [ここ](https://kazutan.github.io/SappoRoR6/rmd_slide.html#/)や[ここ](https://kazutan.github.io/fukuokaR11/intro_rmarkdown_d.html)を見よ
+    + 例: [ここ](https://kazutan.github.io/SappoRoR6/rmd_slide.html#/)や[ここ](https://kazutan.github.io/fukuokaR11/intro_rmarkdown_d.html)
 * もともとは自分用に作ったテンプレだったものを万人向けに修正
 * OS ごとの詳細な事例は `examples` を参考に
 
 
+## 引用
+
+* このパッケージは **rmarkdown** [@R-rmarkdown] および **bookdown** [@R-bookdown] パッケージを元に作成しています.
+
+## 表
+
+```{r tab1, echo=T}
+knitr::kable(head(mtcars[1:3, 1:4]), caption = "表の例", booktabs = T, longtable = T)
+```
+
+## 図
+
+* 画像の表示
+* **ggplot2** のグラフも同様に描画できる
+
+```{r fig1, fig.cap="図の例", ouh.height="60%"}
+par(family = FONT)
+with(mtcars, plot(mpg, wt, col = factor(cyl),
+                  xlab = "ガロン毎マイル", ylab = "重量 (1000ポンド)"))
+```
+
 ##
 
-このファイルの出力例は以下のコマンドでコピーすることができます.
+このファイルの出力例は以下のコマンドでコピーすることができる.
 
 ```{r, echo=T, eval=F}
 file.copy(system.file("resources/examples/templates/beamer_presentation_ja/", package = "rmdja"), "./", recursive = T)
+```
+
+```{r include=F}
+knitr::write_bib(c("rmarkdown", "bookdown"), file = "packages.bib")
 ```
