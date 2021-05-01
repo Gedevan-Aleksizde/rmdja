@@ -624,6 +624,7 @@ $else$
 \renewcommand\refname{$biblio-title$}
 $if(beamer)$
 \section*{$biblio-title$}
+%\addcontentsline{toc}{section}{$biblio-title$}
 $endif$
 $endif$
 $endif$
@@ -643,7 +644,7 @@ $endif$
 $if(biblatex)$
 % biblatex mode
 $if(beamer)$
-\section*{$biblio-title$}
+\section{$biblio-title$}
 \begin{frame}[allowframebreaks]
 \bibliographytrue
 \printbibliography[heading=none]
