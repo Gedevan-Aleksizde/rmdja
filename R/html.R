@@ -39,6 +39,7 @@ gitbook_ja <- function(
   includes = NULL,
   keep_md = FALSE,
   lib_dir = 'libs',
+  knitr_options = NULL,
   md_extensions = NULL,
   pandoc_args = NULL,
   ...){
@@ -98,51 +99,62 @@ gitbook_ja <- function(
     if(is.null(metadata[["biblio-title"]])) args_extra <- c(args_extra, "-Mbiblio-title=参考文献")
     return(args_extra)
   }
-
-  args <- list(
-    fig_caption = fig_caption,
-    number_sections = number_sections,
-    self_contained = self_contained,
-    lib_dir = lib_dir,
-    pandoc_args = pandoc_args,
-    toc_depth = toc_depth,
-    fig_align = fig_align,
-    fig_width = fig_width,
-    fig_height = fig_height,
-    fig_retina = fig_retina,
-    section_divs = section_divs,
-    code_folding = code_folding,
-    code_download = code_download,
-    highlight = highlight,
-    dev = dev,
-    dev.args = dev.args,
-    df_print = df_print,
-    mathjax = mathjax,
-    extra_dependencies = extra_dependencies,
-    css = css,
-    includes = includes,
-    keep_md = keep_md,
-    md_extensions = md_extensions,
-    template = template,
-    split_by = split_by,
-    split_bib = split_bib,
-    config = config,
-    table_css = table_css,
-    base_format = do.call(
-      rmarkdown::output_format,
-      list(pandoc = NULL,
-           knitr = rmarkdown::knitr_options(
-             opts_chunk = opts_chunk_default,
-             opts_hooks = list(echo = hook_display_block),
-             opts_knit = list(global.par = T)
-             ),
-           pre_processor = preproc_css,
-           base_format = rmarkdown::html_document()
-           )
-      ),
-    ...
+  knitr_options_ <- merge_lists(
+    rmarkdown::knitr_options_html(fig_width, fig_height, fig_retina, keep_md, dev),
+    rmarkdown::knitr_options(
+      opts_chunk = opts_chunk_default,
+      opts_hooks = list(echo = hook_display_block),
+      opts_knit = list(global.par = T)
+    ),
+    ignore_null_overlay = T
   )
-  out <- do.call(bookdown::gitbook, args)
+  knitr_options_ <- merge_lists(knitr_options_, list(opts_chunk = opts_chunk_default), ignore_null_overlay = T)
+    
+  args <- list(
+    base = list(
+      fig_caption = fig_caption,
+      number_sections = number_sections,
+      self_contained = self_contained,
+      lib_dir = lib_dir,
+      pandoc_args = pandoc_args,
+      toc_depth = toc_depth,
+      fig_align = fig_align,
+      fig_width = fig_width,
+      fig_height = fig_height,
+      fig_retina = fig_retina,
+      section_divs = section_divs,
+      code_folding = code_folding,
+      code_download = code_download,
+      highlight = highlight,
+      dev = dev,
+      dev.args = dev.args,
+      df_print = df_print,
+      mathjax = mathjax,
+      extra_dependencies = extra_dependencies,
+      css = css,
+      includes = includes,
+      keep_md = keep_md,
+      md_extensions = md_extensions,
+      template = template,
+      split_by = split_by,
+      split_bib = split_bib,
+      config = config,
+      table_css = table_css,
+      ...
+    ),
+    knitr = knitr_options_,
+    pandoc = NULL
+  )
+  base_ <- do.call(
+    rmarkdown::output_format,
+    list(pandoc = args$pandoc,
+         knitr = args$knitr,
+         pre_processor = preproc_css,
+         base_format = rmarkdown::html_document()
+    )
+  )
+
+  out <- do.call(bookdown::gitbook, c(args$base, base_format = base_))
   # TODO refactoring
   preproc_base <- out$pre_processor
   out$pre_processor <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
@@ -186,7 +198,8 @@ html_document2_ja <- function(
   lib_dir = 'libs',
   md_extensions = NULL,
   pandoc_args = NULL,
-  ...){
+  ...
+  ){
   
   code_folding <- code_folding[1]
   match.arg(code_folding, c("none", "show", "hide"))
@@ -216,43 +229,53 @@ html_document2_ja <- function(
     if(is.null(metadata[["biblio-title"]])) args_extra <- c(args_extra, "-Mbiblio-title=参考文献")
     return(args_extra)
   }
-  
-  args <- list(
-    fig_caption = fig_caption,
-    number_sections = number_sections,
-    self_contained = self_contained,
-    lib_dir = lib_dir,
-    pandoc_args = pandoc_args,
-    toc_depth = toc_depth,
-    fig_align = fig_align,
-    fig_width = fig_width,
-    fig_height = fig_height,
-    fig_retina = fig_retina,
-    code_folding = code_folding,
-    code_download = code_download,
-    highlight = highlight,
-    dev = dev,
-    dev.args = dev.args,
-    df_print = df_print,
-    mathjax = mathjax,
-    extra_dependencies = extra_dependencies,
-    css = css,
-    includes = includes,
-    keep_md = keep_md,
-    md_extensions = md_extensions,
-    template = template,
-    ...
-  )
-  out <- rmarkdown::output_format(
-    knitr = rmarkdown::knitr_options(
+  knitr_options_ <- merge_lists(
+    rmarkdown::knitr_options_html(fig_width, fig_height, fig_retina, keep_md, dev),
+    rmarkdown::knitr_options(
       opts_chunk = opts_chunk_default,
       opts_hooks = list(echo = hook_display_block),
       opts_knit = list(global.par = T)
     ),
-    pandoc = NULL,
+    ignore_null_overlay = T
+  )
+  knitr_options_ <- merge_lists(knitr_options_, list(opts_chunk = opts_chunk_default), ignore_null_overlay = T)
+  
+  args <- list(
+    base = list(
+      fig_caption = fig_caption,
+      number_sections = number_sections,
+      self_contained = self_contained,
+      lib_dir = lib_dir,
+      pandoc_args = pandoc_args,
+      toc_depth = toc_depth,
+      fig_align = fig_align,
+      fig_width = fig_width,
+      fig_height = fig_height,
+      fig_retina = fig_retina,
+      code_folding = code_folding,
+      code_download = code_download,
+      highlight = highlight,
+      dev = dev,
+      dev.args = dev.args,
+      df_print = df_print,
+      mathjax = mathjax,
+      extra_dependencies = extra_dependencies,
+      css = css,
+      includes = includes,
+      keep_md = keep_md,
+      md_extensions = md_extensions,
+      template = template,
+      ...
+    ),
+    knitr = knitr_options_,
+    pandoc = NULL
+  )
+  out <- rmarkdown::output_format(
+    knitr = args$knitr,
+    pandoc = args$pandoc,
     keep_md = keep_md,
     pre_processor = preproc_css,
-    base_format = do.call(bookdown::html_document2, args)
+    base_format = do.call(bookdown::html_document2, args$base)
   )
   # TODO refactoring
   preproc_base <- out$pre_processor

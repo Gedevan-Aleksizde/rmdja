@@ -36,7 +36,7 @@ merge_lists <- function (base_list, overlay_list, recursive = TRUE, ignore_null_
       base <- base_list[[name]]
       overlay <- overlay_list[[name]]
       if (is.list(base) && is.list(overlay) && recursive) 
-        merged_list[[name]] <- merge_lists(base, overlay, ignore_null = ignore_null_overlay)
+        merged_list[[name]] <- merge_lists(base, overlay, ignore_null_overlay = ignore_null_overlay)
       else {
         if(!ignore_null_overlay || !any(sapply(overlay_list[which(names(overlay_list) %in% name)], is.null))){
           merged_list[[name]] <- NULL

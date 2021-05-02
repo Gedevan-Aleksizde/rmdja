@@ -291,7 +291,7 @@ pdf_output_base <- function(
         args_extra["biblatexoptions"] <- list("natbib=true")
       }
       if(args_extra[["biblio-style"]] == "jauthoryear"){
-        copy_biblatexstyle(metadata, input_file, runtime, knit_meata, files_dir, output_dir)
+        copy_biblatexstyle(metadata, input_file, runtime, knit_meta, files_dir, output_dir)
       }
       
     }

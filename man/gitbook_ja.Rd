@@ -33,6 +33,7 @@ gitbook_ja(
   includes = NULL,
   keep_md = FALSE,
   lib_dir = "libs",
+  knitr_options = NULL,
   md_extensions = NULL,
   pandoc_args = NULL,
   ...
