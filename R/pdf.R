@@ -707,3 +707,19 @@ parse_ref_links = function(x, regexp) {
   x[i] = ''
   list(content = x, tags = tags, txts = txts, matches = i)
 }
+
+restore_ref_links = function(x, regexp, tags, txts, alt = TRUE) {
+  r = sprintf(regexp, reg_ref_links)
+  m = gregexpr(r, x, perl = TRUE)
+  tagm = regmatches(x, m)
+  for (i in seq_along(tagm)) {
+    tag = tagm[[i]]
+    if (length(tag) == 0) next
+    k = match(tag, tags)
+    tag[!is.na(k)] = txts[na.omit(k)]
+    if (alt && is_img_line(x[i])) tag = strip_html(tag)
+    tagm[[i]] = tag
+  }
+  regmatches(x, m) = tagm
+  x
+}
