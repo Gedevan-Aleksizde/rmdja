@@ -9,10 +9,12 @@ output:
 * 主要OS以外を検知した場合のデフォルトフォントを原ノ味フォントに変更
 * テンプレートをパッケージの要件内で動作するよう修正
 * 出力フォーマットのリファクタリング
-* `beamer_presentation_ja` の `opts_chunk` 引数廃止.
-    * 今後は `knitr::opts_chunk$set()` で設定してください.
+* PDF 系フォーマットに `knitr_options` 引数追加. チャンクオプションやフックのデフォルト値を指定可能
+    * 機能の重複した `beamer_presentation_ja` の `opts_chunk` 引数は廃止されました.
 * PDF 系出力フォーマットに `fig_crop`, `extract-media` 引数追加.
     * Markdown 構文で画像貼り付けに URL を参照していた方は注意してください
+* `pdf_document2_ja` に (u)platex 系の処理機能を追加. しかしまだ不安定かもしれません.
+* 引数のデフォルト値を一部修正
 
 # rmdja 0.4.6
 

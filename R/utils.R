@@ -13,6 +13,8 @@ CSS_FILES <- function(){
 
 LATEX_ENGINES <- c("xelatex", "lualatex", "tectonic", "pdflatex")
 
+LATEX_ENGINES_EXT <- c(LATEX_ENGINES, "uplatex")
+
 BIBLIO_ENGINES <- c("default", "natbib", "biblatex")
 
 BLOCK_STYLES <- c("kframe", "tcolorbox", "awesomebox")
@@ -207,7 +209,7 @@ merge_bibliography_args <- function(citation_package, citation_options){
 ##### copy .latexmkrc for Japaese general usage #####
 # tinytex が upbibtex 対応していないため
 # call at pre_processor
-copy_latexmkrc <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
+copy_latexmkrc <- function(output_dir){
   if(!file.exists(file.path(output_dir, ".latexmkrc"))){
     file.copy(file.path(system.file("resources/latexmk", package = "rmdja"), ".latexmkrc"), to = output_dir, overwrite = F)
   }

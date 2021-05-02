@@ -1,6 +1,7 @@
 #' beamer presentation format for Japanese typesetting with XeLaTeX or LuaLaTeX
 #'
 #' @inheritParams rmarkdown::beamer_presentation
+#' @inheritParams pdf_book_ja
 #' @family pdf formats
 #' @title R Markdown 上で XeLaTeX を使い日本語 beamer スライドを作成するフォーマット
 #' @description \code{bookdown::\link{beamer_presentation2}} wrapper format for Japanese typesetting with XeLaTeX or LuaLaTeX
@@ -29,38 +30,18 @@
 #'   - citestyle=numeric
 #' ```
 #' 
-#' @param keep_tex logical. 出力時に .tex ファイルを残すかどうか. 経験的にknit時エラーのほとんどは生成された .texファイルに問題が発生したときのデバッグ用に **\code{TRUE}を推奨する**. 
-#' @param keep_md logical. 出力時に .md ファイルを残すかどうか. 
 #' @param theme chracter. beamer テーマ. 
 #' @param theme_options character. テーマオプション. デフォルトはフレームタイトルの下にプログレスバーをつけて, ブロックの背景色を描画するというもの
 #' @param fonttheme character. フォントテーマ. デフォルトでは数式にローマン体を使う.
 #' @param colortheme character. 色テーマ.
-#' @param toc logical. 目次をスライド冒頭に出力するかどうか. 白紙フレームになるので見栄えが悪い. examples のように自分で書いたほうが良いと思う. 
-#' @param fig_width numeric. 画像保存時の幅. 単位インチ. デフォルトはbeamerのデフォルト幅と同じ.
-#' @param fig_height numeric. 画像保存時の高さ. 単位インチ. デフォルトはbeamerのデフォルト高と同じ.
-#' @param fig_caption logical. 画像にキャプションを付けるか否か.
-#' @param fig_crop logical. `pdfcrop` を使ってpdf画像の余白を削るかどうか.
-#' @param out.width character. 画像を貼り付ける際のサイズ. チャンクごとに指定することも可能. 
-#' @param out.heigt character. `out.height` 参照. 
-#' @param highlight character. チャンク内のコードのシンタックスハイライトのデザイン. \code{\link[rmarkdown]{beamer_presentation}} 参照. 
-#' @param code_rownumber logical チャンクに行番号を付けるかどうか. 
-#' @param code_softwrapped logical チャンク内のコードを自動折り返しするかどうか. YAML メタデータ `code-softwrapped` でも可.
-#' @param citation_package character. 本文中の引用トークンに関するパッケージ. \code{"default"}, \code{"natbib"} or \code{"biblatex"}. \code{"default"} は pandoc-citeproc を, \code{"natbib"} は bibtex を使用する. よって \code{"natbib"} で日本語文献を引用する場合はオプション \code{options(tinytex.latexmk.emulation = F)} が必要. 詳細は \link[=https://gedevan-aleksizde.github.io/rmdja/%E6%96%87%E7%8C%AE%E5%BC%95%E7%94%A8.html#%E3%82%92%E4%BD%BF%E3%81%86]{rmdja の公式ドキュメント} を参照.
+#' @param toc logical. 目次をスライド冒頭に出力するかどうか. examples のように自分で書いたほうが良いかもしれません.
 #' @param citation_options character. `citation_package` のオプション. `"default"`, 空の文字列, \code{NULL} などを指定すると特に何もしない. \code{citation_package = "natbib"} を選んだ場合, \code{"default"} は \code{`numbers`} に書き換えられる. 
 #' @param figurename character. 図X の「図」の部分のテキスト.
 #' @param tablename character. 表Y の「表」の部分のテキスト.
-#' @param number_sections logical. セクション見出しに番号を付けるかどうか.
 #' @param slide_level integer. フレームタイトルに対応する markdown の節レベル. デフォルト: 2. つまり `#` はセクションタイトルで, `##` がフレームタイトルになる.
 #' @param incremental logical. 箇条書きが順番に現れるやつ. 文字が回転するアニメーション機能はない. 
 #' 『...遠慮のないマッポ関係者が失笑した。ナムサン！プレゼンテーションにおける典型的なセンスレス文字操作だ。』--- B. ボンド& F. モーゼズ
 #' @param self_contained logical. tex ファイルのプリアンブルも生成するかどうか. texソースを手動で書き換えたいのでない限り `TRUE`.
-#' @param includes named list. texファイルに追加するファイルパス. \code{"in_header"}, \code{"before_body"}, \code{"after_body"}, にはファイルパス, \code{"preamble"} は \code{document} 環境直前のプリアンブル記述をインラインで書くことができる. 詳細は \code{\link[rmarkdown]{includes}} 参照.
-#' @param template character. ユーザー定義のpandocテンプレートを使いたい場合はパスを指定する.
-#' @param latex_engine character. LaTeXエンジンの指定. `xelatex` または `lualatex` を想定. `pdflatex`での日本語表示は**サポートしていない**.
-#' @param dev character. グラフィックデバイス. 日本語を使う限りデフォルト値から変更する利点はほぼない. ただし Mac のみ `"quartz"` の選択も考慮する余地がある.
-#' @param md_extensions. named_list. pandoc 変換の際にmdフォーマットに付けるオプション. 詳細は \code{\link[rmarkdown]{rmarkdown_format}} 参照.
-#' @param pandoc_args. named list. pandoc に渡す引数. yamlヘッダのトップレベルに概ね対応する. 詳細は \code{\link[rmarkdown]{pdf_document}}, \code{\link[rmarkdown]{rmd_metadata}} や pandoc の公式ドキュメント参照.
-#' @param latexmk_emulation logical. パッケージオプション `tinytex.latexmk.emulation` に連動する. デフォルトでは, 文献引用エンジンを natbib にしたときのみ `FALSE`, それ以外は `TRUE`. これは `tinytex` が (u)pBibTeX に対応していないため. どうしても BibTeX を使いたい場合以外は操作する必要のない不要なオプションですが, 日本語を含む文書を作成する限りそのような場面はないと思われます. 
 #' @return \code{rmarkdown_output_format} class
 
 #' @export
@@ -96,7 +77,8 @@ beamer_presentation_ja <- function(
   dev = "cairo_pdf",
   df_print = "default",
   template = "default",
-  md_extensions = NULL,
+  md_extensions = "+raw_tex",
+  knitr_options = NULL,
   pandoc_args = NULL
 ){
   # ----- check arguments class & value -----
@@ -143,7 +125,7 @@ beamer_presentation_ja <- function(
   }
   tinytex_latexmk_default <- getOption("tinytex.latexmk.emulation")
   
-  knitr_options <- args_opts_chunk <- merge_lists(
+  knitr_options_ <- args_opts_chunk <- merge_lists(
     rmarkdown::knitr_options_pdf(fig_width, fig_height, fig_crop, dev = dev),
     list(
       opts_chunk = list(
@@ -171,6 +153,7 @@ beamer_presentation_ja <- function(
       ),
     ignore_null_overlay = T
     )
+  knitr_options <- merge_lists(knitr_options_, knitr_options, ignore_null_overlay = T)
   pandoc_args <- merge_lists(
     pandoc_args,
     list(
@@ -197,7 +180,7 @@ beamer_presentation_ja <- function(
       if(is.null(args_extra[["natbiboptions"]])){
         args_extra[["natbiboptions"]] <- "numbers"
       }
-      copy_latexmkrc(metadata, input_file, runtime, knit_meta, files_dir, output_dir)
+      copy_latexmkrc(output_dir)
       if(latexmk_emulation == F){
         options(tinytex.latexmk.emulation = F)
         message(gettext("Preprocessing"), ": ",

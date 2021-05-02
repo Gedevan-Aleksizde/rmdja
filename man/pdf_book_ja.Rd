@@ -3,150 +3,52 @@
 \name{pdf_book_ja}
 \alias{pdf_book_ja}
 \alias{pdf_document2_ja}
-\alias{pdf_document2_platex}
 \title{\code{rmarkdown} + \code{bookdown} で簡単に日本語文書を作るためのプリセットフォーマット}
 \usage{
-pdf_book_ja(
-  toc = TRUE,
-  toc_unnumbered = TRUE,
-  toc_depth = 3,
-  toc_bib = FALSE,
-  toc_appendix = FALSE,
-  number_sections = TRUE,
-  fig_align = "center",
-  fig_caption = TRUE,
-  fig_crop = TRUE,
-  fig_height = 4.5,
-  fig_width = 6.5,
-  dev = "cairo_pdf",
-  dev_args = NULL,
-  out_width = "100\%",
-  out_height = "100\%",
-  out_extra = "keepaspectratio",
-  df_print = "default",
-  quote_footer = NULL,
-  highlight = "default",
-  highlight_bw = FALSE,
-  code_rownumber = TRUE,
-  code_softwrapped = TRUE,
-  block_style = c("default", "kframe", "tcolorbox"),
-  tombow = FALSE,
-  add_folio = FALSE,
-  template = "default",
-  keep_tex = TRUE,
-  keep_md = TRUE,
-  latex_engine = c("xelatex", "lualatex", "tectonic"),
-  citation_package = "biblatex",
-  citation_options = "default",
-  latexmk_emulation = !citation_package == "natbib",
-  extract_media = FALSE,
-  includes = NULL,
-  md_extensions = NULL,
-  output_extensions = NULL,
-  pandoc_args = NULL,
-  extra_dependencies = NULL,
-  ...
-)
+pdf_book_ja(toc = TRUE, tombow = FALSE, add_folio = FALSE, ...)
 
-pdf_document2_ja(
-  toc = FALSE,
-  toc_unnumbered = TRUE,
-  toc_depth = 3,
-  toc_bib = FALSE,
-  toc_appendix = FALSE,
-  number_sections = TRUE,
-  fig_align = "center",
-  fig_caption = TRUE,
-  fig_crop = TRUE,
-  fig_height = 4.5,
-  fig_width = 6.5,
-  dev = "cairo_pdf",
-  dev_args = NULL,
-  out_width = "100\%",
-  out_height = "100\%",
-  out_extra = "keepaspectratio",
-  df_print = "default",
-  quote_footer = NULL,
-  highlight = "default",
-  highlight_bw = FALSE,
-  code_rownumber = TRUE,
-  code_softwrapped = TRUE,
-  block_style = c("default", "kframe", "tcolorbox"),
-  tombow = FALSE,
-  add_folio = FALSE,
-  template = "default",
-  keep_tex = TRUE,
-  keep_md = TRUE,
-  latex_engine = c("xelatex", "lualatex", "tectonic"),
-  citation_package = "biblatex",
-  citation_options = "default",
-  latexmk_emulation = !citation_package == "natbib",
-  extract_media = FALSE,
-  includes = NULL,
-  md_extensions = NULL,
-  output_extensions = NULL,
-  pandoc_args = NULL,
-  extra_dependencies = NULL,
-  ...
-)
-
-pdf_document2_platex(platex = c("uplatex", "platex", "none"), ...)
+pdf_document2_ja(toc = FALSE, ...)
 }
 \arguments{
-\item{toc}{See
-\code{rmarkdown::\link{pdf_document}}, or the documentation of the
-\code{base_format} function.}
-
-\item{toc_unnumbered}{Whether to add unnumberred headers to the table of
-contents.}
-
-\item{toc_bib}{Whether to add the bibliography section to the table of
-contents.}
-
-\item{toc_appendix}{Whether to add the appendix to the table of contents.}
-
-\item{number_sections}{See
-\code{rmarkdown::\link{pdf_document}}, or the documentation of the
-\code{base_format} function.}
-
-\item{fig_caption}{See
-\code{rmarkdown::\link{pdf_document}}, or the documentation of the
-\code{base_format} function.}
-
-\item{quote_footer}{If a character vector of length 2 and the quote footer
-starts with three dashes (\samp{---}), \code{quote_footer[1]} will be
-prepended to the footer, and \code{quote_footer[2]} will be appended; if
-\code{NULL}, the quote footer will not be processed.}
-
-\item{highlight_bw}{Whether to convert colors for syntax highlighting to
-black-and-white (grayscale).}
-
-\item{code_rownumber}{logical. コードセルに行番号を表示するかどうか.}
-
-\item{code_softwrapped}{logical チャンク内のコードを自動折り返しするかどうか. YAML メタデータ \code{code-softwrapped} でも可.}
-
-\item{block_style}{character. \code{block}/\code{block2} チャンクや Fenced Div. 用のスタイル定義. \code{default}, \code{kframe}, \code{tcolorbox} に対応. \code{default} は \code{kframe} と同じ. YAML メタデータに \code{block-style: tcolorbox}, \code{kframe: true} などと書くこともできる. \code{awesomebox.sty} にも近日対応予定.}
+\item{toc}{logical. \code{rmarkdown::\link{pdf_document}} と同じ. 目次の表示.}
 
 \item{tombow}{logical. 製本時に必要なトンボ (trim markers) を付けるかどうか. トンボは \code{gentombow.sty} で作成される.}
 
 \item{add_folio}{logical. 製本時に全ページにノンブルが必要な場合があるらしいので全ページに表示したい時に.}
 
-\item{citation_options}{character. \code{citation_package} のオプション.}
-
-\item{latexmk_emulation}{logical. パッケージオプション \code{tinytex.latexmk.emulation} に連動する. デフォルトでは, 文献引用エンジンを natbib にしたときのみ \code{FALSE}, それ以外は \code{TRUE}. これは \code{tinytex} が (u)pBibTeX に対応していないため. どうしても BibTeX を使いたい場合以外は操作する必要のない不要なオプションですが, 日本語を含む文書を作成する限りそのような場面はないと思われます.}
-
-\item{extract_media}{logical. markdown 構文の画像貼り付けに URL が使用されていた場合, ダウンロードするかどうか. Pandoc の \verb{--extract-media .} に対応. TODO: 現時点では　TRUE にすると余計な画像ファイルが生成される副作用があります. これは rmarkdown にもある不具合です.}
-
-\item{pandoc_args}{See
-\code{rmarkdown::\link{pdf_document}}, or the documentation of the
-\code{base_format} function.}
-
-\item{...}{Other arguments to be passed to \code{base_format}.}
-
-\item{platex}{character. platex を使う場合のエンジン. TODO: てか UTF8 以外で動かせるの?}
+\item{...}{
+  Arguments passed on to \code{\link[=pdf_output_base]{pdf_output_base}}, \code{\link[=pdf_output_base]{pdf_output_base}}
+  \describe{
+    \item{\code{toc_unnumbered}}{logical. 付番されていない見出しも目次に表示するかどうか.}
+    \item{\code{toc_bib}}{logical. 参考文献のセクションも目次に表示するかどうか.}
+    \item{\code{toc_appendix}}{logical. 補遺のセクションも目次に表示するかどうか.}
+    \item{\code{number_sections}}{logical. セクション見出しに番号を付けるかどうか.}
+    \item{\code{highlight_bw}}{logical. グラフの表示をグレースケールに強制変換するかどうか.}
+    \item{\code{code_rownumber}}{logical. コードセルに行番号を表示するかどうか.}
+    \item{\code{code_softwrapped}}{logical. チャンク内のコードを自動折り返しするかどうか. YAML メタデータ \code{code-softwrapped} でも可.}
+    \item{\code{block_style}}{character. \code{block}/\code{block2} チャンクや Fenced Div. 用のスタイル定義. \code{default}, \code{kframe}, \code{tcolorbox} に対応. \code{default} は \code{kframe} と同じ. YAML メタデータに \code{block-style: tcolorbox}, \code{kframe: true} などと書くこともできます. \code{awesomebox.sty} にも近日対応予定.}
+    \item{\code{fig_width}}{numeric. 画像保存時の幅. 単位インチ. デフォルトはbeamerのデフォルト幅と同じ.}
+    \item{\code{fig_height}}{numeric. 画像保存時の高さ. 単位インチ. デフォルトはbeamerのデフォルト高と同じ.}
+    \item{\code{fig_caption}}{logical. 画像にキャプションを付けるか否か.}
+    \item{\code{fig_crop}}{logical. \code{pdfcrop} を使ってpdf画像の余白を削るかどうか.}
+    \item{\code{dev}}{character. グラフィックデバイス. 日本語を使う限りデフォルト値から変更する利点はほぼない. ただし Mac のみ \code{"quartz"} の選択も考慮する余地があります.}
+    \item{\code{df_print}}{character.  データフレームの表示方法. \code{"default"}, \code{"kable"}, \code{"tibble"}, \code{"paged"} のいずれかを指定可能. グローバルオプション の \code{rmarkdown.df_print} を \code{FALSE} にするとこの機能を無効にできます.}
+    \item{\code{highlight}}{character. シンタックスハイライトのスタイル. \code{"default"}, \code{"tango"}, \code{"pygments"}, \code{"kate"}, \code{"monochrome"}, \code{"espresso"}, \code{"zenburn"}, \code{"haddock"}, \code{NULL} が指定可能. \code{NULL} ならばシンタックスハイライト機能を無効にします.}
+    \item{\code{quote_footer}}{長さ2の character. 第1要素は引用ブロックの \verb{---} の後に挿入される. \code{NULL} ならば動作しない.}
+    \item{\code{keep_tex}}{logical. 出力時に .tex ファイルを残すかどうか. 経験的に knit 時エラーのほとんどは生成された .tex ファイルに問題の原因があるため, デバッグ用に \strong{\code{TRUE}を推奨します}.}
+    \item{\code{includes}}{named list. texファイルに追加するファイルパス. \code{"in_header"}, \code{"before_body"}, \code{"after_body"}, にはファイルパス, \code{"preamble"} は \code{document} 環境直前のプリアンブル記述をインラインで書くことができる. 詳細は \code{\link[rmarkdown]{includes}} 参照.}
+    \item{\code{latex_engine}}{character. LaTeXエンジンの指定. \code{xelatex} または \code{lualatex} を想定. \code{pdflatex}での日本語表示は\strong{サポートしていない}.}
+    \item{\code{latexmk_emulation}}{logical. パッケージオプション \code{tinytex.latexmk.emulation} に連動する. デフォルトでは, 文献引用エンジンを \code{citation_package="natbib"} または \code{latex_engine = "uplatex"} にしたときのみ自動で \code{FALSE} となります. これは \code{tinytex} が (u)pLaTeX および (u)pBibTeX に対応していないための措置です. どうしても BibTeX を使いたい場合以外は操作する必要のない不要なオプションですが, 日本語を含む文書を作成する限りそのような場面はほぼないと思われます.}
+    \item{\code{citation_package}}{character. 引用文献処理エンジンの設定. \code{default} は CSL, \code{biblatex} は BibLaTeX, \code{natbib} は BibTeX と natbib.sty の併用を意味します. 日本語表示のため, 紛らわしいですがデフォルトは \code{default} ではなく \code{biblatex} になっていることに注意してください. また, \code{natbib} を指定した場合, デフォルトでは latexmk のエミュレーションモードが無効になります.}
+    \item{\code{citation_options}}{character. \code{citation_package} のオプション.}
+    \item{\code{extract_media}}{logical. markdown 構文の画像貼り付けに URL が使用されていた場合, ダウンロードするかどうか. Pandoc の \verb{--extract-media .} に対応. TODO: 現時点では　TRUE にすると余計な画像ファイルが生成される副作用があります. これは rmarkdown にもある不具合です.}
+    \item{\code{knitr_options}}{list. \code{knitr$opts_chunk$set(...)} などで設定できるチャンクオプションのデフォルト値をリストで与えられます. リスト構造の詳細は \code{rmarkdown::\link{knitr_options}} などを参考にしてください. デフォルトの \code{NULL} は日本語文書に適した設定に自動で書き換えられることを意味します.}
+    \item{\code{pandoc_args}}{named list. pandoc に渡す引数. yamlヘッダのトップレベルに概ね対応します. 詳細は \code{\link[rmarkdown]{pdf_document}}, \code{\link[rmarkdown]{rmd_metadata}} や pandoc の公式ドキュメント参照.}
+    \item{\code{extra_dependencies}}{list. LaTeX に追加で読み込ませるパッケージのリスト. \verb{list(hyperef = c("unicode=true", "breaklinks=true"), lmodern = NULL))} のようにオプションを指定することも可能です.}
+  }}
 }
 \value{
-rmarkdown_output_format
+\code{rmarkdown_output_format} class
 }
 \description{
 bookdown::pdf_book wrapper format for Japanese typesetting with XeLaTeX or LuaLaTeX /\code{bookdown} で PDF文書をビルドする場合, 日本語を適切に表示するためにいろいろ必要だった調整を済ませたラッパフォーマット.
@@ -164,8 +66,10 @@ bookdown::pdf_book wrapper format for Japanese typesetting with XeLaTeX or LuaLa
   bookdown::pdf_book:
     latex_engine: xelatex
     citation_package: biblatex
+    templatex: japanese.templatex
     dev: cairo_pdf
     keep_tex: yes
+    md_extensions: '+raw_tex'
 documentclass: bxjsbook
 mainfont: ...
 sansfont: ...
@@ -177,14 +81,10 @@ biblatexoption:
 加えて knitr のチャンクオプションやフックもいろいろ変更していますが, 基本的にはストレスにならないような動的な設定にしたつもりです. (例: テキストの自動折返し, 文字化けしないようなグラフィックデバイスの選択, 「図」「表」などの頻出キーワードのローカライズなど.)
 
 \code{rmarkdown::\link{pdf_document}} と \code{bookdown::\link{pdf_document2}} の違いは相互参照をサポートしているかどうかです. 技術文書や論文では相互参照は良く使うので後者をベースに日本語文書向けの設定を内蔵しました.
-
-TODO: _platex は 動作確認すらしてません. たぶんまだ動かない
 }
 \seealso{
 Other pdf formats: 
-\code{\link{beamer_presentation_ja}()}
-
-Other pdf formats: 
-\code{\link{beamer_presentation_ja}()}
+\code{\link{beamer_presentation_ja}()},
+\code{\link{pdf_output_base}()}
 }
 \concept{pdf formats}
