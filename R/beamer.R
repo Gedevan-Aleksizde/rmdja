@@ -59,6 +59,7 @@ beamer_presentation_ja <- function(
   fig_caption = TRUE,
   out.width = "100%",
   out.height = "100%",
+  extract_media = F,
   highlight = "default",
   code_rownumber = FALSE,
   code_softwrapped = TRUE,
@@ -90,27 +91,26 @@ beamer_presentation_ja <- function(
   block_style <- block_style[1]
   match.arg(block_style, c("default", BLOCK_STYLES))
   # ----- reshape arguments -----
-  pandoc_args_base <- c()
+  pandoc_vars <- c()
   extra_metadata <- list()
 
   if(!identical(theme_options, "default")){
     if(!is.null(theme_options) && !identical(theme_options, "")){
-      pandoc_args_base <- c(pandoc_args_base, "-V", paste0('themeoptions:', paste0(theme_options, collapse = ","))) #FIXME: how to handle '=' contained values/what does mean the """list""" in Pandoc command line arguments?
+      pandoc_vars <- c(pandoc_vars, "-V", paste0('themeoptions:', paste0(theme_options, collapse = ","))) #FIXME: how to handle '=' contained values/what does mean the """list""" in Pandoc command line arguments?
     }
   }
   extra_metadata <- c(extra_metadata, merge_bibliography_args(citation_package, citation_options))
   if(!is_not_specified(figurename)){
-    pandoc_args_base <- c(pandoc_args_base, rmarkdown::pandoc_variable_arg("figurename", figurename))
+    pandoc_vars <- c(pandoc_vars, rmarkdown::pandoc_variable_arg("figurename", figurename))
   } else {
-    pandoc_args_base <- c(pandoc_args_base, rmarkdown::pandoc_variable_arg("figurename", "図"))
+    pandoc_vars <- c(pandoc_vars, rmarkdown::pandoc_variable_arg("figurename", "図"))
   }
   if(!is_not_specified(tablename)){
-    pandoc_args_base <- c(pandoc_args_base, rmarkdown::pandoc_variable_arg("tablename", tablename))
+    pandoc_vars <- c(pandoc_vars, rmarkdown::pandoc_variable_arg("tablename", tablename))
   } else {
-    pandoc_args_base <- c(pandoc_args_base, rmarkdown::pandoc_variable_arg("tablename", "表"))
+    pandoc_vars <- c(pandoc_vars, rmarkdown::pandoc_variable_arg("tablename", "表"))
   }
-  pandoc_args <- c(pandoc_args_base, pandoc_args)
-  pandoc_args <- add_pandoc_arg(pandoc_args, "--extract-media", ".")
+  if(!is_not_specified(extract_media)) pandoc_vars <- c(pandoc_vars, "--extract-media", ".")
   
   if(is_not_specified(template)){
     template <- system.file("resources/pandoc-templates/beamer-ja.tex.template", package = "rmdja")
@@ -124,7 +124,7 @@ beamer_presentation_ja <- function(
     df_print <- NULL
   }
   tinytex_latexmk_default <- getOption("tinytex.latexmk.emulation")
-  
+
   knitr_options_ <- args_opts_chunk <- merge_lists(
     rmarkdown::knitr_options_pdf(fig_width, fig_height, fig_crop, dev = dev),
     list(
@@ -154,20 +154,15 @@ beamer_presentation_ja <- function(
     ignore_null_overlay = T
     )
   knitr_options <- merge_lists(knitr_options_, knitr_options, ignore_null_overlay = T)
-  pandoc_args <- merge_lists(
-    pandoc_args,
-    list(
-      to = "beamer",
-      from = rmarkdown::from_rmarkdown(fig_caption, md_extensions),
-      args = NULL,
-      ext = ".tex",
-      keep_tex = keep_tex,
-      latex_engine = latex_engine
-    ),
-    ignore_null_overlay = T
+  pandoc_args_ <- rmarkdown::pandoc_options(
+    to = "beamer",
+    from = rmarkdown::from_rmarkdown(fig_caption, md_extensions),
+    args = c(pandoc_vars, pandoc_args),
+    ext = ".tex",
+    keep_tex = keep_tex,
+    latex_engine = latex_engine
   )
-    
-  
+
   preproc <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
     args_extra <- merge_lists(
       metadata[c("biblio-style", "natbiboptions", "biblatexoptions")],
@@ -249,7 +244,7 @@ beamer_presentation_ja <- function(
       pandoc_args = pandoc_args
     ),
     knitr = knitr_options,
-    pandoc = pandoc_args
+    pandoc = pandoc_args_
   )
   
   
