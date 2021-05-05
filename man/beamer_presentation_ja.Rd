@@ -18,6 +18,7 @@ beamer_presentation_ja(
   fig_caption = TRUE,
   out.width = "100\%",
   out.height = "100\%",
+  extract_media = F,
   highlight = "default",
   code_rownumber = FALSE,
   code_softwrapped = TRUE,
