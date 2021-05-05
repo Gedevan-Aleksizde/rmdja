@@ -230,6 +230,15 @@ pdf_output_base <- function(
     ignore_null_overlay = T
   )
   knitr_options <- merge_lists(knitr_options_, knitr_options, ignore_null_overlay = T)
+  knitr_options$knit_hooks$plot <- function(x, options){
+    if(knitr::is_latex_output() && xfun::file_ext(x) == "svg"){
+      output = xfun::with_ext(x, 'pdf')
+      rsvg::rsvg_pdf(svg = x, file = xfun::with_ext(x, "pdf"))
+      knitr::hook_plot_md(output, options)
+    } else {
+      knitr::hook_plot_md(x, options)
+    }
+  }
   
   args <- list(
     base = list(
