@@ -39,6 +39,8 @@ Customized R Markdown/Bookdown format functions for Japanese users
     -   **bookdown** (&gt;=0.21)
     -   **commonmark** (&gt;=1.7)
     -   **styler** (&gt;=1.3.2)
+    -   **xfun** (&gt;=0.3.17)
+    -   **rsvg** (&gt;=2.1.1)
 -   PDF を出力したい
     (おそらくこのパッケージに関心を持った方はほとんど当てはまると思います)
     場合は以下の要件も必要です
@@ -108,9 +110,11 @@ Customized R Markdown/Bookdown format functions for Japanese users
 3.  TeX 環境を未インストールなら, ここでインストールします
     これはそれなりに時間がかかります. また,
     初回のコンパイルにも追加ダウンロードで時間がかかるかもしれません.
+    また, **tinytex** や TeX Live 以外の方法[2]で TeX
+    をインストールした場合の動作確認はしていません.
 
     ``` r
-    tinytex::install_tinytex()
+    rmdja::setup_tinytex_rmdja()
     ```
 
 4.  新規作成時に \[R Markdown\] -&gt; \[From Template\] -&gt; `{rmdja}`
@@ -379,3 +383,8 @@ Ubuntu:
 [1] 2019以前をお使いで,
 これから更新する場合は追加の手続きが必要らしいです. 参考:
 <https://text.baldanders.info/remark/2020/04/haranoaji-fonts-with-texlive-2020/>
+
+[2] 例えば MacTeX はMac版の TeX Live なので問題ありません. この設定には
+tlmgr が必要なので, 例えば TeX Live に準拠していない大昔のバージョンの
+W32TeX
+をインストールしたまま更新せず使い続けているといった環境は想定していません
