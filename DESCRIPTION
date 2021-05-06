@@ -29,4 +29,4 @@ BugReports: https://github.com/Gedevan-Aleksizde/rmdja/issues
 Remotes: 
     github::Gedevan-Aleksizde/fontregisterer
 RoxygenNote: 7.1.1
-License: BSD-3
+License: MIT + file LICENSE
