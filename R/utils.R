@@ -216,7 +216,7 @@ copy_latexmkrc <- function(output_dir){
   return(NULL)
 }
 
-# TODO: bibilatex スタイルのインストールパッケージ
+##### TODO: bibilatex スタイルのインストールパッケージ ####
 copy_biblatexstyle <- function(metadata, input_fike, runtime, knit_meta, files_dir, output_dir){
   if(!file.exists(file.path(output_dir, "jauthoryear.bbx"))){
     file.copy(file.path(system.file("resources/latex", package = "rmdja"), "jauthoryear.bbx"), to = output_dir, overwrite = F)
@@ -226,10 +226,9 @@ copy_biblatexstyle <- function(metadata, input_fike, runtime, knit_meta, files_d
   }
 }
 
-#' ---- copy from bookdown package v0.22 ----
-#' https://github.com/rstudio/bookdown/blob/dfc4f1fb04a7ead9c462e40180f0c3a5dbc212c9/R/utils.R
+##### ---- copy from bookdown package v0.22 ----
+# https://github.com/rstudio/bookdown/blob/dfc4f1fb04a7ead9c462e40180f0c3a5dbc212c9/R/utils.R
 #' @import stats utils
-#' 
 
 bookdown_file = function(...) {
   system.file(..., package = 'bookdown', mustWork = TRUE)

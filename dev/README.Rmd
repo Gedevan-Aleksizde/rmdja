@@ -103,10 +103,10 @@ Customized R Markdown/Bookdown format functions for Japanese users
     リリース一覧からダウンロードしたアーカイブファイルからインストールすることもできます.
     
 1. TeX 環境を未インストールなら, ここでインストールします 
-    これはそれなりに時間がかかります. また, 初回のコンパイルにも追加ダウンロードで時間がかかるかもしれません.
+    これはそれなりに時間がかかります. また, 初回のコンパイルにも追加ダウンロードで時間がかかるかもしれません. また, **tinytex** や TeX Live 以外の方法^[例えば MacTeX はMac版の TeX Live なので問題ありません. この設定には tlmgr が必要なので, 例えば TeX Live に準拠していない大昔のバージョンの W32TeX をインストールしたまま更新せず使い続けているといった環境は想定していません]で TeX をインストールした場合の動作確認はしていません.
     
     ```r
-    tinytex::install_tinytex()
+    rmdja::setup_tinytex_rmdja()
     ```
     
 1. 新規作成時に [R Markdown] -> [From Template] -> `{rmdja}` のテンプレートのいずれかを選択します

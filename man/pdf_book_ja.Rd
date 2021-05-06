@@ -31,6 +31,8 @@ pdf_document2_ja(toc = FALSE, ...)
     \item{\code{fig_height}}{numeric. 画像保存時の高さ. 単位インチ. デフォルトはbeamerのデフォルト高と同じ.}
     \item{\code{fig_caption}}{logical. 画像にキャプションを付けるか否か.}
     \item{\code{fig_crop}}{logical. \code{pdfcrop} を使ってpdf画像の余白を削るかどうか.}
+    \item{\code{fig_auto_font}}{logical. グラフのフォントをOSの標準フォントに自動設定するかどうか}
+    \item{\code{fig_font}}{character. グラフのフォントに一括指定するフォント. \code{fig_auto_font = TRUE} のときのみ有効. デフォルトでは \code{latex_engine} ごとのデフォルトの本文フォントと同じものが選ばれます.}
     \item{\code{dev}}{character. グラフィックデバイス. 日本語を使う限りデフォルト値から変更する利点はほぼない. ただし Mac のみ \code{"quartz"} の選択も考慮する余地があります.}
     \item{\code{df_print}}{character.  データフレームの表示方法. \code{"default"}, \code{"kable"}, \code{"tibble"}, \code{"paged"} のいずれかを指定可能. グローバルオプション の \code{rmarkdown.df_print} を \code{FALSE} にするとこの機能を無効にできます.}
     \item{\code{highlight}}{character. シンタックスハイライトのスタイル. \code{"default"}, \code{"tango"}, \code{"pygments"}, \code{"kate"}, \code{"monochrome"}, \code{"espresso"}, \code{"zenburn"}, \code{"haddock"}, \code{NULL} が指定可能. \code{NULL} ならばシンタックスハイライト機能を無効にします.}

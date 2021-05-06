@@ -17,6 +17,8 @@ pdf_output_base(
   fig_crop = TRUE,
   fig_height = 4.5,
   fig_width = 6.5,
+  fig_auto_font = TRUE,
+  fig_font = NULL,
   dev = "cairo_pdf",
   dev_args = NULL,
   out_width = "100\%",
@@ -65,6 +67,10 @@ pdf_output_base(
 \item{fig_height}{numeric. 画像保存時の高さ. 単位インチ. デフォルトはbeamerのデフォルト高と同じ.}
 
 \item{fig_width}{numeric. 画像保存時の幅. 単位インチ. デフォルトはbeamerのデフォルト幅と同じ.}
+
+\item{fig_auto_font}{logical. グラフのフォントをOSの標準フォントに自動設定するかどうか}
+
+\item{fig_font}{character. グラフのフォントに一括指定するフォント. \code{fig_auto_font = TRUE} のときのみ有効. デフォルトでは \code{latex_engine} ごとのデフォルトの本文フォントと同じものが選ばれます.}
 
 \item{dev}{character. グラフィックデバイス. 日本語を使う限りデフォルト値から変更する利点はほぼない. ただし Mac のみ \code{"quartz"} の選択も考慮する余地があります.}
 

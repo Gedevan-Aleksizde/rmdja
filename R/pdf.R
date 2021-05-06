@@ -68,6 +68,8 @@ pdf_document2_ja <- function (toc = FALSE, ...)
 #' @param fig_height numeric. 画像保存時の高さ. 単位インチ. デフォルトはbeamerのデフォルト高と同じ.
 #' @param fig_caption logical. 画像にキャプションを付けるか否か.
 #' @param fig_crop logical. `pdfcrop` を使ってpdf画像の余白を削るかどうか.
+#' @param fig_auto_font logical. グラフのフォントをOSの標準フォントに自動設定するかどうか
+#' @param fig_font character. グラフのフォントに一括指定するフォント. `fig_auto_font = TRUE` のときのみ有効. デフォルトでは `latex_engine` ごとのデフォルトの本文フォントと同じものが選ばれます.
 #' @param dev character. グラフィックデバイス. 日本語を使う限りデフォルト値から変更する利点はほぼない. ただし Mac のみ `"quartz"` の選択も考慮する余地があります.
 #' @param out.width character. 画像を貼り付ける際のサイズ. チャンクごとに指定することも可能. 
 #' @param out.heigt character. `out.height` 参照. 
@@ -103,6 +105,8 @@ pdf_output_base <- function(
   fig_crop = TRUE,
   fig_height = 4.5,
   fig_width = 6.5,
+  fig_auto_font = TRUE,
+  fig_font = NULL,
   dev = "cairo_pdf",
   dev_args = NULL,
   out_width = "100%",
@@ -230,16 +234,13 @@ pdf_output_base <- function(
     ignore_null_overlay = T
   )
   knitr_options <- merge_lists(knitr_options_, knitr_options, ignore_null_overlay = T)
-  knitr_options$knit_hooks$plot <- function(x, options){
-    if(knitr::is_latex_output() && xfun::file_ext(x) == "svg"){
-      output = xfun::with_ext(x, 'pdf')
-      rsvg::rsvg_pdf(svg = x, file = xfun::with_ext(x, "pdf"))
-      knitr::hook_plot_md(output, options)
-    } else {
-      knitr::hook_plot_md(x, options)
-    }
+  knitr_options$knit_hooks$plot <- svg2pdf_hook
+  if(fig_auto_font){
+    knitr_options$knit_hooks$label <- generate_graphics_font_hook(
+      if(is.null(fig_font)) setNames(rmdja::get_default_font_family(latex_engine)["serif"], "") else fig_font
+      )
   }
-  
+
   args <- list(
     base = list(
       toc = toc,
@@ -359,8 +360,8 @@ pdf_output_base <- function(
     if (is.function(post)) x = post(x)
     write_utf8(x, f)
     if(platex_engine_ != "none"){
-      print(gettext("Japanese-specific compiling mode..."))
-      print(gettextf("LaTeX engine: %s", platex_engine_))
+      message(gettext("Japanese-specific compiling mode..."))
+      message(gettextf("LaTeX engine: %s", platex_engine_))
       copy_latexmkrc(dirname(output))
       tinytex::latexmk(
         f, engine = "latex",
@@ -382,7 +383,7 @@ pdf_output_base <- function(
       if (keep_tex) file.rename(f, file.path(o, f))
       return(output2)
     } else {
-      print(gettext(".pdf file is not generated. Only .tex file is created. plseae complile manually using `tinytex::latexmk()` if needed."))
+      message(gettext(".pdf file is not generated. Only .tex file is created. plseae complile manually using `tinytex::latexmk()` if needed."))
       return(output)
     }
   }

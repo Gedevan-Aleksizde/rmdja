@@ -16,6 +16,8 @@ beamer_presentation_ja(
   fig_height = 3.77953,
   fig_crop = TRUE,
   fig_caption = TRUE,
+  fig_auto_font = TRUE,
+  fig_font = NULL,
   out.width = "100\%",
   out.height = "100\%",
   extract_media = F,

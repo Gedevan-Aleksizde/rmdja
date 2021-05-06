@@ -57,6 +57,8 @@ beamer_presentation_ja <- function(
   fig_height = 3.77953,
   fig_crop = TRUE,
   fig_caption = TRUE,
+  fig_auto_font = TRUE,
+  fig_font = NULL,
   out.width = "100%",
   out.height = "100%",
   extract_media = F,
@@ -124,9 +126,10 @@ beamer_presentation_ja <- function(
     df_print <- NULL
   }
   tinytex_latexmk_default <- getOption("tinytex.latexmk.emulation")
-
+  
+  knitr_options_ <- rmarkdown::knitr_options_pdf(fig_width, fig_height, fig_crop, dev = dev)
   knitr_options_ <- args_opts_chunk <- merge_lists(
-    rmarkdown::knitr_options_pdf(fig_width, fig_height, fig_crop, dev = dev),
+    knitr_options_,
     list(
       opts_chunk = list(
         include = T,
@@ -142,8 +145,7 @@ beamer_presentation_ja <- function(
         out.width = out.width,
         out.height = out.height,
         dev = dev,
-        class.source = class.source,
-        tidy = "tidy"
+        class.source = class.source
         ),
       opts_hooks = list(
         dev = hook_python_pdf_dev,
@@ -154,6 +156,13 @@ beamer_presentation_ja <- function(
     ignore_null_overlay = T
     )
   knitr_options <- merge_lists(knitr_options_, knitr_options, ignore_null_overlay = T)
+  knitr_options$knit_hooks$plot <- svg2pdf_hook
+  if(fig_auto_font){
+    knitr_options$knit_hooks$label <- generate_graphics_font_hook(
+      if(is.null(fig_font)) setNames(rmdja::get_default_font_family(latex_engine)["serif"], "") else fig_font
+    )
+  }
+  
   pandoc_args_ <- rmarkdown::pandoc_options(
     to = "beamer",
     from = rmarkdown::from_rmarkdown(fig_caption, md_extensions),
