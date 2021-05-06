@@ -9,6 +9,7 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 Depends: R (>= 3.6.2)
 Imports:
+  knitr (>= 1.33),
   rmarkdown (>= 2.6),
   bookdown (>= 0.21),
   commonmark (>= 1.7),
