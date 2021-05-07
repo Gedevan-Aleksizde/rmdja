@@ -17,17 +17,19 @@ Imports:
   xfun (>= 0.3.17),
   rsvg (>= 2.1.1)
 Suggests:
-  tidyverse,
-  ggthemes,
-  kableExtra,
-  huxtable,
-  clipr,
-  ymlthis,
-  ragg,
-  svglite,
-  fontregisterer
+    tidyverse,
+    ggthemes,
+    kableExtra,
+    huxtable,
+    clipr,
+    ymlthis,
+    ragg,
+    svglite,
+    fontregisterer,
+    testthat (>= 3.0.0)
 BugReports: https://github.com/Gedevan-Aleksizde/rmdja/issues
 Remotes: 
     github::Gedevan-Aleksizde/fontregisterer
 RoxygenNote: 7.1.1
 License: MIT + file LICENSE
+Config/testthat/edition: 3

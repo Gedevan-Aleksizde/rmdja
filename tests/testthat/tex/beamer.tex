@@ -1,0 +1,388 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames*,x11names*,table}{xcolor}
+%
+\documentclass[
+  12pt,
+  ignorenonframetext,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \setmainfont[]{DejaVu Serif}
+  \setsansfont[]{DejaVu Sans}
+  \setmonofont[]{DejaVu Sans Mono}
+
+% japanese font setting
+% if the preset is specified
+\ifxetex
+  \usepackage[AutoFallBack=true]{zxjatype}
+  \usepackage[noto,]{zxjafont}
+  \usepackage{xeCJKfntef}
+\fi
+\ifluatex
+  \usepackage[,noto]{luatexja-preset}
+  \renewcommand{\kanjifamilydefault}{\gtdefault}
+\fi
+
+  \IfFileExists{pxrubrica.sty}{\usepackage{pxrubrica}}{}
+\ifluatex
+  \ltjsetparameter{%
+    jacharrange={-2,-3},
+    alxspmode={`/,allow},
+    alxspmode={`#,allow},
+    alxspmode={92,allow}
+  }
+\fi
+
+
+\usetheme[]{metropolis}
+% reduce TOC margins
+
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={無題},
+  pdfauthor={RMDJA太郎},
+  colorlinks=true,
+  linkcolor=blue,
+  filecolor=Maroon,
+  citecolor=blue,
+  urlcolor=magenta,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+% for compatible with kableExtra package functions.
+%\usepackage{longtable,booktabs,dcolumn}
+\usepackage{longtable,booktabs,dcolumn,array,multirow,wrapfig,float,colortbl,pdflscape,tabu,threeparttable,threeparttablex,makecell}
+\usepackage{caption}
+% Make caption package work with longtable
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+
+% --- custom blocks ---
+
+% ---- redefine quote format as modern
+\setlength{\fboxsep}{.8em}
+\usepackage{framed}
+\definecolor{quotebarcolor}{rgb}{0.2,0.2,0.2}
+\renewenvironment{quote}{\def\FrameCommand{{\color{quotebarcolor}{\vrule width 3pt}}\hspace{10pt}}\MakeFramed{\advance\hsize-\width\FrameRestore}}{\endMakeFramed}
+% ----
+% ---- kframe blocks
+\newenvironment{infobox}[1]
+  {\begin{itemize}
+  \renewcommand{\labelitemi}{
+    \raisebox{-.7\height}[0pt][0pt]{
+      {\setkeys{Gin}{width=3em,keepaspectratio}\includegraphics{_latex/_img/#1}}
+    }
+  }
+  \setlength{\fboxsep}{1em}\begin{kframe}\item}{\end{kframe}\end{itemize}
+}
+% -----
+
+% for block/block2 engine
+\newenvironment{memo}{\begin{infobox}{memo}}{\end{infobox}}
+\newenvironment{caution}{\begin{infobox}{caution}}{\end{infobox}}
+\newenvironment{important}{\begin{infobox}{important}}{\end{infobox}}
+\newenvironment{tip}{\begin{infobox}{tip}}{\end{infobox}}
+\newenvironment{warning}{\begin{infobox}{warning}}{\end{infobox}}
+% ---- custom block over ----
+
+% ---- for soft wrapping in code block
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},breaklines,breakanywhere}
+% ----
+
+% ---- compatible columns macro
+% by "R Markdown Cookbook" Sec. 5.8
+\newenvironment{cols}[1][]{}{}
+\newenvironment{col}[1]{\begin{minipage}{#1}\ignorespaces}{%
+\end{minipage}
+\ifhmode\unskip\fi
+\aftergroup\useignorespacesandallpars}
+\def\useignorespacesandallpars#1\ignorespaces\fi{%
+#1\fi\ignorespacesandallpars}
+\makeatletter
+\def\ignorespacesandallpars{%
+\@ifnextchar\par
+{\expandafter\ignorespacesandallpars\@gobble}%
+{}%
+}
+\makeatother
+% -----
+
+% ---- user-defined preamble here ----
+\makeatletter
+\setlength{\metropolis@progressinheadfoot@linewidth}{2pt}
+\patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip0.5em}{}{}
+\makeatother
+% ---- user-defined preamble over ----
+
+\usepackage[style=jauthoryear,natbib=true,citestyle=numeric]{biblatex}
+\addbibresource{packages.bib}
+
+\title{無題}
+\author{RMDJA太郎}
+\date{2021/5/7}
+\usepackage{bxtexlogo}
+\colorlet{shadecolor}{gray!20}
+
+\usepackage{fmtcount}
+\ifdefined\theFancyVerbLine\renewcommand{\theFancyVerbLine}{\small \padzeroes[2]{\decimal{FancyVerbLine}}}\fi % adjust row number position
+\IfFileExists{bxcoloremoji.sty}{\usepackage{bxcoloremoji}}{}
+
+\renewcommand{\figurename}{図}
+\renewcommand{\tablename}{表}
+
+% redefine quote format as modern
+\makeatletter
+\@ifpackageloaded{framed}{}{\usepackage{framed}}
+\definecolor{quotebarcolor}{rgb}{0.2,0.2,0.2}
+\renewenvironment{quote}{\def\FrameCommand{{\color{quotebarcolor}{\vrule width 3pt}}\hspace{10pt}}\MakeFramed{\advance\hsize-\width\FrameRestore}}{\endMakeFramed}
+\makeatother
+
+% erase bibliography section title if using beamer
+\ifdefined\bibsection\renewcommand{\bibsection}{}\fi
+\ifdefined\bibfont\renewcommand*{\bibfont}{\footnotesize}\fi
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}{}
+\protect\hypertarget{section}{}
+\begin{quote}
+\textrm{Нужны новые формы. Новые формы нужны, а если их нет, то лучше ничего не нужно.}
+
+\textrm{新しいフォーマットが必要なんですよ. 新しいフォーマットが. それがないというなら, いっそ何もないほうがいい.}
+
+\begin{flushright}
+--- A. チェーホフ 『かもめ』
+
+\end{flushright}
+\end{quote}
+\end{frame}
+
+\begin{frame}{目次}
+\protect\hypertarget{ux76eeux6b21}{}
+\tableofcontents[hideallsubsections]
+\end{frame}
+
+\hypertarget{ux30a4ux30f3ux30c8ux30edux30c0ux30afux30b7ux30e7ux30f3}{%
+\section{イントロダクション}\label{ux30a4ux30f3ux30c8ux30edux30c0ux30afux30b7ux30e7ux30f3}}
+
+\begin{frame}[fragile]{このスライドは何?}
+\protect\hypertarget{ux3053ux306eux30b9ux30e9ux30a4ux30c9ux306fux4f55}{}
+\begin{itemize}
+\tightlist
+\item
+  あまり情報が流れていない, R Markdownと\texttt{beamer}で日本語を含むスライドを作るためのテンプレート兼用例集
+\item
+  \texttt{reveal.js}などHTML媒体は他の資料を参照
+
+  \begin{itemize}
+  \tightlist
+  \item
+    例: \href{https://kazutan.github.io/SappoRoR6/rmd_slide.html\#/}{ここ}や\href{https://kazutan.github.io/fukuokaR11/intro_rmarkdown_d.html}{ここ}
+  \end{itemize}
+\item
+  もともとは自分用に作ったテンプレだったものを万人向けに修正
+\item
+  OS ごとの詳細な事例は \texttt{examples} を参考に
+\end{itemize}
+\end{frame}
+
+\begin{frame}{引用}
+\protect\hypertarget{ux5f15ux7528}{}
+\begin{itemize}
+\tightlist
+\item
+  このパッケージは \textbf{rmarkdown} \autocite{R-rmarkdown} および \textbf{bookdown} \autocite{R-bookdown} パッケージを元に作成しています.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{表}
+\protect\hypertarget{ux8868}{}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(mtcars[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{]), }\AttributeTok{caption =} \StringTok{"表の例"}\NormalTok{, }\AttributeTok{booktabs =}\NormalTok{ T, }\AttributeTok{longtable =}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[t]{lrrrr}
+\caption{\label{tab:tab1}表の例}\\
+\toprule
+  & mpg & cyl & disp & hp\\
+\midrule
+Mazda RX4 & 21.0 & 6 & 160 & 110\\
+Mazda RX4 Wag & 21.0 & 6 & 160 & 110\\
+Datsun 710 & 22.8 & 4 & 108 & 93\\
+\bottomrule
+\end{longtable}
+\end{frame}
+
+\begin{frame}{図}
+\protect\hypertarget{ux56f3}{}
+\begin{itemize}
+\tightlist
+\item
+  画像の表示
+\item
+  \textbf{ggplot2} のグラフも同様に描画できる
+\end{itemize}
+
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth,height=1\textheight,keepaspectratio]{beamer_files/figure-beamer/fig1-1} 
+
+}
+
+\caption{図の例}\label{fig:fig1}
+\end{figure}
+\end{frame}
+
+\begin{frame}{図2}
+\protect\hypertarget{ux56f32}{}
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth,height=1\textheight,keepaspectratio]{beamer_files/figure-beamer/fig2-1} 
+
+}
+
+\caption{svgliteでの出力}\label{fig:fig2}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]{}
+\protect\hypertarget{section-1}{}
+このファイルの出力例は以下のコマンドでコピーすることができる.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{file.copy}\NormalTok{(}\FunctionTok{system.file}\NormalTok{(}\StringTok{"resources/examples/templates/beamer\_presentation\_ja/"}\NormalTok{, }\AttributeTok{package =} \StringTok{"rmdja"}\NormalTok{), }\StringTok{"./"}\NormalTok{, }\AttributeTok{recursive =}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+
+% --- bibliography settings ---
+
+% biblatex mode
+\section{参考文献}
+\begin{frame}[allowframebreaks]
+\bibliographytrue
+\printbibliography[heading=none]
+\end{frame}
+% bibliography settings ends---
+
+
+% -- after body
+
+\end{document}

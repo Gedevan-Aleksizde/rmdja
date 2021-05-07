@@ -1,0 +1,405 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  a4paper,
+  number-of-lines=30,
+  textwidth=40zw]{bxjsarticle}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex,ifpdf,ifthen}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+  \setmainfont[]{DejaVu Serif}
+  \setsansfont[]{DejaVu Sans}
+  \setmonofont[]{DejaVu Sans Mono}
+\fi
+
+% japanese font setting
+% if the preset is specified
+\ifxetex
+  \usepackage[AutoFallBack=true]{zxjatype}
+  \usepackage[noto-otf,]{zxjafont}
+  \usepackage{xeCJKfntef}
+\fi
+\ifluatex
+  \usepackage{luatexja}
+  \usepackage[,noto-otf]{luatexja-preset}
+  %\renewcommand{\kanjifamilydefault}{\gtdefault}
+\fi
+
+  \IfFileExists{pxrubrica.sty}{\usepackage{pxrubrica}}{}
+\ifluatex
+  \ltjsetparameter{%
+    jacharrange={-2,-3},
+    alxspmode={`/,allow},
+    alxspmode={`#,allow},
+    alxspmode={92,allow}
+  }
+\fi
+
+
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\ifpdf
+  \IfFileExists{microtype.sty}{% use microtype if available
+    \usepackage[]{microtype}
+    \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+  }{}
+\fi
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={無題の論文},
+  pdfauthor={RMDJA太郎},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+% for compatible with kableExtra package functions.
+\usepackage{longtable,booktabs,dcolumn}
+%\usepackage{longtable,booktabs,dcolumn,array,multirow,wrapfig,float,colortbl,pdflscape,tabu,threeparttable,threeparttablex,makecell}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+
+
+% compatible mukti-columns macro
+% by "R Markdown Cookbook" Sec. 5.8
+\newenvironment{cols}[1][]{}{}
+\newenvironment{col}[1]{\begin{minipage}{#1}\ignorespaces}{%
+\end{minipage}
+\ifhmode\unskip\fi
+\aftergroup\useignorespacesandallpars}
+\def\useignorespacesandallpars#1\ignorespaces\fi{%
+#1\fi\ignorespacesandallpars}
+\makeatletter
+\def\ignorespacesandallpars{%
+\@ifnextchar\par
+{\expandafter\ignorespacesandallpars\@gobble}%
+{}%
+}
+\makeatother
+%-------
+
+
+% ---- XeLaTeX 専用のあれ ----
+\ifxetex
+  \usepackage{letltxmacro}
+  \setlength{\XeTeXLinkMargin}{1pt}
+  \LetLtxMacro\SavedIncludeGraphics\includegraphics
+  \def\includegraphics#1#{% #1 catches optional stuff (star/opt. arg.)
+    \IncludeGraphicsAux{#1}%
+  }%
+  \newcommand*{\IncludeGraphicsAux}[2]{%
+    \XeTeXLinkBox{%
+      \SavedIncludeGraphics#1{#2}%
+    }%
+  }%
+\fi
+
+% ---- custom blocks ----
+\makeatletter
+\newenvironment{kframe}{%
+\medskip{}
+\setlength{\fboxsep}{.8em}
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\makeatletter
+\@ifundefined{Shaded}{
+}{\renewenvironment{Shaded}{\begin{kframe}}{\end{kframe}}}
+\makeatother
+
+
+% --- custom blocks ---
+
+% ---- redefine quote format as modern
+\setlength{\fboxsep}{.8em}
+\usepackage{framed}
+\definecolor{quotebarcolor}{rgb}{0.2,0.2,0.2}
+\renewenvironment{quote}{\def\FrameCommand{{\color{quotebarcolor}{\vrule width 3pt}}\hspace{10pt}}\MakeFramed{\advance\hsize-\width\FrameRestore}}{\endMakeFramed}
+% ----
+% ---- kframe blocks
+\newenvironment{infobox}[1]
+  {\begin{itemize}
+  \renewcommand{\labelitemi}{
+    \raisebox{-.7\height}[0pt][0pt]{
+      {\setkeys{Gin}{width=3em,keepaspectratio}\includegraphics{_latex/_img/#1}}
+    }
+  }
+  \setlength{\fboxsep}{1em}\begin{kframe}\item}{\end{kframe}\end{itemize}
+}
+% -----
+
+% for block/block2 engine
+\newenvironment{memo}{\begin{infobox}{memo}}{\end{infobox}}
+\newenvironment{caution}{\begin{infobox}{caution}}{\end{infobox}}
+\newenvironment{important}{\begin{infobox}{important}}{\end{infobox}}
+\newenvironment{tip}{\begin{infobox}{tip}}{\end{infobox}}
+\newenvironment{warning}{\begin{infobox}{warning}}{\end{infobox}}
+% ---- custom block over ----
+
+% --- for soft wrapping in code block
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},breaklines,breakanywhere}
+% ----
+
+% ---- user-defined preamble here ----
+% ---- user-defined preamble over ----
+
+\usepackage[style=jauthoryear,natbib=true]{biblatex}
+\addbibresource{packages.bib}
+
+
+\title{無題の論文}
+\author{RMDJA太郎}
+\date{2021/5/7}
+\usepackage{bxtexlogo}
+\colorlet{shadecolor}{gray!20}
+
+\usepackage{fmtcount}
+\ifdefined\theFancyVerbLine\renewcommand{\theFancyVerbLine}{\small \padzeroes[2]{\decimal{FancyVerbLine}}}\fi % adjust row number position
+\IfFileExists{bxcoloremoji.sty}{\usepackage{bxcoloremoji}}{}
+
+
+
+
+\begin{document}
+\maketitle
+\begin{abstract}
+\texttt{rmdja} パッケージは, \texttt{rmarkdown} および \texttt{bookdown} パッケージで自然なレイアウトの日本語文書を作成する際に必要な煩雑な設定を自動で行い, ユーザーの負担を軽減するために作成されたパッケージである.
+\end{abstract}
+
+\newpage
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\CommentTok{\# https://stackoverflow.com/questions/50165404/how{-}to{-}make{-}a{-}pdf{-}using{-}bookdown{-}including{-}svg{-}images}
+\NormalTok{include\_svg }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(path) \{}
+  \ControlFlowTok{if}\NormalTok{ (knitr}\SpecialCharTok{::}\FunctionTok{is\_latex\_output}\NormalTok{()) \{}
+\NormalTok{    output }\OtherTok{\textless{}{-}}\NormalTok{ xfun}\SpecialCharTok{::}\FunctionTok{with\_ext}\NormalTok{(path, }\StringTok{"pdf"}\NormalTok{)}
+    \CommentTok{\# you can compare the timestamp of pdf against svg to avoid conversion if necessary}
+\NormalTok{    rsvg}\SpecialCharTok{::}\FunctionTok{rsvg\_pdf}\NormalTok{(}\AttributeTok{svg =}\NormalTok{ x, }\AttributeTok{file =}\NormalTok{ output)}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+\NormalTok{    output }\OtherTok{\textless{}{-}}\NormalTok{ path}
+\NormalTok{  \}}
+\NormalTok{  knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(output)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{introduction}{%
+\section{イントロダクション}\label{introduction}}
+
+文書の作成には \texttt{rmarkdown} および \texttt{bookdown} パッケージ \autocite{R-rmarkdown,R-bookdown} が必要である.
+
+第 \ref{related-works} 節は先行研究のサーベイである.
+第 \ref{methodology} 節は今回提起する問題とその解決方法である.
+第 \ref{experiment} 節は実験内容である.
+第 \ref{conclusions} 節は結論である.
+
+\hypertarget{related-works}{%
+\section{先行研究}\label{related-works}}
+
+最も充実したドキュメントは開発メンバーの謝益輝 (Yihui) 氏らによる以下の3つである.
+
+\begin{itemize}
+\tightlist
+\item
+  "\href{https://bookdown.org/yihui/rmarkdown/}{R Markdown: The Definitive Guide}
+\item
+  ``\href{https://bookdown.org/yihui/bookdown/}{\texttt{bookdown}: Authoring Books and Technical Documents with R Markdown}''
+\item
+  ``\href{https://bookdown.org/yihui/rmarkdown-cookbook/}{R Markdown Cookbook}''
+\end{itemize}
+
+\hypertarget{methodology}{%
+\section{問題の定式化}\label{methodology}}
+
+このサンプルを動かすには \texttt{knitr} \autocite{R-knitr}, \texttt{tidyverse} \autocite{R-tidyverse} が必要である.
+
+\hypertarget{experiment}{%
+\section{実験}\label{experiment}}
+
+図 \ref{fig:plot} が結果である.
+
+
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\FunctionTok{with}\NormalTok{(mtcars, }\FunctionTok{plot}\NormalTok{(mpg, wt,}
+  \AttributeTok{col =} \FunctionTok{factor}\NormalTok{(cyl),}
+  \AttributeTok{xlab =} \StringTok{"ガロン毎マイル"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"重量 (1000ポンド)"}
+\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth,height=1\textheight,keepaspectratio]{article_files/figure-latex/plot-1} 
+
+}
+
+\caption{これは \textbf{ggplot2} で描くこともできる}\label{fig:plot}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\FunctionTok{par}\NormalTok{(}\AttributeTok{family =} \FunctionTok{setNames}\NormalTok{(rmdja}\SpecialCharTok{::}\FunctionTok{get\_default\_font\_family}\NormalTok{()[}\StringTok{"serif"}\NormalTok{], }\StringTok{""}\NormalTok{))}
+\FunctionTok{with}\NormalTok{(mtcars, }\FunctionTok{plot}\NormalTok{(mpg, wt,}
+  \AttributeTok{col =} \FunctionTok{factor}\NormalTok{(cyl),}
+  \AttributeTok{xlab =} \StringTok{"ガロン毎マイル"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"重量 (1000ポンド)"}\NormalTok{, }\AttributeTok{main =} \StringTok{"cairo\_pdf"}
+\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth,height=1\textheight,keepaspectratio]{article_files/figure-latex/plot2-1} 
+
+}
+
+\caption{これは \textbf{ggplot2} で描くこともできる}\label{fig:plot2}
+\end{figure}
+
+\hypertarget{conclusions}{%
+\section{結論}\label{conclusions}}
+
+表\ref{tab:table-example}を見よ.
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(mtcars[, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{]), }\AttributeTok{booktabs =}\NormalTok{ T, }\AttributeTok{caption =} \StringTok{"表の例"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}
+
+\caption{\label{tab:table-example}表の例}
+\centering
+\begin{tabular}[t]{lrrrr}
+\toprule
+  & mpg & cyl & disp & hp\\
+\midrule
+Mazda RX4 & 21.0 & 6 & 160 & 110\\
+Mazda RX4 Wag & 21.0 & 6 & 160 & 110\\
+Datsun 710 & 22.8 & 4 & 108 & 93\\
+Hornet 4 Drive & 21.4 & 6 & 258 & 110\\
+Hornet Sportabout & 18.7 & 8 & 360 & 175\\
+\addlinespace
+Valiant & 18.1 & 6 & 225 & 105\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+このファイルの出力例は以下のコマンドでコピーすることができる.
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\FunctionTok{file.copy}\NormalTok{(}\FunctionTok{system.file}\NormalTok{(}\StringTok{"resources/examples/templates/pdf\_article\_ja/"}\NormalTok{, }\AttributeTok{package =} \StringTok{"rmdja"}\NormalTok{), }\StringTok{"./"}\NormalTok{, }\AttributeTok{recursive =}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+
+
+
+% --- bibliography settings ---
+
+% biblatex mode
+\printbibliography[title=参考文献,heading=bibintoc]
+% --- bibliography settings ends ---
+
+
+\end{document}
