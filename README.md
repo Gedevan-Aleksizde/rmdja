@@ -16,6 +16,9 @@ Customized R Markdown/Bookdown format functions for Japanese users
 -   XeLaTeXまたはLuaLaTeXでのタイプセットを前提にしています
     -   それぞれ `zxjatype`, `luatex-ja`, を利用して和文表示をしています
 -   私的LaTeXテンプレ集である[my\_latex\_templates](https://github.com/Gedevan-Aleksizde/my_latex_templates/)からパッケージとして独立しました
+-   MS Office Word の出力がしたい場合は
+    [Wordja](https://github.com/Gedevan-Aleksizde/wordja)
+    を参考にしてください.
 
 以下は rmdja 自身で作成したドキュメントです. HTML/PDF も用意しています.
 
@@ -35,6 +38,7 @@ Customized R Markdown/Bookdown format functions for Japanese users
 -   依存パッケージ
     (通常はインストール時に合わせてインストールされるため,
     手作業でなにかする必要はありません)
+    -   **knitr** (&gt;=1.33)
     -   **rmarkdown** (&gt;=2.6)
     -   **bookdown** (&gt;=0.21)
     -   **commonmark** (&gt;=1.7)

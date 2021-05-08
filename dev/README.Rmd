@@ -19,6 +19,7 @@ Customized R Markdown/Bookdown format functions for Japanese users
 * XeLaTeXまたはLuaLaTeXでのタイプセットを前提にしています
   + それぞれ `zxjatype`, `luatex-ja`, を利用して和文表示をしています
 * 私的LaTeXテンプレ集である[my_latex_templates](https://github.com/Gedevan-Aleksizde/my_latex_templates/)からパッケージとして独立しました
+* MS Office Word の出力がしたい場合は [Wordja](https://github.com/Gedevan-Aleksizde/wordja) を参考にしてください.
 
 以下は rmdja 自身で作成したドキュメントです. HTML/PDF も用意しています.
 
