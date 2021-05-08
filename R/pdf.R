@@ -3,7 +3,7 @@
 #' @export
 pdf_book_ja <- function (toc = TRUE, tombow = FALSE, add_folio = FALSE, ...)
 {
-  do.call(pdf_document_base, list(OUTPUT_TYPE = "book", toc = toc, tombow = tombow, add_folio = add_folio, ...))
+  do.call(pdf_output_base, list(OUTPUT_TYPE = "book", toc = toc, tombow = tombow, add_folio = add_folio, ...))
 }
 
 #' @family pdf formats
