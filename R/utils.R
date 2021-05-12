@@ -76,7 +76,7 @@ gen_opts_hook_par <- function(font_family){
 
 ##### to check if chunk engine is asis/text-like #####
 hook_display_block <- function(options){
-  if(options$engine %in% DUMMY_ENGINES()) options$echo <- T
+  if(options$engine %in% DUMMY_ENGINES()) options$echo <- all(options$echo, T)
   return(options)
 }
 
