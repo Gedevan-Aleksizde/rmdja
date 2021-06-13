@@ -6,7 +6,10 @@ description: ""
 documentclass: bxjsbook
 bibliography: 
   - packages.bib
-classoption: a4paper
+classoption:
+  - lualatex
+  - ja=standard
+  - a4paper
 link-citations: true
 linkcolor: blue
 citecolor: blue
