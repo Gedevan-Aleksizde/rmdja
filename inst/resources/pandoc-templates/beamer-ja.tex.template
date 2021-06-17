@@ -89,6 +89,11 @@ $endif$
 $if(beamerarticle)$
 \usepackage{beamerarticle} % needs to be loaded first
 $endif$
+
+$if(theme)$
+\usetheme[$for(themeoptions)$$themeoptions$$sep$,$endfor$]{$theme$}
+$endif$
+
 $if(fontfamily)$
 \usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
 $else$
@@ -198,9 +203,6 @@ $if(latex_engine.luatex)$
 % luatex dayo
 $endif$
 
-$if(theme)$
-\usetheme[$for(themeoptions)$$themeoptions$$sep$,$endfor$]{$theme$}
-$endif$
 $if(colortheme)$
 \usecolortheme{$colortheme$}
 $endif$
