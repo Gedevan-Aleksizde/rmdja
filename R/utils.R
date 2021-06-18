@@ -19,6 +19,8 @@ BIBLIO_ENGINES <- c("default", "natbib", "biblatex")
 
 BLOCK_STYLES <- c("kframe", "tcolorbox", "awesomebox")
 
+BXJSCLS_NAMES <- c("bxjsarticle", "bxjsreport", "bxjsbook", "bxjsslide")
+
 #### common functions ####
 
 #####  to merge rmd parameter lists #####

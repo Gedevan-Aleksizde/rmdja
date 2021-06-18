@@ -141,8 +141,11 @@ $endif$
 $if(jfontpreset)$
 % if the preset is specified
 \ifxetex
+$if(bxjscls)$
+$else$
   \usepackage[AutoFallBack=true]{zxjatype}
   \usepackage[$jfontpreset$,$for(jfontpresetoptions)$$jfontpresetoptions$$sep$,$endfor$]{zxjafont}
+$endif$
   \usepackage{xeCJKfntef}
 \fi
 \ifluatex

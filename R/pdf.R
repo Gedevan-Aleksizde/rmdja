@@ -283,6 +283,21 @@ pdf_output_base <- function(
       metadata[c("biblio-style", "natbiboptions", "biblatexoptions")],
       extra_metadata[c("biblio-style", "natbiboptions", "biblatexoptions")])
     args_extra <- args_extra[!is.na(names(args_extra))]
+    print(metadata)
+    if(latex_engine %in% c("xelatex", "lualatex", metadata$documentclass %in% BXJSCLS_NAMES)){
+      args_extra["bxjscls"] <- T
+      # edit classoptions to [<latex_engine>,ja=standard,...]
+      pos_ja_engine <- which(substr(metadata$classoption, 1, 2) == "ja=")
+      if(length(pos_ja_engine)){
+        metadata$classoption <- c("ja=standard", metadata$classoption)
+      }
+      pos_engine <- which(metadata$classoption %in% c("xelatex", "lualatex"))
+      if(length(pos_engine) == 0){
+        metadata$classoption <- c(latex_engine, metadata$classoption)
+      } else{
+        metadata$classoption[pos_engine] <- latex_engine
+      }
+    }
     if(identical(code_softwrapped, T)){
       args_extra[["code-softwrapped"]] <- T
     }
@@ -331,7 +346,9 @@ pdf_output_base <- function(
     if(!file.exists(icon_dir)) dir.create(path = icon_dir, recursive = T, showWarnings = T)
     file.copy(file.path(system.file("resources/styles/img", package = "rmdja"), ICON_FILES()), icon_dir)
     args_extra <- c(args_extra,
-                    if(!identical(metadata$fontsize, "10pt") & tombow) "-Mclassoption=nomag" else NULL
+                    if(!identical(metadata$fontsize, "10pt") & tombow) sprintf(
+                      "-Mclassoption=%s,nomag", paste(metadata$classoption, collapse = ",")
+                      ) else NULL
     )
     if(is.null(metadata$documentclass)) args_extra <- c(args_extra, sprintf("-Mdocumentclass=%s", doc_class_default))
     if(is.null(metadata[["biblio-title"]])) args_extra <- c(args_extra, "-Mbiblio-title=参考文献")
