@@ -491,6 +491,19 @@ $if(code-softwrapped)$
 % ----
 $endif$
 
+% ---- font style-changing macro for convenient ----
+\ifdefined\mcfamily
+  \newcommand{\textserif}[1]{{\rmfamily\mcfamily #1}}
+\else
+  \newcommand{\textserif}[1]{{\rmfamily #1}}
+\fi
+\ifdefined\gtfamily
+  \newcommand{\textsans}[1]{{\sffamily\gtfamily #1}}
+\else
+  \newcommand{\textsans}[1]{{\sffamily #1}}
+\fi
+% ----
+
 % ---- user-defined preamble here ----
 $for(header-includes)$
 $header-includes$
