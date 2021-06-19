@@ -279,28 +279,47 @@ pdf_output_base <- function(
   )
   
   preproc <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
-    args_extra <- merge_lists(
-      metadata[c("biblio-style", "natbiboptions", "biblatexoptions")],
-      extra_metadata[c("biblio-style", "natbiboptions", "biblatexoptions")])
-    args_extra <- args_extra[!is.na(names(args_extra))]
-    print(metadata)
-    if(latex_engine %in% c("xelatex", "lualatex", metadata$documentclass %in% BXJSCLS_NAMES)){
-      args_extra["bxjscls"] <- T
+    # TODO: 複雑になったので全部 metadata を書き換えてからまとめて更新
+    # TODO: ユーザが行儀よく1行毎にオプションを書いてくれるとは限らない
+    metadata[["classoption"]] <- paste(metadata[["classoption"]], collapse = ",")
+    metadata_origin <- metadata
+    metadata[["classoption"]] <- unlist(strsplit(metadata[["classoption"]], ",", fixed = T))
+    #args_extra <- merge_lists(
+    #  metadata[c("biblio-style", "natbiboptions", "biblatexoptions")],
+    #  extra_metadata[c("biblio-style", "natbiboptions", "biblatexoptions")])
+    #args_extra <- args_extra[!is.na(names(args_extra))]
+    metadata <- complete_font_settings(latex_engine, metadata)
+    
+    if(is.null(metadata[["documentclass"]])) metadata[["documentclass"]] <- doc_class_default
+    
+    # BXjscls-specific settings
+    if(latex_engine %in% c("xelatex", "lualatex", metadata[["classoption"]] %in% BXJSCLS_NAMES)){
+      metadata[["bxjscls"]] <- "yes"
       # edit classoptions to [<latex_engine>,ja=standard,...]
-      pos_ja_engine <- which(substr(metadata$classoption, 1, 2) == "ja=")
-      if(length(pos_ja_engine)){
-        metadata$classoption <- c("ja=standard", metadata$classoption)
+      pos_ja_engine <- which(grepl("^\\s*ja\\s*=", metadata[["classoption"]]))
+      if(length(pos_ja_engine) == 0){
+        metadata[["classoption"]] <- c("ja=standard", metadata[["classoption"]])
       }
-      pos_engine <- which(metadata$classoption %in% c("xelatex", "lualatex"))
+      pos_engine <- which(metadata[["classoption"]] %in% c("xelatex", "lualatex"))
       if(length(pos_engine) == 0){
-        metadata$classoption <- c(latex_engine, metadata$classoption)
+        metadata[["classoption"]] <- c(latex_engine, metadata[["classoption"]])
       } else{
-        metadata$classoption[pos_engine] <- latex_engine
+        metadata[["classoption"]][pos_engine] <- latex_engine
       }
+      pos_jafont <- which(grepl("^\\s*jafont\\s*=", metadata[["classoption"]]))
+      if(length(pos_jafont) == 0){
+        metadata[["classoption"]] <- c(metadata[["classoption"]], sprintf("jafont=%s", metadata[["jfontpreset"]]))
+      }
+      if(!is.null(metadata[["jfontpresetoption"]])){
+        metadata[["classoption"]] <- c(metadata[["classoption"]], metadata[["jfontpresetoption"]])
+      }
+      if(!identical(metadata[["fontsize"]], "10pt") & tombow){
+        metadata[["classoption"]] <- c(metadata[["classoption"]], "nomag")
+      }
+      # flatten
+      metadata[["classoption"]] <- paste(metadata[["classoption"]], collapse = ",")
     }
-    if(identical(code_softwrapped, T)){
-      args_extra[["code-softwrapped"]] <- T
-    }
+    # bibilogpahic options
     if(identical(citation_package, "natbib")){
       copy_latexmkrc(output_dir)
       if(latexmk_emulation == F){
@@ -309,52 +328,54 @@ pdf_output_base <- function(
                 gettext("latexmk emulation is temporarily disabled to use (u)pBibTeX."))
       }
     } else if(identical(citation_package, "biblatex")){
-      if(is.null(args_extra[["biblio-style"]])){
-        args_extra[["biblio-style"]] <- "jauthoryear"
+      if(is.null(metadata[["biblio-style"]])){
+        metadata[["biblio-style"]] <- "jauthoryear"
       }
-      if(is.null(args_extra[["biblatexoptions"]])){
-        args_extra["biblatexoptions"] <- list("natbib=true")
+      if(is.null(metadata[["biblatexoptions"]])){
+        metadata[["biblatexoptions"]] <- c("natbib=true")
       }
-      if(args_extra[["biblio-style"]] == "jauthoryear"){
+      if(metadata[["biblio-style"]] == "jauthoryear"){
         copy_biblatexstyle(metadata, input_file, runtime, knit_meta, files_dir, output_dir)
       }
-      
     }
+    
+    # set custom block styles
     if(block_style == "default"){
-      if(any(!is.null(args_extra[["block-style"]]), F) && args_extra[["block-style"]] %in% BLOCK_STYLES){
-        args_extra[[args_extra[["block-style"]]]] <- T
-      } else if(any(unlist(args_extra[BLOCK_STYLES]))){
+      if(any(!is.null(metadata[["block-style"]]), F) && metadata[["block-style"]] %in% BLOCK_STYLES){
+        metadata[[metadata[["block-style"]]]] <- "yes"
+      } else if(any(unlist(metadata[BLOCK_STYLES]))){
         for(s in BLOCK_STYLES){
-          args_extra[[s]] <- T
+          metadata[[s]] <- "yes"
         }
       } else {
-        args_extra[["kframe"]] <- T
+        metadata[["kframe"]] <- "yes"
       }
     } else {
-      args_extra[[block_style]] <- T
+      metadata[[block_style]] <- "yes"
       for(s in BLOCK_STYLES){
-        if(s != block_style) args_extra[[s]] <- NULL
+        if(s != block_style) metadata[[s]] <- NULL
       }
     }
-    args_extra <- paste0("-M", names(args_extra), "=", args_extra)
     
-    args_extra <- c(
-      args_extra,
-      autodetect_and_set_jfont(metadata, input_file, runtime, knit_meta, files_dir, output_dir, latex_engine = latex_engine)
-    )
+    if(identical(code_softwrapped, T)){
+      metadata[["code-softwrapped"]] <- "yes"
+    }
+
     icon_dir <- file.path(output_dir, "_latex/_img")
     if(!file.exists(icon_dir)) dir.create(path = icon_dir, recursive = T, showWarnings = T)
     file.copy(file.path(system.file("resources/styles/img", package = "rmdja"), ICON_FILES()), icon_dir)
-    args_extra <- c(args_extra,
-                    if(!identical(metadata$fontsize, "10pt") & tombow) sprintf(
-                      "-Mclassoption=%s,nomag", paste(metadata$classoption, collapse = ",")
-                      ) else NULL
+    new_and_updated <- c(
+      names(metadata_origin)[unlist(
+        lapply(names(metadata_origin),
+               function(x) !identical(metadata_origin[[x]], metadata[[x]]))
+        )],
+      setdiff(names(metadata), names(metadata_origin))
     )
-    if(is.null(metadata$documentclass)) args_extra <- c(args_extra, sprintf("-Mdocumentclass=%s", doc_class_default))
-    if(is.null(metadata[["biblio-title"]])) args_extra <- c(args_extra, "-Mbiblio-title=参考文献")
+    metadata <- metadata[new_and_updated]
+    args_extra <- mapply(function(name, val){ paste0("-M", name, "=", val) }, names(metadata), metadata)
     return(args_extra)
   }
-  
+
   # for (u)platex
   postproc <- function(metadata, input, output, clean, verbose) {
     # if (is.function(post)) output = post(metadata, input, output, clean, verbose)

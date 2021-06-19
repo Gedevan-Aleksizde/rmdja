@@ -21,6 +21,22 @@ BLOCK_STYLES <- c("kframe", "tcolorbox", "awesomebox")
 
 BXJSCLS_NAMES <- c("bxjsarticle", "bxjsreport", "bxjsbook", "bxjsslide")
 
+DEFAULT_PRESET <- matrix(
+  c("noto", "noto-otc",
+    "yu-osx", "hiragino-pron",
+    "yu-win10", "yu-win10",
+    "yu-win", "yu-win",
+    "ms-hg", "ms",
+    "haranoaji", "haranoaji"
+    ),
+  ncol = 2,
+  byrow = T,
+  dimnames = list(
+    c("ubuntu", "mac", "windows10", "windows8", "windows-legacy", "others"),
+    c("xelatex", "lualatex")
+    )
+  )
+
 #### common functions ####
 
 #####  to merge rmd parameter lists #####
@@ -103,22 +119,92 @@ adjust_fontsize <- function(input, ...) {
   return(input)
 }
 
+warn_if_preset_unavailable <- function(preset, os){
+  if(substr(preset, 1, 4) == "noto"){
+    families <- c("Noto Serif CJK JP", "Noto Sans CJK JP")
+  } else if(substr(preset, 1, 3) == "yu-"){
+    families <- c("Yu Mincho", "Yu Gothic")
+  } else if(substr(preset, 1, 2) == "ms"){
+    families <- c("MS PMincho", "MS PGothic")
+  } else if(substr(preset, 1, 6) == "hiragino"){
+    families <- c("Hiragino Sans", "Hiragino Minco ProN")
+  } else {
+    families <- c("Harano Aji Mincho", "Harano Aji Gothic")
+  }
+  for(x in families){
+    if(all(systemfonts::font_info(x)$family != x)){
+      warning(gettextf("Font %s is not found in your system.", x))
+    }
+  }
+}
+
+classify_system <- function(){
+  sysinfo <- Sys.info()
+  if(!is.null(sysinfo)){
+    if (grepl("^darwin", R.version$os))
+      name <- "mac"
+    else if(grepl("linux-gnu", R.version$os))
+      if(substr(tolower(osVersion), 1, 6) == "ubuntu") {
+        name <- "ubuntu"
+      } else {
+        name <- "linux"
+      }
+    else if(tolower(R.version$os)){
+      
+    } else {
+      name <- tolower(sysinfo["sysname"])
+    }
+  } else {
+    name <- tolower(.Platform$OS.type)
+    if (grepl("^darwin", R.version$os))
+      name <- "mac"
+    if (grepl("linux-gnu", R.version$os))
+      name <- "linux"
+  }
+  if(substr(name, 1, 5) == "windows"){
+    if(osinfo$version > 10) name <- "windows10"
+    else if(osinfo$version == 8) name <- "windows8"
+    else name <- "windows-legacy"
+  }
+  return(name)
+}
+
 ##### return Japanese font if not specified #####
 # 指定がない場合にフォントを勝手に決める
+
+# complete missing font settings
+complete_font_settings <- function(latex_engine, metadata = NULL){
+  for(x in c("mainfont", "sansfont", "monofont")){
+    if(is.null(metadata[[x]]) && !is.null(metadata[[paste0("j", x)]])){
+      metadata[[x]] <- metadata[[paste0("j", x)]]
+    }
+  }
+  if(is.null(metadata[["jfontpreset"]])){
+    os <- classify_system()
+    latex_engine <- if(is.null(latex_engine)) metadata$latex_engine else latex_engine
+    if(latex_engine == "tectonic") latex_engine <- "xelatex"
+    metadata[["jfontpreset"]] <- DEFAULT_PRESET[os, latex_engine]
+  }
+  return(metadata)
+}
+
 # return font option name depening on the output format settings
 # call at pre_processor
+
 autodetect_jfont <- function(latex_engine, metadata = NULL){
   sysinfo <- Sys.info()
-  if(is.null(sysinfo)){
-    name <- .Platform$OS.type
-    if (grepl("^darwin", R.version$os))
+  if (!is.null(sysinfo)) {
+    if (grepl("^darwin", R.version$os)) {
       name <- "Darwin"
-    if (grepl("linux-gnu", R.version$os))
+    }
+    if (grepl("linux-gnu", R.version$os)) {
       name <- "Linux"
+    } else {
+      name = sysinfo["sysname"]
+    }
   } else {
-    name = sysinfo["sysname"]
+    name <- .Platform$OS.type
   }
-  
   osinfo <- list(
     name = tolower(name),
     version = sysinfo["version"]
