@@ -28,7 +28,7 @@ get_default_font_family <- function(engine = "xelatex"){
   if(engine %in% c("tectonic", "pdflatex")){
     warning(gettextf("Currentry rmdja package not support `%s` engine completely.", engine))
   }
-  fam <- autodetect_jfont(engine)["jfontpreset"]
+  fam <- complete_font_settings(engine)[["jfontpreset"]]
   if(grepl("^noto", fam)){
     font <- c(serif = "Noto Serif CJK JP", sans = "Noto Sans CJK JP")
   } else if(fam == "hiragino-pron") {
