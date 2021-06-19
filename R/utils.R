@@ -119,7 +119,7 @@ adjust_fontsize <- function(input, ...) {
   return(input)
 }
 
-warn_if_preset_unavailable <- function(preset, os){
+warn_if_default_preset_unavailable <- function(preset, os){
   if(substr(preset, 1, 4) == "noto"){
     families <- c("Noto Serif CJK JP", "Noto Sans CJK JP")
   } else if(substr(preset, 1, 3) == "yu-"){
@@ -130,6 +130,10 @@ warn_if_preset_unavailable <- function(preset, os){
     families <- c("Hiragino Sans", "Hiragino Minco ProN")
   } else {
     families <- c("Harano Aji Mincho", "Harano Aji Gothic")
+    if(length(tinytex::tlmgr_search("haranoaji", global = F, .quiet = T, stdout = T) == 0){
+      warning(gettextf("Font `%s` is not found in your system.", "Harano Aji"))
+    }
+    return(NULL)
   }
   for(x in families){
     if(all(systemfonts::font_info(x)$family != x)){
