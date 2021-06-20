@@ -14,6 +14,9 @@ classoption:
   - 'textwidth=40zw'      # 1行全角40字, ただしプロポーショナルフォントなので絶対ではない
 bibliography: 
   - packages.bib
+jmainfont: Noto Serif CJK JP
+jsansfont: Noto Sans CJK JP
+jmonofont: Ricty
 link-citations: false
 ---
 
@@ -26,20 +29,6 @@ require(knitr)
 rmdja::set_graphics_font(rmdja::get_default_font_family("lualatex")["serif"])
 ```
 
-
-```{r, eval=F}
-# https://stackoverflow.com/questions/50165404/how-to-make-a-pdf-using-bookdown-including-svg-images
-include_svg = function(path) {
-  if (knitr::is_latex_output()) {
-    output = xfun::with_ext(path, 'pdf')
-    # you can compare the timestamp of pdf against svg to avoid conversion if necessary
-    rsvg::rsvg_pdf(svg = x, file = output)
-  } else {
-    output = path
-  }
-  knitr::include_graphics(output)
-}
-```
 
 # イントロダクション {#introduction}
 
