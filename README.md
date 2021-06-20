@@ -41,20 +41,23 @@ Customized R Markdown/Bookdown format functions for Japanese users
     -   **knitr** (&gt;=1.33)
     -   **rmarkdown** (&gt;=2.6)
     -   **bookdown** (&gt;=0.21)
+    -   **systemfonts** (&gt;=1.0.2)
     -   **commonmark** (&gt;=1.7)
     -   **styler** (&gt;=1.3.2)
     -   **xfun** (&gt;=0.3.17)
     -   **rsvg** (&gt;=2.1.1)
+    -   ただし,
+        MacやLinux系OSではグラフィック関連のパッケージに必要なライブラリの手動インストールが必要な場合があるかもしれません.
+        -   TODO
 -   PDF を出力したい
     (おそらくこのパッケージに関心を持った方はほとんど当てはまると思います)
     場合は以下の要件も必要です
-    -   TeX Live 2020 以降相当の TeX 環境,
-        特に原ノ味フォントをインストールしていること[1]
+    -   TeX環境: 以下のいずれか片方を満たしていること
 
-    -   もしくは TeX を完全に**アンインストール**した状態
-
-        -   この場合は **tinytex** パッケージで TeX 環境を再構築します
-            (後述).
+        -   TeX Live 2020 以降相当の TeX 環境,
+            特に原ノ味フォントをインストールしていること[1]
+        -   TeX を完全に**アンインストール**した状態. こちらの場合は
+            **tinytex** パッケージで TeX 環境を再構築します (後述).
 
     -   `cairo_pdf()` が動作する環境 Linux や Mac では必要な X11 や
         cairo がインストールされていない可能性があります.
@@ -125,59 +128,17 @@ Customized R Markdown/Bookdown format functions for Japanese users
     のテンプレートのいずれかを選択します ![template
     selection](inst/resources/img/readme-selection.png)
 
-    -   または最初は
-        [`resources/examples/beamer`](inst/resources/examples/)
+    -   または [`resources/examples/beamer`](inst/resources/examples/)
         にもいくつか使用例があります.
 
-5.  フォントの指定 (オプション)
-
-    -   OSごとの違いはほぼデフォルトのフォントだけです.
-        もしフォントが表示されない/気に入らない場合は手動で指定してください.
-        例えば,
-    -   MS (Win10) なら
-
-    <!-- -->
-
-        jfontpreset: bizud
-
-    -   Ubuntuなら
-
-    <!-- -->
-
-        jfontpreset: noto
-
-    -   Noto が入ってない, または Ubuntu 以外の Linux なら
-
-    <!-- -->
-
-        jfontpreset: haranoaji
-
-    -   macなら
-
-    <!-- -->
-
-        jfontpreset: hiragino-pro
-
-    でとりあえずは動くはずです.
-
-    -   XeLaTeX をお使いなら `zxjafont`, LuaLaTeX をお使いなら
-        `luatex-ja` のプリセット名で指定できます
-    -   混植も可能です
-    -   詳しくは [`examples/beamer`](inst/resources/examples/beamer/)
-        以下の pdf を確認してください.
-
-**NOTE**: `jmainfont`, `jsansfont`, `jmonofont`
-で書体ごとにフォントを設定できます. `mainfont`/`sansfont`/`monofont`
-は欧文用です. 特に
-`monofont`/`jamonofont`はソースコードの掲載に使われます.
-プログラムの解説をしたい場合は[M+](http://mix-mplus-ipa.osdn.jp/)や[Ricty](https://rictyfonts.github.io/)などのインストールを推奨します
-
-**NOTE**: 現時点での XeLaTeX 版と LuaLaTeX 版の違いは以下のとおりです.
+**NOTE**: 現時点での XeLaTeX 版と LuaLaTeX
+版の主な違いは以下のとおりです.
 
 1.  一部のLaTeXコマンドが違う
 2.  文字の相対的な大きさ, 字間などのレイアウトが微妙に違う
 3.  LuaLaTeX のほうがやや処理が遅い
-4.  縦書き文書は LuaLaTeX のみ対応
+4.  禁則処理は LuaLaTeX のほうが厳格
+5.  縦書き文書は LuaLaTeX のみ対応
 
 ## 初期バージョン (rmdCJK) をお使いの場合
 
@@ -188,39 +149,100 @@ Customized R Markdown/Bookdown format functions for Japanese users
 
 # 用途によっては追加インストールが必要なもの
 
-## (u)pBibTeX を使用したい場合
+## (u)pBibTeX と .bst ファイルの使用について
 
--   upBibTeX を使って参考文献を出力したい (≒ .bst ファイルを指定したい)
-    場合, TeX Live のインストールが必要になります. BibLaTeX や
-    pandoc-citeproc で良い,
-    参考文献を一切使わないというのであれば**不要**です
--   Mac OS なら MacTeX, Ubuntu
-    なら[公式](https://www.tug.org/texlive/acquire-netinstall.html)から落としてください
-    -   Ubuntu は `apt` を**使わず**インストールしたほうが良いです
-    -   [TeX
-        wiki](https://texwiki.texjp.org/?TeX%20Live)などを参考にしてください
--   [`jecon.bst`](https://github.com/ShiroTakeda/jecon-bst)
-    が役に立つかも知れません
-    -   日本語文献リスト用のスタイルファイルです
-    -   TeX Live にも `jplain.bst`, `jipsj.bst`
-        などの日本語対応スタイルがバンドルされていますが, `jecon.bst`
-        は日本語出力用のオプションが充実しています.
+TODO:
+
+-   TeX Live にも `jplain.bst`, `jipsj.bst`
+    などの日本語対応スタイルがバンドルされていますが, `jecon.bst`
+    は日本語出力用のオプションが充実しています.
 
 ## フォントについて
 
-日本語フォントを指定しなかった場合 (`jfontpreset` 未設定,
-かつ`j~~font`の設定が3つ揃っていない場合),
-OSを判別して以下のようにデフォルトフォントを決めています. これらは
-(Linux 以外) OS標準インストールフォントのはずです.
+**rmdja** のPDF出力では, 6種類の基本フォントを指定できます.
+これらは全てYAMLメタデータのフィールドで指定できます.
 
-|          |          Mac | Ubuntu | windows (8以降) | windows(それ以前) | それ以外 |
-|:---------|-------------:|-------:|----------------:|------------------:|---------:|
-| XeLaTeX  |       游書体 |   Noto |          游書体 |        MSフォント |   原ノ味 |
-| LuaLaTeX | ヒラギノProN |   Noto |          游書体 |        MSフォント |   原ノ味 |
+| 項目名              | フィールド名 |
+|:--------------------|:-------------|
+| 明朝体 (和文)       | `jmainfont`  |
+| セリフ体 (欧文)     | `mainfont`   |
+| ゴシック体 (和文)   | `jsansfont`  |
+| サンセリフ体 (欧文) | `sansfont`   |
+| 等幅フォント (和文) | `jmonofont`  |
+| 等幅フォント (欧文) | `monofont`   |
 
-Ubuntu 18 以降の設定に準拠して Noto-CJK をデフォルトにしています. 他の
-Linux 系 OS ならば, TeX Live 2020 以降で同梱されている原ノ味フォント
-(`haranoaji`) がデフォルトになるようにしています.
+基本的には main という名前が示すとおり, 本文は主にセリフ体/明朝で,
+見出しや強調文字がサンセリフ/ゴシックになります.
+プレゼンテーション資料の場合は本文も全てサンセリフ/ゴシックになります.
+
+**注意**: `monofont`/`jamonofont` はソースコードの記載に使われます.
+[M+](http://mix-mplus-ipa.osdn.jp/)や[Ricty](https://rictyfonts.github.io/)などのプログラム言語の可読性にすぐれたフォントのインストールを推奨します
+
+3種類のそれぞれの欧文フォントが指定されなかった場合,
+対応する和文フォントが採用されます.
+和文フォントもまた指定されなかった場合,
+OSごとに設定したフォントプリセットが使用されます.
+
+以下がその一覧です.
+これらはほとんどの場合OSにインストール済みの標準フォントのはずです.
+
+|          |          Mac |      Ubuntu | windows (8以降) | windows(8以前) | それ以外 |
+|:---------|-------------:|------------:|----------------:|---------------:|---------:|
+| XeLaTeX  |       游書体 | Noto CJK JP |          游書体 |     MSフォント |   原ノ味 |
+| LuaLaTeX | ヒラギノProN | Noto CJK JP |          游書体 |     MSフォント |   原ノ味 |
+
+YAML メタデータの `jfontpreset`
+フィールドでフォントプリセットを変更することもできます.
+プリセットの名称は同じフォントであっても XeLaTeX を使うか LuaLaTeX
+を使うかで異なることがあるので注意してください.
+
+-   LuaLaTeX
+    のフォントプリセット名は『[LuaTeX-jaの使い方](https://ja.osdn.net/projects/luatex-ja/wiki/LuaTeX-ja%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9)』でご確認ください
+-   XeLaTeX のフォントプリセット名は[zxjafontパッケージのマニュアル
+    (PDF)](http://ctan.math.illinois.edu/language/japanese/zxjafont/zxjafont.pdf)でご確認ください
+
+**注意**: `XeLaTeX`
+ではヒラギノフォントのプリセット`hiragino-pro`/`hiragino-pron`は, OS
+Xにバンドルされていないヒラギノ明朝 W2を必要とします.
+インストールされていない場合, この設定ではエラーが発生します.
+
+**注意**: もしなんらかの理由で,
+上記のどのプリセットに必要なフォントもインストールされていない場合,
+エラーが発生します. そのような場合は YAML メタデータの `classoption` に
+`jafont=` を追加することでプリセット指定を空白にしてください.
+
+``` yaml
+classoption:
+  - jafont=
+```
+
+その他のフォントに関するオプションはマニュアルをご覧ください.
+
+それ以外にも文中の任意のテキストのフォント変更や,
+フォールバックフォントの指定が可能です
+(現時点ではLaTeXの構文をご自身で書く必要があります).
+
+### Linux ユーザー (& RStudio Cloud) 向けのフォントに関する補足説明
+
+Ubuntu の場合は 18.04 以降の日本語版の設定に準拠して Noto
+フォントをデフォルトにしています. 上記のどれにもあたらない場合, TeX Live
+2020 以降で同梱されている原ノ味フォント (`haranoaji`)
+がデフォルトになるようにしています.
+原ノ味フォントは広く使われている源ノ角や Noto
+フォントとほぼ同じ見た目で, クセがない無難なフォントだと思います.
+
+原ノ味フォントのインストールは, **tinytex**
+を使用しているなら以下でインストールできます.
+
+``` r
+tinytex::tlmgr_install("haranoaji")
+```
+
+TeX Live の場合も同様に, ターミナルで以下を実行してインストールできます.
+
+``` bash
+tlmgr install haranoaji
+```
 
 なお, Noto フォントのインストール方法は以下のようにします
 
@@ -230,25 +252,9 @@ Ubuntu/Debian:
 sudo apt install fonts-noto-cjk-extra -t stretch-backports
 ```
 
-Cent OS とか Fedora とか:
+Cent OS とか Fedora とかは以下からファイルをダウンロードできます.
 
 <https://www.google.com/get/noto/help/install/>
-
-**NOTE**: `monofont`/`jamonofont`はソースコードの掲載に使われます.
-[M+](http://mix-mplus-ipa.osdn.jp/)や[Ricty](https://rictyfonts.github.io/)などのインストールを推奨します
-
-### 注意事項
-
--   現時点では実際にフォントがインストールされているか判定していません.
--   `XeLaTeX`
-    ではヒラギノフォントのプリセット`hiragino-pro`/`hiragino-pron`は, OS
-    Xにバンドルされていないヒラギノ明朝 W2を必要とします.
-    インストールされていない場合, この設定ではエラーが発生します.
--   WindowsかつLuaLaTeXのとき, `\jfontspec` でフォント変更する歳, Noto
-    Serif CJK JP が読み込めないことがあります (原因調査中)
--   LuaLaTeX ではフォントが常にゴシック体になります, また,
-    一部のフォントプリセットが正しく認識されないことがあります
-    (詳細は公式ドキュメントを参照してください)
 
 ## サンプルの内容を再現したい場合
 
@@ -296,17 +302,19 @@ Cent OS とか Fedora とか:
 
 -   Graphviz
 
-DOT言語で生成した画像を挿入する用例があるため, インストールが必要です
+    DOT言語で生成した画像を挿入する用例があるため,
+    インストールが必要です
 
-MAC:
+    MAC:
 
-    brew install graphviz
+        brew install graphviz
 
-Ubuntu:
+    Ubuntu:
 
-    sudo apt install graphiviz
+        sudo apt install graphiviz
 
 -   [BXcoloremoji.sty](https://github.com/zr-tex8r/BXcoloremoji)
+
     -   カラー絵文字を出力したい場合に必要です.
         CTANに登録されてないため手動インストールする必要があります
 
