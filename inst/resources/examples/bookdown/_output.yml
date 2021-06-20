@@ -1,19 +1,19 @@
 rmdja::gitbook_ja:
-  keep_md: true
-  config:
-    toc:
-      collapse: none
-      before: '<li><a href="index.html">Top</a></li>'
-      after: "<p style='text-align:center;display:block;margin: 0 auto;'><img src='https://i.creativecommons.org/l/by-nc/4.0/88x31.png'></p><li><a href='https://bookdown.org' target='_blank'>Published with bookdown</a></li>"
-    fontsettings:
-      theme: Sepia
-      family: serif
+    keep_md: true
+    config:
+      toc:
+        collapse: none
+        before: '<li><a href="index.html">Top</a></li>'
+        after: "<p style='text-align:center;display:block;margin: 0 auto;'><img src='https://i.creativecommons.org/l/by-nc/4.0/88x31.png'></p><li><a href='https://bookdown.org' target='_blank'>Published with bookdown</a></li>"
+      fontsettings:
+        theme: Sepia
+        family: serif
 
 rmdja::pdf_book_ja:
-  tombow: false
-  # add_folio: true
-  keep_tex: true
-  block_style: tcolorbox
+    tombow: false
+    # add_folio: true
+    keep_tex: true
+    block_style: tcolorbox
 
 bookdown::epub_book:
   fig_width: 5

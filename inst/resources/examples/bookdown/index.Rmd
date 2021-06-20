@@ -10,16 +10,16 @@ cover-image: "img/Johannes_Gutenberg.jpg"        # 表紙画像. epub でのみ�
 apple-touch-icon: "touch-icon.png"               # iOS でホームスクリーンに登録した際に見えるもの
 apple-touch-icon-size: 120                       # そのサイズ
 favicon: "favicon.ico"                           # そのまんまファビコン.
-mainfont: 'DejaVu Serif'
-seriffont: 'DejaVu Sans'
-monofont: Ricty
+mainfont: Noto Serif CJK JP
+seriffont: Noto Sans CJK JP
+monofont: Ricty Discord
 mainfontoptions:
   - Scale=0.8
 sansfontoptions:
   - Scale=0.8
-jmainfont: 'Noto Serif CJK JP'
-jseriffont: 'Noto Sans CJK JP'
-jmonofont: Ricty
+jmainfont: Noto Serif CJK JP
+jseriffont: Noto Sans CJK JP
+jmonofont: Ricty Discord
 link-citations: true                             # 引用に参考文献リストへのハイパーリンクをつける
 linkcolor: blue
 citecolor: blue
@@ -67,9 +67,24 @@ rmdja::get_CC("yes", F, "normal")
 ```
 
 ::::::{.infobox .caution data-latex="{caution}"}
-::: {.center data-latex=""}
+
 **注意!**
-:::
+
 現在, このドキュメントは煩雑でパッケージの更新に対して追いついていません. あまり信用しないでください.
+
+R Markdown 全般の使用例については以下を参考にしてください. これらは R Markdown 開発の中心人物が執筆しているためこのページよりも信頼できます.
+
+* Xie "[knitr: Elegant, flexible, and fast dynamic report generation with R
+](https://yihui.org/knitr/)" (拙訳 谢『knitr: [Rによる美麗で柔軟そして高速な動的レポート生成](https://gedevan-aleksizde.github.io/knitr-doc-ja/index.html)』)
+* Xie, Dervieux, and Riederer "[R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/)" (拙訳 谢・デルヴュー・リーデラー『[R Markdown クックブック](https://gedevan-aleksizde.github.io/rmarkdown-cookbook/)』が公開されています)
+* Xie, Allaire and Grolemund "[R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)" (邦訳未刊, 近日作成予定)
+* Xie "[bookdown: Authoring Books and Technical Documents with R Markdown](https://bookdown.org/yihui/bookdown/)" (邦訳未刊, 近日作成予定)
+
+日本語で書かれた書籍には以下があります.
+
+* 高橋康介 (2018)『[再現可能性のすゝめ RStudio によるデータ解析とレポート作成](https://www.kyoritsu-pub.co.jp/bookdetail/9784320112438)』共立出版
+
+一旦残り2作の翻訳を済ませてから, これらで言及されていない使用法 (特にPDFでの日本語の適切な表示方法など) について本稿で補足説明したいと思います. それまではこちらのドキュメントは**ほとんど更新されない**ことに注意してください.
+
 ::::::
 
