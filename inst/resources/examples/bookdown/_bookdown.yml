@@ -16,10 +16,10 @@ rmd_files:
     - chapters/multi-media.Rmd
     - chapters/appendix.Rmd
     - chapters/reference-title.Rmd
-view: tree/rmdja/inst/resources/examples/bookdown/chapter/%s # 現在のページのソースを確認するためのリンク
-history: blob/master/rmdja/inst/resources/examples/bookdown/chapter/%s # 現在のページのコミットログ確認するためのリンク
-edit: edit/master/rmdja/inst/resources/examples/bookdown/chapter/%s # 現在のページを編集するためのリンク, github pages でホスティングする前提
-repo: https://github.com/rstudio/bookdown/
+# view: tree/rmdja/inst/resources/examples/bookdown/chapter/%s # 現在のページのソースを確認するためのリンク
+# history: blob/gh-pages/rmdja/inst/resources/examples/bookdown/chapter/%s # 現在のページのコミットログ確認するためのリンク
+edit: edit/gh-pages/rmdja/inst/resources/examples/bookdown/chapter/%s # 現在のページを編集するためのリンク, github pages でホスティングする前提
+repo: https://github.com/gedevan-aleksizde/rmdja/
 # ---- 用語の変更 ----
 language:
   label:

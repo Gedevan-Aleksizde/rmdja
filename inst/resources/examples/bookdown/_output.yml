@@ -8,6 +8,8 @@ rmdja::gitbook_ja:
       fontsettings:
         theme: Sepia
         family: serif
+      download:
+      - ['rmdja.pdf', 'PDF']
 
 rmdja::pdf_book_ja:
     tombow: false
