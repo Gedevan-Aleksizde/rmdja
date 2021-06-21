@@ -18,14 +18,12 @@ fig:citr-image
 tab:biblio-comparison
 tab:japreset-default
 tab:japreset-list
-fig:tikz-venn
+fig:tikz-mathcha
 fig:asymptote-graph
 fig:dot-example
 tab:kableextra-color
 tab:kableextra-plot
-tab:huxtable-logo
-tab:huxtable-example
-tab:huxreg-example
+tab:stargazer-table
 tab:biblatex-styles
 fig:py-plotnine-cap
 fig:plot-grey-scale
@@ -65,6 +63,7 @@ bibliography
 文献リスト生成エンジンの違いについて
 wip-簡単なレイアウトスタイル変更
 フォント変更
+どのフォントを使用すべきか
 yaml-フロントマターの設定によるスタイル変更
 ハイパーリンクの配色変更
 latex-エンジンの変更

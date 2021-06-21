@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 動的なコンテンツの作成 | rmdja による多様な形式の日本語技術文書の作成</title>
   <meta name="description" content="bookdown でまともな日本語文書を作る資料" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 動的なコンテンツの作成 | rmdja による多様な形式の日本語技術文書の作成" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://bookdown.org/john/awesome/" />
-  <meta property="og:image" content="https://bookdown.org/john/awesome/img/Johannes_Gutenberg.jpg" />
+  <meta property="og:image" content="https://bookdown.org/john/awesome//img/Johannes_Gutenberg.jpg" />
   <meta property="og:description" content="bookdown でまともな日本語文書を作る資料" />
   <meta name="github-repo" content="Gedevan-Aleksizde/rmdja" />
 
@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="4 動的なコンテンツの作成 | rmdja による多様な形式の日本語技術文書の作成" />
   
   <meta name="twitter:description" content="bookdown でまともな日本語文書を作る資料" />
-  <meta name="twitter:image" content="https://bookdown.org/john/awesome/img/Johannes_Gutenberg.jpg" />
+  <meta name="twitter:image" content="https://bookdown.org/john/awesome//img/Johannes_Gutenberg.jpg" />
 
 <meta name="author" content="Katagiri, Satoshi (ill-identified)" />
 
@@ -32,7 +32,7 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <link rel="prev" href="静的なコンテンツの作成.html"/>
 <link rel="next" href="相互参照と引用.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,6 +50,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -58,6 +60,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -116,6 +119,29 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <link rel="stylesheet" href="rmdja_files/styles/css/style.css" type="text/css" />
@@ -193,7 +219,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="6" data-path="wip-簡単なレイアウトスタイル変更.html"><a href="wip-簡単なレイアウトスタイル変更.html"><i class="fa fa-check"></i><b>6</b> (WIP) 簡単なレイアウト・スタイル変更</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="wip-簡単なレイアウトスタイル変更.html"><a href="wip-簡単なレイアウトスタイル変更.html#フォント変更"><i class="fa fa-check"></i><b>6.1</b> フォント変更</a></li>
+<li class="chapter" data-level="6.1" data-path="wip-簡単なレイアウトスタイル変更.html"><a href="wip-簡単なレイアウトスタイル変更.html#フォント変更"><i class="fa fa-check"></i><b>6.1</b> フォント変更</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="wip-簡単なレイアウトスタイル変更.html"><a href="wip-簡単なレイアウトスタイル変更.html#どのフォントを使用すべきか"><i class="fa fa-check"></i><b>6.1.1</b> どのフォントを使用すべきか</a></li>
+</ul></li>
 <li class="chapter" data-level="6.2" data-path="wip-簡単なレイアウトスタイル変更.html"><a href="wip-簡単なレイアウトスタイル変更.html#yaml-フロントマターの設定によるスタイル変更"><i class="fa fa-check"></i><b>6.2</b> YAML フロントマターの設定によるスタイル変更</a>
 <ul>
 <li class="chapter" data-level="6.2.1" data-path="wip-簡単なレイアウトスタイル変更.html"><a href="wip-簡単なレイアウトスタイル変更.html#ハイパーリンクの配色変更"><i class="fa fa-check"></i><b>6.2.1</b> ハイパーリンクの配色変更</a></li>
@@ -325,7 +354,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>rmdja</code> による多様な形式の日本語技術文書の作成</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><strong>rmdja</strong> による多様な形式の日本語技術文書の作成</a>
           </h1>
         </div>
 
@@ -340,18 +369,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>プログラムチャンクは, R Markdown 最大の特徴であり, R のソースコードや, その実行結果を Markdown に挿入できる. さらには <strong>R 以外の言語の動作も可能</strong>である. 順番が前後してしまったが, 定理などのカスタムブロックは本来はプログラムを入力するためのチャンクブロックであり, それを静的なテキストコンテンツの挿入に流用しているだけである.</p>
 <p>以降は R で多くのユーザが頻繁に使うパッケージと, いくつかの技術文書作成に役に立つパッケージをインポートしている前提の説明とする. なお, <code>rmarkdown</code>, <code>bookdown</code> はチャンク内で特に読み込む必要がない.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb21-1"><a href="動的なコンテンツの作成.html#cb21-1"></a>pkgs <span class="ot">&lt;-</span> <span class="fu">installed.packages</span>()</span>
-<span id="cb21-2"><a href="動的なコンテンツの作成.html#cb21-2"></a><span class="cf">for</span> (p <span class="cf">in</span> <span class="fu">c</span>(<span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;ggthemes&quot;</span>, <span class="st">&quot;equatiomatic&quot;</span>, <span class="st">&quot;tufte&quot;</span>, </span>
+<span id="cb21-2"><a href="動的なコンテンツの作成.html#cb21-2"></a><span class="cf">for</span> (p <span class="cf">in</span> <span class="fu">c</span>(<span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;ggthemes&quot;</span>, <span class="st">&quot;equatiomatic&quot;</span>, <span class="st">&quot;tufte&quot;</span>,</span>
 <span id="cb21-3"><a href="動的なコンテンツの作成.html#cb21-3"></a>  <span class="st">&quot;kableExtra&quot;</span>)) {</span>
-<span id="cb21-4"><a href="動的なコンテンツの作成.html#cb21-4"></a>  <span class="cf">if</span> (<span class="sc">!</span>p <span class="sc">%in%</span> pkgs) </span>
+<span id="cb21-4"><a href="動的なコンテンツの作成.html#cb21-4"></a>  <span class="cf">if</span> (<span class="sc">!</span>p <span class="sc">%in%</span> pkgs)</span>
 <span id="cb21-5"><a href="動的なコンテンツの作成.html#cb21-5"></a>    <span class="fu">install.packages</span>(p)</span>
 <span id="cb21-6"><a href="動的なコンテンツの作成.html#cb21-6"></a>}</span>
 <span id="cb21-7"><a href="動的なコンテンツの作成.html#cb21-7"></a><span class="cf">if</span> (<span class="sc">!</span><span class="st">&quot;rmarkdown&quot;</span> <span class="sc">%in%</span> pkgs) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;rstudio/rmarkdown&quot;</span>)</span>
 <span id="cb21-8"><a href="動的なコンテンツの作成.html#cb21-8"></a><span class="cf">if</span> (<span class="sc">!</span><span class="st">&quot;bookdown&quot;</span> <span class="sc">%in%</span> pkgs) remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;rstudio/bookdown&quot;</span>)</span>
 <span id="cb21-9"><a href="動的なコンテンツの作成.html#cb21-9"></a><span class="fu">require</span>(tidyverse)</span></code></pre></div>
-<pre><code>Loading required package: tidyverse</code></pre>
-<pre><code>─ Attaching packages ──────────────────── tidyverse 1.3.0 ─</code></pre>
+<pre><code> 要求されたパッケージ tidyverse をロード中です </code></pre>
+<pre><code>─ Attaching packages ──────────────────── tidyverse 1.3.1 ─</code></pre>
 <pre><code>✓ ggplot2 3.3.3     ✓ purrr   0.3.4
-✓ tibble  3.1.0     ✓ dplyr   1.0.5
+✓ tibble  3.1.2     ✓ dplyr   1.0.6
 ✓ tidyr   1.1.3     ✓ stringr 1.4.0
 ✓ readr   1.4.0     ✓ forcats 0.5.1</code></pre>
 <pre><code>─ Conflicts ───────────────────── tidyverse_conflicts() ─
@@ -359,9 +388,9 @@ x dplyr::filter()     masks stats::filter()
 x dplyr::group_rows() masks kableExtra::group_rows()
 x dplyr::lag()        masks stats::lag()</code></pre>
 <div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb26-1"><a href="動的なコンテンツの作成.html#cb26-1"></a><span class="fu">require</span>(ggthemes)</span></code></pre></div>
-<pre><code>Loading required package: ggthemes</code></pre>
+<pre><code> 要求されたパッケージ ggthemes をロード中です </code></pre>
 <div class="sourceCode" id="cb28"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb28-1"><a href="動的なコンテンツの作成.html#cb28-1"></a><span class="fu">require</span>(equatiomatic)</span></code></pre></div>
-<pre><code>Loading required package: equatiomatic</code></pre>
+<pre><code> 要求されたパッケージ equatiomatic をロード中です </code></pre>
 <div class="sourceCode" id="cb30"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb30-1"><a href="動的なコンテンツの作成.html#cb30-1"></a><span class="fu">require</span>(kableExtra)</span></code></pre></div>
 <p>このように, ログを掲載することもできる. これは再現性を重視する際に重宝するが, 一方で単に画像などの出力だけを掲載したい場合もあるだろう. あるいは, プログラムを解説するために<strong>プログラムは掲載するが実行しない</strong>, ということも必要になるかもしれない. <strong>プログラムと結果の表示/非表示はどちらも簡単に切り替え可能</strong>である. そのためには, チャンクオプションを指定する.</p>
 <ul>
@@ -373,11 +402,6 @@ x dplyr::lag()        masks stats::lag()</code></pre>
 <li><code>include</code>: 文書作成時にプログラムを実行し, <strong>かつ掲載しない</strong>かどうか</li>
 <li><code>results</code>: 出力をいつもの R の出力風にするか (<code>markup</code>), 隠すか (<code>"hide"</code>), 出力を区切らずまとめるか (<code>"hold"</code>), テキストをそのまま出力するか (<code>"asis"</code>). 最後は R Markdown のソースコードを動的に生成したい場合などに使う.</li>
 </ul>
-<div class="memo">
-<p>
-R の論理値は <code>TRUE</code>/<code>FALSE</code> または <code>T</code>/<code>F</code> と書く.
-</p>
-</div>
 <p>チャンクごとに個別に設定することも, デフォルト値を一括設定することもできる. 前者の場合, チャンクオプションは <code>{}</code> 内部にカンマ <code>,</code> で区切って書く. <code>r</code> は R で実行するという意味である. チャンクの一般的な記法は以下のようになる.</p>
 <pre><code>```{r [&lt;label&gt;], [&lt;options&gt;]}
 data(cars)
@@ -402,9 +426,10 @@ echo Hello, Bookdown
 [26] &quot;cc&quot;          &quot;fortran&quot;     &quot;fortran95&quot;   &quot;asy&quot;         &quot;cat&quot;        
 [31] &quot;asis&quot;        &quot;stan&quot;        &quot;block&quot;       &quot;block2&quot;      &quot;js&quot;         
 [36] &quot;css&quot;         &quot;sql&quot;         &quot;go&quot;          &quot;python&quot;      &quot;julia&quot;      
-[41] &quot;sass&quot;        &quot;scss&quot;        &quot;theorem&quot;     &quot;lemma&quot;       &quot;corollary&quot;  
-[46] &quot;proposition&quot; &quot;conjecture&quot;  &quot;definition&quot;  &quot;example&quot;     &quot;exercise&quot;   
-[51] &quot;proof&quot;       &quot;remark&quot;      &quot;solution&quot;   </code></pre>
+[41] &quot;sass&quot;        &quot;scss&quot;        &quot;R&quot;           &quot;bslib&quot;       &quot;theorem&quot;    
+[46] &quot;lemma&quot;       &quot;corollary&quot;   &quot;proposition&quot; &quot;conjecture&quot;  &quot;definition&quot; 
+[51] &quot;example&quot;     &quot;exercise&quot;    &quot;hypothesis&quot;  &quot;proof&quot;       &quot;remark&quot;     
+[56] &quot;solution&quot;   </code></pre>
 <p>また, 新たにプログラムを追加することもできる. 詳細は RDG <a href="https://bookdown.org/yihui/rmarkdown/language-engines.html">Ch. 2.7 Other language engines</a> を参考に.</p>
 <p>TODO: 他の言語のプログラムを実行する際の注意点</p>
 </div>
@@ -481,7 +506,7 @@ ggplot(diamonds, aes(x=carat, y=price, color=clarity)) +
 <p>R のグラフィックデバイスではないとは, RGL や <code>plotly</code> など外部ライブラリに頼ったグラフ作成ツールのことである. 判断できない人は, RStudio 上で実行して, “Plots” ペーンに表示されたら R のグラフィックデバイス, “Viewer” ペーンに表示されたらそうでない, で覚えていただきたい. 後者を表示する方法は <a href="webapp.html#webapp">11</a> 章で後述する. R をこれまで使ったことがなく, それすらも何を言っているのか分からない, という場合は <code>ggplot2</code> を使ってもらう.</p>
 <p>最後の <code>fig.cap=""</code> がキャプションである. ただし, どうも日本語キャプションを書いたあとに他のチャンクオプションを指定するとエラーになるようだ. よって <strong><code>fig.cap=</code> はオプションの末尾に書くべきである</strong>. また, <code>fig.cap=""</code> に数式や一部の特殊なテキストを直接入力することができない. この問題は相互参照について解説するセクション <a href="相互参照と引用.html#crossref">5.1</a> で詳細を述べる.</p>
 <p><code>fig.cap</code> 以外のオプションはおそらく頻繁には変えないため, 冒頭でまとめて設定したほうが楽だろう.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb41-1"><a href="動的なコンテンツの作成.html#cb41-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">fig.align =</span> <span class="st">&quot;center&quot;</span>, <span class="at">fig.width =</span> <span class="fl">6.5</span>, </span>
+<div class="sourceCode" id="cb41"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb41-1"><a href="動的なコンテンツの作成.html#cb41-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">fig.align =</span> <span class="st">&quot;center&quot;</span>, <span class="at">fig.width =</span> <span class="fl">6.5</span>,</span>
 <span id="cb41-2"><a href="動的なコンテンツの作成.html#cb41-2"></a>  <span class="at">fig.height =</span> <span class="fl">4.5</span>, <span class="at">out.width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">out.height =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
 <p>なお, これらは <code>rmdja</code> でのデフォルト値であるため, 実際にこの値をあえて記述する必要はない.</p>
 <p>ここで, <code>fig.width</code> と <code>out.width</code> の違いも述べておく. <code>out.width</code>/<code>out.height</code> は表示する画像サイズの違いで, <code>fig.width</code>/<code>fig.height</code> はプログラムが出力した画像の保存サイズである. よって <code>ggplot2</code> などを使わず画像ファイルを貼り付けるだけの場合は <code>fig.*</code> は意味をなさない.</p>
@@ -702,7 +727,7 @@ Merc 280          19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4</code></pr
 <li><code>escape = F</code> および <code>format = "pandoc"</code> を指定する</li>
 <li>(非推奨) HTML と PDF でそれぞれの構文で表を描く処理を自分で書く</li>
 </ol>
-<div class="sourceCode" id="cb46"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb46-1"><a href="動的なコンテンツの作成.html#cb46-1"></a>rmdja<span class="sc">::</span><span class="fu">kable</span>(mtcars[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, ], <span class="at">caption =</span> <span class="st">&quot;`booktabs = T` は PDF にのみ影響する&quot;</span>, </span>
+<div class="sourceCode" id="cb46"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb46-1"><a href="動的なコンテンツの作成.html#cb46-1"></a>rmdja<span class="sc">::</span><span class="fu">kable</span>(mtcars[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, ], <span class="at">caption =</span> <span class="st">&quot;`booktabs = T` は PDF にのみ影響する&quot;</span>,</span>
 <span id="cb46-2"><a href="動的なコンテンツの作成.html#cb46-2"></a>  <span class="at">booktabs =</span> T)</span></code></pre></div>
 <table>
 <caption>
@@ -1416,8 +1441,8 @@ Valiant
 <p>さらに, デフォルトでは <code>kable()</code> が PDF に出力する表のデザインはあまりよろしくないが, <code>kable()</code> 関数は過剰な罫線のない表の出力も簡単である. LaTeX を使ったことのある人は知っているかもしれないが, これは <code>booktabs.sty</code> を使った表のスタイルになっている<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a>.</p>
 <p>また, <code>kable()</code> を使う利点として, 表の絡む名に好きな名前を与えられるというものがある. データフレームの列 (変数) 名は, 括弧などプログラミングで特別な意味を持つ文字を使うことができない. そこで, <code>kable()</code> の <code>col.names</code> 引数に表のカラム名を改めて与えることで, こういった文字も出力できる.</p>
 <p><code>kable()</code> による表のスタイルは <code>kableExtra</code> パッケージを使うことで様々にカスタマイズできる. 例えば HTML 版ではデフォルトで奇数偶数行の背景色が異なるが, PDF ではそうなっていない. また, 図表の位置は常にフロートであり, 余白ができにくいように表示位置が前後する (これは技術文書や学術論文では普通のことだが). さらに, 表が本文の領域からはみ出しており見栄えが悪い. これらの設定をHTML版に近づけたい場合は <code>kableExtra::kable_styling()</code> を使って簡単にデザインを変えることができる (表 <a href="動的なコンテンツの作成.html#tab:display-dataframe-kable-2">4.5</a>). 以下のように, <code>full_width</code> は表の幅を本文幅にそろえるオプションである. や十分に幅の小さい表に対しては逆に間延びして見づらいためデフォルトでは無効となっているが, このようにして表幅を調整するのに使える. さらに <code>latex_options</code> は PDF にのみ有効なオプションである. <code>"striped"</code> が奇数偶数の色分け<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>, <code>"hold_position"</code> が表示位置を「なるべく」固定するオプションである (それでも表示位置が大きくずれて気に入らない場合 <code>"HOLD_position"</code> を代わりに使うとよい). ただし HTML と違い PDF では改ページがあるためこのオプションを多様すると, 以下のように本文に無駄な余白が増えることに注意する.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb48-1"><a href="動的なコンテンツの作成.html#cb48-1"></a>rmdja<span class="sc">::</span><span class="fu">kable</span>(mtcars[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, ], <span class="at">booktabs =</span> T, <span class="at">caption =</span> <span class="st">&quot;奇数行を強調し, PDF では `booktabs` を利用&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb48-2"><a href="動的なコンテンツの作成.html#cb48-2"></a>  <span class="fu">kable_styling</span>(<span class="at">full_width =</span> <span class="cf">if</span> (knitr<span class="sc">::</span><span class="fu">is_latex_output</span>()) T <span class="cf">else</span> <span class="cn">NULL</span>, </span>
+<div class="sourceCode" id="cb48"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb48-1"><a href="動的なコンテンツの作成.html#cb48-1"></a>rmdja<span class="sc">::</span><span class="fu">kable</span>(mtcars[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, ], <span class="at">booktabs =</span> T, <span class="at">caption =</span> <span class="st">&quot;奇数行を強調し, PDF では `booktabs` を利用&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb48-2"><a href="動的なコンテンツの作成.html#cb48-2"></a>  <span class="fu">kable_styling</span>(<span class="at">full_width =</span> <span class="cf">if</span> (knitr<span class="sc">::</span><span class="fu">is_latex_output</span>()) T <span class="cf">else</span> <span class="cn">NULL</span>,</span>
 <span id="cb48-3"><a href="動的なコンテンツの作成.html#cb48-3"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hold_position&quot;</span>))</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
@@ -1886,6 +1911,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -1905,7 +1931,7 @@ gitbook.start({
 "link": "tree/rmdja/inst/resources/examples/bookdown/chapter/chapters/elemental.Rmd",
 "text": null
 },
-"download": ["rmdja.pdf", "rmdja.epub"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

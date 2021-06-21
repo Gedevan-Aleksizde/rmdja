@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8 様々なグラフィックプログラムの埋め込み | rmdja による多様な形式の日本語技術文書の作成</title>
   <meta name="description" content="bookdown でまともな日本語文書を作る資料" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8 様々なグラフィックプログラムの埋め込み | rmdja による多様な形式の日本語技術文書の作成" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://bookdown.org/john/awesome/" />
-  <meta property="og:image" content="https://bookdown.org/john/awesome/img/Johannes_Gutenberg.jpg" />
+  <meta property="og:image" content="https://bookdown.org/john/awesome//img/Johannes_Gutenberg.jpg" />
   <meta property="og:description" content="bookdown でまともな日本語文書を作る資料" />
   <meta name="github-repo" content="Gedevan-Aleksizde/rmdja" />
 
@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="8 様々なグラフィックプログラムの埋め込み | rmdja による多様な形式の日本語技術文書の作成" />
   
   <meta name="twitter:description" content="bookdown でまともな日本語文書を作る資料" />
-  <meta name="twitter:image" content="https://bookdown.org/john/awesome/img/Johannes_Gutenberg.jpg" />
+  <meta name="twitter:image" content="https://bookdown.org/john/awesome//img/Johannes_Gutenberg.jpg" />
 
 <meta name="author" content="Katagiri, Satoshi (ill-identified)" />
 
@@ -32,7 +32,7 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <link rel="prev" href="このパートについて.html"/>
 <link rel="next" href="advanced-tabulate.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,6 +50,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -58,6 +60,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -116,6 +119,29 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <link rel="stylesheet" href="rmdja_files/styles/css/style.css" type="text/css" />
@@ -193,7 +219,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="6" data-path="wip-簡単なレイアウトスタイル変更.html"><a href="wip-簡単なレイアウトスタイル変更.html"><i class="fa fa-check"></i><b>6</b> (WIP) 簡単なレイアウト・スタイル変更</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="wip-簡単なレイアウトスタイル変更.html"><a href="wip-簡単なレイアウトスタイル変更.html#フォント変更"><i class="fa fa-check"></i><b>6.1</b> フォント変更</a></li>
+<li class="chapter" data-level="6.1" data-path="wip-簡単なレイアウトスタイル変更.html"><a href="wip-簡単なレイアウトスタイル変更.html#フォント変更"><i class="fa fa-check"></i><b>6.1</b> フォント変更</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="wip-簡単なレイアウトスタイル変更.html"><a href="wip-簡単なレイアウトスタイル変更.html#どのフォントを使用すべきか"><i class="fa fa-check"></i><b>6.1.1</b> どのフォントを使用すべきか</a></li>
+</ul></li>
 <li class="chapter" data-level="6.2" data-path="wip-簡単なレイアウトスタイル変更.html"><a href="wip-簡単なレイアウトスタイル変更.html#yaml-フロントマターの設定によるスタイル変更"><i class="fa fa-check"></i><b>6.2</b> YAML フロントマターの設定によるスタイル変更</a>
 <ul>
 <li class="chapter" data-level="6.2.1" data-path="wip-簡単なレイアウトスタイル変更.html"><a href="wip-簡単なレイアウトスタイル変更.html#ハイパーリンクの配色変更"><i class="fa fa-check"></i><b>6.2.1</b> ハイパーリンクの配色変更</a></li>
@@ -325,7 +354,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>rmdja</code> による多様な形式の日本語技術文書の作成</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><strong>rmdja</strong> による多様な形式の日本語技術文書の作成</a>
           </h1>
         </div>
 
@@ -337,17 +366,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">8</span> 様々なグラフィックプログラムの埋め込み</h1>
 <div id="tikz-を使う" class="section level2" number="8.1">
 <h2><span class="header-section-number">8.1</span> <code>tikz</code> を使う</h2>
-<p>LaTeX で使われる <code>tikzdevice</code> を利用して, 直接 <code>tikz</code> の記述による画像を埋め込むことができる. チャンクのエンジンを <code>tikz</code> とすることで使用でき, 相互参照やキャプション, 画像サイズの指定といったチャンクオプションも使える. 図 <a href="advanced-graph.html#fig:tikz-venn">8.1</a> は <code>tikz</code> で生成した図である. これはHTMLでも表示できる. TODO: しかし現状ではpdflatex以外のエンジンに変更できないため, 日本語表示が難しい.</p>
-<div class="figure" style="text-align: center"><span id="fig:tikz-venn"></span>
-<img src="rmdja_files/figure-html/tikz-venn-1.png" alt="tikzを利用した図の表示"  />
+<p>LaTeX で使われる <code>tikzdevice</code> を利用して, 直接 <code>tikz</code> の記述による画像を埋め込むことができる. チャンクのエンジンを <code>tikz</code> とすることで使用でき, 相互参照やキャプション, 画像サイズの指定といったチャンクオプションも使える. 図 <a href="advanced-graph.html#fig:tikz-mathcha">8.1</a> は<a href="https://www.mathcha.io/">mathcha</a>というサービスで作成した図を tikz のソースとしてエクスポートしたものから生成した図である (ソースコードは長大なので掲載を省略してある). HTML出力ではデフォルトでラスタ画像に変換され表示される.</p>
+<p>TODO: しかし現状ではpdflatex以外のエンジンに変更できないため, 日本語表示が難しい.</p>
+<div class="figure" style="text-align: center"><span id="fig:tikz-mathcha"></span>
+<img src="rmdja_files/figure-html/tikz-mathcha-1.png" alt="mathcha からエクスポートした tikz の表示"  />
 <p class="caption">
-図 8.1: tikzを利用した図の表示
+図 8.1: mathcha からエクスポートした tikz の表示
 </p>
 </div>
 </div>
 <div id="asymptote-を使う" class="section level2" number="8.2">
 <h2><span class="header-section-number">8.2</span> Asymptote を使う</h2>
-<p>同様に, Asymptote のプログラムを埋め込むこともできる. 私は Asymptote が分からないので RCB <a href="https://bookdown.org/yihui/rmarkdown-cookbook/eng-asy.html">Ch. 15.9 Create graphics with Asymptote</a> と同様のプログラムを書いておく. (図 <a href="advanced-graph.html#fig:asymptote-graph">8.2</a>).</p>
+<p>同様に, Asymptote のプログラムを埋め込むこともできる. 私は Asymptote が分からないので RCB <a href="https://gedevan-aleksizde.github.io/rmarkdown-cookbook/eng-asy.html">Ch. 15.9 Asymptote でグラフィックを作成する</a> と同様のプログラムを書いておく. (図 <a href="advanced-graph.html#fig:asymptote-graph">8.2</a>).</p>
 <div class="figure" style="text-align: center"><span id="fig:asymptote-graph"></span>
 <img src="rmdja_files/figure-html/asymptote-graph-1.png" alt="Asymptote による画像" height="50%" />
 <p class="caption">
@@ -380,14 +410,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 図 8.3: DOTの動作確認
 </p>
 </div>
-<p>なお, RCB, Ch. 4.15 でも紹介されているように DOT 言語は <code>DiagrammeR</code> パッケージを経由して使うこともできる<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a>が, <code>grViz()</code> 関数の出力は HTML を前提としているため, PDF での出力時のサイズや解像度の調整がうまくいかないことが多い.</p>
+<p>なお, RCB, <a href="https://gedevan-aleksizde.github.io/rmarkdown-cookbook/diagrams.html">Ch. 4.15</a> でも紹介されているように DOT 言語は <code>DiagrammeR</code> パッケージを経由して使うこともできる<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a>が, <code>grViz()</code> 関数の出力は HTML を前提としているため, PDF での出力時のサイズや解像度の調整がうまくいかないことが多い.</p>
 <p>一方で, <code>ggdag</code> パッケージは<code>ggplot2</code> ベースのパッケージなので, 一般的な R グラフィックスと同じ扱いでグラフィカルモデルを描画できる (つまり名前に反して DAG 以外のネットワーク図も記述可能である). <code>ggplot2</code> 風の構文で記述できるので習熟も容易である.</p>
 </div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="16">
-<li id="fn16"><p>私も詳しいことは知らないが, <code>DiagrammeR::grViz()</code> の構文は本来の DOT と少し異なるようだ, 本来はステートメントごとにセミコロンで区切ることが必要であり, 文字列もダブルクオーテーションで囲まなければならないが, <code>grViz()</code> ではそのような制約がない.<a href="advanced-graph.html#fnref16" class="footnote-back">↩︎</a></p></li>
+<ol start="18">
+<li id="fn18"><p>私も詳しいことは知らないが, <code>DiagrammeR::grViz()</code> の構文は本来の DOT と少し異なるようだ, 本来はステートメントごとにセミコロンで区切ることが必要であり, 文字列もダブルクオーテーションで囲まなければならないが, <code>grViz()</code> ではそのような制約がない.<a href="advanced-graph.html#fnref18" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -419,6 +449,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -438,7 +469,7 @@ gitbook.start({
 "link": "tree/rmdja/inst/resources/examples/bookdown/chapter/chapters/advanced.Rmd",
 "text": null
 },
-"download": ["rmdja.pdf", "rmdja.epub"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

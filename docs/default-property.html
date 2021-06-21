@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>補遺A デフォルト値の自動調整 | rmdja による多様な形式の日本語技術文書の作成</title>
   <meta name="description" content="bookdown でまともな日本語文書を作る資料" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="補遺A デフォルト値の自動調整 | rmdja による多様な形式の日本語技術文書の作成" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://bookdown.org/john/awesome/" />
-  <meta property="og:image" content="https://bookdown.org/john/awesome/img/Johannes_Gutenberg.jpg" />
+  <meta property="og:image" content="https://bookdown.org/john/awesome//img/Johannes_Gutenberg.jpg" />
   <meta property="og:description" content="bookdown でまともな日本語文書を作る資料" />
   <meta name="github-repo" content="Gedevan-Aleksizde/rmdja" />
 
@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="補遺A デフォルト値の自動調整 | rmdja による多様な形式の日本語技術文書の作成" />
   
   <meta name="twitter:description" content="bookdown でまともな日本語文書を作る資料" />
-  <meta name="twitter:image" content="https://bookdown.org/john/awesome/img/Johannes_Gutenberg.jpg" />
+  <meta name="twitter:image" content="https://bookdown.org/john/awesome//img/Johannes_Gutenberg.jpg" />
 
 <meta name="author" content="Katagiri, Satoshi (ill-identified)" />
 
@@ -32,7 +32,7 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <link rel="prev" href="その他のトラブルシュート.html"/>
 <link rel="next" href="pdf-の組版に関する細かい話.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,6 +50,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -58,6 +60,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -116,6 +119,29 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <link rel="stylesheet" href="rmdja_files/styles/css/style.css" type="text/css" />
@@ -193,7 +219,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="6" data-path="wip-簡単なレイアウトスタイル変更.html"><a href="wip-簡単なレイアウトスタイル変更.html"><i class="fa fa-check"></i><b>6</b> (WIP) 簡単なレイアウト・スタイル変更</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="wip-簡単なレイアウトスタイル変更.html"><a href="wip-簡単なレイアウトスタイル変更.html#フォント変更"><i class="fa fa-check"></i><b>6.1</b> フォント変更</a></li>
+<li class="chapter" data-level="6.1" data-path="wip-簡単なレイアウトスタイル変更.html"><a href="wip-簡単なレイアウトスタイル変更.html#フォント変更"><i class="fa fa-check"></i><b>6.1</b> フォント変更</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="wip-簡単なレイアウトスタイル変更.html"><a href="wip-簡単なレイアウトスタイル変更.html#どのフォントを使用すべきか"><i class="fa fa-check"></i><b>6.1.1</b> どのフォントを使用すべきか</a></li>
+</ul></li>
 <li class="chapter" data-level="6.2" data-path="wip-簡単なレイアウトスタイル変更.html"><a href="wip-簡単なレイアウトスタイル変更.html#yaml-フロントマターの設定によるスタイル変更"><i class="fa fa-check"></i><b>6.2</b> YAML フロントマターの設定によるスタイル変更</a>
 <ul>
 <li class="chapter" data-level="6.2.1" data-path="wip-簡単なレイアウトスタイル変更.html"><a href="wip-簡単なレイアウトスタイル変更.html#ハイパーリンクの配色変更"><i class="fa fa-check"></i><b>6.2.1</b> ハイパーリンクの配色変更</a></li>
@@ -325,7 +354,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><code>rmdja</code> による多様な形式の日本語技術文書の作成</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><strong>rmdja</strong> による多様な形式の日本語技術文書の作成</a>
           </h1>
         </div>
 
@@ -413,9 +442,9 @@ MSフォント
 </div>
 <div id="autoformatter" class="section level2" number="19.3">
 <h2><span class="header-section-number">A.3</span> コードブロックの整形と自動折り返し</h2>
-<p>HTML はともかく, PDF はコードの自動折り返しが難しい. 例えば <a href="https://bookdown.org/yihui/rmarkdown-cookbook/text-width.html">RCB Ch. 5.3</a> では, <code>listings.sty</code> を使う方法が書かれているが, この方法ではデフォルトのシンタックスハイライトが使えなくなり, R Markdown の大きなメリットの1つが損なわれてしまう. また, 同 <a href="https://bookdown.org/yihui/rmarkdown-cookbook/opts-tidy.html">Ch. 11.10</a> では <code>knitr</code> のチャンクオプションで <code>tidy</code> と <code>tidy.opts</code> を設定するという方法が紹介されている. この機能は <code>formatR::tidy_source()</code> 関数を利用したコード整形であり, この関数の <code>width.cutoff</code> というオプションで自動折り返しを始める位置を指定できる. (たまに勘違いしている人がいるが, ドキュメントをちゃんと読めば分かるように) このように<strong>コード整形機能は自動折り返しを目的としたものではない</strong>ため, 長すぎる関数名や文字列があると <code>width.cutoff</code> を超過することも十分ありえる. 同章では <code>styler</code> パッケージがより機能が豊富だと言及しているが, このパッケージも現時点では1行の上限を指定する機能はない<a href="#fn35" class="footnote-ref" id="fnref35"><sup>35</sup></a>. <code>rmdja</code> ではデフォルトで <code>styler</code> を使ったコード整形をするとともに, フォーマット <code>beamer_presentation_ja</code> と <code>pdf_book_ja</code> にコードブロックの自動折り返しを有効にする <code>code_softwarp</code> というオプションを用意した. 前者ではデフォルトで <code>false</code>, 後者では <code>true</code> である.</p>
+<p>HTML はともかく, PDF はコードの自動折り返しが難しい. 例えば <a href="https://gedevan-aleksizde.github.io/rmarkdown-cookbook/text-width.html">RCB Ch. 5.3</a> では, <code>listings.sty</code> を使う方法が書かれているが, この方法ではデフォルトのシンタックスハイライトが使えなくなり, R Markdown の大きなメリットの1つが損なわれてしまう. また, 同 <a href="https://gedevan-aleksizde.github.io/rmarkdown-cookbook/opts-tidy.html">Ch. 11.10</a> では <code>knitr</code> のチャンクオプションで <code>tidy</code> と <code>tidy.opts</code> を設定するという方法が紹介されている. この機能は <code>formatR::tidy_source()</code> 関数を利用したコード整形であり, この関数の <code>width.cutoff</code> というオプションで自動折り返しを始める位置を指定できる. (たまに勘違いしている人がいるが, ドキュメントをちゃんと読めば分かるように) このように<strong>コード整形機能は自動折り返しを目的としたものではない</strong>ため, 長すぎる関数名や文字列があると <code>width.cutoff</code> を超過することも十分ありえる. 同章では <code>styler</code> パッケージがより機能が豊富だと言及しているが, このパッケージも現時点では1行の上限を指定する機能はない<a href="#fn37" class="footnote-ref" id="fnref37"><sup>37</sup></a>. <code>rmdja</code> ではデフォルトで <code>styler</code> を使ったコード整形をするとともに, フォーマット <code>beamer_presentation_ja</code> と <code>pdf_book_ja</code> にコードブロックの自動折り返しを有効にする <code>code_softwarp</code> というオプションを用意した. 前者ではデフォルトで <code>false</code>, 後者では <code>true</code> である.</p>
 <p>しかし, これらを使っても「きれいな」コーディングになるとは限らない. 過剰な折り返しで行数が増えてしまう可能性もあるし, 折り返しや改行の位置がふぞろいになる可能性もある. また, トークン単体で非常に長い場合 (たとえば100字分の文字列) も, 途中で折り返すことはできない. よって現状では究極的には手動で調整する必要がある</p>
-<p>その際のアシストツールとして, RStudio の機能であるマージン位置の表示<a href="#fn36" class="footnote-ref" id="fnref36"><sup>36</sup></a> や, <a href="https://github.com/tjmahr/WrapRmd"><code>WrapRmd</code></a> パッケージを使うのが良いだろう.</p>
+<p>その際のアシストツールとして, RStudio の機能であるマージン位置の表示<a href="#fn38" class="footnote-ref" id="fnref38"><sup>38</sup></a> や, <a href="https://github.com/tjmahr/WrapRmd"><code>WrapRmd</code></a> パッケージを使うのが良いだろう.</p>
 <p>逆に自動コード整形が一切不要という場合, 最初のチャンクで以下のように設定する.</p>
 <p>また, 自動折り返しの発生した箇所にはデフォルトでキャリッジリターンの記号が表示される. これが不要である場合, 例えば</p>
 <div class="sourceCode" id="cb95"><pre class="sourceCode tex"><code class="sourceCode latex"><span id="cb95-1"><a href="default-property.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="bu">\usepackage</span>{<span class="ex">fvextra</span>}</span>
@@ -426,9 +455,9 @@ MSフォント
 </div>
 <div class="footnotes">
 <hr />
-<ol start="35">
-<li id="fn35"><p>参考: Issues <a href="https://github.com/r-lib/styler/issues/247">#247</a><a href="default-property.html#fnref35" class="footnote-back">↩︎</a></p></li>
-<li id="fn36"><p>参考: <a href="https://community.rstudio.com/t/vertical-line-in-the-source-editor/24950">Vertical Line in the source editor?</a><a href="default-property.html#fnref36" class="footnote-back">↩︎</a></p></li>
+<ol start="37">
+<li id="fn37"><p>参考: Issues <a href="https://github.com/r-lib/styler/issues/247">#247</a><a href="default-property.html#fnref37" class="footnote-back">↩︎</a></p></li>
+<li id="fn38"><p>参考: <a href="https://community.rstudio.com/t/vertical-line-in-the-source-editor/24950">Vertical Line in the source editor?</a><a href="default-property.html#fnref38" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -460,6 +489,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -479,7 +509,7 @@ gitbook.start({
 "link": "tree/rmdja/inst/resources/examples/bookdown/chapter/chapters/appendix.Rmd",
 "text": null
 },
-"download": ["rmdja.pdf", "rmdja.epub"],
+"download": null,
 "toc": {
 "collapse": "none"
 }

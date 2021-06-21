@@ -1,8 +1,8 @@
 ---
-title: "`rmdja` による多様な形式の日本語技術文書の作成 "
+title: "**rmdja** による多様な形式の日本語技術文書の作成 "
 author: "Katagiri, Satoshi (ill-identified)"
-date: "2020/11/9"
-site: bookdown::bookdown_site                    # RStudio GUIでビルド操作したい場合に必要
+date: "2021/06/21"
+site: bookdown::bookdown_site
 description: "bookdown でまともな日本語文書を作る資料"  # HTML <metadata> に出力されるサイト概要
 url: 'https\://bookdown.org/john/awesome/'       # URL
 github-repo: "Gedevan-Aleksizde/rmdja"           # Github レポジトリ
@@ -10,23 +10,16 @@ cover-image: "img/Johannes_Gutenberg.jpg"        # 表紙画像. epub でのみ�
 apple-touch-icon: "touch-icon.png"               # iOS でホームスクリーンに登録した際に見えるもの
 apple-touch-icon-size: 120                       # そのサイズ
 favicon: "favicon.ico"                           # そのまんまファビコン.
-mainfont: 'DejaVu Serif'
-seriffont: 'DejaVu Sans'
-monofont: Ricty
-mainfontoptions:
-  - Scale=0.8
-sansfontoptions:
-  - Scale=0.8
-jmainfont: 'Noto Serif CJK JP'
-jseriffont: 'Noto Sans CJK JP'
-jmonofont: Ricty
+monofont: Ricty Discord
+jmonofont: Ricty Discord
 link-citations: true                             # 引用に参考文献リストへのハイパーリンクをつける
 linkcolor: blue
 citecolor: blue
 urlcolor: magenta
-bibliography: rmdja.bib
 documentclass: bxjsbook
 pagestyle: headings
+bibliography: rmdja.bib
+biblio-style: jecon
 ---
 
 
@@ -37,7 +30,28 @@ pagestyle: headings
 
 [![](https://i.creativecommons.org/l/by-nc/4.0/88x31.png)](https://creativecommons.org/licenses/by-nc/4.0/deed.ja)
 
-**注意: 絶賛作りかけ**
+::::::{.infobox .caution data-latex="{caution}"}
+
+**注意!**
+
+現在, このドキュメントは煩雑で **rmdja** パッケージの更新に対して追いついていません. あまり信用しないでください.
+
+R Markdown 全般の使用例については以下を参考にしてください. これらは R Markdown 開発の中心人物が執筆しているためこのページよりも信頼できます.
+
+* Xie "[knitr: Elegant, flexible, and fast dynamic report generation with R
+](https://yihui.org/knitr/)" (拙訳: 谢『[knitr: Rによる美麗で柔軟そして高速な動的レポート生成](https://gedevan-aleksizde.github.io/knitr-doc-ja/index.html)』)
+* Xie, Dervieux, and Riederer "[R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/)" (拙訳: 谢・デルヴュー・リーデラー『[R Markdown クックブック](https://gedevan-aleksizde.github.io/rmarkdown-cookbook/)』が公開されています)
+* Xie, Allaire and Grolemund "[R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)" (邦訳未刊, 近日作成予定)
+* Xie "[bookdown: Authoring Books and Technical Documents with R Markdown](https://bookdown.org/yihui/bookdown/)" (邦訳未刊, 近日作成予定)
+
+日本語で書かれた書籍には以下があります.
+
+* 高橋康介 (2018)『[再現可能性のすゝめ RStudio によるデータ解析とレポート作成](https://www.kyoritsu-pub.co.jp/bookdetail/9784320112438)』共立出版
+
+一旦残り2作の翻訳を済ませてから, これらで言及されていない使用法 (特にPDFでの日本語の適切な表示方法など) について本稿で補足説明したいと思います. それまではこちらのドキュメントは**ほとんど更新されない**ことに注意してください.
+
+::::::
+
 
 <!--chapter:end:index.Rmd-->
 
@@ -155,22 +169,13 @@ rmdja::pdf_book_ja:
 
 さらに, 作成した文書は PDF 形式で出力することはもちろん, HTML 形式で様々なサイトで掲載でき[^blogdown]たり, 電子書籍ファイルとしても出力可能である. このような多様な出力形式への対応しているソフトウェアはあまり例を見ない.
 
-\begin{warning}
-ただし,
-現時点では出版に堪えうる組版規格を満たす文書を生成するのは大変である.
-紙媒体の書籍を作りたい, かつ R や \LaTeX を未習得であり,
-これらを習得することに興味がない場合は
-\href{https://reviewml.org/ja/}{Re:View} の使用を検討してほしい.
-\end{warning}
+
 
 ## R使用経験のないユーザへ {-}
 
 Rを使わない, あるいはそもそもプログラミングに詳しくない, という人間にもある使用機会がある. たとえばR を普段使わない人間でも `bookdown` で同人技術書を執筆したという事例がある[^bookdown-example]. この事例は主に数式と画像の貼付けのみだから, 数式出力に必要な \LaTeX の知識があればほとんどのことはできてしまう. そして `rmdja` ではこの事例で言及されている \LaTeX の設定の多くは自動で制御される. また, 小説などはほぼテキストであり, 最低限のレイアウトさえ用意すれば数式も, あるいは画像の挿入すらいらないことが多い. `rmdja` では縦書き文書をPDFで出力する方法も用意している.
 
-\begin{important}
-印刷用フォーマットおよび縦書き文書フォーマットは現在実験的な導入段階であり,
-表示の一部に不具合が存在する.
-\end{important}
+
 
 [^word-out-of-date]: ただし筆者は数年来 Word を使っていないため, これらのいくつかは既に改善されているかもしれない.
 [^blogdown]: `bookdown` 同様に R Markdown で作成した文書をブログ風のフォーマットで出力する `blogdown` パッケージというものも存在する.
@@ -222,7 +227,7 @@ RStudio を起動し, 左上から新規作成を選び, "R Markdown" を選ぶ 
 \caption{R Markdown のテンプレート}(\#fig:rmdja-templates)
 \end{figure}
 
-現在 (Ver. 0.4.5) 用意されているのは以下の4つである.
+現在 (Ver. 0.4.6.9) 用意されているのは以下の4つである.
 
 * プレゼンテーション用スライド形式のテンプレート - `Beamer in Japanese`
 * 論文形式のテンプレート - `pdf article in Japanese`
@@ -536,36 +541,27 @@ Bookdown では**従来の R Markdown でできなかった数式への付番と
 
 である.
 
-\begin{caution}
-技術書によくある注意を喚起するブロック (\texttt{caution}).
-\end{caution}
 
-\begin{important}
-技術書によくある注意を喚起するブロック (\texttt{important}).
-\end{important}
 
-\begin{memo}
-技術書によくある注意を喚起するブロック (\texttt{memo}).
-\end{memo}
 
-\begin{tip}
-技術書によくある注意を喚起するブロック (\texttt{tip}).
-\end{tip}
 
-\begin{warning}
-技術書によくある注意を喚起するブロック (\texttt{warning}).
-\end{warning}
+
+
+
+
+
 
 このブロック内では Markdown の基本構文しか使えず, 引用や相互参照などは使えない. これらをブロック内で使いたい場合は `block` の代わりに `block2`  と書く. ただしこちらは pandoc の機能のハックであるため, 将来使えなくなる可能性もある.
 
 やや煩雑になるが, Pandoc の fenced Div を利用した書き方は, より安全である.
 
 ```
-:::{.infobox .important data-latex="{imporant}"}
+:::{.infobox .important data-latex="{warning}"}
 fenced Div によるブロック
+:::
 ```
 
-:::{.infobox .important data-latex="{important}"}
+:::{.infobox .important data-latex="{warning}"}
 fenced Div によるブロック
 :::
 
@@ -634,12 +630,12 @@ require(tidyverse)
 ```
 
 ```
--- Attaching packages --------------------------------------- tidyverse 1.3.0 --
+-- Attaching packages --------------------------------------- tidyverse 1.3.1 --
 ```
 
 ```
 v ggplot2 3.3.3     v purrr   0.3.4
-v tibble  3.1.0     v dplyr   1.0.5
+v tibble  3.1.2     v dplyr   1.0.6
 v tidyr   1.1.3     v stringr 1.4.0
 v readr   1.4.0     v forcats 0.5.1
 ```
@@ -681,10 +677,7 @@ require(kableExtra)
 * `include`: 文書作成時にプログラムを実行し, **かつ掲載しない**かどうか
 * `results`: 出力をいつもの R の出力風にするか (`markup`), 隠すか (`"hide"`), 出力を区切らずまとめるか (`"hold"`), テキストをそのまま出力するか (`"asis"`). 最後は R Markdown のソースコードを動的に生成したい場合などに使う.
 
-\begin{memo}
-R の論理値は \texttt{TRUE}/\texttt{FALSE} または \texttt{T}/\texttt{F}
-と書く.
-\end{memo}
+
 
 チャンクごとに個別に設定することも, デフォルト値を一括設定することもできる. 前者の場合, チャンクオプションは `{}` 内部にカンマ `,` で区切って書く. `r` は R で実行するという意味である. チャンクの一般的な記法は以下のようになる.
 
@@ -737,9 +730,10 @@ names(knitr::knit_engines$get())
 [26] "cc"          "fortran"     "fortran95"   "asy"         "cat"        
 [31] "asis"        "stan"        "block"       "block2"      "js"         
 [36] "css"         "sql"         "go"          "python"      "julia"      
-[41] "sass"        "scss"        "theorem"     "lemma"       "corollary"  
-[46] "proposition" "conjecture"  "definition"  "example"     "exercise"   
-[51] "proof"       "remark"      "solution"   
+[41] "sass"        "scss"        "R"           "bslib"       "theorem"    
+[46] "lemma"       "corollary"   "proposition" "conjecture"  "definition" 
+[51] "example"     "exercise"    "hypothesis"  "proof"       "remark"     
+[56] "solution"   
 ```
 
 また, 新たにプログラムを追加することもできる. 詳細は RDG [Ch. 2.7 Other language engines](https://bookdown.org/yihui/rmarkdown/language-engines.html) を参考に.
@@ -1308,6 +1302,17 @@ mainfontoptions:
 
 などと書いて調整できる.
 
+### どのフォントを使用すべきか
+
+既に書いたように **rmdja** では, Windows なら游書体シリーズやBIZ UDフォントシリーズ, Macならヒラギノや游書体といったようにOS標準のフォントが自動で選択される. よく, LaTeXやグラフで日本語が表示できないときは「IPAフォント」をダウンロードして使え, という記述がネット上に出回っているが, **これは正確ではない**とわかる. 
+
+文字化けは多くの場合, 文字コードの指定ミスか日本語の**グリフ** (文字) が存在しない欧文フォントを使用しているのが原因であり, このようにしかるべき方法でフォントを指定すれば使い慣れたOS標準のフォントが使用でき, BIZ UDフォントのような可読性に優れたフォントも使用可能である.
+
+また, 無料公開されているフォントとしては, Noto フォントや原ノ味が存在する. 特に後者は見た目こそ既存の有名フォント(原ノ角やNoto)と大差ないが, CIDを持っており組版の点で効率的であり, Tex Live にも同梱されるようになった.
+
+一方で, IPAフォントシリーズのうち, 「[IPAmj明朝](https://moji.or.jp/mojikiban/font/)」フォントは行政の戸籍管理システム用途で開発されたため^[https://www.ipa.go.jp/about/press/20111026_2.html] 約6万字の漢字を収録するなど他の無料公開フォントと比べ格段に収録グリフ数が多いという特徴がある. さらに, CJK統合漢字のフルサポートをしているフォントとして, 9万字近い漢字を収録した[花園明朝](http://fonts.jp/hanazono/)シリーズがある.
+
+言うまでもなくこれらは明朝体のみであるため単体では整った日本語文書に使用することが難しいが, 異字体や稀にしか使われない(あるいは日本語では通常使われない)漢字の表記にこだわりたい場合は必要になるだろう^[LaTeX での使い方は https://texwiki.texjp.org/?TeX%E3%81%A8%E5%A4%96%E5%AD%97 などを参照].
 
 ## YAML フロントマターの設定によるスタイル変更
 
@@ -1464,20 +1469,22 @@ TODO: それ以外にも便利機能を少しづつ増やしていく予定
 
 ## `tikz` を使う
 
-\LaTeX で使われる `tikzdevice` を利用して, 直接  `tikz` の記述による画像を埋め込むことができる. チャンクのエンジンを `tikz` とすることで使用でき, 相互参照やキャプション, 画像サイズの指定といったチャンクオプションも使える. 図 \@ref(fig:tikz-venn) は `tikz` で生成した図である. これはHTMLでも表示できる. TODO: しかし現状ではpdflatex以外のエンジンに変更できないため, 日本語表示が難しい.
+\LaTeX で使われる `tikzdevice` を利用して, 直接  `tikz` の記述による画像を埋め込むことができる. チャンクのエンジンを `tikz` とすることで使用でき, 相互参照やキャプション, 画像サイズの指定といったチャンクオプションも使える. 図 \@ref(fig:tikz-mathcha) は[mathcha](https://www.mathcha.io/)というサービスで作成した図を tikz のソースとしてエクスポートしたものから生成した図である (ソースコードは長大なので掲載を省略してある). HTML出力ではデフォルトでラスタ画像に変換され表示される.
+
+TODO: しかし現状ではpdflatex以外のエンジンに変更できないため, 日本語表示が難しい.
 
 \begin{figure}
 
-{\centering \includegraphics[width=1\linewidth,height=1\textheight,keepaspectratio]{rmdja_files/figure-latex/tikz-venn-1} 
+{\centering \includegraphics[width=1\linewidth,height=1\textheight,keepaspectratio]{rmdja_files/figure-latex/tikz-mathcha-1} 
 
 }
 
-\caption{tikzを利用した図の表示}(\#fig:tikz-venn)
+\caption{mathcha からエクスポートした tikz の表示}(\#fig:tikz-mathcha)
 \end{figure}
 
 ## Asymptote を使う
 
-同様に, Asymptote のプログラムを埋め込むこともできる. 私は Asymptote が分からないので RCB [Ch. 15.9 Create graphics with Asymptote](https://bookdown.org/yihui/rmarkdown-cookbook/eng-asy.html) と同様のプログラムを書いておく. (図 \@ref(fig:asymptote-graph)).
+同様に, Asymptote のプログラムを埋め込むこともできる. 私は Asymptote が分からないので RCB [Ch. 15.9 Asymptote でグラフィックを作成する](https://gedevan-aleksizde.github.io/rmarkdown-cookbook/eng-asy.html) と同様のプログラムを書いておく. (図 \@ref(fig:asymptote-graph)).
 
 \begin{figure}
 
@@ -1522,7 +1529,7 @@ digraph test {
 \end{figure}
 
 
-なお, RCB, Ch. 4.15 でも紹介されているように DOT 言語は `DiagrammeR` パッケージを経由して使うこともできる[^dot-lang-syntax]が, `grViz()` 関数の出力は HTML を前提としているため, PDF での出力時のサイズや解像度の調整がうまくいかないことが多い.
+なお, RCB, [Ch. 4.15](https://gedevan-aleksizde.github.io/rmarkdown-cookbook/diagrams.html) でも紹介されているように DOT 言語は `DiagrammeR` パッケージを経由して使うこともできる[^dot-lang-syntax]が, `grViz()` 関数の出力は HTML を前提としているため, PDF での出力時のサイズや解像度の調整がうまくいかないことが多い.
 
 一方で, `ggdag` パッケージは`ggplot2` ベースのパッケージなので, 一般的な R グラフィックスと同じ扱いでグラフィカルモデルを描画できる (つまり名前に反して DAG 以外のネットワーク図も記述可能である). `ggplot2` 風の構文で記述できるので習熟も容易である.
 
@@ -1539,14 +1546,7 @@ digraph test {
 
 まず, `knitrExtra::kbl()` は既に紹介した `kable()` のラッパであり, 内部で呼び出すのは `kable()` のため `booktabs` といった従来の引数が使える上に, オプション設定の構文がより分かりやすくなっている. さらに `kableExtra` の独自機能として, 表 \@ref(tab:kableextra-color) にみられるように条件書式のような装飾が可能である[^mtcars-term].
 
-\begin{memo}
-\texttt{kableExtra} パッケージはヘルプドキュメントはもちろん,
-公式の解説や用例も充実している.
 
-\url{https://haozhu233.github.io/kableExtra/}
-
-\url{https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html}
-\end{memo}
 
 (ref:kableextra-color-cap) `kabeExtra` パッケージを利用した表の作成, 公式ドキュメントの用例より
 
@@ -1645,9 +1645,9 @@ inline_plot %>%
 \toprule
 シリンダ数 & ガロン毎マイル &  &  &  &  &  & \\
 \midrule
-4 & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//boxplot_e427ee476178.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//hist_e427e2aa1e081.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_e427e7b27e415.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_e427e1d211354.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_e427e4d01eed8.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_e427e1e6c9bb7.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_e427e6ccfc248.pdf}\\
-6 & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//boxplot_e427e7820b59b.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//hist_e427e6602397d.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_e427e25b2331a.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_e427e4f1c1d44.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_e427e84888aa.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_e427e6b33eac1.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_e427e3e89844a.pdf}\\
-8 & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//boxplot_e427e6cdb9eec.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//hist_e427e4e8decc5.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_e427e25694a43.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_e427e37e64886.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_e427e149f6cf4.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_e427e2780aecc.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_e427e60325791.pdf}\\
+4 & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//boxplot_4183b5a739daf.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//hist_4183b4df2d49b.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_4183b2e2d5f87.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_4183b77b7d0b1.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_4183b5ea1cf83.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_4183b68400248.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_4183b64749c26.pdf}\\
+6 & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//boxplot_4183b2cf2bf01.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//hist_4183b41b2b1a7.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_4183b440cada8.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_4183b4506beb9.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_4183b215e9eea.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_4183b67729344.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_4183b69dc6e0f.pdf}\\
+8 & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//boxplot_4183b67c56e9a.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//hist_4183b64b2a4a8.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_4183b68d907c9.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_4183b1f9f5633.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_4183b530c9144.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_4183b44eb0ac6.pdf} & \includegraphics[width=0.67in, height=0.17in]{rmdja_files/figure-latex//plot_4183b2036584e.pdf}\\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -1692,64 +1692,64 @@ inline_plot %>%
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{} &
-\multicolumn{2}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textbf{h}} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 0, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textbf{\textcolor[RGB]{255, 255, 255}{h}}} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 255, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{0, 0, 0}{u}} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont x} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{2}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{2}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{0, 0, 255}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{255, 255, 255}{1.2}}->{\huxb{0, 0, 0}{1.2}}|>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont t} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\multirow[t]{-2}{*}[0ex]{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 255, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{0, 0, 0}{~}} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{} \tabularnewline[-0.5pt]
+
+
+\hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{255, 255, 255}{1.2}}->{\huxb{0, 0, 0}{1.2}}|}
+\arrayrulecolor{black}
+
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 0, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont b} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont l} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\multirow[t]{-2}{*}[0ex]{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont a} \hspace{0pt}\huxbpad{0pt}}} \tabularnewline[-0.5pt]
 
 
 \hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{255, 255, 255}{1.2}}->{\huxb{0, 0, 0}{1.2}}|>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
 \arrayrulecolor{black}
 
-\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{0, 0, 255}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} &
+\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\multirow[t]{-2}{*}[0ex]{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
 \multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{0, 0, 255}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 255, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{0, 0, 0}{~}} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
-
-
-\hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
-\arrayrulecolor{black}
-
-\multicolumn{2}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{0, 0, 255}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{255, 255, 255}{u}} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont x} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
-
-
-\hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
-\arrayrulecolor{black}
-
-\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont a} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont b} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
-
-
-\hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{255, 255, 255}{1.2}}->{\huxb{0, 0, 0}{1.2}}|>{\huxb{255, 255, 255}{1.2}}->{\huxb{0, 0, 0}{1.2}}|>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
-\arrayrulecolor{black}
-
-\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\multirow[t]{-2}{*}[0ex]{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\multirow[t]{-2}{*}[0ex]{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont t} \hspace{0pt}\huxbpad{0pt}}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont l} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 255, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{0, 0, 0}{~}} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
-
-
-\hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
-\arrayrulecolor{black}
-
-\multicolumn{1}{!{\huxvb{0, 0, 0}{1.2}}c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont e} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont ~} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 0, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{255, 255, 255}{~}} \hspace{0pt}\huxbpad{0pt}} &
-\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\cellcolor[RGB]{255, 255, 0}\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont \textcolor[RGB]{0, 0, 0}{~}} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{c!{\huxvb{0, 0, 0}{1.2}}}{\huxtpad{0pt + 1em}\centering \hspace{0pt} {\fontfamily{cmss}\selectfont e} \hspace{0pt}\huxbpad{0pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{>{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}->{\huxb{0, 0, 0}{1.2}}-}
@@ -1815,7 +1815,7 @@ head(mtcars[1:5]) %>%
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{0pt} Mazda RX4 \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{255, 104, 0}{21~~} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{255, 104, 0}{21\hphantom{0}\hphantom{0}} \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 6 \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 160 \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{255, 255, 0}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 110 \hspace{6pt}\huxbpad{6pt}} &
@@ -1826,7 +1826,7 @@ head(mtcars[1:5]) %>%
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{0pt} Mazda RX4 Wag \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{255, 104, 0}{21~~} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{255, 104, 0}{21\hphantom{0}\hphantom{0}} \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 6 \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 160 \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\cellcolor[RGB]{255, 255, 0}\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 110 \hspace{6pt}\huxbpad{6pt}} &
@@ -1943,9 +1943,9 @@ huxreg(lm1, lm2, glm1, stars = NULL, error_pos = "below", note = "括弧内は�
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} (Intercept) \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{37.885~} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{36.908~} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 64.400~ \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{37.885\hphantom{0}} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{36.908\hphantom{0}} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 64.400\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{}
@@ -1961,9 +1961,9 @@ huxreg(lm1, lm2, glm1, stars = NULL, error_pos = "below", note = "括弧内は�
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} cyl \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{-2.876~} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{-2.265~} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} -10.781~ \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{-2.876\hphantom{0}} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{-2.265\hphantom{0}} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} -10.781\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{}
@@ -1979,54 +1979,54 @@ huxreg(lm1, lm2, glm1, stars = NULL, error_pos = "below", note = "括弧内は�
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} hp \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{~~~~~} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{-0.019~} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} ~~~~~ \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{-0.019\hphantom{0}} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{}
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt}  \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{~~~~~} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}} \hspace{6pt}\huxbpad{6pt}} &
 \multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{(0.015)} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} ~~~~~ \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{>{\huxb{255, 255, 255}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}->{\huxb{0, 0, 0}{0.4}}-}
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} N \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{32~~~~~} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{32~~~~~} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 32~~~~~ \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{32\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{32\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 32\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{}
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} R2 \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{0.726~} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{0.741~} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} ~~~~~ \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{0.726\hphantom{0}} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{0.741\hphantom{0}} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0}\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{}
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} logLik \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{-81.653~} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{-80.781~} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} -4.780~ \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{-81.653\hphantom{0}} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{-80.781\hphantom{0}} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} -4.780\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{}
 \arrayrulecolor{black}
 
 \multicolumn{1}{!{\huxvb{0, 0, 0}{0}}l!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedright \hspace{6pt} AIC \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{169.306~} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{169.562~} \hspace{6pt}\huxbpad{6pt}} &
-\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 13.561~ \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 255, 0}{169.306\hphantom{0}} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} \textcolor[RGB]{0, 0, 255}{169.562\hphantom{0}} \hspace{6pt}\huxbpad{6pt}} &
+\multicolumn{1}{r!{\huxvb{0, 0, 0}{0}}}{\huxtpad{6pt + 1em}\raggedleft \hspace{6pt} 13.561\hphantom{0} \hspace{6pt}\huxbpad{6pt}} \tabularnewline[-0.5pt]
 
 
 \hhline{>{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}->{\huxb{0, 0, 0}{0.8}}-}
@@ -2048,9 +2048,9 @@ huxreg(lm1, lm2, glm1, stars = NULL, error_pos = "below", note = "括弧内は�
 
 ## TeX/HTML を出力する関数
 
-`stargazer` や `pander` のように表を出力するための HTML や \LaTeX や Markdown のソースコードを出力してくれるパッケージがある. これらは `results='asis'` のチャンクオプションを指定することで関数の出力するテキストをそのまま埋め込むことができる. よって, あとは HTMLか`\LaTeX`{=latex}`LaTeX`{=html} かといった出力形式の違いに気をつければ表示できる. `stargazer` はオプションが豊富で, 例えば表 \@ref(tab:stargazer-table)では, `align = T` を指定することで, `dcolumn.sty` を使って 数字のアラインメントを小数点で揃えることができる. その他, 複数の回帰モデルの結果を並べて表示したり, その際の表示スタイルも比較的かんたんに調整できる. `stargazer` の詳しい使い方はむかし私が書いた『[R での分析結果を LaTeX 形式で出力するパッケージ比較 (後編)](https://ill-identified.hatenablog.com/entry/2014/01/28/214814)』を参考に.
+**stargazer** や **pander** のように表を出力するための HTML や \LaTeX や Markdown のソースコードを出力してくれるパッケージがある. これらは `results='asis'` のチャンクオプションを指定することで関数の出力するテキストをそのまま埋め込むことができる. よって, あとは HTMLか`\LaTeX`{=latex}`LaTeX`{=html} かといった出力形式の違いに気をつければ表示できる. **stargazer** はオプションが豊富で, 例えば表 \@ref(tab:stargazer-table)では, `align = T` を指定することで, `dcolumn.sty` を使って 数字のアラインメントを小数点で揃えることができる. その他, 複数の回帰モデルの結果を並べて表示したり, その際の表示スタイルも比較的かんたんに調整できる. **stargazer** の詳しい使い方はむかし私が書いた『[R での分析結果を LaTeX 形式で出力するパッケージ比較 (後編)](https://ill-identified.hatenablog.com/entry/2014/01/28/214814)』を参考に.
 
-(ref:stargazer-title) `stargazer` による要約統計量の出力
+(ref:stargazer-title) **stargazer** による要約統計量の出力
 
 
 ```{.r .numberLines .lineAnchors}
@@ -2066,48 +2066,46 @@ stargazer(mtcars,
 
 \begin{table}[!htbp] \centering 
   \caption{(ref:stargazer-title)} 
-  \label{stargazer-table} 
-\begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} } 
+  \label{tab:stargazer-table} 
+\begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} } 
 \\[-1.8ex]\hline 
 \hline \\[-1.8ex] 
-Statistic & \multicolumn{1}{c}{N} & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{St. Dev.} & \multicolumn{1}{c}{Min} & \multicolumn{1}{c}{Pctl(25)} & \multicolumn{1}{c}{Pctl(75)} & \multicolumn{1}{c}{Max} \\ 
+Statistic & \multicolumn{1}{c}{N} & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{St. Dev.} & \multicolumn{1}{c}{Min} & \multicolumn{1}{c}{Max} \\ 
 \hline \\[-1.8ex] 
-mpg & 32 & 20.091 & 6.027 & 10 & 15.4 & 22.8 & 34 \\ 
-cyl & 32 & 6.188 & 1.786 & 4 & 4 & 8 & 8 \\ 
-disp & 32 & 230.722 & 123.939 & 71 & 120.8 & 326 & 472 \\ 
-hp & 32 & 146.688 & 68.563 & 52 & 96.5 & 180 & 335 \\ 
-drat & 32 & 3.597 & 0.535 & 2.760 & 3.080 & 3.920 & 4.930 \\ 
-wt & 32 & 3.217 & 0.978 & 1.513 & 2.581 & 3.610 & 5.424 \\ 
-qsec & 32 & 17.849 & 1.787 & 14.500 & 16.892 & 18.900 & 22.900 \\ 
-vs & 32 & 0.438 & 0.504 & 0 & 0 & 1 & 1 \\ 
-am & 32 & 0.406 & 0.499 & 0 & 0 & 1 & 1 \\ 
-gear & 32 & 3.688 & 0.738 & 3 & 3 & 4 & 5 \\ 
-carb & 32 & 2.812 & 1.615 & 1 & 2 & 4 & 8 \\ 
+mpg & 32 & 20.091 & 6.027 & 10.400 & 33.900 \\ 
+cyl & 32 & 6.188 & 1.786 & 4 & 8 \\ 
+disp & 32 & 230.722 & 123.939 & 71.100 & 472.000 \\ 
+hp & 32 & 146.688 & 68.563 & 52 & 335 \\ 
+drat & 32 & 3.597 & 0.535 & 2.760 & 4.930 \\ 
+wt & 32 & 3.217 & 0.978 & 1.513 & 5.424 \\ 
+qsec & 32 & 17.849 & 1.787 & 14.500 & 22.900 \\ 
+vs & 32 & 0.438 & 0.504 & 0 & 1 \\ 
+am & 32 & 0.406 & 0.499 & 0 & 1 \\ 
+gear & 32 & 3.688 & 0.738 & 3 & 5 \\ 
+carb & 32 & 2.812 & 1.615 & 1 & 8 \\ 
 \hline \\[-1.8ex] 
 \end{tabular} 
 \end{table} 
 
-ただし `stargazer` はここ数年更新されておらず, R Markdown に対応した機能追加なども行われていないため, **相互参照に対応していない**. `bookdown` リポジトリの [issue #175](https://github.com/rstudio/bookdown/issues/175) にあるように, PDFに限れば簡易的な方法で対処できるが, HTMLでも相互参照するには [`stargazer_bookdown`](https://github.com/jiewpeng/stargazer_bookdown) のインストールが必要になる.
+ただし **stargazer** はここ数年更新されておらず, R Markdown に対応した機能追加なども行われていないため, **相互参照に対応していない**. **bookdown** リポジトリの [issue #175](https://github.com/rstudio/bookdown/issues/175) にあるように, PDFに限れば簡易的な方法で対処できるが, HTMLでも相互参照するには [**stargazer_bookdown**](https://github.com/jiewpeng/stargazer_bookdown) のインストールが必要になる. これはインストールしただけで従来の **stargazer** が相互参照に対応するようになる.
 
-その他, `Hmisc::latex()`, `stats::xtable()` という古典的な関数がある. 後者は名前の通り \LaTeX のソースをかなりの自由度で出力できるが, ここまでやるならもう最初から全部 \LaTeX で書いたほうがいいのでは, という気もする. \LaTeX に詳しくない場合, かえって難しいかも知れない. 既に紹介した `kableExtra`, `huxtable` などでできる範囲でやったほうが簡単だろう.
+その他, `Hmisc::latex()`, `stats::xtable()` という古典的な関数がある. 後者は名前の通り \LaTeX のソースをかなりの自由度で出力できるが, ここまでやるならもう最初から全部 \LaTeX で書いたほうがいいのでは, という気もする. \LaTeX に詳しくない場合, かえって難しいかも知れない. 既に紹介した **kableExtra**, **huxtable** などでできる範囲でやったほうが簡単だろう.
 
 ## その他の作表パッケージ
 
-そのほか有名なパッケージとして, `DT`, `flextable`, `gt` などがある. `DT` はインタラクティブな表ウィジェットを作成し, `flextable` は Word へのエクスポート機能をフィーチャーしているが, PDF に対しては画像として出力するなどくせがある. `gt` は RStudio 社が開発しているパッケージで, `huxtable` のように `tidyverse` 的なシンプルな構文が用意されている一方で, まだ R Markdown の相互参照機能に対応していない[^gt-crossref]. 以上からすでに紹介した `kableExtra` や `huxtable` がより `rmdja` の対応する出力媒体に適したパッケージであり, それ以外のパッケージの詳しい紹介は避ける.
+そのほか有名なパッケージとして, **DT**, **flextable**, **gt** などがある. **DT** は[DataTables ライブラリ][https://datatables.net/]を利用してインタラクティブな表ウィジェットを作成し, **flextable** は Word へのエクスポート機能をフィーチャーしているが, PDF に対しては画像として出力するなどくせがある. **gt** は RStudio 社が開発しているパッケージで, **huxtable** のように **tidyverse** 的なシンプルな構文が用意されている一方で, まだ R Markdown の相互参照機能に対応していない[^gt-crossref]. 以上からすでに紹介した **kableExtra** や **huxtable** がより **rmdja** の対応する出力媒体に適したパッケージであり, それ以外のパッケージの詳しい紹介は避ける.
 
-RCB [10.3 Other packages for creating tables](https://bookdown.org/yihui/rmarkdown-cookbook/table-other.html) も参考にせよ.
+RCB [10.3 その他の表作成パッケージ](https://gedevan-aleksizde.github.io/rmarkdown-cookbook/table-other.html) も参考にせよ.
 
-[^gt-crossref]: Issue [#115](https://github.com/rstudio/gt/issues/115) にあるように, 機能を追加したいという声はある. しかし現時点では `gt`  の R Markdown 対応作業の優先度は高くないようである.
+[^gt-crossref]: Issue [#115](https://github.com/rstudio/gt/issues/115) にあるように, 機能を追加したいという声はある. しかし現時点では **gt**  の R Markdown 対応作業の優先度は高くないようである.
 
 # 文献引用の詳細設定 {#biblio-advaneced}
 
 ## `(u)p\BibTeX`{=latex}`(u)pBibTeX`{=html} を使う
 
-\BeginKnitrBlock{caution}
-このセクションの説明の理解には多少の `\LaTeX`{=latex}`LaTeX`{=html} の知識を要する.  Ver. 0.4.3 以降では BibLaTeX 用の日本語スタイルとして最低限のクオリティだけは保った `jauthoryear` を用意しているため, どうしても文献リストのスタイルにこだわりたい以外はここで紹介される方法は使わないほうが良い.
-\EndKnitrBlock{caution}
 
-`.bst` ファイルのスタイルを使いたい場合,  (u)\pBibTeX が必要であり, そのためには現在の R Markdown および `rmdja` の仕様では, YAMLフロントマターとグローバルオプションを変更する必要がある. 例えば `jecon.bst` を使いたい参考文献リストを出力したい場合, YAMLフロントマターは以下のような記述となる.
+
+`.bst` ファイルのスタイルを使いたい場合,  (u)\pBibTeX が必要であり, そのためには現在の R Markdown および **rmdja** の仕様では, YAMLフロントマターとグローバルオプションを変更する必要がある. 例えば `jecon.bst` を使いたい参考文献リストを出力したい場合, YAMLフロントマターは以下のような記述となる.
 
 ```yaml
 output:
@@ -2128,7 +2126,7 @@ options(tinytex.latexmk.emulation = F)
 
 この状態で knit または build すれば `.bst` ファイルのスタイルが適用される.
 
-このような操作が必要な理由を説明する. `rmarkdown` は `tinytex` というパッケージでインストールされたスタンドアローンな \LaTeX 処理系で PDF を生成している. しかしこれは (u)\pBibTeX の使用が想定されていない.  (u)\pBibTeX は日本語コミュニティで開発されたマルチバイト文字対応版 \BibTeX だから, `rmarkdown` 開発メンバーたちがこれらの存在に詳しくないのも仕方ないことだ (YiHui 氏は中国出身だが, 中国語圏では BibLaTeX を使うことが多いようだ). 冒頭のチャンクで `options(tinytex.latexmk.emulation = F)` を指定することで, 自分のマシンにインストールされた, おそらくあなたが普段使っているであろう \LaTeX 処理系に処理させることができる. この方法では `latexmk` コマンドを使用してPDFの生成が行われる, その場合[TeX Wiki](https://texwiki.texjp.org/?Latexmk)に記載のあるように, 日本語出力のため `.latexmkrc`  ファイルが必要となっている. `rmdja` では `natbib` を指定した場合に自動でカレントディレクトリに `.latexmkrc` をコピーするようにしている. しかしログが残らないなどデバッグしづらいところがあるため, このやり方はやや使いづらく \LaTeX に対するそれなりの知識を要する. たとえばこの説明を読んで初めて `latexmk` の存在を知った, そもそも \LaTeX をどうインストールしたか記憶がない, といった人は慣れるまで大変かもしれない.
+このような操作が必要な理由を説明する. **rmarkdown** は **tinytex** というパッケージでインストールされたスタンドアローンな \LaTeX 処理系で PDF を生成している. しかしこれは (u)\pBibTeX の使用が想定されていない.  (u)\pBibTeX は日本語コミュニティで開発されたマルチバイト文字対応版 \BibTeX だから, **rmarkdown** 開発メンバーたちがこれらの存在に詳しくないのも仕方ないことだ (YiHui 氏は中国出身だが, 中国語圏では BibLaTeX を使うことが多いようだ). 冒頭のチャンクで `options(tinytex.latexmk.emulation = F)` を指定することで, 自分のマシンにインストールされた, おそらくあなたが普段使っているであろう \LaTeX 処理系に処理させることができる. この方法では `latexmk` コマンドを使用してPDFの生成が行われる, その場合[TeX Wiki](https://texwiki.texjp.org/?Latexmk)に記載のあるように, 日本語出力のため `.latexmkrc`  ファイルが必要となっている. **rmdja** では `natbib` を指定した場合に自動でカレントディレクトリに `.latexmkrc` をコピーするようにしている. しかしログが残らないなどデバッグしづらいところがあるため, このやり方はやや使いづらく \LaTeX に対するそれなりの知識を要する. たとえばこの説明を読んで初めて `latexmk` の存在を知った, そもそも \LaTeX をどうインストールしたか記憶がない, といった人は慣れるまで大変かもしれない.
 
 ### (TODO) `pandoc-citeproc` と CSL について
 
@@ -2180,17 +2178,9 @@ TODO: その他の非ラテン文字, キリル文字, アラビア文字 ヘブ
 
 # Python スクリプトの埋め込み {#python}
 
-\begin{caution}
-現時点では \texttt{reticulate} による Python
-実行はグラフィック関係や環境設定でまだまだバギーなところが多い. つまり,
-エラーが発生した場合には原因が Python 側にあるのか RStudio や
-\texttt{reticulate} パッケージ側にあるのか判断しなければならない.
-よってあなたがどちらかに習熟していなかったり,
-まだエラーメッセージを注意深く読む習慣がついていない初心者である場合,
-作業が非効率になることが予想される.
-\end{caution}
 
-Python スクリプトを埋め込むこともできる. 方法は2通りあり, 都度システムコマンドから呼び出す方法と, `reticulate` パッケージを使うものがある. `reticulate` 登場以前はチャンクごとに呼び出していたため複数のチャンクに分割して記述するのが難しかったが, 現在は `reticulate` パッケージを利用することでRと同じような感覚で, あるいは Jupyter のコードセルと同じような感覚で書ける.
+
+Python スクリプトを埋め込むこともできる. 方法は2通りあり, 都度システムコマンドから呼び出す方法と, reticulate` パッケージを使うものがある. `reticulate` 登場以前はチャンクごとに呼び出していたため複数のチャンクに分割して記述するのが難しかったが, 現在は `reticulate` パッケージを利用することでRと同じような感覚で, あるいは Jupyter のコードセルと同じような感覚で書ける.
 
 `pyenv` を使用する場合, 共有ライブラリのインストールが必要なことに注意[^pyenv-lib].
 
@@ -2216,9 +2206,7 @@ repl_python()
 
 `matplotlib` エンジンで描いたグラフに日本語フォントを埋め込む場合, `matplotlib-japreset` を使えば必要な設定を一括で行う.
 
-\begin{warning}
-\texttt{matplotlib-japreset} は現在, Linux 以外での動作保証をしていない
-\end{warning}
+
 
 ```sh
 pip install -U git+https://github.com/Gedevan-Aleksizde/matplotlib-japreset.git@master
@@ -2391,7 +2379,7 @@ ggplot(
 
 \begin{figure}
 
-{\centering \includegraphics[width=1\linewidth,height=1\textheight,keepaspectratio]{rmdja_files/figure-latex/plot-grey-scale-1} 
+{\centering \includegraphics[width=1\linewidth,height=1\textheight,keepaspectratio]{rmdja_files/figure-latex/plot-grey-scale-3} 
 
 }
 
@@ -2415,18 +2403,11 @@ ggplot(
 \caption{縦書き文書の出力例}(\#fig:tategaki)
 \end{figure}
 
-\begin{warning}
-現在, 縦書き文書では図のようにゴシック体になってしまうことがある.
-\end{warning}
 
-\begin{tip}
-エディタは横書きのままである. また, 段落改行も Markdown
-のルールに則して1行空けによってなされる.
-\end{tip}
 
-\begin{tip}
-『小説家になろう』『カクヨム』とかに自動投稿する機能もいまのところ用意していない.
-\end{tip}
+
+
+
 
 
 [^luatex-ja-tate]: `luatex-ja` にも縦書き文書クラス `ltjt` シリーズが存在するが, 公式ドキュメントにすら詳しい解説がなかったため採用しなかった.
@@ -2870,7 +2851,7 @@ knitr::opts_chunk(
 
 ## コードブロックの整形と自動折り返し {#autoformatter}
 
-HTML はともかく, PDF はコードの自動折り返しが難しい. 例えば [RCB Ch. 5.3](https://bookdown.org/yihui/rmarkdown-cookbook/text-width.html) では, `listings.sty` を使う方法が書かれているが, この方法ではデフォルトのシンタックスハイライトが使えなくなり, R Markdown の大きなメリットの1つが損なわれてしまう. また, 同 [Ch. 11.10](https://bookdown.org/yihui/rmarkdown-cookbook/opts-tidy.html) では `knitr` のチャンクオプションで `tidy` と `tidy.opts` を設定するという方法が紹介されている. この機能は `formatR::tidy_source()` 関数を利用したコード整形であり, この関数の `width.cutoff` というオプションで自動折り返しを始める位置を指定できる. (たまに勘違いしている人がいるが, ドキュメントをちゃんと読めば分かるように) このように**コード整形機能は自動折り返しを目的としたものではない**ため, 長すぎる関数名や文字列があると `width.cutoff` を超過することも十分ありえる. 同章では `styler` パッケージがより機能が豊富だと言及しているが, このパッケージも現時点では1行の上限を指定する機能はない[^styler-width]. `rmdja` ではデフォルトで `styler` を使ったコード整形をするとともに, フォーマット `beamer_presentation_ja` と `pdf_book_ja` にコードブロックの自動折り返しを有効にする `code_softwarp` というオプションを用意した. 前者ではデフォルトで `false`, 後者では `true` である.
+HTML はともかく, PDF はコードの自動折り返しが難しい. 例えば [RCB Ch. 5.3](https://gedevan-aleksizde.github.io/rmarkdown-cookbook/text-width.html) では, `listings.sty` を使う方法が書かれているが, この方法ではデフォルトのシンタックスハイライトが使えなくなり, R Markdown の大きなメリットの1つが損なわれてしまう. また, 同 [Ch. 11.10](https://gedevan-aleksizde.github.io/rmarkdown-cookbook/opts-tidy.html) では `knitr` のチャンクオプションで `tidy` と `tidy.opts` を設定するという方法が紹介されている. この機能は `formatR::tidy_source()` 関数を利用したコード整形であり, この関数の `width.cutoff` というオプションで自動折り返しを始める位置を指定できる. (たまに勘違いしている人がいるが, ドキュメントをちゃんと読めば分かるように) このように**コード整形機能は自動折り返しを目的としたものではない**ため, 長すぎる関数名や文字列があると `width.cutoff` を超過することも十分ありえる. 同章では `styler` パッケージがより機能が豊富だと言及しているが, このパッケージも現時点では1行の上限を指定する機能はない[^styler-width]. `rmdja` ではデフォルトで `styler` を使ったコード整形をするとともに, フォーマット `beamer_presentation_ja` と `pdf_book_ja` にコードブロックの自動折り返しを有効にする `code_softwarp` というオプションを用意した. 前者ではデフォルトで `false`, 後者では `true` である.
 
 しかし, これらを使っても「きれいな」コーディングになるとは限らない. 過剰な折り返しで行数が増えてしまう可能性もあるし, 折り返しや改行の位置がふぞろいになる可能性もある. また, トークン単体で非常に長い場合 (たとえば100字分の文字列)  も, 途中で折り返すことはできない. よって現状では究極的には手動で調整する必要がある
 
