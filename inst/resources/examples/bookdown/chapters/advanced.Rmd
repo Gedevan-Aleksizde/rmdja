@@ -10,7 +10,7 @@
 
 `r rmdja::texlogo("latex")` で使われる `tikzdevice` を利用して, 直接  `tikz` の記述による画像を埋め込むことができる. チャンクのエンジンを `tikz` とすることで使用でき, 相互参照やキャプション, 画像サイズの指定といったチャンクオプションも使える. 図 \@ref(fig:tikz-venn) は `tikz` で生成した図である. これはHTMLでも表示できる. TODO: しかし現状ではpdflatex以外のエンジンに変更できないため, 日本語表示が難しい.
 
-```{tikz tikz-venn, fig.cap="tikzを利用した図の表示"}
+```{tikz tikz-venn, fig.cap="tikzを利用した図の表示", eval=F}
 \def\firstcenter{(135:1.75cm)}
 \def\secondcenter{(45:1.75cm)}
 \def\firstcircle{\firstcenter circle (2.0cm)}
@@ -285,17 +285,17 @@ stargazer(mtcars, header = F, align = T,
           )
 ```
 
-ただし `stargazer` はここ数年更新されておらず, R Markdown に対応した機能追加なども行われていないため, **相互参照に対応していない**. `bookdown` リポジトリの [issue #175](https://github.com/rstudio/bookdown/issues/175) にあるように, PDFに限れば簡易的な方法で対処できるが, HTMLでも相互参照するには [`stargazer_bookdown`](https://github.com/jiewpeng/stargazer_bookdown) のインストールが必要になる.
+ただし **stargazer** はここ数年更新されておらず, R Markdown に対応した機能追加なども行われていないため, **相互参照に対応していない**. **bookdown** リポジトリの [issue #175](https://github.com/rstudio/bookdown/issues/175) にあるように, PDFに限れば簡易的な方法で対処できるが, HTMLでも相互参照するには [**stargazer_bookdown**](https://github.com/jiewpeng/stargazer_bookdown) のインストールが必要になる. これはインストールしただけで従来の **stargazer** が相互参照に対応するようになる.
 
-その他, `Hmisc::latex()`, `stats::xtable()` という古典的な関数がある. 後者は名前の通り `r rmdja::texlogo("LaTeX")` のソースをかなりの自由度で出力できるが, ここまでやるならもう最初から全部 `r rmdja::texlogo("LaTeX")` で書いたほうがいいのでは, という気もする. `r rmdja::texlogo("LaTeX")` に詳しくない場合, かえって難しいかも知れない. 既に紹介した `kableExtra`, `huxtable` などでできる範囲でやったほうが簡単だろう.
+その他, `Hmisc::latex()`, `stats::xtable()` という古典的な関数がある. 後者は名前の通り `r rmdja::texlogo("LaTeX")` のソースをかなりの自由度で出力できるが, ここまでやるならもう最初から全部 `r rmdja::texlogo("LaTeX")` で書いたほうがいいのでは, という気もする. `r rmdja::texlogo("LaTeX")` に詳しくない場合, かえって難しいかも知れない. 既に紹介した **kableExtra**, **huxtable** などでできる範囲でやったほうが簡単だろう.
 
 ## その他の作表パッケージ
 
-そのほか有名なパッケージとして, `DT`, `flextable`, `gt` などがある. `DT` はインタラクティブな表ウィジェットを作成し, `flextable` は Word へのエクスポート機能をフィーチャーしているが, PDF に対しては画像として出力するなどくせがある. `gt` は RStudio 社が開発しているパッケージで, `huxtable` のように `tidyverse` 的なシンプルな構文が用意されている一方で, まだ R Markdown の相互参照機能に対応していない[^gt-crossref]. 以上からすでに紹介した `kableExtra` や `huxtable` がより `rmdja` の対応する出力媒体に適したパッケージであり, それ以外のパッケージの詳しい紹介は避ける.
+そのほか有名なパッケージとして, **DT**, **flextable**, **gt** などがある. **DT** は[DataTables ライブラリ][https://datatables.net/]を利用してインタラクティブな表ウィジェットを作成し, **flextable** は Word へのエクスポート機能をフィーチャーしているが, PDF に対しては画像として出力するなどくせがある. **gt** は RStudio 社が開発しているパッケージで, **huxtable** のように **tidyverse** 的なシンプルな構文が用意されている一方で, まだ R Markdown の相互参照機能に対応していない[^gt-crossref]. 以上からすでに紹介した **kableExtra** や **huxtable** がより **rmdja** の対応する出力媒体に適したパッケージであり, それ以外のパッケージの詳しい紹介は避ける.
 
 RCB [10.3 Other packages for creating tables](https://bookdown.org/yihui/rmarkdown-cookbook/table-other.html) も参考にせよ.
 
-[^gt-crossref]: Issue [#115](https://github.com/rstudio/gt/issues/115) にあるように, 機能を追加したいという声はある. しかし現時点では `gt`  の R Markdown 対応作業の優先度は高くないようである.
+[^gt-crossref]: Issue [#115](https://github.com/rstudio/gt/issues/115) にあるように, 機能を追加したいという声はある. しかし現時点では **gt**  の R Markdown 対応作業の優先度は高くないようである.
 
 # 文献引用の詳細設定 {#biblio-advaneced}
 

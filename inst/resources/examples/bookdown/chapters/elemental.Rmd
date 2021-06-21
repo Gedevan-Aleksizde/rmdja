@@ -191,7 +191,7 @@ Bookdown では**従来の R Markdown でできなかった数式への付番と
 
 例: 以下に補題 \@ref(lem:borelcantelli), 定理 \@ref(thm:theorem1) を示す.
 
-```{lemma borelcantelli, name="ボレル-カンテリの補題"}
+```{lemma borelcantelli, name="ボレル-カンテリの補題", echo=T}
 ${E_1,E_2,\cdots}$をある確率空間の事象とする. これらの事象の確率の和が有限であるなら, それらが無限に多く起こる確率はゼロである. つまり,
 
 \begin{align*}
@@ -202,16 +202,16 @@ ${E_1,E_2,\cdots}$をある確率空間の事象とする. これらの事象の
 である.
 ```
 
-```{proof borelcantelli-proof}
+```{proof borelcantelli-proof, echo=T}
 証明は読者の課題とする.
 ```
 
 
-```{theorem theorem1, name="無限の猿定理"}
+```{theorem theorem1, name="無限の猿定理", echo=T}
 猿がほとんど確実にタイプライタの全てのキーを無限回叩くならば, ほとんど確実にテキストには任意の作品が含まれる.
 ```
 
-```{proof theorem1-proof}
+```{proof theorem1-proof, echo=T}
 補題 \@ref(lem:borelcantelli) より自明.
 ```
 
