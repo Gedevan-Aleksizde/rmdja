@@ -14,6 +14,8 @@ rmdja::pdf_book_ja:
     # add_folio: true
     keep_tex: true
     block_style: tcolorbox
+    citation_package: natbib
+    extract_media: yes
 
 bookdown::epub_book:
   fig_width: 5

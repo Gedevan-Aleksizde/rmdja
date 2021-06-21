@@ -1,8 +1,8 @@
 ---
-title: "`rmdja` による多様な形式の日本語技術文書の作成 "
+title: "**rmdja** による多様な形式の日本語技術文書の作成 "
 author: "Katagiri, Satoshi (ill-identified)"
-date: "2021/4/17"
-site: bookdown::bookdown_site                    # RStudio GUIでビルド操作したい場合に必要
+date: "`r format(Sys.Date(), '%Y/%m/%d')`"
+site: bookdown::bookdown_site
 description: "bookdown でまともな日本語文書を作る資料"  # HTML <metadata> に出力されるサイト概要
 url: 'https\://bookdown.org/john/awesome/'       # URL
 github-repo: "Gedevan-Aleksizde/rmdja"           # Github レポジトリ
@@ -10,27 +10,23 @@ cover-image: "img/Johannes_Gutenberg.jpg"        # 表紙画像. epub でのみ�
 apple-touch-icon: "touch-icon.png"               # iOS でホームスクリーンに登録した際に見えるもの
 apple-touch-icon-size: 120                       # そのサイズ
 favicon: "favicon.ico"                           # そのまんまファビコン.
-mainfont: Noto Serif CJK JP
-seriffont: Noto Sans CJK JP
 monofont: Ricty Discord
-mainfontoptions:
-  - Scale=0.8
-sansfontoptions:
-  - Scale=0.8
-jmainfont: Noto Serif CJK JP
-jseriffont: Noto Sans CJK JP
 jmonofont: Ricty Discord
 link-citations: true                             # 引用に参考文献リストへのハイパーリンクをつける
 linkcolor: blue
 citecolor: blue
 urlcolor: magenta
-bibliography: rmdja.bib
 documentclass: bxjsbook
 pagestyle: headings
+bibliography: rmdja.bib
+biblio-style: jecon
 ---
 
 ```{r setup, include=FALSE}
-options(huxtable.bookdown = T)
+options(
+  huxtable.bookdown = T,
+  tikzDefaultEngine = "xetex"
+  )
 # アンダースコアを確実に回避するためコピーするしかない
 file.copy(system.file("resources/bibliography/rmdja.bib", package="rmdja"), "./")
 # 画像をコピー
@@ -70,13 +66,13 @@ rmdja::get_CC("yes", F, "normal")
 
 **注意!**
 
-現在, このドキュメントは煩雑でパッケージの更新に対して追いついていません. あまり信用しないでください.
+現在, このドキュメントは煩雑で **rmdja** パッケージの更新に対して追いついていません. あまり信用しないでください.
 
 R Markdown 全般の使用例については以下を参考にしてください. これらは R Markdown 開発の中心人物が執筆しているためこのページよりも信頼できます.
 
 * Xie "[knitr: Elegant, flexible, and fast dynamic report generation with R
-](https://yihui.org/knitr/)" (拙訳 谢『knitr: [Rによる美麗で柔軟そして高速な動的レポート生成](https://gedevan-aleksizde.github.io/knitr-doc-ja/index.html)』)
-* Xie, Dervieux, and Riederer "[R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/)" (拙訳 谢・デルヴュー・リーデラー『[R Markdown クックブック](https://gedevan-aleksizde.github.io/rmarkdown-cookbook/)』が公開されています)
+](https://yihui.org/knitr/)" (拙訳: 谢『[knitr: Rによる美麗で柔軟そして高速な動的レポート生成](https://gedevan-aleksizde.github.io/knitr-doc-ja/index.html)』)
+* Xie, Dervieux, and Riederer "[R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/)" (拙訳: 谢・デルヴュー・リーデラー『[R Markdown クックブック](https://gedevan-aleksizde.github.io/rmarkdown-cookbook/)』が公開されています)
 * Xie, Allaire and Grolemund "[R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)" (邦訳未刊, 近日作成予定)
 * Xie "[bookdown: Authoring Books and Technical Documents with R Markdown](https://bookdown.org/yihui/bookdown/)" (邦訳未刊, 近日作成予定)
 
