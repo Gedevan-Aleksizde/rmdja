@@ -72,7 +72,8 @@ R Markdown 全般の使用例については以下を参考にしてください
 
 * Xie "[knitr: Elegant, flexible, and fast dynamic report generation with R
 ](https://yihui.org/knitr/)" (拙訳: 谢『[knitr: Rによる美麗で柔軟そして高速な動的レポート生成](https://gedevan-aleksizde.github.io/knitr-doc-ja/index.html)』)
-* Xie, Dervieux, and Riederer "[R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/)" (拙訳: 谢・デルヴュー・リーデラー『[R Markdown クックブック](https://gedevan-aleksizde.github.io/rmarkdown-cookbook/)』が公開されています)
+* Xie "[TinyTeX: A lightweight, cross-platform, portable, and easy-to-maintain LaTeX distribution based on TeX Live](https://yihui.org/tinytex/)" (拙訳:『[TinyTeX 非公式日本語版ドキュメント](https://gedevan-aleksizde.github.io/tinytex-doc-ja/)』)
+* Xie, Dervieux, and Riederer "[R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/)" (拙訳: 谢・デルヴュー・リーデラー『[R Markdown クックブック](https://gedevan-aleksizde.github.io/rmarkdown-cookbook/)』)
 * Xie, Allaire and Grolemund "[R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)" (邦訳未刊, 近日作成予定)
 * Xie "[bookdown: Authoring Books and Technical Documents with R Markdown](https://bookdown.org/yihui/bookdown/)" (邦訳未刊, 近日作成予定)
 
