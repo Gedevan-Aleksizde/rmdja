@@ -24,6 +24,7 @@ Customized R Markdown/Bookdown format functions for Japanese users
     <https://gedevan-aleksizde.github.io/rmdja/>
 -   Yihui 氏による knitr のドキュメントの日本語訳:
     <https://gedevan-aleksizde.github.io/knitr-doc-ja/index.html>
+-   同氏による TinyTeX のドキュメントの日本語訳: <https://gedevan-aleksizde.github.io/tinytex-doc-ja/>
 -   “R Markdown Cookbook” の日本語訳
     <https://gedevan-aleksizde.github.io/rmarkdown-cookbook/>
 
