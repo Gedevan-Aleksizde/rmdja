@@ -22,7 +22,7 @@ BLOCK_STYLES <- c("kframe", "tcolorbox", "awesomebox")
 BXJSCLS_NAMES <- c("bxjsarticle", "bxjsreport", "bxjsbook", "bxjsslide")
 
 DEFAULT_PRESET <- matrix(
-  c("noto", "noto-otc",
+  c("noto", "noto-otf",
     "yu-osx", "hiragino-pron",
     "yu-win10", "yu-win10",
     "yu-win", "yu-win",
