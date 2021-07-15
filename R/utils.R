@@ -130,7 +130,7 @@ warn_if_default_preset_unavailable <- function(preset, os){
     families <- c("Hiragino Sans", "Hiragino Minco ProN")
   } else {
     families <- c("Harano Aji Mincho", "Harano Aji Gothic")
-    if(length(tinytex::tlmgr_search("haranoaji", global = F, .quiet = T, stdout = T) == 0){
+    if(length(tinytex::tlmgr_search("haranoaji", global = F, .quiet = T, stdout = T) == 0)){
       warning(gettextf("Font `%s` is not found in your system.", "Harano Aji"))
     }
     return(NULL)
