@@ -15,7 +15,7 @@ Customized R Markdown/Bookdown format functions for Japanese users
     * Beamer スライド (`Beamer in Japanese`)
     * PDF 文書 (`pdf article in Japanese `)
     * 縦書きPDF文書 (`pdf vartical writing in Japanese`)
-    * 書籍形式 (`pdf book in Japanese`, PDF および gitbook テンプレートに沿った HTML
+    * 書籍形式 (`pdf book in Japanese`, PDF および gitbook テンプレートに沿った HTML)
 * XeLaTeXまたはLuaLaTeXでのタイプセットを前提にしています
   + それぞれ `zxjatype`, `luatex-ja`, を利用して和文表示をしています
 * 私的LaTeXテンプレ集である[my_latex_templates](https://github.com/Gedevan-Aleksizde/my_latex_templates/)からパッケージとして独立しました
