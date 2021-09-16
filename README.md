@@ -79,7 +79,13 @@ Customized R Markdown/Bookdown format functions for Japanese users
 
 2.  このパッケージをインストールする (`remotes`
     パッケージを使うのが簡単です)
-    `remotes::install_github('Gedevan-Aleksizde/rmdja', upgrade = "never")`
+    
+    ~~`remotes::install_github('Gedevan-Aleksizde/rmdja', upgrade = "never")`~~
+    
+    **注**: 最近は master が更新されていませんので, development ブランチからのインストールを推奨します. テストが不完全なため master に反映していないだけなので, 基本的には master より development のほうが改良されています. 具体的には以下のようにします.
+
+    `remotes::install_github('Gedevan-Aleksizde/rmdja@development', upgrade = "never")`
+
 
     特定のバージョンをインストールする場合は,
     以下のようにして指定できます.
