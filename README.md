@@ -15,7 +15,7 @@ Customized R Markdown/Bookdown format functions for Japanese users
         テンプレートに沿った HTML
 -   XeLaTeXまたはLuaLaTeXでのタイプセットを前提にしています
     -   それぞれ `zxjatype`, `luatex-ja`, を利用して和文表示をしています
--   私的LaTeXテンプレ集である[my\_latex\_templates](https://github.com/Gedevan-Aleksizde/my_latex_templates/)からパッケージとして独立しました
+-   私的LaTeXテンプレ集である[my_latex_templates](https://github.com/Gedevan-Aleksizde/my_latex_templates/)からパッケージとして独立しました
 -   MS Office Word の出力がしたい場合は
     [Wordja](https://github.com/Gedevan-Aleksizde/wordja)
     を参考にしてください.
@@ -31,21 +31,19 @@ Customized R Markdown/Bookdown format functions for Japanese users
 
 # 最低限必要なもの
 
--   R (&gt;= 3.6.2)
--   R Studio (&gt;= 1.3.1056)
-    -   Windows かつ **reticulate** で Python を使用する場合は [v1.4
-        台での不具合](https://ill-identified.hatenablog.com/entry/2021/02/22/233326)に注意してください
+-   R (>= 3.6.2)
+-   R Studio (>= 1.4.1717)
 -   依存パッケージ
     (通常はインストール時に合わせてインストールされるため,
     手作業でなにかする必要はありません)
-    -   **knitr** (&gt;=1.33)
-    -   **rmarkdown** (&gt;=2.6)
-    -   **bookdown** (&gt;=0.21)
-    -   **systemfonts** (&gt;=1.0.2)
-    -   **commonmark** (&gt;=1.7)
-    -   **styler** (&gt;=1.3.2)
-    -   **xfun** (&gt;=0.3.17)
-    -   **rsvg** (&gt;=2.1.1)
+    -   **knitr** (>=1.33)
+    -   **rmarkdown** (>=2.6)
+    -   **bookdown** (>=0.21)
+    -   **systemfonts** (>=1.0.2)
+    -   **commonmark** (>=1.7)
+    -   **styler** (>=1.3.2)
+    -   **xfun** (>=0.3.17)
+    -   **rsvg** (>=2.1.1)
     -   ただし,
         MacやLinux系OSではグラフィック関連のパッケージに必要なライブラリの手動インストールが必要な場合があるかもしれません.
         -   TODO
@@ -71,14 +69,12 @@ Customized R Markdown/Bookdown format functions for Japanese users
         なら以下のようにしてインストールします (homebrew が必要です).
 
         ``` bash
-        # Cairo
+        # Cairo が FALSE
         brew install cairo
-        # X11
-        brew install --cask xquartz
         ```
 
-        **注意**: xquartz に関しては, 公式 <https://www.xquartz.org/>
-        からインストールしたほうが良いかもしれません.
+        X11 が `FALSE` の場合, <https://www.xquartz.org/> から XQuartz
+        の dmg ファイルをダウンロードしインストールしてください.
 
 # インストールから使用まで
 
@@ -88,17 +84,18 @@ Customized R Markdown/Bookdown format functions for Japanese users
     パッケージを使うのが簡単です)
     `remotes::install_github('Gedevan-Aleksizde/rmdja', upgrade = "never")`
 
+    **注**: 最近は master が更新されていませんので, development
+    ブランチからのインストールを推奨します. テストが不完全なため master
+    に反映していないだけなので, 基本的には master より development
+    のほうが改良されています. 具体的には以下のようにします.
+
+    `remotes::install_github('Gedevan-Aleksizde/rmdja@development', upgrade = "never")`
+
     特定のバージョンをインストールする場合は,
     以下のようにして指定できます.
     `remotes::install_github('Gedevan-Aleksizde/rmdja', ref="v0.4", upgrade = "never")`
     または以下のような記法も可能です
     `remotes::install_github('Gedevan-Aleksizde/rmdja@v0.4', upgrade = "never")`
-
-    `@development` は開発中のバージョンです.
-    新機能が追加されてる場合もありますがバグも多いです.
-    ソースコードを理解して適宜修正できる自信のある方のみ使用してください.
-
-        remotes::install_github('Gedevan-Aleksizde/rmdja@development', upgrade = "never")
 
     Windows OS では
     [Rtools](https://cran.r-project.org/bin/windows/Rtools/)
@@ -108,11 +105,8 @@ Customized R Markdown/Bookdown format functions for Japanese users
     依存パッケージを手動でインストールしてください. 必要なパッケージは
     [`DESCRIPTION`](DESCRIPTION) の `Imports` の項目に書かれています.
 
-    ``` r
-    install.packages(c("rmarkdown", "bookdown", "commonmark", "styler"))
-    ```
-
-    リリース一覧からダウンロードしたアーカイブファイルからインストールすることもできます.
+    リリース一覧からアーカイブファイルからダウンロードし,
+    インストールすることもできます.
 
 3.  TeX 環境を未インストールなら, ここでインストールします
     これはそれなりに時間がかかります. また,
@@ -124,7 +118,7 @@ Customized R Markdown/Bookdown format functions for Japanese users
     rmdja::setup_tinytex_rmdja()
     ```
 
-4.  新規作成時に \[R Markdown\] -&gt; \[From Template\] -&gt; `{rmdja}`
+4.  新規作成時に \[R Markdown\] -> \[From Template\] -> `{rmdja}`
     のテンプレートのいずれかを選択します ![template
     selection](inst/resources/img/readme-selection.png)
 
@@ -134,11 +128,13 @@ Customized R Markdown/Bookdown format functions for Japanese users
 **NOTE**: 現時点での XeLaTeX 版と LuaLaTeX
 版の主な違いは以下のとおりです.
 
-1.  一部のLaTeXコマンドが違う
+1.  文章のインラインスタイル変更などに関する一部のLaTeXコマンドが違う
 2.  文字の相対的な大きさ, 字間などのレイアウトが微妙に違う
 3.  LuaLaTeX のほうがやや処理が遅い
 4.  禁則処理は LuaLaTeX のほうが厳格
 5.  縦書き文書は LuaLaTeX のみ対応
+6.  beamer デフォルトの metropolis テーマは XeLaTeX
+    を想定して作られています
 
 ## 初期バージョン (rmdCJK) をお使いの場合
 
@@ -208,8 +204,9 @@ Xにバンドルされていないヒラギノ明朝 W2を必要とします.
 
 **注意**: もしなんらかの理由で,
 上記のどのプリセットに必要なフォントもインストールされていない場合,
-エラーが発生します. そのような場合は YAML メタデータの `classoption` に
-`jafont=` を追加することでプリセット指定を空白にしてください.
+エラーが発生するかもしれません. そのような場合は YAML メタデータの
+`classoption` に `jafont=`
+を追加することでプリセット指定を空白にしてください.
 
 ``` yaml
 classoption:
@@ -224,11 +221,11 @@ classoption:
 
 ### Linux ユーザー (& RStudio Cloud) 向けのフォントに関する補足説明
 
-Ubuntu の場合は 18.04 以降の日本語版の設定に準拠して Noto
-フォントをデフォルトにしています. 上記のどれにもあたらない場合, TeX Live
-2020 以降で同梱されている原ノ味フォント (`haranoaji`)
+Linux 系 OS で使用する場合, Ubuntu 18.04 以降の日本語版の設定に準拠して
+Noto フォントをデフォルトにしています. 上記の表どれにもあたらない場合,
+TeX Live 2020 以降で採用されている原ノ味フォント (`haranoaji`)
 がデフォルトになるようにしています.
-原ノ味フォントは広く使われている源ノ角や Noto
+原ノ味フォントは広く使われている源ノフォントや Noto
 フォントとほぼ同じ見た目で, クセがない無難なフォントだと思います.
 
 原ノ味フォントのインストールは, **tinytex**
@@ -249,7 +246,7 @@ tlmgr install haranoaji
 Ubuntu/Debian:
 
 ``` sh
-sudo apt install fonts-noto-cjk-extra -t stretch-backports
+sudo apt install fonts-noto-cjk-extra
 ```
 
 Cent OS とか Fedora とかは以下からファイルをダウンロードできます.
@@ -396,7 +393,8 @@ Cent OS とか Fedora とかは以下からファイルをダウンロードで�
 これから更新する場合は追加の手続きが必要らしいです. 参考:
 <https://text.baldanders.info/remark/2020/04/haranoaji-fonts-with-texlive-2020/>
 
-[2] 例えば MacTeX はMac版の TeX Live なので問題ありません. この設定には
-tlmgr が必要なので, 例えば TeX Live に準拠していない大昔のバージョンの
-W32TeX
+[2] 最近の TeX 配布パッケージの多くは TeX Live 準拠なので,
+詳しくない人はあまり気にしなくてもよいと思います. 例えば MacTeX
+はMac版の TeX Live なので問題ありません. これ以降の設定には tlmgr
+が必要なので, 例えば TeX Live に準拠していない大昔のバージョンの W32TeX
 をインストールしたまま更新せず使い続けているといった環境は想定していません

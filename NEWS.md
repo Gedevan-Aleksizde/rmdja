@@ -44,8 +44,8 @@
 
 -   `pdf_document2_ja`, `pdf_book_ja` それぞれで LaTeX
     エンジンに対応したデフォルトの文書クラスを自動設定するように
-    -   document2\_ja -&gt; `*jsarticle`, book\_ja -&gt; `*jsbook`
-    -   `xelatex` -&gt; `bx*`, `lualatex` -&gt; `lt*`
+    -   document2_ja -> `*jsarticle`, book_ja -> `*jsbook`
+    -   `xelatex` -> `bx*`, `lualatex` -> `lt*`
 -   BibLaTeX のデフォルト引用スタイルのエラー修正
 
 # rmdja 0.4.5
@@ -64,11 +64,11 @@
 -   `gitbook_ja` からレポート用の `html_document2_ja` を分離独立,
     ただしやっつけ仕事.
 -   アイコン付きブロックの名称を変更 (`{block, type="..."}` の部分)
-    -   `rmdnote` -&gt; `memo`
-    -   `rmdtip` -&gt; `tip`
-    -   `rmdimportant` -&gt; `important`
-    -   `rmdcaution` -&gt; `caution`
-    -   `rmdwarning` -&gt; `warning`
+    -   `rmdnote` -> `memo`
+    -   `rmdtip` -> `tip`
+    -   `rmdimportant` -> `important`
+    -   `rmdcaution` -> `caution`
+    -   `rmdwarning` -> `warning`
 -   デフォルトの引用スタイル `.css`. `.bbx` の設定を改善
 -   細かい修正
     -   `tectonic` 対応 (要 v2.8 以降の **rmarkdown**)
