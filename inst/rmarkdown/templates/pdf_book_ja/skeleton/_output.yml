@@ -2,6 +2,7 @@ rmdja::gitbook_ja:
   keep_md: true
 
 rmdja::pdf_book_ja:
+  latex_engine: lualatex
   keep_tex: true
   tombow: false
   add_folio: true

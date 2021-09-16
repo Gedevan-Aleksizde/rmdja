@@ -7,8 +7,6 @@ documentclass: bxjsbook
 bibliography: 
   - packages.bib
 classoption:
-  - lualatex
-  - ja=standard
   - a4paper
 link-citations: true
 linkcolor: blue

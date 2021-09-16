@@ -8,8 +8,6 @@ output:
     latex_engine: lualatex
 documentclass: bxjsarticle
 classoption:
-  - lualatex
-  - ja=standard
   - a4paper
   - 'number-of-lines=30'  # 1頁30行, ただし見出しは別
   - 'textwidth=40zw'      # 1行全角40字, ただしプロポーショナルフォントなので絶対ではない
