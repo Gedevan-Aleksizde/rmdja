@@ -184,7 +184,7 @@ Customized R Markdown/Bookdown format functions for Japanese users
 名称を変更したため旧バージョンは不要になります.
 アンインストールしてください
 
-    remove.package("rmdCJK")
+    remove.packages("rmdCJK")
 
 # 用途によっては追加インストールが必要なもの
 
