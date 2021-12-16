@@ -10,7 +10,7 @@ Customized R Markdown/Bookdown format functions for Japanese users
 -   現時点では以下のようなテンプレートがあります.
     -   Beamer スライド (`Beamer in Japanese`)
     -   PDF 文書 (`pdf article in Japanese`)
-    -   縦書きPDF文書 (`pdf vartical writing in Japanese`)
+    -   縦書きPDF文書 (`pdf vertical writing in Japanese`)
     -   書籍形式 (`pdf book in Japanese`, PDF および gitbook
         テンプレートに沿った HTML
 -   XeLaTeXまたはLuaLaTeXでのタイプセットを前提にしています
