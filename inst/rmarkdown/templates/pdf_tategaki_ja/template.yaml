@@ -1,4 +1,4 @@
-name: pdf vartical writing in Japanese 
+name: pdf vertical writing in Japanese 
 description: >
   PDF bookdown with Japanese vertical writing typesetting presets with LuaLaTeX engine.
   IF you want to use (u)pBibTeX, PDF output requires standalone TeX installation (MacTeX on Mac, Tex Live on Windows & Linux)

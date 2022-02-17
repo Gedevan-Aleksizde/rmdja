@@ -151,12 +151,15 @@ classify_system <- function(){
     else if(grepl("linux-gnu", R.version$os))
       if(substr(tolower(osVersion), 1, 6) == "ubuntu") {
         name <- "ubuntu"
+      } else if(substr(tolower(osVersion), 1, 6) == "debian") {
+          name <- "ubuntu"
       } else {
-        name <- "linux"
+          name <- "linux"
       }
-    else if(tolower(R.version$os)){
-      
-    } else {
+#    else if(tolower(R.version$os)){
+#      
+#  }
+  else {
       name <- tolower(sysinfo["sysname"])
     }
   } else {
