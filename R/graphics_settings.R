@@ -34,7 +34,7 @@ get_default_font_family <- function(engine = "xelatex"){
   } else if(fam == "hiragino-pron") {
     font <- c(serif = "Hiragino Mincho ProN", sans = "Hiragino Sans")
   } else if(fam == "yu-osx") {
-    font <- c(serif = "YuMicho", sans = "YuGothic")
+    font <- c(serif = "YuMincho", sans = "YuGothic")
   } else if(grepl("^yu-win", fam)) {
     font <- c(serif = "Yu Mincho", sans = "Yu Gothic")
   } else if(fam == "ms"){
